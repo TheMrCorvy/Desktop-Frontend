@@ -1,6 +1,6 @@
 import { SET_LANGUAGE, LangAction, LangStateI } from "../types"
 
-const localStorageLang = localStorage.getItem("language")
+const localStorageLang = localStorage.getItem("preferred_language")
 
 const initialState: LangStateI = {
 	language: localStorageLang ? localStorageLang : "en",
