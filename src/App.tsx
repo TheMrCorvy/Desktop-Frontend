@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react"
+import React, { FC } from "react"
 import logo from "./logo.svg"
 import "./App.css"
 import { useDispatch, useSelector } from "react-redux"
@@ -8,11 +8,10 @@ import { setLanguage } from "./redux/actions/langActions"
 import { translate } from "./lang"
 
 const App: FC = () => {
-	const { language } = useSelector((state: RootState) => state.lang)
+	const { language } = useSelector((state: RootState) => state.language)
 	const dispatch = useDispatch()
 
 	const chooseLanguage = (value: string) => {
-		console.log("cambiando a: " + value)
 		dispatch(setLanguage(value))
 	}
 
