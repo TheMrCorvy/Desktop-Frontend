@@ -6,13 +6,13 @@ export const translate = (key: string, language: string): string => {
 	let langData: { [key: string]: string } = {}
 
 	switch (language) {
-		case "EN":
+		case "en":
 			langData = en
 			break
-		case "ES":
+		case "es":
 			langData = es
 			break
-		case "JP":
+		case "jp":
 			langData = jp
 			break
 

@@ -1,15 +1,26 @@
-import React, { FC } from "react"
+import React, { FC, useEffect } from "react"
 import logo from "./logo.svg"
 import "./App.css"
+import { useDispatch, useSelector } from "react-redux"
+
+import { RootState } from "./redux/store"
+import { setLanguage } from "./redux/actions/langActions"
+import { translate } from "./lang"
 
 const App: FC = () => {
+	const { language } = useSelector((state: RootState) => state.lang)
+	const dispatch = useDispatch()
+
+	const chooseLanguage = (value: string) => {
+		console.log("cambiando a: " + value)
+		dispatch(setLanguage(value))
+	}
+
 	return (
 		<div className="App">
 			<header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.tsx</code> and save to reload.
-				</p>
+				<p>{translate("prueba", language)}</p>
 				<a
 					className="App-link"
 					href="https://reactjs.org"
@@ -18,6 +29,9 @@ const App: FC = () => {
 				>
 					Learn React
 				</a>
+				<button onClick={() => chooseLanguage("en")}>en</button>
+				<button onClick={() => chooseLanguage("es")}>es</button>
+				<button onClick={() => chooseLanguage("jp")}>jp</button>
 			</header>
 		</div>
 	)

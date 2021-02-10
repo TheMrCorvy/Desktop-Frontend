@@ -1,6 +1,6 @@
 import { LangAction, SET_LANGUAGE } from "../types"
 
-const setLanguage = (lang: string): LangAction => {
+export const setLanguage = (lang: string): LangAction => {
 	localStorage.setItem("language", lang)
 
 	return {
@@ -8,5 +8,3 @@ const setLanguage = (lang: string): LangAction => {
 		payload: lang,
 	}
 }
-
-export default setLanguage
