@@ -7,6 +7,8 @@ import { RootState } from "./redux/store"
 import { setLanguage } from "./redux/actions/langActions"
 import { translate } from "./lang"
 
+import Button from "./components/Button"
+
 const App: FC = () => {
 	const { language } = useSelector((state: RootState) => state.language)
 	const dispatch = useDispatch()
@@ -32,6 +34,8 @@ const App: FC = () => {
 				<button onClick={() => chooseLanguage("es")}>es</button>
 				<button onClick={() => chooseLanguage("jp")}>jp</button>
 			</header>
+
+			<Button text="algun texto de prueba" />
 		</div>
 	)
 }
