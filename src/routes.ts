@@ -1,6 +1,6 @@
 import { lazy, LazyExoticComponent } from "react"
 
-const Landing = lazy(() => import("./Pages/Landing"))
+const Landing = lazy(() => import("./pages/Landing/index"))
 
 export type RouteType = {
 	name: string
