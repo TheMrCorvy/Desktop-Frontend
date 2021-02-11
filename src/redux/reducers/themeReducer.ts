@@ -1,9 +1,25 @@
-import { SET_THEME, ThemeAction, DarkThemeStateI } from "../types"
+import { SET_THEME, ThemeAction, DarkThemeStateI, light, dark } from "../types"
 
 const localStorageTheme = localStorage.getItem("preferred_theme")
 
-const initialState: DarkThemeStateI = {
-	theme: localStorageTheme ? localStorageTheme : "dark",
+let initialState: DarkThemeStateI = {
+	theme: dark,
+}
+
+if (localStorageTheme) {
+	if (localStorageTheme === "dark") {
+		initialState = {
+			theme: dark,
+		}
+	} else {
+		initialState = {
+			theme: light,
+		}
+	}
+} else {
+	initialState = {
+		theme: dark,
+	}
 }
 
 const themeReducer = (state = initialState, action: ThemeAction) => {

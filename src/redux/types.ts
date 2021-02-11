@@ -16,13 +16,16 @@ export type LangAction = SetLanguageActionI
 
 export const SET_THEME = "SET_THEME"
 
+export const light = "light"
+export const dark = "dark"
+
 export interface DarkThemeStateI {
-	theme: string
+	theme: typeof light | typeof dark
 }
 
 interface ToggleDarkThemeActionI {
 	type: typeof SET_THEME
-	payload: string
+	payload: typeof light | typeof dark
 }
 
 export type ThemeAction = ToggleDarkThemeActionI
