@@ -1,10 +1,10 @@
-import { lazy } from "react"
+import { lazy, LazyExoticComponent } from "react"
 
-const Landing = lazy(() => import("./pages/Landing"))
+const Landing = lazy(() => import("./Pages/Landing"))
 
 export type RouteType = {
 	name: string
-	component: any
+	component: LazyExoticComponent<any>
 	requiresAuth: boolean
 	path: string
 }
