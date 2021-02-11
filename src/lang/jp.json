@@ -1,3 +1,11 @@
 {
-	"prueba": "こんにちは"
+	"app_name": "パス世話",
+	"home": "Home",
+	"translate": "Translate",
+	"navbar_login_btn": "Login",
+	"navbar_register_btn": "Register",
+	"navbar_my_credentials_btn": "My Credentials",
+	"navbar_my_account_btn": "My Account",
+	"toggle_dark_theme": "Toggle Dark Theme",
+	"navbar_download_btn": "Download"
 }

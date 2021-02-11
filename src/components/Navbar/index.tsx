@@ -66,7 +66,7 @@ const Navbar = () => {
 	/*********************************************************************************** redux related */
 	const { theme } = useSelector((state: RootState) => state.theme)
 
-	const { language } = useSelector((state: RootState) => state.language)
+	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
 
@@ -113,7 +113,7 @@ const Navbar = () => {
 							</Tooltip>
 
 							<Typography variant="h6" className={classes.title}>
-								{translate("prueba", language)}
+								{translate("prueba", lng)}
 							</Typography>
 
 							<Tooltip title="Translate">

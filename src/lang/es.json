@@ -1,3 +1,11 @@
 {
-	"prueba": "hola"
+	"app_name": "PasuSewa",
+	"home": "Inicio",
+	"translate": "Traducir",
+	"navbar_login_btn": "Ingresar",
+	"navbar_register_btn": "Registrarse",
+	"navbar_my_credentials_btn": "Mis Credenciales",
+	"navbar_my_account_btn": "Mi Cuenta",
+	"toggle_dark_theme": "Alternar Tema Oscuro",
+	"navbar_download_btn": "Descargas"
 }

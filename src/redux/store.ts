@@ -4,7 +4,7 @@ import langReducer from "./reducers/langReducer"
 import themeReducer from "./reducers/themeReducer"
 
 const rootReducer = combineReducers({
-	language: langReducer,
+	lng: langReducer,
 	theme: themeReducer,
 })
 
