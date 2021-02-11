@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
 			flexGrow: 1,
-			paddingTop: "4rem",
 		},
 		navbarItem: {
 			marginRight: theme.spacing(1),
