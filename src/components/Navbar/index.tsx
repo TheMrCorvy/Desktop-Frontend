@@ -4,23 +4,23 @@ import { setTheme } from "../../redux/actions/themeActions"
 import { RootState } from "../../redux/store"
 
 import { AppBar, Toolbar, IconButton, Typography, Button } from "@material-ui/core"
-import MenuIcon from "@material-ui/icons/Menu"
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
+
+import Brightness4Icon from "@material-ui/icons/Brightness4"
+import NightsStayIcon from "@material-ui/icons/NightsStay"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
 			flexGrow: 1,
+			paddingTop: "4rem",
 		},
 		menuButton: {
 			marginRight: theme.spacing(2),
 		},
 		title: {
 			flexGrow: 1,
-		},
-		toggleTheme: {
-			textTransform: "capitalize",
 		},
 	})
 )
@@ -42,26 +42,16 @@ const Navbar = () => {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static" color={theme === "dark" ? "primary" : "secondary"}>
+			<AppBar position="fixed" color={theme === "dark" ? "inherit" : "secondary"}>
 				<Toolbar>
-					<IconButton
-						edge="start"
-						className={classes.menuButton}
-						color="inherit"
-						aria-label="menu"
-					>
-						<MenuIcon />
-					</IconButton>
 					<Typography variant="h6" className={classes.title}>
 						News
 					</Typography>
-					<Button
-						color="inherit"
-						className={classes.toggleTheme}
-						onClick={toggleDarkTheme}
-					>
-						{theme}
-					</Button>
+
+					<Button color="inherit">Login</Button>
+					<IconButton edge="end" color="inherit" onClick={toggleDarkTheme}>
+						{theme === "dark" ? <NightsStayIcon /> : <Brightness4Icon />}
+					</IconButton>
 				</Toolbar>
 			</AppBar>
 		</div>

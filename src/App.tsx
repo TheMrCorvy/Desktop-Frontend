@@ -6,7 +6,7 @@ import { setLanguage } from "./redux/actions/langActions"
 import { translate } from "./lang"
 
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles"
-import { amber, blue } from "@material-ui/core/colors"
+import { orange, blue } from "@material-ui/core/colors"
 import { CssBaseline } from "@material-ui/core"
 import routes from "./routes"
 import MapRoutes from "./components/MapRoutes"
@@ -25,11 +25,11 @@ const App: FC = () => {
 
 	const globalTheme = createMuiTheme({
 		palette: {
-			type: theme === "dark" ? "dark" : "light",
+			type: theme,
 			primary: {
-				light: amber[500],
-				dark: amber[500],
-				main: amber[500],
+				light: orange[700],
+				dark: orange[700],
+				main: orange[700],
 				contrastText: "#fff",
 			},
 			secondary: {
