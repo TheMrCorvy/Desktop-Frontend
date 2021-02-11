@@ -1,4 +1,4 @@
-import { TOGGLE_DARK_THEME, ThemeAction, DarkThemeStateI } from "../types"
+import { SET_THEME, ThemeAction, DarkThemeStateI } from "../types"
 
 const localStorageTheme = localStorage.getItem("preferred_theme")
 
@@ -8,7 +8,7 @@ const initialState: DarkThemeStateI = {
 
 const themeReducer = (state = initialState, action: ThemeAction) => {
 	switch (action.type) {
-		case TOGGLE_DARK_THEME:
+		case SET_THEME:
 			return {
 				...state,
 				theme: action.payload,

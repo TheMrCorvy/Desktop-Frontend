@@ -14,14 +14,14 @@ export type LangAction = SetLanguageActionI
 
 /******************************************************************************** toggle dark theme */
 
-export const TOGGLE_DARK_THEME = "TOGGLE_DARK_THEME"
+export const SET_THEME = "SET_THEME"
 
 export interface DarkThemeStateI {
 	theme: string
 }
 
 interface ToggleDarkThemeActionI {
-	type: typeof TOGGLE_DARK_THEME
+	type: typeof SET_THEME
 	payload: string
 }
 
