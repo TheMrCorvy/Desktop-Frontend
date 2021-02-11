@@ -1,5 +1,5 @@
 import React from "react"
-import { Route, Switch } from "react-router-dom"
+import { Route, Switch, BrowserRouter } from "react-router-dom"
 import { RouteType } from "../../routes"
 
 type Prop = {
@@ -17,8 +17,12 @@ export default function RoutesComponent(props: Prop) {
 	}
 
 	return (
-		<Switch>
-			{props.routes.map((route: RouteType, index: number) => evaluateRoutes(route, index))}
-		</Switch>
+		<BrowserRouter>
+			<Switch>
+				{props.routes.map((route: RouteType, index: number) =>
+					evaluateRoutes(route, index)
+				)}
+			</Switch>
+		</BrowserRouter>
 	)
 }
