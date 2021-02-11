@@ -49,8 +49,8 @@ const App: FC = () => {
 			<CssBaseline />
 			<Paper style={{ minHeight: "100vh", flexGrow: 1 }}>
 				<Navbar />
+				<MapRoutes routes={routes} />
 			</Paper>
-			<MapRoutes routes={routes} />
 			{/* <div className="App">
 				<header className="App-header">
 					<p>{translate("prueba", language)}</p>
