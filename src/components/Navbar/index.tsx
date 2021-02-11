@@ -102,7 +102,7 @@ const Navbar = () => {
 		<>
 			<div className={classes.root}>
 				<Hidden smDown>
-					<AppBar position="fixed" color={theme === "dark" ? "inherit" : "secondary"}>
+					<AppBar position="fixed" color={theme === "dark" ? "primary" : "secondary"}>
 						<Toolbar>
 							<Tooltip title="Home">
 								<IconButton

@@ -26,9 +26,9 @@ const App: FC = () => {
 		palette: {
 			type: theme,
 			primary: {
-				light: orange[700],
-				dark: orange[700],
-				main: orange[700],
+				light: "#ff7300",
+				dark: "#ff7300",
+				main: "#ff7300",
 				contrastText: "#fff",
 			},
 			secondary: {
