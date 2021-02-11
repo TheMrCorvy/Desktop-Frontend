@@ -1,27 +1,26 @@
 import React, { FC } from "react"
-import { useDispatch, useSelector } from "react-redux"
 
+/*********************************************************************************** redux related */
+import { useSelector } from "react-redux"
 import { RootState } from "./redux/store"
-import { setLanguage } from "./redux/actions/langActions"
-import { translate } from "./lang"
 
+/*********************************************************************************** mui related */
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles"
 import { orange, blue } from "@material-ui/core/colors"
 import { CssBaseline } from "@material-ui/core"
+
+/*********************************************************************************** layout related components */
 import routes from "./routes"
 import MapRoutes from "./components/MapRoutes"
 import Layout from "./components/Layout"
 
+/*********************************************************************************** font awesome */
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { faKey, faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
+library.add(faKey, faCloudDownloadAlt)
+
 const App: FC = () => {
-	const { language } = useSelector((state: RootState) => state.language)
-
 	const { theme } = useSelector((state: RootState) => state.theme)
-
-	const dispatch = useDispatch()
-
-	const chooseLanguage = (value: string) => {
-		dispatch(setLanguage(value))
-	}
 
 	const globalTheme = createMuiTheme({
 		palette: {
@@ -47,23 +46,6 @@ const App: FC = () => {
 			<Layout>
 				<MapRoutes routes={routes} />
 			</Layout>
-
-			{/* <div className="App">
-				<header className="App-header">
-					<p>{translate("prueba", language)}</p>
-					<a
-						className="App-link"
-						href="https://reactjs.org"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Learn React
-					</a>
-					<button onClick={() => chooseLanguage("en")}>en</button>
-					<button onClick={() => chooseLanguage("es")}>es</button>
-					<button onClick={() => chooseLanguage("jp")}>jp</button>
-				</header>
-			</div> */}
 		</ThemeProvider>
 	)
 }
