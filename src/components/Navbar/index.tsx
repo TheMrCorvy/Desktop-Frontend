@@ -42,7 +42,7 @@ const Navbar = () => {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static" color="inherit">
+			<AppBar position="static" color={theme === "dark" ? "primary" : "secondary"}>
 				<Toolbar>
 					<IconButton
 						edge="start"
