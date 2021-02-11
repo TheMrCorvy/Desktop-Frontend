@@ -12,6 +12,8 @@ import Navbar from "./components/Navbar"
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles"
 import { amber, blue } from "@material-ui/core/colors"
 import { CssBaseline, Paper } from "@material-ui/core"
+import routes from "./routes"
+import MapRoutes from "./components/MapRoutes"
 
 const App: FC = () => {
 	const { language } = useSelector((state: RootState) => state.language)
@@ -48,7 +50,8 @@ const App: FC = () => {
 			<Paper style={{ minHeight: "100vh", flexGrow: 1 }}>
 				<Navbar />
 			</Paper>
-			<div className="App">
+			<MapRoutes routes={routes} />
+			{/* <div className="App">
 				<header className="App-header">
 					<p>{translate("prueba", language)}</p>
 					<a
@@ -65,7 +68,7 @@ const App: FC = () => {
 				</header>
 
 				<Button text="algun texto de prueba" />
-			</div>
+			</div> */}
 		</ThemeProvider>
 	)
 }
