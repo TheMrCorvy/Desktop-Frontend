@@ -30,12 +30,14 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const Navbar = () => {
+	/*********************************************************************************** redux related */
 	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const { language } = useSelector((state: RootState) => state.language)
 
 	const dispatch = useDispatch()
 
+	/*********************************************************************************** mui related */
 	const classes = useStyles()
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -47,7 +49,7 @@ const Navbar = () => {
 	const handleClose = (value: string) => {
 		setAnchorEl(null)
 
-		if (value !== "nothing") {
+		if (value !== "no change") {
 			dispatch(setLanguage(value))
 		}
 	}
@@ -89,7 +91,7 @@ const Navbar = () => {
 				anchorEl={anchorEl}
 				keepMounted
 				open={Boolean(anchorEl)}
-				onClose={() => handleClose("nothing")}
+				onClose={() => handleClose("no change")}
 			>
 				<MenuItem onClick={() => handleClose("en")}>EN</MenuItem>
 				<MenuItem onClick={() => handleClose("es")}>ES</MenuItem>
