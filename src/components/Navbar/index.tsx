@@ -101,7 +101,7 @@ const Navbar = () => {
 				<Hidden smDown>
 					<AppBar position="fixed" color={theme === "dark" ? "primary" : "secondary"}>
 						<Toolbar>
-							<Tooltip title="Home">
+							<Tooltip title={translate("home", lng)}>
 								<IconButton
 									edge="start"
 									className={classes.navbarItem}
@@ -113,10 +113,10 @@ const Navbar = () => {
 							</Tooltip>
 
 							<Typography variant="h6" className={classes.title}>
-								{translate("prueba", lng)}
+								{translate("app_name", lng)}
 							</Typography>
 
-							<Tooltip title="Translate">
+							<Tooltip title={translate("translate", lng)}>
 								<IconButton
 									aria-controls="lang-menu"
 									aria-haspopup="true"
@@ -129,13 +129,13 @@ const Navbar = () => {
 							</Tooltip>
 
 							<Button color="inherit" className={classes.navbarItem}>
-								Login / My Credentials
+								{translate("navbar_login_btn", lng)}
 							</Button>
 							<Button color="inherit" className={classes.navbarItem}>
-								Register / My Accounts
+								{translate("navbar_register_btn", lng)}
 							</Button>
 
-							<Tooltip title="Toggle Dark Theme">
+							<Tooltip title={translate("toggle_dark_theme", lng)}>
 								<IconButton
 									edge="end"
 									color="inherit"
@@ -146,7 +146,7 @@ const Navbar = () => {
 								</IconButton>
 							</Tooltip>
 
-							<Tooltip title="Download">
+							<Tooltip title={translate("navbar_download_btn", lng)}>
 								<IconButton
 									edge="start"
 									className={classes.navbarItem}

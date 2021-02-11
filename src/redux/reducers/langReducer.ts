@@ -11,7 +11,7 @@ const langReducer = (state = initialState, action: LangAction) => {
 		case SET_LANGUAGE:
 			return {
 				...state,
-				language: action.payload,
+				lng: action.payload,
 			}
 
 		default:
