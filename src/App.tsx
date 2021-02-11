@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react"
+import React, { FC } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import { RootState } from "./redux/store"
@@ -6,14 +6,12 @@ import { setLanguage } from "./redux/actions/langActions"
 import { translate } from "./lang"
 import { light, dark } from "./redux/types"
 
-import Button from "./components/Button"
-import Navbar from "./components/Navbar"
-
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles"
 import { amber, blue } from "@material-ui/core/colors"
 import { CssBaseline, Paper } from "@material-ui/core"
 import routes from "./routes"
 import MapRoutes from "./components/MapRoutes"
+import Layout from "./components/Layout"
 
 const App: FC = () => {
 	const { language } = useSelector((state: RootState) => state.language)
@@ -47,10 +45,10 @@ const App: FC = () => {
 	return (
 		<ThemeProvider theme={globalTheme}>
 			<CssBaseline />
-			<Paper style={{ minHeight: "100vh", flexGrow: 1 }}>
-				<Navbar />
+			<Layout>
 				<MapRoutes routes={routes} />
-			</Paper>
+			</Layout>
+
 			{/* <div className="App">
 				<header className="App-header">
 					<p>{translate("prueba", language)}</p>
@@ -66,8 +64,6 @@ const App: FC = () => {
 					<button onClick={() => chooseLanguage("es")}>es</button>
 					<button onClick={() => chooseLanguage("jp")}>jp</button>
 				</header>
-
-				<Button text="algun texto de prueba" />
 			</div> */}
 		</ThemeProvider>
 	)
