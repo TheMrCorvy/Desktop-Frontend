@@ -12,6 +12,7 @@ import {
 	Menu,
 	MenuItem,
 	Tooltip,
+	Fab,
 } from "@material-ui/core"
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
@@ -19,6 +20,10 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import Brightness4Icon from "@material-ui/icons/Brightness4"
 import NightsStayIcon from "@material-ui/icons/NightsStay"
 import TranslateIcon from "@material-ui/icons/Translate"
+
+import MenuIcon from "@material-ui/icons/Menu"
+import SearchIcon from "@material-ui/icons/Search"
+import MoreIcon from "@material-ui/icons/MoreVert"
 
 /*********************************************************************************** redux related */
 import { useDispatch, useSelector } from "react-redux"
@@ -40,6 +45,21 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		title: {
 			flexGrow: 1,
+		},
+		appBar: {
+			top: "auto",
+			bottom: 0,
+		},
+		grow: {
+			flexGrow: 1,
+		},
+		fabButton: {
+			position: "absolute",
+			zIndex: 1,
+			top: -30,
+			left: 0,
+			right: 0,
+			margin: "0 auto",
 		},
 	})
 )
@@ -151,6 +171,39 @@ const Navbar = () => {
 				<MenuItem onClick={() => handleClose("es")}>ES</MenuItem>
 				<MenuItem onClick={() => handleClose("jp")}>JP</MenuItem>
 			</Menu>
+
+			<AppBar position="fixed" color="secondary" className={classes.appBar}>
+				<Toolbar>
+					<IconButton
+						aria-controls="lang-menu"
+						aria-haspopup="true"
+						color="inherit"
+						onClick={handleClick}
+						className={classes.navbarItem}
+						edge="start"
+					>
+						<TranslateIcon />
+					</IconButton>
+
+					<IconButton
+						edge="end"
+						color="inherit"
+						onClick={toggleDarkTheme}
+						className={classes.navbarItem}
+					>
+						{theme === "dark" ? <NightsStayIcon /> : <Brightness4Icon />}
+					</IconButton>
+
+					<Fab color="primary" aria-label="add" className={classes.fabButton}>
+						<FontAwesomeIcon icon={["fas", "key"]} size="2x" />
+					</Fab>
+					<div className={classes.grow} />
+
+					<IconButton edge="end" color="inherit" aria-label="open drawer">
+						<MenuIcon />
+					</IconButton>
+				</Toolbar>
+			</AppBar>
 		</>
 	)
 }
