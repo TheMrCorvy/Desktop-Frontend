@@ -23,8 +23,6 @@ import NightsStayIcon from "@material-ui/icons/NightsStay"
 import TranslateIcon from "@material-ui/icons/Translate"
 
 import MenuIcon from "@material-ui/icons/Menu"
-import SearchIcon from "@material-ui/icons/Search"
-import MoreIcon from "@material-ui/icons/MoreVert"
 
 /*********************************************************************************** redux related */
 import { useDispatch, useSelector } from "react-redux"
