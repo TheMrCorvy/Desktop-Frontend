@@ -45,7 +45,7 @@ const App: FC = () => {
 	return (
 		<ThemeProvider theme={globalTheme}>
 			<CssBaseline />
-			<Paper style={{ minHeight: "100vh", minWidth: "100vw" }}>
+			<Paper style={{ minHeight: "100vh", flexGrow: 1 }}>
 				<Navbar />
 			</Paper>
 			<div className="App">
