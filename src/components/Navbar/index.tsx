@@ -13,6 +13,7 @@ import {
 	MenuItem,
 	Tooltip,
 	Fab,
+	Hidden,
 } from "@material-ui/core"
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
@@ -100,43 +101,82 @@ const Navbar = () => {
 	return (
 		<>
 			<div className={classes.root}>
-				<AppBar position="fixed" color={theme === "dark" ? "inherit" : "secondary"}>
-					<Toolbar>
-						<Tooltip title="Home">
-							<IconButton
-								edge="start"
-								className={classes.navbarItem}
-								color="inherit"
-								aria-label="logo"
-							>
-								<FontAwesomeIcon icon={["fas", "key"]} />
-							</IconButton>
-						</Tooltip>
+				<Hidden smDown>
+					<AppBar position="fixed" color={theme === "dark" ? "inherit" : "secondary"}>
+						<Toolbar>
+							<Tooltip title="Home">
+								<IconButton
+									edge="start"
+									className={classes.navbarItem}
+									color="inherit"
+									aria-label="logo"
+								>
+									<FontAwesomeIcon icon={["fas", "key"]} />
+								</IconButton>
+							</Tooltip>
 
-						<Typography variant="h6" className={classes.title}>
-							{translate("prueba", language)}
-						</Typography>
+							<Typography variant="h6" className={classes.title}>
+								{translate("prueba", language)}
+							</Typography>
 
-						<Tooltip title="Translate">
+							<Tooltip title="Translate">
+								<IconButton
+									aria-controls="lang-menu"
+									aria-haspopup="true"
+									color="inherit"
+									onClick={handleClick}
+									className={classes.navbarItem}
+								>
+									<TranslateIcon />
+								</IconButton>
+							</Tooltip>
+
+							<Button color="inherit" className={classes.navbarItem}>
+								Login / My Credentials
+							</Button>
+							<Button color="inherit" className={classes.navbarItem}>
+								Register / My Accounts
+							</Button>
+
+							<Tooltip title="Toggle Dark Theme">
+								<IconButton
+									edge="end"
+									color="inherit"
+									onClick={toggleDarkTheme}
+									className={classes.navbarItem}
+								>
+									{theme === "dark" ? <NightsStayIcon /> : <Brightness4Icon />}
+								</IconButton>
+							</Tooltip>
+
+							<Tooltip title="Download">
+								<IconButton
+									edge="start"
+									className={classes.navbarItem}
+									color="inherit"
+									aria-label="logo"
+								>
+									<FontAwesomeIcon icon={["fas", "cloud-download-alt"]} />
+								</IconButton>
+							</Tooltip>
+						</Toolbar>
+					</AppBar>
+				</Hidden>
+
+				<Hidden mdUp>
+					<AppBar position="fixed" color="secondary" className={classes.appBar}>
+						<Toolbar>
 							<IconButton
 								aria-controls="lang-menu"
 								aria-haspopup="true"
 								color="inherit"
 								onClick={handleClick}
 								className={classes.navbarItem}
+								edge="start"
 							>
 								<TranslateIcon />
 							</IconButton>
-						</Tooltip>
 
-						<Button color="inherit" className={classes.navbarItem}>
-							Login / My Credentials
-						</Button>
-						<Button color="inherit" className={classes.navbarItem}>
-							Register / My Accounts
-						</Button>
-
-						<Tooltip title="Toggle Dark Theme">
 							<IconButton
 								edge="end"
 								color="inherit"
@@ -145,21 +185,20 @@ const Navbar = () => {
 							>
 								{theme === "dark" ? <NightsStayIcon /> : <Brightness4Icon />}
 							</IconButton>
-						</Tooltip>
 
-						<Tooltip title="Download">
-							<IconButton
-								edge="start"
-								className={classes.navbarItem}
-								color="inherit"
-								aria-label="logo"
-							>
-								<FontAwesomeIcon icon={["fas", "cloud-download-alt"]} />
+							<Fab color="primary" aria-label="add" className={classes.fabButton}>
+								<FontAwesomeIcon icon={["fas", "key"]} size="2x" />
+							</Fab>
+							<div className={classes.grow} />
+
+							<IconButton edge="end" color="inherit" aria-label="open drawer">
+								<MenuIcon />
 							</IconButton>
-						</Tooltip>
-					</Toolbar>
-				</AppBar>
+						</Toolbar>
+					</AppBar>
+				</Hidden>
 			</div>
+
 			<Menu
 				id="lang-menu"
 				anchorEl={anchorEl}
@@ -171,39 +210,6 @@ const Navbar = () => {
 				<MenuItem onClick={() => handleClose("es")}>ES</MenuItem>
 				<MenuItem onClick={() => handleClose("jp")}>JP</MenuItem>
 			</Menu>
-
-			<AppBar position="fixed" color="secondary" className={classes.appBar}>
-				<Toolbar>
-					<IconButton
-						aria-controls="lang-menu"
-						aria-haspopup="true"
-						color="inherit"
-						onClick={handleClick}
-						className={classes.navbarItem}
-						edge="start"
-					>
-						<TranslateIcon />
-					</IconButton>
-
-					<IconButton
-						edge="end"
-						color="inherit"
-						onClick={toggleDarkTheme}
-						className={classes.navbarItem}
-					>
-						{theme === "dark" ? <NightsStayIcon /> : <Brightness4Icon />}
-					</IconButton>
-
-					<Fab color="primary" aria-label="add" className={classes.fabButton}>
-						<FontAwesomeIcon icon={["fas", "key"]} size="2x" />
-					</Fab>
-					<div className={classes.grow} />
-
-					<IconButton edge="end" color="inherit" aria-label="open drawer">
-						<MenuIcon />
-					</IconButton>
-				</Toolbar>
-			</AppBar>
 		</>
 	)
 }
