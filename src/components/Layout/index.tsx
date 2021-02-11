@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			flexGrow: 1,
 			[theme.breakpoints.down("sm")]: {
 				paddingTop: 0,
-				paddingBottom: "4rem",
+				paddingBottom: "5rem",
 			},
 			[theme.breakpoints.up("md")]: {
 				paddingBottom: 0,
@@ -34,7 +34,7 @@ const Layout = (props: { children: ReactElement }) => {
 
 	const trigger = useScrollTrigger({
 		disableHysteresis: true,
-		threshold: 100,
+		threshold: 200,
 	})
 
 	const handleClick = () => {
@@ -47,6 +47,7 @@ const Layout = (props: { children: ReactElement }) => {
 	return (
 		<Paper className={classes.main}>
 			<Navbar />
+
 			{props.children}
 
 			<Zoom in={trigger}>
