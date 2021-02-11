@@ -2,11 +2,7 @@ import React from "react"
 import { Route, Switch, BrowserRouter } from "react-router-dom"
 import { RouteType } from "../../routes"
 
-type Prop = {
-	routes: RouteType[]
-}
-
-export default function RoutesComponent(props: Prop) {
+export default function RoutesComponent(props: { routes: RouteType[] }) {
 	// hay que evaluar si está el token de autorizacion en el estado de redux
 	const evaluateRoutes = (r: RouteType, i: number) => {
 		if (r.requiresAuth) {

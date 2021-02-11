@@ -168,18 +168,12 @@ const Navbar = () => {
 								aria-haspopup="true"
 								color="inherit"
 								onClick={handleClick}
-								className={classes.navbarItem}
 								edge="start"
 							>
 								<TranslateIcon />
 							</IconButton>
 
-							<IconButton
-								edge="end"
-								color="inherit"
-								onClick={toggleDarkTheme}
-								className={classes.navbarItem}
-							>
+							<IconButton edge="end" color="inherit" onClick={toggleDarkTheme}>
 								{theme === "dark" ? <NightsStayIcon /> : <Brightness4Icon />}
 							</IconButton>
 
