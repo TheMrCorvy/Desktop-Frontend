@@ -1,9 +1,10 @@
 import React from "react"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import TranslateButton from "../NavbarComponents/NavbarButtons/TranslateButton"
 
-/*********************************************************************************** mui related */
+import TranslateButton from "../NavbarComponents/NavbarButtons/TranslateButton"
+import ToggleDarkTheme from "../NavbarComponents/NavbarButtons/ToggleDarkTheme"
+
 import {
 	AppBar,
 	Toolbar,
@@ -17,14 +18,9 @@ import {
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 
-import Brightness4Icon from "@material-ui/icons/Brightness4"
-import NightsStayIcon from "@material-ui/icons/NightsStay"
-
 import MenuIcon from "@material-ui/icons/Menu"
 
-/*********************************************************************************** redux related */
-import { useDispatch, useSelector } from "react-redux"
-import { setTheme } from "../../redux/actions/themeActions"
+import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
@@ -60,23 +56,11 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const Navbar = () => {
-	/*********************************************************************************** redux related */
 	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const dispatch = useDispatch()
-
-	/*********************************************************************************** mui related */
 	const classes = useStyles()
-
-	const toggleDarkTheme = () => {
-		if (theme === "dark") {
-			dispatch(setTheme("light"))
-		} else {
-			dispatch(setTheme("dark"))
-		}
-	}
 
 	return (
 		<>
@@ -108,16 +92,7 @@ const Navbar = () => {
 								{translate("navbar_register_btn", lng)}
 							</Button>
 
-							<Tooltip title={translate("toggle_dark_theme", lng)}>
-								<IconButton
-									edge="end"
-									color="inherit"
-									onClick={toggleDarkTheme}
-									className={classes.navbarItem}
-								>
-									{theme === "dark" ? <NightsStayIcon /> : <Brightness4Icon />}
-								</IconButton>
-							</Tooltip>
+							<ToggleDarkTheme className={classes.navbarItem} />
 
 							<Tooltip title={translate("navbar_download_btn", lng)}>
 								<IconButton
@@ -138,9 +113,7 @@ const Navbar = () => {
 						<Toolbar>
 							<TranslateButton edge="start" />
 
-							<IconButton edge="end" color="inherit" onClick={toggleDarkTheme}>
-								{theme === "dark" ? <NightsStayIcon /> : <Brightness4Icon />}
-							</IconButton>
+							<ToggleDarkTheme />
 
 							<Fab color="primary" aria-label="add" className={classes.fabButton}>
 								<FontAwesomeIcon icon={["fas", "key"]} size="2x" />
