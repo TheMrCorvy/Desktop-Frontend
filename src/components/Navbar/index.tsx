@@ -1,6 +1,7 @@
-import React, { useState, MouseEvent } from "react"
+import React from "react"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import TranslateButton from "../NavbarComponents/NavbarButtons/TranslateButton"
 
 /*********************************************************************************** mui related */
 import {
@@ -9,8 +10,6 @@ import {
 	IconButton,
 	Typography,
 	Button,
-	Menu,
-	MenuItem,
 	Tooltip,
 	Fab,
 	Hidden,
@@ -20,7 +19,6 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 
 import Brightness4Icon from "@material-ui/icons/Brightness4"
 import NightsStayIcon from "@material-ui/icons/NightsStay"
-import TranslateIcon from "@material-ui/icons/Translate"
 
 import MenuIcon from "@material-ui/icons/Menu"
 
@@ -30,7 +28,6 @@ import { setTheme } from "../../redux/actions/themeActions"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
-import { setLanguage } from "../../redux/actions/langActions"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -73,20 +70,6 @@ const Navbar = () => {
 	/*********************************************************************************** mui related */
 	const classes = useStyles()
 
-	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-
-	const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-		setAnchorEl(event.currentTarget)
-	}
-
-	const handleClose = (value: string) => {
-		setAnchorEl(null)
-
-		if (value !== "no change") {
-			dispatch(setLanguage(value))
-		}
-	}
-
 	const toggleDarkTheme = () => {
 		if (theme === "dark") {
 			dispatch(setTheme("light"))
@@ -116,17 +99,7 @@ const Navbar = () => {
 								{translate("app_name", lng)}
 							</Typography>
 
-							<Tooltip title={translate("translate", lng)}>
-								<IconButton
-									aria-controls="lang-menu"
-									aria-haspopup="true"
-									color="inherit"
-									onClick={handleClick}
-									className={classes.navbarItem}
-								>
-									<TranslateIcon />
-								</IconButton>
-							</Tooltip>
+							<TranslateButton className={classes.navbarItem} />
 
 							<Button color="inherit" className={classes.navbarItem}>
 								{translate("navbar_login_btn", lng)}
@@ -163,15 +136,7 @@ const Navbar = () => {
 				<Hidden mdUp>
 					<AppBar position="fixed" color="secondary" className={classes.appBar}>
 						<Toolbar>
-							<IconButton
-								aria-controls="lang-menu"
-								aria-haspopup="true"
-								color="inherit"
-								onClick={handleClick}
-								edge="start"
-							>
-								<TranslateIcon />
-							</IconButton>
+							<TranslateButton edge="start" />
 
 							<IconButton edge="end" color="inherit" onClick={toggleDarkTheme}>
 								{theme === "dark" ? <NightsStayIcon /> : <Brightness4Icon />}
@@ -189,18 +154,6 @@ const Navbar = () => {
 					</AppBar>
 				</Hidden>
 			</div>
-
-			<Menu
-				id="lang-menu"
-				anchorEl={anchorEl}
-				keepMounted
-				open={Boolean(anchorEl)}
-				onClose={() => handleClose("no change")}
-			>
-				<MenuItem onClick={() => handleClose("en")}>EN</MenuItem>
-				<MenuItem onClick={() => handleClose("es")}>ES</MenuItem>
-				<MenuItem onClick={() => handleClose("jp")}>JP</MenuItem>
-			</Menu>
 		</>
 	)
 }

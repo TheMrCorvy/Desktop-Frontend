@@ -6,7 +6,7 @@ import { RootState } from "./redux/store"
 
 /*********************************************************************************** mui related */
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles"
-import { orange, blue } from "@material-ui/core/colors"
+import { blue } from "@material-ui/core/colors"
 import { CssBaseline } from "@material-ui/core"
 
 /*********************************************************************************** layout related components */
