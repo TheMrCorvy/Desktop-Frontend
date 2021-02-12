@@ -1,6 +1,6 @@
 import React from "react"
 import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom"
-import { RouteType } from "../../routes"
+import { RouteType } from "../routes"
 
 export default function RoutesComponent(props: { routes: RouteType[] }) {
 	// hay que evaluar si está el token de autorizacion en el estado de redux

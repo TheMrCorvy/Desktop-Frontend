@@ -5,22 +5,14 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp"
 
-import Navbar from "../Navbar"
-import Drawer from "../NavbarComponents/Drawer"
+import Navbar from "./Navbar"
+import Drawer from "./NavbarComponents/Drawer"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		main: {
 			minHeight: "100vh",
 			flexGrow: 1,
-			// [theme.breakpoints.down("sm")]: {
-			// 	paddingTop: 0,
-			// 	paddingBottom: "5rem",
-			// },
-			// [theme.breakpoints.up("md")]: {
-			// 	paddingBottom: 0,
-			// 	paddingTop: "4rem",
-			// },
 		},
 		backToTop: {
 			position: "fixed",
