@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import TranslateButton from "../NavbarComponents/NavbarButtons/TranslateButton"
 import ToggleDarkTheme from "../NavbarComponents/NavbarButtons/ToggleDarkTheme"
 
+/************************************************************************************ mui related */
 import {
 	AppBar,
 	Toolbar,
@@ -14,12 +15,22 @@ import {
 	Tooltip,
 	Fab,
 	Hidden,
+	SwipeableDrawer,
+	List,
+	Divider,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
 } from "@material-ui/core"
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 
+import InboxIcon from "@material-ui/icons/MoveToInbox"
+import MailIcon from "@material-ui/icons/Mail"
+
 import MenuIcon from "@material-ui/icons/Menu"
 
+/************************************************************************************ redux related */
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
@@ -61,6 +72,8 @@ const Navbar = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
+
+	const [open, setOpen] = useState(false)
 
 	return (
 		<>
@@ -120,11 +133,42 @@ const Navbar = () => {
 							</Fab>
 							<div className={classes.grow} />
 
-							<IconButton edge="end" color="inherit" aria-label="open drawer">
+							<IconButton
+								edge="end"
+								color="inherit"
+								aria-label="open drawer"
+								onClick={() => setOpen(true)}
+							>
 								<MenuIcon />
 							</IconButton>
 						</Toolbar>
 					</AppBar>
+					<SwipeableDrawer
+						anchor="right"
+						open={open}
+						onClose={() => setOpen(false)}
+						onOpen={() => setOpen(true)}
+					>
+						<div
+							role="presentation"
+							onClick={() => setOpen(false)}
+							onKeyDown={() => setOpen(false)}
+						>
+							<List>
+								{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+									<>
+										<ListItem button key={text}>
+											<ListItemIcon>
+												{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+											</ListItemIcon>
+											<ListItemText primary={text} />
+										</ListItem>
+										<Divider />
+									</>
+								))}
+							</List>
+						</div>
+					</SwipeableDrawer>
 				</Hidden>
 			</div>
 		</>
