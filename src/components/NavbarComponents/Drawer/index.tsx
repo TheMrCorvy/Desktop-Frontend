@@ -27,7 +27,7 @@ const Drawer: FC = () => {
 	useEffect(() => {
 		window.addEventListener("beforeinstallprompt", (e: Event) => {
 			// Prevent the mini-infobar from appearing on mobile
-			e.preventDefault()
+			/***************************************************************** e.preventDefault()*/
 			// Stash the event so it can be triggered later.
 			deferredPrompt = e
 			// Update UI notify the user they can install the PWA
