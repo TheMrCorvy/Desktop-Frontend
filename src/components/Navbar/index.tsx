@@ -125,9 +125,11 @@ const Navbar = () => {
 
 							<ToggleDarkTheme />
 
-							<Fab color="primary" aria-label="add" className={classes.fabButton}>
-								<FontAwesomeIcon icon={["fas", "key"]} size="2x" />
-							</Fab>
+							<Link to="/">
+								<Fab color="primary" aria-label="add" className={classes.fabButton}>
+									<FontAwesomeIcon icon={["fas", "key"]} size="2x" />
+								</Fab>
+							</Link>
 							<div className={classes.grow} />
 
 							<IconButton
