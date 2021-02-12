@@ -6,6 +6,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp"
 
 import Navbar from "../Navbar"
+import Drawer from "../NavbarComponents/Drawer"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -47,6 +48,7 @@ const Layout = (props: { children: ReactElement }) => {
 	return (
 		<Paper className={classes.main}>
 			<Navbar />
+			<Drawer />
 
 			{props.children}
 

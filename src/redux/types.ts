@@ -13,7 +13,6 @@ interface SetLanguageActionI {
 export type LangAction = SetLanguageActionI
 
 /******************************************************************************** toggle dark theme */
-
 export const SET_THEME = "SET_THEME"
 
 export const light = "light"
@@ -29,3 +28,17 @@ interface ToggleDarkThemeActionI {
 }
 
 export type ThemeAction = ToggleDarkThemeActionI
+
+/******************************************************************************** toggle drawer */
+export const TOGGLE_DRAWER = "TOGGLE_DRAWER"
+
+export interface DrawerStateI {
+	open: boolean
+}
+
+interface ToggleDrawerActionI {
+	type: typeof TOGGLE_DRAWER
+	payload: boolean
+}
+
+export type DrawerAction = ToggleDrawerActionI
