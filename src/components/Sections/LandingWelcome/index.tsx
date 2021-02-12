@@ -21,7 +21,7 @@ import { translate } from "../../../lang"
 const useStyles = makeStyles({
 	card: {
 		maxWidth: "90%",
-		width: "70rem",
+		width: "60rem",
 		paddingBottom: 20,
 		borderRadius: 5,
 	},
@@ -36,7 +36,8 @@ const useStyles = makeStyles({
 		flexDirection: "column",
 		alignItems: " center",
 		textAlign: "center",
-		borderRadius: 10,
+		borderBottomLeftRadius: 10,
+		borderBottomRightRadius: 10,
 	},
 	mainSpacing: {
 		marginTop: 50,

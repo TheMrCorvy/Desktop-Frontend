@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React from "react"
+import { Link } from "react-router-dom"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		navbarItem: {
 			marginRight: theme.spacing(1),
 			marginLeft: theme.spacing(1),
+			color: "white",
 		},
 		title: {
 			flexGrow: 1,
@@ -75,14 +77,16 @@ const Navbar = () => {
 					<AppBar position="fixed" color={theme === "dark" ? "primary" : "secondary"}>
 						<Toolbar>
 							<Tooltip title={translate("home", lng)}>
-								<IconButton
-									edge="start"
-									className={classes.navbarItem}
-									color="inherit"
-									aria-label="logo"
-								>
-									<FontAwesomeIcon icon={["fas", "key"]} />
-								</IconButton>
+								<Link to="/">
+									<IconButton
+										edge="start"
+										className={classes.navbarItem}
+										color="default"
+										aria-label="logo"
+									>
+										<FontAwesomeIcon icon={["fas", "key"]} />
+									</IconButton>
+								</Link>
 							</Tooltip>
 
 							<Typography variant="h6" className={classes.title}>

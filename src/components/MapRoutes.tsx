@@ -1,5 +1,5 @@
 import React from "react"
-import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom"
+import { Route, Switch, Redirect } from "react-router-dom"
 import { RouteType } from "../routes"
 
 export default function RoutesComponent(props: { routes: RouteType[] }) {
@@ -13,12 +13,8 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 	}
 
 	return (
-		<BrowserRouter>
-			<Switch>
-				{props.routes.map((route: RouteType, index: number) =>
-					evaluateRoutes(route, index)
-				)}
-			</Switch>
-		</BrowserRouter>
+		<Switch>
+			{props.routes.map((route: RouteType, index: number) => evaluateRoutes(route, index))}
+		</Switch>
 	)
 }

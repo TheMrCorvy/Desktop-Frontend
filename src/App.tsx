@@ -17,6 +17,7 @@ import Layout from "./components/Layout"
 /*********************************************************************************** font awesome */
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faKey, faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
+import { BrowserRouter } from "react-router-dom"
 library.add(faKey, faCloudDownloadAlt)
 
 const App: FC = () => {
@@ -42,10 +43,12 @@ const App: FC = () => {
 
 	return (
 		<ThemeProvider theme={globalTheme}>
-			<CssBaseline />
-			<Layout>
-				<MapRoutes routes={routes} />
-			</Layout>
+			<BrowserRouter>
+				<CssBaseline />
+				<Layout>
+					<MapRoutes routes={routes} />
+				</Layout>
+			</BrowserRouter>
 		</ThemeProvider>
 	)
 }
