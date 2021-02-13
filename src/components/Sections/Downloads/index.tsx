@@ -2,56 +2,67 @@ import React, { FC } from "react"
 
 import { Container, Grid, Button, Typography, Divider, Hidden } from "@material-ui/core"
 
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
-import { purple, indigo } from "@material-ui/core/colors"
+import { purple, indigo, pink } from "@material-ui/core/colors"
 
-const useStyles = makeStyles({
-	linuxBtn: {
-		backgroundColor: purple[400],
-		"&:hover": {
-			backgroundColor: purple[500],
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		linuxBtn: {
+			backgroundColor: purple[400],
+			"&:hover": {
+				backgroundColor: purple[500],
+			},
 		},
-	},
-	webBtn: {
-		backgroundColor: indigo["A400"],
-		"&:hover": {
-			backgroundColor: indigo["A700"],
+		webBtn: {
+			backgroundColor: indigo["A400"],
+			"&:hover": {
+				backgroundColor: indigo["A700"],
+			},
 		},
-	},
-})
+		androidBtn: {
+			backgroundColor: pink[500],
+			"&:hover": {
+				backgroundColor: pink[600],
+			},
+		},
+		container: {
+			paddingTop: 45,
+			paddingBottom: 500,
+			textAlign: "center",
+
+			[theme.breakpoints.down("xs")]: {
+				paddingTop: 0,
+			},
+		},
+		marginB: {
+			marginBottom: 30,
+		},
+	})
+)
 
 const Downloads: FC = () => {
 	const classes = useStyles()
 
 	return (
-		<Container maxWidth="lg" style={{ textAlign: "center" }} id="downloads-section">
-			<Grid
-				container
-				style={{ paddingTop: 45, paddingBottom: 500 }}
-				justify="center"
-				spacing={6}
-			>
-				<Grid item xs={12} style={{ textAlign: "center", paddingBottom: 0 }}>
-					<Typography gutterBottom variant="h4" style={{ marginBottom: 0 }}>
+		<Container maxWidth="lg" className={classes.container} id="downloads-section">
+			<Grid container justify="center" spacing={6}>
+				<Grid item xs={12}>
+					<Typography gutterBottom variant="h4" className={classes.marginB}>
 						Downloads
 					</Typography>
 				</Grid>
 
-				<Grid item xs={12}>
-					<Divider orientation="horizontal" />
-				</Grid>
-
 				<Grid item xs={12} sm={5} lg={2}>
 					<Grid container justify="space-between" spacing={1}>
-						<Grid item xs={12} style={{ textAlign: "center" }}>
+						<Grid item xs={12}>
 							<Typography gutterBottom variant="h5">
 								Web Version
 							</Typography>
 						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={12}>
 							<Button variant="contained" color="primary" className={classes.webBtn}>
-								probando
+								Install
 							</Button>
 						</Grid>
 					</Grid>
@@ -69,23 +80,28 @@ const Downloads: FC = () => {
 
 				<Grid item xs={12} sm={5} lg={3}>
 					<Grid container spacing={1}>
-						<Grid item xs={12} style={{ textAlign: "center" }}>
+						<Grid item xs={12}>
 							<Typography gutterBottom variant="h5">
 								Desktop
 							</Typography>
 						</Grid>
-						<Grid item xs={6} style={{ textAlign: "center" }}>
+						<Grid item xs={4}>
+							<Button variant="contained" color="primary">
+								PC
+							</Button>
+						</Grid>
+						<Grid item xs={4}>
+							<Button variant="contained" color="secondary">
+								Mac
+							</Button>
+						</Grid>
+						<Grid item xs={4}>
 							<Button
 								variant="contained"
 								color="primary"
 								className={classes.linuxBtn}
 							>
-								probando
-							</Button>
-						</Grid>
-						<Grid item xs={6} style={{ textAlign: "center" }}>
-							<Button variant="contained" color="primary" className={classes.webBtn}>
-								probando
+								Linux
 							</Button>
 						</Grid>
 					</Grid>
@@ -112,7 +128,7 @@ const Downloads: FC = () => {
 
 				<Grid item xs={12} sm={5} lg={3}>
 					<Grid container justify="space-between" spacing={1}>
-						<Grid item xs={12} style={{ textAlign: "center" }}>
+						<Grid item xs={12}>
 							<Typography gutterBottom variant="h5">
 								Android
 							</Typography>
@@ -121,14 +137,14 @@ const Downloads: FC = () => {
 							<Button
 								variant="contained"
 								color="primary"
-								className={classes.linuxBtn}
+								className={classes.androidBtn}
 							>
-								probando
+								Play Store
 							</Button>
 						</Grid>
 						<Grid item xs={6}>
 							<Button variant="contained" color="primary" className={classes.webBtn}>
-								probando
+								Install
 							</Button>
 						</Grid>
 					</Grid>
@@ -144,32 +160,19 @@ const Downloads: FC = () => {
 					<Divider orientation="vertical" flexItem />
 				</Hidden>
 
-				<Grid item xs={12} sm={5} lg={3}>
+				<Grid item xs={12} sm={5} lg={2}>
 					<Grid container justify="space-between" spacing={1}>
-						<Grid item xs={12} style={{ textAlign: "center" }}>
+						<Grid item xs={12}>
 							<Typography gutterBottom variant="h5">
 								IOS
 							</Typography>
 						</Grid>
-						<Grid item xs={6}>
-							<Button
-								variant="contained"
-								color="primary"
-								className={classes.linuxBtn}
-							>
-								probando
-							</Button>
-						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={12}>
 							<Button variant="contained" color="primary" className={classes.webBtn}>
-								probando
+								Install
 							</Button>
 						</Grid>
 					</Grid>
-				</Grid>
-
-				<Grid item xs={12}>
-					<Divider orientation="horizontal" />
 				</Grid>
 			</Grid>
 		</Container>
