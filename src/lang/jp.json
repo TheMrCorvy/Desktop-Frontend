@@ -23,5 +23,38 @@
 		"And lastly to",
 		"「パス世話」",
 		"(PasuSewa)"
+	],
+	"about_title": ["How does this works?"],
+	"about_subtitle": ["What is \"Vulnerable Sections\"?"],
+	"about_texts": [
+		"All your passwords will be completely protected by the best encryption techniques, and stored safely in the cloud so that you can access them at any time, from any device.",
+		"Since the main purpose of a Password Manager is to actually free you from having to remember all your passwords, we don't use any \"password\" or Access Pin, and we can do that by making use of the 2 Factor Authentication, wich means that, instead of having to access using \"something you know\" (a password or a pin), you will be accessing by \"something you have\" (your smartphone or email for example).",
+		"Whenever you store any kind of credential, it will be separated based on its \"Vulnerable Sections\", and the most vulnerable parts will be encrypted, so the only moment when your credentials will be visible, will be at the moment, and place, you ask for it.",
+		"Every information you enter will be divided and separated. Let's imagine that you enter an email: ",
+		"In this case the \"Vulnerable Section\" are all the characters before the \"@\", and so, that is the part that will be encrypted, and it will look something like this: ",
+		"You can see more about how your credentials are encrypted and stored by clicking the button bellow.",
+		"The same goes for the rest of the categories of Vulnerable Information, below you'll have some examples of how your information will be displayed once it's encrypted.",
+		"The asterisks (*) means that credential is encrypted, if there are only 5 asterisks that means that all the credentials was encrypted, instead of just the mos vulnerable part."
+	],
+	"encryption_examples": [
+		"mr_x@email.com",
+		"@Password123",
+		"Example Name",
+		"+54 1234-5678",
+		"Security Question",
+		"Security Answer",
+		"Unique Security Code (example: kj1dn3k32a)",
+		"Multiple Security Codes",
+		"Credentials for Cryptocurrency Wallet"
+	],
+	"encrypted_examples": [
+		"m***@email.com",
+		"*****",
+		"E**********e",
+		"+54******78",
+		"*****",
+		"*****",
+		"*****",
+		"*****"
 	]
 }
