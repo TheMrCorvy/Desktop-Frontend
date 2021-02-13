@@ -1,6 +1,20 @@
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 
-import { Container, Grid, Typography, Hidden, Divider, Fab, Tooltip } from "@material-ui/core"
+import {
+	Container,
+	Grid,
+	Typography,
+	Hidden,
+	Divider,
+	Fab,
+	Tooltip,
+	Dialog,
+	DialogTitle,
+	DialogContentText,
+	DialogContent,
+	DialogActions,
+	Button,
+} from "@material-ui/core"
 
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 
@@ -8,6 +22,12 @@ import LandingWelcome from "../components/Sections/LandingWelcome/index"
 import Downloads from "../components/Sections/Downloads/index"
 
 const Landing: FC = () => {
+	const [open, setOpen] = useState(false)
+
+	const toggleDialog = () => {
+		setOpen(!open)
+	}
+
 	return (
 		<>
 			<LandingWelcome />
@@ -84,11 +104,36 @@ const Landing: FC = () => {
 						aria-label="help"
 						size="small"
 						style={{ position: "absolute", bottom: 100, right: 20 }}
+						onClick={toggleDialog}
 					>
 						<HelpOutlineIcon />
 					</Fab>
 				</Tooltip>
 			</Container>
+
+			<Dialog
+				onClose={toggleDialog}
+				aria-labelledby="simple-dialog-title"
+				open={open}
+				scroll="paper"
+			>
+				<DialogTitle id="simple-dialog-title">
+					¿Qué es eso de "secciones sensibles"?
+				</DialogTitle>
+				<DialogContent>
+					<DialogContentText>
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum corrupti
+						quaerat neque, mollitia ad impedit adipisci assumenda laborum facilis
+						reprehenderit earum modi, vitae blanditiis eum. Et quia ipsum reprehenderit
+						inventore.
+					</DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					<Button autoFocus onClick={toggleDialog} color="default" size="large">
+						Volver
+					</Button>
+				</DialogActions>
+			</Dialog>
 		</>
 	)
 }

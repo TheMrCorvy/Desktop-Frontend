@@ -6,7 +6,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { purple, indigo, pink } from "@material-ui/core/colors"
 
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
