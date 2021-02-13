@@ -47,7 +47,7 @@
 		"mr_x@email.com",
 		"@Contraseña123",
 		"Nombre de Ejemplo",
-		"+54 1234-5678",
+		"+54 1234 - 5678",
 		"Pregunta de Seguridad",
 		"Respuesta de Seguridad",
 		"Código Único de Seguridad (ejemplo: kj1dn3k32a)",
@@ -64,5 +64,6 @@
 		"*****",
 		"*****",
 		"*****"
-	]
+	],
+	"more_info": ["Ver más Información"]
 }

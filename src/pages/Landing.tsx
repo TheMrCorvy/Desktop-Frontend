@@ -21,7 +21,16 @@ import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 import LandingWelcome from "../components/Sections/LandingWelcome/index"
 import Downloads from "../components/Sections/Downloads/index"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../redux/store"
+
+import { translate } from "../lang"
+
+import * as es from "../lang/es.json"
+
 const Landing: FC = () => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const [open, setOpen] = useState(false)
 
 	const toggleDialog = () => {
@@ -39,7 +48,7 @@ const Landing: FC = () => {
 				<Grid container justify="space-around">
 					<Grid item xs={12} style={{ textAlign: "center", marginBottom: "3rem" }}>
 						<Typography gutterBottom variant="h4">
-							¿Cómo Funciona?
+							{translate("about_title", lng)}
 						</Typography>
 					</Grid>
 					<Grid item xs={12} style={{ marginBottom: "3rem" }}>
@@ -47,58 +56,38 @@ const Landing: FC = () => {
 					</Grid>
 					<Grid item xs={12} sm={5} style={{ marginBottom: "3rem" }}>
 						<Typography variant="body1" style={{ marginBottom: "3rem" }}>
-							Todas tus contraseñas estarán completamente protegidas por las mejores
-							técnicas de ecriptación, y almacenadas de forma segura en la nube para
-							que puedas acceder a ellas en cualquier momento y desde cualquier
-							dispositivo.
+							{translate("about_texts", lng, 0)}
 						</Typography>
-						<Typography variant="body1">
-							Ya que la principal función de un gestor de contraseñas es,
-							precisamente, liberarte de tener que recordar todas tus contraseñas,
-							para permitir que solo tú tengas acceso a tus contraseñas nos apoyamos
-							en los métodos de autenticación en 2 factores, lo que quiere decir que
-							no te identificarás con "algo que sabes" (una contraseña maestra/pin),
-							sino que lo harás con "algo que tienes" (el smartphone en tu bolsillo,
-							tu email, etc.).
-						</Typography>
+						<Typography variant="body1">{translate("about_texts", lng, 1)}</Typography>
 					</Grid>
 					<Hidden xsDown>
 						<Divider orientation="vertical" flexItem style={{ marginBottom: "3rem" }} />
 					</Hidden>
 					<Grid item xs={12} sm={5} style={{ marginBottom: "3rem" }}>
 						<Typography variant="body1" style={{ marginBottom: "3rem" }}>
-							A la hora de almacenar cualquier información que nos proporciones, esta
-							será dividida según sus secciones de "sensibilidad", y las partes más
-							sensibles serán almacenadas de manera cifrada, por lo que tus
-							contraseñas solo serán visibles cuándo y dónde lo pidas, y nunca más.
+							{translate("about_texts", lng, 2)}
 						</Typography>
 						<Typography variant="body1" paragraph>
-							¿Qué es eso de "secciones sensibles"?
+							{translate("about_subtitle", lng)}
 						</Typography>
 						<Typography variant="body2" paragraph>
-							Toda la iformación que ingreses será catalogada y separada. Imaginemos
-							que ingresas un email: "
+							{translate("about_texts", lng, 3)}"
 							<Typography component="span" variant="body2" color="primary">
-								mr_x@email.com
+								{translate("encryption_examples", lng, 0)}
 							</Typography>
-							". en este caso la "sección sensible" es aquella que viene antes del
-							"@", por lo que esa parte será separada y encriptada, quedando algo así
-							"
+							". {translate("about_texts", lng, 4)}"
 							<Typography component="span" variant="body2" color="primary">
 								m***@email.com
 							</Typography>
 							".
 						</Typography>
-						<Typography variant="body2">
-							Para ver más información acerca de cómo se encripta y almacena tu
-							información puedes hacer click en el botón debajo.
-						</Typography>
+						<Typography variant="body2">{translate("about_texts", lng, 5)}</Typography>
 					</Grid>
 					<Grid item xs={12}>
 						<Divider orientation="horizontal" />
 					</Grid>
 				</Grid>
-				<Tooltip title="more info" placement="left">
+				<Tooltip title={translate("more_info", lng)} placement="left">
 					<Fab
 						color="secondary"
 						aria-label="help"
@@ -118,112 +107,52 @@ const Landing: FC = () => {
 				scroll="paper"
 			>
 				<DialogTitle id="simple-dialog-title">
-					¿Qué es eso de "secciones sensibles"?
+					{translate("about_subtitle", lng)}
 				</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
 						<Typography variant="body2" paragraph>
-							Toda la iformación que ingreses será catalogada y separada. Imaginemos
-							que ingresas un email: "
+							{translate("about_texts", lng, 3)}"
 							<Typography component="span" variant="body2" color="primary">
-								mr_x@email.com
+								{translate("encryption_examples", lng, 0)}
 							</Typography>
-							". en este caso la "sección sensible" es aquella que viene antes del
-							"@", por lo que esa parte será separada y encriptada, quedando algo así
-							"
+							"{". "}
+							{translate("about_texts", lng, 4)}"
 							<Typography component="span" variant="body2" color="primary">
 								m***@email.com
 							</Typography>
 							".
 						</Typography>
 						<Typography variant="body2" paragraph>
-							Lo mismo aplica para las demás categorías de información sensible, a
-							continuación tendrás unos ejemplos sobre cómo será mostrada tu
-							información una vez encriptada.
+							{translate("about_texts", lng, 6)}
 						</Typography>
 						<Typography variant="body2" paragraph>
-							Los asteríscos (*) representan que la información ha sido encriptada, si
-							hay sólo 5 asteríscos, significa que no hay nada de esa credencial que
-							se almacene sin encriptar.
+							{translate("about_texts", lng, 7)}
 						</Typography>
 						<ol>
-							<li>
-								"
-								<Typography component="span" variant="body2" color="primary">
-									mr_x@email.com
-								</Typography>
-								" {"=>"} "
-								<Typography component="span" variant="body2" color="primary">
-									m***@email.com
-								</Typography>
-								",
-							</li>
-							<li>
-								"
-								<Typography component="span" variant="body2" color="primary">
-									@Contraseña123
-								</Typography>
-								" {"=>"} "
-								<Typography component="span" variant="body2" color="primary">
-									*****
-								</Typography>
-								",
-							</li>
-							<li>
-								"
-								<Typography component="span" variant="body2" color="primary">
-									Nombre de Ejemplo
-								</Typography>
-								" {"=>"} "
-								<Typography component="span" variant="body2" color="primary">
-									N***************o
-								</Typography>
-								",
-							</li>
-							<li>
-								"
-								<Typography component="span" variant="body2" color="primary">
-									Pregunta de Seguridad
-								</Typography>
-								" {"=>"} "
-								<Typography component="span" variant="body2" color="primary">
-									*****
-								</Typography>
-								",
-							</li>
-							<li>
-								"
-								<Typography component="span" variant="body2" color="primary">
-									Código Único de Seguridad (ejemplo: kj1dn3k32a)
-								</Typography>
-								" {"=>"} "
-								<Typography component="span" variant="body2" color="primary">
-									*****
-								</Typography>
-								",
-							</li>
-							<li>
-								"
-								<Typography component="span" variant="body2" color="primary">
-									Múltiples Códigos de Seguridad
-								</Typography>
-								" {"=>"} "
-								<Typography component="span" variant="body2" color="primary">
-									*****
-								</Typography>
-								",
-							</li>
-							<li>
-								"
-								<Typography component="span" variant="body2" color="primary">
-									Credenciales de Acceso a Billetera Criptográfica
-								</Typography>
-								" {"=>"} "
-								<Typography component="span" variant="body2" color="primary">
-									*****
-								</Typography>
-								",
-							</li>
+							{es.encryption_examples.map((el, index) => (
+								<li key={index}>
+									<span>
+										"
+										<Typography
+											component="span"
+											variant="body2"
+											color="primary"
+										>
+											{translate("encryption_examples", lng, index)}
+										</Typography>
+										" {"=>"} "
+										<Typography
+											component="span"
+											variant="body2"
+											color="primary"
+										>
+											{translate("encrypted_examples", lng, index)}
+										</Typography>
+										",
+									</span>
+								</li>
+							))}
 						</ol>
 					</DialogContentText>
 				</DialogContent>

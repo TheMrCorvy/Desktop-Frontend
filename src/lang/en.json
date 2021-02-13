@@ -40,7 +40,7 @@
 		"mr_x@email.com",
 		"@Password123",
 		"Example Name",
-		"+54 1234-5678",
+		"+54 1234 - 5678",
 		"Security Question",
 		"Security Answer",
 		"Unique Security Code (example: kj1dn3k32a)",
@@ -55,6 +55,8 @@
 		"*****",
 		"*****",
 		"*****",
+		"*****",
 		"*****"
-	]
+	],
+	"more_info": ["See more Information"]
 }
