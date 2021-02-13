@@ -5,7 +5,6 @@ import {
 	Container,
 	Paper,
 	Typography,
-	Button,
 	Hidden,
 	Card,
 	CardContent,
@@ -51,6 +50,9 @@ const useStyles = makeStyles({
 	secondarySpacing: {
 		marginTop: 10,
 	},
+	welcomeSection: {
+		height: "100vh",
+	},
 })
 
 const LandingWelcome: FC = () => {
@@ -61,7 +63,7 @@ const LandingWelcome: FC = () => {
 	const classes = useStyles()
 
 	return (
-		<Container maxWidth="lg">
+		<Container maxWidth="lg" className={classes.welcomeSection}>
 			<Paper
 				style={{
 					background: theme === "dark" ? "#333" : "#f5f5f5",
