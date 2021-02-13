@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import "../../../styles/styles.css"
 
 import {
 	Container,
@@ -9,7 +10,10 @@ import {
 	Card,
 	CardContent,
 	CardActions,
+	Fab,
 } from "@material-ui/core"
+
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown"
 
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -22,7 +26,8 @@ const useStyles = makeStyles({
 	card: {
 		maxWidth: "90%",
 		width: "60rem",
-		paddingBottom: 20,
+		paddingBottom: 40,
+		paddingTop: 30,
 		borderRadius: 5,
 	},
 	cardActions: {
@@ -30,7 +35,7 @@ const useStyles = makeStyles({
 		justifyContent: "center",
 	},
 	paperMain: {
-		height: "90vh",
+		height: "85vh",
 		display: "flex",
 		justifyContent: "center",
 		flexDirection: "column",
@@ -68,7 +73,7 @@ const LandingWelcome: FC = () => {
 					<CardContent>
 						<Hidden xsDown>
 							<Typography variant="h3" gutterBottom>
-								{translate("landing_title", lng)}
+								{translate("prueba", lng, 0)}
 							</Typography>
 						</Hidden>
 						<Hidden smUp>
@@ -102,14 +107,13 @@ const LandingWelcome: FC = () => {
 						</Typography>
 					</CardContent>
 					<CardActions className={classes.cardActions}>
-						<Button
-							variant="contained"
+						<Fab
 							color={theme === "dark" ? "secondary" : "primary"}
-							disableElevation
+							className="callToAction"
 							size="small"
 						>
-							Continue Reading
-						</Button>
+							<KeyboardArrowDownIcon />
+						</Fab>
 					</CardActions>
 				</Card>
 			</Paper>
