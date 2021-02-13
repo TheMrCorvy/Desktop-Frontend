@@ -11,6 +11,7 @@ import {
 	CardContent,
 	CardActions,
 	Fab,
+	Tooltip,
 } from "@material-ui/core"
 
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown"
@@ -73,7 +74,7 @@ const LandingWelcome: FC = () => {
 					<CardContent>
 						<Hidden xsDown>
 							<Typography variant="h3" gutterBottom>
-								{translate("prueba", lng, 0)}
+								{translate("landing_title", lng)}
 							</Typography>
 						</Hidden>
 						<Hidden smUp>
@@ -82,28 +83,46 @@ const LandingWelcome: FC = () => {
 							</Typography>
 						</Hidden>
 						<Typography variant="subtitle1" gutterBottom>
-							{translate("landing_main_subtitle", lng)}
+							{translate("landing_texts", lng, 0)}
 						</Typography>
 						<Typography
 							variant="subtitle2"
 							gutterBottom
 							className={classes.mainSpacing}
 						>
-							{translate("landing_second_sub_part_1", lng)}
+							{translate("landing_texts", lng, 1)}
+
+							<Tooltip placement="top" title={translate("landing_texts", lng, 3)}>
+								<Typography component="span">
+									{translate("landing_texts", lng, 2)}
+								</Typography>
+							</Tooltip>
 						</Typography>
 						<Typography
 							variant="subtitle2"
 							gutterBottom
 							className={classes.secondarySpacing}
 						>
-							{translate("landing_second_sub_part_2", lng)}
+							{translate("landing_texts", lng, 4)}
+
+							<Tooltip placement="top" title={translate("landing_texts", lng, 6)}>
+								<Typography component="span">
+									{translate("landing_texts", lng, 5)}
+								</Typography>
+							</Tooltip>
 						</Typography>
 						<Typography
 							variant="subtitle2"
 							gutterBottom
 							className={classes.secondarySpacing}
 						>
-							{translate("landing_second_sub_part_3", lng)}
+							{translate("landing_texts", lng, 7)}
+
+							<Tooltip placement="top" title={translate("landing_texts", lng, 9)}>
+								<Typography component="span">
+									{translate("landing_texts", lng, 8)}
+								</Typography>
+							</Tooltip>
 						</Typography>
 					</CardContent>
 					<CardActions className={classes.cardActions}>

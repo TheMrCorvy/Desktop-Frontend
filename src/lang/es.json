@@ -9,13 +9,16 @@
 	"toggle_dark_theme": ["Alternar Tema Oscuro"],
 	"navbar_download_btn": ["Descargas"],
 	"landing_title": ["¿Qué es PasuSewa?"],
-	"landing_main_subtitle": [
-		"PasuSewa es el gestor de contraseñas más completo que puedas encontrar en la web."
-	],
-	"landing_second_sub_part_1": [
-		"\"PasuSewa\" proviene de la frase 「私たちはあなたのパスワードの世話をします。」"
-	],
-	"landing_second_sub_part_2": ["Que luego fue contraida a「パスワード世話。」"],
-	"landing_second_sub_part_3": ["Y por último 「パス世話 (PasuSewa)」"],
-	"prueba": ["algo 1", "algo 2"]
+	"landing_texts": [
+		"PasuSewa es el gestor de contraseñas más completo que puedas encontrar en la web.",
+		"\"PasuSewa\" proviene de la frase",
+		"「私たちはあなたのパスワードの世話をします。」",
+		"(watashitachi wa anata no pasuwaado no sewa o shimasu)",
+		"Que luego fue contraida a",
+		"「パスワード世話。」",
+		"(pasuwaado sewa)",
+		"Y por último",
+		"「パス世話」",
+		"(PasuSewa)"
+	]
 }
