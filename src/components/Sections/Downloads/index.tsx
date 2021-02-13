@@ -6,6 +6,11 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { purple, indigo, pink } from "@material-ui/core/colors"
 
+import { useSelector, useDispatch } from "react-redux"
+import { RootState } from "../../../redux/store"
+
+import { translate } from "../../../lang"
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		linuxBtn: {
@@ -28,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		container: {
 			paddingTop: 45,
-			paddingBottom: 500,
+			paddingBottom: 45,
 			textAlign: "center",
 
 			[theme.breakpoints.down("xs")]: {
@@ -45,6 +50,8 @@ let deferredPrompt: any
 
 const Downloads: FC = () => {
 	const classes = useStyles()
+
+	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [installable, setInstallable] = useState(false)
 
@@ -81,7 +88,7 @@ const Downloads: FC = () => {
 			<Grid container justify="center" spacing={6}>
 				<Grid item xs={12}>
 					<Typography gutterBottom variant="h4" className={classes.marginB}>
-						Downloads
+						{translate("downloads", lng)}
 					</Typography>
 				</Grid>
 
@@ -91,7 +98,7 @@ const Downloads: FC = () => {
 							<Grid container justify="space-between" spacing={1}>
 								<Grid item xs={12}>
 									<Typography gutterBottom variant="h5">
-										Web Version
+										{translate("web_version", lng)}
 									</Typography>
 								</Grid>
 								<Grid item xs={12}>
@@ -101,7 +108,7 @@ const Downloads: FC = () => {
 										className={classes.webBtn}
 										onClick={handleInstallClick}
 									>
-										Install
+										{translate("install", lng)}
 									</Button>
 								</Grid>
 							</Grid>
@@ -123,7 +130,7 @@ const Downloads: FC = () => {
 					<Grid container spacing={1}>
 						<Grid item xs={12}>
 							<Typography gutterBottom variant="h5">
-								Desktop
+								{translate("desktop", lng)}
 							</Typography>
 						</Grid>
 						<Grid item xs={4}>
@@ -197,7 +204,7 @@ const Downloads: FC = () => {
 										className={classes.webBtn}
 										onClick={handleInstallClick}
 									>
-										Install
+										{translate("install", lng)}
 									</Button>
 								</Grid>
 							</>
@@ -243,7 +250,7 @@ const Downloads: FC = () => {
 										className={classes.webBtn}
 										onClick={handleInstallClick}
 									>
-										Install
+										{translate("install", lng)}
 									</Button>
 								</Grid>
 							</Grid>

@@ -104,7 +104,7 @@ const Navbar = () => {
 
 							<ToggleDarkTheme className={classes.navbarItem} />
 
-							<Tooltip title={translate("navbar_download_btn", lng)}>
+							<Tooltip title={translate("downloads", lng)}>
 								<IconButton
 									edge="start"
 									className={classes.navbarItem}

@@ -7,7 +7,10 @@
 	"navbar_my_credentials_btn": ["My Credentials"],
 	"navbar_my_account_btn": ["My Account"],
 	"toggle_dark_theme": ["Toggle Dark Theme"],
-	"navbar_download_btn": ["Download"],
+	"downloads": ["Download"],
+	"install": ["Install"],
+	"desktop": ["Desktop"],
+	"web_version": ["Web Version"],
 	"landing_title": ["What is PasuSewa?"],
 	"landing_texts": [
 		"PasuSewa is the most complete password manager on the Web.",

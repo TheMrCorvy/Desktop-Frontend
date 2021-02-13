@@ -7,7 +7,10 @@
 	"navbar_my_credentials_btn": ["Mis Credenciales"],
 	"navbar_my_account_btn": ["Mi Cuenta"],
 	"toggle_dark_theme": ["Alternar Tema Oscuro"],
-	"navbar_download_btn": ["Descargas"],
+	"downloads": ["Descargas"],
+	"install": ["Instalar"],
+	"desktop": ["Escritorio"],
+	"web_version": ["Versión Web"],
 	"landing_title": ["¿Qué es PasuSewa?"],
 	"landing_texts": [
 		"PasuSewa es el gestor de contraseñas más completo que puedas encontrar en la web.",
