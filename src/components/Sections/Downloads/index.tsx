@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
 
 import { Container, Grid, Button, Typography, Divider, Hidden } from "@material-ui/core"
 
@@ -41,8 +41,40 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
+let deferredPrompt: any
+
 const Downloads: FC = () => {
 	const classes = useStyles()
+
+	const [installable, setInstallable] = useState(false)
+
+	useEffect(() => {
+		window.addEventListener("beforeinstallprompt", (e: Event) => {
+			e.preventDefault()
+
+			deferredPrompt = e
+
+			setInstallable(true)
+		})
+
+		window.addEventListener("appinstalled", () => {
+			console.log("INSTALL: Success")
+		})
+	}, [])
+
+	const handleInstallClick = () => {
+		setInstallable(false)
+
+		deferredPrompt.prompt()
+
+		deferredPrompt.userChoice.then((choiceResult: any) => {
+			if (choiceResult.outcome === "accepted") {
+				console.log("User accepted the install prompt")
+			} else {
+				console.log("User dismissed the install prompt")
+			}
+		})
+	}
 
 	return (
 		<Container maxWidth="lg" className={classes.container} id="downloads-section">
@@ -53,30 +85,39 @@ const Downloads: FC = () => {
 					</Typography>
 				</Grid>
 
-				<Grid item xs={12} sm={5} lg={2}>
-					<Grid container justify="space-between" spacing={1}>
-						<Grid item xs={12}>
-							<Typography gutterBottom variant="h5">
-								Web Version
-							</Typography>
+				{installable && (
+					<>
+						<Grid item xs={12} sm={5} lg={2}>
+							<Grid container justify="space-between" spacing={1}>
+								<Grid item xs={12}>
+									<Typography gutterBottom variant="h5">
+										Web Version
+									</Typography>
+								</Grid>
+								<Grid item xs={12}>
+									<Button
+										variant="contained"
+										color="primary"
+										className={classes.webBtn}
+										onClick={handleInstallClick}
+									>
+										Install
+									</Button>
+								</Grid>
+							</Grid>
 						</Grid>
-						<Grid item xs={12}>
-							<Button variant="contained" color="primary" className={classes.webBtn}>
-								Install
-							</Button>
-						</Grid>
-					</Grid>
-				</Grid>
 
-				<Hidden xsDown>
-					<Divider orientation="vertical" flexItem />
-				</Hidden>
+						<Hidden xsDown>
+							<Divider orientation="vertical" flexItem />
+						</Hidden>
 
-				<Hidden smUp>
-					<Grid item xs={12}>
-						<Divider orientation="horizontal" />
-					</Grid>
-				</Hidden>
+						<Hidden smUp>
+							<Grid item xs={12}>
+								<Divider orientation="horizontal" />
+							</Grid>
+						</Hidden>
+					</>
+				)}
 
 				<Grid item xs={12} sm={5} lg={3}>
 					<Grid container spacing={1}>
@@ -107,18 +148,22 @@ const Downloads: FC = () => {
 					</Grid>
 				</Grid>
 
-				<Hidden only={["xs", "lg", "xl"]}>
-					<Grid item xs={6}>
-						<Divider orientation="horizontal" />
-					</Grid>
-					<Grid item xs={6}>
-						<Divider orientation="horizontal" />
-					</Grid>
-				</Hidden>
+				{installable && (
+					<>
+						<Hidden only={["xs", "lg", "xl"]}>
+							<Grid item xs={6}>
+								<Divider orientation="horizontal" />
+							</Grid>
+							<Grid item xs={6}>
+								<Divider orientation="horizontal" />
+							</Grid>
+						</Hidden>
 
-				<Hidden mdDown>
-					<Divider orientation="vertical" flexItem />
-				</Hidden>
+						<Hidden mdDown>
+							<Divider orientation="vertical" flexItem />
+						</Hidden>
+					</>
+				)}
 
 				<Hidden smUp>
 					<Grid item xs={12}>
@@ -133,47 +178,78 @@ const Downloads: FC = () => {
 								Android
 							</Typography>
 						</Grid>
-						<Grid item xs={6}>
-							<Button
-								variant="contained"
-								color="primary"
-								className={classes.androidBtn}
-							>
-								Play Store
-							</Button>
-						</Grid>
-						<Grid item xs={6}>
-							<Button variant="contained" color="primary" className={classes.webBtn}>
-								Install
-							</Button>
-						</Grid>
+
+						{installable ? (
+							<>
+								<Grid item xs={6}>
+									<Button
+										variant="contained"
+										color="primary"
+										className={classes.androidBtn}
+									>
+										Play Store
+									</Button>
+								</Grid>
+								<Grid item xs={6}>
+									<Button
+										variant="contained"
+										color="primary"
+										className={classes.webBtn}
+										onClick={handleInstallClick}
+									>
+										Install
+									</Button>
+								</Grid>
+							</>
+						) : (
+							<>
+								<Grid item xs={12}>
+									<Button
+										variant="contained"
+										color="primary"
+										className={classes.androidBtn}
+									>
+										Play Store
+									</Button>
+								</Grid>
+							</>
+						)}
 					</Grid>
 				</Grid>
 
-				<Hidden smUp>
-					<Grid item xs={12}>
-						<Divider orientation="horizontal" />
-					</Grid>
-				</Hidden>
+				{installable && (
+					<>
+						<Hidden smUp>
+							<Grid item xs={12}>
+								<Divider orientation="horizontal" />
+							</Grid>
+						</Hidden>
 
-				<Hidden xsDown>
-					<Divider orientation="vertical" flexItem />
-				</Hidden>
+						<Hidden xsDown>
+							<Divider orientation="vertical" flexItem />
+						</Hidden>
 
-				<Grid item xs={12} sm={5} lg={2}>
-					<Grid container justify="space-between" spacing={1}>
-						<Grid item xs={12}>
-							<Typography gutterBottom variant="h5">
-								IOS
-							</Typography>
+						<Grid item xs={12} sm={5} lg={2}>
+							<Grid container justify="space-between" spacing={1}>
+								<Grid item xs={12}>
+									<Typography gutterBottom variant="h5">
+										IOS
+									</Typography>
+								</Grid>
+								<Grid item xs={12}>
+									<Button
+										variant="contained"
+										color="primary"
+										className={classes.webBtn}
+										onClick={handleInstallClick}
+									>
+										Install
+									</Button>
+								</Grid>
+							</Grid>
 						</Grid>
-						<Grid item xs={12}>
-							<Button variant="contained" color="primary" className={classes.webBtn}>
-								Install
-							</Button>
-						</Grid>
-					</Grid>
-				</Grid>
+					</>
+				)}
 			</Grid>
 		</Container>
 	)
