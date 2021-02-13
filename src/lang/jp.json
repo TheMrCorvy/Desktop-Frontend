@@ -1,16 +1,19 @@
 {
-	"app_name": "パス世話",
-	"home": "Home",
-	"translate": "Translate",
-	"navbar_login_btn": "Login",
-	"navbar_register_btn": "Register",
-	"navbar_my_credentials_btn": "My Credentials",
-	"navbar_my_account_btn": "My Account",
-	"toggle_dark_theme": "Toggle Dark Theme",
-	"navbar_download_btn": "Download",
-	"landing_title": "What is PasuSewa?",
-	"landing_main_subtitle": "PasuSewa is the most complete password manager on the Web.",
-	"landing_second_sub_part_1": "\"PasuSewa\" comes from the phrase 「私たちはあなたのパスワードの世話をします。」",
-	"landing_second_sub_part_2": "Then it was shortened to「パスワード世話。」",
-	"landing_second_sub_part_3": "And lastly to 「パス世話 (PasuSewa)」"
+	"app_name": ["パス世話"],
+	"home": ["Home"],
+	"translate": ["Translate"],
+	"navbar_login_btn": ["Login"],
+	"navbar_register_btn": ["Register"],
+	"navbar_my_credentials_btn": ["My Credentials"],
+	"navbar_my_account_btn": ["My Account"],
+	"toggle_dark_theme": ["Toggle Dark Theme"],
+	"navbar_download_btn": ["Download"],
+	"landing_title": ["What is PasuSewa?"],
+	"landing_main_subtitle": ["PasuSewa is the most complete password manager on the Web."],
+	"landing_second_sub_part_1": [
+		"\"PasuSewa\" comes from the phrase 「私たちはあなたのパスワードの世話をします。」"
+	],
+	"landing_second_sub_part_2": ["Then it was shortened to「パスワード世話。」"],
+	"landing_second_sub_part_3": ["And lastly to 「パス世話 (PasuSewa)」"],
+	"prueba": ["algo 1", "algo 2"]
 }

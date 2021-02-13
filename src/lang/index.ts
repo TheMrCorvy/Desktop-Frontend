@@ -2,8 +2,8 @@ import en from "./en.json"
 import es from "./es.json"
 import jp from "./jp.json"
 
-export const translate = (key: string, language: string): string => {
-	let langData: { [key: string]: string } = {}
+export const translate = (key: string, language: string, index?: number): string => {
+	let langData: { [key: string]: string[] } = {}
 
 	switch (language) {
 		case "en":
@@ -21,5 +21,5 @@ export const translate = (key: string, language: string): string => {
 			break
 	}
 
-	return langData[key]
+	return langData[key][index ? index : 0]
 }
