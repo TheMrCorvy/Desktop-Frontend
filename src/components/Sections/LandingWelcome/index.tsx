@@ -62,6 +62,8 @@ const LandingWelcome: FC = () => {
 
 	const classes = useStyles()
 
+	const scrollToNextSection = () => {}
+
 	return (
 		<Container maxWidth="lg" className={classes.welcomeSection}>
 			<Paper
@@ -132,6 +134,7 @@ const LandingWelcome: FC = () => {
 							color={theme === "dark" ? "secondary" : "primary"}
 							className="callToAction"
 							size="small"
+							onClick={() => scrollToNextSection}
 						>
 							<KeyboardArrowDownIcon />
 						</Fab>

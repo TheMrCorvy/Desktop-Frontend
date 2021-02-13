@@ -25,13 +25,23 @@ const Downloads: FC = () => {
 	const classes = useStyles()
 
 	return (
-		<Container maxWidth="lg" style={{ textAlign: "center" }}>
+		<Container maxWidth="lg" style={{ textAlign: "center" }} id="downloads-section">
 			<Grid
 				container
 				style={{ paddingTop: 30, paddingBottom: 500 }}
 				justify="center"
 				spacing={6}
 			>
+				<Grid item xs={12} style={{ textAlign: "center", paddingBottom: 0 }}>
+					<Typography gutterBottom variant="h4" style={{ marginBottom: 0 }}>
+						Downloads
+					</Typography>
+				</Grid>
+
+				<Grid item xs={12}>
+					<Divider orientation="horizontal" />
+				</Grid>
+
 				<Grid item xs={12} sm={5} lg={2}>
 					<Grid container justify="space-between" spacing={1}>
 						<Grid item xs={12} style={{ textAlign: "center" }}>
@@ -156,6 +166,10 @@ const Downloads: FC = () => {
 							</Button>
 						</Grid>
 					</Grid>
+				</Grid>
+
+				<Grid item xs={12}>
+					<Divider orientation="horizontal" />
 				</Grid>
 			</Grid>
 		</Container>
