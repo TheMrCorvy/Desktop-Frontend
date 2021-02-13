@@ -15,45 +15,51 @@ import {
 
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown"
 
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
 
-const useStyles = makeStyles({
-	card: {
-		maxWidth: "90%",
-		width: "60rem",
-		paddingBottom: 40,
-		paddingTop: 30,
-		borderRadius: 5,
-	},
-	cardActions: {
-		display: "flex",
-		justifyContent: "center",
-	},
-	paperMain: {
-		height: "85vh",
-		display: "flex",
-		justifyContent: "center",
-		flexDirection: "column",
-		alignItems: " center",
-		textAlign: "center",
-		borderBottomLeftRadius: 10,
-		borderBottomRightRadius: 10,
-	},
-	mainSpacing: {
-		marginTop: 50,
-	},
-	secondarySpacing: {
-		marginTop: 10,
-	},
-	welcomeSection: {
-		height: "100vh",
-	},
-})
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		card: {
+			maxWidth: "90%",
+			width: "60rem",
+			paddingBottom: 40,
+			paddingTop: 30,
+			borderRadius: 5,
+		},
+		cardActions: {
+			display: "flex",
+			justifyContent: "center",
+		},
+		paperMain: {
+			height: "80vh",
+			display: "flex",
+			justifyContent: "center",
+			flexDirection: "column",
+			alignItems: " center",
+			textAlign: "center",
+			borderBottomLeftRadius: 10,
+			borderBottomRightRadius: 10,
+
+			[theme.breakpoints.down("xs")]: {
+				height: "90vh",
+			},
+		},
+		mainSpacing: {
+			marginTop: 50,
+		},
+		secondarySpacing: {
+			marginTop: 10,
+		},
+		welcomeSection: {
+			height: "100vh",
+		},
+	})
+)
 
 const LandingWelcome: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -62,7 +68,16 @@ const LandingWelcome: FC = () => {
 
 	const classes = useStyles()
 
-	const scrollToNextSection = () => {}
+	const scrollToNextSection = () => {
+		const downloadsSection = document.getElementById("downloads-section")
+
+		if (downloadsSection) {
+			downloadsSection.scrollIntoView({
+				block: "start",
+				behavior: "smooth",
+			})
+		}
+	}
 
 	return (
 		<Container maxWidth="lg" className={classes.welcomeSection}>
@@ -134,7 +149,7 @@ const LandingWelcome: FC = () => {
 							color={theme === "dark" ? "secondary" : "primary"}
 							className="callToAction"
 							size="small"
-							onClick={() => scrollToNextSection}
+							onClick={scrollToNextSection}
 						>
 							<KeyboardArrowDownIcon />
 						</Fab>
