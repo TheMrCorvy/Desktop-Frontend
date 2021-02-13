@@ -122,10 +122,109 @@ const Landing: FC = () => {
 				</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum corrupti
-						quaerat neque, mollitia ad impedit adipisci assumenda laborum facilis
-						reprehenderit earum modi, vitae blanditiis eum. Et quia ipsum reprehenderit
-						inventore.
+						<Typography variant="body2" paragraph>
+							Toda la iformación que ingreses será catalogada y separada. Imaginemos
+							que ingresas un email: "
+							<Typography component="span" variant="body2" color="primary">
+								mr_x@email.com
+							</Typography>
+							". en este caso la "sección sensible" es aquella que viene antes del
+							"@", por lo que esa parte será separada y encriptada, quedando algo así
+							"
+							<Typography component="span" variant="body2" color="primary">
+								m***@email.com
+							</Typography>
+							".
+						</Typography>
+						<Typography variant="body2" paragraph>
+							Lo mismo aplica para las demás categorías de información sensible, a
+							continuación tendrás unos ejemplos sobre cómo será mostrada tu
+							información una vez encriptada.
+						</Typography>
+						<Typography variant="body2" paragraph>
+							Los asteríscos (*) representan que la información ha sido encriptada, si
+							hay sólo 5 asteríscos, significa que no hay nada de esa credencial que
+							se almacene sin encriptar.
+						</Typography>
+						<ol>
+							<li>
+								"
+								<Typography component="span" variant="body2" color="primary">
+									mr_x@email.com
+								</Typography>
+								" {"=>"} "
+								<Typography component="span" variant="body2" color="primary">
+									m***@email.com
+								</Typography>
+								",
+							</li>
+							<li>
+								"
+								<Typography component="span" variant="body2" color="primary">
+									@Contraseña123
+								</Typography>
+								" {"=>"} "
+								<Typography component="span" variant="body2" color="primary">
+									*****
+								</Typography>
+								",
+							</li>
+							<li>
+								"
+								<Typography component="span" variant="body2" color="primary">
+									Nombre de Ejemplo
+								</Typography>
+								" {"=>"} "
+								<Typography component="span" variant="body2" color="primary">
+									N***************o
+								</Typography>
+								",
+							</li>
+							<li>
+								"
+								<Typography component="span" variant="body2" color="primary">
+									Pregunta de Seguridad
+								</Typography>
+								" {"=>"} "
+								<Typography component="span" variant="body2" color="primary">
+									*****
+								</Typography>
+								",
+							</li>
+							<li>
+								"
+								<Typography component="span" variant="body2" color="primary">
+									Código Único de Seguridad (ejemplo: kj1dn3k32a)
+								</Typography>
+								" {"=>"} "
+								<Typography component="span" variant="body2" color="primary">
+									*****
+								</Typography>
+								",
+							</li>
+							<li>
+								"
+								<Typography component="span" variant="body2" color="primary">
+									Múltiples Códigos de Seguridad
+								</Typography>
+								" {"=>"} "
+								<Typography component="span" variant="body2" color="primary">
+									*****
+								</Typography>
+								",
+							</li>
+							<li>
+								"
+								<Typography component="span" variant="body2" color="primary">
+									Credenciales de Acceso a Billetera Criptográfica
+								</Typography>
+								" {"=>"} "
+								<Typography component="span" variant="body2" color="primary">
+									*****
+								</Typography>
+								",
+							</li>
+						</ol>
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
