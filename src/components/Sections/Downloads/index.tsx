@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			},
 		},
 		container: {
-			paddingTop: 45,
+			paddingTop: 65,
 			paddingBottom: 45,
 			textAlign: "center",
 
