@@ -28,7 +28,7 @@ const Downloads: FC = () => {
 		<Container maxWidth="lg" style={{ textAlign: "center" }} id="downloads-section">
 			<Grid
 				container
-				style={{ paddingTop: 30, paddingBottom: 500 }}
+				style={{ paddingTop: 45, paddingBottom: 500 }}
 				justify="center"
 				spacing={6}
 			>
