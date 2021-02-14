@@ -15,13 +15,13 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
 
 /*************************************************************************** import the font awesome icons for the test */
 import { library } from "@fortawesome/fontawesome-svg-core"
-import { faKey } from "@fortawesome/free-solid-svg-icons"
-library.add(faKey)
+import { faKey, faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
+library.add(faKey, faCloudDownloadAlt)
 
 // first we have to tell the component that it'll be rendered on a specific scale
-const SizeWrapper = (props: { children: ReactElement }) => {
+const SizeWrapper = (props: { children: ReactElement; size: "xs" | "sm" | "md" | "lg" | "xl" }) => {
 	const theme = createMuiTheme({
-		props: { MuiWithWidth: { initialWidth: "xl" } },
+		props: { MuiWithWidth: { initialWidth: props.size } },
 	})
 
 	return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
@@ -32,10 +32,10 @@ const SizeWrapper = (props: { children: ReactElement }) => {
 // 2) wrap everything inside the initial window scale
 // 3) since the navbar contains links, we need to put it inside a BrowserRouter
 // 4) we can finally attempt to render the navbar, emphasis in "attemp"
-it("navbar renders correctly", () => {
+it("large navbar renders correctly", () => {
 	const { queryByTitle } = render(
 		<Provider store={store}>
-			<SizeWrapper>
+			<SizeWrapper size="xl">
 				<BrowserRouter>
 					<Navbar />
 				</BrowserRouter>
@@ -43,7 +43,23 @@ it("navbar renders correctly", () => {
 		</Provider>
 	)
 
-	const navbar = queryByTitle("test_navbar")
+	const largeNavbar = queryByTitle("test_large_navbar")
 
-	expect(navbar).toBeTruthy()
+	expect(largeNavbar).toBeTruthy()
+})
+
+it("small navbar renders correctly", () => {
+	const { queryByTitle } = render(
+		<Provider store={store}>
+			<SizeWrapper size="xs">
+				<BrowserRouter>
+					<Navbar />
+				</BrowserRouter>
+			</SizeWrapper>
+		</Provider>
+	)
+
+	const smallNavbar = queryByTitle("test_small_navbar")
+
+	expect(smallNavbar).toBeTruthy()
 })

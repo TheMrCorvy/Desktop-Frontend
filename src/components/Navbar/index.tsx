@@ -77,7 +77,7 @@ const Navbar = () => {
 					<AppBar
 						position="fixed"
 						color={theme === "dark" ? "primary" : "secondary"}
-						title="test_navbar"
+						title="test_large_navbar"
 					>
 						<Toolbar>
 							<Tooltip title={translate("home", lng)}>
@@ -127,7 +127,7 @@ const Navbar = () => {
 						position="fixed"
 						color="secondary"
 						className={classes.appBar}
-						title="test_navbar"
+						title="test_small_navbar"
 					>
 						<Toolbar>
 							<TranslateButton edge="start" />
