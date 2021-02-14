@@ -16,6 +16,8 @@ import {
 	Button,
 } from "@material-ui/core"
 
+import { makeStyles } from "@material-ui/core/styles"
+
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 
 import { useSelector } from "react-redux"
@@ -25,10 +27,26 @@ import { translate } from "../../../lang"
 
 import * as es from "../../../lang/es.json"
 
+const useStyles = makeStyles({
+	container: {
+		marginTop: "10rem",
+		paddingBottom: "10rem",
+		position: "relative",
+	},
+	textCenter: {
+		textAlign: "center",
+	},
+	marginB: {
+		marginBottom: "3rem",
+	},
+})
+
 const About: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)
+
+	const classes = useStyles()
 
 	const toggleDialog = () => {
 		setOpen(!open)
@@ -36,30 +54,27 @@ const About: FC = () => {
 
 	return (
 		<>
-			<Container
-				maxWidth="xl"
-				style={{ marginTop: "10rem", paddingBottom: "10rem", position: "relative" }}
-			>
+			<Container maxWidth="xl" className={classes.container}>
 				<Grid container justify="space-around">
-					<Grid item xs={12} style={{ textAlign: "center", marginBottom: "3rem" }}>
+					<Grid item xs={12} className={(classes.marginB, classes.textCenter)}>
 						<Typography gutterBottom variant="h4">
 							{translate("about_title", lng)}
 						</Typography>
 					</Grid>
-					<Grid item xs={12} style={{ marginBottom: "3rem" }}>
+					<Grid item xs={12} className={classes.marginB}>
 						<Divider orientation="horizontal" />
 					</Grid>
-					<Grid item xs={12} sm={5} style={{ marginBottom: "3rem" }}>
-						<Typography variant="body1" style={{ marginBottom: "3rem" }}>
+					<Grid item xs={12} sm={5} className={classes.marginB}>
+						<Typography variant="body1" className={classes.marginB}>
 							{translate("about_texts", lng, 0)}
 						</Typography>
 						<Typography variant="body1">{translate("about_texts", lng, 1)}</Typography>
 					</Grid>
 					<Hidden xsDown>
-						<Divider orientation="vertical" flexItem style={{ marginBottom: "3rem" }} />
+						<Divider orientation="vertical" flexItem className={classes.marginB} />
 					</Hidden>
-					<Grid item xs={12} sm={5} style={{ marginBottom: "3rem" }}>
-						<Typography variant="body1" style={{ marginBottom: "3rem" }}>
+					<Grid item xs={12} sm={5} className={classes.marginB}>
+						<Typography variant="body1" className={classes.marginB}>
 							{translate("about_texts", lng, 2)}
 						</Typography>
 						<Typography variant="body1" paragraph>
