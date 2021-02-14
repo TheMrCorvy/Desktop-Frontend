@@ -96,7 +96,7 @@ const Navbar = () => {
 							<Typography
 								variant="h6"
 								className={classes.title}
-								title="test_translation"
+								title="test_app_name"
 							>
 								{translate("app_name", lng)}
 							</Typography>
