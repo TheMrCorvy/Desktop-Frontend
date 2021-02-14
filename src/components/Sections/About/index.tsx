@@ -39,6 +39,11 @@ const useStyles = makeStyles({
 	marginB: {
 		marginBottom: "3rem",
 	},
+	infoBtn: {
+		position: "absolute",
+		bottom: 100,
+		right: 20,
+	},
 })
 
 const About: FC = () => {
@@ -102,7 +107,7 @@ const About: FC = () => {
 						color="secondary"
 						aria-label="help"
 						size="small"
-						style={{ position: "absolute", bottom: 100, right: 20 }}
+						className={classes.infoBtn}
 						onClick={toggleDialog}
 					>
 						<HelpOutlineIcon />
@@ -168,7 +173,7 @@ const About: FC = () => {
 				</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={toggleDialog} color="default" size="large">
-						Volver
+						{translate("go_back", lng)}
 					</Button>
 				</DialogActions>
 			</Dialog>
