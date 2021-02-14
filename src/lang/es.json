@@ -29,13 +29,13 @@
 	"about_texts": [
 		"Todas tus contraseñas estarán completamente protegidas por las mejores técnicas de ecriptación, y almacenadas de forma segura en la nube para que puedas acceder a ellas en cualquier momento y desde cualquier dispositivo.",
 
-		"Ya que la principal función de un gestor de contraseñas es, precisamente, liberarte de tener que recordar todas tus contraseñas, para permitir que solo tú tengas acceso a tus contraseñas nos apoyamos en los métodos de autenticación en 2 factores, lo que quiere decir que no te identificarás con \"algo que sabes\" (una contraseña maestra/pin), sino que lo harás con \"algo que tienes\" (el smartphone en tu bolsillo, tu email, etc.).",
+		"Ya que la principal función de un Gestor de Contraseñas es, precisamente, liberarte de tener que recordar todas tus contraseñas, para permitir que solo tú tengas acceso a tus credenciales nos apoyamos en los métodos de autenticación en 2 factores, lo que quiere decir que no te identificarás con \"algo que sabes\" (una Contraseña Maestra/Pin), sino que lo harás con \"algo que tienes\" (tu smartphone, tu email, etc.).",
 
-		"A la hora de almacenar cualquier información que nos proporciones, esta será dividida según sus secciones de \"sensibilidad\", y las partes más sensibles serán almacenadas de manera cifrada, por lo que tus contraseñas solo serán visibles cuándo y dónde lo pidas, y nunca más.",
+		"A la hora de almacenar cualquier información que nos proporciones, esta será dividida según sus secciones de \"sensibilidad\", y las partes más vulnerables serán almacenadas de manera cifrada, por lo que tus contraseñas solo serán visibles cuándo y dónde lo pidas, y nunca más.",
 
-		"Toda la iformación que ingreses será catalogada y separada. Imaginemos que ingresas un email: ",
+		"Toda la información que ingreses será catalogada y separada. Imaginemos que ingresas un email: ",
 
-		"En este caso la \"sección sensible\" es aquella que viene antes del \"@\", por lo que esa parte será separada y encriptada, quedando algo así: ",
+		"En este caso la \"sección sensible/vulnerable\" es aquella que viene antes del \"@\", por lo que esa parte será separada y encriptada, quedando algo así: ",
 
 		"Para ver más información acerca de cómo se encripta y almacena tu información puedes hacer click en el botón debajo.",
 

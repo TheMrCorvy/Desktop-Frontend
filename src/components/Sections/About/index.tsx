@@ -72,7 +72,7 @@ const About: FC = () => {
 							</Typography>
 							". {translate("about_texts", lng, 4)}"
 							<Typography component="span" variant="body2" color="primary">
-								m***@email.com
+								{translate("encrypted_examples", lng, 0)}
 							</Typography>
 							".
 						</Typography>
@@ -99,7 +99,7 @@ const About: FC = () => {
 				onClose={toggleDialog}
 				aria-labelledby="simple-dialog-title"
 				open={open}
-				scroll="paper"
+				scroll="body"
 			>
 				<DialogTitle id="simple-dialog-title">
 					{translate("about_subtitle", lng)}
