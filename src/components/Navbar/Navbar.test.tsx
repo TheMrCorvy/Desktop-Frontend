@@ -32,7 +32,7 @@ const SizeWrapper = (props: { children: ReactElement; size: "xs" | "sm" | "md" |
 // 2) wrap everything inside the initial window scale
 // 3) since the navbar contains links, we need to put it inside a BrowserRouter
 // 4) we can finally attempt to render the navbar, emphasis in "attemp"
-it("large navbar renders correctly", () => {
+it("large navbar renders properly", () => {
 	const { queryByTitle } = render(
 		<Provider store={store}>
 			<SizeWrapper size="xl">
@@ -48,7 +48,7 @@ it("large navbar renders correctly", () => {
 	expect(largeNavbar).toBeTruthy()
 })
 
-it("small navbar renders correctly", () => {
+it("small navbar renders properly", () => {
 	const { queryByTitle } = render(
 		<Provider store={store}>
 			<SizeWrapper size="xs">

@@ -80,7 +80,7 @@ const LandingWelcome: FC = () => {
 	}
 
 	return (
-		<Container maxWidth="lg" className={classes.welcomeSection}>
+		<Container maxWidth="lg" className={classes.welcomeSection} title="test_landing_welcome">
 			<Paper
 				style={{
 					background: theme === "dark" ? "#333" : "#f5f5f5",

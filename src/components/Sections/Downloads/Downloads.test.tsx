@@ -3,16 +3,16 @@ import { render } from "@testing-library/react"
 import { Provider } from "react-redux"
 import store from "../../../redux/store"
 
-import About from "./index"
+import Downloads from "./index"
 
-it("about section renders properly", () => {
+it("downloads section renders properly", () => {
 	const { queryByTitle } = render(
 		<Provider store={store}>
-			<About />
+			<Downloads />
 		</Provider>
 	)
 
-	const about = queryByTitle("test_about")
+	const downloads = queryByTitle("test_downloads")
 
-	expect(about).toBeTruthy()
+	expect(downloads).toBeTruthy()
 })
