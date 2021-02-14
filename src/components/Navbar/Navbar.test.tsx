@@ -2,7 +2,7 @@
 import { ReactElement } from "react"
 import { BrowserRouter } from "react-router-dom"
 
-import { render } from "@testing-library/react"
+import { render, fireEvent } from "@testing-library/react"
 
 /*************************************************************************** redux related */
 import { Provider } from "react-redux"
@@ -17,6 +17,9 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faKey, faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
 library.add(faKey, faCloudDownloadAlt)
+
+/*************************************************************************** import the translate function for the test */
+import { translate } from "../../lang"
 
 // first we have to tell the component that it'll be rendered on a specific scale
 const SizeWrapper = (props: { children: ReactElement; size: "xs" | "sm" | "md" | "lg" | "xl" }) => {
@@ -46,6 +49,10 @@ it("large navbar renders properly", () => {
 	const largeNavbar = queryByTitle("test_large_navbar")
 
 	expect(largeNavbar).toBeTruthy()
+
+	const translateBtn = queryByTitle(translate("translate", "en"))
+
+	expect(translateBtn).toBeTruthy()
 })
 
 it("small navbar renders properly", () => {

@@ -5,7 +5,7 @@ import store from "../../../redux/store"
 
 import About from "./index"
 
-it("about section renders properly", () => {
+it("renders properly", () => {
 	const { queryByTitle } = render(
 		<Provider store={store}>
 			<About />

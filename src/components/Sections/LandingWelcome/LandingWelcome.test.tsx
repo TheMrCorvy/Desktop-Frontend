@@ -5,7 +5,7 @@ import store from "../../../redux/store"
 
 import LandingWelcome from "./index"
 
-it("welcome section renders properly", () => {
+it("renders properly", () => {
 	const { queryByTitle } = render(
 		<Provider store={store}>
 			<LandingWelcome />

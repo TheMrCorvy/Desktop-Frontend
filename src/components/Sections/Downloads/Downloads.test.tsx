@@ -5,7 +5,7 @@ import store from "../../../redux/store"
 
 import Downloads from "./index"
 
-it("downloads section renders properly", () => {
+it("renders properly", () => {
 	const { queryByTitle } = render(
 		<Provider store={store}>
 			<Downloads />
