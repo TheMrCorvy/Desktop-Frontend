@@ -85,7 +85,7 @@ const Downloads: FC = () => {
 
 	return (
 		<Container maxWidth="lg" className={classes.container} id="downloads-section">
-			<Grid container justify="center" spacing={6}>
+			<Grid container justify="center" spacing={3}>
 				<Grid item xs={12}>
 					<Typography gutterBottom variant="h4" className={classes.marginB}>
 						{translate("downloads", lng)}

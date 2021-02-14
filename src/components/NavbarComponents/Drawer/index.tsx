@@ -1,6 +1,16 @@
 import React, { FC } from "react"
 
-import { SwipeableDrawer, List, Divider } from "@material-ui/core"
+import {
+	SwipeableDrawer,
+	List,
+	Divider,
+	ListItemText,
+	ListItemIcon,
+	ListItem,
+} from "@material-ui/core"
+
+import InboxIcon from "@material-ui/icons/MoveToInbox"
+import MailIcon from "@material-ui/icons/Mail"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../redux/store"
@@ -24,7 +34,19 @@ const Drawer: FC = () => {
 				onKeyDown={() => dispatch(toggleDrawer(false))}
 			>
 				<List>
+					<ListItem button>
+						<ListItemIcon>
+							<InboxIcon />
+						</ListItemIcon>
+						<ListItemText primary="mucho texto" />
+					</ListItem>
 					<Divider />
+					<ListItem>
+						<ListItemIcon>
+							<MailIcon />
+						</ListItemIcon>
+						<ListItemText primary="poco texto" />
+					</ListItem>
 				</List>
 			</div>
 		</SwipeableDrawer>
