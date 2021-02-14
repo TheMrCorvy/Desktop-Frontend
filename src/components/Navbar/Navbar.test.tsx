@@ -13,16 +13,16 @@ import Navbar from "./index"
 /*************************************************************************** MUI related */
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
 
-/*************************************************************************** import the font awesome icons for the test */
-import { library } from "@fortawesome/fontawesome-svg-core"
-import { faKey, faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
-library.add(faKey, faCloudDownloadAlt)
-
-/*************************************************************************** import the translate function for the test */
+/*************************************************************************** import the translations for the test */
 import { translate } from "../../lang"
 import es from "../../lang/es.json"
 import en from "../../lang/en.json"
 import jp from "../../lang/jp.json"
+
+/*************************************************************************** import the font awesome icons for the test */
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { faKey, faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
+library.add(faKey, faCloudDownloadAlt)
 
 // first we have to tell the component that it'll be rendered on a specific scale
 const SizeWrapper = (props: { children: ReactElement; size: "xs" | "sm" | "md" | "lg" | "xl" }) => {
@@ -38,7 +38,6 @@ const SizeWrapper = (props: { children: ReactElement; size: "xs" | "sm" | "md" |
 // 2) wrap everything inside the initial window scale
 // 3) since the navbar contains links, we need to put it inside a BrowserRouter
 // 4) we can finally attempt to render the navbar, emphasis in "attemp"
-
 describe("large navbar renders and translate function are working properly", () => {
 	it("renders properly", () => {
 		const { queryByTitle } = render(
@@ -68,7 +67,7 @@ describe("large navbar renders and translate function are working properly", () 
 		)
 
 		const translateBtn = queryByTitle(translate("translate", "en"))
-		// the default lang of the app is en, thats why here the "en" its burned
+		// the default lang of the app is english, thats why here the "en" its burned
 
 		expect(translateBtn).toBeTruthy()
 

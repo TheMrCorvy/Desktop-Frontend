@@ -29,7 +29,11 @@ const ToggleDarkTheme = ({ ...rest }) => {
 	return (
 		<Tooltip title={translate("toggle_dark_theme", lng)}>
 			<IconButton edge="end" color="inherit" onClick={toggleDarkTheme} {...rest}>
-				{theme === "dark" ? <Brightness4Icon /> : <NightsStayIcon />}
+				{theme === "dark" ? (
+					<Brightness4Icon data-testid="test_theme_is_dark" />
+				) : (
+					<NightsStayIcon data-testid="test_theme_is_light" />
+				)}
 			</IconButton>
 		</Tooltip>
 	)
