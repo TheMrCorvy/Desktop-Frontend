@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import { BrowserRouter } from "react-router-dom"
 
 /*********************************************************************************** redux related */
 import { useSelector } from "react-redux"
@@ -17,7 +18,6 @@ import Layout from "./components/Layout"
 /*********************************************************************************** font awesome */
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faKey, faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
-import { BrowserRouter } from "react-router-dom"
 library.add(faKey, faCloudDownloadAlt)
 
 const App: FC = () => {

@@ -74,7 +74,11 @@ const Navbar = () => {
 		<>
 			<div className={classes.root}>
 				<Hidden smDown>
-					<AppBar position="fixed" color={theme === "dark" ? "primary" : "secondary"}>
+					<AppBar
+						position="fixed"
+						color={theme === "dark" ? "primary" : "secondary"}
+						title="test_navbar"
+					>
 						<Toolbar>
 							<Tooltip title={translate("home", lng)}>
 								<Link to="/">
@@ -119,7 +123,12 @@ const Navbar = () => {
 				</Hidden>
 
 				<Hidden mdUp>
-					<AppBar position="fixed" color="secondary" className={classes.appBar}>
+					<AppBar
+						position="fixed"
+						color="secondary"
+						className={classes.appBar}
+						title="test_navbar"
+					>
 						<Toolbar>
 							<TranslateButton edge="start" />
 
