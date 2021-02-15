@@ -31,6 +31,8 @@ import { RootState } from "../redux/store"
 
 import { translate } from "../lang"
 
+import DialogComponent from "../components/Dialog"
+
 const Landing: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
@@ -298,7 +300,7 @@ const Landing: FC = () => {
 						</Grid>
 					</Grid>
 				</Container>
-				<Tooltip title={translate("more_info", lng)} placement="right">
+				{/* <Tooltip title={translate("more_info", lng)} placement="right">
 					<Fab
 						color="secondary"
 						aria-label="help"
@@ -312,7 +314,23 @@ const Landing: FC = () => {
 					>
 						<HelpOutlineIcon />
 					</Fab>
-				</Tooltip>
+				</Tooltip> */}
+				<DialogComponent
+					title="probando dialog"
+					className={{
+						position: "absolute",
+						bottom: 30, //20
+						left: 30, //20
+						boxShadow: "none",
+					}}
+					tooltipPlacement="right"
+				>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, saepe optio?
+						Consequuntur, fugit iste voluptatem molestiae eligendi provident eos, eaque
+						quod sunt hic repellat maxime debitis! Temporibus dignissimos rerum fugit!
+					</p>
+				</DialogComponent>
 			</Paper>
 		</>
 	)

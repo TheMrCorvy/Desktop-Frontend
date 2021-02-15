@@ -18,7 +18,26 @@ import {
 
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 
-const DialogComponent = (props: { children: ReactElement; className?: any }) => {
+type Props = {
+	children: ReactElement
+	title: string
+	tooltipPlacement:
+		| "left"
+		| "right"
+		| "top"
+		| "bottom"
+		| "bottom-end"
+		| "bottom-start"
+		| "left-end"
+		| "left-start"
+		| "right-end"
+		| "right-start"
+		| "top-end"
+		| "top-start"
+	className?: any
+}
+
+const DialogComponent = (props: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)
@@ -29,7 +48,7 @@ const DialogComponent = (props: { children: ReactElement; className?: any }) => 
 
 	return (
 		<>
-			<Tooltip title={translate("more_info", lng)} placement="left">
+			<Tooltip title={translate("more_info", lng)} placement={props.tooltipPlacement}>
 				<Fab
 					color="secondary"
 					aria-label="help"
@@ -47,11 +66,11 @@ const DialogComponent = (props: { children: ReactElement; className?: any }) => 
 				open={open}
 				scroll="body"
 			>
-				<DialogTitle id="simple-dialog-title">
-					{translate("about_subtitle", lng)}
-				</DialogTitle>
+				<DialogTitle id="simple-dialog-title">{props.title}</DialogTitle>
 				<DialogContent>
-					<DialogContentText>{props.children}</DialogContentText>
+					<DialogContentText data-testid="dialog_content_text">
+						{props.children}
+					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={toggleDialog} color="default" size="large">

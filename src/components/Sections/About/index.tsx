@@ -82,7 +82,11 @@ const About: FC = () => {
 						<Divider orientation="horizontal" />
 					</Grid>
 				</Grid>
-				<DialogComponent className={classes.infoBtn}>
+				<DialogComponent
+					className={classes.infoBtn}
+					title={translate("about_subtitle", lng)}
+					tooltipPlacement="left"
+				>
 					<>
 						<Typography variant="body2" paragraph>
 							{translate("about_texts", lng, 3)}"
