@@ -17,8 +17,28 @@ import Layout from "./components/Layout"
 
 /*********************************************************************************** font awesome */
 import { library } from "@fortawesome/fontawesome-svg-core"
-import { faKey, faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
-library.add(faKey, faCloudDownloadAlt)
+import {
+	faKey,
+	faCloudDownloadAlt,
+	faSyncAlt,
+	faLock,
+	faLockOpen,
+	faFingerprint,
+	faWallet,
+	faUsers,
+	faStar,
+} from "@fortawesome/free-solid-svg-icons"
+library.add(
+	faKey,
+	faCloudDownloadAlt,
+	faSyncAlt,
+	faLock,
+	faLockOpen,
+	faFingerprint,
+	faWallet,
+	faUsers,
+	faStar
+)
 
 const App: FC = () => {
 	const { theme } = useSelector((state: RootState) => state.theme)

@@ -19,11 +19,12 @@ import {
 	ListItemText,
 	Button,
 	CardActions,
-	Fab,
-	Tooltip,
 } from "@material-ui/core"
 
+import { useTheme } from "@material-ui/core/styles"
+
 import InboxIcon from "@material-ui/icons/Inbox"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
@@ -78,6 +79,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			paddingTop: 50,
 			textAlign: "center",
 		},
+		iconsColor: {
+			color: "",
+		},
 	})
 )
 
@@ -87,6 +91,11 @@ const Landing: FC = () => {
 	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const classes = useStyles()
+
+	const muiTheme = useTheme()
+
+	const iconsColor =
+		theme === "dark" ? muiTheme.palette.secondary.main : muiTheme.palette.primary.main
 
 	return (
 		<>
@@ -125,7 +134,11 @@ const Landing: FC = () => {
 									<List component="nav" aria-label="free accounts benefits">
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "sync-alt"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -136,7 +149,11 @@ const Landing: FC = () => {
 										<Divider className={classes.divider} />
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "lock"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -147,7 +164,11 @@ const Landing: FC = () => {
 										<Divider className={classes.divider} />
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "fingerprint"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -184,7 +205,11 @@ const Landing: FC = () => {
 									>
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "sync-alt"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -195,7 +220,11 @@ const Landing: FC = () => {
 										<Divider className={classes.divider} />
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "lock"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -206,7 +235,11 @@ const Landing: FC = () => {
 										<Divider className={classes.divider} />
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "wallet"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -217,7 +250,11 @@ const Landing: FC = () => {
 										<Divider className={classes.divider} />
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "fingerprint"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -254,7 +291,11 @@ const Landing: FC = () => {
 									>
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "sync-alt"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -265,7 +306,11 @@ const Landing: FC = () => {
 										<Divider className={classes.divider} />
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "lock-open"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -276,7 +321,11 @@ const Landing: FC = () => {
 										<Divider className={classes.divider} />
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "users"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -287,7 +336,11 @@ const Landing: FC = () => {
 										<Divider className={classes.divider} />
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "star"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -298,7 +351,11 @@ const Landing: FC = () => {
 										<Divider className={classes.divider} />
 										<ListItem button>
 											<ListItemIcon>
-												<InboxIcon />
+												<FontAwesomeIcon
+													icon={["fas", "fingerprint"]}
+													size="2x"
+													color={iconsColor}
+												/>
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
@@ -333,7 +390,7 @@ const Landing: FC = () => {
 							{translate("tier_free", lng, 0)}
 						</Typography>
 						<Typography paragraph variant="body2">
-							{translate("tier_free", lng, 4)}
+							{translate("tier_free", lng, 5)}
 						</Typography>
 
 						<Divider className={classes.divider} />
