@@ -60,38 +60,38 @@
 	],
 	"more_info": ["See more Information"],
 	"go_back": ["Go Back"],
-	"pricing_title": ["Precios"],
+	"pricing_title": ["Pricing"],
 	"tier_free": [
 		"Free",
-		"Completamente Gratis",
-		"Todas tus contraseñas en todos tus dispositivos",
-		"Un máximo de 5 espacios disponibles para almacenar tus datos.",
-		"Seguridad garantizada para toda tu información",
-		"El Tier free te da acceso a todas las funcionalidades de la plataforma, con la limitación de que no podrás tener más de 5 espacios a tu nombre, y que tanto las sugerencias que envíes, como las reseñas, no tendrán la opción de ser publicadas en los medios oficiales de la plataforma (página web, app, programa de escritorio, redes sociales)."
+		"Completely Free",
+		"All your passwords on all your devices",
+		"A maximum of only 5 slots available to store your credentials",
+		"Guaranteed security for all your information",
+		"The Free Tier gives you access to all the plattform's functionalities, with the limitation you can't have more than 5 slots to store in your account, and that both the suggestions you send, as well as the reviews, will not have the option of being published in the official media of the platform (such as the website, app, desktop program, and social media)."
 	],
 	"tier_semi_premium": [
 		"Semi-Premium",
-		"Único pago de USD $10 por cada 5 espacios que compres",
-		"Todas tus contraseñas en todos tus dispositivos",
-		"Un máximo de 25 espacios disponibles para almacenar tus datos",
-		"Un único pago de USD $10 por cada 5 espacios que compres",
-		"Seguridad garantizada para toda tu información",
-		"El Tier Semi-Premium te proporciona la posibilidad de poder pagar una única vez por la cantidad de espacios que creas necesario (máximo 20 espacios). Una vez realizado el pago, nunca más tendrás que preocuparte por renovarlo a no ser que desees comprar más espacios.",
-		"De igual manera que con el Tier Free, con el Semi-`remium no tendrás la posibilidad de que tus sugerencias/reseñas sean publicadas en los medios oficiales."
+		"A unique payment of USD $10 for eacg 5 slots that you buy",
+		"All your passwords on all your devices",
+		"A maximum of 20 slots available to store your data",
+		"A unique payment of USD $10 for eacg 5 slots that you buy",
+		"Guaranteed security for all your information",
+		"The Semi-Premium Tier gives you the possibility of being able to pay only once for the amount of slots you think necessary (maximum 20 slots). Once the payment is made, you will never have to worry about renewing it again unless you want to buy more slots.",
+		"In the same way as with Tier Free, with Semi-Premium you won't have the possibility that your suggestions/reviews are published in the official media of the plattform."
 	],
 	"tier_premium": [
 		"Premium",
-		"USD $5 al mes para tener espacios ilimitados y otras ventajas",
-		"Todas tus contraseñas en todos tus dispositivos",
-		"Cantidad de espacios ilimitados por una suscripción de USD $5 al mes",
-		"Prioridad para tus sugerencias, con la posibilidad de que éstas sean publicadas en los medios oficiales",
-		"Posibilidad de que tu reseña sea publicada en los medios oficiales",
-		"Seguridad garantizada para toda tu información",
-		"Para acceder y mantener este rol, deberás pagar una suscripción menusal de USD $5 al mes. Esto te proporcionará acceso a una cantidad ilimitada de espacios para que almacenes tus credenciales, y también a la posibilidad de que tus reseñas y/o sugerencias sean publicadas en los medios oficiales com \"Feedbac de los Usuarios\" con tu nombre (el nombre que ingreses en la plataforma al registrarte)."
+		"USD $ 5 a month to have unlimited slots and other benefits",
+		"All your passwords on all your devices",
+		"Unlimited number of slots for a subscription of USD $5 per month",
+		"Priority for your suggestions, with the possibility that they are published in the official media of the plattform",
+		"The possibility for your review to be published in the official media of the plattform",
+		"Guaranteed security for all your information",
+		"To access and maintain this role, you must pay a monthly subscription of USD $5 per month. This will grant you access to an unlimited amount of slots for you to store your credentials, and also to the possibility that your reviews and/or suggestions are published in the official media like \"Our Users' Feedback\" with your name (the name you enter signing in)."
 	],
 	"about_slots": [
-		"¿Qué son los \"Espacios\"?",
-		"Imaginemos que quieres almacenar las credenciales de una cuenta de Google. Una cuenta de Google puede incluir: Email, Nombre, Número de Teléfono, Código de Seguridad, Email de Respaldo, entre otras.",
-		"En lugar de tener espacio solo para un Email, una Contraseña, y una Descripción, como en otros gestores de contraseñas, Nosotros incluimos todas las credenciales mencionadas y más dentro de Un Solo \"Espacio\", de esta forma cada cuenta que ingreses consumirá Un Espacio de los que tengas disponibles."
+		"What are \"Slots\"?",
+		"Let's imagine that you want to store the credentials of a Google account. A Google account may include: an Email, Name, Phone Number, a Security Code, a Backup Email, among others.",
+		"Instead of having space only for an Email, a Password, and a Description, like with other password managers, We include all the mentioned credentials, and more, within a Single \"Slot\", in this way each account you enter will consume One Slot that you have available."
 	]
 }
