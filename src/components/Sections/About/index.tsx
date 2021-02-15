@@ -62,7 +62,7 @@ const About: FC = () => {
 			<Container maxWidth="xl" className={classes.container} data-testid="test_about">
 				<Grid container justify="space-around">
 					<Grid item xs={12} className={(classes.marginB, classes.textCenter)}>
-						<Typography gutterBottom variant="h4">
+						<Typography gutterBottom variant="h4" className={classes.marginB}>
 							{translate("about_title", lng)}
 						</Typography>
 					</Grid>

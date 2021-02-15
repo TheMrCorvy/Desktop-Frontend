@@ -19,9 +19,12 @@ import {
 	ListItemText,
 	Button,
 	CardActions,
+	Fab,
+	Tooltip,
 } from "@material-ui/core"
 
 import InboxIcon from "@material-ui/icons/Inbox"
+import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
@@ -48,6 +51,7 @@ const Landing: FC = () => {
 					minHeight: "20vh",
 					marginBottom: "40rem",
 					paddingBottom: "5rem",
+					position: "relative",
 				}}
 			>
 				<Container maxWidth="lg">
@@ -57,7 +61,7 @@ const Landing: FC = () => {
 								Pricing
 							</Typography>
 						</Grid>
-						<Grid item xs={12} sm={4}>
+						<Grid item xs={12} sm={6} md={4}>
 							<Card style={{ borderRadius: 8 }} elevation={0}>
 								<CardHeader
 									title="Free"
@@ -121,7 +125,7 @@ const Landing: FC = () => {
 								</CardActions>
 							</Card>
 						</Grid>
-						<Grid item xs={12} sm={4}>
+						<Grid item xs={12} sm={6} md={4}>
 							<Card style={{ borderRadius: 8 }} elevation={1}>
 								<CardHeader
 									title="Semi-Premium"
@@ -200,7 +204,7 @@ const Landing: FC = () => {
 								</CardActions>
 							</Card>
 						</Grid>
-						<Grid item xs={12} sm={4}>
+						<Grid item xs={12} sm={6} md={4}>
 							<Card style={{ borderRadius: 8 }} elevation={1}>
 								<CardHeader
 									title="Premium"
@@ -294,6 +298,21 @@ const Landing: FC = () => {
 						</Grid>
 					</Grid>
 				</Container>
+				<Tooltip title={translate("more_info", lng)} placement="right">
+					<Fab
+						color="secondary"
+						aria-label="help"
+						size="small"
+						style={{
+							position: "absolute",
+							bottom: 30, //20
+							left: 30, //20
+							boxShadow: "none",
+						}}
+					>
+						<HelpOutlineIcon />
+					</Fab>
+				</Tooltip>
 			</Paper>
 		</>
 	)
