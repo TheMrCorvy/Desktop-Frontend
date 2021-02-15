@@ -48,13 +48,13 @@ const TranslateButton = ({ ...rest }) => {
 				open={Boolean(anchorEl)}
 				onClose={() => handleClose("no change")}
 			>
-				<MenuItem title="test_translation_to_en" onClick={() => handleClose("en")}>
+				<MenuItem data-testid="test_translation_to_en" onClick={() => handleClose("en")}>
 					EN
 				</MenuItem>
-				<MenuItem title="test_translation_to_es" onClick={() => handleClose("es")}>
+				<MenuItem data-testid="test_translation_to_es" onClick={() => handleClose("es")}>
 					ES
 				</MenuItem>
-				<MenuItem title="test_translation_to_jp" onClick={() => handleClose("jp")}>
+				<MenuItem data-testid="test_translation_to_jp" onClick={() => handleClose("jp")}>
 					JP
 				</MenuItem>
 			</Menu>

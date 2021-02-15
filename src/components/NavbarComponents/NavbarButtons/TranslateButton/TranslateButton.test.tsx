@@ -25,7 +25,7 @@ describe("the translate button works properly", () => {
 	})
 
 	it("translates properly", () => {
-		const { queryByTitle } = render(
+		const { queryByTestId, queryByTitle } = render(
 			<Provider store={store}>
 				<TranslateButton />
 			</Provider>
@@ -35,9 +35,9 @@ describe("the translate button works properly", () => {
 
 		translateBtn && fireEvent.click(translateBtn)
 
-		const translateOptionEsp = queryByTitle("test_translation_to_es")
-		const translateOptionJpn = queryByTitle("test_translation_to_jp")
-		const translateOptionEng = queryByTitle("test_translation_to_en")
+		const translateOptionEsp = queryByTestId("test_translation_to_es")
+		const translateOptionJpn = queryByTestId("test_translation_to_jp")
+		const translateOptionEng = queryByTestId("test_translation_to_en")
 
 		expect(translateOptionEsp).toBeTruthy()
 		expect(translateOptionJpn).toBeTruthy()

@@ -33,7 +33,7 @@ const SizeWrapper = (props: { children: ReactElement; size: "xs" | "sm" | "md" |
 // 3) since the navbar contains links, we need to put it inside a BrowserRouter
 // 4) we can finally attempt to render the navbar, emphasis in "attemp"
 it("large navbar renders properly", () => {
-	const { queryByTitle } = render(
+	const { queryByTestId } = render(
 		<Provider store={store}>
 			<SizeWrapper size="xl">
 				<BrowserRouter>
@@ -43,13 +43,13 @@ it("large navbar renders properly", () => {
 		</Provider>
 	)
 
-	const largeNavbar = queryByTitle("test_large_navbar")
+	const largeNavbar = queryByTestId("test_large_navbar")
 
 	expect(largeNavbar).toBeTruthy()
 })
 
 it("small navbar renders properly", () => {
-	const { queryByTitle } = render(
+	const { queryByTestId } = render(
 		<Provider store={store}>
 			<SizeWrapper size="xs">
 				<BrowserRouter>
@@ -59,7 +59,7 @@ it("small navbar renders properly", () => {
 		</Provider>
 	)
 
-	const smallNavbar = queryByTitle("test_small_navbar")
+	const smallNavbar = queryByTestId("test_small_navbar")
 
 	expect(smallNavbar).toBeTruthy()
 })

@@ -6,13 +6,13 @@ import store from "../../../redux/store"
 import LandingWelcome from "./index"
 
 it("renders properly", () => {
-	const { queryByTitle } = render(
+	const { getByTestId } = render(
 		<Provider store={store}>
 			<LandingWelcome />
 		</Provider>
 	)
 
-	const welcome = queryByTitle("test_landing_welcome")
+	const welcome = getByTestId("test_landing_welcome")
 
 	expect(welcome).toBeTruthy()
 })

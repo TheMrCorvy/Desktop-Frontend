@@ -6,13 +6,13 @@ import store from "../../../redux/store"
 import About from "./index"
 
 it("renders properly", () => {
-	const { queryByTitle } = render(
+	const { getByTestId } = render(
 		<Provider store={store}>
 			<About />
 		</Provider>
 	)
 
-	const about = queryByTitle("test_about")
+	const about = getByTestId("test_about")
 
 	expect(about).toBeTruthy()
 })

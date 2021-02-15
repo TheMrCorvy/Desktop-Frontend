@@ -91,7 +91,7 @@ const Downloads: FC = () => {
 						gutterBottom
 						variant="h4"
 						className={classes.marginB}
-						title="test_downloads"
+						data-testid="test_downloads"
 					>
 						{translate("downloads", lng)}
 					</Typography>

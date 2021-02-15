@@ -6,13 +6,13 @@ import store from "../../../redux/store"
 import Downloads from "./index"
 
 it("renders properly", () => {
-	const { queryByTitle } = render(
+	const { getByTestId } = render(
 		<Provider store={store}>
 			<Downloads />
 		</Provider>
 	)
 
-	const downloads = queryByTitle("test_downloads")
+	const downloads = getByTestId("test_downloads")
 
 	expect(downloads).toBeTruthy()
 })

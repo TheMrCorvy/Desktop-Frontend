@@ -59,7 +59,7 @@ const About: FC = () => {
 
 	return (
 		<>
-			<Container maxWidth="xl" className={classes.container} title="test_about">
+			<Container maxWidth="xl" className={classes.container} data-testid="test_about">
 				<Grid container justify="space-around">
 					<Grid item xs={12} className={(classes.marginB, classes.textCenter)}>
 						<Typography gutterBottom variant="h4">
