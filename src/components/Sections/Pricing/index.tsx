@@ -11,7 +11,7 @@ import { translate } from "../../../lang"
 
 import DialogComponent from "../../../components/Dialog"
 
-import PricingCard, { PricingCardT } from "./PricingComponents"
+import PricingCard, { PricingCardT } from "./PricingCard"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -28,8 +28,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		paper: {
 			flexGrow: 1,
-			minHeight: "20vh",
-			marginBottom: "40rem",
 			paddingBottom: "5rem",
 			position: "relative",
 		},
@@ -89,12 +87,12 @@ const Pricing: FC = () => {
 				text: translate("tier_semi_premium", lng, 3),
 			},
 			{
-				icon: "wallet",
-				text: translate("tier_semi_premium", lng, 4),
-			},
-			{
 				icon: "fingerprint",
 				text: translate("tier_semi_premium", lng, 5),
+			},
+			{
+				icon: "wallet",
+				text: translate("tier_semi_premium", lng, 4),
 			},
 		],
 		cardElevation: 1,
@@ -115,16 +113,16 @@ const Pricing: FC = () => {
 				text: translate("tier_premium", lng, 3),
 			},
 			{
+				icon: "fingerprint",
+				text: translate("tier_premium", lng, 6),
+			},
+			{
 				icon: "users",
 				text: translate("tier_premium", lng, 4),
 			},
 			{
 				icon: "star",
 				text: translate("tier_premium", lng, 5),
-			},
-			{
-				icon: "fingerprint",
-				text: translate("tier_premium", lng, 6),
 			},
 		],
 		cardElevation: 2,
