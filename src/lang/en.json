@@ -59,5 +59,39 @@
 		"*****"
 	],
 	"more_info": ["See more Information"],
-	"go_back": ["Go Back"]
+	"go_back": ["Go Back"],
+	"pricing_title": ["Precios"],
+	"tier_free": [
+		"Free",
+		"Completamente Gratis",
+		"Todas tus contraseñas en todos tus dispositivos",
+		"Un máximo de 5 espacios disponibles para almacenar tus datos.",
+		"Seguridad garantizada para toda tu información",
+		"El Tier free te da acceso a todas las funcionalidades de la plataforma, con la limitación de que no podrás tener más de 5 espacios a tu nombre, y que tanto las sugerencias que envíes, como las reseñas, no tendrán la opción de ser publicadas en los medios oficiales de la plataforma (página web, app, programa de escritorio, redes sociales)."
+	],
+	"tier_semi_premium": [
+		"Semi-Premium",
+		"Único pago de USD $10 por cada 5 espacios que compres",
+		"Todas tus contraseñas en todos tus dispositivos",
+		"Un máximo de 25 espacios disponibles para almacenar tus datos",
+		"Un único pago de USD $10 por cada 5 espacios que compres",
+		"Seguridad garantizada para toda tu información",
+		"El Tier Semi-Premium te proporciona la posibilidad de poder pagar una única vez por la cantidad de espacios que creas necesario (máximo 20 espacios). Una vez realizado el pago, nunca más tendrás que preocuparte por renovarlo a no ser que desees comprar más espacios.",
+		"De igual manera que con el Tier Free, con el Semi-`remium no tendrás la posibilidad de que tus sugerencias/reseñas sean publicadas en los medios oficiales."
+	],
+	"tier_premium": [
+		"Premium",
+		"USD $5 al mes para tener espacios ilimitados y otras ventajas",
+		"Todas tus contraseñas en todos tus dispositivos",
+		"Cantidad de espacios ilimitados por una suscripción de USD $5 al mes",
+		"Prioridad para tus sugerencias, con la posibilidad de que éstas sean publicadas en los medios oficiales",
+		"Posibilidad de que tu reseña sea publicada en los medios oficiales",
+		"Seguridad garantizada para toda tu información",
+		"Para acceder y mantener este rol, deberás pagar una suscripción menusal de USD $5 al mes. Esto te proporcionará acceso a una cantidad ilimitada de espacios para que almacenes tus credenciales, y también a la posibilidad de que tus reseñas y/o sugerencias sean publicadas en los medios oficiales com \"Feedbac de los Usuarios\" con tu nombre (el nombre que ingreses en la plataforma al registrarte)."
+	],
+	"about_slots": [
+		"¿Qué son los \"Espacios\"?",
+		"Imaginemos que quieres almacenar las credenciales de una cuenta de Google. Una cuenta de Google puede incluir: Email, Nombre, Número de Teléfono, Código de Seguridad, Email de Respaldo, entre otras.",
+		"En lugar de tener espacio solo para un Email, una Contraseña, y una Descripción, como en otros gestores de contraseñas, Nosotros incluimos todas las credenciales mencionadas y más dentro de Un Solo \"Espacio\", de esta forma cada cuenta que ingreses consumirá Un Espacio de los que tengas disponibles."
+	]
 }

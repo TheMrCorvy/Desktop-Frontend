@@ -111,15 +111,15 @@ const Landing: FC = () => {
 					>
 						<Grid item xs={12} className={classes.title}>
 							<Typography variant="h4" gutterBottom>
-								Pricing
+								{translate("pricing_title", lng)}
 							</Typography>
 						</Grid>
 						<Grid item xs={12} sm={6} md={4}>
 							<Card className={classes.card} elevation={0}>
 								<CardHeader
-									title="Free"
+									title={translate("tier_free", lng, 0)}
 									className={classes.textCenter}
-									subheader="Completamente Gratis"
+									subheader={translate("tier_free", lng, 1)}
 								/>
 								<CardContent className={classes.paddingBottomSm}>
 									<List component="nav" aria-label="free accounts benefits">
@@ -129,7 +129,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Todas tus contraseñas en todos tus dispositivos
+													{translate("tier_free", lng, 2)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -140,8 +140,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Un máximo de 5 espacios disponibles para
-													almacenar tus datos
+													{translate("tier_free", lng, 3)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -152,7 +151,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Seguridad garantizada para toda tu información
+													{translate("tier_free", lng, 4)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -166,7 +165,7 @@ const Landing: FC = () => {
 										size="large"
 										disableElevation
 									>
-										Registrarse
+										{translate("navbar_register_btn", lng)}
 									</Button>
 								</CardActions>
 							</Card>
@@ -174,9 +173,9 @@ const Landing: FC = () => {
 						<Grid item xs={12} sm={6} md={4}>
 							<Card className={classes.card} elevation={1}>
 								<CardHeader
-									title="Semi-Premium"
+									title={translate("tier_semi_premium", lng, 0)}
 									className={classes.textCenter}
-									subheader="Único pago de USD $10 por cada 5 espacios que compres"
+									subheader={translate("tier_semi_premium", lng, 1)}
 								/>
 								<CardContent className={classes.paddingBottomSm}>
 									<List
@@ -189,7 +188,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Todas tus contraseñas en todos tus dispositivos
+													{translate("tier_semi_premium", lng, 2)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -200,8 +199,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Un máximo de 25 espacios disponibles para
-													almacenar tus datos
+													{translate("tier_semi_premium", lng, 3)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -212,8 +210,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Un único pago de USD $10 por cada 5 espacios que
-													compres
+													{translate("tier_semi_premium", lng, 4)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -224,7 +221,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Seguridad garantizada para toda tu información
+													{translate("tier_semi_premium", lng, 5)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -238,7 +235,7 @@ const Landing: FC = () => {
 										size="large"
 										disableElevation
 									>
-										Registrarse
+										{translate("navbar_register_btn", lng)}
 									</Button>
 								</CardActions>
 							</Card>
@@ -246,9 +243,9 @@ const Landing: FC = () => {
 						<Grid item xs={12} sm={6} md={4}>
 							<Card className={classes.card} elevation={1}>
 								<CardHeader
-									title="Premium"
+									title={translate("tier_premium", lng, 0)}
 									className={classes.textCenter}
-									subheader="USD $5 al mes para tener espacios ilimitados y otras ventajas"
+									subheader={translate("tier_premium", lng, 1)}
 								/>
 								<CardContent className={classes.paddingBottomSm}>
 									<List
@@ -261,7 +258,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Todas tus contraseñas en todos tus dispositivos
+													{translate("tier_premium", lng, 2)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -272,8 +269,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Cantidad de espacios ilimitados por una
-													suscripción de USD $5 al mes
+													{translate("tier_premium", lng, 3)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -284,9 +280,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Prioridad para tus sugerencias, con la
-													posibilidad de que éstas sean publicadas en los
-													medios oficiales
+													{translate("tier_premium", lng, 4)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -297,8 +291,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Posibilidad de que tu reseña sea publicada en
-													los medios oficiales
+													{translate("tier_premium", lng, 5)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -309,7 +302,7 @@ const Landing: FC = () => {
 											</ListItemIcon>
 											<ListItemText>
 												<Typography variant="body2">
-													Seguridad garantizada para toda tu información
+													{translate("tier_premium", lng, 6)}
 												</Typography>
 											</ListItemText>
 										</ListItem>
@@ -323,7 +316,7 @@ const Landing: FC = () => {
 										size="large"
 										disableElevation
 									>
-										Registrarse
+										{translate("navbar_register_btn", lng)}
 									</Button>
 								</CardActions>
 							</Card>
@@ -337,63 +330,43 @@ const Landing: FC = () => {
 				>
 					<>
 						<Typography variant="h5" gutterBottom>
-							Tier Free
+							{translate("tier_free", lng, 0)}
 						</Typography>
 						<Typography paragraph variant="body2">
-							El Tier free te da acceso a todas las funcionalidades de la plataforma,
-							con la limitación de que no podrás tener más de 5 espacios a tu nombre,
-							y que tanto las sugerencias que envíes, como las reseñas, no tendrán la
-							opción de ser publicadas en los medios oficiales de la plataforma
-							(página web, app, programa de escritorio, redes sociales).
+							{translate("tier_free", lng, 4)}
 						</Typography>
 
 						<Divider className={classes.divider} />
 
 						<Typography variant="h5" gutterBottom>
-							Tier Semi-Premium
+							{translate("tier_semi_premium", lng, 0)}
 						</Typography>
 						<Typography paragraph variant="body2">
-							El Tier Semi-Premium te proporciona la posibilidad de poder pagar una
-							única vez por la cantidad de espacios que creas necesario (máximo 20
-							espacios). Una vez realizado el pago, nunca más tendrás que preocuparte
-							por renovarlo a no ser que desees comprar más espacios.
+							{translate("tier_semi_premium", lng, 6)}
 						</Typography>
 						<Typography paragraph variant="body2">
-							De igual manera que con el Tier Free, con el Semi-`remium no tendrás la
-							posibilidad de que tus sugerencias/reseñas sean publicadas en los medios
-							oficiales.
+							{translate("tier_semi_premium", lng, 7)}
 						</Typography>
 
 						<Divider className={classes.divider} />
 
 						<Typography variant="h5" gutterBottom>
-							Tier Premium
+							{translate("tier_premium", lng, 0)}
 						</Typography>
 						<Typography paragraph variant="body2">
-							Para acceder y mantener este rol, deberás pagar una suscripción menusal
-							de USD $5 al mes. Esto te proporcionará acceso a una cantidad ilimitada
-							de espacios para que almacenes tus credenciales, y también a la
-							posibilidad de que tus reseñas y/o sugerencias sean publicadas en los
-							medios oficiales com "Feedbac de los Usuarios" con tu nombre (el nombre
-							que ingreses en la plataforma al registrarte).
+							{translate("tier_premium", lng, 7)}
 						</Typography>
 
 						<Divider className={classes.divider} />
 
 						<Typography variant="h5" gutterBottom>
-							¿Qué son los \"Espacios\"?
+							{translate("about_slots", lng, 0)}
 						</Typography>
 						<Typography paragraph variant="body2">
-							Imaginemos que quieres almacenar las credenciales de una cuenta de
-							Google. Una cuenta de Google puede incluir: Email, Nombre, Número de
-							Teléfono, Código de Seguridad, Email de Respaldo, entre otras.
+							{translate("about_slots", lng, 1)}
 						</Typography>
 						<Typography paragraph variant="body2">
-							En lugar de tener espacio solo para un Email, una Contraseña, y una
-							Descripción, como en otros gestores de contraseñas, Nosotros incluimos
-							todas las credenciales mencionadas y más dentro de Un Solo \"Espacio\",
-							de esta forma cada cuenta que ingreses consumirá Un Espacio de los que
-							tengas disponibles.
+							{translate("about_slots", lng, 2)}
 						</Typography>
 					</>
 				</DialogComponent>
