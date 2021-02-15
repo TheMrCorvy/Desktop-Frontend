@@ -141,6 +141,7 @@ const Pricing: FC = () => {
 			style={{
 				background: theme === "dark" ? "#333" : "#f2f2f2",
 			}}
+			data-testid="test_pricing_section"
 		>
 			<Container maxWidth="lg">
 				<Grid container justify="space-around" spacing={4} className={classes.paddingTopL}>

@@ -65,8 +65,11 @@ const DialogComponent = (props: Props) => {
 				aria-labelledby="simple-dialog-title"
 				open={open}
 				scroll="paper"
+				data-testid="test_dialog"
 			>
-				<DialogTitle id="simple-dialog-title">{props.title}</DialogTitle>
+				<DialogTitle id="simple-dialog-title" data-testid="test_dialog_title">
+					{props.title}
+				</DialogTitle>
 				<DialogContent>
 					<DialogContentText data-testid="dialog_content_text">
 						{props.children}

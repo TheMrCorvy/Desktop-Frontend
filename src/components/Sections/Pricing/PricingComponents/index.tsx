@@ -69,7 +69,11 @@ const PricingCard = (props: PricingCardT) => {
 	const classes = useStyles()
 
 	return (
-		<Card className={classes.card} elevation={props.cardElevation}>
+		<Card
+			className={classes.card}
+			elevation={props.cardElevation}
+			data-testid="test_pricing_card"
+		>
 			<CardHeader
 				title={props.title}
 				className={classes.textCenter}
