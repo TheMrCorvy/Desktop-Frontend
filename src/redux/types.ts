@@ -42,3 +42,17 @@ interface ToggleDrawerActionI {
 }
 
 export type DrawerAction = ToggleDrawerActionI
+
+/******************************************************************************** toggle drawer */
+export const TOGGLE_DIALOG = "TOGGLE_DIALOG"
+
+export interface DialogStateI {
+	dialogIsOpen: boolean
+}
+
+interface DialogActionI {
+	type: typeof TOGGLE_DIALOG
+	payload: boolean
+}
+
+export type DialogAction = DialogActionI

@@ -134,7 +134,7 @@ const About: FC = () => {
 							"{". "}
 							{translate("about_texts", lng, 4)}"
 							<Typography component="span" variant="body2" color="primary">
-								m***@email.com
+								{translate("encrypted_examples", lng, 0)}
 							</Typography>
 							".
 						</Typography>
