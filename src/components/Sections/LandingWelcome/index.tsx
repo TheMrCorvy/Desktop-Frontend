@@ -87,7 +87,7 @@ const LandingWelcome: FC = () => {
 		>
 			<Paper
 				style={{
-					background: theme === "dark" ? "#333" : "#f5f5f5",
+					background: theme === "dark" ? "#333" : "#f2f2f2",
 				}}
 				elevation={0}
 				square

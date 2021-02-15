@@ -93,11 +93,7 @@ const Navbar = () => {
 								</Link>
 							</Tooltip>
 
-							<Typography
-								variant="h6"
-								className={classes.title}
-								title="test_app_name"
-							>
+							<Typography variant="h6" className={classes.title}>
 								{translate("app_name", lng)}
 							</Typography>
 
