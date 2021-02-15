@@ -70,11 +70,7 @@ const DialogComponent = (props: Props) => {
 				<DialogTitle id="simple-dialog-title" data-testid="test_dialog_title">
 					{props.title}
 				</DialogTitle>
-				<DialogContent>
-					<DialogContentText data-testid="dialog_content_text">
-						{props.children}
-					</DialogContentText>
-				</DialogContent>
+				<DialogContent data-testid="dialog_content_text">{props.children}</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={toggleDialog} color="default" size="large">
 						{translate("go_back", lng)}

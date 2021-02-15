@@ -12,7 +12,7 @@ describe("the dialog component works properly", () => {
 		const { queryByTitle } = render(
 			<Provider store={store}>
 				<DialogComponent title="testing title" tooltipPlacement="right">
-					<span data-testid="test_dialog_content">testing content</span>
+					<p data-testid="test_dialog_content">testing content</p>
 				</DialogComponent>
 			</Provider>
 		)
@@ -26,7 +26,7 @@ describe("the dialog component works properly", () => {
 		const { queryByTitle, queryByTestId } = render(
 			<Provider store={store}>
 				<DialogComponent title="testing title" tooltipPlacement="right">
-					<span data-testid="test_dialog_content">testing content</span>
+					<p data-testid="test_dialog_content">testing content</p>
 				</DialogComponent>
 			</Provider>
 		)
