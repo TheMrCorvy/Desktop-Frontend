@@ -10,7 +10,6 @@ import {
 	Tooltip,
 	Dialog,
 	DialogTitle,
-	DialogContentText,
 	DialogContent,
 	DialogActions,
 	Button,
@@ -62,15 +61,15 @@ const DialogComponent = (props: Props) => {
 
 			<Dialog
 				onClose={toggleDialog}
-				aria-labelledby="simple-dialog-title"
+				aria-labelledby="dialog-title"
 				open={open}
 				scroll="paper"
 				data-testid="test_dialog"
 			>
-				<DialogTitle id="simple-dialog-title" data-testid="test_dialog_title">
+				<DialogTitle id="dialog-title" data-testid="test_dialog_title">
 					{props.title}
 				</DialogTitle>
-				<DialogContent data-testid="dialog_content_text">{props.children}</DialogContent>
+				<DialogContent>{props.children}</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={toggleDialog} color="default" size="large">
 						{translate("go_back", lng)}
