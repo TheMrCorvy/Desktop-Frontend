@@ -5,9 +5,9 @@ import { IconButton, Tooltip, Menu, MenuItem } from "@material-ui/core"
 import TranslateIcon from "@material-ui/icons/Translate"
 
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../../../redux/store"
-import { translate } from "../../../../lang"
-import { setLanguage } from "../../../../redux/actions/langActions"
+import { RootState } from "../../../../../redux/store"
+import { translate } from "../../../../../lang"
+import { setLanguage } from "../../../../../redux/actions/langActions"
 
 const TranslateButton = ({ ...rest }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)

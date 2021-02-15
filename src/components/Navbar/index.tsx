@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import TranslateButton from "../NavbarComponents/NavbarButtons/TranslateButton"
-import ToggleDarkTheme from "../NavbarComponents/NavbarButtons/ToggleDarkTheme"
+import TranslateButton from "./NavbarComponents/NavbarButtons/TranslateButton"
+import ToggleDarkTheme from "./NavbarComponents/NavbarButtons/ToggleDarkTheme"
 
 /************************************************************************************ mui related */
 import {

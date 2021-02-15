@@ -6,10 +6,10 @@ import Brightness4Icon from "@material-ui/icons/Brightness4"
 import NightsStayIcon from "@material-ui/icons/NightsStay"
 
 import { useDispatch, useSelector } from "react-redux"
-import { setTheme } from "../../../../redux/actions/themeActions"
-import { RootState } from "../../../../redux/store"
+import { setTheme } from "../../../../../redux/actions/themeActions"
+import { RootState } from "../../../../../redux/store"
 
-import { translate } from "../../../../lang"
+import { translate } from "../../../../../lang"
 
 const ToggleDarkTheme = ({ ...rest }) => {
 	const { theme } = useSelector((state: RootState) => state.theme)

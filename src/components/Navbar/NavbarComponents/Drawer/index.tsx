@@ -13,8 +13,8 @@ import InboxIcon from "@material-ui/icons/MoveToInbox"
 import MailIcon from "@material-ui/icons/Mail"
 
 import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "../../../redux/store"
-import { toggleDrawer } from "../../../redux/actions/drawerActions"
+import { RootState } from "../../../../redux/store"
+import { toggleDrawer } from "../../../../redux/actions/drawerActions"
 
 const Drawer: FC = () => {
 	const { open } = useSelector((state: RootState) => state.open)

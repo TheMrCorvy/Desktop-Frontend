@@ -1,14 +1,14 @@
 import { render, fireEvent } from "@testing-library/react"
 
 import { Provider } from "react-redux"
-import store from "../../../../redux/store"
+import store from "../../../../../redux/store"
 
 import TranslateButton from "./index"
 
-import { translate } from "../../../../lang"
-import es from "../../../../lang/es.json"
-import en from "../../../../lang/en.json"
-import jp from "../../../../lang/jp.json"
+import { translate } from "../../../../../lang"
+import es from "../../../../../lang/es.json"
+import en from "../../../../../lang/en.json"
+import jp from "../../../../../lang/jp.json"
 
 describe("the translate button works properly", () => {
 	it("renders properly", () => {
