@@ -1,24 +1,8 @@
-import React, { FC, useState } from "react"
+import React, { FC } from "react"
 
-import {
-	Container,
-	Grid,
-	Typography,
-	Hidden,
-	Divider,
-	Fab,
-	Tooltip,
-	Dialog,
-	DialogTitle,
-	DialogContentText,
-	DialogContent,
-	DialogActions,
-	Button,
-} from "@material-ui/core"
+import { Container, Grid, Typography, Hidden, Divider } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
-
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
@@ -26,6 +10,8 @@ import { RootState } from "../../../redux/store"
 import { translate } from "../../../lang"
 
 import * as es from "../../../lang/es.json"
+
+import DialogComponent from "../../Dialog"
 
 const useStyles = makeStyles({
 	container: {
@@ -49,13 +35,7 @@ const useStyles = makeStyles({
 const About: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [open, setOpen] = useState(false)
-
 	const classes = useStyles()
-
-	const toggleDialog = () => {
-		setOpen(!open)
-	}
 
 	return (
 		<>
@@ -102,30 +82,8 @@ const About: FC = () => {
 						<Divider orientation="horizontal" />
 					</Grid>
 				</Grid>
-				<Tooltip title={translate("more_info", lng)} placement="left">
-					<Fab
-						color="secondary"
-						aria-label="help"
-						size="small"
-						className={classes.infoBtn}
-						onClick={toggleDialog}
-					>
-						<HelpOutlineIcon />
-					</Fab>
-				</Tooltip>
-			</Container>
-
-			<Dialog
-				onClose={toggleDialog}
-				aria-labelledby="simple-dialog-title"
-				open={open}
-				scroll="body"
-			>
-				<DialogTitle id="simple-dialog-title">
-					{translate("about_subtitle", lng)}
-				</DialogTitle>
-				<DialogContent>
-					<DialogContentText>
+				<DialogComponent className={classes.infoBtn}>
+					<>
 						<Typography variant="body2" paragraph>
 							{translate("about_texts", lng, 3)}"
 							<Typography component="span" variant="body2" color="primary">
@@ -169,14 +127,9 @@ const About: FC = () => {
 								</li>
 							))}
 						</ol>
-					</DialogContentText>
-				</DialogContent>
-				<DialogActions>
-					<Button autoFocus onClick={toggleDialog} color="default" size="large">
-						{translate("go_back", lng)}
-					</Button>
-				</DialogActions>
-			</Dialog>
+					</>
+				</DialogComponent>
+			</Container>
 		</>
 	)
 }
