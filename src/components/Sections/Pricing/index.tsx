@@ -1,25 +1,6 @@
 import React, { FC } from "react"
 
-import {
-	Card,
-	CardHeader,
-	Container,
-	Grid,
-	Paper,
-	Typography,
-	CardContent,
-	List,
-	ListItem,
-	ListItemIcon,
-	Divider,
-	ListItemText,
-	Button,
-	CardActions,
-} from "@material-ui/core"
-
-import { useTheme } from "@material-ui/core/styles"
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Container, Grid, Paper, Typography, Divider } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
@@ -29,7 +10,8 @@ import { RootState } from "../../../redux/store"
 import { translate } from "../../../lang"
 
 import DialogComponent from "../../../components/Dialog"
-import { constants } from "zlib"
+
+import PricingCard, { PricingCardT } from "./PricingComponents"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -51,32 +33,16 @@ const useStyles = makeStyles((theme: Theme) =>
 			paddingBottom: "5rem",
 			position: "relative",
 		},
-		textCenter: {
-			textAlign: "center",
-		},
 		paddingTopL: {
 			paddingTop: 50,
-		},
-		paddingBottomSm: { paddingBottom: 10 },
-		card: {
-			borderRadius: 8,
-		},
-		cardAction: {
-			display: "flex",
-			justifyContent: "center",
-			textAlign: "center",
-			paddingBottom: "2.5rem",
-		},
-		divider: {
-			marginTop: 10,
-			marginBottom: 10,
 		},
 		title: {
 			paddingTop: 50,
 			textAlign: "center",
 		},
-		iconsColor: {
-			color: "",
+		divider: {
+			marginTop: 10,
+			marginBottom: 10,
 		},
 	})
 )
@@ -88,10 +54,83 @@ const Pricing: FC = () => {
 
 	const classes = useStyles()
 
-	const muiTheme = useTheme()
+	const freeCard: PricingCardT = {
+		title: translate("tier_free", lng, 0),
+		subtitle: translate("tier_free", lng, 1),
+		listItems: [
+			{
+				icon: "sync-alt",
+				text: translate("tier_free", lng, 2),
+			},
+			{
+				icon: "lock",
+				text: translate("tier_free", lng, 3),
+			},
+			{
+				icon: "fingerprint",
+				text: translate("tier_free", lng, 4),
+			},
+		],
+		cardElevation: 0,
+		buttonText: translate("navbar_register_btn", lng),
+		linkUrl: "/register",
+	}
 
-	const iconsColor =
-		theme === "dark" ? muiTheme.palette.secondary.main : muiTheme.palette.primary.main
+	const semiPremiumCard: PricingCardT = {
+		title: translate("tier_semi_premium", lng, 0),
+		subtitle: translate("tier_semi_premium", lng, 1),
+		listItems: [
+			{
+				icon: "sync-alt",
+				text: translate("tier_semi_premium", lng, 2),
+			},
+			{
+				icon: "lock",
+				text: translate("tier_semi_premium", lng, 3),
+			},
+			{
+				icon: "wallet",
+				text: translate("tier_semi_premium", lng, 4),
+			},
+			{
+				icon: "fingerprint",
+				text: translate("tier_semi_premium", lng, 5),
+			},
+		],
+		cardElevation: 1,
+		buttonText: translate("navbar_register_btn", lng),
+		linkUrl: "/register",
+	}
+
+	const premiumCard: PricingCardT = {
+		title: translate("tier_premium", lng, 0),
+		subtitle: translate("tier_premium", lng, 1),
+		listItems: [
+			{
+				icon: "sync-alt",
+				text: translate("tier_premium", lng, 2),
+			},
+			{
+				icon: "lock-open",
+				text: translate("tier_premium", lng, 3),
+			},
+			{
+				icon: "users",
+				text: translate("tier_premium", lng, 4),
+			},
+			{
+				icon: "star",
+				text: translate("tier_premium", lng, 5),
+			},
+			{
+				icon: "fingerprint",
+				text: translate("tier_premium", lng, 6),
+			},
+		],
+		cardElevation: 2,
+		buttonText: translate("navbar_register_btn", lng),
+		linkUrl: "/register",
+	}
 
 	return (
 		<Paper
@@ -111,253 +150,31 @@ const Pricing: FC = () => {
 						</Typography>
 					</Grid>
 					<Grid item xs={12} sm={6} md={4}>
-						<Card className={classes.card} elevation={0}>
-							<CardHeader
-								title={translate("tier_free", lng, 0)}
-								className={classes.textCenter}
-								subheader={translate("tier_free", lng, 1)}
-							/>
-							<CardContent className={classes.paddingBottomSm}>
-								<List component="nav" aria-label="free accounts benefits">
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "sync-alt"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_free", lng, 2)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "lock"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_free", lng, 3)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "fingerprint"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_free", lng, 4)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-								</List>
-							</CardContent>
-							<CardActions className={classes.cardAction}>
-								<Button
-									color={theme === "dark" ? "secondary" : "primary"}
-									variant="contained"
-									size="large"
-									disableElevation
-								>
-									{translate("navbar_register_btn", lng)}
-								</Button>
-							</CardActions>
-						</Card>
+						<PricingCard
+							title={freeCard.title}
+							subtitle={freeCard.subtitle}
+							cardElevation={freeCard.cardElevation}
+							listItems={freeCard.listItems}
+							buttonText={freeCard.buttonText}
+						/>
 					</Grid>
 					<Grid item xs={12} sm={6} md={4}>
-						<Card className={classes.card} elevation={1}>
-							<CardHeader
-								title={translate("tier_semi_premium", lng, 0)}
-								className={classes.textCenter}
-								subheader={translate("tier_semi_premium", lng, 1)}
-							/>
-							<CardContent className={classes.paddingBottomSm}>
-								<List component="nav" aria-label="semi-premium accounts benefits">
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "sync-alt"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_semi_premium", lng, 2)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "lock"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_semi_premium", lng, 3)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "wallet"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_semi_premium", lng, 4)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "fingerprint"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_semi_premium", lng, 5)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-								</List>
-							</CardContent>
-							<CardActions className={classes.cardAction}>
-								<Button
-									color={theme === "dark" ? "secondary" : "primary"}
-									variant="contained"
-									size="large"
-									disableElevation
-								>
-									{translate("navbar_register_btn", lng)}
-								</Button>
-							</CardActions>
-						</Card>
+						<PricingCard
+							title={semiPremiumCard.title}
+							subtitle={semiPremiumCard.subtitle}
+							cardElevation={semiPremiumCard.cardElevation}
+							listItems={semiPremiumCard.listItems}
+							buttonText={semiPremiumCard.buttonText}
+						/>
 					</Grid>
 					<Grid item xs={12} sm={6} md={4}>
-						<Card className={classes.card} elevation={1}>
-							<CardHeader
-								title={translate("tier_premium", lng, 0)}
-								className={classes.textCenter}
-								subheader={translate("tier_premium", lng, 1)}
-							/>
-							<CardContent className={classes.paddingBottomSm}>
-								<List component="nav" aria-label="semi-premium accounts benefits">
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "sync-alt"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_premium", lng, 2)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "lock-open"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_premium", lng, 3)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "users"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_premium", lng, 4)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "star"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_premium", lng, 5)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-									<ListItem button>
-										<ListItemIcon>
-											<FontAwesomeIcon
-												icon={["fas", "fingerprint"]}
-												size="2x"
-												color={iconsColor}
-											/>
-										</ListItemIcon>
-										<ListItemText>
-											<Typography variant="body2">
-												{translate("tier_premium", lng, 6)}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-									<Divider className={classes.divider} />
-								</List>
-							</CardContent>
-							<CardActions className={classes.cardAction}>
-								<Button
-									color={theme === "dark" ? "secondary" : "primary"}
-									variant="contained"
-									size="large"
-									disableElevation
-								>
-									{translate("navbar_register_btn", lng)}
-								</Button>
-							</CardActions>
-						</Card>
+						<PricingCard
+							title={premiumCard.title}
+							subtitle={premiumCard.subtitle}
+							cardElevation={premiumCard.cardElevation}
+							listItems={premiumCard.listItems}
+							buttonText={premiumCard.buttonText}
+						/>
 					</Grid>
 				</Grid>
 			</Container>
