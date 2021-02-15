@@ -64,7 +64,7 @@ const DialogComponent = (props: Props) => {
 				onClose={toggleDialog}
 				aria-labelledby="simple-dialog-title"
 				open={open}
-				scroll="body"
+				scroll="paper"
 			>
 				<DialogTitle id="simple-dialog-title">{props.title}</DialogTitle>
 				<DialogContent>
