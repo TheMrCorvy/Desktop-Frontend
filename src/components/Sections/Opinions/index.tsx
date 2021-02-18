@@ -43,7 +43,11 @@ const Opinions = ({ title, opinions }: Props) => {
 			<Container maxWidth="xl" className={classes.container}>
 				<Grid container spacing={3} justify="space-around">
 					<Grid item xs={12} className={classes.textCenter}>
-						<Typography variant="h4" gutterBottom>
+						<Typography
+							variant="h4"
+							gutterBottom
+							data-testid="test_opinions_section_title"
+						>
 							{title}
 						</Typography>
 					</Grid>

@@ -66,7 +66,7 @@ const OpinionCard = ({ user, date, opinion }: OpinionCardT) => {
 				</Typography>
 			</CardContent>
 			{opinion.isRating && (
-				<CardActions disableSpacing>
+				<CardActions disableSpacing data-testid="test_opinion_rating">
 					<Rating name="read-only" value={opinion.rating} precision={0.5} readOnly />
 				</CardActions>
 			)}
