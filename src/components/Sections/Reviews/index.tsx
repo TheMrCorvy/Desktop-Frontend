@@ -1,17 +1,6 @@
 import React, { FC } from "react"
 
-import {
-	Container,
-	Card,
-	CardHeader,
-	CardContent,
-	CardActions,
-	Avatar,
-	Typography,
-	Grid,
-} from "@material-ui/core"
-
-import { Rating } from "@material-ui/lab"
+import { Container, Typography, Grid } from "@material-ui/core"
 
 import { red } from "@material-ui/core/colors"
 

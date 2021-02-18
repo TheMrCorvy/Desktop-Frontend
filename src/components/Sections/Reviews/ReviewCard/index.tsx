@@ -16,6 +16,15 @@ import { red } from "@material-ui/core/colors"
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
+export type ReviewCardT = {
+	userName: string
+	date: string
+	rating: {
+		body: string
+		rating: number
+	}
+}
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
@@ -37,15 +46,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 	})
 )
-
-export type ReviewCardT = {
-	userName: string
-	date: string
-	rating: {
-		body: string
-		rating: number
-	}
-}
 
 const ReviewCard = ({ userName, date, rating }: ReviewCardT) => {
 	const classes = useStyles()
