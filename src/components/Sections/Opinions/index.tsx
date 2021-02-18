@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React from "react"
 
 import { Container, Typography, Grid } from "@material-ui/core"
 
@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
 			backgroundColor: red[500],
 		},
 		container: {
-			paddingTop: "3rem",
-			paddingBottom: "3rem",
+			paddingTop: "5rem",
+			paddingBottom: "5rem",
 		},
 		textCenter: {
 			textAlign: "center",
