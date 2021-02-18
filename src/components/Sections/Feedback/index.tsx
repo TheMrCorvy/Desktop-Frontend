@@ -11,7 +11,7 @@ import Opinions from "../Opinions"
 const Feedback: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	//here will be the api call to fetch the feedback
+	//here will be the api call to fetch the feedback, depending on the current language
 	return (
 		<div data-testid="test_feedback">
 			<Opinions title={translate("feedback_titles", lng, 0)} opinions={suggestions} />
