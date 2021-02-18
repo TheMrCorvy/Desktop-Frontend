@@ -101,5 +101,9 @@
 		"¿Qué son los \"Espacios\"?",
 		"Imaginemos que quieres almacenar las credenciales de una cuenta de Google. Una cuenta de Google puede incluir: Email, Nombre, Número de Teléfono, Código de Seguridad, Email de Respaldo, entre otras.",
 		"En lugar de tener espacio solo para un Email, una Contraseña, y una Descripción, como en otros gestores de contraseñas, Nosotros incluimos todas las credenciales mencionadas y más dentro de Un Solo \"Espacio\", de esta forma cada cuenta que ingreses consumirá Un Espacio de los que tengas disponibles."
+	],
+	"feedback_titles": [
+		"¿En qué estamos trabajando actualmente?",
+		"¿Qué opinan los usuarios de PasuSewa?"
 	]
 }

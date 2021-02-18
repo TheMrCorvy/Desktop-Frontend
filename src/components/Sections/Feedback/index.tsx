@@ -1,14 +1,21 @@
 import React, { FC } from "react"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../../redux/store"
+
+import { translate } from "../../../lang"
+
 import { ratings, suggestions } from "../../Temporary/Opinions"
 import Opinions from "../Opinions"
 
 const Feedback: FC = () => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	//here will be the api call to fetch the feedback
 	return (
 		<div data-testid="test_feedback">
-			<Opinions title="What are we working on?" opinions={suggestions} />
-			<Opinions title="What do our users think of PasuSewa?" opinions={ratings} />
+			<Opinions title={translate("feedback_titles", lng, 0)} opinions={suggestions} />
+			<Opinions title={translate("feedback_titles", lng, 1)} opinions={ratings} />
 		</div>
 	)
 }

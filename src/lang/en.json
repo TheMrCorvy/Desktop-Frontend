@@ -94,5 +94,6 @@
 		"What are \"Slots\"?",
 		"Let's imagine that you want to store the credentials of a Google account. A Google account may include: an Email, Name, Phone Number, a Security Code, a Backup Email, among others.",
 		"Instead of having space only for an Email, a Password, and a Description, like with other password managers, We include all the mentioned credentials, and more, within a Single \"Slot\", in this way each account you enter will consume One Slot that you have available."
-	]
+	],
+	"feedback_titles": ["What are we currently working on?", "What do our users think of PasuSewa?"]
 }
