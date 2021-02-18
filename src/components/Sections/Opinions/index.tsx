@@ -39,7 +39,7 @@ const Opinions = ({ title, opinions }: Props) => {
 	const classes = useStyles()
 
 	return (
-		<div className={classes.root}>
+		<div className={classes.root} data-testid="test_opinions_section">
 			<Container maxWidth="xl" className={classes.container}>
 				<Grid container spacing={3} justify="space-around">
 					<Grid item xs={12} className={classes.textCenter}>

@@ -17,7 +17,7 @@ export type OpinionCardT = {
 	opinion: {
 		body: string
 		isRating: boolean
-		rating?: number | null
+		rating?: number
 	}
 }
 
@@ -50,7 +50,7 @@ const OpinionCard = ({ user, date, opinion }: OpinionCardT) => {
 	const avatar = user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase()
 
 	return (
-		<Card>
+		<Card data-testid="test_opinion_card">
 			<CardHeader
 				avatar={
 					<Avatar aria-label="recipe" className={classes.avatar}>
