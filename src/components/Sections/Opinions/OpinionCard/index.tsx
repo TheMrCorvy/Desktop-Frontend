@@ -61,7 +61,12 @@ const OpinionCard = ({ user, date, opinion }: OpinionCardT) => {
 				subheader={date}
 			/>
 			<CardContent>
-				<Typography variant="body2" color="textSecondary" component="p">
+				<Typography
+					variant="body2"
+					color="textSecondary"
+					component="p"
+					data-testid="test_card_body"
+				>
 					{opinion.body}
 				</Typography>
 			</CardContent>

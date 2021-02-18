@@ -6,9 +6,9 @@ import store from "../../../redux/store"
 import Opinions from "./index"
 import { ratingsForTesting, suggestionsForTesting } from "../../Temporary/Opinions"
 
-it("renders suggestions properly", () => {
-	const title = "testing title for suggestions"
+const title = "testing title"
 
+it("renders suggestions properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
 			<Opinions title={title} opinions={suggestionsForTesting} />
@@ -25,8 +25,6 @@ it("renders suggestions properly", () => {
 })
 
 it("renders ratings properly", () => {
-	const title = "testing title for ratings"
-
 	const { getByTestId } = render(
 		<Provider store={store}>
 			<Opinions title={title} opinions={ratingsForTesting} />
