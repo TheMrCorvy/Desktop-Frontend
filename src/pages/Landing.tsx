@@ -4,7 +4,7 @@ import LandingWelcome from "../components/Sections/LandingWelcome/index"
 import Downloads from "../components/Sections/Downloads/index"
 import About from "../components/Sections/About"
 import Pricing from "../components/Sections/Pricing"
-import Reviews from "../components/Sections/Reviews"
+import Feedback from "../components/Sections/Feedback"
 
 const Landing: FC = () => {
 	return (
@@ -12,7 +12,7 @@ const Landing: FC = () => {
 			<LandingWelcome />
 			<Downloads />
 			<About />
-			<Reviews />
+			<Feedback />
 			<Pricing />
 		</>
 	)
