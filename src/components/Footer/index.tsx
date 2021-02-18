@@ -36,7 +36,7 @@ const Footer: FC = () => {
 	const classes = useStyles()
 
 	return (
-		<div className={classes.root}>
+		<div className={classes.root} data-testid="test_footer">
 			<Container maxWidth="xl" className={classes.container}>
 				<Grid container justify="space-around" spacing={4}>
 					<Grid item xs={12} sm={1} className={classes.textCenter}>
