@@ -146,29 +146,6 @@ const Reviews: FC = () => {
 							</CardActions>
 						</Card>
 					</Grid>
-					<Grid item xs={12} sm={6} md={4} lg={3}>
-						<Card>
-							<CardHeader
-								avatar={
-									<Avatar aria-label="recipe" className={classes.avatar}>
-										E
-									</Avatar>
-								}
-								title="Example Name"
-								subheader="September 14, 2016"
-							/>
-							<CardContent>
-								<Typography variant="body2" color="textSecondary" component="p">
-									This impressive paella is a perfect party dish and a fun meal to
-									cook together with your guests. Add 1 cup of frozen peas along
-									with the mussels, if you like.
-								</Typography>
-							</CardContent>
-							<CardActions disableSpacing>
-								<Rating name="read-only" value={value} precision={0.5} readOnly />
-							</CardActions>
-						</Card>
-					</Grid>
 				</Grid>
 			</Container>
 		</div>
