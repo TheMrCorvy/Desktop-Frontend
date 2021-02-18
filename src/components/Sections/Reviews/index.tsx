@@ -36,7 +36,10 @@ const Reviews: FC = () => {
 	//here will be an api call to fetch these reviews
 	const userReviews: ReviewCardT[] = [
 		{
-			userName: "Example Name 1",
+			userName: {
+				firstName: "Name 1",
+				lastName: "Example",
+			},
 			date: "September 14, 2016",
 			rating: {
 				body:
@@ -45,7 +48,10 @@ const Reviews: FC = () => {
 			},
 		},
 		{
-			userName: "fxample Name 2",
+			userName: {
+				firstName: "Name 2",
+				lastName: "Example",
+			},
 			date: "September 14, 2016",
 			rating: {
 				body:
@@ -54,7 +60,10 @@ const Reviews: FC = () => {
 			},
 		},
 		{
-			userName: "Example Name 3",
+			userName: {
+				firstName: "Name 3",
+				lastName: "Example",
+			},
 			date: "September 14, 2016",
 			rating: {
 				body:
@@ -63,7 +72,10 @@ const Reviews: FC = () => {
 			},
 		},
 		{
-			userName: "Example Name 4",
+			userName: {
+				firstName: "Name 4",
+				lastName: "Example",
+			},
 			date: "September 14, 2016",
 			rating: {
 				body:
@@ -72,7 +84,10 @@ const Reviews: FC = () => {
 			},
 		},
 		{
-			userName: "Example Name 5",
+			userName: {
+				firstName: "Name 5",
+				lastName: "Example",
+			},
 			date: "September 14, 2016",
 			rating: {
 				body:

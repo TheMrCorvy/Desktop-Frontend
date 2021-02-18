@@ -17,7 +17,10 @@ import { red } from "@material-ui/core/colors"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 export type ReviewCardT = {
-	userName: string
+	userName: {
+		firstName: string
+		lastName: string
+	}
 	date: string
 	rating: {
 		body: string
@@ -33,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		avatar: {
 			backgroundColor: red[500],
+			color: "white",
 		},
 		container: {
 			paddingTop: "3rem",
@@ -50,7 +54,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const ReviewCard = ({ userName, date, rating }: ReviewCardT) => {
 	const classes = useStyles()
 
-	const avatar = userName.charAt(0).toUpperCase()
+	const avatar =
+		userName.firstName.charAt(0).toUpperCase() + userName.lastName.charAt(0).toUpperCase()
 
 	return (
 		<Card>
@@ -60,7 +65,7 @@ const ReviewCard = ({ userName, date, rating }: ReviewCardT) => {
 						{avatar}
 					</Avatar>
 				}
-				title={userName}
+				title={userName.lastName + " " + userName.firstName}
 				subheader={date}
 			/>
 			<CardContent>

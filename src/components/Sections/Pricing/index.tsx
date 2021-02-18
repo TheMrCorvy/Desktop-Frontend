@@ -178,7 +178,7 @@ const Pricing: FC = () => {
 				</Grid>
 			</Container>
 			<DialogComponent
-				title="Acerca de los precios"
+				title={translate("about_prices", lng)}
 				className={classes.infoBtn}
 				tooltipPlacement="right"
 			>
