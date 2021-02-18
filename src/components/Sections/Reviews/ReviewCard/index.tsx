@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-type CardRatingT = {
+export type ReviewCardT = {
 	userName: string
 	date: string
 	rating: {
@@ -47,7 +47,7 @@ type CardRatingT = {
 	}
 }
 
-const ReviewCard = ({ userName, date, rating }: CardRatingT) => {
+const ReviewCard = ({ userName, date, rating }: ReviewCardT) => {
 	const classes = useStyles()
 
 	const avatar = userName.charAt(0).toUpperCase()

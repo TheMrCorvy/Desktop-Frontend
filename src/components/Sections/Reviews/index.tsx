@@ -17,6 +17,8 @@ import { red } from "@material-ui/core/colors"
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
+import ReviewCard, { ReviewCardT } from "./ReviewCard"
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
@@ -42,7 +44,54 @@ const useStyles = makeStyles((theme: Theme) =>
 const Reviews: FC = () => {
 	const classes = useStyles()
 
-	const value: number = 9 / 2
+	//here will be an api call to fetch these reviews
+	const userReviews: ReviewCardT[] = [
+		{
+			userName: "Example Name 1",
+			date: "September 14, 2016",
+			rating: {
+				body:
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem culpa optio animi deleniti ipsum dolorum voluptatem vel iste saepe ad sed maiores cupiditate, debitis nihil atque facilis minus! Alias, voluptatum.",
+				rating: 2.5,
+			},
+		},
+		{
+			userName: "fxample Name 2",
+			date: "September 14, 2016",
+			rating: {
+				body:
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem culpa optio animi deleniti ipsum dolorum voluptatem vel iste saepe ad sed maiores cupiditate, debitis nihil atque facilis minus! Alias, voluptatum.",
+				rating: 2.5,
+			},
+		},
+		{
+			userName: "Example Name 3",
+			date: "September 14, 2016",
+			rating: {
+				body:
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem culpa optio animi deleniti ipsum dolorum voluptatem vel iste saepe ad sed maiores cupiditate, debitis nihil atque facilis minus! Alias, voluptatum.",
+				rating: 2.5,
+			},
+		},
+		{
+			userName: "Example Name 4",
+			date: "September 14, 2016",
+			rating: {
+				body:
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem culpa optio animi deleniti ipsum dolorum voluptatem vel iste saepe ad sed maiores cupiditate, debitis nihil atque facilis minus! Alias, voluptatum.",
+				rating: 2.5,
+			},
+		},
+		{
+			userName: "Example Name 5",
+			date: "September 14, 2016",
+			rating: {
+				body:
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem culpa optio animi deleniti ipsum dolorum voluptatem vel iste saepe ad sed maiores cupiditate, debitis nihil atque facilis minus! Alias, voluptatum.",
+				rating: 2.5,
+			},
+		},
+	]
 
 	return (
 		<div className={classes.root}>
@@ -53,99 +102,11 @@ const Reviews: FC = () => {
 							What do our users think of PasuSewa?
 						</Typography>
 					</Grid>
-
-					<Grid item xs={12} sm={6} md={4} lg={3}>
-						<Card>
-							<CardHeader
-								avatar={
-									<Avatar aria-label="recipe" className={classes.avatar}>
-										E
-									</Avatar>
-								}
-								title="Example Name"
-								subheader="September 14, 2016"
-							/>
-							<CardContent>
-								<Typography variant="body2" color="textSecondary" component="p">
-									This impressive paella is a perfect party dish and a fun meal to
-									cook together with your guests. Add 1 cup of frozen peas along
-									with the mussels, if you like.
-								</Typography>
-							</CardContent>
-							<CardActions disableSpacing>
-								<Rating name="read-only" value={value} precision={0.5} readOnly />
-							</CardActions>
-						</Card>
-					</Grid>
-					<Grid item xs={12} sm={6} md={4} lg={3}>
-						<Card>
-							<CardHeader
-								avatar={
-									<Avatar aria-label="recipe" className={classes.avatar}>
-										E
-									</Avatar>
-								}
-								title="Example Name"
-								subheader="September 14, 2016"
-							/>
-							<CardContent>
-								<Typography variant="body2" color="textSecondary" component="p">
-									This impressive paella is a perfect party dish and a fun meal to
-									cook together with your guests. Add 1 cup of frozen peas along
-									with the mussels, if you like.
-								</Typography>
-							</CardContent>
-							<CardActions disableSpacing>
-								<Rating name="read-only" value={value} precision={0.5} readOnly />
-							</CardActions>
-						</Card>
-					</Grid>
-					<Grid item xs={12} sm={6} md={4} lg={3}>
-						<Card>
-							<CardHeader
-								avatar={
-									<Avatar aria-label="recipe" className={classes.avatar}>
-										E
-									</Avatar>
-								}
-								title="Example Name"
-								subheader="September 14, 2016"
-							/>
-							<CardContent>
-								<Typography variant="body2" color="textSecondary" component="p">
-									This impressive paella is a perfect party dish and a fun meal to
-									cook together with your guests. Add 1 cup of frozen peas along
-									with the mussels, if you like.
-								</Typography>
-							</CardContent>
-							<CardActions disableSpacing>
-								<Rating name="read-only" value={value} precision={0.5} readOnly />
-							</CardActions>
-						</Card>
-					</Grid>
-					<Grid item xs={12} sm={6} md={4} lg={3}>
-						<Card>
-							<CardHeader
-								avatar={
-									<Avatar aria-label="recipe" className={classes.avatar}>
-										E
-									</Avatar>
-								}
-								title="Example Name"
-								subheader="September 14, 2016"
-							/>
-							<CardContent>
-								<Typography variant="body2" color="textSecondary" component="p">
-									This impressive paella is a perfect party dish and a fun meal to
-									cook together with your guests. Add 1 cup of frozen peas along
-									with the mussels, if you like.
-								</Typography>
-							</CardContent>
-							<CardActions disableSpacing>
-								<Rating name="read-only" value={value} precision={0.5} readOnly />
-							</CardActions>
-						</Card>
-					</Grid>
+					{userReviews.map((review, index) => (
+						<Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+							<ReviewCard {...review} />
+						</Grid>
+					))}
 				</Grid>
 			</Container>
 		</div>
