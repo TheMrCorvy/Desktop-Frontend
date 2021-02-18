@@ -28,6 +28,9 @@ const useStyles = makeStyles({
 	textCenter: {
 		textAlign: "center",
 	},
+	link: {
+		color: "white",
+	},
 })
 
 const Footer: FC = () => {
@@ -49,18 +52,84 @@ const Footer: FC = () => {
 						</Tooltip>
 					</Grid>
 					<Grid item xs={12} sm={11} md={9}>
-						<Typography variant="body2" gutterBottom paragraph>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
-							suscipit beatae non, animi totam quas deserunt libero dolorum voluptas
-							molestias numquam excepturi, sint alias neque? Exercitationem eos
-							officiis deleniti consectetur?
-						</Typography>
-						<Typography variant="body2" gutterBottom paragraph>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
-							suscipit beatae non, animi totam quas deserunt libero dolorum voluptas
-							molestias numquam excepturi, sint alias neque? Exercitationem eos
-							officiis deleniti consectetur?
-						</Typography>
+						<Grid container justify="space-between" spacing={2}>
+							<Grid item xs={12}>
+								<Typography variant="body2" gutterBottom paragraph>
+									{translate("footer_texts", lng, 0)}
+								</Typography>
+							</Grid>
+							<Grid item xs={6} sm={3}>
+								<Typography variant="body2" gutterBottom paragraph>
+									<Typography component="span">
+										<a
+											href="https://github.com/PasuSewa/Mobile-FrontEnd"
+											target="_blank"
+											className={classes.link}
+										>
+											React Native
+										</a>
+									</Typography>
+								</Typography>
+							</Grid>
+							<Grid item xs={6} sm={3}>
+								<Typography variant="body2" gutterBottom paragraph>
+									<Typography component="span">
+										<a
+											href="https://github.com/PasuSewa/Web-FrontEnd"
+											target="_blank"
+											className={classes.link}
+										>
+											React JS
+										</a>
+									</Typography>
+								</Typography>
+							</Grid>
+							<Grid item xs={6} sm={3}>
+								<Typography variant="body2" gutterBottom paragraph>
+									<Typography component="span">
+										<a
+											href="https://github.com/PasuSewa/Desktop-FrontEnd"
+											target="_blank"
+											className={classes.link}
+										>
+											Electron
+										</a>
+									</Typography>
+								</Typography>
+							</Grid>
+							<Grid item xs={6} sm={3}>
+								<Typography variant="body2" gutterBottom paragraph>
+									<Typography component="span">
+										<a
+											href="https://github.com/PasuSewa/Backend"
+											target="_blank"
+											className={classes.link}
+										>
+											Laravel
+										</a>
+									</Typography>
+								</Typography>
+							</Grid>
+							<Grid item xs={12}>
+								<Typography variant="body2" gutterBottom paragraph>
+									{translate("footer_texts", lng, 1)}
+								</Typography>
+							</Grid>
+							<Grid item xs={12}>
+								<Typography variant="body2" gutterBottom paragraph>
+									PasuSewa &copy; 2021{" "}
+									<Typography component="span">
+										<a
+											href="http://corvalangonzalo.xyz"
+											target="_blank"
+											className={classes.link}
+										>
+											Gonzalo Salvador Corvalan
+										</a>
+									</Typography>
+								</Typography>
+							</Grid>
+						</Grid>
 					</Grid>
 					<Grid item xs={12} sm={12} md={2} className={classes.textCenter}>
 						<Grid container justify="space-between" spacing={2}>

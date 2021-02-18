@@ -95,5 +95,12 @@
 		"Let's imagine that you want to store the credentials of a Google account. A Google account may include: an Email, Name, Phone Number, a Security Code, a Backup Email, among others.",
 		"Instead of having space only for an Email, a Password, and a Description, like with other password managers, We include all the mentioned credentials, and more, within a Single \"Slot\", in this way each account you enter will consume One Slot that you have available."
 	],
-	"feedback_titles": ["What are we currently working on?", "What do our users think of PasuSewa?"]
+	"feedback_titles": [
+		"What are we currently working on?",
+		"What do our users think of PasuSewa?"
+	],
+	"footer_texts": [
+		"PasuSewa is an Open Source project, with the aim of maintaining privacy, and making life easier for our users on the internet.",
+		"The idea of ​​this project is to always try to help users on the internet guarding their passwords, teaching different techniques to maintain your privacy online, among others."
+	]
 }
