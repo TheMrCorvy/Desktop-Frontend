@@ -107,9 +107,12 @@ const Navbar = () => {
 									{translate("navbar_login_btn", lng)}
 								</Button>
 							</Link>
-							<Button color="inherit" className={classes.navbarItem}>
-								{translate("navbar_register_btn", lng)}
-							</Button>
+
+							<Link to="/register" className={classes.link}>
+								<Button color="inherit" className={classes.navbarItem}>
+									{translate("navbar_register_btn", lng)}
+								</Button>
+							</Link>
 
 							<ToggleDarkTheme className={classes.navbarItem} />
 

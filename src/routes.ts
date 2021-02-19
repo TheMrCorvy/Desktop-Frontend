@@ -1,6 +1,7 @@
 import { lazy, LazyExoticComponent } from "react"
 
 const Landing = lazy(() => import("./pages/Landing"))
+const Login = lazy(() => import("./pages/Login"))
 
 export type RouteType = {
 	name: string
@@ -15,6 +16,12 @@ const routes: RouteType[] = [
 		component: Landing,
 		requiresAuth: false,
 		path: "/",
+	},
+	{
+		name: "Login Page",
+		component: Login,
+		requiresAuth: false,
+		path: "/login",
 	},
 ]
 
