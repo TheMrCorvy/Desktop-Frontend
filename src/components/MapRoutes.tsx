@@ -2,6 +2,8 @@ import React, { lazy } from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
 import { RouteType } from "../routes"
 
+import Loader from "../pages/Loader"
+
 const NotFound = lazy(() => import("../pages/NotFound"))
 
 export default function RoutesComponent(props: { routes: RouteType[] }) {
@@ -17,6 +19,8 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 	return (
 		<Switch>
 			{props.routes.map((route: RouteType, index: number) => evaluateRoutes(route, index))}
+
+			<Route exact path="/loading" component={Loader} />
 
 			<Route component={NotFound} />
 		</Switch>
