@@ -58,6 +58,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			right: 0,
 			margin: "0 auto",
 		},
+		link: {
+			textDecoration: "none",
+		},
 	})
 )
 
@@ -81,7 +84,7 @@ const Navbar = () => {
 					>
 						<Toolbar>
 							<Tooltip title={translate("home", lng)}>
-								<Link to="/">
+								<Link to="/" className={classes.link}>
 									<IconButton
 										edge="start"
 										className={classes.navbarItem}
@@ -99,9 +102,11 @@ const Navbar = () => {
 
 							<TranslateButton className={classes.navbarItem} />
 
-							<Button color="inherit" className={classes.navbarItem}>
-								{translate("navbar_login_btn", lng)}
-							</Button>
+							<Link to="/login" className={classes.link}>
+								<Button color="inherit" className={classes.navbarItem}>
+									{translate("navbar_login_btn", lng)}
+								</Button>
+							</Link>
 							<Button color="inherit" className={classes.navbarItem}>
 								{translate("navbar_register_btn", lng)}
 							</Button>
