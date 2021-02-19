@@ -1,6 +1,8 @@
-import React from "react"
+import React, { lazy } from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
 import { RouteType } from "../routes"
+
+const NotFound = lazy(() => import("../pages/NotFound"))
 
 export default function RoutesComponent(props: { routes: RouteType[] }) {
 	// hay que evaluar si está el token de autorizacion en el estado de redux
@@ -15,6 +17,8 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 	return (
 		<Switch>
 			{props.routes.map((route: RouteType, index: number) => evaluateRoutes(route, index))}
+
+			<Route component={NotFound} />
 		</Switch>
 	)
 }

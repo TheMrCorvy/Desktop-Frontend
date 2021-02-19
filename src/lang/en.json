@@ -102,5 +102,6 @@
 	"footer_texts": [
 		"PasuSewa is an Open Source project, with the aim of maintaining privacy, and making life easier for our users on the internet.",
 		"The idea of ​​this project is to always try to help users on the internet guarding their passwords, teaching different techniques to maintain your privacy online, among others."
-	]
+	],
+	"error_404": ["Page Not Found"]
 }

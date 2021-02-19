@@ -109,5 +109,6 @@
 	"footer_texts": [
 		"PasuSewa es un proyecto de Código Abierto, con el objetivo de mantener la privacidad, y falicitar la vida de nuestros usuarios en internet.",
 		"La idea de este proyecto es siempre tratar de quitarle un peso de encima a nuestros usuarios, custodiando sus contraseñas, enseñando diferentes técnicas para mantener tu privacidad online, entre otros."
-	]
+	],
+	"error_404": ["Página No Encontrada"]
 }
