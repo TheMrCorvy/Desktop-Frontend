@@ -6,10 +6,12 @@ import reportWebVitals from "./reportWebVitals"
 import { Provider } from "react-redux"
 import store from "./redux/store"
 
+import Loader from "./pages/Loader"
+
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<Suspense fallback="loading...">
+			<Suspense fallback={Loader}>
 				<App />
 			</Suspense>
 		</Provider>
