@@ -11,7 +11,7 @@ import Loader from "./pages/Loader"
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<Suspense fallback={Loader}>
+			<Suspense fallback={<Loader />}>
 				<App />
 			</Suspense>
 		</Provider>
