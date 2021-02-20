@@ -111,5 +111,12 @@
 		"La idea de este proyecto es siempre tratar de quitarle un peso de encima a nuestros usuarios, custodiando sus contraseñas, enseñando diferentes técnicas para mantener tu privacidad online, entre otros."
 	],
 	"loading": ["Cargando, por favor espere..."],
-	"error_404": ["Página No Encontrada"]
+	"error_404": ["Página No Encontrada"],
+	"login_title": ["Ingresa con:"],
+	"login_options": [
+		"Código de Dos Factores:",
+		"Código de Email:",
+		"Email de Recuperación:",
+		"Código de Seguridad Único:"
+	]
 }

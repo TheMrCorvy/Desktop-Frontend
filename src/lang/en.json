@@ -104,5 +104,7 @@
 		"The idea of ​​this project is to always try to help users on the internet guarding their passwords, teaching different techniques to maintain your privacy online, among others."
 	],
 	"loading": ["Loading, please wait..."],
-	"error_404": ["Page Not Found"]
+	"error_404": ["Page Not Found"],
+	"login_title": ["Login with:"],
+	"login_options": ["Two Factor Code:", "Email Code:", "Recovery Email:", "Unique Security Code:"]
 }
