@@ -13,6 +13,9 @@ import {
 	CardHeader,
 	CardActions,
 	Button,
+	Paper,
+	Tab,
+	Tabs,
 } from "@material-ui/core"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
@@ -62,18 +65,29 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: "flex",
 			justifyContent: "flex-end",
 		},
+		link: {
+			textDecoration: "none",
+		},
 	})
 )
 
 const Login: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const { theme } = useSelector((state: RootState) => state.theme)
+
 	const classes = useStyles()
 
-	const [expanded, setExpanded] = useState<string | false>("panel1")
+	// const [expanded, setExpanded] = useState<string | false>("panel1")
 
-	const handleChange = (panel: string) => (event: ChangeEvent<{}>, isExpanded: boolean) => {
-		setExpanded(isExpanded ? panel : false)
+	// const handleChange = (panel: string) => (event: ChangeEvent<{}>, isExpanded: boolean) => {
+	// 	setExpanded(isExpanded ? panel : false)
+	// }
+
+	const [value, setValue] = useState(0)
+
+	const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
+		setValue(newValue)
 	}
 
 	return (
@@ -81,9 +95,9 @@ const Login: FC = () => {
 			<Grid container justify="space-around" className={classes.centerAll} spacing={0}>
 				<Grid item xs={12} md={6}>
 					<Card className={classes.card} elevation={2}>
-						<CardHeader title={translate("login_title", lng)} />
+						{/* <CardHeader title={translate("login_title", lng)} /> */}
 						<CardContent>
-							<Accordion
+							{/* <Accordion
 								expanded={expanded === "panel1"}
 								onChange={handleChange("panel1")}
 								elevation={0}
@@ -169,10 +183,26 @@ const Login: FC = () => {
 										est augue.
 									</Typography>
 								</AccordionDetails>
-							</Accordion>
+							</Accordion> */}
+							{/* <Paper square> */}
+							<Tabs
+								value={value}
+								indicatorColor={theme === "dark" ? "primary" : "secondary"}
+								textColor={theme === "dark" ? "primary" : "secondary"}
+								onChange={handleChange}
+								aria-label="disabled tabs example"
+								variant="scrollable"
+								scrollButtons="off"
+							>
+								<Tab label="Active" />
+								<Tab label="Disabled" disabled />
+								<Tab label="Active 2" />
+								<Tab label="Active 3" />
+							</Tabs>
+							{/* </Paper> */}
 						</CardContent>
 						<CardActions className={classes.cardActions}>
-							<Link to="/register">
+							<Link to="/register" className={classes.link}>
 								<Button size="large" color="primary">
 									{translate("navbar_register_btn", lng)}
 								</Button>
