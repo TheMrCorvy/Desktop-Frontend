@@ -1,6 +1,14 @@
 import Recat from "react"
 
-import { Card, CardHeader, CardContent, CardActions, Avatar, Typography } from "@material-ui/core"
+import {
+	Card,
+	CardHeader,
+	CardContent,
+	CardActions,
+	Avatar,
+	Typography,
+	ListSubheader,
+} from "@material-ui/core"
 
 import { Rating } from "@material-ui/lab"
 
@@ -41,6 +49,10 @@ const useStyles = makeStyles((theme: Theme) =>
 		divider: {
 			marginBottom: "5rem",
 		},
+		textColor: {
+			color:
+				theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.54)",
+		},
 	})
 )
 
@@ -59,6 +71,9 @@ const OpinionCard = ({ user, date, opinion }: OpinionCardT) => {
 				}
 				title={user.lastName + " " + user.firstName}
 				subheader={date}
+				classes={{
+					subheader: classes.textColor,
+				}}
 			/>
 			<CardContent>
 				<Typography
@@ -66,6 +81,7 @@ const OpinionCard = ({ user, date, opinion }: OpinionCardT) => {
 					color="textSecondary"
 					component="p"
 					data-testid="test_card_body"
+					className={classes.textColor}
 				>
 					{opinion.body}
 				</Typography>

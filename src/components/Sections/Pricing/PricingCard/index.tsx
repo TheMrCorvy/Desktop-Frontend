@@ -16,7 +16,7 @@ import {
 
 import { useTheme } from "@material-ui/core/styles"
 
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconName } from "@fortawesome/fontawesome-svg-core"
@@ -38,25 +38,31 @@ export type PricingCardT = {
 	linkUrl?: string
 }
 
-const useStyles = makeStyles({
-	textCenter: {
-		textAlign: "center",
-	},
-	paddingBottomSm: { paddingBottom: 10 },
-	card: {
-		borderRadius: 8,
-	},
-	cardAction: {
-		display: "flex",
-		justifyContent: "center",
-		textAlign: "center",
-		paddingBottom: "2.5rem",
-	},
-	divider: {
-		marginTop: 10,
-		marginBottom: 10,
-	},
-})
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		textCenter: {
+			textAlign: "center",
+		},
+		paddingBottomSm: { paddingBottom: 10 },
+		card: {
+			borderRadius: 8,
+		},
+		cardAction: {
+			display: "flex",
+			justifyContent: "center",
+			textAlign: "center",
+			paddingBottom: "2.5rem",
+		},
+		divider: {
+			marginTop: 10,
+			marginBottom: 10,
+		},
+		textColor: {
+			color:
+				theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.54)",
+		},
+	})
+)
 
 const PricingCard = (props: PricingCardT) => {
 	const { theme } = useSelector((state: RootState) => state.theme)
@@ -78,6 +84,9 @@ const PricingCard = (props: PricingCardT) => {
 				title={props.title}
 				className={classes.textCenter}
 				subheader={props.subtitle}
+				classes={{
+					subheader: classes.textColor,
+				}}
 			/>
 			<CardContent className={classes.paddingBottomSm}>
 				<List component="nav" aria-label="accounts benefits">
