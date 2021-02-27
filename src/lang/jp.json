@@ -105,6 +105,6 @@
 	],
 	"loading": ["ナウローディング、まって下さい..."],
 	"error_404": ["Page Not Found"],
-	"login_title": ["Login with:"],
-	"login_options": ["Two Factor Code:", "Email Code:", "Recovery Email:", "Unique Security Code:"]
+	"login_subtitle": ["Please check that you are visiting the correct URL"],
+	"login_options": ["Two Factor Code", "Email", "Recovery Email", "Security Code"]
 }

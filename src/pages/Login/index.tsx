@@ -27,6 +27,8 @@ import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
+import TwoFactorCode from "../../components/Sections/LoginOptions/TwoFactorCode"
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
@@ -60,6 +62,10 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		card: {
 			borderRadius: 7,
+
+			[theme.breakpoints.down("sm")]: {
+				marginBottom: "4rem",
+			},
 		},
 		cardActions: {
 			display: "flex",
@@ -67,6 +73,14 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		link: {
 			textDecoration: "none",
+		},
+		cardSubheader: {
+			color:
+				theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.54)",
+			textAlign: "center",
+		},
+		cardHeader: {
+			textAlign: "center",
 		},
 	})
 )
@@ -78,128 +92,57 @@ const Login: FC = () => {
 
 	const classes = useStyles()
 
-	// const [expanded, setExpanded] = useState<string | false>("panel1")
-
-	// const handleChange = (panel: string) => (event: ChangeEvent<{}>, isExpanded: boolean) => {
-	// 	setExpanded(isExpanded ? panel : false)
-	// }
-
-	const [value, setValue] = useState(0)
+	const [tab, setTab] = useState(0)
 
 	const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
-		setValue(newValue)
+		setTab(newValue)
+	}
+
+	const showOptions = (option: number) => {
+		switch (option) {
+			case 0:
+				return <TwoFactorCode />
+
+			default:
+				return "<TwoFactorCode />"
+		}
 	}
 
 	return (
 		<Container maxWidth="xl" className={classes.container} data-testid="test_not_found_page">
 			<Grid container justify="space-around" className={classes.centerAll} spacing={0}>
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={7}>
 					<Card className={classes.card} elevation={2}>
-						{/* <CardHeader title={translate("login_title", lng)} /> */}
-						<CardContent>
-							{/* <Accordion
-								expanded={expanded === "panel1"}
-								onChange={handleChange("panel1")}
-								elevation={0}
-							>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-									aria-controls="panel1bh-content"
-									id="panel1bh-header"
-								>
-									<Typography className={classes.heading}>
-										{translate("login_options", lng, 0)}
-									</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<Typography>
-										Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-										feugiat. Aliquam eget maximus est, id dignissim quam.
-									</Typography>
-								</AccordionDetails>
-							</Accordion>
-							<Accordion
-								expanded={expanded === "panel2"}
-								onChange={handleChange("panel2")}
-								elevation={0}
-							>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-									aria-controls="panel2bh-content"
-									id="panel2bh-header"
-								>
-									<Typography className={classes.heading}>
-										{translate("login_options", lng, 1)}
-									</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<Typography>
-										Donec placerat, lectus sed mattis semper, neque lectus
-										feugiat lectus, varius pulvinar diam eros in elit.
-										Pellentesque convallis laoreet laoreet.
-									</Typography>
-								</AccordionDetails>
-							</Accordion>
-							<Accordion
-								expanded={expanded === "panel3"}
-								onChange={handleChange("panel3")}
-								elevation={0}
-							>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-									aria-controls="panel3bh-content"
-									id="panel3bh-header"
-								>
-									<Typography className={classes.heading}>
-										{translate("login_options", lng, 2)}
-									</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<Typography>
-										Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
-										Integer sit amet egestas eros, vitae egestas augue. Duis vel
-										est augue.
-									</Typography>
-								</AccordionDetails>
-							</Accordion>
-							<Accordion
-								expanded={expanded === "panel4"}
-								onChange={handleChange("panel4")}
-								elevation={0}
-							>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-									aria-controls="panel4bh-content"
-									id="panel4bh-header"
-								>
-									<Typography className={classes.heading}>
-										{translate("login_options", lng, 3)}
-									</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<Typography>
-										Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
-										Integer sit amet egestas eros, vitae egestas augue. Duis vel
-										est augue.
-									</Typography>
-								</AccordionDetails>
-							</Accordion> */}
-							{/* <Paper square> */}
-							<Tabs
-								value={value}
-								indicatorColor={theme === "dark" ? "primary" : "secondary"}
-								textColor={theme === "dark" ? "primary" : "secondary"}
-								onChange={handleChange}
-								aria-label="disabled tabs example"
-								variant="scrollable"
-								scrollButtons="off"
-							>
-								<Tab label="Active" />
-								<Tab label="Disabled" disabled />
-								<Tab label="Active 2" />
-								<Tab label="Active 3" />
-							</Tabs>
-							{/* </Paper> */}
+						<CardHeader
+							title={translate("navbar_login_btn", lng)}
+							subheader={translate("login_subtitle", lng)}
+							classes={{
+								subheader: classes.cardSubheader,
+								title: classes.cardHeader,
+							}}
+						/>
+						<CardContent style={{ display: "flex", justifyContent: "center" }}>
+							<Grid container spacing={3} justify="center">
+								<Grid item xs={12}>
+									<Tabs
+										value={tab}
+										indicatorColor={theme === "dark" ? "primary" : "secondary"}
+										textColor={theme === "dark" ? "primary" : "secondary"}
+										onChange={handleChange}
+										aria-label="disabled tabs example"
+										variant="scrollable"
+										scrollButtons="off"
+									>
+										<Tab label={translate("login_options", lng, 0)} />
+										<Tab label={translate("login_options", lng, 1)} />
+										<Tab label={translate("login_options", lng, 2)} />
+										<Tab label={translate("login_options", lng, 3)} />
+									</Tabs>
+								</Grid>
+								<Grid item xs={12}>
+									{showOptions(tab)}
+								</Grid>
+							</Grid>
 						</CardContent>
 						<CardActions className={classes.cardActions}>
 							<Link to="/register" className={classes.link}>

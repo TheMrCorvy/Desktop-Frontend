@@ -112,11 +112,11 @@
 	],
 	"loading": ["Cargando, por favor espere..."],
 	"error_404": ["Página No Encontrada"],
-	"login_title": ["Ingresa con:"],
+	"login_subtitle": ["Por favor, comprueba que estás visitando la URL correcta"],
 	"login_options": [
-		"Código de Dos Factores:",
-		"Código de Email:",
-		"Email de Recuperación:",
-		"Código de Seguridad Único:"
+		"Código de Verificación",
+		"Email",
+		"Email de Recuperación",
+		"Código de Seguridad"
 	]
 }
