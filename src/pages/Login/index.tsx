@@ -28,6 +28,7 @@ import { RootState } from "../../redux/store"
 import { translate } from "../../lang"
 
 import TwoFactorCode from "../../components/Sections/LoginOptions/TwoFactorCode"
+import EmailCode from "../../components/Sections/LoginOptions/EmailCode"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -102,6 +103,8 @@ const Login: FC = () => {
 		switch (option) {
 			case 0:
 				return <TwoFactorCode />
+			case 1:
+				return <EmailCode />
 
 			default:
 				return "<TwoFactorCode />"
