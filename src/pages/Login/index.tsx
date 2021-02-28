@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		cardActions: {
 			display: "flex",
-			justifyContent: "flex-end",
+			justifyContent: "space-between",
 		},
 		link: {
 			textDecoration: "none",
@@ -139,12 +139,17 @@ const Login: FC = () => {
 										<Tab label={translate("login_options", lng, 3)} />
 									</Tabs>
 								</Grid>
-								<Grid item xs={12}>
+								<Grid item xs={12} sm={6}>
 									{showOptions(tab)}
 								</Grid>
 							</Grid>
 						</CardContent>
 						<CardActions className={classes.cardActions}>
+							<Link to="/" className={classes.link}>
+								<Button size="large" color="primary">
+									{translate("home", lng)}
+								</Button>
+							</Link>
 							<Link to="/register" className={classes.link}>
 								<Button size="large" color="primary">
 									{translate("navbar_register_btn", lng)}
