@@ -139,8 +139,8 @@ const Login: FC = () => {
 								>
 									<Tabs
 										value={tab}
-										indicatorColor={theme === "dark" ? "primary" : "secondary"}
-										textColor={theme === "dark" ? "primary" : "secondary"}
+										indicatorColor="primary"
+										textColor="primary"
 										onChange={handleChange}
 										scrollButtons="off"
 										variant="scrollable"
