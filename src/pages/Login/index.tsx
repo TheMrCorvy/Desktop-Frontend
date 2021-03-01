@@ -113,10 +113,14 @@ const Login: FC = () => {
 		}
 	}
 
-	const handleChange = (captchaResponse: string | null) => {
+	const handleChangeCaptcha = (captchaResponse: string | null) => {
 		if (captchaResponse) {
 			setIsRobot(false)
 		}
+	}
+
+	const handleErrorCaptcha = () => {
+		setIsRobot(true)
 	}
 
 	return (
@@ -159,9 +163,11 @@ const Login: FC = () => {
 									style={{ display: "flex", justifyContent: "center" }}
 								>
 									<ReCAPTCHA
-										onChange={handleChange}
+										onChange={handleChangeCaptcha}
 										sitekey="6LcxYW0aAAAAAEnierwCCRtIGZwUsp4dLg1BWNtn"
 										theme={theme}
+										onExpired={handleErrorCaptcha}
+										onErrored={handleErrorCaptcha}
 									/>
 								</Grid>
 								<Grid item xs={12} style={{ paddingTop: 15 }}>
