@@ -40,6 +40,7 @@ const TimerButton = ({ title, initialTime, color, size }: Props) => {
 			size={size ? size : "small"}
 			disableElevation
 			onClick={startCountDown}
+			disabled={timerIsOn}
 		>
 			{time !== 0 ? time : title}
 		</Button>

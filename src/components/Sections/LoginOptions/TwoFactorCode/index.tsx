@@ -1,15 +1,5 @@
 import React from "react"
-import {
-	Box,
-	Grid,
-	FormControl,
-	InputLabel,
-	OutlinedInput,
-	Button,
-	InputAdornment,
-} from "@material-ui/core"
-
-import TimerButton from "../../../TimerButton"
+import { Box, Grid, FormControl, InputLabel, OutlinedInput, Button } from "@material-ui/core"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
@@ -36,14 +26,7 @@ const TwoFactorCode = ({ testing }: { testing?: boolean }) => {
 								<InputLabel htmlFor="outlined-adornment-password">
 									{translate("auth_form_texts", lng, 0)}
 								</InputLabel>
-								<OutlinedInput
-									label={translate("auth_form_texts", lng, 0)}
-									endAdornment={
-										<InputAdornment position="end" onClick={handleClick}>
-											<TimerButton title={translate("send_email", lng)} />
-										</InputAdornment>
-									}
-								/>
+								<OutlinedInput label={translate("auth_form_texts", lng, 0)} />
 							</FormControl>
 						</Grid>
 						<Grid item xs={12}>

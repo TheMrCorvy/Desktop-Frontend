@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import {
 	Box,
 	Grid,
@@ -23,7 +23,11 @@ type Props = {
 const EmailCode = ({ testing, isRecovery }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const [canSubmit, setCanSubmit] = useState(false)
+
 	const handleClick = () => {
+		setCanSubmit(true)
+
 		if (testing) {
 			console.log("hola mundo")
 		} else {
@@ -76,7 +80,13 @@ const EmailCode = ({ testing, isRecovery }: Props) => {
 							</FormControl>
 						</Grid>
 						<Grid item xs={12}>
-							<Button variant="contained" color="primary" fullWidth disableElevation>
+							<Button
+								variant="contained"
+								color="primary"
+								fullWidth
+								disableElevation
+								disabled={!canSubmit}
+							>
 								{translate("navbar_login_btn", lng)}
 							</Button>
 						</Grid>
