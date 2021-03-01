@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
 import { translate } from "../../../../lang"
 
-const TwoFactorCode = ({ testing }: { testing?: boolean }) => {
+const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const handleClick = () => {
@@ -17,7 +17,7 @@ const TwoFactorCode = ({ testing }: { testing?: boolean }) => {
 	}
 
 	return (
-		<Box component="div" style={{ marginTop: 15 }}>
+		<Box component="div">
 			<Grid container justify="center" spacing={3}>
 				<Grid item xs={12} sm={6}>
 					<Grid container spacing={3}>
@@ -44,6 +44,7 @@ const TwoFactorCode = ({ testing }: { testing?: boolean }) => {
 								fullWidth
 								disableElevation
 								onClick={handleClick}
+								disabled={isRobot}
 							>
 								{translate("navbar_login_btn", lng)}
 							</Button>

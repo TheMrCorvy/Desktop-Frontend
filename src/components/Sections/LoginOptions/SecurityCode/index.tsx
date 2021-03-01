@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {
 	Box,
 	Grid,
@@ -13,7 +13,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
 import { translate } from "../../../../lang"
 
-const SecurityCode = ({ testing }: { testing?: boolean }) => {
+const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const handleClick = () => {
@@ -61,7 +61,13 @@ const SecurityCode = ({ testing }: { testing?: boolean }) => {
 						</FormControl>
 					</Grid>
 					<Grid item xs={12} sm={6}>
-						<Button variant="contained" color="primary" fullWidth disableElevation>
+						<Button
+							variant="contained"
+							color="primary"
+							fullWidth
+							disableElevation
+							disabled={isRobot}
+						>
 							{translate("navbar_login_btn", lng)}
 						</Button>
 					</Grid>

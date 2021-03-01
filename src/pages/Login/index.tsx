@@ -15,6 +15,8 @@ import {
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 
+import ReCAPTCHA from "react-google-recaptcha"
+
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
@@ -83,27 +85,37 @@ const useStyles = makeStyles((theme: Theme) =>
 const Login: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const { theme } = useSelector((state: RootState) => state.theme)
+
 	const classes = useStyles()
 
 	const [tab, setTab] = useState(0)
 
-	const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
+	const [isRobot, setIsRobot] = useState(true)
+
+	const handleTabs = (event: ChangeEvent<{}>, newValue: number) => {
 		setTab(newValue)
 	}
 
 	const showOptions = (option: number) => {
 		switch (option) {
 			case 0:
-				return <TwoFactorCode />
+				return <TwoFactorCode isRobot={isRobot} />
 			case 1:
-				return <EmailCode isRecovery={false} />
+				return <EmailCode isRecovery={false} isRobot={isRobot} />
 			case 2:
-				return <EmailCode isRecovery={true} />
+				return <EmailCode isRecovery={true} isRobot={isRobot} />
 			case 3:
-				return <SecurityCode />
+				return <SecurityCode isRobot={isRobot} />
 
 			default:
-				return <TwoFactorCode />
+				return <TwoFactorCode isRobot={isRobot} />
+		}
+	}
+
+	const handleChange = (captchaResponse: string | null) => {
+		if (captchaResponse) {
+			setIsRobot(false)
 		}
 	}
 
@@ -131,7 +143,7 @@ const Login: FC = () => {
 										value={tab}
 										indicatorColor="primary"
 										textColor="primary"
-										onChange={handleChange}
+										onChange={handleTabs}
 										scrollButtons="off"
 										variant="scrollable"
 									>
@@ -141,7 +153,18 @@ const Login: FC = () => {
 										<Tab label={translate("login_options", lng, 3)} />
 									</Tabs>
 								</Grid>
-								<Grid item xs={12}>
+								<Grid
+									item
+									xs={12}
+									style={{ display: "flex", justifyContent: "center" }}
+								>
+									<ReCAPTCHA
+										onChange={handleChange}
+										sitekey="6LcxYW0aAAAAAEnierwCCRtIGZwUsp4dLg1BWNtn"
+										theme={theme}
+									/>
+								</Grid>
+								<Grid item xs={12} style={{ paddingTop: 15 }}>
 									{showOptions(tab)}
 								</Grid>
 							</Grid>

@@ -17,10 +17,11 @@ import { translate } from "../../../../lang"
 
 type Props = {
 	isRecovery: boolean
+	isRobot: boolean
 	testing?: boolean
 }
 
-const EmailCode = ({ testing, isRecovery }: Props) => {
+const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [canSubmit, setCanSubmit] = useState(false)
@@ -65,7 +66,13 @@ const EmailCode = ({ testing, isRecovery }: Props) => {
 									}
 									endAdornment={
 										<InputAdornment position="end" onClick={handleClick}>
-											<TimerButton title={translate("send_email", lng)} />
+											{isRobot ? (
+												<Button size="small" disabled variant="contained">
+													{translate("send_email", lng)}
+												</Button>
+											) : (
+												<TimerButton title={translate("send_email", lng)} />
+											)}
 										</InputAdornment>
 									}
 								/>
