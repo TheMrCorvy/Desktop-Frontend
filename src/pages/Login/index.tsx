@@ -132,7 +132,7 @@ const Login: FC = () => {
 							}}
 						/>
 						<CardContent style={{ display: "flex", justifyContent: "center" }}>
-							<Grid container spacing={3} justify="center">
+							<Grid container spacing={3} justify="space-around">
 								<Grid item xs={12}>
 									<Tabs
 										value={tab}
@@ -149,7 +149,7 @@ const Login: FC = () => {
 										<Tab label={translate("login_options", lng, 3)} />
 									</Tabs>
 								</Grid>
-								<Grid item xs={12} sm={6}>
+								<Grid item xs={12}>
 									{showOptions(tab)}
 								</Grid>
 							</Grid>
