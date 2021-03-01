@@ -29,6 +29,7 @@ import { translate } from "../../lang"
 
 import TwoFactorCode from "../../components/Sections/LoginOptions/TwoFactorCode"
 import EmailCode from "../../components/Sections/LoginOptions/EmailCode"
+import RecoveryEmailCode from "../../components/Sections/LoginOptions/RecoveryEmailCode"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -105,6 +106,8 @@ const Login: FC = () => {
 				return <TwoFactorCode />
 			case 1:
 				return <EmailCode />
+			case 2:
+				return <RecoveryEmailCode />
 
 			default:
 				return "<TwoFactorCode />"
