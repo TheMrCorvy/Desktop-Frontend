@@ -4,21 +4,14 @@ import { Link } from "react-router-dom"
 import {
 	Container,
 	Grid,
-	Typography,
-	Accordion,
-	AccordionDetails,
-	AccordionSummary,
 	Card,
 	CardContent,
 	CardHeader,
 	CardActions,
 	Button,
-	Paper,
 	Tab,
 	Tabs,
 } from "@material-ui/core"
-
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 
@@ -29,7 +22,6 @@ import { translate } from "../../lang"
 
 import TwoFactorCode from "../../components/Sections/LoginOptions/TwoFactorCode"
 import EmailCode from "../../components/Sections/LoginOptions/EmailCode"
-import RecoveryEmailCode from "../../components/Sections/LoginOptions/RecoveryEmailCode"
 import SecurityCode from "../../components/Sections/LoginOptions/SecurityCode"
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -106,9 +98,9 @@ const Login: FC = () => {
 			case 0:
 				return <TwoFactorCode />
 			case 1:
-				return <EmailCode />
+				return <EmailCode isRecovery={false} />
 			case 2:
-				return <RecoveryEmailCode />
+				return <EmailCode isRecovery={true} />
 			case 3:
 				return <SecurityCode />
 
