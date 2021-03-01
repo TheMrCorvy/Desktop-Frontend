@@ -2,16 +2,28 @@ import React from "react"
 import {
 	Box,
 	Grid,
-	TextField,
 	Button,
-	InputAdornment,
 	OutlinedInput,
 	InputLabel,
 	FormControl,
 	Typography,
 } from "@material-ui/core"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../../../redux/store"
+import { translate } from "../../../../lang"
+
 const SecurityCode = ({ testing }: { testing?: boolean }) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
+	const handleClick = () => {
+		if (testing) {
+			console.log("hola mundo")
+		} else {
+			console.log("production api call")
+		}
+	}
+
 	return (
 		<Box component="div" style={{ marginTop: 15 }}>
 			<Grid item xs={12}>
@@ -19,44 +31,43 @@ const SecurityCode = ({ testing }: { testing?: boolean }) => {
 					<Grid item xs={12} sm={6}>
 						<FormControl variant="outlined" fullWidth>
 							<InputLabel htmlFor="outlined-adornment-password">
-								Main Email
+								{translate("auth_form_texts", lng, 2)}
 							</InputLabel>
-							<OutlinedInput label="Main Email" />
+							<OutlinedInput label={translate("auth_form_texts", lng, 2)} />
 						</FormControl>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<FormControl variant="outlined" fullWidth>
 							<InputLabel htmlFor="outlined-adornment-password">
-								Recovery Email
+								{translate("auth_form_texts", lng, 3)}
 							</InputLabel>
-							<OutlinedInput label="Recovery Email" />
+							<OutlinedInput label={translate("auth_form_texts", lng, 3)} />
 						</FormControl>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<FormControl variant="outlined" fullWidth>
 							<InputLabel htmlFor="outlined-adornment-password">
-								Anti Fishing Secret
+								{translate("auth_form_texts", lng, 4)}
 							</InputLabel>
-							<OutlinedInput label="Anti Fishing Secret" />
+							<OutlinedInput label={translate("auth_form_texts", lng, 4)} />
 						</FormControl>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<FormControl variant="outlined" fullWidth>
 							<InputLabel htmlFor="outlined-adornment-password">
-								Security Code
+								{translate("auth_form_texts", lng, 5)}
 							</InputLabel>
-							<OutlinedInput label="Security Code" />
+							<OutlinedInput label={translate("auth_form_texts", lng, 5)} />
 						</FormControl>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<Button variant="contained" color="primary" fullWidth disableElevation>
-							Primary
+							{translate("navbar_login_btn", lng)}
 						</Button>
 					</Grid>
 					<Grid item xs={12} style={{ textAlign: "center" }}>
 						<Typography variant="body2" component="small">
-							The security code you enter will work only once, so make sure to renew
-							it immediately after the login.
+							{translate("before_using_security_code", lng)}
 						</Typography>
 					</Grid>
 				</Grid>

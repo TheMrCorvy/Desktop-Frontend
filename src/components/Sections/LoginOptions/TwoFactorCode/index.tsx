@@ -25,6 +25,7 @@ const TwoFactorCode = ({ testing }: { testing?: boolean }) => {
 			console.log("production api call")
 		}
 	}
+
 	return (
 		<Box component="div" style={{ marginTop: 15 }}>
 			<Grid container justify="center" spacing={3}>
