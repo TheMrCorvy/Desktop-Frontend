@@ -9,6 +9,7 @@ import {
 	InputLabel,
 	FormControl,
 } from "@material-ui/core"
+import TimerButton from "../../../TimerButton"
 
 const EmailCode = ({ testing }: { testing?: boolean }) => {
 	const [time, setTime] = useState(0)
@@ -39,6 +40,8 @@ const EmailCode = ({ testing }: { testing?: boolean }) => {
 		setTime(50)
 	}
 
+	const handleClick = () => console.log("hola mundo")
+
 	return (
 		<Box component="div" style={{ marginTop: 15 }}>
 			<Grid container justify="center" spacing={3}>
@@ -50,16 +53,8 @@ const EmailCode = ({ testing }: { testing?: boolean }) => {
 								<OutlinedInput
 									label="Email"
 									endAdornment={
-										<InputAdornment position="end">
-											<Button
-												variant="contained"
-												color="primary"
-												size="small"
-												disableElevation
-												onClick={startCountDown}
-											>
-												{time !== 0 ? time : "enviar email"}
-											</Button>
+										<InputAdornment position="end" onClick={handleClick}>
+											<TimerButton />
 										</InputAdornment>
 									}
 								/>
