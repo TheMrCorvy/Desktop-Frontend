@@ -82,6 +82,8 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
+const { REACT_APP_RECAPTCHA_SITE_KEY } = process.env
+
 const Login: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
@@ -164,7 +166,7 @@ const Login: FC = () => {
 								>
 									<ReCAPTCHA
 										onChange={handleChangeCaptcha}
-										sitekey="6LcxYW0aAAAAAEnierwCCRtIGZwUsp4dLg1BWNtn"
+										sitekey={`${REACT_APP_RECAPTCHA_SITE_KEY}`}
 										theme={theme}
 										onExpired={handleErrorCaptcha}
 										onErrored={handleErrorCaptcha}
