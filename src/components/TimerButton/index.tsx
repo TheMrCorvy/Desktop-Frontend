@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { Button } from "@material-ui/core"
 
-const TimerButton = () => {
+type Props = {
+	title: string
+	initialTime?: number
+	color?: "inherit" | "primary" | "secondary" | "default" | undefined
+	size?: "small" | "medium" | "large" | undefined
+}
+
+const TimerButton = ({ title, initialTime, color, size }: Props) => {
 	const [time, setTime] = useState(0)
 
 	const [timerIsOn, setTimerIsOn] = useState(false)
@@ -9,8 +16,6 @@ const TimerButton = () => {
 	useEffect(() => {
 		if (time === 0) {
 			setTimerIsOn(false)
-
-			return
 		} else {
 			if (timerIsOn) {
 				const timer = setTimeout(() => {
@@ -19,26 +24,24 @@ const TimerButton = () => {
 				return () => {
 					clearTimeout(timer)
 				}
-			} else {
-				return
 			}
 		}
 	}, [time])
 
 	const startCountDown = () => {
 		setTimerIsOn(true)
-		setTime(50)
+		setTime(initialTime && initialTime > 0 ? initialTime : 50)
 	}
 
 	return (
 		<Button
 			variant="contained"
-			color="primary"
-			size="small"
+			color={color ? color : "primary"}
+			size={size ? size : "small"}
 			disableElevation
 			onClick={startCountDown}
 		>
-			{time !== 0 ? time : "enviar email"}
+			{time !== 0 ? time : title}
 		</Button>
 	)
 }
