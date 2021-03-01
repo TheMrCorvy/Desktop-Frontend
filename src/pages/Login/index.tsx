@@ -30,6 +30,7 @@ import { translate } from "../../lang"
 import TwoFactorCode from "../../components/Sections/LoginOptions/TwoFactorCode"
 import EmailCode from "../../components/Sections/LoginOptions/EmailCode"
 import RecoveryEmailCode from "../../components/Sections/LoginOptions/RecoveryEmailCode"
+import SecurityCode from "../../components/Sections/LoginOptions/SecurityCode"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -44,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		container: {
 			flexGrow: 1,
 			background: theme.palette.type === "dark" ? "#333" : "#f2f2f2",
+			paddingTop: "3rem",
 		},
 		centerAll: {
 			minHeight: "100vh",
@@ -108,15 +110,17 @@ const Login: FC = () => {
 				return <EmailCode />
 			case 2:
 				return <RecoveryEmailCode />
+			case 3:
+				return <SecurityCode />
 
 			default:
-				return "<TwoFactorCode />"
+				return <TwoFactorCode />
 		}
 	}
 
 	return (
 		<Container maxWidth="xl" className={classes.container} data-testid="test_not_found_page">
-			<Grid container justify="space-around" className={classes.centerAll} spacing={0}>
+			<Grid container justify="center" className={classes.centerAll} spacing={0}>
 				<Grid item xs={12} md={7}>
 					<Card className={classes.card} elevation={2}>
 						<CardHeader
