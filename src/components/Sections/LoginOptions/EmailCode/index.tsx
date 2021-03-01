@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import {
 	Box,
 	Grid,
@@ -11,6 +11,34 @@ import {
 } from "@material-ui/core"
 
 const EmailCode = ({ testing }: { testing?: boolean }) => {
+	const [time, setTime] = useState(0)
+
+	const [timerIsOn, setTimerIsOn] = useState(false)
+
+	useEffect(() => {
+		if (time === 0) {
+			setTimerIsOn(false)
+
+			return
+		} else {
+			if (timerIsOn) {
+				const timer = setTimeout(() => {
+					setTime(time - 1)
+				}, 1000)
+				return () => {
+					clearTimeout(timer)
+				}
+			} else {
+				return
+			}
+		}
+	}, [time])
+
+	const startCountDown = () => {
+		setTimerIsOn(true)
+		setTime(50)
+	}
+
 	return (
 		<Box component="div" style={{ marginTop: 15 }}>
 			<Grid container justify="center" spacing={3}>
@@ -28,8 +56,9 @@ const EmailCode = ({ testing }: { testing?: boolean }) => {
 												color="primary"
 												size="small"
 												disableElevation
+												onClick={startCountDown}
 											>
-												Send Code
+												{time !== 0 ? time : "enviar email"}
 											</Button>
 										</InputAdornment>
 									}
