@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import {
 	Box,
 	Grid,
-	TextField,
 	Button,
 	InputAdornment,
 	OutlinedInput,
@@ -12,35 +11,13 @@ import {
 import TimerButton from "../../../TimerButton"
 
 const EmailCode = ({ testing }: { testing?: boolean }) => {
-	const [time, setTime] = useState(0)
-
-	const [timerIsOn, setTimerIsOn] = useState(false)
-
-	useEffect(() => {
-		if (time === 0) {
-			setTimerIsOn(false)
-
-			return
+	const handleClick = () => {
+		if (testing) {
+			console.log("hola mundo")
 		} else {
-			if (timerIsOn) {
-				const timer = setTimeout(() => {
-					setTime(time - 1)
-				}, 1000)
-				return () => {
-					clearTimeout(timer)
-				}
-			} else {
-				return
-			}
+			console.log("production api call")
 		}
-	}, [time])
-
-	const startCountDown = () => {
-		setTimerIsOn(true)
-		setTime(50)
 	}
-
-	const handleClick = () => console.log("hola mundo")
 
 	return (
 		<Box component="div" style={{ marginTop: 15 }}>
@@ -54,7 +31,7 @@ const EmailCode = ({ testing }: { testing?: boolean }) => {
 									label="Email"
 									endAdornment={
 										<InputAdornment position="end" onClick={handleClick}>
-											<TimerButton />
+											<TimerButton title="enviar email" />
 										</InputAdornment>
 									}
 								/>
