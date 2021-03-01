@@ -83,8 +83,6 @@ const useStyles = makeStyles((theme: Theme) =>
 const Login: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const { theme } = useSelector((state: RootState) => state.theme)
-
 	const classes = useStyles()
 
 	const [tab, setTab] = useState(0)

@@ -106,5 +106,17 @@
 	"loading": ["Loading, please wait..."],
 	"error_404": ["Page Not Found"],
 	"login_subtitle": ["Please check that you are visiting the correct URL"],
-	"login_options": ["Two Factor Code", "Email", "Recovery Email", "Security Code"]
+	"login_options": ["Verification Code", "Email", "Recovery Email", "Security Code"],
+	"auth_form_texts": [
+		"Email",
+		"Verification Code",
+		"Main Email",
+		"Recovery Email",
+		"Anti-Fishing Secret",
+		"Security Code"
+	],
+	"before_using_security_code": [
+		"The security code you enter will work only once, so make sure to renew it immediately after the login."
+	],
+	"send_email": ["Send Email"]
 }

@@ -10,12 +10,18 @@ import {
 } from "@material-ui/core"
 import TimerButton from "../../../TimerButton"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../../../redux/store"
+import { translate } from "../../../../lang"
+
 type Props = {
 	isRecovery: boolean
 	testing?: boolean
 }
 
 const EmailCode = ({ testing, isRecovery }: Props) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const handleClick = () => {
 		if (testing) {
 			console.log("hola mundo")
@@ -33,22 +39,28 @@ const EmailCode = ({ testing, isRecovery }: Props) => {
 							<Grid item xs={12}>
 								<FormControl variant="outlined" fullWidth>
 									<InputLabel htmlFor="outlined-adornment-password">
-										Main Email
+										{translate("auth_form_texts", lng, 2)}
 									</InputLabel>
-									<OutlinedInput label="Main Email" />
+									<OutlinedInput label={translate("auth_form_texts", lng, 2)} />
 								</FormControl>
 							</Grid>
 						)}
 						<Grid item xs={12}>
 							<FormControl variant="outlined" fullWidth>
 								<InputLabel htmlFor="outlined-adornment-password">
-									Email to send code
+									{isRecovery
+										? translate("auth_form_texts", lng, 3)
+										: translate("auth_form_texts", lng, 0)}
 								</InputLabel>
 								<OutlinedInput
-									label="Email to send code"
+									label={
+										isRecovery
+											? translate("auth_form_texts", lng, 3)
+											: translate("auth_form_texts", lng, 0)
+									}
 									endAdornment={
 										<InputAdornment position="end" onClick={handleClick}>
-											<TimerButton title="enviar email" />
+											<TimerButton title={translate("send_email", lng)} />
 										</InputAdornment>
 									}
 								/>
@@ -57,14 +69,14 @@ const EmailCode = ({ testing, isRecovery }: Props) => {
 						<Grid item xs={12}>
 							<FormControl variant="outlined" fullWidth>
 								<InputLabel htmlFor="outlined-adornment-password">
-									VerificationCode
+									{translate("auth_form_texts", lng, 1)}
 								</InputLabel>
-								<OutlinedInput label="VerificationCode" />
+								<OutlinedInput label={translate("auth_form_texts", lng, 1)} />
 							</FormControl>
 						</Grid>
 						<Grid item xs={12}>
 							<Button variant="contained" color="primary" fullWidth disableElevation>
-								Primary
+								{translate("navbar_login_btn", lng)}
 							</Button>
 						</Grid>
 					</Grid>

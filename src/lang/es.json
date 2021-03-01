@@ -118,5 +118,17 @@
 		"Email",
 		"Email de Recuperación",
 		"Código de Seguridad"
-	]
+	],
+	"auth_form_texts": [
+		"Email",
+		"Código de Verificación",
+		"Email Principal",
+		"Email de Recuperación",
+		"Secreto Anti-Fishing",
+		"Código de Seguridad"
+	],
+	"before_using_security_code": [
+		"El código de seguridad que ingreses solo funcionará una única vez, asegurate de renovarlo apenas ingreses."
+	],
+	"send_email": ["Enviar Email"]
 }
