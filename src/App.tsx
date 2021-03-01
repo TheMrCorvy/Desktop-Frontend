@@ -47,9 +47,9 @@ const App: FC = () => {
 		palette: {
 			type: theme,
 			primary: {
-				light: "#ff7300",
-				dark: "#ff7300",
-				main: "#ff7300",
+				light: "#ff6200",
+				dark: "#ff6200",
+				main: "#ff6200",
 				contrastText: "#fff",
 			},
 			secondary: {
