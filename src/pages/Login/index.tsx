@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		container: {
 			flexGrow: 1,
 			background: theme.palette.type === "dark" ? "#333" : "#f2f2f2",
-			paddingTop: "3rem",
 		},
 		centerAll: {
 			minHeight: "100vh",
@@ -131,17 +130,20 @@ const Login: FC = () => {
 								title: classes.cardHeader,
 							}}
 						/>
-						<CardContent style={{ display: "flex", justifyContent: "center" }}>
-							<Grid container spacing={3} justify="space-around">
-								<Grid item xs={12}>
+						<CardContent>
+							<Grid container spacing={3} justify="center">
+								<Grid
+									item
+									xs={12}
+									style={{ display: "flex", justifyContent: "center" }}
+								>
 									<Tabs
 										value={tab}
 										indicatorColor={theme === "dark" ? "primary" : "secondary"}
 										textColor={theme === "dark" ? "primary" : "secondary"}
 										onChange={handleChange}
-										aria-label="disabled tabs example"
-										variant="scrollable"
 										scrollButtons="off"
+										variant="scrollable"
 									>
 										<Tab label={translate("login_options", lng, 0)} />
 										<Tab label={translate("login_options", lng, 1)} />
