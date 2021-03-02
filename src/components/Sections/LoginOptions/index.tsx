@@ -57,7 +57,7 @@ const LoginOptions = ({ testing }: { testing?: boolean }) => {
 	}
 
 	return (
-		<Grid container spacing={3} justify="center">
+		<Grid container spacing={3} justify="center" data-testid="test_login_options">
 			<Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
 				<Tabs
 					value={tab}

@@ -2,20 +2,20 @@ import { render } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom"
 
 import { Provider } from "react-redux"
-import store from "../../redux/store"
+import store from "../../../redux/store"
 
-import Login from "./index"
+import LoginOptions from "./index"
 
 it("renders properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
 			<BrowserRouter>
-				<Login testing={true} />
+				<LoginOptions testing={true} />
 			</BrowserRouter>
 		</Provider>
 	)
 
-	const login = getByTestId("test_login_page")
+	const loginOptions = getByTestId("test_login_options")
 
-	expect(login).toBeTruthy()
+	expect(loginOptions).toBeTruthy()
 })

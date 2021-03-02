@@ -1,9 +1,9 @@
 import { fireEvent, render } from "@testing-library/react"
 
 import { Provider } from "react-redux"
-import store from "../../../../../redux/store"
+import store from "../../../../redux/store"
 
-import { translate } from "../../../../../lang"
+import { translate } from "../../../../lang"
 
 import ToggleDarkTheme from "./index"
 
