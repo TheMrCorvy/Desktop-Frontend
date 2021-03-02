@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 
 import {
@@ -9,33 +9,19 @@ import {
 	CardHeader,
 	CardActions,
 	Button,
-	Tab,
-	Tabs,
 } from "@material-ui/core"
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
-
-import ReCAPTCHA from "react-google-recaptcha"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
-import TwoFactorCode from "../../components/Sections/LoginOptions/TwoFactorCode"
-import EmailCode from "../../components/Sections/LoginOptions/EmailCode"
-import SecurityCode from "../../components/Sections/LoginOptions/SecurityCode"
+import LoginOptions from "../../components/Sections/LoginOptions"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		root: {
-			width: "100%",
-		},
-		heading: {
-			fontSize: theme.typography.pxToRem(15),
-			flexBasis: "33.33%",
-			flexShrink: 0,
-		},
 		container: {
 			flexGrow: 1,
 			background: theme.palette.type === "dark" ? "#333" : "#f2f2f2",
@@ -50,12 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
 				display: "flex",
 				alignItems: "center",
 			},
-		},
-		button: {
-			textDecoration: "none",
-		},
-		title: {
-			marginRight: 100,
 		},
 		card: {
 			borderRadius: 7,
@@ -82,51 +62,14 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const { REACT_APP_RECAPTCHA_SITE_KEY } = process.env
-
-const Login: FC = () => {
+//It's necessary to add this "testing" prop, so I can actually test if the forms work properly
+const Login = ({ testing }: { testing?: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
-
-	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const classes = useStyles()
 
-	const [tab, setTab] = useState(0)
-
-	const [isRobot, setIsRobot] = useState(true)
-
-	const handleTabs = (event: ChangeEvent<{}>, newValue: number) => {
-		setTab(newValue)
-	}
-
-	const showOptions = (option: number) => {
-		switch (option) {
-			case 0:
-				return <TwoFactorCode isRobot={isRobot} />
-			case 1:
-				return <EmailCode isRecovery={false} isRobot={isRobot} />
-			case 2:
-				return <EmailCode isRecovery={true} isRobot={isRobot} />
-			case 3:
-				return <SecurityCode isRobot={isRobot} />
-
-			default:
-				return <TwoFactorCode isRobot={isRobot} />
-		}
-	}
-
-	const handleChangeCaptcha = (captchaResponse: string | null) => {
-		if (captchaResponse) {
-			setIsRobot(false)
-		}
-	}
-
-	const handleErrorCaptcha = () => {
-		setIsRobot(true)
-	}
-
 	return (
-		<Container maxWidth="xl" className={classes.container} data-testid="test_not_found_page">
+		<Container maxWidth="xl" className={classes.container} data-testid="test_login_page">
 			<Grid container justify="center" className={classes.centerAll} spacing={0}>
 				<Grid item xs={12} md={7}>
 					<Card className={classes.card} elevation={2}>
@@ -139,43 +82,7 @@ const Login: FC = () => {
 							}}
 						/>
 						<CardContent>
-							<Grid container spacing={3} justify="center">
-								<Grid
-									item
-									xs={12}
-									style={{ display: "flex", justifyContent: "center" }}
-								>
-									<Tabs
-										value={tab}
-										indicatorColor="primary"
-										textColor="primary"
-										onChange={handleTabs}
-										scrollButtons="off"
-										variant="scrollable"
-									>
-										<Tab label={translate("login_options", lng, 0)} />
-										<Tab label={translate("login_options", lng, 1)} />
-										<Tab label={translate("login_options", lng, 2)} />
-										<Tab label={translate("login_options", lng, 3)} />
-									</Tabs>
-								</Grid>
-								<Grid
-									item
-									xs={12}
-									style={{ display: "flex", justifyContent: "center" }}
-								>
-									<ReCAPTCHA
-										onChange={handleChangeCaptcha}
-										sitekey={`${REACT_APP_RECAPTCHA_SITE_KEY}`}
-										theme={theme}
-										onExpired={handleErrorCaptcha}
-										onErrored={handleErrorCaptcha}
-									/>
-								</Grid>
-								<Grid item xs={12} style={{ paddingTop: 15 }}>
-									{showOptions(tab)}
-								</Grid>
-							</Grid>
+							<LoginOptions testing={testing} />
 						</CardContent>
 						<CardActions className={classes.cardActions}>
 							<Link to="/" className={classes.link}>

@@ -6,7 +6,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp"
 
 import Navbar from "./Navbar"
-import Drawer from "./Navbar/NavbarComponents/Drawer"
+import Drawer from "./Navbar/Drawer"
 import Footer from "./Footer"
 
 const useStyles = makeStyles((theme: Theme) =>

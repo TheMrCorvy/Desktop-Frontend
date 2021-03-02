@@ -12,7 +12,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
-import TranslateButton from "../../components/Navbar/NavbarComponents/NavbarButtons/TranslateButton"
+import TranslateButton from "../../components/Navbar/NavbarButtons/TranslateButton"
 
 const useStyles = makeStyles({
 	root: {
