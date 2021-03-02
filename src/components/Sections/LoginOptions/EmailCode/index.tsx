@@ -37,7 +37,7 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 	}
 
 	return (
-		<Box component="div">
+		<Box component="div" data-testid="test_main_email_form">
 			<Grid container justify="center" spacing={3}>
 				<Grid item xs={12} sm={6}>
 					<Grid container justify="center" spacing={3}>
