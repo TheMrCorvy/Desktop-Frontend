@@ -25,11 +25,16 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 
 	const { register, errors, handleSubmit } = useForm()
 
+	const requiredMessage = translate("form_validation_messages", lng, 0)
+	const maxCharMessage = translate("form_validation_messages", lng, 1)
+	const minCharMessage = translate("form_validation_messages", lng, 2)
+
 	const onSubmit = (data: FormInputs) => {
 		if (testing) {
 			console.log(data)
 		} else {
 			console.log("production api call")
+			console.log(data)
 		}
 	}
 
@@ -44,60 +49,69 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 								<OutlinedInput
 									label={translate("auth_form_texts", lng, 0)}
 									name="email"
+									required
+									type="email"
 									inputProps={{
 										"data-testid": "test_2fa_code_input",
 										ref: register({
 											required: {
 												value: true,
-												message: "hola mundo",
+												message: requiredMessage,
 											},
 											maxLength: {
 												value: 50,
-												message: "No puede haber más de 50 caractéres",
+												message: maxCharMessage,
 											},
 											minLength: {
 												value: 5,
-												message: "Debe haber un mínimo de 5 caractéres",
+												message: minCharMessage,
+											},
+											pattern: {
+												value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+												message: translate(
+													"form_validation_messages",
+													lng,
+													3
+												),
 											},
 										}),
 									}}
 									error={errors?.email ? true : false}
 								/>
 								{errors.email && (
-									<Typography variant="overline">
-										{errors.email.message}
-									</Typography>
+									<Typography variant="body2">{errors.email.message}</Typography>
 								)}
 							</FormControl>
 						</Grid>
 						<Grid item xs={12}>
 							<FormControl variant="outlined" fullWidth>
 								<InputLabel>{translate("auth_form_texts", lng, 1)}</InputLabel>
-
 								<OutlinedInput
 									label={translate("auth_form_texts", lng, 1)}
 									name="verificationCode"
+									type="number"
+									required
 									inputProps={{
 										"data-testid": "test_2fa_code_input",
 										ref: register({
 											required: {
 												value: true,
-												message: "hola mundo",
+												message: requiredMessage,
 											},
 											maxLength: {
-												value: 50,
-												message: "No puede haber más de 50 caractéres",
+												value: 6,
+												message: maxCharMessage,
 											},
 											minLength: {
-												value: 5,
-												message: "Debe haber un mínimo de 5 caractéres",
+												value: 6,
+												message: minCharMessage,
 											},
 										}),
 									}}
 									error={errors?.verificationCode ? true : false}
 								/>
 								{errors.verificationCode && (
-									<Typography variant="overline">
+									<Typography variant="body2">
 										{errors.verificationCode.message}
 									</Typography>
 								)}

@@ -130,5 +130,11 @@
 	"before_using_security_code": [
 		"El código de seguridad que ingreses solo funcionará una única vez, asegurate de renovarlo apenas ingreses."
 	],
-	"send_email": ["Enviar Email"]
+	"send_email": ["Enviar Email"],
+	"form_validation_messages": [
+		"Este campo es requerido.",
+		"Se ha sobrepasado la cantidad máxima de caractéres.",
+		"No se ha alcanzado la cantidad mínima de caractéres.",
+		"No es un Email válido."
+	]
 }

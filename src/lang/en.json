@@ -118,5 +118,11 @@
 	"before_using_security_code": [
 		"The security code you enter will work only once, so make sure to renew it immediately after the login."
 	],
-	"send_email": ["Send Email"]
+	"send_email": ["Send Email"],
+	"form_validation_messages": [
+		"This input is required.",
+		"The maximum amount of characters has been exceeded.",
+		"The minimum amount of characters has not been reached.",
+		"Not a valid Email."
+	]
 }
