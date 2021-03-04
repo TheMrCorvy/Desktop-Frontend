@@ -34,9 +34,18 @@ type Props = {
 		| "top-end"
 		| "top-start"
 	className?: any
+	tooltipTitle?: string
+	scroll?: "paper" | "body"
 }
 
-const DialogComponent = (props: Props) => {
+const DialogComponent = ({
+	children,
+	title,
+	tooltipPlacement,
+	className,
+	tooltipTitle,
+	scroll,
+}: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)
@@ -47,12 +56,15 @@ const DialogComponent = (props: Props) => {
 
 	return (
 		<>
-			<Tooltip title={translate("more_info", lng)} placement={props.tooltipPlacement}>
+			<Tooltip
+				title={tooltipTitle ? tooltipTitle : translate("more_info", lng)}
+				placement={tooltipPlacement}
+			>
 				<Fab
 					color="secondary"
 					aria-label="help"
 					size="small"
-					className={props.className}
+					className={className}
 					onClick={toggleDialog}
 				>
 					<HelpOutlineIcon />
@@ -63,13 +75,13 @@ const DialogComponent = (props: Props) => {
 				onClose={toggleDialog}
 				aria-labelledby="dialog-title"
 				open={open}
-				scroll="paper"
+				scroll={scroll ? scroll : "paper"}
 				data-testid="test_dialog"
 			>
 				<DialogTitle id="dialog-title" data-testid="test_dialog_title">
-					{props.title}
+					{title}
 				</DialogTitle>
-				<DialogContent>{props.children}</DialogContent>
+				<DialogContent>{children}</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={toggleDialog} color="default" size="large">
 						{translate("go_back", lng)}
