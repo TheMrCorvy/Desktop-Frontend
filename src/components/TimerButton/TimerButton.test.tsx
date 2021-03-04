@@ -32,6 +32,6 @@ describe("checking if the countdown works properly", () => {
 
 		setTimeout(() => {
 			expect(timerBtn.firstElementChild?.innerHTML).toBe(title)
-		}, 2000)
+		}, 1000)
 	})
 })
