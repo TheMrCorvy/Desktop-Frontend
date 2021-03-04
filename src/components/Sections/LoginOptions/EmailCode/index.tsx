@@ -88,7 +88,7 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 										required
 										type="email"
 										inputProps={{
-											"data-testid": "test_2fa_code_input",
+											"data-testid": "test_main_email",
 											ref: register({
 												required: {
 													value: true,
@@ -124,7 +124,7 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 									required
 									type="email"
 									inputProps={{
-										"data-testid": "test_2fa_code_input",
+										"data-testid": "test_email_to_send_code",
 										ref: register({
 											required: {
 												value: true,
@@ -173,7 +173,7 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 									type="number"
 									required
 									inputProps={{
-										"data-testid": "test_2fa_code_input",
+										"data-testid": "test_verification_code",
 										ref: register({
 											required: {
 												value: true,

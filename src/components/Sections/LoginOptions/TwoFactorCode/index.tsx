@@ -50,7 +50,7 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 									required
 									type="email"
 									inputProps={{
-										"data-testid": "test_2fa_code_input",
+										"data-testid": "test_email_input",
 										ref: register({
 											required: {
 												value: true,
