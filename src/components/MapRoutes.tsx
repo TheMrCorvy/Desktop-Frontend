@@ -7,6 +7,7 @@ import ScrollToTop from "./ScrollTop"
 const NotFound = lazy(() => import("../pages/NotFound"))
 
 import { useSelector } from "react-redux"
+
 import { RootState } from "../redux/store"
 
 export default function RoutesComponent(props: { routes: RouteType[] }) {
