@@ -7,6 +7,8 @@ import {
 	OutlinedInput,
 	InputLabel,
 	FormControl,
+	TextField,
+	Input,
 } from "@material-ui/core"
 
 import TimerButton from "../../../TimerButton"
@@ -64,12 +66,35 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 										? translate("auth_form_texts", lng, 3)
 										: translate("auth_form_texts", lng, 0)}
 								</InputLabel>
-								<OutlinedInput
+								{/* <TextField
 									label={
 										isRecovery
 											? translate("auth_form_texts", lng, 3)
 											: translate("auth_form_texts", lng, 0)
 									}
+									variant="outlined"
+									inputProps={{
+										"data-testid": "test_email_to_send_code",
+										endAdornment: (
+											<InputAdornment position="end" onClick={handleClick}>
+												{isRobot ? (
+													<Button
+														size="small"
+														disabled
+														variant="contained"
+													>
+														{translate("send_email", lng)}
+													</Button>
+												) : (
+													<TimerButton
+														title={translate("send_email", lng)}
+													/>
+												)}
+											</InputAdornment>
+										),
+									}}
+								/> */}
+								<Input
 									endAdornment={
 										<InputAdornment position="end" onClick={handleClick}>
 											{isRobot ? (
@@ -81,7 +106,6 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 											)}
 										</InputAdornment>
 									}
-									inputProps={{ "data-testid": "test_email_to_send_code" }}
 								/>
 							</FormControl>
 						</Grid>

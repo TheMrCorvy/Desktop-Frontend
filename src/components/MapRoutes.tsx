@@ -4,11 +4,10 @@ import { RouteType } from "../routes"
 
 import ScrollTop from "./ScrollTop"
 
-const NotFound = lazy(() => import("../pages/NotFound"))
-
 import { useSelector } from "react-redux"
-
 import { RootState } from "../redux/store"
+
+const NotFound = lazy(() => import("../pages/NotFound"))
 
 export default function RoutesComponent(props: { routes: RouteType[] }) {
 	const { token } = useSelector((state: RootState) => state.token)
