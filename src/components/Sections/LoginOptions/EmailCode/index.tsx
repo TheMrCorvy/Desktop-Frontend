@@ -50,7 +50,10 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 									<InputLabel htmlFor="outlined-adornment-password">
 										{translate("auth_form_texts", lng, 2)}
 									</InputLabel>
-									<OutlinedInput label={translate("auth_form_texts", lng, 2)} />
+									<OutlinedInput
+										label={translate("auth_form_texts", lng, 2)}
+										inputProps={{ "data-testid": "test_main_email" }}
+									/>
 								</FormControl>
 							</Grid>
 						)}
@@ -78,6 +81,7 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 											)}
 										</InputAdornment>
 									}
+									inputProps={{ "data-testid": "test_email_to_send_code" }}
 								/>
 							</FormControl>
 						</Grid>
@@ -86,7 +90,10 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 								<InputLabel htmlFor="outlined-adornment-password">
 									{translate("auth_form_texts", lng, 1)}
 								</InputLabel>
-								<OutlinedInput label={translate("auth_form_texts", lng, 1)} />
+								<OutlinedInput
+									label={translate("auth_form_texts", lng, 1)}
+									inputProps={{ "data-testid": "test_verification_code" }}
+								/>
 							</FormControl>
 						</Grid>
 						<Grid item xs={12}>
