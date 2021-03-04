@@ -27,6 +27,8 @@ import {
 	faWallet,
 	faUsers,
 	faStar,
+	faChevronLeft,
+	faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 library.add(
 	faKey,
@@ -37,7 +39,9 @@ library.add(
 	faFingerprint,
 	faWallet,
 	faUsers,
-	faStar
+	faStar,
+	faChevronLeft,
+	faChevronRight
 )
 
 const App: FC = () => {

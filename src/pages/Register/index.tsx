@@ -1,9 +1,6 @@
 import React, { useState } from "react"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
-
 import {
 	Grid,
 	Container,
@@ -25,6 +22,8 @@ import { RootState } from "../../redux/store"
 import { translate } from "../../lang"
 
 import DialogComponent from "../../components/Dialog"
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const tutorialSteps = [
 	{
@@ -185,18 +184,23 @@ export default function TextMobileStepper() {
 									<Button
 										size="small"
 										onClick={handleNext}
+										color="secondary"
 										disabled={activeStep === maxSteps - 1}
 									>
-										<KeyboardArrowRight />
+										<FontAwesomeIcon
+											icon={["fas", "chevron-right"]}
+											size="2x"
+										/>
 									</Button>
 								}
 								backButton={
 									<Button
 										size="small"
 										onClick={handleBack}
+										color="secondary"
 										disabled={activeStep === 0}
 									>
-										<KeyboardArrowLeft />
+										<FontAwesomeIcon icon={["fas", "chevron-left"]} size="2x" />
 									</Button>
 								}
 								className={classes.stepperFooter}
