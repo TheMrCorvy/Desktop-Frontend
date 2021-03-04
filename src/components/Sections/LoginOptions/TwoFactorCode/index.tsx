@@ -17,7 +17,7 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 	}
 
 	return (
-		<Box component="div">
+		<Box component="div" data-testid="test_2fa_form">
 			<Grid container justify="center" spacing={3}>
 				<Grid item xs={12} sm={6}>
 					<Grid container spacing={3}>

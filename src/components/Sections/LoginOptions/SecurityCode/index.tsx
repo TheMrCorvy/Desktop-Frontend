@@ -25,7 +25,7 @@ const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolea
 	}
 
 	return (
-		<Box component="div">
+		<Box component="div" data-testid="test_security_code_form">
 			<Grid item xs={12}>
 				<Grid container justify="center" spacing={3}>
 					<Grid item xs={12} sm={6}>

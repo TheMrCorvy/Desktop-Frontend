@@ -66,5 +66,23 @@ describe("testing the behaviour of the tabs", () => {
 		const mainEmailForm = getByTestId("test_main_email_form")
 
 		expect(mainEmailForm).toBeTruthy()
+
+		fireEvent.click(tabThree)
+
+		const recoveryEmailForm = getByTestId("test_recovery_email_form")
+
+		expect(recoveryEmailForm).toBeTruthy()
+
+		fireEvent.click(tabFour)
+
+		const securityCodeForm = getByTestId("test_security_code_form")
+
+		expect(securityCodeForm).toBeTruthy()
+
+		fireEvent.click(tabOne)
+
+		const twoFactorForm = getByTestId("test_2fa_form")
+
+		expect(twoFactorForm).toBeTruthy()
 	})
 })
