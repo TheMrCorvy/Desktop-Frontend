@@ -30,12 +30,10 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 	const minCharMessage = translate("form_validation_messages", lng, 2)
 
 	const onSubmit = (data: FormInputs) => {
-		if (testing) {
-			console.log(data)
-		} else {
-			console.log("production api call")
-			console.log(data)
-		}
+		if (testing) return
+
+		console.log("production api call")
+		console.log(data)
 	}
 
 	return (
