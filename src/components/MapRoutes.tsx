@@ -2,10 +2,12 @@ import React, { lazy } from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
 import { RouteType } from "../routes"
 
+import ScrollToTop from "./ScrollTop"
+
 const NotFound = lazy(() => import("../pages/NotFound"))
 
 export default function RoutesComponent(props: { routes: RouteType[] }) {
-	// hay que evaluar si está el token de autorizacion en el estado de redux
+	// we have to check if the auth token is on redux
 	const evaluateRoutes = (r: RouteType, i: number) => {
 		if (r.requiresAuth) {
 			return <Redirect from={r.path} to="/login" key={i} />
@@ -15,10 +17,15 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 	}
 
 	return (
-		<Switch>
-			{props.routes.map((route: RouteType, index: number) => evaluateRoutes(route, index))}
+		<>
+			<ScrollToTop />
+			<Switch>
+				{props.routes.map((route: RouteType, index: number) =>
+					evaluateRoutes(route, index)
+				)}
 
-			<Route component={NotFound} />
-		</Switch>
+				<Route component={NotFound} />
+			</Switch>
+		</>
 	)
 }
