@@ -27,7 +27,7 @@ describe("checking if the user can write properly on the form", () => {
 
 		const email = "email@email.com"
 
-		const emailInput = getByTestId("test_email_input")
+		const emailInput = getByTestId("test_email_input") as HTMLInputElement
 
 		fireEvent.change(emailInput, { target: { value: email } })
 
@@ -43,7 +43,7 @@ describe("checking if the user can write properly on the form", () => {
 
 		const code = "123456"
 
-		const codeInput = getByTestId("test_2fa_code_input")
+		const codeInput = getByTestId("test_2fa_code_input") as HTMLInputElement
 
 		fireEvent.change(codeInput, { target: { value: code } })
 
