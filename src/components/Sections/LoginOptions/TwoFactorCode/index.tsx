@@ -23,18 +23,20 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 					<Grid container spacing={3}>
 						<Grid item xs={12}>
 							<FormControl variant="outlined" fullWidth>
-								<InputLabel htmlFor="outlined-adornment-password">
-									{translate("auth_form_texts", lng, 0)}
-								</InputLabel>
-								<OutlinedInput label={translate("auth_form_texts", lng, 0)} />
+								<InputLabel>{translate("auth_form_texts", lng, 0)}</InputLabel>
+								<OutlinedInput
+									label={translate("auth_form_texts", lng, 0)}
+									inputProps={{ "data-testid": "test_email_input" }}
+								/>
 							</FormControl>
 						</Grid>
 						<Grid item xs={12}>
 							<FormControl variant="outlined" fullWidth>
-								<InputLabel htmlFor="outlined-adornment-password">
-									{translate("auth_form_texts", lng, 1)}
-								</InputLabel>
-								<OutlinedInput label={translate("auth_form_texts", lng, 1)} />
+								<InputLabel>{translate("auth_form_texts", lng, 1)}</InputLabel>
+								<OutlinedInput
+									label={translate("auth_form_texts", lng, 1)}
+									inputProps={{ "data-testid": "test_2fa_code_input" }}
+								/>
 							</FormControl>
 						</Grid>
 						<Grid item xs={12}>
