@@ -6,11 +6,19 @@ import ScrollToTop from "./ScrollTop"
 
 const NotFound = lazy(() => import("../pages/NotFound"))
 
+import { useSelector } from "react-redux"
+import { RootState } from "../redux/store"
+
 export default function RoutesComponent(props: { routes: RouteType[] }) {
-	// we have to check if the auth token is on redux
+	const { token } = useSelector((state: RootState) => state.token)
+
 	const evaluateRoutes = (r: RouteType, i: number) => {
 		if (r.requiresAuth) {
-			return <Redirect from={r.path} to="/login" key={i} />
+			return token !== null ? (
+				<Route exact path={r.path} component={r.component} key={i} />
+			) : (
+				<Redirect from={r.path} to="/login" key={i} />
+			)
 		} else {
 			return <Route exact path={r.path} component={r.component} key={i} />
 		}
@@ -23,7 +31,6 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 				{props.routes.map((route: RouteType, index: number) =>
 					evaluateRoutes(route, index)
 				)}
-
 				<Route component={NotFound} />
 			</Switch>
 		</>
