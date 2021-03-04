@@ -42,3 +42,17 @@ interface ToggleDrawerActionI {
 }
 
 export type DrawerAction = ToggleDrawerActionI
+
+/******************************************************************************** auth token */
+export const AUTH_TOKEN = "AUTH_TOKEN"
+
+export interface AuthTokenI {
+	token: null | string
+}
+
+interface AuthActionI {
+	type: typeof AUTH_TOKEN
+	payload: null | string
+}
+
+export type AuthAction = AuthActionI
