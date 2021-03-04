@@ -19,7 +19,7 @@ describe("the translate button works properly", () => {
 		)
 
 		const translateBtn = queryByTitle(translate("translate", "en"))
-		// the default lang of the app is english, thats why here the "en" its burned
+		// the default lang of the app is english, thats why here "en" is hardcoded
 
 		expect(translateBtn).toBeTruthy()
 	})
