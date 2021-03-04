@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { makeStyles, Theme, useTheme, createStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
@@ -23,6 +23,8 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
+
+import DialogComponent from "../../components/Dialog"
 
 const tutorialSteps = [
 	{
@@ -57,11 +59,13 @@ const useStyles = makeStyles((theme: Theme) =>
 		header: {
 			display: "flex",
 			alignItems: "center",
-			height: 50,
-			paddingLeft: theme.spacing(4),
-			backgroundColor: theme.palette.background.default,
+			minHeight: 50,
+			textAlign: "center",
+			justifyContent: "center",
 			borderTopLeftRadius: 8,
 			borderTopRightRadius: 8,
+			backgroundColor: theme.palette.background.default,
+			padding: 20,
 		},
 		stepperContent: {
 			backgroundColor: theme.palette.background.default,
@@ -87,13 +91,14 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: "flex",
 			alignItems: "center",
 			textAlign: "center",
+
+			[theme.breakpoints.up("sm")]: {
+				marginTop: "1rem",
+			},
 		},
 		card: {
 			borderRadius: 7,
-
-			[theme.breakpoints.down("sm")]: {
-				marginBottom: "4rem",
-			},
+			marginTop: "1rem",
 		},
 		cardActions: {
 			display: "flex",
@@ -110,6 +115,10 @@ const useStyles = makeStyles((theme: Theme) =>
 		cardHeader: {
 			textAlign: "center",
 		},
+		dialogButton: {
+			boxShadow: "none",
+			marginBottom: "2rem",
+		},
 	})
 )
 
@@ -117,8 +126,6 @@ export default function TextMobileStepper() {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
-
-	const theme = useTheme()
 
 	const [activeStep, setActiveStep] = useState(0)
 
@@ -136,16 +143,29 @@ export default function TextMobileStepper() {
 		<Container maxWidth="xl" className={classes.container} data-testid="test_not_found_page">
 			<Grid container justify="center" className={classes.centerAll} spacing={0}>
 				<Grid item xs={12} sm={8} md={7}>
-					<Card>
+					<Card className={classes.card}>
 						<CardHeader
-							title={translate("navbar_login_btn", lng)}
-							subheader={translate("login_subtitle", lng)}
+							title={translate("navbar_register_btn", lng)}
+							subheader="Por favor asegurese de tener instalada una app para generar códigos de verificación. Haz click en el símbolo de pregunta para saber más al respecto."
 							classes={{
 								subheader: classes.cardSubheader,
 								title: classes.cardHeader,
 							}}
+							subheaderTypographyProps={{ variant: "body2" }}
 						/>
 						<CardContent>
+							<DialogComponent
+								title={translate("about_subtitle", lng)}
+								tooltipPlacement="top"
+								className={classes.dialogButton}
+							>
+								<>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
+									nisi, suscipit maxime eaque rem quasi doloremque omnis tempora
+									natus voluptate dolore officia repellat odio dignissimos ab
+									nostrum earum magnam qui.
+								</>
+							</DialogComponent>
 							<Paper square elevation={0} className={classes.header}>
 								<Typography>{tutorialSteps[activeStep].label}</Typography>
 							</Paper>
@@ -188,9 +208,9 @@ export default function TextMobileStepper() {
 									{translate("home", lng)}
 								</Button>
 							</Link>
-							<Link to="/register" className={classes.link}>
+							<Link to="/login" className={classes.link}>
 								<Button size="large" color="primary">
-									{translate("navbar_register_btn", lng)}
+									{translate("navbar_login_btn", lng)}
 								</Button>
 							</Link>
 						</CardActions>
