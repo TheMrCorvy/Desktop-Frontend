@@ -41,6 +41,7 @@ const TimerButton = ({ title, initialTime, color, size }: Props) => {
 			disableElevation
 			onClick={startCountDown}
 			disabled={timerIsOn}
+			data-testid="test_timer_btn"
 		>
 			{time !== 0 ? time : title}
 		</Button>
