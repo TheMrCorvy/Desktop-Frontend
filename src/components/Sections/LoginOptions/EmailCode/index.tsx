@@ -2,16 +2,13 @@ import React, { useState } from "react"
 import {
 	Box,
 	Grid,
-	Button,
-	InputAdornment,
-	OutlinedInput,
-	InputLabel,
 	FormControl,
-	Input,
+	InputLabel,
+	OutlinedInput,
+	Button,
 	Typography,
+	InputAdornment,
 } from "@material-ui/core"
-
-import TimerButton from "../../../TimerButton"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
@@ -19,10 +16,7 @@ import { translate } from "../../../../lang"
 
 import { useForm } from "react-hook-form"
 
-type FormInputs = {
-	mainEmail: string
-	recoveryEmail: string
-}
+import TimerButton from "../../../TimerButton"
 
 type Props = {
 	isRecovery: boolean
@@ -30,12 +24,18 @@ type Props = {
 	testing?: boolean
 }
 
+type FormInputs = {
+	mailToSendCode: String
+	verificationCode: number
+	mainEmail?: string
+}
+
 const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [canSubmit, setCanSubmit] = useState(false)
-
 	const { register, errors, handleSubmit } = useForm()
+
+	const [canSubmit, setCanSubmit] = useState(false)
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
@@ -59,6 +59,17 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 		console.log("sending email...")
 	}
 
+	//I'm leaving this commented because I'm not sure if I'll allow the user to login more than 50 seconds after sending the email
+	//it depents on the lifespan of the code generated on the backend
+
+	// useEffect(() => {
+	// 	if (canSubmit) {
+	// 		setTimeout(() => {
+	// 			setCanSubmit(false)
+	// 		}, 50000)
+	// 	}
+	// }, [canSubmit])
+
 	return (
 		<Box
 			component="div"
@@ -66,24 +77,18 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 		>
 			<Grid container justify="center" spacing={3}>
 				<Grid item xs={12} sm={6}>
-					<Grid
-						container
-						justify="center"
-						spacing={3}
-						component="form"
-						onSubmit={handleSubmit(onSubmit)}
-					>
+					<Grid container spacing={3} component="form" onSubmit={handleSubmit(onSubmit)}>
 						{isRecovery && (
 							<Grid item xs={12}>
 								<FormControl variant="outlined" fullWidth>
-									<InputLabel>{translate("auth_form_texts", lng, 2)}</InputLabel>
+									<InputLabel>{translate("auth_form_texts", lng, 0)}</InputLabel>
 									<OutlinedInput
-										label={translate("auth_form_texts", lng, 2)}
+										label={translate("auth_form_texts", lng, 0)}
 										name="mainEmail"
 										required
 										type="email"
 										inputProps={{
-											"data-testid": "test_main_email",
+											"data-testid": "test_2fa_code_input",
 											ref: register({
 												required: {
 													value: true,
@@ -112,21 +117,14 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 						)}
 						<Grid item xs={12}>
 							<FormControl variant="outlined" fullWidth>
-								<InputLabel>
-									{isRecovery
-										? translate("auth_form_texts", lng, 3)
-										: translate("auth_form_texts", lng, 0)}
-								</InputLabel>
+								<InputLabel>{translate("auth_form_texts", lng, 0)}</InputLabel>
 								<OutlinedInput
-									label={
-										isRecovery
-											? translate("auth_form_texts", lng, 3)
-											: translate("auth_form_texts", lng, 0)
-									}
-									name="recoveryEmail"
+									label={translate("auth_form_texts", lng, 0)}
+									name="mailToSendCode"
 									required
 									type="email"
 									inputProps={{
+										"data-testid": "test_2fa_code_input",
 										ref: register({
 											required: {
 												value: true,
@@ -143,7 +141,7 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 											pattern: emailPattern,
 										}),
 									}}
-									error={errors?.recoveryEmail ? true : false}
+									error={errors?.mailToSendCode ? true : false}
 									endAdornment={
 										<InputAdornment position="end" onClick={sendEmail}>
 											{isRobot ? (
@@ -151,14 +149,17 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 													{translate("send_email", lng)}
 												</Button>
 											) : (
-												<TimerButton title={translate("send_email", lng)} />
+												<TimerButton
+													title={translate("send_email", lng)}
+													initialTime={50}
+												/>
 											)}
 										</InputAdornment>
 									}
 								/>
-								{errors.recoveryEmail && (
+								{errors.mailToSendCode && (
 									<Typography variant="body2">
-										{errors.recoveryEmail.message}
+										{errors.mailToSendCode.message}
 									</Typography>
 								)}
 							</FormControl>
@@ -168,11 +169,11 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 								<InputLabel>{translate("auth_form_texts", lng, 1)}</InputLabel>
 								<OutlinedInput
 									label={translate("auth_form_texts", lng, 1)}
-									name="recoveryEmail"
+									name="verificationCode"
+									type="number"
 									required
-									type="email"
 									inputProps={{
-										"data-testid": "test_verification_code",
+										"data-testid": "test_2fa_code_input",
 										ref: register({
 											required: {
 												value: true,
@@ -188,22 +189,11 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 											},
 										}),
 									}}
-									error={errors?.recoveryEmail ? true : false}
-									endAdornment={
-										<InputAdornment position="end" onClick={sendEmail}>
-											{isRobot ? (
-												<Button size="small" disabled variant="contained">
-													{translate("send_email", lng)}
-												</Button>
-											) : (
-												<TimerButton title={translate("send_email", lng)} />
-											)}
-										</InputAdornment>
-									}
+									error={errors?.verificationCode ? true : false}
 								/>
-								{errors.recoveryEmail && (
+								{errors.verificationCode && (
 									<Typography variant="body2">
-										{errors.recoveryEmail.message}
+										{errors.verificationCode.message}
 									</Typography>
 								)}
 							</FormControl>
@@ -214,8 +204,8 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 								color="primary"
 								fullWidth
 								disableElevation
+								onClick={handleSubmit(onSubmit)}
 								disabled={!canSubmit}
-								onSubmit={handleSubmit(onSubmit)}
 							>
 								{translate("navbar_login_btn", lng)}
 							</Button>
