@@ -33,7 +33,10 @@ const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolea
 							<InputLabel htmlFor="outlined-adornment-password">
 								{translate("auth_form_texts", lng, 2)}
 							</InputLabel>
-							<OutlinedInput label={translate("auth_form_texts", lng, 2)} />
+							<OutlinedInput
+								label={translate("auth_form_texts", lng, 2)}
+								inputProps={{ "data-testid": "test_main_email_input" }}
+							/>
 						</FormControl>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -49,7 +52,10 @@ const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolea
 							<InputLabel htmlFor="outlined-adornment-password">
 								{translate("auth_form_texts", lng, 4)}
 							</InputLabel>
-							<OutlinedInput label={translate("auth_form_texts", lng, 4)} />
+							<OutlinedInput
+								label={translate("auth_form_texts", lng, 4)}
+								inputProps={{ "data-testid": "test_anti_fishing_input" }}
+							/>
 						</FormControl>
 					</Grid>
 					<Grid item xs={12} sm={6}>
