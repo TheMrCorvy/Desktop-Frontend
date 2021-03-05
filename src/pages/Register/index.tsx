@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			background: theme.palette.type === "dark" ? "#333" : "#f2f2f2",
 			paddingTop: "4rem",
 			paddingBottom: "2rem",
+
+			[theme.breakpoints.down("sm")]: {
+				paddingTop: 0,
+			},
 		},
 		centerAll: {
 			minHeight: "100vh",
@@ -123,7 +127,7 @@ const Register = ({ testing }: { testing?: boolean }) => {
 									/>
 								</Grid>
 								<Grid item xs={12} style={{ marginRight: 15, marginLeft: 15 }}>
-									<RegisterSteps isRobot={isRobot} />
+									<RegisterSteps isRobot={false} />
 								</Grid>
 							</Grid>
 						</CardContent>

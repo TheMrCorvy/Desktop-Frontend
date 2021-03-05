@@ -152,5 +152,6 @@
 		"This app, by default, comes with protection, that is, if someone wants to have access to the generated codes, they must know how to unlock your smartphone as well.",
 		"It is the most frequently used for this type of authentication, but it does not porvides any protection by default to display the generated codes.",
 		"It is the only of the 3 options that allows you to back up your codes safely in the cloud, with the disadvantage that it asks you to store a password to unlock them (you know where you can save that password, I'm just saying...)."
-	]
+	],
+	"copy_paste_secret_key": ["Copy and paste this Secret Key:"]
 }
