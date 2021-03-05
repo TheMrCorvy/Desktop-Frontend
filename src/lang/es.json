@@ -137,6 +137,9 @@
 		"No se ha alcanzado la cantidad mínima de caractéres.",
 		"No es un Email válido."
 	],
+	"install_app_to_generate_codes": [
+		"Por favor, asegurese de tener ya instalada una app para generar códigos temporales de acceso. Puedes hacer click en el signo de pregunta para saber más al respecto."
+	],
 	"register_steps_titles": [
 		"Paso 1: ¿Cómo podemos identificarte?",
 		"Paso 2: Te hemos enviado un código de verificación a tu email principal, y de recuperación, por favor verifica los códigos.",

@@ -125,9 +125,12 @@
 		"The minimum amount of characters has not been reached.",
 		"Not a valid Email."
 	],
+	"install_app_to_generate_codes": [
+		"Please make sure to have already installed an app to generate temporary access codes. You can click on the question mark to learn more about it."
+	],
 	"register_steps_titles": [
 		"Step 1: How can we identify you?",
-		"Step 2: We have sent you some verification codes to both, your main email, and your recovery email.",
+		"Step 2: We have sent you some verification codes to, your main email, and your recovery email, please verify the codes.",
 		"Step 3: Scan this QR code with your favorite app to generate temporary access codes, and verify it."
 	]
 }

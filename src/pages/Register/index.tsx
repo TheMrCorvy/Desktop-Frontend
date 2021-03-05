@@ -104,7 +104,7 @@ export default function TextMobileStepper() {
 					<Card className={classes.card}>
 						<CardHeader
 							title={translate("navbar_register_btn", lng)}
-							subheader="Por favor asegurese de tener instalada una app para generar códigos de verificación. Haz click en el símbolo de pregunta para saber más al respecto."
+							subheader={translate("install_app_to_generate_codes", lng)}
 							classes={{
 								subheader: classes.cardSubheader,
 								title: classes.cardHeader,
