@@ -10,7 +10,7 @@ it("renders properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
 			<BrowserRouter>
-				<Login testing={true} />
+				<Login />
 			</BrowserRouter>
 		</Provider>
 	)

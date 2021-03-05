@@ -76,17 +76,15 @@ const LoginOptions = ({ testing }: { testing?: boolean }) => {
 					))}
 				</Tabs>
 			</Grid>
-			{!testing && (
-				<Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
-					<ReCAPTCHA
-						onChange={handleChangeCaptcha}
-						sitekey={`${REACT_APP_RECAPTCHA_SITE_KEY}`}
-						theme={theme}
-						onExpired={handleErrorCaptcha}
-						onErrored={handleErrorCaptcha}
-					/>
-				</Grid>
-			)}
+			<Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
+				<ReCAPTCHA
+					onChange={handleChangeCaptcha}
+					sitekey={`${REACT_APP_RECAPTCHA_SITE_KEY}`}
+					theme={theme}
+					onExpired={handleErrorCaptcha}
+					onErrored={handleErrorCaptcha}
+				/>
+			</Grid>
 			<Grid item xs={12} style={{ paddingTop: 15 }}>
 				{showOptions(tab)}
 			</Grid>

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { Link } from "react-router-dom"
 
 import {
@@ -62,8 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-//It's necessary to add this "testing" prop, so I can actually test if the forms work properly
-const Login = ({ testing }: { testing?: boolean }) => {
+const Login: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
@@ -82,7 +81,7 @@ const Login = ({ testing }: { testing?: boolean }) => {
 							}}
 						/>
 						<CardContent>
-							<LoginOptions testing={testing} />
+							<LoginOptions />
 						</CardContent>
 						<CardActions className={classes.cardActions}>
 							<Link to="/" className={classes.link}>

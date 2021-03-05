@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 
 import { Typography, DialogContent, Divider, Link } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const RegisterDialog = () => {
+const RegisterDialog: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()

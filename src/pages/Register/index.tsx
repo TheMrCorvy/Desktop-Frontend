@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-export default function TextMobileStepper({ testing }: { testing?: boolean }) {
+const Register = ({ testing }: { testing?: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
@@ -145,3 +145,5 @@ export default function TextMobileStepper({ testing }: { testing?: boolean }) {
 		</Container>
 	)
 }
+
+export default Register
