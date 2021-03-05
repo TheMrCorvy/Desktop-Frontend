@@ -81,9 +81,9 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 						{isRecovery && (
 							<Grid item xs={12}>
 								<FormControl variant="outlined" fullWidth>
-									<InputLabel>{translate("auth_form_texts", lng, 0)}</InputLabel>
+									<InputLabel>{translate("auth_form_texts", lng, 2)}</InputLabel>
 									<OutlinedInput
-										label={translate("auth_form_texts", lng, 0)}
+										label={translate("auth_form_texts", lng, 2)}
 										name="mainEmail"
 										required
 										type="email"
@@ -117,9 +117,11 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 						)}
 						<Grid item xs={12}>
 							<FormControl variant="outlined" fullWidth>
-								<InputLabel>{translate("auth_form_texts", lng, 0)}</InputLabel>
+								<InputLabel>
+									{translate("auth_form_texts", lng, isRecovery ? 3 : 0)}
+								</InputLabel>
 								<OutlinedInput
-									label={translate("auth_form_texts", lng, 0)}
+									label={translate("auth_form_texts", lng, isRecovery ? 3 : 0)}
 									name="mailToSendCode"
 									required
 									type="email"
