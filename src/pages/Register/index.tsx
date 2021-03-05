@@ -106,7 +106,7 @@ export default function TextMobileStepper() {
 	]
 
 	return (
-		<Container maxWidth="xl" className={classes.container} data-testid="test_not_found_page">
+		<Container maxWidth="xl" className={classes.container} data-testid="test_register_page">
 			<Grid container justify="center" className={classes.centerAll} spacing={0}>
 				<Grid item xs={12} sm={8} md={7}>
 					<Card className={classes.card}>
