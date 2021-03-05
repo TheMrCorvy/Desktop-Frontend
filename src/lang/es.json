@@ -125,7 +125,10 @@
 		"Email Principal",
 		"Email de Recuperación",
 		"Secreto Anti-Fishing",
-		"Código de Seguridad"
+		"Código de Seguridad",
+		"Nombre",
+		"Número de Teléfono",
+		"Confirma"
 	],
 	"before_using_security_code": [
 		"El código de seguridad que ingreses solo funcionará una única vez, asegurate de renovarlo apenas ingreses."
@@ -135,7 +138,9 @@
 		"Este campo es requerido.",
 		"Se ha sobrepasado la cantidad máxima de caractéres.",
 		"No se ha alcanzado la cantidad mínima de caractéres.",
-		"No es un Email válido."
+		"No es un Email válido.",
+		"El campo y su confirmación no coinciden.",
+		"El Email Principal y el Email de Recuperación no pueden ser el mismo."
 	],
 	"install_app_to_generate_codes": [
 		"Por favor, asegurese de tener ya instalada una app para generar códigos temporales de acceso. Puedes hacer click en el signo de pregunta para saber más al respecto."

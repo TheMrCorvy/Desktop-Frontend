@@ -113,7 +113,10 @@
 		"Main Email",
 		"Recovery Email",
 		"Anti-Fishing Secret",
-		"Security Code"
+		"Security Code",
+		"Name",
+		"Phone Number",
+		"Confirm"
 	],
 	"before_using_security_code": [
 		"The security code you enter will work only once, so make sure to renew it immediately after the login."
@@ -123,7 +126,9 @@
 		"This input is required.",
 		"The maximum amount of characters has been exceeded.",
 		"The minimum amount of characters has not been reached.",
-		"Not a valid Email."
+		"Not a valid Email.",
+		"Input and confirmation do not match.",
+		"Main Rmail can not be the same as Recovery Email."
 	],
 	"install_app_to_generate_codes": [
 		"Please make sure to have already installed an app to generate temporary access codes. You can click on the question mark to learn more about it."

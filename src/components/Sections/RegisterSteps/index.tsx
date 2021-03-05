@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const RegisterSteps = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
+const RegisterSteps = ({ isRobot }: { isRobot: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
