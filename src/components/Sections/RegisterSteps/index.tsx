@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme, createStyles, useTheme } from "@material-ui/core/styles"
 
 import { Button, Typography, Paper, MobileStepper, Grid } from "@material-ui/core"
 
@@ -10,27 +10,11 @@ import { translate } from "../../../lang"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
+import ReCAPTCHA from "react-google-recaptcha"
+
 import StepOne from "./StepOne"
 import StepTwo from "./StepTwo"
 import StepThree from "./StepThree"
-
-const tutorialSteps = [
-	{
-		label: "San Francisco – Oakland Bay Bridge, United States",
-		imgPath:
-			"https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
-	},
-	{
-		label: "Bird",
-		imgPath:
-			"https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
-	},
-	{
-		label: "Bali, Indonesia",
-		imgPath:
-			"https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80",
-	},
-]
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -57,14 +41,18 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const RegisterSteps = () => {
+const RegisterSteps = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
 
+	const [isRobot, setIsRobot] = useState(testing ? false : true)
+
 	const [activeStep, setActiveStep] = useState(0)
 
-	const maxSteps = tutorialSteps.length
+	const { REACT_APP_RECAPTCHA_SITE_KEY } = process.env
+
+	const theme = useTheme()
 
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1)
@@ -72,6 +60,16 @@ const RegisterSteps = () => {
 
 	const handleBack = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1)
+	}
+
+	const handleChangeCaptcha = (captchaResponse: string | null) => {
+		if (captchaResponse) {
+			setIsRobot(false)
+		}
+	}
+
+	const handleErrorCaptcha = () => {
+		setIsRobot(true)
 	}
 
 	const showSteps = () => {
@@ -93,22 +91,27 @@ const RegisterSteps = () => {
 			<Paper square elevation={0} className={classes.header}>
 				<Typography>{translate("register_steps_titles", lng, activeStep)}</Typography>
 			</Paper>
-			<div className={classes.stepperContent}>{showSteps()}</div>
+			<div className={classes.stepperContent}>
+				<Grid container justify="space-around" spacing={3}>
+					<Grid item xs={12} sm={6}>
+						<ReCAPTCHA
+							onChange={handleChangeCaptcha}
+							sitekey={`${REACT_APP_RECAPTCHA_SITE_KEY}`}
+							theme={theme.palette.type}
+							onExpired={handleErrorCaptcha}
+							onErrored={handleErrorCaptcha}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						{showSteps()}
+					</Grid>
+				</Grid>
+			</div>
 			<MobileStepper
-				steps={maxSteps}
+				steps={3}
 				position="static"
 				variant="text"
 				activeStep={activeStep}
-				nextButton={
-					<Button
-						size="small"
-						onClick={handleNext}
-						color="secondary"
-						disabled={activeStep === maxSteps - 1}
-					>
-						<FontAwesomeIcon icon={["fas", "chevron-right"]} size="2x" />
-					</Button>
-				}
 				backButton={
 					<Button
 						size="small"
@@ -117,6 +120,16 @@ const RegisterSteps = () => {
 						disabled={activeStep === 0}
 					>
 						<FontAwesomeIcon icon={["fas", "chevron-left"]} size="2x" />
+					</Button>
+				}
+				nextButton={
+					<Button
+						size="small"
+						onClick={handleNext}
+						color="secondary"
+						disabled={activeStep === 2 || isRobot}
+					>
+						<FontAwesomeIcon icon={["fas", "chevron-right"]} size="2x" />
 					</Button>
 				}
 				className={classes.stepperFooter}

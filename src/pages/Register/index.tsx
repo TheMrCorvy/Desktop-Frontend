@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		container: {
 			flexGrow: 1,
 			background: theme.palette.type === "dark" ? "#333" : "#f2f2f2",
-			paddingTop: "1rem",
-			paddingBottom: "1rem",
+			paddingTop: "4rem",
+			paddingBottom: "2rem",
 		},
 		centerAll: {
 			minHeight: "100vh",
