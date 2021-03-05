@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
-import { Button, Typography, Paper, MobileStepper } from "@material-ui/core"
+import { Button, Typography, Paper, MobileStepper, Grid } from "@material-ui/core"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
@@ -9,6 +9,10 @@ import { RootState } from "../../../redux/store"
 import { translate } from "../../../lang"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
+import StepOne from "./StepOne"
+import StepTwo from "./StepTwo"
+import StepThree from "./StepThree"
 
 const tutorialSteps = [
 	{
@@ -43,18 +47,12 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		stepperContent: {
 			backgroundColor: theme.palette.background.default,
+			padding: 25,
 		},
 		stepperFooter: {
 			backgroundColor: theme.palette.background.default,
 			borderBottomLeftRadius: 8,
 			borderBottomRightRadius: 8,
-		},
-		img: {
-			height: 255,
-			maxWidth: 400,
-			overflow: "hidden",
-			display: "block",
-			width: "100%",
 		},
 	})
 )
@@ -76,18 +74,26 @@ const RegisterSteps = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1)
 	}
 
+	const showSteps = () => {
+		switch (activeStep) {
+			case 0:
+				return <StepOne />
+			case 1:
+				return <StepTwo />
+			case 2:
+				return <StepThree />
+
+			default:
+				return <StepOne />
+		}
+	}
+
 	return (
 		<>
 			<Paper square elevation={0} className={classes.header}>
 				<Typography>{translate("register_steps_titles", lng, activeStep)}</Typography>
 			</Paper>
-			<div className={classes.stepperContent}>
-				<img
-					className={classes.img}
-					src={tutorialSteps[activeStep].imgPath}
-					alt={tutorialSteps[activeStep].label}
-				/>
-			</div>
+			<div className={classes.stepperContent}>{showSteps()}</div>
 			<MobileStepper
 				steps={maxSteps}
 				position="static"
