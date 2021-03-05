@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import { makeStyles, Theme, createStyles, useTheme } from "@material-ui/core/styles"
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
-import { Button, Typography, Paper, MobileStepper, Grid } from "@material-ui/core"
+import { Button, Typography, Paper, MobileStepper } from "@material-ui/core"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
@@ -9,8 +9,6 @@ import { RootState } from "../../../redux/store"
 import { translate } from "../../../lang"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
-import ReCAPTCHA from "react-google-recaptcha"
 
 import StepOne from "./StepOne"
 import StepTwo from "./StepTwo"
@@ -46,13 +44,7 @@ const RegisterSteps = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 
 	const classes = useStyles()
 
-	const [isRobot, setIsRobot] = useState(testing ? false : true)
-
 	const [activeStep, setActiveStep] = useState(0)
-
-	const { REACT_APP_RECAPTCHA_SITE_KEY } = process.env
-
-	const theme = useTheme()
 
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1)
@@ -60,16 +52,6 @@ const RegisterSteps = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 
 	const handleBack = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1)
-	}
-
-	const handleChangeCaptcha = (captchaResponse: string | null) => {
-		if (captchaResponse) {
-			setIsRobot(false)
-		}
-	}
-
-	const handleErrorCaptcha = () => {
-		setIsRobot(true)
 	}
 
 	const showSteps = () => {
@@ -91,22 +73,7 @@ const RegisterSteps = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 			<Paper square elevation={0} className={classes.header}>
 				<Typography>{translate("register_steps_titles", lng, activeStep)}</Typography>
 			</Paper>
-			<div className={classes.stepperContent}>
-				<Grid container justify="space-around" spacing={3}>
-					<Grid item xs={12} sm={6}>
-						<ReCAPTCHA
-							onChange={handleChangeCaptcha}
-							sitekey={`${REACT_APP_RECAPTCHA_SITE_KEY}`}
-							theme={theme.palette.type}
-							onExpired={handleErrorCaptcha}
-							onErrored={handleErrorCaptcha}
-						/>
-					</Grid>
-					<Grid item xs={12}>
-						{showSteps()}
-					</Grid>
-				</Grid>
-			</div>
+			<div className={classes.stepperContent}>{showSteps()}</div>
 			<MobileStepper
 				steps={3}
 				position="static"

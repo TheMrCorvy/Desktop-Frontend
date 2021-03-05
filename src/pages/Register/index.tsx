@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme, createStyles, useTheme } from "@material-ui/core/styles"
 
 import {
 	Grid,
@@ -16,6 +16,8 @@ import {
 } from "@material-ui/core"
 
 import { Link } from "react-router-dom"
+
+import ReCAPTCHA from "react-google-recaptcha"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
@@ -63,6 +65,10 @@ const useStyles = makeStyles((theme: Theme) =>
 		cardHeader: {
 			textAlign: "center",
 		},
+		cardContent: {
+			paddingRight: 0,
+			paddingLeft: 0,
+		},
 		dialogButton: {
 			boxShadow: "none",
 			marginBottom: "2rem",
@@ -78,10 +84,16 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-export default function TextMobileStepper() {
+export default function TextMobileStepper({ testing }: { testing?: boolean }) {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
+
+	const theme = useTheme()
+
+	const [isRobot, setIsRobot] = useState(testing ? false : true)
+
+	const { REACT_APP_RECAPTCHA_SITE_KEY } = process.env
 
 	const recommendedApps = [
 		{
@@ -107,6 +119,16 @@ export default function TextMobileStepper() {
 		},
 	]
 
+	const handleChangeCaptcha = (captchaResponse: string | null) => {
+		if (captchaResponse) {
+			setIsRobot(false)
+		}
+	}
+
+	const handleErrorCaptcha = () => {
+		setIsRobot(true)
+	}
+
 	return (
 		<Container maxWidth="xl" className={classes.container} data-testid="test_register_page">
 			<Grid container justify="center" className={classes.centerAll} spacing={0}>
@@ -121,60 +143,86 @@ export default function TextMobileStepper() {
 							}}
 							subheaderTypographyProps={{ variant: "body2" }}
 						/>
-						<CardContent>
-							<DialogComponent
-								title={translate("register_dialog_texts", lng, 0)}
-								tooltipPlacement="top"
-								className={classes.dialogButton}
-							>
-								<DialogContent>
-									<Typography paragraph gutterBottom variant="body2">
-										{translate("register_dialog_texts", lng, 1)}
-									</Typography>
-									<Typography paragraph gutterBottom variant="body2">
-										{translate("register_dialog_texts", lng, 2)}
-									</Typography>
-									<Divider className={classes.divider} />
-									<Typography paragraph gutterBottom variant="body2">
-										{translate("register_dialog_texts", lng, 3)}
-									</Typography>
-									<Typography paragraph gutterBottom variant="body2">
-										{translate("register_dialog_texts", lng, 4)}
-									</Typography>
-									<Divider className={classes.divider} />
-									<Typography paragraph gutterBottom variant="body2">
-										{translate("register_dialog_texts", lng, 5)}
-									</Typography>
-									<ol>
-										{recommendedApps.map((app, index) => (
-											<li key={index} style={{ marginBottom: 25 }}>
-												<Typography variant="h6" gutterBottom>
-													{app.appName}
-												</Typography>
-												<Typography paragraph gutterBottom variant="body2">
-													{app.bodyText}
-												</Typography>
-												<MuiLink
-													className={classes.recommendedLinks}
-													href={app.linkPlayStore}
-													target="_blank"
-												>
-													Google PlayStore
-												</MuiLink>
-												<MuiLink
-													className={classes.recommendedLinks}
-													href={app.linkAppleStore}
-													target="_blank"
-												>
-													Apple AppStore
-												</MuiLink>
-											</li>
-										))}
-									</ol>
-								</DialogContent>
-							</DialogComponent>
-
-							<RegisterSteps />
+						<CardContent className={classes.cardContent}>
+							<Grid container justify="center" spacing={1}>
+								<Grid item xs={12} style={{ textAlign: "center" }}>
+									<DialogComponent
+										title={translate("register_dialog_texts", lng, 0)}
+										tooltipPlacement="top"
+										className={classes.dialogButton}
+									>
+										<DialogContent>
+											<Typography paragraph gutterBottom variant="body2">
+												{translate("register_dialog_texts", lng, 1)}
+											</Typography>
+											<Typography paragraph gutterBottom variant="body2">
+												{translate("register_dialog_texts", lng, 2)}
+											</Typography>
+											<Divider className={classes.divider} />
+											<Typography paragraph gutterBottom variant="body2">
+												{translate("register_dialog_texts", lng, 3)}
+											</Typography>
+											<Typography paragraph gutterBottom variant="body2">
+												{translate("register_dialog_texts", lng, 4)}
+											</Typography>
+											<Divider className={classes.divider} />
+											<Typography paragraph gutterBottom variant="body2">
+												{translate("register_dialog_texts", lng, 5)}
+											</Typography>
+											<ol>
+												{recommendedApps.map((app, index) => (
+													<li key={index} style={{ marginBottom: 25 }}>
+														<Typography variant="h6" gutterBottom>
+															{app.appName}
+														</Typography>
+														<Typography
+															paragraph
+															gutterBottom
+															variant="body2"
+														>
+															{app.bodyText}
+														</Typography>
+														<MuiLink
+															className={classes.recommendedLinks}
+															href={app.linkPlayStore}
+															target="_blank"
+														>
+															Google PlayStore
+														</MuiLink>
+														<MuiLink
+															className={classes.recommendedLinks}
+															href={app.linkAppleStore}
+															target="_blank"
+														>
+															Apple AppStore
+														</MuiLink>
+													</li>
+												))}
+											</ol>
+										</DialogContent>
+									</DialogComponent>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+									style={{
+										display: "flex",
+										alignItems: "center",
+										textAlign: "center",
+									}}
+								>
+									<ReCAPTCHA
+										onChange={handleChangeCaptcha}
+										sitekey={`${REACT_APP_RECAPTCHA_SITE_KEY}`}
+										theme={theme.palette.type}
+										onExpired={handleErrorCaptcha}
+										onErrored={handleErrorCaptcha}
+									/>
+								</Grid>
+								<Grid item xs={12} style={{ marginRight: 15, marginLeft: 15 }}>
+									<RegisterSteps isRobot={isRobot} />
+								</Grid>
+							</Grid>
 						</CardContent>
 						<CardActions className={classes.cardActions}>
 							<Link to="/" className={classes.link}>
