@@ -1,26 +1,18 @@
 import React, { useState } from "react"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
-import {
-	Grid,
-	Container,
-	Button,
-	Card,
-	CardContent,
-	CardHeader,
-	CardActions,
-} from "@material-ui/core"
+import { Button, Typography, Paper, MobileStepper } from "@material-ui/core"
 
 import { Link } from "react-router-dom"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
+import { RootState } from "../../../redux/store"
 
-import { translate } from "../../lang"
+import { translate } from "../../../lang"
 
-import DialogComponent from "../../components/Dialog"
+import DialogComponent from "../../../components/Dialog"
 
-import RegisterSteps from "../../components/Sections/RegisterSteps"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const tutorialSteps = [
 	{
@@ -118,7 +110,11 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-export default function TextMobileStepper() {
+type Props = {
+	testing?: boolean
+}
+
+const RegisterSteps = ({ testing }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
@@ -136,49 +132,46 @@ export default function TextMobileStepper() {
 	}
 
 	return (
-		<Container maxWidth="xl" className={classes.container} data-testid="test_not_found_page">
-			<Grid container justify="center" className={classes.centerAll} spacing={0}>
-				<Grid item xs={12} sm={8} md={7}>
-					<Card className={classes.card}>
-						<CardHeader
-							title={translate("navbar_register_btn", lng)}
-							subheader="Por favor asegurese de tener instalada una app para generar códigos de verificación. Haz click en el símbolo de pregunta para saber más al respecto."
-							classes={{
-								subheader: classes.cardSubheader,
-								title: classes.cardHeader,
-							}}
-							subheaderTypographyProps={{ variant: "body2" }}
-						/>
-						<CardContent>
-							<DialogComponent
-								title={translate("about_subtitle", lng)}
-								tooltipPlacement="top"
-								className={classes.dialogButton}
-							>
-								<>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
-									nisi, suscipit maxime eaque rem quasi doloremque omnis tempora
-									natus voluptate dolore officia repellat odio dignissimos ab
-									nostrum earum magnam qui.
-								</>
-							</DialogComponent>
-							<RegisterSteps />
-						</CardContent>
-						<CardActions className={classes.cardActions}>
-							<Link to="/" className={classes.link}>
-								<Button size="large" color="primary">
-									{translate("home", lng)}
-								</Button>
-							</Link>
-							<Link to="/login" className={classes.link}>
-								<Button size="large" color="primary">
-									{translate("navbar_login_btn", lng)}
-								</Button>
-							</Link>
-						</CardActions>
-					</Card>
-				</Grid>
-			</Grid>
-		</Container>
+		<>
+			<Paper square elevation={0} className={classes.header}>
+				<Typography>{tutorialSteps[activeStep].label}</Typography>
+			</Paper>
+			<div className={classes.stepperContent}>
+				<img
+					className={classes.img}
+					src={tutorialSteps[activeStep].imgPath}
+					alt={tutorialSteps[activeStep].label}
+				/>
+			</div>
+			<MobileStepper
+				steps={maxSteps}
+				position="static"
+				variant="text"
+				activeStep={activeStep}
+				nextButton={
+					<Button
+						size="small"
+						onClick={handleNext}
+						color="secondary"
+						disabled={activeStep === maxSteps - 1}
+					>
+						<FontAwesomeIcon icon={["fas", "chevron-right"]} size="2x" />
+					</Button>
+				}
+				backButton={
+					<Button
+						size="small"
+						onClick={handleBack}
+						color="secondary"
+						disabled={activeStep === 0}
+					>
+						<FontAwesomeIcon icon={["fas", "chevron-left"]} size="2x" />
+					</Button>
+				}
+				className={classes.stepperFooter}
+			/>
+		</>
 	)
 }
+
+export default RegisterSteps
