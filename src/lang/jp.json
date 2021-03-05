@@ -130,7 +130,20 @@
 	],
 	"register_steps_titles": [
 		"Step 1: How can we identify you?",
-		"Step 2: We have sent you some verification codes to, your main email, and your recovery email, please verify the codes.",
+		"Step 2: We have sent you some verification codes to your main email, and your recovery email, please verify those codes.",
 		"Step 3: Scan this QR code with your favorite app to generate temporary access codes, and verify it."
+	],
+	"register_dialog_texts": [
+		"What is an app to generate temporary access codes?",
+		"In order to guarantee the maximum possible security for your account, we recommend using an app that generates TOTP codes (Time-based One Time Passowrds).",
+		"These generated codes will be renewed every 30 seconds, and will only be valid once.",
+		"Next we will ask you to scan a QR code with an app, or to copy and paste the Secret Key provided next to the QR code.",
+		"PLEASE DO NOT SHARE THE QR CODE OR THE SECRET KEY WITH ANYONE, as this will give them access to your account and all your passwords.",
+		"To generate Temporary Access Codes, we recommend using at least one of the following apps:"
+	],
+	"recommended_apps_texts": [
+		"This app, by default, comes with protection, that is, if someone wants to have access to the generated codes, they must know how to unlock your smartphone as well.",
+		"It is the most frequently used for this type of authentication, but it does not porvides any protection by default to display the generated codes.",
+		"It is the only of the 3 options that allows you to back up your codes safely in the cloud, with the disadvantage that it asks you to store a password to unlock them (you know where you can save that password, I'm just saying...)."
 	]
 }

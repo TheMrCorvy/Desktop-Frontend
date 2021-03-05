@@ -144,5 +144,18 @@
 		"Paso 1: ¿Cómo podemos identificarte?",
 		"Paso 2: Te hemos enviado un código de verificación a tu email principal, y de recuperación, por favor verifica los códigos.",
 		"Paso 3: Escanea este código QR con tu app favorita para generar códigos temporales, y verifica con el código generado."
+	],
+	"register_dialog_texts": [
+		"¿Qué es una app para generar códigos de acceso temporal?",
+		"Para poder garantizar la máxima seguridad posible para tu cuenta, te recomendamos usar una app que genere códigos TOTP (por sus siglas en Inglés: Contraseñas de Uso único, generadas en base a Tiempo).",
+		"Éstos códigos generados se renovarán cada 30 segundos, y solo serán válidos una única vez.",
+		"A continuación te pediremos que escanees un código QR con una app, o que copies y peges la Llave Secreta proporcionada al lado del código QR.",
+		"POR FAVOR NO COMPARTAS NI EL CÓDIGO QR, NI LA LLAVE SECRETA CON NADIE, ya que esto le dará acceso a tu cuenta y a todas tus contraseñas.",
+		"Para generar los Códigos Temporales de Acceso, te recomendamos usar al menos una de las siguientes apps:"
+	],
+	"recommended_apps_texts": [
+		"Ésta app por defecto viene con protección, es decir, si alguien quiere tener acceso a tos códigos, debe saber cómo desbloquear tu smartphone también.",
+		"Es la más frecuentemente usada para este tipo de autenticación, pero no cuenta con ninguna protección por defecto para mostrar los códigos generados.",
+		"Es la única de las 3 opciones que te permite respaldar tus códigos de manera segura en la nube, con la desventaja de que te pide que almacenes una contraseña para desbloquearlos (ya sabes en dónde puedes guardar esa contraseña, guiño guiño...)."
 	]
 }
