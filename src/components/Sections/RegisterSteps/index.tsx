@@ -59,7 +59,7 @@ const RegisterSteps = ({ isRobot }: { isRobot: boolean }) => {
 			case 0:
 				return <StepOne isRobot={isRobot} nextStep={handleNext} />
 			case 1:
-				return <StepTwo />
+				return <StepTwo isRobot={isRobot} nextStep={handleNext} />
 			case 2:
 				return <StepThree />
 

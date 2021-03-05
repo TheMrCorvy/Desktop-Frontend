@@ -128,7 +128,9 @@
 		"Código de Seguridad",
 		"Nombre",
 		"Número de Teléfono",
-		"Confirma"
+		"Confirma",
+		"Código Email Principal",
+		"Código Email Recuperación"
 	],
 	"before_using_security_code": [
 		"El código de seguridad que ingreses solo funcionará una única vez, asegurate de renovarlo apenas ingreses."
