@@ -35,17 +35,9 @@ type Props = {
 		| "top-start"
 	className?: any
 	tooltipTitle?: string
-	scroll?: "paper" | "body"
 }
 
-const DialogComponent = ({
-	children,
-	title,
-	tooltipPlacement,
-	className,
-	tooltipTitle,
-	scroll,
-}: Props) => {
+const DialogComponent = ({ children, title, tooltipPlacement, className, tooltipTitle }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)
@@ -75,7 +67,7 @@ const DialogComponent = ({
 				onClose={toggleDialog}
 				aria-labelledby="dialog-title"
 				open={open}
-				scroll={scroll ? scroll : "paper"}
+				scroll="paper"
 				data-testid="test_dialog"
 			>
 				<DialogTitle id="dialog-title" data-testid="test_dialog_title">
