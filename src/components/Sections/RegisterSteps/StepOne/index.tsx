@@ -1,12 +1,24 @@
 import React from "react"
 
-import { Grid, FormControl, InputLabel, OutlinedInput, Button, Typography } from "@material-ui/core"
+import {
+	Grid,
+	FormControl,
+	InputLabel,
+	OutlinedInput,
+	Button,
+	Typography,
+	InputAdornment,
+} from "@material-ui/core"
+
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import { useForm } from "react-hook-form"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
 import { translate } from "../../../../lang"
+
+import DialogComponent from "../../../Dialog"
 
 type Props = {
 	nextStep: () => void
@@ -23,10 +35,28 @@ type FormInputs = {
 	antiFishingSecret_confirmation: string
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		antiFishingDialog: {
+			boxShadow: "none",
+			background: theme.palette.primary.main,
+			"&:hover": {
+				background: theme.palette.primary.main,
+			},
+		},
+		divider: {
+			marginTop: 10,
+			marginBottom: 10,
+		},
+	})
+)
+
 const StepOne = ({ nextStep, isRobot, testing }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const { register, errors, handleSubmit, getValues } = useForm()
+
+	const classes = useStyles()
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
@@ -216,6 +246,30 @@ const StepOne = ({ nextStep, isRobot, testing }: Props) => {
 								}),
 							}}
 							error={errors?.antiFishingSecret ? true : false}
+							endAdornment={
+								<InputAdornment position="end">
+									<DialogComponent
+										title={translate("anti_fishing_texts", lng, 0)}
+										tooltipPlacement="top"
+										className={classes.antiFishingDialog}
+									>
+										<>
+											<Typography paragraph variant="body2" gutterBottom>
+												{translate("anti_fishing_texts", lng, 1)}
+											</Typography>
+											<Typography paragraph variant="body2" gutterBottom>
+												{translate("anti_fishing_texts", lng, 2)}
+											</Typography>
+											<Typography paragraph variant="body2" gutterBottom>
+												{translate("anti_fishing_texts", lng, 3)}
+											</Typography>
+											<Typography paragraph variant="body2" gutterBottom>
+												{translate("anti_fishing_texts", lng, 4)}
+											</Typography>
+										</>
+									</DialogComponent>
+								</InputAdornment>
+							}
 						/>
 						{errors.antiFishingSecret && (
 							<Typography variant="body2">

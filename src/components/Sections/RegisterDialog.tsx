@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 
 import { Typography, DialogContent, Divider, Link } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
@@ -10,20 +10,22 @@ import { translate } from "../../lang"
 
 import DialogComponent from "../Dialog"
 
-const useStyles = makeStyles({
-	dialogButton: {
-		boxShadow: "none",
-		marginBottom: "2rem",
-	},
-	divider: {
-		marginTop: 10,
-		marginBottom: 10,
-	},
-	recommendedLinks: {
-		marginRight: 15,
-		color: "#ff6200",
-	},
-})
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		dialogButton: {
+			boxShadow: "none",
+			marginBottom: "2rem",
+		},
+		divider: {
+			marginTop: 10,
+			marginBottom: 10,
+		},
+		recommendedLinks: {
+			marginRight: 15,
+			color: theme.palette.primary.main,
+		},
+	})
+)
 
 const RegisterDialog: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)

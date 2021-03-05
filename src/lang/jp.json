@@ -154,5 +154,12 @@
 		"It is the most frequently used for this type of authentication, but it does not porvides any protection by default to display the generated codes.",
 		"It is the only of the 3 options that allows you to back up your codes safely in the cloud, with the disadvantage that it asks you to store a password to unlock them (you know where you can save that password, I'm just saying...)."
 	],
-	"copy_paste_secret_key": ["Copy and paste this Secret Key:"]
+	"copy_paste_secret_key": ["Copy and paste this Secret Key:"],
+	"anti_fishing_texts": [
+		"What is an \"Anti-Fishing Scret\"?",
+		"A well-known hacking technique is called \"fishing\", in which an impostor sends you an email (just to give an example) posing as the company or the real person, and asking for any kind of information.",
+		"For example, let's imagine that one day you receive an email from PasuSewa saying that we need verify your identity, and for that you are asked to respond with a security code. By doing this you will be giving total access to your account to anyone that would be on the other side.",
+		"To avoid that, every time you receive a notification from PasuSewa, within that notification will be included a secret word that only you know. This secret word is the \"Anti-Fishing Secret\".",
+		"Since an imposter won't know what your secret word is, they will not be able to include it in the means by which they contacted you, and thus you will know that you are not speaking with the original company or person."
+	]
 }

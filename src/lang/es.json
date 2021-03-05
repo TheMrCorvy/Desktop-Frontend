@@ -166,5 +166,12 @@
 		"Es la más frecuentemente usada para este tipo de autenticación, pero no cuenta con ninguna protección por defecto para mostrar los códigos generados.",
 		"Es la única de las 3 opciones que te permite respaldar tus códigos de manera segura en la nube, con la desventaja de que te pide que almacenes una contraseña para desbloquearlos (ya sabes en dónde puedes guardar esa contraseña, guiño guiño...)."
 	],
-	"copy_paste_secret_key": ["Copia y pega esta Llave Secreta:"]
+	"copy_paste_secret_key": ["Copia y pega esta Llave Secreta:"],
+	"anti_fishing_texts": [
+		"¿Qué es un \"Secreto Anti-Fishing\"?",
+		"Una técnica de hacking muy conocida es el llamado \"fishing\", en el cual un impostor te envía un email (solo por dar un ejemplo) haciendose pasar por la empresa o la persona real, pidiendo alguna clase de información.",
+		"Por ejemplo, imagina que un día recibes un email de PasuSewa diciendo que necesitamos verificar tu identidad, y para eso se te pide que respondas con algún código de seguridad. Al hacer esto le estarás dando acceso total a tu cuenta a quien sea que está del otro lado.",
+		"Para evitar eso, cada vez que recibas una notificación de PasuSewa, dentro de dicha notificación se incluirá una palabra secreta que solo tú conoces. Dicha palabra secreta es el \"Secreto Anti-Fishing\".",
+		"Ya que un impostor no sabrá cuál es tu palabra secreta, no podrá incluirla en el medio por el cual te haya contactado, y así sabrás que no estás hablando con la empresa o la persona original."
+	]
 }
