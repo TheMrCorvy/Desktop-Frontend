@@ -3,8 +3,6 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import { Button, Typography, Paper, MobileStepper } from "@material-ui/core"
 
-import { Link } from "react-router-dom"
-
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 
