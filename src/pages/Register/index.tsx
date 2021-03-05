@@ -127,7 +127,7 @@ const Register = ({ testing }: { testing?: boolean }) => {
 									/>
 								</Grid>
 								<Grid item xs={12} style={{ marginRight: 15, marginLeft: 15 }}>
-									<RegisterSteps isRobot={false} />
+									<RegisterSteps isRobot={isRobot} />
 								</Grid>
 							</Grid>
 						</CardContent>

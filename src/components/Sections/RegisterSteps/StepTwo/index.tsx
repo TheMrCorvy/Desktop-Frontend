@@ -118,7 +118,7 @@ const StepTwo = ({ nextStep, isRobot, testing }: Props) => {
 								onClick={handleSubmit(onSubmit)}
 								disabled={isRobot}
 							>
-								{translate("navbar_login_btn", lng)}
+								{translate("continue", lng)}
 							</Button>
 						</Grid>
 					</Grid>

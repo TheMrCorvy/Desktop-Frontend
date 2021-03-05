@@ -111,6 +111,7 @@
 		"La idea de este proyecto es siempre tratar de quitarle un peso de encima a nuestros usuarios, custodiando sus contraseñas, enseñando diferentes técnicas para mantener tu privacidad online, entre otros."
 	],
 	"loading": ["Cargando, por favor espere..."],
+	"continue": ["Continuar"],
 	"error_404": ["Página No Encontrada"],
 	"login_subtitle": ["Por favor, comprueba que estás visitando la URL correcta"],
 	"login_options": [

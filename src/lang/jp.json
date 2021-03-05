@@ -104,6 +104,7 @@
 		"The idea of ​​this project is to always try to help users on the internet guarding their passwords, teaching different techniques to maintain your privacy online, among others."
 	],
 	"loading": ["ナウローディング、まって下さい..."],
+	"continue": ["Continue"],
 	"error_404": ["Page Not Found"],
 	"login_subtitle": ["Please check that you are visiting the correct URL"],
 	"login_options": ["Verification Code", "Email", "Recovery Email", "Security Code"],

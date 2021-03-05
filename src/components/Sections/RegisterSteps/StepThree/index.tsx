@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 import {
 	Grid,
@@ -8,6 +8,7 @@ import {
 	InputAdornment,
 	Button,
 	Typography,
+	CircularProgress,
 } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
@@ -19,6 +20,21 @@ import { translate } from "../../../../lang"
 import { useForm } from "react-hook-form"
 
 import { QRCode } from "react-qrcode-logo"
+
+type Props = {
+	isRobot: boolean
+	testing?: boolean
+}
+
+type FormInput = {
+	verificationCode: string
+}
+
+type UserData = {
+	email: string
+	secretKey: string
+	error?: any
+}
 
 const useStyles = makeStyles({
 	centerAll: {
@@ -32,12 +48,13 @@ const useStyles = makeStyles({
 	},
 })
 
-type FormInput = {
-	verificationCode: string
-}
-
-const StepThree = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
+const StepThree = ({ isRobot, testing }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+
+	const [userData, setUserData] = useState<UserData>({
+		email: "",
+		secretKey: "",
+	})
 
 	const { register, errors, handleSubmit } = useForm()
 
@@ -47,9 +64,27 @@ const StepThree = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
 	const minCharMessage = translate("form_validation_messages", lng, 2)
 
-	const appName = "PasuSewa 4"
-	const email = "mr.corvy@gmail.com"
-	const secretKey = "DCRMALCXPEZOFKZH"
+	useEffect(() => {
+		if (testing) {
+			setUserData({
+				email: "mr.corvy@gmail.com",
+				secretKey: "DCRMALCXPEZOFKZH",
+			})
+
+			return
+		}
+
+		//api call, just for now I'll simulate the api call
+		const timer = setTimeout(() => {
+			setUserData({
+				email: "mr.corvy@gmail.com",
+				secretKey: "DCRMALCXPEZOFKZH",
+			})
+		}, 5000)
+		return () => {
+			clearTimeout(timer)
+		}
+	}, [])
 
 	const onSubmit = (data: FormInput) => {
 		if (testing) return
@@ -60,82 +95,102 @@ const StepThree = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }
 
 	return (
 		<Grid container spacing={3} justify="space-around">
-			<Grid item xs={12} sm={6}>
-				<Typography paragraph variant="subtitle2">
-					{translate("register_dialog_texts", lng, 4)}
-				</Typography>
-			</Grid>
-			<Grid item xs={12} sm={6}>
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<FormControl variant="outlined" fullWidth>
-						<InputLabel>{translate("auth_form_texts", lng, 1)}</InputLabel>
-						<OutlinedInput
-							label={translate("auth_form_texts", lng, 1)}
-							name="verificationCode"
-							required
-							type="email"
-							inputProps={{
-								"data-testid": "test_verification_code_input",
-								ref: register({
-									required: {
-										value: true,
-										message: requiredMessage,
-									},
-									maxLength: {
-										value: 6,
-										message: maxCharMessage,
-									},
-									minLength: {
-										value: 6,
-										message: minCharMessage,
-									},
-								}),
-							}}
-							error={errors?.verificationCode ? true : false}
-							endAdornment={
-								<InputAdornment position="end">
-									<Button
-										variant="contained"
-										color="primary"
-										fullWidth
-										disableElevation
-										onClick={handleSubmit(onSubmit)}
-										disabled={isRobot}
-									>
-										{translate("navbar_login_btn", lng)}
-									</Button>
-								</InputAdornment>
-							}
+			{!userData.email || !userData.secretKey ? (
+				<>
+					<Grid item xs={12} className={classes.centerAll}>
+						<CircularProgress />
+					</Grid>
+					<Grid item xs={12} className={classes.centerAll}>
+						<Typography paragraph variant="subtitle2">
+							{translate("loading", lng)}
+						</Typography>
+					</Grid>
+				</>
+			) : (
+				<>
+					<Grid item xs={12} sm={6}>
+						<Typography paragraph variant="subtitle2">
+							{translate("register_dialog_texts", lng, 4)}
+						</Typography>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<form onSubmit={handleSubmit(onSubmit)}>
+							<FormControl variant="outlined" fullWidth>
+								<InputLabel>{translate("auth_form_texts", lng, 1)}</InputLabel>
+								<OutlinedInput
+									label={translate("auth_form_texts", lng, 1)}
+									name="verificationCode"
+									required
+									type="email"
+									inputProps={{
+										"data-testid": "test_verification_code_input",
+										ref: register({
+											required: {
+												value: true,
+												message: requiredMessage,
+											},
+											maxLength: {
+												value: 6,
+												message: maxCharMessage,
+											},
+											minLength: {
+												value: 6,
+												message: minCharMessage,
+											},
+										}),
+									}}
+									error={errors?.verificationCode ? true : false}
+									endAdornment={
+										<InputAdornment position="end">
+											<Button
+												variant="contained"
+												color="primary"
+												fullWidth
+												disableElevation
+												onClick={handleSubmit(onSubmit)}
+												disabled={isRobot}
+											>
+												{translate("navbar_login_btn", lng)}
+											</Button>
+										</InputAdornment>
+									}
+								/>
+								{errors.verificationCode && (
+									<Typography variant="body2">
+										{errors.verificationCode.message}
+									</Typography>
+								)}
+							</FormControl>
+						</form>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<QRCode
+							value={`otpauth://totp/${translate("app_name", lng)}:${
+								userData.email
+							}?secret=${userData.secretKey}&issuer=${translate(
+								"app_name",
+								lng
+							)}&algorithm=SHA1&digits=6&period=30`}
+							size={200}
 						/>
-						{errors.verificationCode && (
-							<Typography variant="body2">
-								{errors.verificationCode.message}
+					</Grid>
+					<Grid item xs={12} sm={6} className={classes.centerAll}>
+						<Typography paragraph gutterBottom variant="subtitle1">
+							{translate("copy_paste_secret_key", lng)}
+							<br />
+							<Typography
+								paragraph
+								gutterBottom
+								variant="h6"
+								component="h6"
+								className={classes.secretKey}
+							>
+								{userData.secretKey}
 							</Typography>
-						)}
-					</FormControl>
-				</form>
-			</Grid>
-			<Grid item xs={12} sm={6}>
-				<QRCode
-					value={`otpauth://totp/${appName}:${email}?secret=${secretKey}&issuer=${appName}&algorithm=SHA1&digits=6&period=30`}
-					size={200}
-				/>
-			</Grid>
-			<Grid item xs={12} sm={6} className={classes.centerAll}>
-				<Typography paragraph gutterBottom variant="subtitle1">
-					{translate("copy_paste_secret_key", lng)}
-					<br />
-					<Typography
-						paragraph
-						gutterBottom
-						variant="h6"
-						component="h6"
-						className={classes.secretKey}
-					>
-						{secretKey}
-					</Typography>
-				</Typography>
-			</Grid>
+						</Typography>
+					</Grid>
+				</>
+			)}
 		</Grid>
 	)
 }
