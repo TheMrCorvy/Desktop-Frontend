@@ -10,8 +10,6 @@ import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
 
-import DialogComponent from "../../../components/Dialog"
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const tutorialSteps = [
@@ -29,16 +27,6 @@ const tutorialSteps = [
 		label: "Bali, Indonesia",
 		imgPath:
 			"https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80",
-	},
-	{
-		label: "NeONBRAND Digital Marketing, Las Vegas, United States",
-		imgPath:
-			"https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60",
-	},
-	{
-		label: "Goč, Serbia",
-		imgPath:
-			"https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
 	},
 ]
 
@@ -70,51 +58,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: "block",
 			width: "100%",
 		},
-		container: {
-			flexGrow: 1,
-			background: theme.palette.type === "dark" ? "#333" : "#f2f2f2",
-		},
-		centerAll: {
-			minHeight: "100vh",
-			display: "flex",
-			alignItems: "center",
-			textAlign: "center",
-
-			[theme.breakpoints.up("sm")]: {
-				marginTop: "1rem",
-			},
-		},
-		card: {
-			borderRadius: 7,
-			marginTop: "1rem",
-		},
-		cardActions: {
-			display: "flex",
-			justifyContent: "space-between",
-		},
-		link: {
-			textDecoration: "none",
-		},
-		cardSubheader: {
-			color:
-				theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.54)",
-			textAlign: "center",
-		},
-		cardHeader: {
-			textAlign: "center",
-		},
-		dialogButton: {
-			boxShadow: "none",
-			marginBottom: "2rem",
-		},
 	})
 )
 
-type Props = {
-	testing?: boolean
-}
-
-const RegisterSteps = ({ testing }: Props) => {
+const RegisterSteps = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
@@ -134,7 +81,7 @@ const RegisterSteps = ({ testing }: Props) => {
 	return (
 		<>
 			<Paper square elevation={0} className={classes.header}>
-				<Typography>{tutorialSteps[activeStep].label}</Typography>
+				<Typography>{translate("register_steps_titles", lng, activeStep)}</Typography>
 			</Paper>
 			<div className={classes.stepperContent}>
 				<img

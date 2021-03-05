@@ -136,5 +136,10 @@
 		"Se ha sobrepasado la cantidad máxima de caractéres.",
 		"No se ha alcanzado la cantidad mínima de caractéres.",
 		"No es un Email válido."
+	],
+	"register_steps_titles": [
+		"Paso 1: ¿Cómo podemos identificarte?",
+		"Paso 2: Te hemos enviado un código de verificación a tu email principal, y de recuperación, por favor verifica los códigos.",
+		"Paso 3: Escanea este código QR con tu app favorita para generar códigos temporales, y verifica con el código generado."
 	]
 }

@@ -124,5 +124,10 @@
 		"The maximum amount of characters has been exceeded.",
 		"The minimum amount of characters has not been reached.",
 		"Not a valid Email."
+	],
+	"register_steps_titles": [
+		"Step 1: How can we identify you?",
+		"Step 2: We have sent you some verification codes to both, your main email, and your recovery email.",
+		"Step 3: Scan this QR code with your favorite app to generate temporary access codes, and verify it."
 	]
 }

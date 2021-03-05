@@ -52,32 +52,6 @@ const tutorialSteps = [
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		header: {
-			display: "flex",
-			alignItems: "center",
-			minHeight: 50,
-			textAlign: "center",
-			justifyContent: "center",
-			borderTopLeftRadius: 8,
-			borderTopRightRadius: 8,
-			backgroundColor: theme.palette.background.default,
-			padding: 20,
-		},
-		stepperContent: {
-			backgroundColor: theme.palette.background.default,
-		},
-		stepperFooter: {
-			backgroundColor: theme.palette.background.default,
-			borderBottomLeftRadius: 8,
-			borderBottomRightRadius: 8,
-		},
-		img: {
-			height: 255,
-			maxWidth: 400,
-			overflow: "hidden",
-			display: "block",
-			width: "100%",
-		},
 		container: {
 			flexGrow: 1,
 			background: theme.palette.type === "dark" ? "#333" : "#f2f2f2",
@@ -122,18 +96,6 @@ export default function TextMobileStepper() {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
-
-	const [activeStep, setActiveStep] = useState(0)
-
-	const maxSteps = tutorialSteps.length
-
-	const handleNext = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep + 1)
-	}
-
-	const handleBack = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep - 1)
-	}
 
 	return (
 		<Container maxWidth="xl" className={classes.container} data-testid="test_not_found_page">
