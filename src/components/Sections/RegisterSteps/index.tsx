@@ -57,14 +57,14 @@ const RegisterSteps = ({ isRobot }: { isRobot: boolean }) => {
 	const showSteps = () => {
 		switch (activeStep) {
 			case 0:
-				return <StepOne />
+				return <StepOne isRobot={isRobot} nextStep={handleNext} />
 			case 1:
 				return <StepTwo />
 			case 2:
 				return <StepThree />
 
 			default:
-				return <StepOne />
+				return <StepOne isRobot={isRobot} nextStep={handleNext} />
 		}
 	}
 

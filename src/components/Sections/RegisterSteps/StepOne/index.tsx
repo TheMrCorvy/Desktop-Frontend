@@ -8,12 +8,22 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
 import { translate } from "../../../../lang"
 
-type FormInputs = {
-	email: String
-	verificationCode: number
+type Props = {
+	nextStep: () => void
+	isRobot: boolean
+	testing?: boolean
 }
 
-const StepOne = ({ testing }: { testing?: boolean }) => {
+type FormInputs = {
+	name: string
+	phoneNumber: string
+	mainEmail: string
+	recoveryEmail: string
+	antiFishingSecret: string
+	antiFishingSecret_confirmation: string
+}
+
+const StepOne = ({ nextStep, isRobot, testing }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const { register, errors, handleSubmit, getValues } = useForm()
@@ -31,9 +41,11 @@ const StepOne = ({ testing }: { testing?: boolean }) => {
 
 		console.log("production api call")
 		console.log(data)
+
+		nextStep()
 	}
 
-	const validateInputs = (input: string, value: any) => {
+	const validateInputs = (input: string, value: FormInputs) => {
 		let validation
 
 		if (input === "secret") {
@@ -49,7 +61,7 @@ const StepOne = ({ testing }: { testing?: boolean }) => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(onSubmit)} data-testid="test_register_step_1">
 			<Grid container spacing={3} justify="space-around">
 				<Grid item xs={12} sm={6}>
 					<FormControl variant="outlined" fullWidth>
@@ -253,6 +265,7 @@ const StepOne = ({ testing }: { testing?: boolean }) => {
 						fullWidth
 						disableElevation
 						onClick={handleSubmit(onSubmit)}
+						disabled={isRobot}
 					>
 						{translate("navbar_register_btn", lng)}
 					</Button>
