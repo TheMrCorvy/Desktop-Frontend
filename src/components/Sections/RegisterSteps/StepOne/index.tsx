@@ -91,7 +91,7 @@ const StepOne = ({ nextStep, isRobot, testing }: Props) => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} data-testid="test_register_step_1">
+		<form onSubmit={handleSubmit(onSubmit)} data-testid="test_step_one">
 			<Grid container spacing={3} justify="space-around">
 				<Grid item xs={12} sm={6}>
 					<FormControl variant="outlined" fullWidth>
@@ -134,6 +134,7 @@ const StepOne = ({ nextStep, isRobot, testing }: Props) => {
 							required
 							type="text"
 							inputProps={{
+								"data-testid": "test_phone_num_input",
 								ref: register({
 									required: {
 										value: true,

@@ -28,7 +28,7 @@ describe("checking if the user can write properly on the form", () => {
 		const code = "123456"
 
 		const mainCodeInput = getByTestId("test_main_email_code") as HTMLInputElement
-		const recoveryCodeInput = getByTestId("test_main_email_code") as HTMLInputElement
+		const recoveryCodeInput = getByTestId("test_recovery_email_code") as HTMLInputElement
 
 		fireEvent.change(mainCodeInput, { target: { value: code } })
 
