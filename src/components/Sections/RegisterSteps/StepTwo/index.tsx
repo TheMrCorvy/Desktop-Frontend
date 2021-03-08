@@ -37,7 +37,7 @@ const StepTwo = ({ nextStep, isRobot, testing }: Props) => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(onSubmit)} data-testid="test_step_two">
 			<Grid container justify="center">
 				<Grid item xs={12} sm={6}>
 					<Grid container spacing={3}>
