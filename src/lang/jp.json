@@ -152,7 +152,10 @@
 	"recommended_apps_texts": [
 		"This app, by default, comes with protection, that is, if someone wants to have access to the generated codes, they must know how to unlock your smartphone as well.",
 		"It is the most frequently used for this type of authentication, but it does not porvides any protection by default to display the generated codes.",
-		"It is the only of the 3 options that allows you to back up your codes safely in the cloud, with the disadvantage that it asks you to store a password to unlock them (you know where you can save that password, I'm just saying...)."
+		"It is the only of the 3 options that allows you to back up your codes safely in the cloud, with the disadvantage that it asks you to store a password to unlock them (you know where you can save that password, I'm just saying...).",
+		"The vast majority of Internet searches are done from a smartphone, it is not a secret that we have them, more or less, glued to our fingers, and that is where Firefox Focus comes in. This app allows you to search on the Internet without leaving any records of anything, no site cookies, no Google search history, no sessions, nothing. Everything is automatically cleaned when you close the app.",
+		"Tor is a very famous web browser because it serves as the main gateway to the dark web, but that's not necessarily its main purpose. Fundamentally Tor exists to protect your searches and interactions on the Internet, yes read well, I said \"Internet\" since Tor can be used to browse the normal web, apart from the dark web. Tor removes from the game all Cookies, sessions, possible attacks that web pages may attempt, etc. It's like you were browsing on the Internet from an antivirus.",
+		"Unlike the apps that we've been recommending, Duck Duck Go is not an app, but rather a search engine, which differs from Google and other engines, as it doesen't offer as first results those sites that paid for advertising, or that you previously searched for (the so-called \"bubble filter\"), this hand in hand with other options and settings that support the free Internet and protect your privacy, makes it a highly recommended search engine."
 	],
 	"copy_paste_secret_key": ["Copy and paste this Secret Key:"],
 	"anti_fishing_texts": [
@@ -161,5 +164,18 @@
 		"For example, let's imagine that one day you receive an email from PasuSewa saying that we need verify your identity, and for that you are asked to respond with a security code. By doing this you will be giving total access to your account to anyone that would be on the other side.",
 		"To avoid that, every time you receive a notification from PasuSewa, within that notification will be included a secret word that only you know. This secret word is the \"Anti-Fishing Secret\".",
 		"Since an imposter won't know what your secret word is, they will not be able to include it in the means by which they contacted you, and thus you will know that you are not speaking with the original company or person."
+	],
+	"downloads_page_titles": ["Other Recommended Downloads", "Privacy", "Security"],
+	"downloads_page_texts": [
+		"At PasuSewa we care about our users, after all, the original idea behind the project was to make life easier for our users. That is why we decided to go one step further, and try to teach at least a minimum about how and why to better protect the privacy of our users online.",
+		"In this section you will find some useful apps and tips to maintain your privacy and security online.",
+		"None of the Apps or services mentioned sponsor anything of what is said on this page.",
+		"In terms of privacy there are many options, such as using a VPN, or a browser that doesen't register Cookies, etc. But here we are going to focus on 3 specific apps or services that will be very useful to maintain your privacy on the Internet.",
+		"But you may be wondering \"Why should I take care of my privacy on the Internet? I have nothing to hide... \" We have all heard or said that phrase at least once, but think about it in this way, don't you think its annoying that if one day you were talking to a friend about how you dislike having to do the dishes, and the next day you would receive 30 pamphlets in the mail with dishwasher promotions? The same thing happens on the Internet, but not with real pamphlets, but in the form of spam emails, ads on social networks, etc. Wherever you go, dishwasher ads, on Facebook, on YouTube, on other social media, and more.",
+		"That's why we want to help you prevent that from happening, no one likes having to watch dishwasher ads 24 hours a day...",
+		"In the security section, we wanted to emphasize the importance of activating 2-Factor Authentication, but... what is 2-Factor Authentication?",
+		"There are 3 ways to identify you, which are: by something you know (a password), by something you are (your fingerprints, your face, your pupils, etc.), and by something you have (the key to your house, your credit card, or your smartphone).",
+		"Nowadays passwords are not secure anymore, there are databases on the Internet that store patterns shared by many hacked passwords, and this being the case, if a possible hacker wants to guess your password, the only thing they'll have to do is mixing those patterns that are frequently repeated, until they finds the right combination.",
+		"What 2-Factor Authentication does is to increase the security by adding a \"factor\" or, to put it simpler, to build a second \"wall\" to protect your house. In this way, if someone guessed your password, they would still have to jump the second wall as they also have to get the key generated by your smartphone."
 	]
 }

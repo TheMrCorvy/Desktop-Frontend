@@ -164,7 +164,10 @@
 	"recommended_apps_texts": [
 		"Ésta app por defecto viene con protección, es decir, si alguien quiere tener acceso a tos códigos, debe saber cómo desbloquear tu smartphone también.",
 		"Es la más frecuentemente usada para este tipo de autenticación, pero no cuenta con ninguna protección por defecto para mostrar los códigos generados.",
-		"Es la única de las 3 opciones que te permite respaldar tus códigos de manera segura en la nube, con la desventaja de que te pide que almacenes una contraseña para desbloquearlos (ya sabes en dónde puedes guardar esa contraseña, guiño guiño...)."
+		"Es la única de las 3 opciones que te permite respaldar tus códigos de manera segura en la nube, con la desventaja de que te pide que almacenes una contraseña para desbloquearlos (ya sabes en dónde puedes guardar esa contraseña, guiño guiño...).",
+		"La gran mayoría de las búsquedas en Internet se hacen desde el smartphone, no es un secreto que los tenemos prácticamente pegados a nuestros dedos, y es ahí en donde entra Firefox Focus. Esta app para smartphones te permite hacer búsquedas en Internet sin que queden registros de nada, ni Cookies de sitios, ni historial de búsquedas en Google, ni sesiones, nada. Todo se limpia automaticamente al salir de la app.",
+		"Tor es un navegador muy famoso gracias a que sirve como la entrada principal a la dark web, pero no necesariamente es su principal objetivo. Fundamentalmente Tor existe para proteger tus búsquedas e interacciones en Internet, sí así es, dije \"Internet\" ya que Tor puede usarse para navegar por la web normal, aparte de la dark web. Tor elimina del juego a las Cookies, sesiones, posibles ataques que puedan intentar hacer las páginas web, etc. Es como si navegaras desde dentro de un antivirus.",
+		"A diferencia de las app que vinimos recomendando, Duck Duck Go no es una app, sino más bien un motor de búsquedas, que diferencia de Google y otros motores, no ofrece como primeros resultados a aquellos sitios que pagaron por publicidad, o que buscaste previamente (el llamado \"filtro burbuja\"), esto de la mano con otras opciones y configuraciones que favorecen al Internet libre y protegen tu privacidad en el Internet lo convierten en un motor de búsquedas ampliamente recomendable."
 	],
 	"copy_paste_secret_key": ["Copia y pega esta Llave Secreta:"],
 	"anti_fishing_texts": [
@@ -173,5 +176,18 @@
 		"Por ejemplo, imagina que un día recibes un email de PasuSewa diciendo que necesitamos verificar tu identidad, y para eso se te pide que respondas con algún código de seguridad. Al hacer esto le estarás dando acceso total a tu cuenta a quien sea que está del otro lado.",
 		"Para evitar eso, cada vez que recibas una notificación de PasuSewa, dentro de dicha notificación se incluirá una palabra secreta que solo tú conoces. Dicha palabra secreta es el \"Secreto Anti-Fishing\".",
 		"Ya que un impostor no sabrá cuál es tu palabra secreta, no podrá incluirla en el medio por el cual te haya contactado, y así sabrás que no estás hablando con la empresa o la persona original."
+	],
+	"downloads_page_titles": ["Otras Descargas que Recomendamos", "Privacidad", "Seguridad"],
+	"downloads_page_texts": [
+		"En PasuSewa nos preocupamos por nuestros usuarios, después de todo, la idea original detrás del proyecto era el poder facilitarle la vida a las personas. Es por eso que decidimos ir un paso más allá, y tratar de enseñar un mínimo sobre cómo y porqué proteger mejor la privacidad de nuestros usuarios en línea.",
+		"En esta sección podrás encontrar algunas apps y consejos útiles para mantener tu privacidad y seguridad en línea.",
+		"Ninguna de las Apps o servicios mencionados esponsorean ni patrocinan lo dicho en esta página.",
+		"En terminos de privacidad hay muchas opciones, como usar algún VPN, o un navegador que no registre las Cookies, etc. Pero aquí nos vamos a concentrar en 3 apps o servicios específicos que te resultarán muy útiles para mantener tu privacidad en Internet.",
+		"Pero te estarás preguntando \"¿Porqué debería yo cuidar mi privacidad en Internet? yo no tengo nada que ocultar...\", todos hemos oído o dicho esa frase al menos una vez, pero piénsalo de esta forma, ¿no te parecería molesto que si un día estuvieras hablando con amigo sobre lo poco que te gusta tener que lavar los platos, y al día siguiente te llegaran 30 panfletos por correo con promociones de lavabajillas?. En Internet pasa lo mismo, pero no con panfletos reales, sino en forma de correos de spam, anuncios en redes sociales, etc. Vayas a donde vayas, anuncios de lavabajillas, en Facebook, en YouTube, en otras redes sociales, y demás.",
+		"Es por eso que queremos ayudarte a evitar que eso pase, a nadie le gusta tener que ver anuncios de lavabajillas las 24 horas del día...",
+		"En el apartado de la seguridad, queríamos enfatizar en la importancia de activar la Autenticación en 2 Factores, pero... ¿qué es la Autenticación en 2 Factores?.",
+		"Existen 3 formas de identificarte, las cuales son: por algo que sabes (una contraseña), por algo que eres (tus huellas dactilares, tu rostro, tus pupilas, etc.), y por algo que tienes (la llave de tu casa, tu tarjeta de crédito, o tu smartphone).",
+		"Hoy en día las contraseñas no son seguras, existen bases de datos en Internet que almacenan patrones compartidos por muchas contraseñas hackeadas, y siendo así, si un posible atacante quisiera adivinar tu contraseña, lo único que deberá hacer será mezclar esos patrones que se repiten frecuentemente hasta dar con la combinación correcta.",
+		"La Autenticación de 2 Factores lo que hace es aumentar la seguridad añadiendo un \"factor\" o, para explicarlo de una forma más simple, levantar un segundo \"muro\" para proteger tu casa. De esta forma, si alguien adivinara tu contraseña, todavía tendría que saltar el segundo muro al tener que conseguir también la clave generada por tu smartphone."
 	]
 }
