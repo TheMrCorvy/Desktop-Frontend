@@ -2,7 +2,7 @@ import React, { FC } from "react"
 
 import { Container, Grid, Typography, Hidden, Divider } from "@material-ui/core"
 
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
@@ -13,24 +13,29 @@ import * as es from "../../../lang/es.json"
 
 import DialogComponent from "../../Dialog"
 
-const useStyles = makeStyles({
-	container: {
-		marginTop: "10rem",
-		paddingBottom: "10rem",
-		position: "relative",
-	},
-	textCenter: {
-		textAlign: "center",
-	},
-	marginB: {
-		marginBottom: "3rem",
-	},
-	infoBtn: {
-		position: "absolute",
-		bottom: 100,
-		right: 20,
-	},
-})
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		container: {
+			marginTop: "10rem",
+			paddingBottom: "10rem",
+			position: "relative",
+		},
+		textCenter: {
+			textAlign: "center",
+		},
+		marginB: {
+			marginBottom: "3rem",
+		},
+		infoBtn: {
+			position: "absolute",
+			bottom: 100,
+			right: 20,
+		},
+		primaryColor: {
+			color: theme.palette.primary.main,
+		},
+	})
+)
 
 const About: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -67,11 +72,19 @@ const About: FC = () => {
 						</Typography>
 						<Typography variant="body2" paragraph>
 							{translate("about_texts", lng, 3)}"
-							<Typography component="span" variant="body2" color="primary">
+							<Typography
+								component="span"
+								variant="body2"
+								className={classes.primaryColor}
+							>
 								{translate("encryption_examples", lng, 0)}
 							</Typography>
 							". {translate("about_texts", lng, 4)}"
-							<Typography component="span" variant="body2" color="primary">
+							<Typography
+								component="span"
+								variant="body2"
+								className={classes.primaryColor}
+							>
 								{translate("encrypted_examples", lng, 0)}
 							</Typography>
 							".
@@ -90,12 +103,20 @@ const About: FC = () => {
 					<>
 						<Typography variant="body2" paragraph>
 							{translate("about_texts", lng, 3)}"
-							<Typography component="span" variant="body2" color="primary">
+							<Typography
+								component="span"
+								variant="body2"
+								className={classes.primaryColor}
+							>
 								{translate("encryption_examples", lng, 0)}
 							</Typography>
 							"{". "}
 							{translate("about_texts", lng, 4)}"
-							<Typography component="span" variant="body2" color="primary">
+							<Typography
+								component="span"
+								variant="body2"
+								className={classes.primaryColor}
+							>
 								{translate("encrypted_examples", lng, 0)}
 							</Typography>
 							".
@@ -107,14 +128,14 @@ const About: FC = () => {
 							{translate("about_texts", lng, 7)}
 						</Typography>
 						<ol>
-							{es.encryption_examples.map((el, index) => (
+							{es.encryption_examples.map((element, index) => (
 								<li key={index}>
 									<span>
 										"
 										<Typography
 											component="span"
 											variant="body2"
-											color="primary"
+											className={classes.primaryColor}
 										>
 											{translate("encryption_examples", lng, index)}
 										</Typography>
@@ -122,7 +143,7 @@ const About: FC = () => {
 										<Typography
 											component="span"
 											variant="body2"
-											color="primary"
+											className={classes.primaryColor}
 										>
 											{translate("encrypted_examples", lng, index)}
 										</Typography>

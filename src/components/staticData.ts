@@ -5,6 +5,7 @@ export type TwoFactorAppsType = {
 	bodyText: string
 	linkAppleStore: string
 	linkPlayStore: string
+	linkOfficialPage?: string
 }
 
 export const recommendedTwoFactorApps = (lang: string): TwoFactorAppsType[] => {
