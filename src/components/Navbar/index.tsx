@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		link: {
 			textDecoration: "none",
+			color: "inherit",
 		},
 	})
 )
@@ -97,7 +98,11 @@ const Navbar = () => {
 							</Tooltip>
 
 							<Typography variant="h6" className={classes.title}>
-								{translate("app_name", lng)}
+								<Tooltip title={translate("home", lng)}>
+									<Link to="/" className={classes.link}>
+										{translate("app_name", lng)}
+									</Link>
+								</Tooltip>
 							</Typography>
 
 							<TranslateButton className={classes.navbarItem} />
@@ -116,8 +121,8 @@ const Navbar = () => {
 
 							<ToggleDarkTheme className={classes.navbarItem} />
 
-							<Tooltip title={translate("downloads", lng)}>
-								<Link to="/downloads" className={classes.link}>
+							<Link to="/downloads" className={classes.link}>
+								<Tooltip title={translate("downloads", lng)}>
 									<IconButton
 										edge="start"
 										className={classes.navbarItem}
@@ -126,8 +131,8 @@ const Navbar = () => {
 									>
 										<FontAwesomeIcon icon={["fas", "cloud-download-alt"]} />
 									</IconButton>
-								</Link>
-							</Tooltip>
+								</Tooltip>
+							</Link>
 						</Toolbar>
 					</AppBar>
 				</Hidden>
