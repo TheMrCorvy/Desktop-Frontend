@@ -94,7 +94,7 @@ const StepThree = ({ isRobot, testing }: Props) => {
 	}
 
 	return (
-		<Grid container spacing={3} justify="space-around">
+		<Grid container spacing={3} justify="space-around" data-testid="test_step_three">
 			{!userData.email || !userData.secretKey ? (
 				<>
 					<Grid item xs={12} className={classes.centerAll}>
@@ -121,7 +121,7 @@ const StepThree = ({ isRobot, testing }: Props) => {
 									label={translate("auth_form_texts", lng, 1)}
 									name="verificationCode"
 									required
-									type="email"
+									type="number"
 									inputProps={{
 										"data-testid": "test_verification_code_input",
 										ref: register({
@@ -164,15 +164,17 @@ const StepThree = ({ isRobot, testing }: Props) => {
 						</form>
 					</Grid>
 					<Grid item xs={12} sm={6}>
-						<QRCode
-							value={`otpauth://totp/${translate("app_name", lng)}:${
-								userData.email
-							}?secret=${userData.secretKey}&issuer=${translate(
-								"app_name",
-								lng
-							)}&algorithm=SHA1&digits=6&period=30`}
-							size={200}
-						/>
+						{!testing && (
+							<QRCode
+								value={`otpauth://totp/${translate("app_name", lng)}:${
+									userData.email
+								}?secret=${userData.secretKey}&issuer=${translate(
+									"app_name",
+									lng
+								)}&algorithm=SHA1&digits=6&period=30`}
+								size={200}
+							/>
+						)}
 					</Grid>
 					<Grid item xs={12} sm={6} className={classes.centerAll}>
 						<Typography paragraph gutterBottom variant="subtitle1">
@@ -182,7 +184,7 @@ const StepThree = ({ isRobot, testing }: Props) => {
 								paragraph
 								gutterBottom
 								variant="h6"
-								component="h6"
+								component="span"
 								className={classes.secretKey}
 							>
 								{userData.secretKey}
