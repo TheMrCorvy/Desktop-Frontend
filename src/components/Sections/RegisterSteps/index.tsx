@@ -70,8 +70,15 @@ const RegisterSteps = ({ isRobot }: { isRobot: boolean }) => {
 
 	return (
 		<>
-			<Paper square elevation={0} className={classes.header}>
-				<Typography>{translate("register_steps_titles", lng, activeStep)}</Typography>
+			<Paper
+				square
+				elevation={0}
+				className={classes.header}
+				data-testid="test_register_steps"
+			>
+				<Typography data-testid="test_step_title">
+					{translate("register_steps_titles", lng, activeStep)}
+				</Typography>
 			</Paper>
 			<div className={classes.stepperContent}>{showSteps()}</div>
 			<MobileStepper
@@ -85,6 +92,7 @@ const RegisterSteps = ({ isRobot }: { isRobot: boolean }) => {
 						onClick={handleBack}
 						color="secondary"
 						disabled={activeStep === 0}
+						data-testid="test_prev_step"
 					>
 						<FontAwesomeIcon icon={["fas", "chevron-left"]} size="2x" />
 					</Button>
@@ -95,6 +103,7 @@ const RegisterSteps = ({ isRobot }: { isRobot: boolean }) => {
 						onClick={handleNext}
 						color="secondary"
 						disabled={activeStep === 2 || isRobot}
+						data-testid="test_next_step"
 					>
 						<FontAwesomeIcon icon={["fas", "chevron-right"]} size="2x" />
 					</Button>
