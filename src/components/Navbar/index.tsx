@@ -117,14 +117,16 @@ const Navbar = () => {
 							<ToggleDarkTheme className={classes.navbarItem} />
 
 							<Tooltip title={translate("downloads", lng)}>
-								<IconButton
-									edge="start"
-									className={classes.navbarItem}
-									color="inherit"
-									aria-label="logo"
-								>
-									<FontAwesomeIcon icon={["fas", "cloud-download-alt"]} />
-								</IconButton>
+								<Link to="/downloads" className={classes.link}>
+									<IconButton
+										edge="start"
+										className={classes.navbarItem}
+										color="inherit"
+										aria-label="logo"
+									>
+										<FontAwesomeIcon icon={["fas", "cloud-download-alt"]} />
+									</IconButton>
+								</Link>
 							</Tooltip>
 						</Toolbar>
 					</AppBar>

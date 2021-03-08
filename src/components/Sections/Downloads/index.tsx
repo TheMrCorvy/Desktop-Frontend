@@ -43,12 +43,15 @@ const useStyles = makeStyles((theme: Theme) =>
 		marginB: {
 			marginBottom: 30,
 		},
+		underline: {
+			borderBottom: "1px solid",
+		},
 	})
 )
 
 let deferredPrompt: any
 
-const Downloads: FC = () => {
+const Downloads = (props: { underline?: boolean }) => {
 	const classes = useStyles()
 
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -93,7 +96,11 @@ const Downloads: FC = () => {
 						className={classes.marginB}
 						data-testid="test_downloads"
 					>
-						{translate("downloads", lng)}
+						{!props.underline ? (
+							translate("downloads", lng)
+						) : (
+							<span className={classes.underline}>{translate("downloads", lng)}</span>
+						)}
 					</Typography>
 				</Grid>
 
