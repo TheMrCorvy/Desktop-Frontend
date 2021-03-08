@@ -1,16 +1,43 @@
 import React from "react"
 
-import { Container, Divider, Grid, Hidden, Typography } from "@material-ui/core"
+import { Container, Divider, Grid, Hidden, Typography, Link } from "@material-ui/core"
+
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 
 import { translate } from "../lang"
 
+import {
+	recommendedTwoFactorApps,
+	recommendedApps,
+	RecommendedAppsType,
+} from "../components/staticData"
+
 import Downloads from "../components/Sections/Downloads"
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		divider: {
+			marginTop: 10,
+			marginBottom: 10,
+		},
+		recommendedLinks: {
+			marginRight: 15,
+			color: theme.palette.primary.main,
+		},
+	})
+)
 
 const DownloadsPage = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+
+	const classes = useStyles()
+
+	const recommendedTwoFA: RecommendedAppsType[] = recommendedTwoFactorApps(lng)
+
+	const otherApps: RecommendedAppsType[] = recommendedApps(lng)
 
 	return (
 		<Container maxWidth="xl" style={{ paddingBottom: "5rem", paddingTop: "2rem" }}>
@@ -69,30 +96,39 @@ const DownloadsPage = () => {
 				</Grid>
 				<Grid item xs={12} sm={8}>
 					<ul>
-						<li style={{ marginBottom: 32 }}>
-							<Typography variant="h5" paragraph gutterBottom>
-								Firefox Focus
-							</Typography>
-							<Typography variant="body1" paragraph gutterBottom>
-								{translate("recommended_apps_texts", lng, 3)}
-							</Typography>
-						</li>
-						<li style={{ marginBottom: 32 }}>
-							<Typography variant="h5" paragraph gutterBottom>
-								Navegador Web Tor
-							</Typography>
-							<Typography variant="body2" paragraph gutterBottom>
-								{translate("recommended_apps_texts", lng, 4)}
-							</Typography>
-						</li>
-						<li style={{ marginBottom: 32 }}>
-							<Typography variant="h5" paragraph gutterBottom>
-								duck duck go
-							</Typography>
-							<Typography variant="body1" paragraph gutterBottom>
-								{translate("recommended_apps_texts", lng, 5)}
-							</Typography>
-						</li>
+						{otherApps.map((app, index) => (
+							<li style={{ marginBottom: 32 }} key={index}>
+								<Typography variant="h5" paragraph gutterBottom>
+									{app.appName}
+								</Typography>
+								<Typography variant="body1" paragraph gutterBottom>
+									{app.bodyText}
+								</Typography>
+								<Link
+									className={classes.recommendedLinks}
+									href={app.linkPlayStore}
+									target="_blank"
+								>
+									Google PlayStore
+								</Link>
+								<Link
+									className={classes.recommendedLinks}
+									href={app.linkAppleStore}
+									target="_blank"
+								>
+									Apple AppStore
+								</Link>
+								{app.linkOfficialPage && (
+									<Link
+										className={classes.recommendedLinks}
+										href={app.linkOfficialPage}
+										target="_blank"
+									>
+										{translate("official_site", lng)}
+									</Link>
+								)}
+							</li>
+						))}
 					</ul>
 				</Grid>
 				<Grid xs={12} sm={8}>
@@ -117,57 +153,30 @@ const DownloadsPage = () => {
 				</Grid>
 				<Grid item xs={12} sm={8}>
 					<ul>
-						<li style={{ marginBottom: 32 }}>
-							<Typography variant="h5" paragraph gutterBottom>
-								App 1
-							</Typography>
-							<Typography variant="body2" paragraph gutterBottom>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo, odit
-								unde vero nostrum debitis eligendi obcaecati laborum recusandae
-								voluptatibus id quis mollitia similique ab dolor aperiam! Voluptatem
-								sed ad amet. Lorem, ipsum dolor sit amet consectetur adipisicing
-								elit. Nemo, odit unde vero nostrum debitis eligendi obcaecati
-								laborum recusandae voluptatibus id quis mollitia similique ab dolor
-								aperiam! Voluptatem sed ad amet. Lorem, ipsum dolor sit amet
-								consectetur adipisicing elit. Nemo, odit unde vero nostrum debitis
-								eligendi obcaecati laborum recusandae voluptatibus id quis mollitia
-								similique ab dolor aperiam! Voluptatem sed ad amet.
-							</Typography>
-						</li>
-						<li style={{ marginBottom: 32 }}>
-							<Typography variant="h5" paragraph gutterBottom>
-								App 2
-							</Typography>
-							<Typography variant="body2" paragraph gutterBottom>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo, odit
-								unde vero nostrum debitis eligendi obcaecati laborum recusandae
-								voluptatibus id quis mollitia similique ab dolor aperiam! Voluptatem
-								sed ad amet. Lorem, ipsum dolor sit amet consectetur adipisicing
-								elit. Nemo, odit unde vero nostrum debitis eligendi obcaecati
-								laborum recusandae voluptatibus id quis mollitia similique ab dolor
-								aperiam! Voluptatem sed ad amet. Lorem, ipsum dolor sit amet
-								consectetur adipisicing elit. Nemo, odit unde vero nostrum debitis
-								eligendi obcaecati laborum recusandae voluptatibus id quis mollitia
-								similique ab dolor aperiam! Voluptatem sed ad amet.
-							</Typography>
-						</li>
-						<li style={{ marginBottom: 32 }}>
-							<Typography variant="h5" paragraph gutterBottom>
-								App 3
-							</Typography>
-							<Typography variant="body2" paragraph gutterBottom>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo, odit
-								unde vero nostrum debitis eligendi obcaecati laborum recusandae
-								voluptatibus id quis mollitia similique ab dolor aperiam! Voluptatem
-								sed ad amet. Lorem, ipsum dolor sit amet consectetur adipisicing
-								elit. Nemo, odit unde vero nostrum debitis eligendi obcaecati
-								laborum recusandae voluptatibus id quis mollitia similique ab dolor
-								aperiam! Voluptatem sed ad amet. Lorem, ipsum dolor sit amet
-								consectetur adipisicing elit. Nemo, odit unde vero nostrum debitis
-								eligendi obcaecati laborum recusandae voluptatibus id quis mollitia
-								similique ab dolor aperiam! Voluptatem sed ad amet.
-							</Typography>
-						</li>
+						{recommendedTwoFA.map((app, index) => (
+							<li style={{ marginBottom: 32 }} key={index}>
+								<Typography variant="h5" paragraph gutterBottom>
+									{app.appName}
+								</Typography>
+								<Typography variant="body1" paragraph gutterBottom>
+									{app.bodyText}
+								</Typography>
+								<Link
+									className={classes.recommendedLinks}
+									href={app.linkPlayStore}
+									target="_blank"
+								>
+									Google PlayStore
+								</Link>
+								<Link
+									className={classes.recommendedLinks}
+									href={app.linkAppleStore}
+									target="_blank"
+								>
+									Apple AppStore
+								</Link>
+							</li>
+						))}
 					</ul>
 				</Grid>
 			</Grid>

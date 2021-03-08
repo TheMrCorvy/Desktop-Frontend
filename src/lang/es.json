@@ -189,5 +189,6 @@
 		"Existen 3 formas de identificarte, las cuales son: por algo que sabes (una contraseña), por algo que eres (tus huellas dactilares, tu rostro, tus pupilas, etc.), y por algo que tienes (la llave de tu casa, tu tarjeta de crédito, o tu smartphone).",
 		"Hoy en día las contraseñas no son seguras, existen bases de datos en Internet que almacenan patrones compartidos por muchas contraseñas hackeadas, y siendo así, si un posible atacante quisiera adivinar tu contraseña, lo único que deberá hacer será mezclar esos patrones que se repiten frecuentemente hasta dar con la combinación correcta.",
 		"La Autenticación de 2 Factores lo que hace es aumentar la seguridad añadiendo un \"factor\" o, para explicarlo de una forma más simple, levantar un segundo \"muro\" para proteger tu casa. De esta forma, si alguien adivinara tu contraseña, todavía tendría que saltar el segundo muro al tener que conseguir también la clave generada por tu smartphone."
-	]
+	],
+	"official_site": ["Sitio Oficial"]
 }
