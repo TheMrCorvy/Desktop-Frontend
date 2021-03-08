@@ -10,7 +10,7 @@ const Landing: FC = () => {
 	return (
 		<>
 			<LandingWelcome />
-			<Downloads />
+			<Downloads testing />
 			<About />
 			<Feedback />
 			<Pricing />

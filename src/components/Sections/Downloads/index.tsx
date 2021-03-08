@@ -51,12 +51,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 let deferredPrompt: any
 
-const Downloads = (props: { underline?: boolean }) => {
+const Downloads = ({ alternative, testing }: { alternative?: boolean; testing?: boolean }) => {
 	const classes = useStyles()
 
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [installable, setInstallable] = useState(false)
+	const [installable, setInstallable] = useState(testing ? true : false)
 
 	useEffect(() => {
 		window.addEventListener("beforeinstallprompt", (e: Event) => {
@@ -65,6 +65,8 @@ const Downloads = (props: { underline?: boolean }) => {
 			deferredPrompt = e
 
 			setInstallable(true)
+
+			console.log("event handled successfully")
 		})
 
 		window.addEventListener("appinstalled", () => {
@@ -92,15 +94,11 @@ const Downloads = (props: { underline?: boolean }) => {
 				<Grid item xs={12}>
 					<Typography
 						gutterBottom
-						variant="h4"
+						variant={alternative ? "h3" : "h4"}
 						className={classes.marginB}
 						data-testid="test_downloads"
 					>
-						{!props.underline ? (
-							translate("downloads", lng)
-						) : (
-							<span className={classes.underline}>{translate("downloads", lng)}</span>
-						)}
+						{translate("downloads", lng)}
 					</Typography>
 				</Grid>
 
