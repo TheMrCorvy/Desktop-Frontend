@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { Container, Grid, Button, Typography, Divider, Hidden } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
-import { purple, indigo, pink } from "@material-ui/core/colors"
+import { purple, indigo } from "@material-ui/core/colors"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			},
 		},
 		androidBtn: {
-			backgroundColor: pink[500],
+			backgroundColor: theme.palette.type === "dark" ? "#1fad2c" : "#1ebd2d",
 			"&:hover": {
-				backgroundColor: pink[600],
+				backgroundColor: theme.palette.type === "dark" ? "#15a122" : "#1cad29",
 			},
 		},
 		container: {
