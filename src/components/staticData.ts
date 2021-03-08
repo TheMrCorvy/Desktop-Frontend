@@ -1,13 +1,13 @@
 import { translate } from "../lang"
 
-export type TwoFAppsType = {
+export type TwoFactorAppsType = {
 	appName: string
 	bodyText: string
 	linkAppleStore: string
 	linkPlayStore: string
 }
 
-export const recommendedTwoFactorApps = (lang: string): TwoFAppsType[] => {
+export const recommendedTwoFactorApps = (lang: string): TwoFactorAppsType[] => {
 	return [
 		{
 			appName: "Microsoft Authenticator",
