@@ -170,7 +170,7 @@
 		"Tor es un navegador muy famoso gracias a que sirve como la entrada principal a la dark web, pero no necesariamente es su principal objetivo. Fundamentalmente Tor existe para proteger tus búsquedas e interacciones en Internet, sí así es, dije \"Internet\" ya que Tor puede usarse para navegar por la web normal, aparte de la dark web. Tor elimina del juego a las Cookies, sesiones, posibles ataques que puedan intentar hacer las páginas web, etc. Es como si navegaras desde dentro de un antivirus.",
 		"A diferencia de las app que vinimos recomendando, Duck Duck Go no es una app, sino más bien un motor de búsquedas, que diferencia de Google y otros motores, no ofrece como primeros resultados a aquellos sitios que pagaron por publicidad, o que buscaste previamente (el llamado \"filtro burbuja\"), esto de la mano con otras opciones y configuraciones que favorecen al Internet libre y protegen tu privacidad en el Internet lo convierten en un motor de búsquedas ampliamente recomendable."
 	],
-	"copy_paste_secret_key": ["Copia y pega esta Llave Secreta:"],
+	"copy_paste_secret_key": ["Copia y pega la Llave Secreta:"],
 	"anti_fishing_texts": [
 		"¿Qué es un \"Secreto Anti-Fishing\"?",
 		"Una técnica de hacking muy conocida es el llamado \"fishing\", en el cual un impostor te envía un email (solo por dar un ejemplo) haciendose pasar por la empresa o la persona real, pidiendo alguna clase de información.",

@@ -53,7 +53,7 @@ export interface AuthTokenI {
 
 interface AuthActionI {
 	type: typeof LOG_IN | typeof LOG_OUT
-	payload: string | null
+	payload: null | string
 }
 
 export type AuthAction = AuthActionI
