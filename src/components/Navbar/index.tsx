@@ -29,6 +29,7 @@ import { RootState } from "../../redux/store"
 import { translate } from "../../lang"
 
 import { toggleDrawer } from "../../redux/actions/drawerActions"
+import { logOut } from "../../redux/actions/authTokenActions"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -136,6 +137,13 @@ const Navbar = () => {
 											{translate("navbar_my_account_btn", lng)}
 										</Button>
 									</Link>
+									<Button
+										color="inherit"
+										className={classes.navbarItem}
+										onClick={() => dispatch(logOut())}
+									>
+										{translate("navbar_log_out_btn", lng)}
+									</Button>
 								</>
 							)}
 
