@@ -70,6 +70,8 @@ const Navbar = () => {
 
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const { token } = useSelector((state: RootState) => state.token)
+
 	const classes = useStyles()
 
 	const dispatch = useDispatch()
@@ -107,17 +109,35 @@ const Navbar = () => {
 
 							<TranslateButton className={classes.navbarItem} />
 
-							<Link to="/login" className={classes.link}>
-								<Button color="inherit" className={classes.navbarItem}>
-									{translate("navbar_login_btn", lng)}
-								</Button>
-							</Link>
+							{!token ? (
+								<>
+									<Link to="/login" className={classes.link}>
+										<Button color="inherit" className={classes.navbarItem}>
+											{translate("navbar_login_btn", lng)}
+										</Button>
+									</Link>
 
-							<Link to="/register" className={classes.link}>
-								<Button color="inherit" className={classes.navbarItem}>
-									{translate("navbar_register_btn", lng)}
-								</Button>
-							</Link>
+									<Link to="/register" className={classes.link}>
+										<Button color="inherit" className={classes.navbarItem}>
+											{translate("navbar_register_btn", lng)}
+										</Button>
+									</Link>
+								</>
+							) : (
+								<>
+									<Link to="/my-credentials" className={classes.link}>
+										<Button color="inherit" className={classes.navbarItem}>
+											{translate("navbar_my_credentials_btn", lng)}
+										</Button>
+									</Link>
+
+									<Link to="/my-account" className={classes.link}>
+										<Button color="inherit" className={classes.navbarItem}>
+											{translate("navbar_my_account_btn", lng)}
+										</Button>
+									</Link>
+								</>
+							)}
 
 							<ToggleDarkTheme className={classes.navbarItem} />
 

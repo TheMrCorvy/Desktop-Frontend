@@ -6,6 +6,7 @@
 	"navbar_register_btn": ["Registrarse"],
 	"navbar_my_credentials_btn": ["Mis Credenciales"],
 	"navbar_my_account_btn": ["Mi Cuenta"],
+	"navbar_log_out_btn": ["Cerrar Sesión"],
 	"toggle_dark_theme": ["Alternar Tema Oscuro"],
 	"downloads": ["Descargas"],
 	"install": ["Instalar"],

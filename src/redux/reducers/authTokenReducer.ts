@@ -1,4 +1,4 @@
-import { AUTH_TOKEN, AuthAction, AuthTokenI } from "../types"
+import { LOG_IN, LOG_OUT, AuthAction, AuthTokenI } from "../types"
 
 const initialState: AuthTokenI = {
 	token: null,
@@ -6,7 +6,13 @@ const initialState: AuthTokenI = {
 
 const authTokenReducer = (state = initialState, action: AuthAction) => {
 	switch (action.type) {
-		case AUTH_TOKEN:
+		case LOG_IN:
+			return {
+				...state,
+				token: action.payload,
+			}
+
+		case LOG_OUT:
 			return {
 				...state,
 				token: action.payload,

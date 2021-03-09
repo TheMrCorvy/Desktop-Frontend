@@ -13,18 +13,15 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const evaluateRoutes = (r: RouteType, i: number) => {
-		if (token !== null && r.guestOnly) 
-		{
-			return <Redirect from={r.path} to="/home" key={i} />
-		} else if (r.requiresAuth) 
-		{
+		if (token !== null && r.guestOnly) {
+			return <Redirect from={r.path} to="/my-account" key={i} />
+		} else if (r.requiresAuth) {
 			return token !== null ? (
 				<Route exact path={r.path} component={r.component} key={i} />
 			) : (
 				<Redirect from={r.path} to="/login" key={i} />
 			)
-		} else 
-		{
+		} else {
 			return <Route exact path={r.path} component={r.component} key={i} />
 		}
 	}

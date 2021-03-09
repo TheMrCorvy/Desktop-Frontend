@@ -29,6 +29,10 @@ import {
 	faStar,
 	faChevronLeft,
 	faChevronRight,
+	faHome,
+	faSignInAlt,
+	faSignOutAlt,
+	faDoorOpen,
 } from "@fortawesome/free-solid-svg-icons"
 library.add(
 	faKey,
@@ -41,7 +45,11 @@ library.add(
 	faUsers,
 	faStar,
 	faChevronLeft,
-	faChevronRight
+	faChevronRight,
+	faHome,
+	faSignInAlt,
+	faSignOutAlt,
+	faDoorOpen
 )
 
 const App: FC = () => {
