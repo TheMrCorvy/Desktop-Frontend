@@ -9,8 +9,11 @@ import {
 	Typography,
 } from "@material-ui/core"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../redux/store"
+
+import { login } from "../../../../redux/actions/authTokenActions"
+
 import { translate } from "../../../../lang"
 
 import { useForm } from "react-hook-form"
@@ -25,6 +28,8 @@ type FormInputs = {
 const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const dispatch = useDispatch()
+
 	const { register, errors, handleSubmit } = useForm()
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)
@@ -36,7 +41,9 @@ const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolea
 	}
 
 	const onSubmit = (data: FormInputs) => {
-		if (testing) return
+		if (testing) {
+			dispatch(login("authorization token"))
+		}
 
 		console.log("production api call")
 		console.log(data)

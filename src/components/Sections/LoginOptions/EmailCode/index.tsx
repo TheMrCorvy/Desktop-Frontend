@@ -10,8 +10,11 @@ import {
 	InputAdornment,
 } from "@material-ui/core"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../redux/store"
+
+import { login } from "../../../../redux/actions/authTokenActions"
+
 import { translate } from "../../../../lang"
 
 import { useForm } from "react-hook-form"
@@ -33,6 +36,8 @@ type FormInputs = {
 const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const dispatch = useDispatch()
+
 	const { register, errors, handleSubmit } = useForm()
 
 	const [canSubmit, setCanSubmit] = useState(false)
@@ -46,7 +51,9 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 	}
 
 	const onSubmit = (data: FormInputs) => {
-		if (testing) return
+		if (testing) {
+			dispatch(login("authorization token"))
+		}
 
 		console.log("production api call")
 		console.log(data)

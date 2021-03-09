@@ -33,16 +33,16 @@ const LoginOptions = ({ testing }: { testing?: boolean }) => {
 	const showOptions = (option: number) => {
 		switch (option) {
 			case 0:
-				return <TwoFactorCode isRobot={isRobot} />
+				return <TwoFactorCode isRobot={isRobot} testing={testing} />
 			case 1:
-				return <EmailCode isRecovery={false} isRobot={isRobot} />
+				return <EmailCode isRecovery={false} isRobot={isRobot} testing={testing} />
 			case 2:
-				return <EmailCode isRecovery={true} isRobot={isRobot} />
+				return <EmailCode isRecovery={true} isRobot={isRobot} testing={testing} />
 			case 3:
-				return <SecurityCode isRobot={isRobot} />
+				return <SecurityCode isRobot={isRobot} testing={testing} />
 
 			default:
-				return <TwoFactorCode isRobot={isRobot} />
+				return <TwoFactorCode isRobot={isRobot} testing={testing} />
 		}
 	}
 

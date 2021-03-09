@@ -9,8 +9,11 @@ import {
 	Typography,
 } from "@material-ui/core"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../redux/store"
+
+import { login } from "../../../../redux/actions/authTokenActions"
+
 import { translate } from "../../../../lang"
 
 import { useForm } from "react-hook-form"
@@ -25,12 +28,16 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 
 	const { register, errors, handleSubmit } = useForm()
 
+	const dispatch = useDispatch()
+
 	const requiredMessage = translate("form_validation_messages", lng, 0)
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
 	const minCharMessage = translate("form_validation_messages", lng, 2)
 
 	const onSubmit = (data: FormInputs) => {
-		if (testing) return
+		if (testing) {
+			dispatch(login("authorization token"))
+		}
 
 		console.log("production api call")
 		console.log(data)

@@ -67,6 +67,12 @@ const Login: FC = () => {
 
 	const classes = useStyles()
 
+	const { REACT_APP_ENV_LOCAL } = process.env
+
+	const cardSubtitle: string = REACT_APP_ENV_LOCAL
+		? "You don't need to check the 'im not a robot' to login, since we're in local env"
+		: translate("login_subtitle", lng)
+
 	return (
 		<Container maxWidth="xl" className={classes.container} data-testid="test_login_page">
 			<Grid container justify="center" className={classes.centerAll} spacing={0}>
@@ -74,14 +80,14 @@ const Login: FC = () => {
 					<Card className={classes.card} elevation={2}>
 						<CardHeader
 							title={translate("navbar_login_btn", lng)}
-							subheader={translate("login_subtitle", lng)}
+							subheader={cardSubtitle}
 							classes={{
 								subheader: classes.cardSubheader,
 								title: classes.cardHeader,
 							}}
 						/>
 						<CardContent>
-							<LoginOptions />
+							<LoginOptions testing={REACT_APP_ENV_LOCAL ? true : false} />
 						</CardContent>
 						<CardActions className={classes.cardActions}>
 							<Link to="/" className={classes.link}>
