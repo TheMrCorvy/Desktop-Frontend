@@ -109,7 +109,7 @@ const DownloadsPage = () => {
 									{app.bodyText}
 								</Typography>
 								<Grid container spacing={2}>
-									<Grid item xs={12} sm={4}>
+									<Grid item xs={12} sm={4} lg={3}>
 										<Link
 											className={classes.recommendedLinks}
 											href={app.linkPlayStore}
@@ -118,7 +118,7 @@ const DownloadsPage = () => {
 											Google PlayStore
 										</Link>
 									</Grid>
-									<Grid item xs={12} sm={4}>
+									<Grid item xs={12} sm={4} lg={3}>
 										<Link
 											className={classes.recommendedLinks}
 											href={app.linkAppleStore}
@@ -127,7 +127,7 @@ const DownloadsPage = () => {
 											Apple AppStore
 										</Link>
 									</Grid>
-									<Grid item xs={12} sm={4}>
+									<Grid item xs={12} sm={4} lg={3}>
 										{app.linkOfficialPage && (
 											<Link
 												className={classes.recommendedLinks}
@@ -162,6 +162,9 @@ const DownloadsPage = () => {
 					<Typography variant="body1" paragraph gutterBottom>
 						{translate("downloads_page_texts", lng, 9)}
 					</Typography>
+					<Typography variant="body1" paragraph gutterBottom>
+						{translate("downloads_page_texts", lng, 10)}
+					</Typography>
 				</Grid>
 				<Grid item xs={12} sm={11} md={8}>
 					<ul>
@@ -174,7 +177,7 @@ const DownloadsPage = () => {
 									{app.bodyText}
 								</Typography>
 								<Grid container spacing={2}>
-									<Grid item xs={12} sm={4}>
+									<Grid item xs={12} sm={4} lg={3}>
 										<Link
 											className={classes.recommendedLinks}
 											href={app.linkPlayStore}
@@ -183,7 +186,7 @@ const DownloadsPage = () => {
 											Google PlayStore
 										</Link>
 									</Grid>
-									<Grid item xs={12} sm={4}>
+									<Grid item xs={12} sm={4} lg={3}>
 										<Link
 											className={classes.recommendedLinks}
 											href={app.linkAppleStore}
@@ -192,7 +195,7 @@ const DownloadsPage = () => {
 											Apple AppStore
 										</Link>
 									</Grid>
-									<Grid item xs={12} sm={4}>
+									<Grid item xs={12} sm={4} lg={3}>
 										{app.linkOfficialPage && (
 											<Link
 												className={classes.recommendedLinks}
