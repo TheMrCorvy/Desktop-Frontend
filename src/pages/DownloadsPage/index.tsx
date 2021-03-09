@@ -5,17 +5,17 @@ import { Container, Divider, Grid, Hidden, Typography, Link } from "@material-ui
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../redux/store"
+import { RootState } from "../../redux/store"
 
-import { translate } from "../lang"
+import { translate } from "../../lang"
 
 import {
 	recommendedTwoFactorApps,
 	recommendedApps,
 	RecommendedAppsType,
-} from "../components/staticData"
+} from "../../components/staticData"
 
-import Downloads from "../components/Sections/Downloads"
+import Downloads from "../../components/Sections/Downloads"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -52,8 +52,56 @@ const DownloadsPage = () => {
 
 	const otherApps: RecommendedAppsType[] = recommendedApps(lng)
 
+	const mapRecommendations = (apps: RecommendedAppsType[]) => {
+		return (
+			<ul>
+				{apps.map((app) => (
+					<li className={classes.marginBottom} key={app.appName}>
+						<Typography variant="h5" paragraph gutterBottom data-testid={app.appName}>
+							{app.appName}
+						</Typography>
+						<Typography variant="body1" paragraph gutterBottom>
+							{app.bodyText}
+						</Typography>
+						<Grid container spacing={2}>
+							<Grid item xs={12} sm={4} lg={3}>
+								<Link
+									className={classes.recommendedLinks}
+									href={app.linkPlayStore}
+									target="_blank"
+								>
+									Google PlayStore
+								</Link>
+							</Grid>
+							<Grid item xs={12} sm={4} lg={3}>
+								<Link
+									className={classes.recommendedLinks}
+									href={app.linkAppleStore}
+									target="_blank"
+								>
+									Apple AppStore
+								</Link>
+							</Grid>
+							<Grid item xs={12} sm={4} lg={3}>
+								{app.linkOfficialPage && (
+									<Link
+										className={classes.recommendedLinks}
+										href={app.linkOfficialPage}
+										target="_blank"
+									>
+										{translate("official_site", lng)}
+									</Link>
+								)}
+							</Grid>
+						</Grid>
+					</li>
+				))}
+			</ul>
+		)
+	}
+
 	return (
-		<Container maxWidth="xl" className={classes.container}>
+		<Container maxWidth="xl" className={classes.container} data-testid="test_downloads_page">
 			<Grid container justify="center" spacing={3}>
 				<Grid item xs={12} className={classes.landingSection}>
 					<Downloads testing alternative />
@@ -99,49 +147,7 @@ const DownloadsPage = () => {
 					</Typography>
 				</Grid>
 				<Grid item xs={12} sm={11} md={8}>
-					<ul>
-						{otherApps.map((app, index) => (
-							<li className={classes.marginBottom} key={index}>
-								<Typography variant="h5" paragraph gutterBottom>
-									{app.appName}
-								</Typography>
-								<Typography variant="body1" paragraph gutterBottom>
-									{app.bodyText}
-								</Typography>
-								<Grid container spacing={2}>
-									<Grid item xs={12} sm={4} lg={3}>
-										<Link
-											className={classes.recommendedLinks}
-											href={app.linkPlayStore}
-											target="_blank"
-										>
-											Google PlayStore
-										</Link>
-									</Grid>
-									<Grid item xs={12} sm={4} lg={3}>
-										<Link
-											className={classes.recommendedLinks}
-											href={app.linkAppleStore}
-											target="_blank"
-										>
-											Apple AppStore
-										</Link>
-									</Grid>
-									<Grid item xs={12} sm={4} lg={3}>
-										{app.linkOfficialPage && (
-											<Link
-												className={classes.recommendedLinks}
-												href={app.linkOfficialPage}
-												target="_blank"
-											>
-												{translate("official_site", lng)}
-											</Link>
-										)}
-									</Grid>
-								</Grid>
-							</li>
-						))}
-					</ul>
+					{mapRecommendations(otherApps)}
 				</Grid>
 				<Grid item xs={12} sm={11} md={8}>
 					<Divider className={classes.divider} />
@@ -167,49 +173,7 @@ const DownloadsPage = () => {
 					</Typography>
 				</Grid>
 				<Grid item xs={12} sm={11} md={8}>
-					<ul>
-						{recommendedTwoFA.map((app, index) => (
-							<li style={{ marginBottom: 32 }} key={index}>
-								<Typography variant="h5" paragraph gutterBottom>
-									{app.appName}
-								</Typography>
-								<Typography variant="body1" paragraph gutterBottom>
-									{app.bodyText}
-								</Typography>
-								<Grid container spacing={2}>
-									<Grid item xs={12} sm={4} lg={3}>
-										<Link
-											className={classes.recommendedLinks}
-											href={app.linkPlayStore}
-											target="_blank"
-										>
-											Google PlayStore
-										</Link>
-									</Grid>
-									<Grid item xs={12} sm={4} lg={3}>
-										<Link
-											className={classes.recommendedLinks}
-											href={app.linkAppleStore}
-											target="_blank"
-										>
-											Apple AppStore
-										</Link>
-									</Grid>
-									<Grid item xs={12} sm={4} lg={3}>
-										{app.linkOfficialPage && (
-											<Link
-												className={classes.recommendedLinks}
-												href={app.linkOfficialPage}
-												target="_blank"
-											>
-												{translate("official_site", lng)}
-											</Link>
-										)}
-									</Grid>
-								</Grid>
-							</li>
-						))}
-					</ul>
+					{mapRecommendations(recommendedTwoFA)}
 				</Grid>
 			</Grid>
 		</Container>
