@@ -1,4 +1,9 @@
 import React, { useState, useEffect, ChangeEvent } from "react"
+
+import { useForm } from "react-hook-form"
+
+import { user4Testing } from "../../../Data4Testing"
+
 import {
 	Box,
 	Grid,
@@ -16,13 +21,9 @@ import { login } from "../../../../redux/actions/authTokenActions"
 
 import { translate } from "../../../../lang"
 
-import { useForm } from "react-hook-form"
-
-import { use4Testing } from "../../../Data4Testing"
-
 type FormInputs = {
 	email: String
-	verificationCode: string
+	verificationCode: string | number
 }
 
 const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
@@ -44,8 +45,8 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 	useEffect(() => {
 		if (testing) {
 			setFormData({
-				email: use4Testing.mainEmail,
-				verificationCode: "123456",
+				email: user4Testing.mainEmail,
+				verificationCode: 123456,
 			})
 		}
 	}, [])
@@ -53,6 +54,10 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 	const onSubmit = (data: FormInputs) => {
 		if (testing) {
 			dispatch(login("authorization token"))
+
+			console.log(data)
+
+			return
 		}
 
 		console.log("production api call")

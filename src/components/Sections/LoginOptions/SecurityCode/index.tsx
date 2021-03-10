@@ -43,6 +43,8 @@ const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolea
 	const onSubmit = (data: FormInputs) => {
 		if (testing) {
 			dispatch(login("authorization token"))
+
+			return
 		}
 
 		console.log("production api call")

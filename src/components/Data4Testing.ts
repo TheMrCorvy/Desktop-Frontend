@@ -32,7 +32,7 @@ export const rating4Testing: OpinionCardT[] = [
 	},
 ]
 
-export const use4Testing: UserT = {
+export const user4Testing: UserT = {
 	name: "Gonzalo",
 	mainEmail: "email_1@gmail.com",
 	recoveryEmail: "email_2@gmail.com",
