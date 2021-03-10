@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect, ChangeEvent } from "react"
 import {
 	Box,
 	Grid,
@@ -18,13 +18,20 @@ import { translate } from "../../../../lang"
 
 import { useForm } from "react-hook-form"
 
+import { use4Testing } from "../../../Data4Testing"
+
 type FormInputs = {
 	email: String
-	verificationCode: number
+	verificationCode: string
 }
 
 const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+
+	const [formData, setFormData] = useState<FormInputs>({
+		email: "",
+		verificationCode: "",
+	})
 
 	const { register, errors, handleSubmit } = useForm()
 
@@ -34,6 +41,15 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
 	const minCharMessage = translate("form_validation_messages", lng, 2)
 
+	useEffect(() => {
+		if (testing) {
+			setFormData({
+				email: use4Testing.mainEmail,
+				verificationCode: "123456",
+			})
+		}
+	}, [])
+
 	const onSubmit = (data: FormInputs) => {
 		if (testing) {
 			dispatch(login("authorization token"))
@@ -41,6 +57,13 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 
 		console.log("production api call")
 		console.log(data)
+	}
+
+	const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		setFormData({
+			...formData,
+			[event.target.name]: event.target.value,
+		})
 	}
 
 	return (
@@ -82,6 +105,8 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 										}),
 									}}
 									error={errors?.email ? true : false}
+									value={formData?.email}
+									onChange={onChange}
 								/>
 								{errors.email && (
 									<Typography variant="body2">{errors.email.message}</Typography>
@@ -114,6 +139,8 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 										}),
 									}}
 									error={errors?.verificationCode ? true : false}
+									value={formData?.verificationCode}
+									onChange={onChange}
 								/>
 								{errors.verificationCode && (
 									<Typography variant="body2">
