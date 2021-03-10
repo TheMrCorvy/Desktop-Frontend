@@ -4,6 +4,7 @@ const Landing = lazy(() => import("./pages/Landing"))
 const Login = lazy(() => import("./pages/Login"))
 const Register = lazy(() => import("./pages/Register"))
 const DownloadsPage = lazy(() => import("./pages/DownloadsPage"))
+const MyCredentials = lazy(() => import("./pages/MyCredentials"))
 
 export type RouteType = {
 	component: LazyExoticComponent<any>
@@ -35,6 +36,11 @@ const routes: RouteType[] = [
 		requiresAuth: false,
 		path: "/downloads",
 		guestOnly: true,
+	},
+	{
+		component: MyCredentials,
+		requiresAuth: true,
+		path: "/my-credentials",
 	},
 ]
 
