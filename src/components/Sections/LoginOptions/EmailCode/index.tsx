@@ -62,9 +62,11 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 	}
 
 	const sendEmail = () => {
+		setCanSubmit(true)
+
 		if (testing) return
 
-		setCanSubmit(true)
+		// api cal...
 		console.log("sending email...")
 	}
 

@@ -76,7 +76,7 @@ const Login: FC = () => {
 	return (
 		<Container maxWidth="xl" className={classes.container} data-testid="test_login_page">
 			<Grid container justify="center" className={classes.centerAll} spacing={0}>
-				<Grid item xs={12} md={7}>
+				<Grid item xs={12} md={10} lg={7}>
 					<Card className={classes.card} elevation={2}>
 						<CardHeader
 							title={translate("navbar_login_btn", lng)}
