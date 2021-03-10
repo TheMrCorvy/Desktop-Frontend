@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react"
 
 import OpinionCard from "./index"
-import { ratingsForTesting, suggestionsForTesting } from "../../../Temporary/Opinions"
+import { rating4Testing, suggestion4Testing } from "../../../Data4Testing/Opinions"
 
 it("renders properly a suggestion properly", () => {
-	const suggestion = suggestionsForTesting[0]
+	const suggestion = suggestion4Testing[0]
 
 	const { getByTestId, getByText } = render(<OpinionCard {...suggestion} />)
 
@@ -24,7 +24,7 @@ it("renders properly a suggestion properly", () => {
 })
 
 it("renders properly a rating properly", () => {
-	const rating = ratingsForTesting[0]
+	const rating = rating4Testing[0]
 
 	const { getByTestId, getByText } = render(<OpinionCard {...rating} />)
 
