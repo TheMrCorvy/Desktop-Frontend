@@ -43,9 +43,18 @@ interface ToggleDrawerActionI {
 
 export type DrawerAction = ToggleDrawerActionI
 
-/******************************************************************************** auth token */
+/******************************************************************************** auth */
 export const LOG_IN = "LOG_IN"
 export const LOG_OUT = "LOG_OUT"
+
+export type UserT = {
+	name: string
+	mainEmail: string
+	recoveryEmail: string
+	phone: string
+	availableSlots: number
+	role: "free" | "semi-premium" | "premium" | "admin"
+}
 
 export interface AuthTokenI {
 	token: null | string

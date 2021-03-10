@@ -9,7 +9,7 @@ import Opinions from "../Opinions"
 
 import { OpinionCardT } from "../Opinions/OpinionCard"
 
-import { rating4Testing, suggestion4Testing } from "../../Data4Testing/Opinions"
+import { rating4Testing, suggestion4Testing } from "../../Data4Testing"
 
 type FeedbackT = {
 	suggestions: OpinionCardT[]

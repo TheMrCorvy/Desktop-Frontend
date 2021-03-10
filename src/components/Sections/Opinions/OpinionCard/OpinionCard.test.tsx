@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react"
 
 import OpinionCard from "./index"
-import { rating4Testing, suggestion4Testing } from "../../../Data4Testing/Opinions"
+import { rating4Testing, suggestion4Testing } from "../../../Data4Testing"
 
 it("renders properly a suggestion properly", () => {
 	const suggestion = suggestion4Testing[0]

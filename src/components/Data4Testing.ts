@@ -1,4 +1,5 @@
-import { OpinionCardT } from "../Sections/Opinions/OpinionCard"
+import { OpinionCardT } from "./Sections/Opinions/OpinionCard"
+import { UserT } from "../redux/types"
 
 export const suggestion4Testing: OpinionCardT[] = [
 	{
@@ -30,3 +31,12 @@ export const rating4Testing: OpinionCardT[] = [
 		},
 	},
 ]
+
+export const use4Testing: UserT = {
+	name: "Gonzalo",
+	mainEmail: "email_1@gmail.com",
+	recoveryEmail: "email_2@gmail.com",
+	phone: "+54 011 1234-5678",
+	availableSlots: 5,
+	role: "free",
+}
