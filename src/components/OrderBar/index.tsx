@@ -81,7 +81,7 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 					endIcon={order.by === "created" && <order.arrow />}
 					onClick={() => orderBy("created")}
 				>
-					order by created
+					{translate("order_options", lng, 0)}
 				</Button>
 			</Grid>
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
@@ -90,7 +90,7 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 					endIcon={order.by === "edited" && <order.arrow />}
 					onClick={() => orderBy("edited")}
 				>
-					order by edited
+					{translate("order_options", lng, 1)}
 				</Button>
 			</Grid>
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
@@ -99,7 +99,7 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 					endIcon={order.by === "name" && <order.arrow />}
 					onClick={() => orderBy("name")}
 				>
-					order by name
+					{translate("order_options", lng, 2)}
 				</Button>
 			</Grid>
 			<Grid item xs={12} sm={3} className={classes.textCenter}>
@@ -108,7 +108,7 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 					endIcon={order.by === "recently" && <order.arrow />}
 					onClick={() => orderBy("recently")}
 				>
-					recently viewed
+					{translate("order_options", lng, 3)}
 				</Button>
 			</Grid>
 			<Grid item xs={12}>

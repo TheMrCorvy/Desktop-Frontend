@@ -192,5 +192,6 @@
 		"La Autenticación de 2 Factores lo que hace es aumentar la seguridad añadiendo un \"factor\" o, para explicarlo de una forma más simple, levantar un segundo \"muro\" para proteger tu casa. De esta forma, si alguien adivinara tu contraseña, todavía tendría que saltar el segundo muro al tener que conseguir también la clave generada por tu smartphone.",
 		"Para que puedas comenzar a hacer uso de la Autenticación en 2 Factores, te recomendamos las siguientes apps:"
 	],
-	"official_site": ["Sitio Oficial"]
+	"official_site": ["Sitio Oficial"],
+	"order_options": ["Creado", "Editado", "Nombre", "Visto Recientemente"]
 }

@@ -18,7 +18,7 @@ type Order = {
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		topBar: {
+		container: {
 			paddingTop: "6rem",
 
 			[theme.breakpoints.down("xs")]: {
@@ -37,7 +37,7 @@ const MyCredentials: FC = () => {
 
 	return (
 		<>
-			<Container maxWidth="lg" className={classes.topBar}>
+			<Container maxWidth="lg" className={classes.container}>
 				<OrderBar orderCredentials={orderBy} />
 			</Container>
 			<Downloads testing />
