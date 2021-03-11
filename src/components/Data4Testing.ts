@@ -1,5 +1,6 @@
 import { OpinionCardT } from "./Sections/Opinions/OpinionCard"
 import { UserT } from "../redux/types"
+import { CredentialT } from "./CredentialCard"
 
 export const suggestion4Testing: OpinionCardT[] = [
 	{
@@ -40,3 +41,12 @@ export const user4Testing: UserT = {
 	availableSlots: 5,
 	role: "free",
 }
+
+export const credential4Testing: CredentialT[] = [
+	{
+		name: "test",
+		avatar: null,
+		recentlySeen: true,
+		id: 1,
+	},
+]
