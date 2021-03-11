@@ -43,6 +43,33 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		card: {
 			background: theme.palette.type === "dark" ? theme.palette.background.default : "white",
+			height: "100%",
+			borderRadius: 10,
+		},
+		textColor: {
+			color:
+				theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.54)",
+		},
+		addCredential: {
+			flexGrow: 1,
+			display: "flex",
+			justifyContent: "center",
+			alignItems: "center",
+			textAlign: "center",
+			height: "100%",
+		},
+		cardAlter: {
+			borderStyle: "dashed",
+			background: theme.palette.type === "dark" ? theme.palette.background.default : "white",
+			height: "100%",
+			borderRadius: 10,
+			minHeight: "7rem",
+		},
+		grid: {
+			marginLeft: 20,
+			marginRight: 20,
+			marginBottom: 20,
+			marginTop: 20,
 		},
 	})
 )
@@ -57,9 +84,9 @@ const MyCredentials: FC = () => {
 	return (
 		<>
 			<Container maxWidth="lg" className={classes.container}>
-				<Grid container justify="space-around" spacing={4}>
+				<Grid container justify="space-around" spacing={3}>
 					<OrderBar orderCredentials={orderBy} />
-					<Grid xs={12} sm={6} md={4}>
+					<Grid xs={12} sm={6} md={4} className={classes.grid}>
 						<Card className={classes.card}>
 							<CardActionArea>
 								<CardContent>
@@ -76,7 +103,66 @@ const MyCredentials: FC = () => {
 										}
 										title="Shrimp and Chorizo Paella"
 										subheader="Has been recently seen"
+										classes={{
+											subheader: classes.textColor,
+										}}
 									/>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid xs={12} sm={6} md={4} className={classes.grid}>
+						<Card
+							className={(classes.addCredential, classes.cardAlter)}
+							variant="outlined"
+						>
+							<CardActionArea className={classes.card}>
+								<CardContent>
+									<div className={classes.addCredential}>
+										<MoreVertIcon />
+									</div>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid xs={12} sm={6} md={4} className={classes.grid}>
+						<Card
+							className={(classes.addCredential, classes.cardAlter)}
+							variant="outlined"
+						>
+							<CardActionArea className={classes.card}>
+								<CardContent>
+									<div className={classes.addCredential}>
+										<MoreVertIcon />
+									</div>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid xs={12} sm={6} md={4} className={classes.grid}>
+						<Card
+							className={(classes.addCredential, classes.cardAlter)}
+							variant="outlined"
+						>
+							<CardActionArea className={classes.card}>
+								<CardContent>
+									<div className={classes.addCredential}>
+										<MoreVertIcon />
+									</div>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid xs={12} sm={6} md={4} className={classes.grid}>
+						<Card
+							className={(classes.addCredential, classes.cardAlter)}
+							variant="outlined"
+						>
+							<CardActionArea className={classes.card}>
+								<CardContent>
+									<div className={classes.addCredential}>
+										<MoreVertIcon />
+									</div>
 								</CardContent>
 							</CardActionArea>
 						</Card>
