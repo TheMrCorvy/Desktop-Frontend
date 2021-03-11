@@ -9,6 +9,7 @@ import {
 	Avatar,
 	IconButton,
 	CardContent,
+	Typography,
 } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 import { red } from "@material-ui/core/colors"
@@ -44,11 +45,14 @@ const useStyles = makeStyles((theme: Theme) =>
 		card: {
 			background: theme.palette.type === "dark" ? theme.palette.background.default : "white",
 			height: "100%",
-			borderRadius: 10,
+			borderRadius: 8,
 		},
 		textColor: {
 			color:
 				theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.54)",
+		},
+		lineHeight: {
+			lineHeight: 1.5,
 		},
 		addCredential: {
 			flexGrow: 1,
@@ -56,20 +60,17 @@ const useStyles = makeStyles((theme: Theme) =>
 			justifyContent: "center",
 			alignItems: "center",
 			textAlign: "center",
-			height: "100%",
+			minHeight: "100%",
 		},
 		cardAlter: {
 			borderStyle: "dashed",
 			background: theme.palette.type === "dark" ? theme.palette.background.default : "white",
 			height: "100%",
-			borderRadius: 10,
+			borderRadius: 8,
 			minHeight: "7rem",
 		},
-		grid: {
-			marginLeft: 20,
-			marginRight: 20,
-			marginBottom: 20,
-			marginTop: 20,
+		cardAction: {
+			minHeight: "100%",
 		},
 	})
 )
@@ -84,76 +85,43 @@ const MyCredentials: FC = () => {
 	return (
 		<>
 			<Container maxWidth="lg" className={classes.container}>
-				<Grid container justify="space-around" spacing={3}>
+				<Grid container justify="space-around" spacing={4}>
 					<OrderBar orderCredentials={orderBy} />
-					<Grid xs={12} sm={6} md={4} className={classes.grid}>
+					<Grid item xs={12} sm={6} md={4}>
 						<Card className={classes.card}>
-							<CardActionArea>
+							<CardActionArea className={classes.cardAction}>
 								<CardContent>
-									<CardHeader
-										avatar={
+									<Grid container spacing={2}>
+										<Grid item xs={2} className={classes.addCredential}>
 											<Avatar aria-label="recipe" className={classes.avatar}>
 												R
 											</Avatar>
-										}
-										action={
-											<IconButton>
-												<MoreVertIcon />
-											</IconButton>
-										}
-										title="Shrimp and Chorizo Paella"
-										subheader="Has been recently seen"
-										classes={{
-											subheader: classes.textColor,
-										}}
-									/>
+										</Grid>
+										<Grid item xs={8}>
+											<Typography
+												variant="subtitle1"
+												paragraph
+												gutterBottom
+												className={classes.lineHeight}
+											>
+												Name of the credential the user created
+											</Typography>
+											<Typography
+												variant="body1"
+												className={classes.textColor}
+											>
+												Has been recently seen
+											</Typography>
+										</Grid>
+										<Grid item xs={2} className={classes.addCredential}>
+											<MoreVertIcon />
+										</Grid>
+									</Grid>
 								</CardContent>
 							</CardActionArea>
 						</Card>
 					</Grid>
-					<Grid xs={12} sm={6} md={4} className={classes.grid}>
-						<Card
-							className={(classes.addCredential, classes.cardAlter)}
-							variant="outlined"
-						>
-							<CardActionArea className={classes.card}>
-								<CardContent>
-									<div className={classes.addCredential}>
-										<MoreVertIcon />
-									</div>
-								</CardContent>
-							</CardActionArea>
-						</Card>
-					</Grid>
-					<Grid xs={12} sm={6} md={4} className={classes.grid}>
-						<Card
-							className={(classes.addCredential, classes.cardAlter)}
-							variant="outlined"
-						>
-							<CardActionArea className={classes.card}>
-								<CardContent>
-									<div className={classes.addCredential}>
-										<MoreVertIcon />
-									</div>
-								</CardContent>
-							</CardActionArea>
-						</Card>
-					</Grid>
-					<Grid xs={12} sm={6} md={4} className={classes.grid}>
-						<Card
-							className={(classes.addCredential, classes.cardAlter)}
-							variant="outlined"
-						>
-							<CardActionArea className={classes.card}>
-								<CardContent>
-									<div className={classes.addCredential}>
-										<MoreVertIcon />
-									</div>
-								</CardContent>
-							</CardActionArea>
-						</Card>
-					</Grid>
-					<Grid xs={12} sm={6} md={4} className={classes.grid}>
+					<Grid item xs={12} sm={6} md={4}>
 						<Card
 							className={(classes.addCredential, classes.cardAlter)}
 							variant="outlined"
