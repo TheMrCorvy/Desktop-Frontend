@@ -74,7 +74,7 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 	}
 
 	return (
-		<Grid container justify="space-around" spacing={4}>
+		<>
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
 				<Button
 					color="inherit"
@@ -114,7 +114,7 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 			<Grid item xs={12}>
 				<Divider className={classes.topDivider} />
 			</Grid>
-		</Grid>
+		</>
 	)
 }
 
