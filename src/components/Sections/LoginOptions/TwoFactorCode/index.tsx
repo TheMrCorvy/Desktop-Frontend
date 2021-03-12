@@ -28,7 +28,8 @@ type FormInputs = {
 	verificationCode: string | number
 }
 
-export type ApiResponse = {
+//this type will be moved to the ajax manager in the future
+export type ApiResponseLogin = {
 	token: string
 	user_data: UserT
 	user_credentials: CredentialT[]
@@ -60,12 +61,12 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 	}, [])
 
 	const onSubmit = (data: FormInputs) => {
-		let responseData: ApiResponse
+		let responseData: ApiResponseLogin
 
 		if (testing) {
 			console.log(data)
 
-			const fakeResponse: ApiResponse = {
+			const fakeResponse: ApiResponseLogin = {
 				token: "fake api authorization token",
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
@@ -74,7 +75,7 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 			responseData = fakeResponse
 		} else {
 			// here goes the api call, for now i'll just copy-paste the same fake response
-			const fakeResponse: ApiResponse = {
+			const fakeResponse: ApiResponseLogin = {
 				token: "fake api authorization token",
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
@@ -82,6 +83,9 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 
 			responseData = fakeResponse
 		}
+
+		localStorage.put("user_data", JSON.stringify(responseData.user_data))
+		localStorage.put("user_credentials", JSON.stringify(responseData.user_credentials))
 
 		dispatch(login(responseData.token))
 	}
