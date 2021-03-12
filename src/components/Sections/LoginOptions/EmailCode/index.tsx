@@ -25,7 +25,7 @@ import { credential4Testing, user4Testing } from "../../../Data4Testing"
 import { UserT } from "../../../../redux/types"
 import { CredentialT } from "../../../CredentialCard"
 
-import { ApiResponseLogin } from "../TwoFactorCode"
+import { ApiResponseLoginT } from "../../../ajaxManager"
 
 type Props = {
 	isRecovery: boolean
@@ -57,12 +57,12 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 	}
 
 	const onSubmit = (data: FormInputs) => {
-		let responseData: ApiResponseLogin
+		let responseData: ApiResponseLoginT
 
 		if (testing) {
 			console.log(data)
 
-			const fakeResponse: ApiResponseLogin = {
+			const fakeResponse: ApiResponseLoginT = {
 				token: "fake api authorization token",
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
@@ -71,7 +71,7 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 			responseData = fakeResponse
 		} else {
 			// here goes the api call, for now i'll just copy-paste the same fake response
-			const fakeResponse: ApiResponseLogin = {
+			const fakeResponse: ApiResponseLoginT = {
 				token: "fake api authorization token",
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
@@ -80,8 +80,8 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 			responseData = fakeResponse
 		}
 
-		localStorage.put("user_data", JSON.stringify(responseData.user_data))
-		localStorage.put("user_credentials", JSON.stringify(responseData.user_credentials))
+		localStorage.setItem("user_data", JSON.stringify(responseData.user_data))
+		localStorage.setItem("user_credentials", JSON.stringify(responseData.user_credentials))
 
 		dispatch(login(responseData.token))
 	}

@@ -20,19 +20,11 @@ import { login } from "../../../../redux/actions/authTokenActions"
 import { translate } from "../../../../lang"
 
 import { credential4Testing, user4Testing } from "../../../Data4Testing"
-import { UserT } from "../../../../redux/types"
-import { CredentialT } from "../../../CredentialCard"
+import { ApiResponseLoginT } from "../../../ajaxManager"
 
 type FormInputs = {
 	email: String
 	verificationCode: string | number
-}
-
-//this type will be moved to the ajax manager in the future
-export type ApiResponseLogin = {
-	token: string
-	user_data: UserT
-	user_credentials: CredentialT[]
 }
 
 const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
@@ -61,12 +53,12 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 	}, [])
 
 	const onSubmit = (data: FormInputs) => {
-		let responseData: ApiResponseLogin
+		let responseData: ApiResponseLoginT
 
 		if (testing) {
 			console.log(data)
 
-			const fakeResponse: ApiResponseLogin = {
+			const fakeResponse: ApiResponseLoginT = {
 				token: "fake api authorization token",
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
@@ -75,7 +67,7 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 			responseData = fakeResponse
 		} else {
 			// here goes the api call, for now i'll just copy-paste the same fake response
-			const fakeResponse: ApiResponseLogin = {
+			const fakeResponse: ApiResponseLoginT = {
 				token: "fake api authorization token",
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
@@ -84,8 +76,8 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 			responseData = fakeResponse
 		}
 
-		localStorage.put("user_data", JSON.stringify(responseData.user_data))
-		localStorage.put("user_credentials", JSON.stringify(responseData.user_credentials))
+		localStorage.setItem("user_data", JSON.stringify(responseData.user_data))
+		localStorage.setItem("user_credentials", JSON.stringify(responseData.user_credentials))
 
 		dispatch(login(responseData.token))
 	}
