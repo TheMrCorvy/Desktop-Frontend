@@ -7,7 +7,7 @@ export type ApiResponseLoginT = {
 	user_credentials: CredentialT[]
 }
 
-export type ApiResponseGetCredentials = {
+export type ApiResponseGetCredentialsT = {
 	available_slots: number
 	user_credentials: CredentialT[]
 }

@@ -1,20 +1,25 @@
 import React, { FC, useState, useEffect } from "react"
 
+/************************************************************************************ mui related */
 import { Container, Grid, Button, Typography } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
+/************************************************************************************ redux related */
 import { logOut } from "../../redux/actions/authTokenActions"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
+/************************************************************************************ my components */
 import Downloads from "../../components/Sections/Downloads"
 import Snackbar from "../../components/Snackbar"
+
+/************************************************************************************ types imports */
 import OrderBar, { By, Direction } from "../../components/OrderBar"
 import CredentialCard, { CredentialT } from "../../components/CredentialCard"
 import { UserT } from "../../redux/types"
-import { ApiResponseGetCredentials } from "../../components/ajaxManager"
+import { ApiResponseGetCredentialsT } from "../../components/ajaxManager"
 
 import { credential4Testing } from "../../components/Data4Testing"
 
@@ -52,6 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MyCredentials: FC = () => {
 	const { token } = useSelector((state: RootState) => state.token)
+	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
 
@@ -84,7 +90,7 @@ const MyCredentials: FC = () => {
 			setCredentials(localCredentials)
 		} else {
 			setError(true)
-			setSnackbarMessage("There was an error geting your data...")
+			setSnackbarMessage(translate("error_messages", lng, 0))
 		}
 	}, [])
 
@@ -95,7 +101,7 @@ const MyCredentials: FC = () => {
 	const getFromApi = () => {
 		setError(false)
 
-		let apiResponse: ApiResponseGetCredentials
+		let apiResponse: ApiResponseGetCredentialsT
 
 		if (REACT_APP_ENV_LOCAL) {
 			apiResponse = {
@@ -123,11 +129,9 @@ const MyCredentials: FC = () => {
 			setAvailableSlots(apiResponse.available_slots)
 		} else {
 			setError(true)
-			setSnackbarMessage(
-				"There was an error with your stored data, so we are logging you out."
-			)
+			setSnackbarMessage(translate("error_messages", lng, 2))
 
-			console.log("There was an error with your stored data, so we are logging you out.")
+			console.log(translate("error_messages", lng, 2))
 
 			dispatch(logOut())
 		}
@@ -152,8 +156,7 @@ const MyCredentials: FC = () => {
 						<>
 							<Grid item xs={12} className={classes.error}>
 								<Typography variant="subtitle1" gutterBottom paragraph>
-									There was an error geting your data, if you want to retry, click
-									the button bellow.
+									{translate("error_messages", lng, 1)}
 								</Typography>
 								<Button
 									variant="contained"
@@ -162,7 +165,7 @@ const MyCredentials: FC = () => {
 									size="large"
 									onClick={getFromApi}
 								>
-									Retry
+									{translate("retry", lng)}
 								</Button>
 							</Grid>
 							<Snackbar open={error} snackbarMessage={snackbarMessage} />

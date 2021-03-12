@@ -181,5 +181,11 @@
 		"In order for you to start using 2-Factor Authentication, we recommend the following apps:"
 	],
 	"official_site": ["Official Site"],
-	"order_options": ["By Created", "By Edited", "By Name", "Recently Viewed"]
+	"order_options": ["By Created", "By Edited", "By Name", "Recently Viewed"],
+	"error_messages": [
+		"There was an error geting your data...",
+		"There was an error geting your data, if you want to retry, click the button bellow.",
+		"There was an error with your stored data, so we are logging you out."
+	],
+	"retry": ["Retry"]
 }

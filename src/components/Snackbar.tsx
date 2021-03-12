@@ -31,7 +31,7 @@ const Snackbar = ({
 					horizontal: horizontalPosition ? horizontalPosition : "left",
 				}}
 				open={isOpen}
-				autoHideDuration={duration ? duration : 6000}
+				autoHideDuration={duration && duration > 1000 ? duration : 6000}
 				message={snackbarMessage}
 				onClose={handleClose}
 			/>

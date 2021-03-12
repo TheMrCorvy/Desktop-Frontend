@@ -193,5 +193,11 @@
 		"Para que puedas comenzar a hacer uso de la Autenticación en 2 Factores, te recomendamos las siguientes apps:"
 	],
 	"official_site": ["Sitio Oficial"],
-	"order_options": ["Creado", "Editado", "Nombre", "Visto Recientemente"]
+	"order_options": ["Creado", "Editado", "Nombre", "Visto Recientemente"],
+	"error_messages": [
+		"Hubo un error tratando de obtener tus datos...",
+		"Hubo un error obteniendo tus datos, si quieres reintentar, puedes hacer click en el botón debajo.",
+		"Hay un error en tus datos almacenados, así que te cerraremos la sesión."
+	],
+	"retry": ["Renintentar"]
 }
