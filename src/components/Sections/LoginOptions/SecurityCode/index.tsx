@@ -1,4 +1,6 @@
 import React from "react"
+import { useForm } from "react-hook-form"
+
 import {
 	Box,
 	Grid,
@@ -16,7 +18,11 @@ import { login } from "../../../../redux/actions/authTokenActions"
 
 import { translate } from "../../../../lang"
 
-import { useForm } from "react-hook-form"
+import { credential4Testing, user4Testing } from "../../../Data4Testing"
+import { UserT } from "../../../../redux/types"
+import { CredentialT } from "../../../CredentialCard"
+
+import { ApiResponseLogin } from "../TwoFactorCode"
 
 type FormInputs = {
 	mainEmail: string
@@ -41,14 +47,33 @@ const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolea
 	}
 
 	const onSubmit = (data: FormInputs) => {
-		if (testing) {
-			dispatch(login("authorization token"))
+		let responseData: ApiResponseLogin
 
-			return
+		if (testing) {
+			console.log(data)
+
+			const fakeResponse: ApiResponseLogin = {
+				token: "fake api authorization token",
+				user_data: user4Testing,
+				user_credentials: credential4Testing,
+			}
+
+			responseData = fakeResponse
+		} else {
+			// here goes the api call, for now i'll just copy-paste the same fake response
+			const fakeResponse: ApiResponseLogin = {
+				token: "fake api authorization token",
+				user_data: user4Testing,
+				user_credentials: credential4Testing,
+			}
+
+			responseData = fakeResponse
 		}
 
-		console.log("production api call")
-		console.log(data)
+		localStorage.put("user_data", JSON.stringify(responseData.user_data))
+		localStorage.put("user_credentials", JSON.stringify(responseData.user_credentials))
+
+		dispatch(login(responseData.token))
 	}
 
 	return (
