@@ -1,7 +1,21 @@
 import React, { useState } from "react"
 import { Snackbar as SnackbarMui } from "@material-ui/core"
 
-const Snackbar = ({ snackbarMessage, open }: { snackbarMessage: string; open: boolean }) => {
+type Props = {
+	snackbarMessage: string
+	open: boolean
+	duration?: number
+	verticalPosition?: "bottom" | "top"
+	horizontalPosition?: "center" | "left" | "right"
+}
+
+const Snackbar = ({
+	snackbarMessage,
+	open,
+	duration,
+	verticalPosition,
+	horizontalPosition,
+}: Props) => {
 	//this part is necessary to autohide the snackbar
 	const [isOpen, setIsOpen] = useState<boolean>(open)
 
@@ -13,11 +27,11 @@ const Snackbar = ({ snackbarMessage, open }: { snackbarMessage: string; open: bo
 		<div>
 			<SnackbarMui
 				anchorOrigin={{
-					vertical: "bottom",
-					horizontal: "left",
+					vertical: verticalPosition ? verticalPosition : "bottom",
+					horizontal: horizontalPosition ? horizontalPosition : "left",
 				}}
 				open={isOpen}
-				autoHideDuration={6000}
+				autoHideDuration={duration ? duration : 6000}
 				message={snackbarMessage}
 				onClose={handleClose}
 			/>
