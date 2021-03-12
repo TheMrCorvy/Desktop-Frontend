@@ -2,8 +2,6 @@ import React, { useState, useEffect, ChangeEvent } from "react"
 
 import { useForm } from "react-hook-form"
 
-import { user4Testing } from "../../../Data4Testing"
-
 import {
 	Box,
 	Grid,
@@ -21,9 +19,19 @@ import { login } from "../../../../redux/actions/authTokenActions"
 
 import { translate } from "../../../../lang"
 
+import { credential4Testing, user4Testing } from "../../../Data4Testing"
+import { UserT } from "../../../../redux/types"
+import { CredentialT } from "../../../CredentialCard"
+
 type FormInputs = {
 	email: String
 	verificationCode: string | number
+}
+
+export type ApiResponse = {
+	token: string
+	user_data: UserT
+	user_credentials: CredentialT[]
 }
 
 const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
@@ -52,16 +60,30 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 	}, [])
 
 	const onSubmit = (data: FormInputs) => {
-		if (testing) {
-			dispatch(login("authorization token"))
+		let responseData: ApiResponse
 
+		if (testing) {
 			console.log(data)
 
-			return
+			const fakeResponse: ApiResponse = {
+				token: "fake api authorization token",
+				user_data: user4Testing,
+				user_credentials: credential4Testing,
+			}
+
+			responseData = fakeResponse
+		} else {
+			// here goes the api call, for now i'll just copy-paste the same fake response
+			const fakeResponse: ApiResponse = {
+				token: "fake api authorization token",
+				user_data: user4Testing,
+				user_credentials: credential4Testing,
+			}
+
+			responseData = fakeResponse
 		}
 
-		console.log("production api call")
-		console.log(data)
+		dispatch(login(responseData.token))
 	}
 
 	const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
