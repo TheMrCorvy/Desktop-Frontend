@@ -127,6 +127,8 @@ const MyCredentials: FC = () => {
 				"There was an error with your stored data, so we are logging you out."
 			)
 
+			console.log("There was an error with your stored data, so we are logging you out.")
+
 			dispatch(logOut())
 		}
 

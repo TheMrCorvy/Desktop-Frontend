@@ -38,7 +38,7 @@ export const user4Testing: UserT = {
 	mainEmail: "email_1@gmail.com",
 	recoveryEmail: "email_2@gmail.com",
 	phone: "+54 011 1234-5678",
-	availableSlots: 5,
+	availableSlots: 4,
 	role: "free",
 }
 
