@@ -10,6 +10,7 @@ import { RootState } from "../../redux/store"
 import { translate } from "../../lang"
 
 import Downloads from "../../components/Sections/Downloads"
+import Snackbar from "../../components/Snackbar"
 import OrderBar, { By, Direction } from "../../components/OrderBar"
 import CredentialCard, { CredentialT } from "../../components/CredentialCard"
 import { UserT } from "../../redux/types"
@@ -132,7 +133,7 @@ const MyCredentials: FC = () => {
 		<>
 			<Container maxWidth="lg" className={classes.container}>
 				<Grid container justify="space-around" spacing={4}>
-					{error ? (
+					{!error ? (
 						<>
 							<OrderBar orderCredentials={orderBy} />
 							<CredentialCard
@@ -141,21 +142,24 @@ const MyCredentials: FC = () => {
 							/>
 						</>
 					) : (
-						<Grid item xs={12} className={classes.error}>
-							<Typography variant="subtitle1" gutterBottom paragraph>
-								There was an error geting your data, if you want to retry, click the
-								button bellow.
-							</Typography>
-							<Button
-								variant="contained"
-								className={classes.errorBtn}
-								disableElevation
-								size="large"
-								onClick={getFromApi}
-							>
-								Retry
-							</Button>
-						</Grid>
+						<>
+							<Grid item xs={12} className={classes.error}>
+								<Typography variant="subtitle1" gutterBottom paragraph>
+									There was an error geting your data, if you want to retry, click
+									the button bellow.
+								</Typography>
+								<Button
+									variant="contained"
+									className={classes.errorBtn}
+									disableElevation
+									size="large"
+									onClick={getFromApi}
+								>
+									Retry
+								</Button>
+							</Grid>
+							<Snackbar open={error} snackbarMessage={snackbarMessage} />
+						</>
 					)}
 				</Grid>
 			</Container>
