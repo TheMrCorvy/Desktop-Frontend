@@ -119,6 +119,8 @@ const MyCredentials: FC = () => {
 			newData.availableSlots = apiResponse.available_slots
 
 			localStorage.setItem("user_data", JSON.stringify(newData))
+
+			setAvailableSlots(apiResponse.available_slots)
 		} else {
 			setError(true)
 			setSnackbarMessage(
@@ -127,6 +129,9 @@ const MyCredentials: FC = () => {
 
 			dispatch(logOut())
 		}
+
+		localStorage.setItem("user_credentials", JSON.stringify(apiResponse.user_credentials))
+		setCredentials(apiResponse.user_credentials)
 	}
 
 	return (
