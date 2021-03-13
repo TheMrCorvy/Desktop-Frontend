@@ -3,7 +3,6 @@ import React, { FC } from "react"
 import { Container, Grid, Tooltip, IconButton, Typography, Link } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
-
 import { grey } from "@material-ui/core/colors"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -12,6 +11,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
+
 import TranslateButton from "../../components/Navbar/NavbarButtons/TranslateButton"
 
 const useStyles = makeStyles({
@@ -35,6 +35,7 @@ const useStyles = makeStyles({
 
 const Footer: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+	const { token } = useSelector((state: RootState) => state.token)
 
 	const classes = useStyles()
 
@@ -138,16 +139,34 @@ const Footer: FC = () => {
 									{translate("downloads", lng)}
 								</Link>
 							</Grid>
-							<Grid item xs={3} md={12}>
-								<Link href="/login" color="inherit">
-									{translate("navbar_login_btn", lng)}
-								</Link>
-							</Grid>
-							<Grid item xs={3} md={12}>
-								<Link href="/register" color="inherit">
-									{translate("navbar_register_btn", lng)}
-								</Link>
-							</Grid>
+							{!token ? (
+								<>
+									<Grid item xs={3} md={12}>
+										<Link href="/login" color="inherit">
+											{translate("navbar_login_btn", lng)}
+										</Link>
+									</Grid>
+
+									<Grid item xs={3} md={12}>
+										<Link href="/register" color="inherit">
+											{translate("navbar_register_btn", lng)}
+										</Link>
+									</Grid>
+								</>
+							) : (
+								<>
+									<Grid item xs={3} md={12}>
+										<Link href="/my-account" color="inherit">
+											{translate("navbar_my_account_btn", lng)}
+										</Link>
+									</Grid>
+									<Grid item xs={3} md={12}>
+										<Link href="/my-credentials" color="inherit">
+											{translate("navbar_my_credentials_btn", lng)}
+										</Link>
+									</Grid>
+								</>
+							)}
 							<Grid item xs={3} md={12}>
 								<TranslateButton style={{ padding: 0 }} />
 							</Grid>

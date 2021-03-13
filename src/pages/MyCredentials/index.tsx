@@ -18,7 +18,7 @@ import Snackbar from "../../components/Snackbar"
 /************************************************************************************ types imports */
 import OrderBar, { By, Direction } from "../../components/OrderBar"
 import CredentialCard, { CredentialT } from "../../components/CredentialCard"
-import { UserT } from "../../redux/types"
+import { UserT } from "../../misc/ajaxManager"
 import { ApiResponseGetCredentialsT } from "../../misc/ajaxManager"
 
 import { credential4Testing } from "../../misc/Data4Testing"
@@ -105,13 +105,13 @@ const MyCredentials: FC = () => {
 
 		if (REACT_APP_ENV_LOCAL) {
 			apiResponse = {
-				available_slots: 4,
+				available_slots: 3,
 				user_credentials: credential4Testing,
 			}
 		} else {
 			//i'm going to leave this until i'll start making the api
 			apiResponse = {
-				available_slots: 4,
+				available_slots: 3,
 				user_credentials: credential4Testing,
 			}
 			console.log("getting the fresh data, using the token: " + token)

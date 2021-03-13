@@ -1,5 +1,5 @@
 import { OpinionCardT } from "../components/Sections/Opinions/OpinionCard"
-import { UserT } from "../redux/types"
+import { UserT } from "./ajaxManager"
 import { CredentialT } from "../components/CredentialCard"
 
 export const suggestion4Testing: OpinionCardT[] = [
@@ -38,7 +38,7 @@ export const user4Testing: UserT = {
 	mainEmail: "email_1@gmail.com",
 	recoveryEmail: "email_2@gmail.com",
 	phone: "+54 011 1234-5678",
-	availableSlots: 4,
+	availableSlots: 3,
 	role: "free",
 }
 
@@ -48,5 +48,11 @@ export const credential4Testing: CredentialT[] = [
 		avatar: null,
 		recentlySeen: true,
 		id: 1,
+	},
+	{
+		name: "second test",
+		avatar: null,
+		recentlySeen: false,
+		id: 2,
 	},
 ]

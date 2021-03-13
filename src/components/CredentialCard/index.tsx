@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		cardAlter: {
 			borderStyle: "dashed",
-			background: theme.palette.type === "dark" ? theme.palette.background.default : "white",
+			background: theme.palette.background.default,
 			height: "100%",
 			borderRadius: 8,
 			minHeight: "7rem",
@@ -124,8 +124,8 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 			))}
 			{[...Array(availableSlots)].map((value: undefined, index: number) => (
 				<Grid item xs={12} sm={6} md={4} key={index}>
-					<Card className={(classes.addCredential, classes.cardAlter)} variant="outlined">
-						<CardActionArea className={classes.card}>
+					<Card className={classes.cardAlter} variant="outlined">
+						<CardActionArea className={classes.cardAlter}>
 							<CardContent className={classes.addCredential}>
 								<MoreVertIcon />
 							</CardContent>

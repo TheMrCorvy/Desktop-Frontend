@@ -1,5 +1,13 @@
-import { UserT } from "../redux/types"
 import { CredentialT } from "../components/CredentialCard"
+
+export type UserT = {
+	name: string
+	mainEmail: string
+	recoveryEmail: string
+	phone: string
+	availableSlots: number
+	role: "free" | "semi-premium" | "premium" | "admin"
+}
 
 export type ApiResponseLoginT = {
 	token: string
