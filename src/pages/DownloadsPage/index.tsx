@@ -13,7 +13,7 @@ import {
 	recommendedTwoFactorApps,
 	recommendedApps,
 	RecommendedAppsType,
-} from "../../components/staticData"
+} from "../../misc/staticData"
 
 import Downloads from "../../components/Sections/Downloads"
 

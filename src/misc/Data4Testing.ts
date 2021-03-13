@@ -1,6 +1,6 @@
-import { OpinionCardT } from "./Sections/Opinions/OpinionCard"
+import { OpinionCardT } from "../components/Sections/Opinions/OpinionCard"
 import { UserT } from "../redux/types"
-import { CredentialT } from "./CredentialCard"
+import { CredentialT } from "../components/CredentialCard"
 
 export const suggestion4Testing: OpinionCardT[] = [
 	{

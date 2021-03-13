@@ -21,11 +21,11 @@ import { translate } from "../../../../lang"
 
 import TimerButton from "../../../TimerButton"
 
-import { credential4Testing, user4Testing } from "../../../Data4Testing"
+import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 import { UserT } from "../../../../redux/types"
 import { CredentialT } from "../../../CredentialCard"
 
-import { ApiResponseLoginT } from "../../../ajaxManager"
+import { ApiResponseLoginT } from "../../../../misc/ajaxManager"
 
 type Props = {
 	isRecovery: boolean

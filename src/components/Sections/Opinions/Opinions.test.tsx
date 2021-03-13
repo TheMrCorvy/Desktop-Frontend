@@ -4,7 +4,7 @@ import { Provider } from "react-redux"
 import store from "../../../redux/store"
 
 import Opinions from "./index"
-import { rating4Testing, suggestion4Testing } from "../../Data4Testing"
+import { rating4Testing, suggestion4Testing } from "../../../misc/Data4Testing"
 
 const title = "testing title"
 

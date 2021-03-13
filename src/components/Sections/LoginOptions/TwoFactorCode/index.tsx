@@ -19,8 +19,8 @@ import { login } from "../../../../redux/actions/authTokenActions"
 
 import { translate } from "../../../../lang"
 
-import { credential4Testing, user4Testing } from "../../../Data4Testing"
-import { ApiResponseLoginT } from "../../../ajaxManager"
+import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
+import { ApiResponseLoginT } from "../../../../misc/ajaxManager"
 
 type FormInputs = {
 	email: String

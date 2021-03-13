@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom"
 import { Provider } from "react-redux"
 import store from "../../redux/store"
 
-import { recommendedTwoFactorApps, recommendedApps } from "../../components/staticData"
+import { recommendedTwoFactorApps, recommendedApps } from "../../misc/staticData"
 
 import DownloadsPage from "./index"
 

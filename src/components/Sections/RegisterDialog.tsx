@@ -10,7 +10,7 @@ import { translate } from "../../lang"
 
 import DialogComponent from "../Dialog"
 
-import { recommendedTwoFactorApps, RecommendedAppsType } from "../staticData"
+import { recommendedTwoFactorApps, RecommendedAppsType } from "../../misc/staticData"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

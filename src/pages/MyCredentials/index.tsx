@@ -19,9 +19,9 @@ import Snackbar from "../../components/Snackbar"
 import OrderBar, { By, Direction } from "../../components/OrderBar"
 import CredentialCard, { CredentialT } from "../../components/CredentialCard"
 import { UserT } from "../../redux/types"
-import { ApiResponseGetCredentialsT } from "../../components/ajaxManager"
+import { ApiResponseGetCredentialsT } from "../../misc/ajaxManager"
 
-import { credential4Testing } from "../../components/Data4Testing"
+import { credential4Testing } from "../../misc/Data4Testing"
 
 type Order = {
 	by: By
