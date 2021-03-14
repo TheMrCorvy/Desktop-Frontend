@@ -91,13 +91,11 @@ const MyCredentials: FC = () => {
 	const getFromApi = async () => {
 		setError(false)
 
-		let localUser = await getUser().then((user: any) => {
-			if (user === undefined || user.failed) {
-				fatalError(user)
-			} else {
-				return user
-			}
-		})
+		let localUser = await getUser().then((user: any) => user)
+
+		if (localUser === undefined || localUser.failed) {
+			return fatalError(localUser)
+		}
 
 		const newCredentials: ApiResponseGetCredentialsT = getCredentialsFromApi(
 			localUser.id,
