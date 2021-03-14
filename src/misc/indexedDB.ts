@@ -22,14 +22,11 @@ export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
 		//here I use put so when the user login or registers there won't be any error of "same key/id"
 		const userStored = await db.users.put(user)
 
-		const credentialsStored = await db.credentials.bulkPut(credentials)
+		const credentialsStored = await putCredentials(credentials)
 
 		return { userStored, credentialsStored }
 	} catch (error) {
-		return {
-			error,
-			failed: true,
-		}
+		return { failed: true, error }
 	}
 }
 
@@ -45,9 +42,26 @@ export const getCredentials = async () => {
 
 		return { userData, credentials }
 	} catch (error) {
-		return {
-			failed: true,
-			error,
-		}
+		return { failed: true, error }
+	}
+}
+
+export const getUser = async () => {
+	try {
+		const db = new PasuSewaDatabase()
+
+		return await db.users.orderBy("id").first()
+	} catch (error) {
+		return { failed: true, error }
+	}
+}
+
+export const putCredentials = async (credentials: CredentialT[]) => {
+	try {
+		const db = new PasuSewaDatabase()
+
+		return await db.credentials.bulkPut(credentials)
+	} catch (error) {
+		return { failed: true, error }
 	}
 }

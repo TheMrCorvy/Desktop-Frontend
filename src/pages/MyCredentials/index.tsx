@@ -115,27 +115,27 @@ const MyCredentials: FC = () => {
 			console.log("getting the fresh data, using the token: " + token)
 		}
 
-		const localUserData = localStorage.getItem("user_data")
+		// const localUserData = localStorage.getItem("user_data")
 
-		if (localUserData) {
-			let newData: UserT = JSON.parse(localUserData)
+		// if (localUserData) {
+		// 	let newData: UserT = JSON.parse(localUserData)
 
-			newData.availableSlots = apiResponse.available_slots
+		// 	newData.availableSlots = apiResponse.available_slots
 
-			localStorage.setItem("user_data", JSON.stringify(newData))
+		// 	localStorage.setItem("user_data", JSON.stringify(newData))
 
-			setAvailableSlots(apiResponse.available_slots)
-		} else {
-			setError(true)
-			setSnackbarMessage(translate("error_messages", lng, 2))
+		// 	setAvailableSlots(apiResponse.available_slots)
+		// } else {
+		// 	setError(true)
+		// 	setSnackbarMessage(translate("error_messages", lng, 2))
 
-			console.log(translate("error_messages", lng, 2))
+		// 	console.log(translate("error_messages", lng, 2))
 
-			dispatch(logOut())
-		}
+		// 	dispatch(logOut())
+		// }
 
-		localStorage.setItem("user_credentials", JSON.stringify(apiResponse.user_credentials))
-		setCredentials(apiResponse.user_credentials)
+		// localStorage.setItem("user_credentials", JSON.stringify(apiResponse.user_credentials))
+		// setCredentials(apiResponse.user_credentials)
 	}
 
 	return (
