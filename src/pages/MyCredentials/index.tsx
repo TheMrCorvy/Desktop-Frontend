@@ -19,16 +19,11 @@ import Snackbar from "../../components/Snackbar"
 import { DBErrorT, getCredentials, getUser, putCredentials, putUser } from "../../misc/indexedDB"
 
 /************************************************************************************ types imports */
-import OrderBar, { By, Direction } from "../../components/OrderBar"
+import OrderBar, { By } from "../../components/OrderBar"
 import CredentialCard, { CredentialT } from "../../components/CredentialCard"
 
 /************************************************************************************ ajax */
 import { ApiResponseGetCredentialsT, getCredentialsFromApi } from "../../misc/ajaxManager"
-
-type Order = {
-	by: By
-	direction: Direction
-}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -89,7 +84,7 @@ const MyCredentials: FC = () => {
 		})
 	}, [])
 
-	const orderBy = (order: Order) => {
+	const orderBy = (order: By) => {
 		console.log(order)
 	}
 

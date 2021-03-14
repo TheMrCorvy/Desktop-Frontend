@@ -22,8 +22,6 @@ class PasuSewaDatabase extends Dexie {
 
 export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
 	try {
-		const db = new PasuSewaDatabase()
-
 		//here I use put so when the user login or registers there won't be any error of "same key/id"
 		const userStored = await putUser(user)
 
