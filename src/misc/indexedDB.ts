@@ -19,10 +19,10 @@ export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
 	try {
 		const db = new PasuSewaDatabase()
 
-		//this user stored will always be the only user in the db
-		const userStored = await db.users.add(user)
+		//here I use put so when the user login or registers there won't be any error of "same key/id"
+		const userStored = await db.users.put(user)
 
-		const credentialsStored = await db.credentials.bulkAdd(credentials)
+		const credentialsStored = await db.credentials.bulkPut(credentials)
 
 		return { userStored, credentialsStored }
 	} catch (error) {
