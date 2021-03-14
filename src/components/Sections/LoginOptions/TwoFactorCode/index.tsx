@@ -88,8 +88,6 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 
 				setError(true)
 			} else {
-				console.log(storedData)
-
 				dispatch(login(responseData.token))
 			}
 		})

@@ -32,3 +32,22 @@ export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
 		}
 	}
 }
+
+export const getCredentials = async () => {
+	try {
+		throw new Error("error")
+
+		const db = new PasuSewaDatabase()
+
+		const credentials = await db.credentials.toArray()
+
+		const userData = await db.users.orderBy("id").first()
+
+		return { userData, credentials }
+	} catch (error) {
+		return {
+			failed: true,
+			error,
+		}
+	}
+}

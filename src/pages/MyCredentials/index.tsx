@@ -15,6 +15,9 @@ import { translate } from "../../lang"
 import Downloads from "../../components/Sections/Downloads"
 import Snackbar from "../../components/Snackbar"
 
+/************************************************************************************ indexedDB */
+import { getCredentials } from "../../misc/indexedDB"
+
 /************************************************************************************ types imports */
 import OrderBar, { By, Direction } from "../../components/OrderBar"
 import CredentialCard, { CredentialT } from "../../components/CredentialCard"
@@ -74,24 +77,19 @@ const MyCredentials: FC = () => {
 	const { REACT_APP_ENV_LOCAL } = process.env
 
 	useEffect(() => {
-		const getCredentials = localStorage.getItem("user_credentials")
-		const getAvailableSlots = localStorage.getItem("user_data")
+		getCredentials().then((data) => {
+			if (data.userData && data.credentials) {
+				setAvailableSlots(data.userData.availableSlots)
 
-		let localCredentials: CredentialT[]
-		let localSlots: UserT
+				setCredentials(data.credentials)
+			} else {
+				setError(true)
 
-		if (getCredentials && getAvailableSlots) {
-			localCredentials = JSON.parse(getCredentials)
+				setSnackbarMessage(translate("error_messages", lng, 0))
 
-			localSlots = JSON.parse(getAvailableSlots)
-
-			setAvailableSlots(localSlots.availableSlots)
-
-			setCredentials(localCredentials)
-		} else {
-			setError(true)
-			setSnackbarMessage(translate("error_messages", lng, 0))
-		}
+				console.log(data.error)
+			}
+		})
 	}, [])
 
 	const orderBy = (order: Order) => {
