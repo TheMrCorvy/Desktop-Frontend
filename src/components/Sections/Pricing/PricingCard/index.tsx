@@ -35,7 +35,6 @@ export type PricingCardT = {
 	cardElevation: number
 	listItems: ListItemT[]
 	buttonText: string
-	linkUrl?: string
 }
 
 const useStyles = makeStyles((theme: Theme) =>

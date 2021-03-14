@@ -83,7 +83,6 @@ export const pricingInfo = (lang: string): PricingCardT[] => {
 		],
 		cardElevation: 0,
 		buttonText: translate("navbar_register_btn", lang),
-		linkUrl: "/register",
 	}
 
 	const semiPremiumCard: PricingCardT = {
@@ -109,7 +108,6 @@ export const pricingInfo = (lang: string): PricingCardT[] => {
 		],
 		cardElevation: 1,
 		buttonText: translate("navbar_register_btn", lang),
-		linkUrl: "/register",
 	}
 
 	const premiumCard: PricingCardT = {
@@ -130,7 +128,7 @@ export const pricingInfo = (lang: string): PricingCardT[] => {
 			},
 			{
 				icon: "file-import",
-				text: translate("tier_premium", lang, 6),
+				text: translate("tier_premium", lang, 8),
 			},
 			{
 				icon: "users",
@@ -143,7 +141,6 @@ export const pricingInfo = (lang: string): PricingCardT[] => {
 		],
 		cardElevation: 2,
 		buttonText: translate("navbar_register_btn", lang),
-		linkUrl: "/register",
 	}
 
 	return [freeCard, semiPremiumCard, premiumCard]

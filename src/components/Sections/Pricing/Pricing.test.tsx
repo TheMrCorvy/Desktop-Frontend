@@ -12,8 +12,9 @@ import {
 	faWallet,
 	faUsers,
 	faStar,
+	faFileImport,
 } from "@fortawesome/free-solid-svg-icons"
-library.add(faSyncAlt, faLock, faLockOpen, faFingerprint, faWallet, faUsers, faStar)
+library.add(faSyncAlt, faLock, faLockOpen, faFingerprint, faWallet, faUsers, faStar, faFileImport)
 
 import Pricing from "./index"
 
