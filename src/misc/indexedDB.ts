@@ -2,6 +2,11 @@ import Dexie, { Table } from "dexie"
 import { CredentialT } from "../components/CredentialCard"
 import { UserT } from "./ajaxManager"
 
+export type DBErrorT = {
+	failed: boolean
+	error: any
+}
+
 class PasuSewaDatabase extends Dexie {
 	users!: Table<UserT>
 	credentials!: Table<CredentialT>
@@ -20,7 +25,7 @@ export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
 		const db = new PasuSewaDatabase()
 
 		//here I use put so when the user login or registers there won't be any error of "same key/id"
-		const userStored = await db.users.put(user)
+		const userStored = await putUser(user)
 
 		const credentialsStored = await putCredentials(credentials)
 
@@ -32,8 +37,6 @@ export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
 
 export const getCredentials = async () => {
 	try {
-		throw new Error("error")
-
 		const db = new PasuSewaDatabase()
 
 		const credentials = await db.credentials.toArray()
@@ -51,6 +54,16 @@ export const getUser = async () => {
 		const db = new PasuSewaDatabase()
 
 		return await db.users.orderBy("id").first()
+	} catch (error) {
+		return { failed: true, error }
+	}
+}
+
+export const putUser = async (user: UserT) => {
+	try {
+		const db = new PasuSewaDatabase()
+
+		return await db.users.put(user)
 	} catch (error) {
 		return { failed: true, error }
 	}

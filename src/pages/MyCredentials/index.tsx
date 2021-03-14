@@ -16,15 +16,14 @@ import Downloads from "../../components/Sections/Downloads"
 import Snackbar from "../../components/Snackbar"
 
 /************************************************************************************ indexedDB */
-import { getCredentials } from "../../misc/indexedDB"
+import { DBErrorT, getCredentials, getUser, putCredentials, putUser } from "../../misc/indexedDB"
 
 /************************************************************************************ types imports */
 import OrderBar, { By, Direction } from "../../components/OrderBar"
 import CredentialCard, { CredentialT } from "../../components/CredentialCard"
-import { UserT } from "../../misc/ajaxManager"
-import { ApiResponseGetCredentialsT } from "../../misc/ajaxManager"
 
-import { credential4Testing } from "../../misc/Data4Testing"
+/************************************************************************************ ajax */
+import { ApiResponseGetCredentialsT, getCredentialsFromApi } from "../../misc/ajaxManager"
 
 type Order = {
 	by: By
@@ -74,8 +73,6 @@ const MyCredentials: FC = () => {
 
 	const [snackbarMessage, setSnackbarMessage] = useState("")
 
-	const { REACT_APP_ENV_LOCAL } = process.env
-
 	useEffect(() => {
 		getCredentials().then((data) => {
 			if (data.userData && data.credentials) {
@@ -96,46 +93,49 @@ const MyCredentials: FC = () => {
 		console.log(order)
 	}
 
-	const getFromApi = () => {
+	const getFromApi = async () => {
 		setError(false)
 
-		let apiResponse: ApiResponseGetCredentialsT
-
-		if (REACT_APP_ENV_LOCAL) {
-			apiResponse = {
-				available_slots: 3,
-				user_credentials: credential4Testing,
+		let localUser = await getUser().then((user: any) => {
+			if (user === undefined || user.failed) {
+				fatalError(user)
+			} else {
+				return user
 			}
-		} else {
-			//i'm going to leave this until i'll start making the api
-			apiResponse = {
-				available_slots: 3,
-				user_credentials: credential4Testing,
+		})
+
+		const newCredentials: ApiResponseGetCredentialsT = getCredentialsFromApi(
+			localUser.id,
+			token
+		)
+
+		localUser.availableSlots = newCredentials.available_slots
+
+		putUser(localUser).then((result: any) => {
+			if (result.failed) {
+				fatalError(result)
 			}
-			console.log("getting the fresh data, using the token: " + token)
-		}
+		})
 
-		// const localUserData = localStorage.getItem("user_data")
+		putCredentials(newCredentials.user_credentials).then((result: any) => {
+			if (result.failed) {
+				fatalError(result)
+			}
+		})
 
-		// if (localUserData) {
-		// 	let newData: UserT = JSON.parse(localUserData)
+		setAvailableSlots(newCredentials.available_slots)
 
-		// 	newData.availableSlots = apiResponse.available_slots
+		setCredentials(newCredentials.user_credentials)
+	}
 
-		// 	localStorage.setItem("user_data", JSON.stringify(newData))
+	const fatalError = (error: DBErrorT) => {
+		setError(true)
 
-		// 	setAvailableSlots(apiResponse.available_slots)
-		// } else {
-		// 	setError(true)
-		// 	setSnackbarMessage(translate("error_messages", lng, 2))
+		setSnackbarMessage(translate("error_messages", lng, 2))
 
-		// 	console.log(translate("error_messages", lng, 2))
+		console.log({ error })
 
-		// 	dispatch(logOut())
-		// }
-
-		// localStorage.setItem("user_credentials", JSON.stringify(apiResponse.user_credentials))
-		// setCredentials(apiResponse.user_credentials)
+		dispatch(logOut())
 	}
 
 	return (

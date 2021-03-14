@@ -1,4 +1,5 @@
 import { CredentialT } from "../components/CredentialCard"
+import { credential4Testing } from "./Data4Testing"
 
 export type UserT = {
 	name: string
@@ -19,4 +20,26 @@ export type ApiResponseLoginT = {
 export type ApiResponseGetCredentialsT = {
 	available_slots: number
 	user_credentials: CredentialT[]
+}
+
+export const getCredentialsFromApi = (id: number, token: string | null) => {
+	const { REACT_APP_ENV_LOCAL } = process.env
+
+	let apiResponse: ApiResponseGetCredentialsT
+
+	if (REACT_APP_ENV_LOCAL) {
+		apiResponse = {
+			available_slots: 3,
+			user_credentials: credential4Testing,
+		}
+	} else {
+		//i'm going to leave this until i'll start making the api
+		apiResponse = {
+			available_slots: 3,
+			user_credentials: credential4Testing,
+		}
+		console.log("getting the fresh data, using the token: " + token)
+	}
+
+	return apiResponse
 }
