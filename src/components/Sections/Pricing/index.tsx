@@ -13,6 +13,8 @@ import DialogComponent from "../../../components/Dialog"
 
 import PricingCard, { PricingCardT } from "./PricingCard"
 
+import { pricingInfo } from "../../../misc/staticData"
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		infoBtn: {
@@ -52,83 +54,7 @@ const Pricing: FC = () => {
 
 	const classes = useStyles()
 
-	const freeCard: PricingCardT = {
-		title: translate("tier_free", lng, 0),
-		subtitle: translate("tier_free", lng, 1),
-		listItems: [
-			{
-				icon: "sync-alt",
-				text: translate("tier_free", lng, 2),
-			},
-			{
-				icon: "lock",
-				text: translate("tier_free", lng, 3),
-			},
-			{
-				icon: "fingerprint",
-				text: translate("tier_free", lng, 4),
-			},
-		],
-		cardElevation: 0,
-		buttonText: translate("navbar_register_btn", lng),
-		linkUrl: "/register",
-	}
-
-	const semiPremiumCard: PricingCardT = {
-		title: translate("tier_semi_premium", lng, 0),
-		subtitle: translate("tier_semi_premium", lng, 1),
-		listItems: [
-			{
-				icon: "sync-alt",
-				text: translate("tier_semi_premium", lng, 2),
-			},
-			{
-				icon: "lock",
-				text: translate("tier_semi_premium", lng, 3),
-			},
-			{
-				icon: "fingerprint",
-				text: translate("tier_semi_premium", lng, 5),
-			},
-			{
-				icon: "wallet",
-				text: translate("tier_semi_premium", lng, 4),
-			},
-		],
-		cardElevation: 1,
-		buttonText: translate("navbar_register_btn", lng),
-		linkUrl: "/register",
-	}
-
-	const premiumCard: PricingCardT = {
-		title: translate("tier_premium", lng, 0),
-		subtitle: translate("tier_premium", lng, 1),
-		listItems: [
-			{
-				icon: "sync-alt",
-				text: translate("tier_premium", lng, 2),
-			},
-			{
-				icon: "lock-open",
-				text: translate("tier_premium", lng, 3),
-			},
-			{
-				icon: "fingerprint",
-				text: translate("tier_premium", lng, 6),
-			},
-			{
-				icon: "users",
-				text: translate("tier_premium", lng, 4),
-			},
-			{
-				icon: "star",
-				text: translate("tier_premium", lng, 5),
-			},
-		],
-		cardElevation: 2,
-		buttonText: translate("navbar_register_btn", lng),
-		linkUrl: "/register",
-	}
+	const info: PricingCardT[] = pricingInfo(lng)
 
 	return (
 		<Paper
@@ -148,33 +74,17 @@ const Pricing: FC = () => {
 							{translate("pricing_title", lng)}
 						</Typography>
 					</Grid>
-					<Grid item xs={12} sm={6} md={4}>
-						<PricingCard
-							title={freeCard.title}
-							subtitle={freeCard.subtitle}
-							cardElevation={freeCard.cardElevation}
-							listItems={freeCard.listItems}
-							buttonText={freeCard.buttonText}
-						/>
-					</Grid>
-					<Grid item xs={12} sm={6} md={4}>
-						<PricingCard
-							title={semiPremiumCard.title}
-							subtitle={semiPremiumCard.subtitle}
-							cardElevation={semiPremiumCard.cardElevation}
-							listItems={semiPremiumCard.listItems}
-							buttonText={semiPremiumCard.buttonText}
-						/>
-					</Grid>
-					<Grid item xs={12} sm={6} md={4}>
-						<PricingCard
-							title={premiumCard.title}
-							subtitle={premiumCard.subtitle}
-							cardElevation={premiumCard.cardElevation}
-							listItems={premiumCard.listItems}
-							buttonText={premiumCard.buttonText}
-						/>
-					</Grid>
+					{info.map((infoCard, index) => (
+						<Grid item xs={12} sm={6} md={4} key={index}>
+							<PricingCard
+								title={infoCard.title}
+								subtitle={infoCard.subtitle}
+								cardElevation={infoCard.cardElevation}
+								listItems={infoCard.listItems}
+								buttonText={infoCard.buttonText}
+							/>
+						</Grid>
+					))}
 				</Grid>
 			</Container>
 			<DialogComponent

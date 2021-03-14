@@ -1,3 +1,4 @@
+import { PricingCardT } from "../components/Sections/Pricing/PricingCard"
 import { translate } from "../lang"
 
 export type RecommendedAppsType = {
@@ -60,4 +61,90 @@ export const recommendedApps = (lang: string): RecommendedAppsType[] => {
 			linkOfficialPage: "https://duckduckgo.com/",
 		},
 	]
+}
+
+export const pricingInfo = (lang: string): PricingCardT[] => {
+	const freeCard: PricingCardT = {
+		title: translate("tier_free", lang, 0),
+		subtitle: translate("tier_free", lang, 1),
+		listItems: [
+			{
+				icon: "sync-alt",
+				text: translate("tier_free", lang, 2),
+			},
+			{
+				icon: "lock",
+				text: translate("tier_free", lang, 3),
+			},
+			{
+				icon: "fingerprint",
+				text: translate("tier_free", lang, 4),
+			},
+		],
+		cardElevation: 0,
+		buttonText: translate("navbar_register_btn", lang),
+		linkUrl: "/register",
+	}
+
+	const semiPremiumCard: PricingCardT = {
+		title: translate("tier_semi_premium", lang, 0),
+		subtitle: translate("tier_semi_premium", lang, 1),
+		listItems: [
+			{
+				icon: "sync-alt",
+				text: translate("tier_semi_premium", lang, 2),
+			},
+			{
+				icon: "lock",
+				text: translate("tier_semi_premium", lang, 3),
+			},
+			{
+				icon: "fingerprint",
+				text: translate("tier_semi_premium", lang, 5),
+			},
+			{
+				icon: "wallet",
+				text: translate("tier_semi_premium", lang, 4),
+			},
+		],
+		cardElevation: 1,
+		buttonText: translate("navbar_register_btn", lang),
+		linkUrl: "/register",
+	}
+
+	const premiumCard: PricingCardT = {
+		title: translate("tier_premium", lang, 0),
+		subtitle: translate("tier_premium", lang, 1),
+		listItems: [
+			{
+				icon: "sync-alt",
+				text: translate("tier_premium", lang, 2),
+			},
+			{
+				icon: "lock-open",
+				text: translate("tier_premium", lang, 3),
+			},
+			{
+				icon: "fingerprint",
+				text: translate("tier_premium", lang, 6),
+			},
+			{
+				icon: "file-import",
+				text: translate("tier_premium", lang, 6),
+			},
+			{
+				icon: "users",
+				text: translate("tier_premium", lang, 4),
+			},
+			{
+				icon: "star",
+				text: translate("tier_premium", lang, 5),
+			},
+		],
+		cardElevation: 2,
+		buttonText: translate("navbar_register_btn", lang),
+		linkUrl: "/register",
+	}
+
+	return [freeCard, semiPremiumCard, premiumCard]
 }
