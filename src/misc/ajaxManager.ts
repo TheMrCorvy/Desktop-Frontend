@@ -7,6 +7,7 @@ export type UserT = {
 	phone: string
 	availableSlots: number
 	role: "free" | "semi-premium" | "premium" | "admin"
+	id: number
 }
 
 export type ApiResponseLoginT = {

@@ -40,6 +40,7 @@ export const user4Testing: UserT = {
 	phone: "+54 011 1234-5678",
 	availableSlots: 3,
 	role: "free",
+	id: 100,
 }
 
 export const credential4Testing: CredentialT[] = [

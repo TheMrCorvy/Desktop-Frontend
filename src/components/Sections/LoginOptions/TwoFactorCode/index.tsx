@@ -22,6 +22,10 @@ import { translate } from "../../../../lang"
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 import { ApiResponseLoginT } from "../../../../misc/ajaxManager"
 
+import { initiateDB } from "../../../../misc/indexedDB"
+
+import Snackbar from "../../../Snackbar"
+
 type FormInputs = {
 	email: String
 	verificationCode: string | number
@@ -34,6 +38,8 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 		email: "",
 		verificationCode: "",
 	})
+
+	const [error, setError] = useState(false)
 
 	const { register, errors, handleSubmit } = useForm()
 
@@ -76,10 +82,17 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 			responseData = fakeResponse
 		}
 
-		localStorage.setItem("user_data", JSON.stringify(responseData.user_data))
-		localStorage.setItem("user_credentials", JSON.stringify(responseData.user_credentials))
+		initiateDB(responseData.user_data, responseData.user_credentials).then((storedData) => {
+			if (storedData.failed) {
+				console.log(storedData)
 
-		dispatch(login(responseData.token))
+				setError(true)
+			} else {
+				console.log(storedData)
+
+				dispatch(login(responseData.token))
+			}
+		})
 	}
 
 	const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -187,6 +200,13 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 					</Grid>
 				</Grid>
 			</Grid>
+			{error && (
+				<Snackbar
+					snackbarMessage={translate("error_messages", lng, 3)}
+					open={error}
+					duration={25000}
+				/>
+			)}
 		</Box>
 	)
 }

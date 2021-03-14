@@ -186,7 +186,8 @@
 	"error_messages": [
 		"There was an error geting your data...",
 		"There was an error geting your data, if you want to retry, click the button bellow.",
-		"There was an error with your stored data, so we are logging you out."
+		"There was an error with your stored data, so we are logging you out.",
+		"There was an error, please try again later."
 	],
 	"retry": ["Retry"]
 }

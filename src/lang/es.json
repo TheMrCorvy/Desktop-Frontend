@@ -198,7 +198,8 @@
 	"error_messages": [
 		"Hubo un error tratando de obtener tus datos...",
 		"Hubo un error obteniendo tus datos, si quieres reintentar, puedes hacer click en el botón debajo.",
-		"Hay un error en tus datos almacenados, así que te cerraremos la sesión."
+		"Hay un error en tus datos almacenados, así que te cerraremos la sesión.",
+		"Hubo un error, por favor intente de nuevo más tarde."
 	],
 	"retry": ["Renintentar"]
 }
