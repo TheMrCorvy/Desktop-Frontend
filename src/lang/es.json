@@ -203,5 +203,12 @@
 		"Parace que algo salió mal... Por favor intenta de nuevo más tarde, o intenta contactar con los administradores del sitio/app.",
 		"Hubo un error tratando de instalar la PWA."
 	],
-	"retry": ["Renintentar"]
+	"retry": ["Renintentar"],
+	"feedback_form": [
+		"Deja tu Comentario",
+		"Tu reseña / Sugerencia",
+		"Enviar",
+		"Reseña",
+		"Sugerencia"
+	]
 }

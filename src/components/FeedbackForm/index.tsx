@@ -1,14 +1,49 @@
 import React, { FC, useState, ChangeEvent, useEffect } from "react"
+
 import { Container, Grid, Typography, Select, MenuItem, TextField, Button } from "@material-ui/core"
 import Rating from "@material-ui/lab/Rating"
+
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+
+import { translate } from "../../lang"
+
 import { getUser } from "../../misc/indexedDB"
 
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		container: {
+			marginTop: "10rem",
+			marginBottom: "5rem",
+			textAlign: "center",
+		},
+		textLeft: {
+			textAlign: "left",
+		},
+		alignCenter: {
+			display: "flex",
+			alignItems: "center",
+		},
+		textDanger: {
+			color: theme.palette.error.main,
+		},
+	})
+)
+
 const FeedbackForm: FC = () => {
-	const [feedbackType, setFeedbackType] = useState("sugerencia")
+	const { lng } = useSelector((state: RootState) => state.lng)
+
+	const [feedbackType, setFeedbackType] = useState("suggestion")
 
 	const [rating, setRating] = useState<number>(0)
 
+	const [feedbackBody, setFeedbackBody] = useState("")
+
 	const [allowed, setAllowed] = useState(true)
+
+	const classes = useStyles()
 
 	useEffect(() => {
 		getUser().then((user: any) => {
@@ -30,14 +65,15 @@ const FeedbackForm: FC = () => {
 		}
 	}
 
+	const handleChangeTextInput = (event: ChangeEvent<{ value: unknown }>) => {
+		setFeedbackBody(event.target.value as string)
+	}
+
 	return !allowed ? null : (
-		<Container
-			maxWidth="sm"
-			style={{ marginTop: "10rem", marginBottom: "5rem", textAlign: "center" }}
-		>
+		<Container maxWidth="sm" className={classes.container}>
 			<Grid container justify="center" spacing={4}>
 				<Grid item xs={12}>
-					<Typography variant="h4">Reseñas y Sugerencias</Typography>
+					<Typography variant="h4">{translate("feedback_form", lng, 0)}</Typography>
 				</Grid>
 				<Grid item xs={12} md={6}>
 					<Select
@@ -46,28 +82,43 @@ const FeedbackForm: FC = () => {
 						variant="outlined"
 						fullWidth
 					>
-						<MenuItem value={"sugerencia"}>sugerencia</MenuItem>
-						<MenuItem value={"reseña"}>reseña</MenuItem>
+						<MenuItem value="suggestion">{translate("feedback_form", lng, 4)}</MenuItem>
+						<MenuItem value="rating">{translate("feedback_form", lng, 3)}</MenuItem>
 					</Select>
 				</Grid>
-				<Grid item xs={12}>
-					<TextField multiline label={"your " + feedbackType} fullWidth rows={6} />
+				<Grid item xs={12} className={classes.textLeft}>
+					<TextField
+						multiline
+						label={translate("feedback_form", lng, 1)}
+						fullWidth
+						rows={6}
+						onChange={handleChangeTextInput}
+						value={feedbackBody}
+					/>
+					<Typography
+						variant={feedbackBody.length >= 190 ? "h4" : "caption"}
+						className={feedbackBody.length >= 190 ? classes.textDanger : ""}
+					>
+						{feedbackBody.length} / 190
+					</Typography>
 				</Grid>
 				<Grid item xs={12}>
 					<Grid container justify="space-between" spacing={3}>
-						<Grid item style={{ display: "flex", alignItems: "center" }}>
-							<Rating
-								name="rating"
-								value={rating}
-								onChange={(event, newRating) => {
-									handleRating(newRating)
-								}}
-								precision={0.5}
-							/>
+						<Grid item className={classes.alignCenter}>
+							{feedbackType === "rating" && (
+								<Rating
+									name="rating"
+									value={rating}
+									onChange={(event, newRating) => {
+										handleRating(newRating)
+									}}
+									precision={0.5}
+								/>
+							)}
 						</Grid>
-						<Grid item style={{ display: "flex", alignItems: "center" }}>
+						<Grid item className={classes.alignCenter}>
 							<Button variant="contained" color="primary" disableElevation>
-								hola mundo
+								{translate("feedback_form", lng, 2)}
 							</Button>
 						</Grid>
 					</Grid>
