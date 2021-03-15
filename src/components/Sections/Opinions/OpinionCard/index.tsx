@@ -1,14 +1,6 @@
 import Recat from "react"
 
-import {
-	Card,
-	CardHeader,
-	CardContent,
-	CardActions,
-	Avatar,
-	Typography,
-	ListSubheader,
-} from "@material-ui/core"
+import { Card, CardHeader, CardContent, CardActions, Avatar, Typography } from "@material-ui/core"
 
 import { Rating } from "@material-ui/lab"
 

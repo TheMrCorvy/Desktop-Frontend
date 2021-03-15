@@ -19,6 +19,7 @@ import OrderBar, { By, Direction } from "../components/OrderBar"
 import CredentialCard, { CredentialT } from "../components/CredentialCard"
 import Downloads from "../components/Sections/Downloads"
 import Snackbar from "../components/Snackbar"
+import FeedbackForm from "../components/FeedbackForm"
 
 /************************************************************************************ ajax */
 import { ApiResponseGetCredentialsT, getCredentialsFromApi } from "../misc/ajaxManager"
@@ -179,6 +180,7 @@ const MyCredentials: FC = () => {
 					)}
 				</Grid>
 			</Container>
+			<FeedbackForm />
 			<Downloads testing />
 		</>
 	)

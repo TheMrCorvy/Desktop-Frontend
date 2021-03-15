@@ -39,7 +39,7 @@ export const user4Testing: UserT = {
 	recoveryEmail: "email_2@gmail.com",
 	phone: "+54 011 1234-5678",
 	availableSlots: 3,
-	role: "free",
+	role: "premium",
 	id: 100,
 }
 
