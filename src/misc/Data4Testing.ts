@@ -49,11 +49,15 @@ export const credential4Testing: CredentialT[] = [
 		avatar: null,
 		recentlySeen: true,
 		id: 1,
+		created_at: "some date as string",
+		updated_at: "some date as string",
 	},
 	{
 		name: "second test",
 		avatar: null,
 		recentlySeen: false,
 		id: 2,
+		created_at: "some date as string",
+		updated_at: "some date as string",
 	},
 ]

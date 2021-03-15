@@ -89,6 +89,7 @@ const MyCredentials: FC = () => {
 
 	const orderBy = (order: Order) => {
 		console.log(order)
+		credentials.sort()
 	}
 
 	const getFromApi = async () => {

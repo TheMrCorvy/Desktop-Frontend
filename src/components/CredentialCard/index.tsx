@@ -1,23 +1,10 @@
 import React from "react"
 
-import {
-	Container,
-	Grid,
-	Card,
-	CardActionArea,
-	Avatar,
-	CardContent,
-	Typography,
-} from "@material-ui/core"
+import { Grid, Card, CardActionArea, Avatar, CardContent, Typography } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 import { red } from "@material-ui/core/colors"
 
 import MoreVertIcon from "@material-ui/icons/MoreVert"
-
-import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
-
-import { translate } from "../../lang"
 
 type Props = {
 	credentials: CredentialT[]
@@ -29,6 +16,8 @@ export type CredentialT = {
 	avatar: string | null
 	recentlySeen: boolean
 	id: number
+	created_at: string
+	updated_at: string
 }
 
 const useStyles = makeStyles((theme: Theme) =>
