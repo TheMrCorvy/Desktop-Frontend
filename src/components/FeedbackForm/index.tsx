@@ -45,6 +45,8 @@ const FeedbackForm: FC = () => {
 
 	const classes = useStyles()
 
+	const maxTxt = 190
+
 	useEffect(() => {
 		getUser().then((user: any) => {
 			if (user.role !== "premium") {
@@ -67,6 +69,14 @@ const FeedbackForm: FC = () => {
 
 	const handleChangeTextInput = (event: ChangeEvent<{ value: unknown }>) => {
 		setFeedbackBody(event.target.value as string)
+	}
+
+	const handleSubmit = () => {
+		console.log({
+			feedbackType,
+			feedbackBody,
+			rating: rating * 2,
+		})
 	}
 
 	return !allowed ? null : (
@@ -96,10 +106,10 @@ const FeedbackForm: FC = () => {
 						value={feedbackBody}
 					/>
 					<Typography
-						variant={feedbackBody.length >= 190 ? "h4" : "caption"}
-						className={feedbackBody.length >= 190 ? classes.textDanger : ""}
+						variant={feedbackBody.length >= maxTxt ? "h4" : "caption"}
+						className={feedbackBody.length >= maxTxt ? classes.textDanger : ""}
 					>
-						{feedbackBody.length} / 190
+						{feedbackBody.length} / {maxTxt}
 					</Typography>
 				</Grid>
 				<Grid item xs={12}>
@@ -117,7 +127,12 @@ const FeedbackForm: FC = () => {
 							)}
 						</Grid>
 						<Grid item className={classes.alignCenter}>
-							<Button variant="contained" color="primary" disableElevation>
+							<Button
+								variant="contained"
+								color="primary"
+								disableElevation
+								onClick={handleSubmit}
+							>
 								{translate("feedback_form", lng, 2)}
 							</Button>
 						</Grid>
