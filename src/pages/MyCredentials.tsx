@@ -23,7 +23,7 @@ import Snackbar from "../components/Snackbar"
 /************************************************************************************ ajax */
 import { ApiResponseGetCredentialsT, getCredentialsFromApi } from "../misc/ajaxManager"
 
-type Order = {
+type Sort = {
 	by: By
 	direction: Direction
 }
@@ -87,20 +87,20 @@ const MyCredentials: FC = () => {
 		})
 	}, [])
 
-	const orderBy = (order: Order) => {
-		const credentialsSorted = credentials.sort((prev, next) => {
-			if (prev[order.by] > next[order.by]) {
-				return 1 * order.direction
+	const orderBy = (sort: Sort) => {
+		// the [...credentials] is very important, since a sorted array its still the same, and thus react won't update state after re order the arra
+		// so we need to copy it, creating a new array in the proces, then sorting it, and the finally update the state
+		const credentialsSorted = [...credentials].sort((prev, next) => {
+			if (prev[sort.by] > next[sort.by]) {
+				return 1 * sort.direction
 			}
 
-			if (prev[order.by] < next[order.by]) {
-				return -1 * order.direction
+			if (prev[sort.by] < next[sort.by]) {
+				return -1 * sort.direction
 			}
 
 			return 0
 		})
-
-		console.log(credentialsSorted)
 		setCredentials(credentialsSorted)
 	}
 
@@ -151,7 +151,7 @@ const MyCredentials: FC = () => {
 				<Grid container justify="space-around" spacing={4}>
 					{!error ? (
 						<>
-							<OrderBar orderCredentials={orderBy} />
+							<OrderBar sortCredentials={orderBy} />
 							<CredentialCard
 								availableSlots={availableSlots}
 								credentials={credentials}

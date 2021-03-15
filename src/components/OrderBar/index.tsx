@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
+const OrderBar = ({ sortCredentials }: { sortCredentials: Function }) => {
 	const [order, setOrder] = useState<OrderT>({
 		by: "created_at",
 		arrow: ArrowUpwardIcon,
@@ -70,7 +70,7 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 			direction,
 		})
 
-		orderCredentials({ direction, by })
+		sortCredentials({ direction, by })
 	}
 
 	return (
