@@ -14,9 +14,19 @@ class PasuSewaDatabase extends Dexie {
 	constructor() {
 		super("PasuSewa")
 		this.version(1).stores({
-			users: "id,name,mainEmail,RecoveryEmail,phone,availableSlots,role",
+			users: "id,name,mainEmail,recoveryEmail,phone,availableSlots,role",
 			credentials: "id,name,avatar,recentlySeen",
 		})
+	}
+}
+
+export const dropDatabase = (): void | DBErrorT => {
+	try {
+		const db = new PasuSewaDatabase()
+
+		db.delete()
+	} catch (error) {
+		return { failed: true, error }
 	}
 }
 
@@ -72,16 +82,6 @@ export const putCredentials = async (credentials: CredentialT[]) => {
 		const db = new PasuSewaDatabase()
 
 		return await db.credentials.bulkPut(credentials)
-	} catch (error) {
-		return { failed: true, error }
-	}
-}
-
-export const dropDatabase = (): void | DBErrorT => {
-	try {
-		const db = new PasuSewaDatabase()
-
-		db.delete()
 	} catch (error) {
 		return { failed: true, error }
 	}

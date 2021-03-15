@@ -5,7 +5,7 @@ import { Container, Grid, Button, Typography } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 /************************************************************************************ redux related */
-import { logOut } from "../redux/actions/authTokenActions"
+import { showError } from "../redux/actions/errorHandlingActions"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 
@@ -120,7 +120,7 @@ const MyCredentials: FC = () => {
 
 		console.log({ error })
 
-		dispatch(logOut())
+		dispatch(showError("There was an error..."))
 	}
 
 	return (

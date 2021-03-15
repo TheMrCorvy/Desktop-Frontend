@@ -57,3 +57,15 @@ interface AuthActionI {
 }
 
 export type AuthAction = AuthActionI
+
+/******************************************************************************** error handling */
+export const ERROR_500 = "ERROR_500"
+
+export interface ErrorMessageI {
+	err: string | null
+}
+
+export interface ErrorI {
+	type: typeof ERROR_500
+	payload: string
+}
