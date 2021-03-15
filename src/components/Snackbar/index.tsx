@@ -34,6 +34,7 @@ const Snackbar = ({
 				autoHideDuration={duration && duration > 1000 ? duration : 6000}
 				message={snackbarMessage}
 				onClose={handleClose}
+				data-testid="test_snackbar"
 			/>
 		</div>
 	)
