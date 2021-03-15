@@ -9,7 +9,7 @@ describe("the order bar component works properly", () => {
 	it("renders properly", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<OrderBar orderCredentials={() => {}} />
+				<OrderBar sortCredentials={() => {}} />
 			</Provider>
 		)
 
@@ -19,9 +19,9 @@ describe("the order bar component works properly", () => {
 	})
 
 	it("changes order properly", () => {
-		const { getByTestId, queryByTestId } = render(
+		const { getByTestId } = render(
 			<Provider store={store}>
-				<OrderBar orderCredentials={() => {}} />
+				<OrderBar sortCredentials={() => {}} />
 			</Provider>
 		)
 

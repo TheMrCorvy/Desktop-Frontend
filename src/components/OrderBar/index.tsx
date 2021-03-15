@@ -78,7 +78,11 @@ const OrderBar = ({ sortCredentials }: { sortCredentials: Function }) => {
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
 				<Button
 					color="inherit"
-					endIcon={order.by === "created_at" && <order.arrow />}
+					endIcon={
+						order.by === "created_at" && (
+							<order.arrow data-testid="test_created_arrow" />
+						)
+					}
 					onClick={() => orderBy("created_at")}
 					data-testid="test_order_by_created"
 				>
@@ -88,7 +92,9 @@ const OrderBar = ({ sortCredentials }: { sortCredentials: Function }) => {
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
 				<Button
 					color="inherit"
-					endIcon={order.by === "updated_at" && <order.arrow />}
+					endIcon={
+						order.by === "updated_at" && <order.arrow data-testid="test_edited_arrow" />
+					}
 					onClick={() => orderBy("updated_at")}
 					data-testid="test_order_by_edited"
 				>
