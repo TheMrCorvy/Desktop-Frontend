@@ -155,7 +155,7 @@ const MyCredentials: FC = () => {
 									{translate("retry", lng)}
 								</Button>
 							</Grid>
-							<Snackbar open={error} snackbarMessage={snackbarMessage} />
+							<Snackbar open={error} message={snackbarMessage} />
 						</>
 					)}
 				</Grid>

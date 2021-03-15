@@ -5,7 +5,7 @@ import Snackbar from "./index"
 it("renders properly", () => {
 	const { getByTestId } = render(
 		<Snackbar
-			snackbarMessage="testing..."
+			message="testing..."
 			duration={1001}
 			open={true}
 			verticalPosition="top"

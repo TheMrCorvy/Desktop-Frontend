@@ -200,7 +200,7 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 			</Grid>
 			{error && (
 				<Snackbar
-					snackbarMessage={translate("error_messages", lng, 3)}
+					message={translate("error_messages", lng, 3)}
 					open={error}
 					duration={25000}
 				/>
