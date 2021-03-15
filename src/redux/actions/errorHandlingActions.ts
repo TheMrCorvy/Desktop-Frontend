@@ -6,3 +6,10 @@ export const showError = (err: string): ErrorI => {
 		payload: err,
 	}
 }
+
+export const clearError = (): ErrorI => {
+	return {
+		type: ERROR_500,
+		payload: null,
+	}
+}

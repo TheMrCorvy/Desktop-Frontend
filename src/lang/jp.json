@@ -187,7 +187,8 @@
 		"There was an error geting your data...",
 		"There was an error geting your data, if you want to retry, click the button bellow.",
 		"There was an error with your stored data, so we are logging you out.",
-		"There was an error, please try again later."
+		"There was an error, please try again later.",
+		"Seems like something went wrong... Please tray again later, or try contancting the administrators of the page/app."
 	],
 	"retry": ["Retry"]
 }

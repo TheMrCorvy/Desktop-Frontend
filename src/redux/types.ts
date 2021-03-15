@@ -67,5 +67,5 @@ export interface ErrorMessageI {
 
 export interface ErrorI {
 	type: typeof ERROR_500
-	payload: string
+	payload: string | null
 }

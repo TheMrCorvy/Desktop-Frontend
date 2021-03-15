@@ -120,7 +120,7 @@ const MyCredentials: FC = () => {
 
 		console.log({ error })
 
-		dispatch(showError("There was an error..."))
+		dispatch(showError(translate("error_messages", lng, 0)))
 	}
 
 	return (
