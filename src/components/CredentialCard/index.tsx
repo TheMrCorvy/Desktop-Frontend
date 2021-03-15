@@ -14,7 +14,7 @@ type Props = {
 export type CredentialT = {
 	name: string
 	avatar: string | null
-	recentlySeen: boolean
+	recently_seen: boolean
 	id: number
 	created_at: string
 	updated_at: string
@@ -100,7 +100,7 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 										>
 											{credential.name}
 										</Typography>
-										{credential.recentlySeen && (
+										{credential.recently_seen && (
 											<Typography
 												variant="body1"
 												className={classes.textColor}

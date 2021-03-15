@@ -88,8 +88,20 @@ const MyCredentials: FC = () => {
 	}, [])
 
 	const orderBy = (order: Order) => {
-		console.log(order)
-		credentials.sort()
+		const credentialsSorted = credentials.sort((prev, next) => {
+			if (prev[order.by] > next[order.by]) {
+				return 1 * order.direction
+			}
+
+			if (prev[order.by] < next[order.by]) {
+				return -1 * order.direction
+			}
+
+			return 0
+		})
+
+		console.log(credentialsSorted)
+		setCredentials(credentialsSorted)
 	}
 
 	const getFromApi = async () => {

@@ -17,7 +17,7 @@ type OrderT = {
 	direction: Direction
 }
 
-export type By = "created" | "name" | "edited" | "recently"
+export type By = "created_at" | "name" | "updated_at" | "recently_seen"
 
 export type Direction = 1 | -1
 
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 
 const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 	const [order, setOrder] = useState<OrderT>({
-		by: "created",
+		by: "created_at",
 		arrow: ArrowUpwardIcon,
 		direction: 1,
 	})
@@ -78,8 +78,8 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
 				<Button
 					color="inherit"
-					endIcon={order.by === "created" && <order.arrow />}
-					onClick={() => orderBy("created")}
+					endIcon={order.by === "created_at" && <order.arrow />}
+					onClick={() => orderBy("created_at")}
 					data-testid="test_order_by_created"
 				>
 					{translate("order_options", lng, 0)}
@@ -88,8 +88,8 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
 				<Button
 					color="inherit"
-					endIcon={order.by === "edited" && <order.arrow />}
-					onClick={() => orderBy("edited")}
+					endIcon={order.by === "updated_at" && <order.arrow />}
+					onClick={() => orderBy("updated_at")}
 					data-testid="test_order_by_edited"
 				>
 					{translate("order_options", lng, 1)}
@@ -107,8 +107,8 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 			<Grid item xs={12} sm={3} className={classes.textCenter}>
 				<Button
 					color="inherit"
-					endIcon={order.by === "recently" && <order.arrow />}
-					onClick={() => orderBy("recently")}
+					endIcon={order.by === "recently_seen" && <order.arrow />}
+					onClick={() => orderBy("recently_seen")}
 				>
 					{translate("order_options", lng, 3)}
 				</Button>
