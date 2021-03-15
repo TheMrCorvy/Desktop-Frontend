@@ -35,7 +35,6 @@ const routes: RouteType[] = [
 		component: DownloadsPage,
 		requiresAuth: false,
 		path: "/downloads",
-		guestOnly: true,
 	},
 	{
 		component: MyCredentials,

@@ -45,35 +45,19 @@ export const user4Testing: UserT = {
 
 export const credential4Testing: CredentialT[] = [
 	{
-		name: "test",
+		name: "test 1",
 		avatar: null,
 		recently_seen: true,
 		id: 1,
-		created_at: "some date as string",
-		updated_at: "some date as string 1",
+		created_at: "some date 1",
+		updated_at: "some date 2",
 	},
 	{
-		name: "second test",
+		name: "test 2",
 		avatar: null,
 		recently_seen: false,
 		id: 2,
-		created_at: "some date as string 2",
-		updated_at: "some date as string 3",
-	},
-	{
-		name: "third test",
-		avatar: null,
-		recently_seen: false,
-		id: 3,
-		created_at: "some date as string 2",
-		updated_at: "some date as string",
-	},
-	{
-		name: "fourth test",
-		avatar: null,
-		recently_seen: true,
-		id: 4,
-		created_at: "some date as string",
-		updated_at: "some date as string 6",
+		created_at: "some date 3",
+		updated_at: "some date 4",
 	},
 ]

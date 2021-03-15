@@ -31,7 +31,7 @@ type Sort = {
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		container: {
-			paddingTop: "6rem",
+			paddingTop: "7rem",
 
 			[theme.breakpoints.down("xs")]: {
 				paddingTop: "1rem",
@@ -88,7 +88,8 @@ const MyCredentials: FC = () => {
 	}, [])
 
 	const orderBy = (sort: Sort) => {
-		// the [...credentials] is very important, since a sorted array its still the same, and thus react won't update state after re order the arra
+		// the [...credentials] is very important, since a sorted array its still the same,
+		// and thus react won't update state after re order the array.
 		// so we need to copy it, creating a new array in the proces, then sorting it, and the finally update the state
 		const credentialsSorted = [...credentials].sort((prev, next) => {
 			if (prev[sort.by] > next[sort.by]) {

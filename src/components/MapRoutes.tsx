@@ -15,38 +15,34 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 
 	const { err } = useSelector((state: RootState) => state.err)
 
-	const evaluateRoutes = (r: RouteType, i: number) => 
-	{
-		if (token !== null && r.guestOnly) 
-		{
-			return <Redirect from={r.path} to="/my-account" key={i} />
+	const evaluateRoutes = (r: RouteType, i: number) => {
+		if (err !== null) {
+			return <Route component={Error500} />
+		}
 
-		} else if (r.requiresAuth) 
-		{
-			return token !== null ? (
-				<Route exact path={r.path} component={r.component} key={i} />
-			) : (
-				<Redirect from={r.path} to="/login" key={i} />
-			)
-		} else {
+		if (token !== null && r.guestOnly) {
+			return <Redirect from={r.path} to="/my-account" key={i} />
+		}
+
+		if (r.requiresAuth && token === null) {
+			return <Redirect from={r.path} to="/login" key={i} />
+		}
+
+		if (r.requiresAuth && token !== null) {
 			return <Route exact path={r.path} component={r.component} key={i} />
 		}
+
+		return <Route exact path={r.path} component={r.component} key={i} />
 	}
 
 	return (
 		<>
 			<ScrollTop />
 			<Switch>
-				{!err ? (
-					<>
-						{props.routes.map((route: RouteType, index: number) =>
-							evaluateRoutes(route, index)
-						)}
-						<Route component={NotFound} />
-					</>
-				) : (
-					<Route component={Error500} />
+				{props.routes.map((route: RouteType, index: number) =>
+					evaluateRoutes(route, index)
 				)}
+				<Route component={NotFound} />
 			</Switch>
 		</>
 	)
