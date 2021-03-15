@@ -1,5 +1,9 @@
 import { render } from "@testing-library/react"
 
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { faChevronRight, faPlusCircle } from "@fortawesome/free-solid-svg-icons"
+library.add(faChevronRight, faPlusCircle)
+
 import CredentialCard from "./index"
 
 import { credential4Testing, user4Testing } from "../../misc/Data4Testing"

@@ -106,8 +106,8 @@ const FeedbackForm: FC = () => {
 						value={feedbackBody}
 					/>
 					<Typography
-						variant={feedbackBody.length >= maxTxt ? "h4" : "caption"}
-						className={feedbackBody.length >= maxTxt ? classes.textDanger : ""}
+						variant={feedbackBody.length > maxTxt ? "h4" : "caption"}
+						className={feedbackBody.length > maxTxt ? classes.textDanger : ""}
 					>
 						{feedbackBody.length} / {maxTxt}
 					</Typography>

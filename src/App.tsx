@@ -34,6 +34,7 @@ import {
 	faSignOutAlt,
 	faDoorOpen,
 	faFileImport,
+	faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons"
 library.add(
 	faKey,
@@ -51,7 +52,8 @@ library.add(
 	faSignInAlt,
 	faSignOutAlt,
 	faDoorOpen,
-	faFileImport
+	faFileImport,
+	faPlusCircle
 )
 
 const App: FC = () => {

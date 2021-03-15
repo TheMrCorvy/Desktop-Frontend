@@ -4,7 +4,8 @@ import { Grid, Card, CardActionArea, Avatar, CardContent, Typography } from "@ma
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 import { red } from "@material-ui/core/colors"
 
-import MoreVertIcon from "@material-ui/icons/MoreVert"
+// import MoreVertIcon from "@material-ui/icons/MoreVert"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 type Props = {
 	credentials: CredentialT[]
@@ -56,6 +57,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		cardAction: {
 			minHeight: "100%",
+		},
+		textPrimary: {
+			color: theme.palette.info.main,
 		},
 	})
 )
@@ -110,7 +114,11 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 										)}
 									</Grid>
 									<Grid item xs={2} className={classes.addCredential}>
-										<MoreVertIcon />
+										<FontAwesomeIcon
+											className={classes.textPrimary}
+											icon={["fas", "chevron-right"]}
+											size="2x"
+										/>
 									</Grid>
 								</Grid>
 							</CardContent>
@@ -130,7 +138,11 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 					<Card className={classes.cardAlter} variant="outlined">
 						<CardActionArea className={classes.cardAlter}>
 							<CardContent className={classes.addCredential}>
-								<MoreVertIcon />
+								<FontAwesomeIcon
+									className={classes.textPrimary}
+									icon={["fas", "plus-circle"]}
+									size="3x"
+								/>
 							</CardContent>
 						</CardActionArea>
 					</Card>
