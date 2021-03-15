@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 
 import { Container, Grid, Typography, Button } from "@material-ui/core"
@@ -27,71 +27,42 @@ const useStyles = makeStyles({
 	},
 })
 
-const Error500: FC = () => {
+const Error500 = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 	const { err } = useSelector((state: RootState) => state.err)
 
 	const classes = useStyles()
 
-	if (!err) {
-		return (
-			<Container
-				maxWidth="xl"
-				className={classes.container}
-				data-testid="test_not_found_page"
-			>
-				<Grid container justify="center" className={classes.centerAll} spacing={0}>
-					<Grid item xs={12}>
-						<Typography variant="h3" paragraph gutterBottom>
-							500 oops there was an error...
-						</Typography>
-						<Typography variant="body1" paragraph gutterBottom>
-							{err}
-						</Typography>
-						<Link to="/" className={classes.button}>
-							<Button
-								variant="contained"
-								color="primary"
-								startIcon={<HomeIcon />}
-								disableElevation
-							>
-								{translate("home", lng)}
-							</Button>
-						</Link>
-					</Grid>
+	useEffect(() => {
+		if (!err) {
+			window.location.replace("/")
+		}
+	}, [])
+
+	return (
+		<Container maxWidth="xl" className={classes.container} data-testid="test_not_found_page">
+			<Grid container justify="center" className={classes.centerAll} spacing={0}>
+				<Grid item xs={12}>
+					<Typography variant="h3" paragraph gutterBottom>
+						500 oops there was an error...
+					</Typography>
+					<Typography variant="body1" paragraph gutterBottom>
+						{err}
+					</Typography>
+					<Link to="/" className={classes.button}>
+						<Button
+							variant="contained"
+							color="primary"
+							startIcon={<HomeIcon />}
+							disableElevation
+						>
+							{translate("home", lng)}
+						</Button>
+					</Link>
 				</Grid>
-			</Container>
-		)
-	} else {
-		return (
-			<Container
-				maxWidth="xl"
-				className={classes.container}
-				data-testid="test_not_found_page"
-			>
-				<Grid container justify="center" className={classes.centerAll} spacing={0}>
-					<Grid item xs={12}>
-						<Typography variant="h3" paragraph gutterBottom>
-							500 oops there was an error...
-						</Typography>
-						<Typography variant="body1" paragraph gutterBottom>
-							{err}
-						</Typography>
-						<Link to="/" className={classes.button}>
-							<Button
-								variant="contained"
-								color="primary"
-								startIcon={<HomeIcon />}
-								disableElevation
-							>
-								{translate("home", lng)}
-							</Button>
-						</Link>
-					</Grid>
-				</Grid>
-			</Container>
-		)
-	}
+			</Grid>
+		</Container>
+	)
 }
 
 export default Error500
