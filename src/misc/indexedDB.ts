@@ -45,8 +45,6 @@ export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
 
 export const getCredentials = async () => {
 	try {
-		throw new Error("cant get the credentials")
-
 		const db = new PasuSewaDatabase()
 
 		const credentials = await db.credentials.toArray()
@@ -61,8 +59,6 @@ export const getCredentials = async () => {
 
 export const getUser = async () => {
 	try {
-		throw new Error("cant get the user")
-
 		const db = new PasuSewaDatabase()
 
 		return await db.users.orderBy("id").first()
