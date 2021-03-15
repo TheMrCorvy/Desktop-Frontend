@@ -15,13 +15,18 @@ import { translate } from "../lang"
 import { DBErrorT, getCredentials, getUser, initiateDB } from "../misc/indexedDB"
 
 /************************************************************************************ types & components */
-import OrderBar, { By } from "../components/OrderBar"
+import OrderBar, { By, Direction } from "../components/OrderBar"
 import CredentialCard, { CredentialT } from "../components/CredentialCard"
 import Downloads from "../components/Sections/Downloads"
 import Snackbar from "../components/Snackbar"
 
 /************************************************************************************ ajax */
 import { ApiResponseGetCredentialsT, getCredentialsFromApi } from "../misc/ajaxManager"
+
+type Order = {
+	by: By
+	direction: Direction
+}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -82,7 +87,7 @@ const MyCredentials: FC = () => {
 		})
 	}, [])
 
-	const orderBy = (order: By) => {
+	const orderBy = (order: Order) => {
 		console.log(order)
 	}
 
