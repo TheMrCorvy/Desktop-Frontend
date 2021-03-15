@@ -39,8 +39,13 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
 				<Button
 					color="inherit"
-					endIcon={order === "created" && <ArrowDownwardIcon />}
+					endIcon={
+						order === "created" && (
+							<ArrowDownwardIcon data-testid="test_created_arrow" />
+						)
+					}
 					onClick={() => orderBy("created")}
+					data-testid="test_order_by_created"
 				>
 					{translate("order_options", lng, 0)}
 				</Button>
@@ -48,8 +53,11 @@ const OrderBar = ({ orderCredentials }: { orderCredentials: Function }) => {
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
 				<Button
 					color="inherit"
-					endIcon={order === "edited" && <ArrowDownwardIcon />}
+					endIcon={
+						order === "edited" && <ArrowDownwardIcon data-testid="test_edited_arrow" />
+					}
 					onClick={() => orderBy("edited")}
+					data-testid="test_order_by_edited"
 				>
 					{translate("order_options", lng, 1)}
 				</Button>

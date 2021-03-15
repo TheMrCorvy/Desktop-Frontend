@@ -76,3 +76,13 @@ export const putCredentials = async (credentials: CredentialT[]) => {
 		return { failed: true, error }
 	}
 }
+
+export const dropDatabase = (): void | DBErrorT => {
+	try {
+		const db = new PasuSewaDatabase()
+
+		db.delete()
+	} catch (error) {
+		return { failed: true, error }
+	}
+}

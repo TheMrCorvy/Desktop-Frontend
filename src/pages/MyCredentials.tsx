@@ -5,25 +5,23 @@ import { Container, Grid, Button, Typography } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 /************************************************************************************ redux related */
-import { logOut } from "../../redux/actions/authTokenActions"
+import { logOut } from "../redux/actions/authTokenActions"
 import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "../../redux/store"
+import { RootState } from "../redux/store"
 
-import { translate } from "../../lang"
-
-/************************************************************************************ my components */
-import Downloads from "../../components/Sections/Downloads"
-import Snackbar from "../../components/Snackbar"
+import { translate } from "../lang"
 
 /************************************************************************************ indexedDB */
-import { DBErrorT, getCredentials, getUser, putCredentials, putUser } from "../../misc/indexedDB"
+import { DBErrorT, getCredentials, getUser, initiateDB } from "../misc/indexedDB"
 
-/************************************************************************************ types imports */
-import OrderBar, { By } from "../../components/OrderBar"
-import CredentialCard, { CredentialT } from "../../components/CredentialCard"
+/************************************************************************************ types & components */
+import OrderBar, { By } from "../components/OrderBar"
+import CredentialCard, { CredentialT } from "../components/CredentialCard"
+import Downloads from "../components/Sections/Downloads"
+import Snackbar from "../components/Snackbar"
 
 /************************************************************************************ ajax */
-import { ApiResponseGetCredentialsT, getCredentialsFromApi } from "../../misc/ajaxManager"
+import { ApiResponseGetCredentialsT, getCredentialsFromApi } from "../misc/ajaxManager"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -104,13 +102,7 @@ const MyCredentials: FC = () => {
 
 		localUser.availableSlots = newCredentials.available_slots
 
-		putUser(localUser).then((result: any) => {
-			if (result.failed) {
-				fatalError(result)
-			}
-		})
-
-		putCredentials(newCredentials.user_credentials).then((result: any) => {
+		initiateDB(localUser, newCredentials.user_credentials).then((result: any) => {
 			if (result.failed) {
 				fatalError(result)
 			}
@@ -133,7 +125,11 @@ const MyCredentials: FC = () => {
 
 	return (
 		<>
-			<Container maxWidth="lg" className={classes.container}>
+			<Container
+				maxWidth="lg"
+				className={classes.container}
+				data-testid="test_my_credentials_page"
+			>
 				<Grid container justify="space-around" spacing={4}>
 					{!error ? (
 						<>
