@@ -77,7 +77,14 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 	return (
 		<>
 			{credentials.map((credential) => (
-				<Grid item xs={12} sm={6} md={4} key={credential.id}>
+				<Grid
+					item
+					xs={12}
+					sm={6}
+					md={4}
+					key={credential.id}
+					data-testid={"test_credential_card_" + credential.id}
+				>
 					<Card className={classes.card}>
 						<CardActionArea className={classes.cardAction}>
 							<CardContent>
@@ -123,7 +130,14 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 				</Grid>
 			))}
 			{[...Array(availableSlots)].map((value: undefined, index: number) => (
-				<Grid item xs={12} sm={6} md={4} key={index}>
+				<Grid
+					item
+					xs={12}
+					sm={6}
+					md={4}
+					key={index}
+					data-testid={"test_available_slot_" + index}
+				>
 					<Card className={classes.cardAlter} variant="outlined">
 						<CardActionArea className={classes.cardAlter}>
 							<CardContent className={classes.addCredential}>
