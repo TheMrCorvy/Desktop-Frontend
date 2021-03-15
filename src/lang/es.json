@@ -200,7 +200,8 @@
 		"Hubo un error obteniendo tus datos, si quieres reintentar, puedes hacer click en el botón debajo.",
 		"Hay un error en tus datos almacenados, así que te cerraremos la sesión.",
 		"Hubo un error, por favor intente de nuevo más tarde.",
-		"Parace que algo salió mal... Por favor intenta de nuevo más tarde, o intenta contactar con los administradores del sitio/app."
+		"Parace que algo salió mal... Por favor intenta de nuevo más tarde, o intenta contactar con los administradores del sitio/app.",
+		"Hubo un error tratando de instalar la PWA."
 	],
 	"retry": ["Renintentar"]
 }

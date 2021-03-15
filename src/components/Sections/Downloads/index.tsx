@@ -6,8 +6,9 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { purple, indigo } from "@material-ui/core/colors"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../redux/store"
+import { showError } from "../../../redux/actions/errorHandlingActions"
 
 import { translate } from "../../../lang"
 
@@ -56,6 +57,8 @@ const Downloads = ({ alternative, testing }: { alternative?: boolean; testing?: 
 
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const dispatch = useDispatch()
+
 	const [installable, setInstallable] = useState(testing ? true : false)
 
 	useEffect(() => {
@@ -77,15 +80,21 @@ const Downloads = ({ alternative, testing }: { alternative?: boolean; testing?: 
 	const handleInstallClick = () => {
 		setInstallable(false)
 
-		deferredPrompt.prompt()
+		try {
+			deferredPrompt.prompt()
 
-		deferredPrompt.userChoice.then((choiceResult: any) => {
-			if (choiceResult.outcome === "accepted") {
-				console.log("User accepted the install prompt")
-			} else {
-				console.log("User dismissed the install prompt")
-			}
-		})
+			deferredPrompt.userChoice.then((choiceResult: any) => {
+				if (choiceResult.outcome === "accepted") {
+					console.log("User accepted the install prompt")
+				} else {
+					console.log("User dismissed the install prompt")
+				}
+			})
+		} catch (error) {
+			console.log(error)
+
+			dispatch(showError(translate("error_messages", lng, 5)))
+		}
 	}
 
 	return (
