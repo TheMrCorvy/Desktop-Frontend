@@ -4,8 +4,8 @@ import { Grid, Card, CardActionArea, Avatar, CardContent, Typography } from "@ma
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 import { red } from "@material-ui/core/colors"
 
-// import MoreVertIcon from "@material-ui/icons/MoreVert"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import ControlPointIcon from "@material-ui/icons/ControlPoint"
 
 type Props = {
 	credentials: CredentialT[]
@@ -138,10 +138,14 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 					<Card className={classes.cardAlter} variant="outlined">
 						<CardActionArea className={classes.cardAlter}>
 							<CardContent className={classes.addCredential}>
-								<FontAwesomeIcon
+								{/* <FontAwesomeIcon
 									className={classes.textPrimary}
 									icon={["fas", "plus-circle"]}
 									size="3x"
+								/> */}
+								<ControlPointIcon
+									fontSize="large"
+									className={classes.textPrimary}
 								/>
 							</CardContent>
 						</CardActionArea>
