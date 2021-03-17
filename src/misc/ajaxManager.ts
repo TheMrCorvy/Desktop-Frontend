@@ -3,12 +3,13 @@ import { credential4Testing } from "./Data4Testing"
 
 export type UserT = {
 	name: string
-	mainEmail: string
-	recoveryEmail: string
-	phone: string
-	availableSlots: number
+	email: string
+	recovery_email: string
+	slots_available: number
 	role: "free" | "semi-premium" | "premium" | "admin"
 	id: number
+	phone_number: string
+	anti_fishing_secret: string
 }
 
 export type ApiResponseLoginT = {
@@ -18,7 +19,7 @@ export type ApiResponseLoginT = {
 }
 
 export type ApiResponseGetCredentialsT = {
-	available_slots: number
+	slots_available: number
 	user_credentials: CredentialT[]
 }
 
@@ -29,13 +30,13 @@ export const getCredentialsFromApi = (id: number, token: string | null) => {
 
 	if (REACT_APP_ENV_LOCAL) {
 		apiResponse = {
-			available_slots: 3,
+			slots_available: 3,
 			user_credentials: credential4Testing,
 		}
 	} else {
 		//i'm going to leave this until i'll start making the api
 		apiResponse = {
-			available_slots: 3,
+			slots_available: 3,
 			user_credentials: credential4Testing,
 		}
 		console.log("getting the fresh data, using the token: " + token)

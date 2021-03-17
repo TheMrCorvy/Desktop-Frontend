@@ -116,19 +116,6 @@ const AccessManagement: FC = () => {
 						)}
 					</Grid>
 				</CardContent>
-				{!locked && (
-					<CardActions>
-						<Button
-							variant="contained"
-							size="large"
-							color="secondary"
-							onClick={toggleLock}
-							disableElevation
-						>
-							save changes
-						</Button>
-					</CardActions>
-				)}
 			</Card>
 		</Grid>
 	)

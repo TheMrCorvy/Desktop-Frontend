@@ -35,12 +35,13 @@ export const rating4Testing: OpinionCardT[] = [
 
 export const user4Testing: UserT = {
 	name: "Gonzalo",
-	mainEmail: "email_1@gmail.com",
-	recoveryEmail: "email_2@gmail.com",
-	phone: "+54 011 1234-5678",
-	availableSlots: 3,
+	email: "email_1@gmail.com",
+	recovery_email: "email_2@gmail.com",
+	phone_number: "+54 011 1234-5678",
+	slots_available: 3,
 	role: "premium",
 	id: 100,
+	anti_fishing_secret: "@Leonard1618",
 }
 
 export const credential4Testing: CredentialT[] = [

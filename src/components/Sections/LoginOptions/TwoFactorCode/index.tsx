@@ -52,7 +52,7 @@ const TwoFactorCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boole
 	useEffect(() => {
 		if (testing) {
 			setFormData({
-				email: user4Testing.mainEmail,
+				email: user4Testing.email,
 				verificationCode: 123456,
 			})
 		}

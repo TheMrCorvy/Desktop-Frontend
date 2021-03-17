@@ -75,7 +75,7 @@ const MyCredentials: FC = () => {
 	useEffect(() => {
 		getCredentials().then((data) => {
 			if (data.userData && data.credentials) {
-				setAvailableSlots(data.userData.availableSlots)
+				setAvailableSlots(data.userData.slots_available)
 
 				setCredentials(data.credentials)
 			} else {
@@ -120,7 +120,7 @@ const MyCredentials: FC = () => {
 			token
 		)
 
-		localUser.availableSlots = newCredentials.available_slots
+		localUser.availableSlots = newCredentials.slots_available
 
 		initiateDB(localUser, newCredentials.user_credentials).then((result: any) => {
 			if (result.failed) {
@@ -128,7 +128,7 @@ const MyCredentials: FC = () => {
 			}
 		})
 
-		setAvailableSlots(newCredentials.available_slots)
+		setAvailableSlots(newCredentials.slots_available)
 
 		setCredentials(newCredentials.user_credentials)
 	}
