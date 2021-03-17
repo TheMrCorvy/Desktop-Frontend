@@ -138,11 +138,6 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 					<Card className={classes.cardAlter} variant="outlined">
 						<CardActionArea className={classes.cardAlter}>
 							<CardContent className={classes.addCredential}>
-								{/* <FontAwesomeIcon
-									className={classes.textPrimary}
-									icon={["fas", "plus-circle"]}
-									size="3x"
-								/> */}
 								<ControlPointIcon
 									fontSize="large"
 									className={classes.textPrimary}
