@@ -77,6 +77,16 @@ const App: FC = () => {
 		},
 	})
 
+	//I'll leave this here untill I make the credential page
+
+	const userAgentInfo = navigator.userAgent
+
+	const variosStrings = userAgentInfo.split("(")
+
+	const stringFinal = variosStrings[1].split(")")
+
+	console.log(stringFinal[0])
+
 	return (
 		<ThemeProvider theme={globalTheme}>
 			<BrowserRouter>
