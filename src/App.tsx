@@ -11,7 +11,7 @@ import { blue } from "@material-ui/core/colors"
 import { CssBaseline } from "@material-ui/core"
 
 /*********************************************************************************** layout related components */
-import routes from "./routes"
+import routes from "./misc/routes"
 import MapRoutes from "./components/MapRoutes"
 import Layout from "./components/Layout"
 

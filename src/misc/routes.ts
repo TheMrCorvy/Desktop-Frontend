@@ -1,10 +1,11 @@
 import { lazy, LazyExoticComponent } from "react"
 
-const Landing = lazy(() => import("./pages/Landing"))
-const Login = lazy(() => import("./pages/Login"))
-const Register = lazy(() => import("./pages/Register"))
-const DownloadsPage = lazy(() => import("./pages/DownloadsPage"))
-const MyCredentials = lazy(() => import("./pages/MyCredentials"))
+const Landing = lazy(() => import("../pages/Landing"))
+const Login = lazy(() => import("../pages/Login"))
+const Register = lazy(() => import("../pages/Register"))
+const DownloadsPage = lazy(() => import("../pages/DownloadsPage"))
+const MyCredentials = lazy(() => import("../pages/MyCredentials"))
+const MyAccount = lazy(() => import("../pages/MyAccount"))
 
 export type RouteType = {
 	component: LazyExoticComponent<any>
@@ -40,6 +41,11 @@ const routes: RouteType[] = [
 		component: MyCredentials,
 		requiresAuth: true,
 		path: "/my-credentials",
+	},
+	{
+		component: MyAccount,
+		requiresAuth: true,
+		path: "/my-account",
 	},
 ]
 

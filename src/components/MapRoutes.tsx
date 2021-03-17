@@ -1,6 +1,6 @@
 import React, { lazy } from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
-import { RouteType } from "../routes"
+import { RouteType } from "../misc/routes"
 
 import ScrollTop from "./ScrollTop"
 
