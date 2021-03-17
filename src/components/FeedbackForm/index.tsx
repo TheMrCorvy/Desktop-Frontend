@@ -5,7 +5,8 @@ import Rating from "@material-ui/lab/Rating"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
-import { useSelector } from "react-redux"
+import { showError } from "../../redux/actions/errorHandlingActions"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
@@ -43,16 +44,26 @@ const FeedbackForm: FC = () => {
 
 	const [allowed, setAllowed] = useState(true)
 
+	const dispatch = useDispatch()
+
 	const classes = useStyles()
 
 	const maxTxt = 190
 
 	useEffect(() => {
-		getUser().then((user: any) => {
-			if (user.role !== "premium") {
-				setAllowed(false)
-			}
-		})
+		const errMsg = translate("error_messages", lng, 0)
+
+		getUser()
+			.then((user: any) => {
+				if (user === undefined || user.failed) {
+					dispatch(showError(errMsg))
+				} else if (user.role !== "premium") {
+					setAllowed(false)
+				}
+			})
+			.catch(() => {
+				dispatch(showError(errMsg))
+			})
 	})
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {

@@ -52,15 +52,17 @@ const MyAccount: FC = () => {
 			<Grid container justify="center">
 				<AccessManagement />
 
-				<Grid item xs={12} md={10} lg={8} className={classes.availableSlots}>
-					<Grid container spacing={5}>
-						<Grid item xs={12}>
-							<Typography variant="h5">Available Slots</Typography>
-						</Grid>
+				{availableSlots >= 1 && (
+					<Grid item xs={12} md={10} lg={8} className={classes.availableSlots}>
+						<Grid container spacing={5}>
+							<Grid item xs={12}>
+								<Typography variant="h5">Available Slots</Typography>
+							</Grid>
 
-						<CredentialCard availableSlots={availableSlots} credentials={[]} />
+							<CredentialCard availableSlots={availableSlots} credentials={[]} />
+						</Grid>
 					</Grid>
-				</Grid>
+				)}
 			</Grid>
 			<FeedbackForm />
 			<Downloads />
