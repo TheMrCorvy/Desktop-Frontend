@@ -46,6 +46,10 @@ const useStyles = makeStyles({
 	secretKey: {
 		color: "#ff6200",
 	},
+	qrContainer: {
+		display: "flex",
+		justifyContent: "center",
+	},
 })
 
 const StepThree = ({ isRobot, testing }: Props) => {
@@ -116,9 +120,9 @@ const StepThree = ({ isRobot, testing }: Props) => {
 					<Grid item xs={12} sm={6}>
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<FormControl variant="outlined" fullWidth>
-								<InputLabel>{translate("auth_form_texts", lng, 1)}</InputLabel>
+								<InputLabel>{translate("auth_form_texts", lng, 8)}</InputLabel>
 								<OutlinedInput
-									label={translate("auth_form_texts", lng, 1)}
+									label={translate("auth_form_texts", lng, 8)}
 									name="verificationCode"
 									required
 									type="number"
@@ -163,7 +167,7 @@ const StepThree = ({ isRobot, testing }: Props) => {
 							</FormControl>
 						</form>
 					</Grid>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={12} sm={6} className={classes.qrContainer}>
 						{!testing && (
 							<QRCode
 								value={`otpauth://totp/${translate("app_name", lng)}:${
