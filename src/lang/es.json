@@ -210,5 +210,7 @@
 		"Enviar",
 		"Reseña",
 		"Sugerencia"
-	]
+	],
+	"available_slots": ["Espacios Disponibles"],
+	"access_management": ["Administrar Acceso", "Editar tus datos", "Guardar Cambios"]
 }

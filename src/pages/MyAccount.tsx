@@ -5,13 +5,17 @@ import { Container, Grid, Typography } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { showError } from "../redux/actions/errorHandlingActions"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../redux/store"
+
+import { translate } from "../lang"
 
 import FeedbackForm from "../components/FeedbackForm"
 import Downloads from "../components/Sections/Downloads"
 import AccessManagement from "../components/Sections/AccessManagement"
-import { getUser } from "../misc/indexedDB"
 import CredentialCard from "../components/CredentialCard"
+
+import { getUser } from "../misc/indexedDB"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -31,6 +35,8 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const MyAccount: FC = () => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const [availableSlots, setAvailableSlots] = useState(0)
 
 	const classes = useStyles()
@@ -42,7 +48,7 @@ const MyAccount: FC = () => {
 			if (user !== undefined && !user.failed) {
 				setAvailableSlots(user.slots_available)
 			} else {
-				dispatch(showError("error "))
+				dispatch(showError(translate("error_messages", lng, 0)))
 			}
 		})
 	}, [])
@@ -56,7 +62,9 @@ const MyAccount: FC = () => {
 					<Grid item xs={12} md={10} lg={8} className={classes.availableSlots}>
 						<Grid container spacing={5}>
 							<Grid item xs={12}>
-								<Typography variant="h5">Available Slots</Typography>
+								<Typography variant="h5">
+									{translate("available_slots", lng)}
+								</Typography>
 							</Grid>
 
 							<CredentialCard availableSlots={availableSlots} credentials={[]} />

@@ -17,6 +17,11 @@ import { makeStyles } from "@material-ui/core/styles"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import LockIcon from "@material-ui/icons/Lock"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../../redux/store"
+
+import { translate } from "../../../lang"
+
 import StepThree from "../RegisterSteps/StepThree"
 
 const useStyles = makeStyles({
@@ -29,6 +34,8 @@ const useStyles = makeStyles({
 })
 
 const AccessManagement: FC = () => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const [locked, setLocked] = useState(true)
 
 	const classes = useStyles()
@@ -37,13 +44,13 @@ const AccessManagement: FC = () => {
 		setLocked(!locked)
 	}
 
-	const tooltipTitle = locked ? "edit your account" : "save changes"
+	const tooltipTitle = translate("access_management", lng, locked ? 1 : 2)
 
 	return (
 		<Grid item xs={12} md={6} lg={8}>
 			<Card className={classes.borderRadius} elevation={2}>
 				<CardHeader
-					title="access management"
+					title={translate("access_management", lng, 0)}
 					action={
 						<Tooltip title={tooltipTitle} placement="right">
 							<IconButton color="primary" onClick={toggleLock}>
@@ -57,7 +64,7 @@ const AccessManagement: FC = () => {
 						<Grid item xs={12} md={6}>
 							<TextField
 								variant="outlined"
-								label="Name"
+								label={translate("auth_form_texts", lng, 6)}
 								name="name"
 								type={locked ? "password" : "text"}
 								defaultValue="Gonzalo Salvador Corvalán"
@@ -68,7 +75,7 @@ const AccessManagement: FC = () => {
 						<Grid item xs={12} md={6}>
 							<TextField
 								variant="outlined"
-								label="Phone"
+								label={translate("auth_form_texts", lng, 7)}
 								name="phoneNumber"
 								type={locked ? "password" : "text"}
 								defaultValue="+54 011 5048-8031"
@@ -79,7 +86,7 @@ const AccessManagement: FC = () => {
 						<Grid item xs={12} md={6}>
 							<TextField
 								variant="outlined"
-								label="Main Email"
+								label={translate("auth_form_texts", lng, 2)}
 								name="mainEmail"
 								type={locked ? "password" : "email"}
 								defaultValue="mr.corvy@gmail.com"
@@ -90,7 +97,7 @@ const AccessManagement: FC = () => {
 						<Grid item xs={12} md={6}>
 							<TextField
 								variant="outlined"
-								label="Recovery Email"
+								label={translate("auth_form_texts", lng, 3)}
 								name="recoveryEmail"
 								type={locked ? "password" : "email"}
 								defaultValue="gonzalosalvadorcorvalan@gmail.com"
@@ -101,7 +108,7 @@ const AccessManagement: FC = () => {
 						<Grid item xs={12}>
 							<TextField
 								variant="outlined"
-								label="Anti Fishing Secret"
+								label={translate("auth_form_texts", lng, 4)}
 								name="antiFishing"
 								type={locked ? "password" : "text"}
 								defaultValue="@Leonard1618"
