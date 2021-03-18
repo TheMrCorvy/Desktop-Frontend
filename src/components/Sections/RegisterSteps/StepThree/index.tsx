@@ -24,6 +24,10 @@ import { QRCode } from "react-qrcode-logo"
 type Props = {
 	isRobot: boolean
 	testing?: boolean
+	alter?: {
+		email: string
+		secretKey: string
+	}
 }
 
 type FormInput = {
@@ -52,7 +56,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const StepThree = ({ isRobot, testing }: Props) => {
+const StepThree = ({ isRobot, testing, alter }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [userData, setUserData] = useState<UserData>({
@@ -79,14 +83,21 @@ const StepThree = ({ isRobot, testing }: Props) => {
 		}
 
 		//api call, just for now I'll simulate the api call
-		const timer = setTimeout(() => {
+		if (alter) {
 			setUserData({
-				email: "mr.corvy@gmail.com",
-				secretKey: "DCRMALCXPEZOFKZH",
+				email: alter.email,
+				secretKey: alter.secretKey,
 			})
-		}, 5000)
-		return () => {
-			clearTimeout(timer)
+		} else {
+			const timer = setTimeout(() => {
+				setUserData({
+					email: "mr.corvy@gmail.com",
+					secretKey: "DCRMALCXPEZOFKZH",
+				})
+			}, 5000)
+			return () => {
+				clearTimeout(timer)
+			}
 		}
 	}, [])
 

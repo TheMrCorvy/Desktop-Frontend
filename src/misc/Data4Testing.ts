@@ -44,6 +44,8 @@ export const user4Testing: UserT = {
 	anti_fishing_secret: "@Leonard1618",
 }
 
+export const secretKey4Testing = "DCRMALCXPEZOFKZH"
+
 export const credential4Testing: CredentialT[] = [
 	{
 		name: "test 1",
