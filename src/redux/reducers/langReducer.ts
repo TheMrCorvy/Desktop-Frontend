@@ -16,6 +16,9 @@ const initialLang = navLang === "en" || navLang === "es" || navLang === "jp" ? n
 // else, will go the lang got from the validation before
 initialState.lng = localStorageLang ? localStorageLang : initialLang
 
+// and for last, set on the localstorage the user's preferred lang, so the next time they visit the site, it'll be already stored
+localStorage.setItem("preferred_language", initialState.lng)
+
 const langReducer = (state = initialState, action: LangAction) => {
 	switch (action.type) {
 		case SET_LANGUAGE:
