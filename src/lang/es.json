@@ -213,5 +213,14 @@
 	],
 	"available_slots": ["Espacios Disponibles"],
 	"access_management": ["Administrar Acceso", "Editar tus datos", "Guardar Cambios"],
-	"recently_seen": ["Fue vista recientemente"]
+	"recently_seen": [
+		"Fue vista recientemente",
+		"Credencial",
+		"Fecha",
+		"Ubicación",
+		"Dispositivo",
+		"Versión",
+		"Nuguna credencial fue vista recientemente.",
+		"FORMATO DE FECHA: Año-Mes-Día, Horas : Minutos : Segundos"
+	]
 }

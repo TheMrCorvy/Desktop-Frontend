@@ -201,5 +201,14 @@
 	],
 	"available_slots": ["Available Slots"],
 	"access_management": ["Access Management", "Edit Your Account", "Save Changes"],
-	"recently_seen": ["Has been recently seen"]
+	"recently_seen": [
+		"Has been recently seen",
+		"Credential",
+		"Date",
+		"Location",
+		"Device",
+		"Version",
+		"There are no recently seen credentials",
+		"DATE FORMAT: Year-Month-Day, Hours : Minutes : Seconds"
+	]
 }

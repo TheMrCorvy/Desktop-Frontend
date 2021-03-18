@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles"
 
 import {
 	Card,
@@ -14,6 +14,11 @@ import {
 	Typography,
 } from "@material-ui/core"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../../redux/store"
+
+import { translate } from "../../../lang"
+
 import { recentlySeen4Testing } from "../../../misc/Data4Testing"
 
 export type RecentlySeenT = {
@@ -27,30 +32,30 @@ export type RecentlySeenT = {
 	version: string
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		table: {
-			minWidth: 650,
-		},
-		card: {
-			borderRadius: 10,
-			marginBottom: "3rem",
-		},
-		marginTop: {
-			marginTop: 20,
-		},
-		textCapitalize: {
-			textTransform: "capitalize",
-		},
-		subTitle: {
-			marginTop: 25,
-			float: "left",
-			paddingBottom: 25,
-		},
-	})
-)
+const useStyles = makeStyles({
+	table: {
+		minWidth: 650,
+	},
+	card: {
+		borderRadius: 8,
+		marginBottom: "3rem",
+	},
+	marginTop: {
+		marginTop: 20,
+	},
+	textCapitalize: {
+		textTransform: "capitalize",
+	},
+	subTitle: {
+		marginTop: 25,
+		float: "left",
+		paddingBottom: 25,
+	},
+})
 
 const RecentAccessTable = () => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const [credentials, setCredentials] = useState<RecentlySeenT[]>([])
 
 	const [loading, setLoading] = useState(true)
@@ -58,6 +63,7 @@ const RecentAccessTable = () => {
 	const classes = useStyles()
 
 	useEffect(() => {
+		//fake api call on component did mount
 		setTimeout(() => {
 			setCredentials(recentlySeen4Testing)
 
@@ -73,18 +79,24 @@ const RecentAccessTable = () => {
 				) : (
 					<>
 						<TableContainer>
-							<Table
-								className={classes.table}
-								size="small"
-								aria-label="a dense table"
-							>
+							<Table className={classes.table} size="small">
 								<TableHead>
 									<TableRow>
-										<TableCell>Credential</TableCell>
-										<TableCell align="center">Date</TableCell>
-										<TableCell align="center">Where</TableCell>
-										<TableCell align="center">Device</TableCell>
-										<TableCell align="center">Version</TableCell>
+										<TableCell align="center">
+											{translate("recently_seen", lng, 1)}
+										</TableCell>
+										<TableCell align="center">
+											{translate("recently_seen", lng, 2)}
+										</TableCell>
+										<TableCell align="center">
+											{translate("recently_seen", lng, 3)}
+										</TableCell>
+										<TableCell align="center">
+											{translate("recently_seen", lng, 4)}
+										</TableCell>
+										<TableCell align="center">
+											{translate("recently_seen", lng, 5)}
+										</TableCell>
 									</TableRow>
 								</TableHead>
 								<TableBody>
@@ -118,7 +130,7 @@ const RecentAccessTable = () => {
 									) : (
 										<TableRow>
 											<TableCell colSpan={5}>
-												There are no recently seen credentials
+												{translate("recently_seen", lng, 6)}
 											</TableCell>
 										</TableRow>
 									)}
@@ -127,7 +139,7 @@ const RecentAccessTable = () => {
 						</TableContainer>
 						{credentials.length >= 1 && (
 							<Typography variant="body2" className={classes.subTitle}>
-								DATE FORMAT: Year-Month-Day Hour : Minute : Seconds
+								{translate("recently_seen", lng, 7)}
 							</Typography>
 						)}
 					</>

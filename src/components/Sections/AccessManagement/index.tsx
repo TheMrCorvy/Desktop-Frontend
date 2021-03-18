@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			color: "#fff",
 		},
 		borderRadius: {
-			borderRadius: 10,
+			borderRadius: 8,
 		},
 		marginTop: {
 			marginTop: "3rem",
