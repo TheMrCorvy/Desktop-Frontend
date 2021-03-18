@@ -212,5 +212,6 @@
 		"Sugerencia"
 	],
 	"available_slots": ["Espacios Disponibles"],
-	"access_management": ["Administrar Acceso", "Editar tus datos", "Guardar Cambios"]
+	"access_management": ["Administrar Acceso", "Editar tus datos", "Guardar Cambios"],
+	"recently_seen": ["Fue vista recientemente"]
 }

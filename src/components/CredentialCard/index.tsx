@@ -3,9 +3,14 @@ import React from "react"
 import { Grid, Card, CardActionArea, Avatar, CardContent, Typography } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 import { red } from "@material-ui/core/colors"
+import ControlPointIcon from "@material-ui/icons/ControlPoint"
+
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+
+import { translate } from "../../lang"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import ControlPointIcon from "@material-ui/icons/ControlPoint"
 
 type Props = {
 	credentials: CredentialT[]
@@ -65,6 +70,8 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const CredentialCard = ({ credentials, availableSlots }: Props) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const classes = useStyles()
 
 	return (
@@ -109,7 +116,7 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 												variant="body1"
 												className={classes.textColor}
 											>
-												Has been recently seen
+												{translate("recently_seen", lng)}
 											</Typography>
 										)}
 									</Grid>

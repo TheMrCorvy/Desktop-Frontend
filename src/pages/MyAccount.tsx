@@ -16,6 +16,7 @@ import AccessManagement from "../components/Sections/AccessManagement"
 import CredentialCard from "../components/CredentialCard"
 
 import { getUser } from "../misc/indexedDB"
+import RecentAccessTable from "../components/Sections/RecentAccessTable"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -61,6 +62,9 @@ const MyAccount: FC = () => {
 				{availableSlots >= 1 && (
 					<Grid item xs={12} md={10} lg={8} className={classes.availableSlots}>
 						<Grid container spacing={5}>
+							<Grid item xs={12}>
+								<RecentAccessTable />
+							</Grid>
 							<Grid item xs={12}>
 								<Typography variant="h5">
 									{translate("available_slots", lng)}
