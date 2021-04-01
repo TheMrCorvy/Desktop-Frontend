@@ -53,7 +53,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const RecentAccessTable = () => {
+const RecentAccessTable = ({ testing }: { testing?: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [credentials, setCredentials] = useState<RecentlySeenT[]>([])
@@ -63,16 +63,26 @@ const RecentAccessTable = () => {
 	const classes = useStyles()
 
 	useEffect(() => {
-		//fake api call on component did mount
-		setTimeout(() => {
+		if (!testing) {
+			//fake api call on component did mount
+			const fakeTimer = setTimeout(() => {
+				setCredentials(recentlySeen4Testing)
+
+				setLoading(false)
+			}, 5000)
+
+			return () => {
+				clearTimeout(fakeTimer)
+			}
+		} else {
 			setCredentials(recentlySeen4Testing)
 
 			setLoading(false)
-		}, 5000)
+		}
 	}, [])
 
 	return (
-		<Card className={classes.card} elevation={2}>
+		<Card className={classes.card} elevation={2} data-testid="test_recently_seen_table">
 			<CardContent>
 				{loading ? (
 					<CircularProgress color="primary" className={classes.marginTop} />
@@ -102,7 +112,10 @@ const RecentAccessTable = () => {
 								<TableBody>
 									{credentials.length >= 1 ? (
 										credentials.map((credential) => (
-											<TableRow key={credential.id}>
+											<TableRow
+												key={credential.id}
+												data-testid={"test_RS_row_" + credential.id}
+											>
 												<TableCell
 													component="th"
 													scope="row"
