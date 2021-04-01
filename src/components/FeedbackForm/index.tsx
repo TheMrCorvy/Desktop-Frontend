@@ -106,9 +106,16 @@ const FeedbackForm = ({ testing }: { testing?: boolean }) => {
 						onChange={handleChange}
 						variant="outlined"
 						fullWidth
+						inputProps={{
+							"data-testid": "test_select_input",
+						}}
 					>
-						<MenuItem value="suggestion">{translate("feedback_form", lng, 4)}</MenuItem>
-						<MenuItem value="rating">{translate("feedback_form", lng, 3)}</MenuItem>
+						<MenuItem value="suggestion" data-testid="test_opt_1">
+							{translate("feedback_form", lng, 4)}
+						</MenuItem>
+						<MenuItem value="rating" data-testid="test_opt_2">
+							{translate("feedback_form", lng, 3)}
+						</MenuItem>
 					</Select>
 				</Grid>
 				<Grid item xs={12} className={classes.textLeft}>
@@ -119,6 +126,9 @@ const FeedbackForm = ({ testing }: { testing?: boolean }) => {
 						rows={6}
 						onChange={handleChangeTextInput}
 						value={feedbackBody}
+						inputProps={{
+							"data-testid": "test_text_input",
+						}}
 					/>
 					<Typography
 						variant={feedbackBody.length > maxTxt ? "h4" : "caption"}
@@ -147,6 +157,7 @@ const FeedbackForm = ({ testing }: { testing?: boolean }) => {
 								color="primary"
 								disableElevation
 								onClick={handleSubmit}
+								data-testid="test_submit_btn"
 							>
 								{translate("feedback_form", lng, 2)}
 							</Button>
