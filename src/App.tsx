@@ -15,6 +15,10 @@ import routes from "./misc/routes"
 import MapRoutes from "./components/MapRoutes"
 import Layout from "./components/Layout"
 
+/*********************************************************************************** prevent reload if user is signed in */
+import { Beforeunload } from "react-beforeunload"
+import { translate } from "./lang"
+
 /*********************************************************************************** font awesome */
 import { library } from "@fortawesome/fontawesome-svg-core"
 import {
@@ -61,6 +65,8 @@ const App: FC = () => {
 
 	const { token } = useSelector((state: RootState) => state.token)
 
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const globalTheme = createMuiTheme({
 		palette: {
 			type: theme,
@@ -93,6 +99,7 @@ const App: FC = () => {
 		<ThemeProvider theme={globalTheme}>
 			<BrowserRouter>
 				<CssBaseline />
+				{token && <Beforeunload onBeforeunload={() => translate("before_unload", lng)} />}
 				<Layout>
 					<MapRoutes routes={routes} />
 				</Layout>

@@ -210,5 +210,8 @@
 		"Version",
 		"There are no recently seen credentials",
 		"DATE FORMAT: Year-Month-Day, Hours : Minutes : Seconds"
+	],
+	"before_unload": [
+		"Your session will be closed if you refresh the page. Are you sure you want to log out?"
 	]
 }
