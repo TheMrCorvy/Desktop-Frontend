@@ -5,17 +5,12 @@ import {
 	CardContent,
 	CardHeader,
 	Grid,
-	IconButton,
 	TextField,
-	Tooltip,
 	Backdrop,
 	CircularProgress,
 } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
-
-import LockOpenIcon from "@material-ui/icons/LockOpen"
-import LockIcon from "@material-ui/icons/Lock"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
@@ -23,6 +18,7 @@ import { RootState } from "../../../redux/store"
 import { translate } from "../../../lang"
 
 import StepThree from "../RegisterSteps/StepThree"
+import UnlockData from "../../UnlockData"
 
 import { secretKey4Testing, user4Testing } from "../../../misc/Data4Testing"
 
@@ -50,8 +46,6 @@ const AccessManagement = ({ testing }: { testing?: boolean }) => {
 
 	const classes = useStyles()
 
-	const tooltipTitle = translate("access_management", lng, locked ? 1 : 2)
-
 	const callApi = () => {
 		if (!testing) {
 			// here we'll call the api either to get the decrypted data, or to send the new data
@@ -76,17 +70,7 @@ const AccessManagement = ({ testing }: { testing?: boolean }) => {
 				<Card className={classes.borderRadius} elevation={2}>
 					<CardHeader
 						title={translate("access_management", lng, 0)}
-						action={
-							<Tooltip title={tooltipTitle} placement="right">
-								<IconButton
-									color="primary"
-									onClick={callApi}
-									data-testid="test_toggle_lock"
-								>
-									{locked ? <LockIcon /> : <LockOpenIcon />}
-								</IconButton>
-							</Tooltip>
-						}
+						action={<UnlockData toggleLock={callApi} locked={locked} />}
 					/>
 					<CardContent>
 						<Grid container justify="space-between" spacing={4}>
