@@ -57,6 +57,7 @@ const Drawer: FC = () => {
 				role="presentation"
 				onClick={() => dispatch(toggleDrawer(false))}
 				onKeyDown={() => dispatch(toggleDrawer(false))}
+				data-testid="test_drawer"
 			>
 				<List>
 					<Link to="/" className={classes.link}>
