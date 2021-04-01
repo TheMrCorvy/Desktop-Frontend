@@ -8,7 +8,10 @@ import {
 	DialogContent,
 	DialogActions,
 	Button,
+	useMediaQuery,
 } from "@material-ui/core"
+
+import { useTheme } from "@material-ui/core/styles"
 
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import LockIcon from "@material-ui/icons/Lock"
@@ -27,6 +30,8 @@ const UnlockData = ({ toggleLock, locked }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)
+
+	const fullScreen = useMediaQuery(useTheme().breakpoints.down("sm"))
 
 	const toggleDialog = () => {
 		if (locked) {
@@ -58,13 +63,17 @@ const UnlockData = ({ toggleLock, locked }: Props) => {
 				open={open}
 				scroll="paper"
 				data-testid="test_dialog"
+				maxWidth="md"
+				fullScreen={fullScreen}
 			>
 				<DialogTitle id="dialog-title">titulo</DialogTitle>
 				<DialogContent>
 					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum consectetur quas
 					in cumque consequuntur nesciunt molestiae ex eligendi sapiente saepe quidem,
 					reprehenderit ut aliquid, neque autem totam alias officia repellat?
-					<Button onClick={onAuthSuccess}>auth succeded</Button>
+					<Button variant="contained" color="primary" onClick={onAuthSuccess}>
+						auth succeded
+					</Button>
 				</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={toggleDialog} color="default" size="large">
