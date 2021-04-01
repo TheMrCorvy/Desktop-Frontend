@@ -104,7 +104,7 @@ const DownloadsPage = () => {
 		<Container maxWidth="xl" className={classes.container} data-testid="test_downloads_page">
 			<Grid container justify="center" spacing={3}>
 				<Grid item xs={12} className={classes.landingSection}>
-					<Downloads testing alternative />
+					<Downloads alternative />
 				</Grid>
 				<Grid item xs={12} sm={11} md={8}>
 					<Hidden xsDown>

@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, useEffect } from "react"
 import { BrowserRouter } from "react-router-dom"
 
 /*********************************************************************************** redux related */
@@ -58,6 +58,8 @@ library.add(
 
 const App: FC = () => {
 	const { theme } = useSelector((state: RootState) => state.theme)
+
+	const { token } = useSelector((state: RootState) => state.token)
 
 	const globalTheme = createMuiTheme({
 		palette: {

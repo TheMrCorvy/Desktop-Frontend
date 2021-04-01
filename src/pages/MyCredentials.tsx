@@ -181,7 +181,7 @@ const MyCredentials: FC = () => {
 				</Grid>
 			</Container>
 			<FeedbackForm />
-			<Downloads testing />
+			<Downloads />
 		</>
 	)
 }
