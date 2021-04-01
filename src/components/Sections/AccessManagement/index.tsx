@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react"
+import React, { useState } from "react"
 
 import {
 	Card,
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const AccessManagement: FC = () => {
+const AccessManagement = ({ testing }: { testing?: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [locked, setLocked] = useState(true)
@@ -53,15 +53,18 @@ const AccessManagement: FC = () => {
 	const tooltipTitle = translate("access_management", lng, locked ? 1 : 2)
 
 	const callApi = () => {
-		// here we'll call the api either to get the decrypted data, or to send the new data
+		if (!testing) {
+			// here we'll call the api either to get the decrypted data, or to send the new data
+			setLoading(true)
 
-		setLoading(true)
+			setTimeout(() => {
+				setLocked(!locked)
 
-		setTimeout(() => {
+				setLoading(false)
+			}, 3000)
+		} else {
 			setLocked(!locked)
-
-			setLoading(false)
-		}, 3000)
+		}
 	}
 
 	return (
@@ -69,13 +72,17 @@ const AccessManagement: FC = () => {
 			<Backdrop className={classes.backdrop} open={loading}>
 				<CircularProgress color="inherit" />
 			</Backdrop>
-			<Grid item xs={12} md={6} lg={8}>
+			<Grid item xs={12} md={6} lg={8} data-testid="test_access_management">
 				<Card className={classes.borderRadius} elevation={2}>
 					<CardHeader
 						title={translate("access_management", lng, 0)}
 						action={
 							<Tooltip title={tooltipTitle} placement="right">
-								<IconButton color="primary" onClick={callApi}>
+								<IconButton
+									color="primary"
+									onClick={callApi}
+									data-testid="test_toggle_lock"
+								>
 									{locked ? <LockIcon /> : <LockOpenIcon />}
 								</IconButton>
 							</Tooltip>
@@ -92,6 +99,9 @@ const AccessManagement: FC = () => {
 									defaultValue={user4Testing.name}
 									disabled={locked}
 									fullWidth
+									inputProps={{
+										"data-testid": "test_name_input",
+									}}
 								/>
 							</Grid>
 							<Grid item xs={12} md={6}>
@@ -138,7 +148,7 @@ const AccessManagement: FC = () => {
 									fullWidth
 								/>
 							</Grid>
-							{!locked && (
+							{!locked && !testing && (
 								<Grid item xs={12} className={classes.marginTop}>
 									<StepThree
 										isRobot={false}
