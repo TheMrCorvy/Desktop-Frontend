@@ -85,8 +85,9 @@ const App: FC = () => {
 		},
 	})
 
-	//I'll leave this here untill I make the credential page
+	const { REACT_APP_ENV_LOCAL } = process.env
 
+	//I'll leave this here untill I make the credential page
 	const userAgentInfo = navigator.userAgent
 
 	const variosStrings = userAgentInfo.split("(")
@@ -99,7 +100,9 @@ const App: FC = () => {
 		<ThemeProvider theme={globalTheme}>
 			<BrowserRouter>
 				<CssBaseline />
-				{token && <Beforeunload onBeforeunload={() => translate("before_unload", lng)} />}
+				{token && !REACT_APP_ENV_LOCAL && (
+					<Beforeunload onBeforeunload={() => translate("before_unload", lng)} />
+				)}
 				<Layout>
 					<MapRoutes routes={routes} />
 				</Layout>
