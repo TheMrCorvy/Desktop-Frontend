@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const FeedbackForm: FC = () => {
+const FeedbackForm = ({ testing }: { testing?: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [feedbackType, setFeedbackType] = useState("suggestion")
@@ -53,17 +53,21 @@ const FeedbackForm: FC = () => {
 	useEffect(() => {
 		const errMsg = translate("error_messages", lng, 0)
 
-		getUser()
-			.then((user: any) => {
-				if (user === undefined || user.failed) {
+		if (!testing) {
+			getUser()
+				.then((user: any) => {
+					if (user === undefined || user.failed) {
+						dispatch(showError(errMsg))
+					} else if (user.role !== "premium") {
+						setAllowed(false)
+					}
+				})
+				.catch(() => {
 					dispatch(showError(errMsg))
-				} else if (user.role !== "premium") {
-					setAllowed(false)
-				}
-			})
-			.catch(() => {
-				dispatch(showError(errMsg))
-			})
+				})
+		} else {
+			setAllowed(true)
+		}
 	})
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
@@ -91,7 +95,7 @@ const FeedbackForm: FC = () => {
 	}
 
 	return !allowed ? null : (
-		<Container maxWidth="sm" className={classes.container}>
+		<Container maxWidth="sm" className={classes.container} data-testid="test_feedback_form">
 			<Grid container justify="center" spacing={4}>
 				<Grid item xs={12}>
 					<Typography variant="h4">{translate("feedback_form", lng, 0)}</Typography>
