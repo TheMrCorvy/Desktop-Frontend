@@ -33,9 +33,7 @@ describe("checking if the user can write properly on the form", () => {
 	})
 
 	it("selects the type of feedback", () => {
-		const mockCallback = jest.fn()
-
-		const { getByTestId, getByText } = render(
+		const { getByTestId } = render(
 			<Provider store={store}>
 				<FeedbackForm testing />
 			</Provider>

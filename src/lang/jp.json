@@ -197,7 +197,7 @@
 		"Your Review / Suggestion",
 		"Send",
 		"Review",
-		"Suggestions"
+		"Suggestion"
 	],
 	"available_slots": ["Available Slots"],
 	"access_management": ["Access Management", "Edit Your Account", "Save Changes"],
