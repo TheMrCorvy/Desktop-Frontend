@@ -7,6 +7,8 @@ import ScrollTop from "./ScrollTop"
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 
+import { Beforeunload } from "react-beforeunload"
+
 const NotFound = lazy(() => import("../pages/Errors/404"))
 const Error500 = lazy(() => import("../pages/Errors/500"))
 
@@ -37,6 +39,7 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 
 	return (
 		<>
+			{token && <Beforeunload onBeforeunload={() => "You'll lose your data!"} />}
 			<ScrollTop />
 			<Switch>
 				{props.routes.map((route: RouteType, index: number) =>
