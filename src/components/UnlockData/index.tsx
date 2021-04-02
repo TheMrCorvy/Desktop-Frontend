@@ -21,6 +21,8 @@ import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
+import { ApiResponseLoginT } from "../../misc/ajaxManager"
+
 import Login from "../../components/Sections/Login"
 
 type Props = {
@@ -43,10 +45,12 @@ const UnlockData = ({ toggleLock, locked }: Props) => {
 		}
 	}
 
-	const onAuthSuccess = () => {
-		setOpen(false)
+	const onAuthSuccess = (res: ApiResponseLoginT) => {
+		if (res.isAuthorized) {
+			setOpen(false)
 
-		toggleLock()
+			toggleLock()
+		}
 	}
 
 	const tooltipTitle = translate("access_management", lng, locked ? 1 : 2)
@@ -70,10 +74,7 @@ const UnlockData = ({ toggleLock, locked }: Props) => {
 			>
 				<DialogTitle id="dialog-title">titulo</DialogTitle>
 				<DialogContent>
-					<Login isRobot={false} />
-					{/* <Button variant="contained" color="primary" onClick={onAuthSuccess}>
-						auth succeded
-					</Button> */}
+					<Login isRobot={false} onAuthSuccess={onAuthSuccess} endpointAlt />
 				</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={toggleDialog} color="default" size="large">

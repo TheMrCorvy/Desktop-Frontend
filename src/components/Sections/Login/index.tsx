@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
-import { MobileStepper, Paper, Typography, Button, Grid } from "@material-ui/core"
+import { Button, Grid } from "@material-ui/core"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
@@ -13,8 +13,12 @@ import TwoFactorCode from "./TwoFactorCode"
 import EmailCode from "./EmailCode"
 import SecurityCode from "./SecurityCode"
 
+import { ApiResponseLoginT } from "../../../misc/ajaxManager"
+
 type Props = {
+	onAuthSuccess: (res: ApiResponseLoginT) => void
 	isRobot: boolean
+	endpointAlt?: boolean
 	testing?: boolean
 }
 
@@ -48,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const Login = ({ testing, isRobot }: Props) => {
+const Login = ({ onAuthSuccess, isRobot, testing, endpointAlt }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
@@ -67,14 +71,32 @@ const Login = ({ testing, isRobot }: Props) => {
 		setActiveStep(activeStep - 1)
 	}
 
+	const endpoint = endpointAlt ? "/verify-info" : "/login"
+
 	const showOptions = (option: number) => {
 		switch (option) {
 			case 0:
 				return <TwoFactorCode isRobot={isRobot} testing={testing} />
 			case 1:
-				return <EmailCode isRecovery={false} isRobot={isRobot} testing={testing} />
+				return (
+					<EmailCode
+						onAuthSuccess={onAuthSuccess}
+						isRecovery={false}
+						isRobot={isRobot}
+						testing={testing}
+						endpoint={endpoint}
+					/>
+				)
 			case 2:
-				return <EmailCode isRecovery={true} isRobot={isRobot} testing={testing} />
+				return (
+					<EmailCode
+						onAuthSuccess={onAuthSuccess}
+						isRecovery={true}
+						isRobot={isRobot}
+						testing={testing}
+						endpoint={endpoint}
+					/>
+				)
 			case 3:
 				return <SecurityCode isRobot={isRobot} testing={testing} />
 
