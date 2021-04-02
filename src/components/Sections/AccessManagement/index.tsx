@@ -66,7 +66,7 @@ const AccessManagement = ({ testing }: { testing?: boolean }) => {
 			<Backdrop className={classes.backdrop} open={loading}>
 				<CircularProgress color="inherit" />
 			</Backdrop>
-			<Grid item xs={12} md={6} lg={8} data-testid="test_access_management">
+			<Grid item xs={12} md={8} data-testid="test_access_management">
 				<Card className={classes.borderRadius} elevation={2}>
 					<CardHeader
 						title={translate("access_management", lng, 0)}
