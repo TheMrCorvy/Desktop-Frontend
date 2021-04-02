@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			[theme.breakpoints.up("md")]: {
 				display: "flex",
 				alignItems: "center",
+				marginTop: "1rem",
 			},
 		},
 		card: {
