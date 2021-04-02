@@ -12,10 +12,8 @@ import {
 	InputAdornment,
 } from "@material-ui/core"
 
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
-
-import { login } from "../../../../redux/actions/authTokenActions"
 
 import { translate } from "../../../../lang"
 
