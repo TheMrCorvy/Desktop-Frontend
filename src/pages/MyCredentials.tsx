@@ -16,10 +16,12 @@ import { DBErrorT, getCredentials, getUser, initiateDB } from "../misc/indexedDB
 
 /************************************************************************************ types & components */
 import OrderBar, { By, Direction } from "../components/OrderBar"
-import CredentialCard, { CredentialT } from "../components/CredentialCard"
+import CredentialCard from "../components/CredentialCard"
 import Downloads from "../components/Sections/Downloads"
 import Snackbar from "../components/Snackbar"
 import FeedbackForm from "../components/FeedbackForm"
+
+import { CredentialT } from "../misc/types"
 
 /************************************************************************************ ajax */
 import { ApiResponseGetCredentialsT, getCredentialsFromApi } from "../misc/ajaxManager"

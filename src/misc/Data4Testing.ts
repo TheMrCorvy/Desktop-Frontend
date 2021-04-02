@@ -39,7 +39,7 @@ export const user4Testing: UserT = {
 	email: "email_1@gmail.com",
 	recovery_email: "email_2@gmail.com",
 	phone_number: "+54 011 1234-5678",
-	slots_available: 3,
+	slots_available: 2,
 	role: "premium",
 	id: 100,
 	anti_fishing_secret: "@Leonard1618",
@@ -56,7 +56,7 @@ export const credential4Testing: CredentialT[] = [
 		logo_url: null,
 		description: "roses are red, violets are blue, lorem ipsum this is a description",
 		last_seen: "2021-02-15 17:32:23",
-		recently_seen: null,
+		recently_seen: "",
 		email: {
 			opening: "fa",
 			char_count: 7,
@@ -128,6 +128,8 @@ export const credential4Testing: CredentialT[] = [
 				"laborum",
 			],
 		},
+		created_at: "2021-02-15 17:32:23",
+		updated_at: "2021-02-15 17:32:23",
 	},
 	{
 		id: 2,
@@ -209,6 +211,8 @@ export const credential4Testing: CredentialT[] = [
 				"laborum",
 			],
 		},
+		created_at: "2021-02-15 17:32:23",
+		updated_at: "2021-02-15 17:32:23",
 	},
 	{
 		id: 3,
@@ -290,6 +294,8 @@ export const credential4Testing: CredentialT[] = [
 				"laborum",
 			],
 		},
+		created_at: "2021-02-15 17:32:23",
+		updated_at: "2021-02-15 17:32:23",
 	},
 ]
 

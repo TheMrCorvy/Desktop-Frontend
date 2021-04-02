@@ -1,5 +1,5 @@
 import Dexie, { Table } from "dexie"
-import { CredentialT } from "../components/CredentialCard"
+import { CredentialT } from "./types"
 import { UserT } from "./ajaxManager"
 
 export type DBErrorT = {

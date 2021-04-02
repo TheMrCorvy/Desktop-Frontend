@@ -17,7 +17,7 @@ type OrderT = {
 	direction: Direction
 }
 
-export type By = "created_at" | "name" | "updated_at" | "recently_seen"
+export type By = "created_at" | "company_name" | "updated_at" | "recently_seen"
 
 export type Direction = 1 | -1
 
@@ -104,8 +104,8 @@ const OrderBar = ({ sortCredentials }: { sortCredentials: Function }) => {
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
 				<Button
 					color="inherit"
-					endIcon={order.by === "name" && <order.arrow />}
-					onClick={() => orderBy("name")}
+					endIcon={order.by === "company_name" && <order.arrow />}
+					onClick={() => orderBy("company_name")}
 				>
 					{translate("order_options", lng, 2)}
 				</Button>

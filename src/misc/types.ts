@@ -6,7 +6,7 @@ export type CredentialT = {
 	logo_url: string | null
 	description?: string
 	last_seen: string
-	recently_seen: boolean | null
+	recently_seen: boolean | string
 	email?: {
 		opening: string
 		char_count: number
@@ -36,4 +36,6 @@ export type CredentialT = {
 		multiple_security_codes?: string[]
 		crypto_currency_access_code?: string[]
 	}
+	created_at: string
+	updated_at: string
 }
