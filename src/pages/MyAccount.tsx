@@ -61,7 +61,7 @@ const MyAccount: FC = () => {
 
 				{availableSlots >= 1 && (
 					<Grid item xs={12} md={10} lg={8} className={classes.availableSlots}>
-						<Grid container spacing={5}>
+						<Grid container spacing={4}>
 							<Grid item xs={12}>
 								<RecentAccessTable />
 							</Grid>
