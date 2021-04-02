@@ -47,6 +47,7 @@
 	"encryption_examples": [
 		"mr_x@email.com",
 		"@Contraseña123",
+		"xXNombre_De_UsuarioXx",
 		"Nombre de Ejemplo",
 		"+54 1234 - 5678",
 		"Pregunta de Seguridad",
@@ -57,6 +58,7 @@
 	],
 	"encrypted_examples": [
 		"m***@email.com",
+		"*****",
 		"*****",
 		"N***************o",
 		"+54******78",

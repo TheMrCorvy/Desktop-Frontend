@@ -40,6 +40,7 @@
 	"encryption_examples": [
 		"mr_x@email.com",
 		"@Password123",
+		"xXUsername32Xx",
 		"Example Name",
 		"+54 1234 - 5678",
 		"Security Question",
@@ -50,6 +51,7 @@
 	],
 	"encrypted_examples": [
 		"m***@email.com",
+		"*****",
 		"*****",
 		"E**********e",
 		"+54******78",
