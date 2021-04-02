@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const Login = ({ onAuthSuccess, isRobot, testing, endpointAlt }: Props) => {
+const LoginOptions = ({ onAuthSuccess, isRobot, testing, endpointAlt }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
@@ -138,6 +138,7 @@ const Login = ({ onAuthSuccess, isRobot, testing, endpointAlt }: Props) => {
 							data-testid={"test_login_option_" + index}
 							className={classes.btn}
 							onClick={() => handleNext(index)}
+							disabled={isRobot}
 						>
 							{translate("login_options", lng, index)}
 						</Button>
@@ -160,4 +161,4 @@ const Login = ({ onAuthSuccess, isRobot, testing, endpointAlt }: Props) => {
 	)
 }
 
-export default Login
+export default LoginOptions

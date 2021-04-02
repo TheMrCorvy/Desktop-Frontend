@@ -23,7 +23,7 @@ import { translate } from "../../lang"
 
 import { ApiResponseLoginT } from "../../misc/ajaxManager"
 
-import Login from "../../components/Sections/Login"
+import LoginOptions from "../../components/Sections/Login"
 
 type Props = {
 	toggleLock: () => void
@@ -74,7 +74,7 @@ const UnlockData = ({ toggleLock, locked }: Props) => {
 			>
 				<DialogTitle id="dialog-title">{translate("authorize", lng)}</DialogTitle>
 				<DialogContent>
-					<Login isRobot={false} onAuthSuccess={onAuthSuccess} endpointAlt />
+					<LoginOptions isRobot={false} onAuthSuccess={onAuthSuccess} endpointAlt />
 				</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={toggleDialog} color="default" size="large">
