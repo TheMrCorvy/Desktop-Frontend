@@ -1,4 +1,4 @@
-import { CredentialT } from "../components/CredentialCard"
+import { CredentialT } from "./types"
 import { credential4Testing } from "./Data4Testing"
 
 export type UserT = {

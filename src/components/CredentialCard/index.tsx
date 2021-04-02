@@ -12,18 +12,11 @@ import { translate } from "../../lang"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
+import { CredentialT } from "../../misc/types"
+
 type Props = {
 	credentials: CredentialT[]
 	availableSlots: number
-}
-
-export type CredentialT = {
-	name: string
-	avatar: string | null
-	recently_seen: boolean
-	id: number
-	created_at: string
-	updated_at: string
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -90,15 +83,15 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 							<CardContent>
 								<Grid container spacing={2}>
 									<Grid item xs={2} className={classes.addCredential}>
-										{credential.avatar ? (
+										{credential.logo_url ? (
 											<Avatar
 												aria-label="recipe"
-												src={credential.avatar}
-												alt={credential.name}
+												src={credential.logo_url}
+												alt={credential.company_name}
 											/>
 										) : (
 											<Avatar aria-label="recipe" className={classes.avatar}>
-												{credential.name.charAt(0).toUpperCase()}
+												{credential.company_name.charAt(0).toUpperCase()}
 											</Avatar>
 										)}
 									</Grid>
@@ -109,7 +102,7 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 											gutterBottom
 											className={classes.lineHeight}
 										>
-											{credential.name}
+											{credential.company_name}
 										</Typography>
 										{credential.recently_seen && (
 											<Typography
