@@ -9,9 +9,9 @@ import { translate } from "../../../lang"
 
 import en from "../../../lang/en.json"
 
-import TwoFactorCode from "../../Sections/LoginOptions/TwoFactorCode"
-import EmailCode from "../../Sections/LoginOptions/EmailCode"
-import SecurityCode from "../../Sections/LoginOptions/SecurityCode"
+import TwoFactorCode from "./TwoFactorCode"
+import EmailCode from "./EmailCode"
+import SecurityCode from "./SecurityCode"
 
 type Props = {
 	isRobot: boolean
