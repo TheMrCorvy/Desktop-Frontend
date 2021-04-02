@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 
 import {
-	Box,
 	Grid,
 	FormControl,
 	InputLabel,
@@ -12,10 +11,8 @@ import {
 	InputAdornment,
 } from "@material-ui/core"
 
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
-
-import { login } from "../../../../redux/actions/authTokenActions"
 
 import { translate } from "../../../../lang"
 
@@ -26,6 +23,8 @@ import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 import { ApiResponseLoginT } from "../../../../misc/ajaxManager"
 
 type Props = {
+	onAuthSuccess: (res: ApiResponseLoginT) => void
+	endpoint: string
 	isRecovery: boolean
 	isRobot: boolean
 	testing?: boolean
@@ -37,10 +36,8 @@ type FormInputs = {
 	mainEmail?: string
 }
 
-const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
+const EmailCode = ({ onAuthSuccess, endpoint, isRobot, isRecovery, testing }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
-
-	const dispatch = useDispatch()
 
 	const { register, errors, handleSubmit } = useForm()
 
@@ -52,6 +49,15 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 	const emailPattern = {
 		value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
 		message: translate("form_validation_messages", lng, 3),
+	}
+
+	const sendEmail = () => {
+		setCanSubmit(true)
+
+		if (testing) return
+
+		// api cal...
+		console.log("sending email...")
 	}
 
 	const onSubmit = (data: FormInputs) => {
@@ -68,29 +74,28 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 
 			responseData = fakeResponse
 		} else {
-			// here goes the api call, for now i'll just copy-paste the same fake response
-			const fakeResponse: ApiResponseLoginT = {
-				token: "fake api authorization token",
-				user_data: user4Testing,
-				user_credentials: credential4Testing,
+			// here goes the api call, for now i'll just leave a fake response
+			let fakeResponse: ApiResponseLoginT
+
+			if (endpoint !== "/login") {
+				fakeResponse = {
+					token: "fake api authorization token",
+					user_data: user4Testing,
+					user_credentials: credential4Testing,
+					isAuthorized: true,
+				}
+			} else {
+				fakeResponse = {
+					token: "fake api authorization token",
+					user_data: user4Testing,
+					user_credentials: credential4Testing,
+				}
 			}
 
 			responseData = fakeResponse
 		}
 
-		localStorage.setItem("user_data", JSON.stringify(responseData.user_data))
-		localStorage.setItem("user_credentials", JSON.stringify(responseData.user_credentials))
-
-		dispatch(login(responseData.token))
-	}
-
-	const sendEmail = () => {
-		setCanSubmit(true)
-
-		if (testing) return
-
-		// api cal...
-		console.log("sending email...")
+		onAuthSuccess(responseData)
 	}
 
 	//I'm leaving this commented because I'm not sure if I'll allow the user to login more than 50 seconds after sending the email
@@ -105,13 +110,16 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 	// }, [canSubmit])
 
 	return (
-		<Box
-			component="div"
+		<Grid
+			container
+			justify="center"
+			spacing={3}
 			data-testid={!isRecovery ? "test_main_email_form" : "test_recovery_email_form"}
+			style={{ flexGrow: 1 }}
 		>
-			<Grid container justify="center" spacing={3}>
-				<Grid item xs={12} sm={6}>
-					<Grid container spacing={3} component="form" onSubmit={handleSubmit(onSubmit)}>
+			<Grid item xs={12} sm={10} md={8}>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<Grid container spacing={3}>
 						{isRecovery && (
 							<Grid item xs={12}>
 								<FormControl variant="outlined" fullWidth>
@@ -247,9 +255,9 @@ const EmailCode = ({ testing, isRobot, isRecovery }: Props) => {
 							</Button>
 						</Grid>
 					</Grid>
-				</Grid>
+				</form>
 			</Grid>
-		</Box>
+		</Grid>
 	)
 }
 

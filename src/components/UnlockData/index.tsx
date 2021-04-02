@@ -23,7 +23,7 @@ import { translate } from "../../lang"
 
 import { ApiResponseLoginT } from "../../misc/ajaxManager"
 
-import LoginOptions from "../../components/Sections/Login"
+import LoginOptions from "../Sections/LoginOptions"
 
 type Props = {
 	toggleLock: () => void

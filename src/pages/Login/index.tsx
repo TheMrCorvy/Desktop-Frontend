@@ -26,7 +26,7 @@ import { ApiResponseLoginT } from "../../misc/ajaxManager"
 import { initiateDB } from "../../misc/indexedDB"
 
 import Snackbar from "../../components/Snackbar"
-import LoginOptions from "../../components/Sections/Login"
+import LoginOptions from "../../components/Sections/LoginOptions"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -170,7 +170,7 @@ const Login: FC = () => {
 				<Snackbar
 					message={translate("error_messages", lng, 3)}
 					open={error}
-					duration={25000}
+					duration={35000}
 				/>
 			)}
 		</>

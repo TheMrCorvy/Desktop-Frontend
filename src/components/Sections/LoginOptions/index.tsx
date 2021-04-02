@@ -1,93 +1,162 @@
-import React, { useState, ChangeEvent } from "react"
+import React, { useState } from "react"
 
-import en from "../../../lang/en.json"
-
-import { Grid, Tab, Tabs } from "@material-ui/core"
-
-import ReCAPTCHA from "react-google-recaptcha"
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+import { Button, Grid } from "@material-ui/core"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 import { translate } from "../../../lang"
 
+import en from "../../../lang/en.json"
+
 import TwoFactorCode from "./TwoFactorCode"
 import EmailCode from "./EmailCode"
 import SecurityCode from "./SecurityCode"
 
-const LoginOptions = ({ testing }: { testing?: boolean }) => {
+import { ApiResponseLoginT } from "../../../misc/ajaxManager"
+
+type Props = {
+	onAuthSuccess: (res: ApiResponseLoginT) => void
+	isRobot: boolean
+	endpointAlt?: boolean
+	testing?: boolean
+}
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		btn: {
+			minWidth: "50%",
+			[theme.breakpoints.down("xs")]: {
+				minWidth: "70%",
+			},
+		},
+		grid: {
+			display: "flex",
+			justifyContent: "center",
+		},
+		container: {
+			flexGrow: 1,
+			[theme.breakpoints.down("xs")]: {
+				minHeight: "80vh",
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
+				textAlign: "center",
+			},
+		},
+		goBack: {
+			display: "flex",
+			justifyContent: "center",
+			marginTop: 15,
+		},
+	})
+)
+
+const LoginOptions = ({ onAuthSuccess, isRobot, testing, endpointAlt }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const { theme } = useSelector((state: RootState) => state.theme)
+	const classes = useStyles()
 
-	const { REACT_APP_RECAPTCHA_SITE_KEY } = process.env
+	const [activeStep, setActiveStep] = useState(1)
 
-	const [tab, setTab] = useState(0)
+	const [activeOption, setActiveOption] = useState(0)
 
-	//I had to do this because when I'm testing the component, I can't click on the "I'm not a robot"...
-	const [isRobot, setIsRobot] = useState(testing ? false : true)
+	const handleNext = (option: number) => {
+		setActiveStep(activeStep + 1)
 
-	const handleTabs = (event: ChangeEvent<{}>, newValue: number) => {
-		setTab(newValue)
+		setActiveOption(option)
 	}
+
+	const handleBack = () => {
+		setActiveStep(activeStep - 1)
+	}
+
+	const endpoint = endpointAlt ? "/verify-info" : "/login"
 
 	const showOptions = (option: number) => {
 		switch (option) {
 			case 0:
-				return <TwoFactorCode isRobot={isRobot} testing={testing} />
+				return (
+					<TwoFactorCode
+						isRobot={isRobot}
+						testing={testing}
+						endpoint={endpoint}
+						onAuthSuccess={onAuthSuccess}
+					/>
+				)
 			case 1:
-				return <EmailCode isRecovery={false} isRobot={isRobot} testing={testing} />
+				return (
+					<EmailCode
+						onAuthSuccess={onAuthSuccess}
+						isRecovery={false}
+						isRobot={isRobot}
+						testing={testing}
+						endpoint={endpoint}
+					/>
+				)
 			case 2:
-				return <EmailCode isRecovery={true} isRobot={isRobot} testing={testing} />
+				return (
+					<EmailCode
+						onAuthSuccess={onAuthSuccess}
+						isRecovery={true}
+						isRobot={isRobot}
+						testing={testing}
+						endpoint={endpoint}
+					/>
+				)
 			case 3:
-				return <SecurityCode isRobot={isRobot} testing={testing} />
+				return (
+					<SecurityCode
+						isRobot={isRobot}
+						testing={testing}
+						endpoint={endpoint}
+						onAuthSuccess={onAuthSuccess}
+					/>
+				)
 
 			default:
-				return <TwoFactorCode isRobot={isRobot} testing={testing} />
+				return (
+					<TwoFactorCode
+						isRobot={isRobot}
+						testing={testing}
+						endpoint={endpoint}
+						onAuthSuccess={onAuthSuccess}
+					/>
+				)
 		}
-	}
-
-	const handleChangeCaptcha = (captchaResponse: string | null) => {
-		if (captchaResponse) {
-			setIsRobot(false)
-		}
-	}
-
-	const handleErrorCaptcha = () => {
-		setIsRobot(true)
 	}
 
 	return (
-		<Grid container spacing={3} justify="center" data-testid="test_login_options">
-			<Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
-				<Tabs
-					value={tab}
-					indicatorColor="primary"
-					textColor="primary"
-					onChange={handleTabs}
-					scrollButtons="off"
-					variant="scrollable"
-				>
-					{en.login_options.map((option, index) => (
-						<Tab
-							key={index}
-							label={translate("login_options", lng, index)}
+		<Grid container justify="center" spacing={2} className={classes.container}>
+			{activeStep === 1 &&
+				en.login_options.map((option, index) => (
+					<Grid item xs={12} key={index} className={classes.grid}>
+						<Button
+							variant="contained"
+							color="secondary"
+							disableElevation
 							data-testid={"test_login_option_" + index}
-						/>
-					))}
-				</Tabs>
-			</Grid>
-			<Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
-				<ReCAPTCHA
-					onChange={handleChangeCaptcha}
-					sitekey={`${REACT_APP_RECAPTCHA_SITE_KEY}`}
-					theme={theme}
-					onExpired={handleErrorCaptcha}
-					onErrored={handleErrorCaptcha}
-				/>
-			</Grid>
-			<Grid item xs={12} style={{ paddingTop: 15 }}>
-				{showOptions(tab)}
-			</Grid>
+							className={classes.btn}
+							onClick={() => handleNext(index)}
+							disabled={isRobot}
+						>
+							{translate("login_options", lng, index)}
+						</Button>
+					</Grid>
+				))}
+
+			{activeStep === 2 && (
+				<>
+					<Grid item xs={12} className={classes.grid}>
+						{showOptions(activeOption)}
+					</Grid>
+					<Grid item xs={12} className={classes.goBack}>
+						<Button color="primary" size="large" onClick={handleBack}>
+							{translate("go_back", lng)}
+						</Button>
+					</Grid>
+				</>
+			)}
 		</Grid>
 	)
 }
