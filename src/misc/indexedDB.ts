@@ -15,7 +15,8 @@ class PasuSewaDatabase extends Dexie {
 		super("PasuSewa")
 		this.version(1).stores({
 			users: "id,name,mainEmail,recoveryEmail,phone,availableSlots,role",
-			credentials: "id,name,avatar,recently_seen,created_at,updated_at",
+			credentials:
+				"id,user_id,company_id,company_name,logo_url,description,last_seen,recently_seen,email,password,username,phone_number,security_question_answer,security_codes,created_at,updated_at",
 		})
 	}
 }
