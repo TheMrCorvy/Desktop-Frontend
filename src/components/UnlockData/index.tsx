@@ -21,6 +21,8 @@ import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
+import Login from "../../components/Sections/Login"
+
 type Props = {
 	toggleLock: () => void
 	locked: boolean
@@ -31,7 +33,7 @@ const UnlockData = ({ toggleLock, locked }: Props) => {
 
 	const [open, setOpen] = useState(false)
 
-	const fullScreen = useMediaQuery(useTheme().breakpoints.down("sm"))
+	const fullScreen = useMediaQuery(useTheme().breakpoints.down("xs"))
 
 	const toggleDialog = () => {
 		if (locked) {
@@ -61,19 +63,17 @@ const UnlockData = ({ toggleLock, locked }: Props) => {
 				onClose={toggleDialog}
 				aria-labelledby="dialog-title"
 				open={open}
-				scroll="paper"
+				scroll="body"
 				data-testid="test_dialog"
 				maxWidth="md"
 				fullScreen={fullScreen}
 			>
 				<DialogTitle id="dialog-title">titulo</DialogTitle>
 				<DialogContent>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum consectetur quas
-					in cumque consequuntur nesciunt molestiae ex eligendi sapiente saepe quidem,
-					reprehenderit ut aliquid, neque autem totam alias officia repellat?
-					<Button variant="contained" color="primary" onClick={onAuthSuccess}>
+					<Login isRobot={false} />
+					{/* <Button variant="contained" color="primary" onClick={onAuthSuccess}>
 						auth succeded
-					</Button>
+					</Button> */}
 				</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={toggleDialog} color="default" size="large">
