@@ -66,19 +66,24 @@ const UnlockData = ({ toggleLock, locked, testing }: Props) => {
 
 			<Dialog
 				onClose={toggleDialog}
-				aria-labelledby="dialog-title"
 				open={open}
 				scroll="body"
 				data-testid="test_dialog"
 				maxWidth="md"
 				fullScreen={fullScreen}
 			>
-				<DialogTitle id="dialog-title">{translate("authorize", lng)}</DialogTitle>
+				<DialogTitle>{translate("authorize", lng)}</DialogTitle>
 				<DialogContent>
 					<LoginOptions isRobot={false} onAuthSuccess={onAuthSuccess} endpointAlt />
 				</DialogContent>
 				<DialogActions>
-					<Button autoFocus onClick={toggleDialog} color="default" size="large">
+					<Button
+						autoFocus
+						onClick={toggleDialog}
+						color="default"
+						size="large"
+						data-testid="test_go_back"
+					>
 						{translate("go_back", lng)}
 					</Button>
 				</DialogActions>
