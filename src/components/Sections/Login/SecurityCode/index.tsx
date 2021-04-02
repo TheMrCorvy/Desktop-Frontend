@@ -1,26 +1,23 @@
 import React from "react"
 import { useForm } from "react-hook-form"
 
-import {
-	Box,
-	Grid,
-	Button,
-	OutlinedInput,
-	InputLabel,
-	FormControl,
-	Typography,
-} from "@material-ui/core"
+import { Grid, Button, OutlinedInput, InputLabel, FormControl, Typography } from "@material-ui/core"
 
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
-
-import { login } from "../../../../redux/actions/authTokenActions"
 
 import { translate } from "../../../../lang"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 
 import { ApiResponseLoginT } from "../../../../misc/ajaxManager"
+
+type Props = {
+	onAuthSuccess: (res: ApiResponseLoginT) => void
+	endpoint: string
+	isRobot: boolean
+	testing?: boolean
+}
 
 type FormInputs = {
 	mainEmail: string
@@ -29,10 +26,8 @@ type FormInputs = {
 	securityCode: string
 }
 
-const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolean }) => {
+const SecurityCode = ({ onAuthSuccess, endpoint, isRobot, testing }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
-
-	const dispatch = useDispatch()
 
 	const { register, errors, handleSubmit } = useForm()
 
@@ -58,32 +53,34 @@ const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolea
 
 			responseData = fakeResponse
 		} else {
-			// here goes the api call, for now i'll just copy-paste the same fake response
-			const fakeResponse: ApiResponseLoginT = {
-				token: "fake api authorization token",
-				user_data: user4Testing,
-				user_credentials: credential4Testing,
+			// here goes the api call, for now i'll just leave a fake response
+			let fakeResponse: ApiResponseLoginT
+
+			if (endpoint !== "/login") {
+				fakeResponse = {
+					token: "fake api authorization token",
+					user_data: user4Testing,
+					user_credentials: credential4Testing,
+					isAuthorized: true,
+				}
+			} else {
+				fakeResponse = {
+					token: "fake api authorization token",
+					user_data: user4Testing,
+					user_credentials: credential4Testing,
+				}
 			}
 
 			responseData = fakeResponse
 		}
 
-		localStorage.setItem("user_data", JSON.stringify(responseData.user_data))
-		localStorage.setItem("user_credentials", JSON.stringify(responseData.user_credentials))
-
-		dispatch(login(responseData.token))
+		onAuthSuccess(responseData)
 	}
 
 	return (
-		<Box component="div" data-testid="test_security_code_form">
-			<Grid item xs={12}>
-				<Grid
-					container
-					justify="center"
-					spacing={3}
-					component="form"
-					onSubmit={handleSubmit(onSubmit)}
-				>
+		<Grid item xs={12} data-testid="test_security_code_form">
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<Grid container justify="center" spacing={3}>
 					<Grid item xs={12} sm={6}>
 						<FormControl variant="outlined" fullWidth>
 							<InputLabel>{translate("auth_form_texts", lng, 2)}</InputLabel>
@@ -236,8 +233,8 @@ const SecurityCode = ({ isRobot, testing }: { isRobot: boolean; testing?: boolea
 						</Typography>
 					</Grid>
 				</Grid>
-			</Grid>
-		</Box>
+			</form>
+		</Grid>
 	)
 }
 

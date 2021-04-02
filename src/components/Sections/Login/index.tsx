@@ -105,7 +105,14 @@ const Login = ({ onAuthSuccess, isRobot, testing, endpointAlt }: Props) => {
 					/>
 				)
 			case 3:
-				return <SecurityCode isRobot={isRobot} testing={testing} />
+				return (
+					<SecurityCode
+						isRobot={isRobot}
+						testing={testing}
+						endpoint={endpoint}
+						onAuthSuccess={onAuthSuccess}
+					/>
+				)
 
 			default:
 				return (

@@ -39,8 +39,6 @@ type FormInputs = {
 const EmailCode = ({ onAuthSuccess, endpoint, isRobot, isRecovery, testing }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	// const dispatch = useDispatch()
-
 	const { register, errors, handleSubmit } = useForm()
 
 	const [canSubmit, setCanSubmit] = useState(false)
