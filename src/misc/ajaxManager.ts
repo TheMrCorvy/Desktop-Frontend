@@ -16,6 +16,7 @@ export type ApiResponseLoginT = {
 	token: string
 	user_data: UserT
 	user_credentials: CredentialT[]
+	isAuthorized?: boolean
 }
 
 export type ApiResponseGetCredentialsT = {
