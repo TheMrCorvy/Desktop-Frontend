@@ -72,7 +72,7 @@ const UnlockData = ({ toggleLock, locked }: Props) => {
 				maxWidth="md"
 				fullScreen={fullScreen}
 			>
-				<DialogTitle id="dialog-title">titulo</DialogTitle>
+				<DialogTitle id="dialog-title">{translate("authorize", lng)}</DialogTitle>
 				<DialogContent>
 					<Login isRobot={false} onAuthSuccess={onAuthSuccess} endpointAlt />
 				</DialogContent>

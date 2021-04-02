@@ -225,5 +225,6 @@
 	],
 	"before_unload": [
 		"Si refrescas la página, se cerrará la sesión. ¿Está seguro que quiere cerrar la sesión?"
-	]
+	],
+	"authorize": ["Varifica tu Identidad"]
 }
