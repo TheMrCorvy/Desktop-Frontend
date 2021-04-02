@@ -76,7 +76,14 @@ const Login = ({ onAuthSuccess, isRobot, testing, endpointAlt }: Props) => {
 	const showOptions = (option: number) => {
 		switch (option) {
 			case 0:
-				return <TwoFactorCode isRobot={isRobot} testing={testing} />
+				return (
+					<TwoFactorCode
+						isRobot={isRobot}
+						testing={testing}
+						endpoint={endpoint}
+						onAuthSuccess={onAuthSuccess}
+					/>
+				)
 			case 1:
 				return (
 					<EmailCode
@@ -101,7 +108,14 @@ const Login = ({ onAuthSuccess, isRobot, testing, endpointAlt }: Props) => {
 				return <SecurityCode isRobot={isRobot} testing={testing} />
 
 			default:
-				return <TwoFactorCode isRobot={isRobot} testing={testing} />
+				return (
+					<TwoFactorCode
+						isRobot={isRobot}
+						testing={testing}
+						endpoint={endpoint}
+						onAuthSuccess={onAuthSuccess}
+					/>
+				)
 		}
 	}
 
