@@ -250,6 +250,7 @@ const EmailCode = ({ onAuthSuccess, endpoint, isRobot, isRecovery, testing }: Pr
 								disableElevation
 								onClick={handleSubmit(onSubmit)}
 								disabled={!canSubmit}
+								type="submit"
 							>
 								{translate("navbar_login_btn", lng)}
 							</Button>

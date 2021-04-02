@@ -182,6 +182,7 @@ const TwoFactorCode = ({ onAuthSuccess, endpoint, isRobot, testing }: Props) => 
 								disableElevation
 								onClick={handleSubmit(onSubmit)}
 								disabled={isRobot}
+								type="submit"
 							>
 								{translate("navbar_login_btn", lng)}
 							</Button>

@@ -223,6 +223,7 @@ const SecurityCode = ({ onAuthSuccess, endpoint, isRobot, testing }: Props) => {
 							disableElevation
 							disabled={isRobot}
 							onClick={handleSubmit(onSubmit)}
+							type="submit"
 						>
 							{translate("navbar_login_btn", lng)}
 						</Button>
