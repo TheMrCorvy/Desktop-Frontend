@@ -8,7 +8,7 @@ import TwoFactorCode from "./index"
 it("renders properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
-			<TwoFactorCode isRobot={false} testing={true} />
+			<TwoFactorCode onAuthSuccess={() => {}} endpoint="" isRobot={false} testing={true} />
 		</Provider>
 	)
 
@@ -21,7 +21,12 @@ describe("checking if the user can write properly on the form", () => {
 	it("writes on the email input", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<TwoFactorCode isRobot={false} testing={true} />
+				<TwoFactorCode
+					onAuthSuccess={() => {}}
+					endpoint=""
+					isRobot={false}
+					testing={true}
+				/>
 			</Provider>
 		)
 
@@ -37,7 +42,12 @@ describe("checking if the user can write properly on the form", () => {
 	it("writes on the 2fa code input", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<TwoFactorCode isRobot={false} testing={true} />
+				<TwoFactorCode
+					onAuthSuccess={() => {}}
+					endpoint=""
+					isRobot={false}
+					testing={true}
+				/>
 			</Provider>
 		)
 

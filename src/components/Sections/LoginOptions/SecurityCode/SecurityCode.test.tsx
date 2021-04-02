@@ -8,7 +8,7 @@ import SecurityCode from "./index"
 it("renders properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
-			<SecurityCode isRobot={false} testing={true} />
+			<SecurityCode onAuthSuccess={() => {}} endpoint="" isRobot={false} testing={true} />
 		</Provider>
 	)
 
@@ -21,7 +21,7 @@ describe("checking if the user can write properly on the form", () => {
 	it("writes on the main email input", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<SecurityCode isRobot={false} testing={true} />
+				<SecurityCode onAuthSuccess={() => {}} endpoint="" isRobot={false} testing={true} />
 			</Provider>
 		)
 
@@ -37,7 +37,7 @@ describe("checking if the user can write properly on the form", () => {
 	it("writes on the anti-fishing secret input", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<SecurityCode isRobot={false} testing={true} />
+				<SecurityCode onAuthSuccess={() => {}} endpoint="" isRobot={false} testing={true} />
 			</Provider>
 		)
 

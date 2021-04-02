@@ -28,9 +28,10 @@ import LoginOptions from "../Sections/LoginOptions"
 type Props = {
 	toggleLock: () => void
 	locked: boolean
+	testing?: boolean
 }
 
-const UnlockData = ({ toggleLock, locked }: Props) => {
+const UnlockData = ({ toggleLock, locked, testing }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)
@@ -38,7 +39,7 @@ const UnlockData = ({ toggleLock, locked }: Props) => {
 	const fullScreen = useMediaQuery(useTheme().breakpoints.down("xs"))
 
 	const toggleDialog = () => {
-		if (locked) {
+		if (locked && !testing) {
 			setOpen(!open)
 		} else {
 			toggleLock()

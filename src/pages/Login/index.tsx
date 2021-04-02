@@ -1,6 +1,9 @@
 import React, { FC, useState } from "react"
 import { Link } from "react-router-dom"
 
+import ReCAPTCHA from "react-google-recaptcha"
+
+/************************************************************************************ mui related */
 import {
 	Container,
 	Grid,
@@ -13,18 +16,19 @@ import {
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 
+/************************************************************************************ redux related */
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { login } from "../../redux/actions/authTokenActions"
 import { translate } from "../../lang"
 
-import ReCAPTCHA from "react-google-recaptcha"
-
+/************************************************************************************ manage info */
 import { ApiResponseLoginT } from "../../misc/ajaxManager"
 
 import { initiateDB } from "../../misc/indexedDB"
 
+/************************************************************************************ my components */
 import Snackbar from "../../components/Snackbar"
 import LoginOptions from "../../components/Sections/LoginOptions"
 
@@ -89,7 +93,7 @@ const Login: FC = () => {
 
 	const classes = useStyles()
 
-	const cardSubtitle: string = REACT_APP_ENV_LOCAL
+	const cardSubtitle = REACT_APP_ENV_LOCAL
 		? "You don't need to check the 'im not a robot' to login, since we're in local env"
 		: translate("login_subtitle", lng)
 

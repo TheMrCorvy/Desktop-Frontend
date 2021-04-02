@@ -70,7 +70,9 @@ const AccessManagement = ({ testing }: { testing?: boolean }) => {
 				<Card className={classes.borderRadius} elevation={2}>
 					<CardHeader
 						title={translate("access_management", lng, 0)}
-						action={<UnlockData toggleLock={callApi} locked={locked} />}
+						action={
+							<UnlockData toggleLock={callApi} locked={locked} testing={testing} />
+						}
 					/>
 					<CardContent>
 						<Grid container justify="space-between" spacing={4}>

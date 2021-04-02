@@ -8,7 +8,13 @@ import EmailCode from "./index"
 it("renders main email code form properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
-			<EmailCode isRobot={false} testing={true} isRecovery={false} />
+			<EmailCode
+				onAuthSuccess={() => {}}
+				endpoint=""
+				isRobot={false}
+				testing={true}
+				isRecovery={false}
+			/>
 		</Provider>
 	)
 
@@ -20,7 +26,13 @@ it("renders main email code form properly", () => {
 it("renders recovery email code form properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
-			<EmailCode isRobot={false} testing={true} isRecovery={true} />
+			<EmailCode
+				onAuthSuccess={() => {}}
+				endpoint=""
+				isRobot={false}
+				testing={true}
+				isRecovery={true}
+			/>
 		</Provider>
 	)
 
@@ -33,7 +45,13 @@ describe("checking if the user can write properly on the form", () => {
 	it("writes on the email to send code input", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<EmailCode isRecovery={false} isRobot={false} testing={true} />
+				<EmailCode
+					onAuthSuccess={() => {}}
+					endpoint=""
+					isRecovery={false}
+					isRobot={false}
+					testing={true}
+				/>
 			</Provider>
 		)
 
@@ -49,7 +67,13 @@ describe("checking if the user can write properly on the form", () => {
 	it("writes on the code input", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<EmailCode isRecovery={false} isRobot={false} testing={true} />
+				<EmailCode
+					onAuthSuccess={() => {}}
+					endpoint=""
+					isRecovery={false}
+					isRobot={false}
+					testing={true}
+				/>
 			</Provider>
 		)
 
@@ -67,7 +91,13 @@ describe("checking if the user can write properly on the recovery email form", (
 	it("writes on the main email input", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<EmailCode isRecovery={true} isRobot={false} testing={true} />
+				<EmailCode
+					onAuthSuccess={() => {}}
+					endpoint=""
+					isRecovery={true}
+					isRobot={false}
+					testing={true}
+				/>
 			</Provider>
 		)
 
