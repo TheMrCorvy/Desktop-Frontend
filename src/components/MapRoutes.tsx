@@ -17,7 +17,7 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 
 	const evaluateRoutes = (r: RouteType, i: number) => {
 		if (err !== null) {
-			return <Route component={Error500} />
+			return <Route component={Error500} key={i} />
 		}
 
 		if (token !== null && r.guestOnly) {
