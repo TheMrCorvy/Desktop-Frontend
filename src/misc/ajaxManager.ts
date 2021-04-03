@@ -45,3 +45,25 @@ export const getCredentialsFromApi = (id: number, token: string | null) => {
 
 	return apiResponse
 }
+
+export const findCredentialFromApi = (id: number, token: string | null) => {
+	const { REACT_APP_ENV_LOCAL } = process.env
+
+	let apiResponse: {
+		credential: CredentialT
+	}
+
+	if (REACT_APP_ENV_LOCAL) {
+		apiResponse = {
+			credential: credential4Testing[0],
+		}
+	} else {
+		//i'm going to leave this until i'll start making the api
+		apiResponse = {
+			credential: credential4Testing[0],
+		}
+		console.log("getting the fresh data, using the token: " + token)
+	}
+
+	return apiResponse
+}
