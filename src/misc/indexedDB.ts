@@ -87,3 +87,13 @@ export const putCredentials = async (credentials: CredentialT[]) => {
 		return { failed: true, error }
 	}
 }
+
+export const findCredential = async (credentialId: number) => {
+	try {
+		const db = new PasuSewaDatabase()
+
+		return await db.credentials.get(credentialId)
+	} catch (error) {
+		return { failed: true, error }
+	}
+}

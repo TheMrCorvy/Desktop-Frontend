@@ -29,10 +29,12 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 		}
 
 		if (r.requiresAuth && token !== null) {
-			return <Route exact path={r.path} component={r.component} key={i} />
+			return (
+				<Route exact path={r.path} render={(props) => <r.component {...props} />} key={i} />
+			)
 		}
 
-		return <Route exact path={r.path} component={r.component} key={i} />
+		return <Route exact path={r.path} render={(props) => <r.component {...props} />} key={i} />
 	}
 
 	return (

@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 import { Grid, Card, CardActionArea, Avatar, CardContent, Typography } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
@@ -59,6 +60,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		textPrimary: {
 			color: theme.palette.info.main,
 		},
+		link: {
+			textDecoration: "none",
+		},
 	})
 )
 
@@ -78,52 +82,59 @@ const CredentialCard = ({ credentials, availableSlots }: Props) => {
 					key={credential.id}
 					data-testid={"test_credential_card_" + credential.id}
 				>
-					<Card className={classes.card}>
-						<CardActionArea className={classes.cardAction}>
-							<CardContent>
-								<Grid container spacing={2}>
-									<Grid item xs={2} className={classes.addCredential}>
-										{credential.logo_url ? (
-											<Avatar
-												aria-label="recipe"
-												src={credential.logo_url}
-												alt={credential.company_name}
-											/>
-										) : (
-											<Avatar aria-label="recipe" className={classes.avatar}>
-												{credential.company_name.charAt(0).toUpperCase()}
-											</Avatar>
-										)}
-									</Grid>
-									<Grid item xs={8}>
-										<Typography
-											variant="subtitle1"
-											paragraph
-											gutterBottom
-											className={classes.lineHeight}
-										>
-											{credential.company_name}
-										</Typography>
-										{credential.recently_seen && (
+					<Link to={"/view-credential/" + credential.id} className={classes.link}>
+						<Card className={classes.card}>
+							<CardActionArea className={classes.cardAction}>
+								<CardContent>
+									<Grid container spacing={2}>
+										<Grid item xs={2} className={classes.addCredential}>
+											{credential.logo_url ? (
+												<Avatar
+													aria-label="recipe"
+													src={credential.logo_url}
+													alt={credential.company_name}
+												/>
+											) : (
+												<Avatar
+													aria-label="recipe"
+													className={classes.avatar}
+												>
+													{credential.company_name
+														.charAt(0)
+														.toUpperCase()}
+												</Avatar>
+											)}
+										</Grid>
+										<Grid item xs={8}>
 											<Typography
-												variant="body1"
-												className={classes.textColor}
+												variant="subtitle1"
+												paragraph
+												gutterBottom
+												className={classes.lineHeight}
 											>
-												{translate("recently_seen", lng)}
+												{credential.company_name}
 											</Typography>
-										)}
+											{credential.recently_seen && (
+												<Typography
+													variant="body1"
+													className={classes.textColor}
+												>
+													{translate("recently_seen", lng)}
+												</Typography>
+											)}
+										</Grid>
+										<Grid item xs={2} className={classes.addCredential}>
+											<FontAwesomeIcon
+												className={classes.textPrimary}
+												icon={["fas", "chevron-right"]}
+												size="2x"
+											/>
+										</Grid>
 									</Grid>
-									<Grid item xs={2} className={classes.addCredential}>
-										<FontAwesomeIcon
-											className={classes.textPrimary}
-											icon={["fas", "chevron-right"]}
-											size="2x"
-										/>
-									</Grid>
-								</Grid>
-							</CardContent>
-						</CardActionArea>
-					</Card>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Link>
 				</Grid>
 			))}
 			{[...Array(availableSlots)].map((value: undefined, index: number) => (
