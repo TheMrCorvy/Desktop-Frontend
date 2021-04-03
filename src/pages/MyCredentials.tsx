@@ -85,7 +85,7 @@ const MyCredentials: FC = () => {
 
 				setSnackbarMessage(translate("error_messages", lng, 0))
 
-				console.log(data.error)
+				console.error(data.error)
 			}
 		})
 	}, [])
@@ -122,9 +122,9 @@ const MyCredentials: FC = () => {
 			token
 		)
 
-		localUser.availableSlots = newCredentials.slots_available
+		const user = { ...localUser, availableSlots: newCredentials.slots_available }
 
-		initiateDB(localUser, newCredentials.user_credentials).then((result: any) => {
+		initiateDB(user, newCredentials.user_credentials).then((result: any) => {
 			if (result.failed) {
 				fatalError(result)
 			}
@@ -140,7 +140,7 @@ const MyCredentials: FC = () => {
 
 		setSnackbarMessage(translate("error_messages", lng, 2))
 
-		console.log({ error })
+		console.error({ error })
 
 		dispatch(showError(translate("error_messages", lng, 0)))
 	}
