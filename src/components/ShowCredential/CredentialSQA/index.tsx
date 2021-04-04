@@ -9,6 +9,7 @@ import {
 	Button,
 	Divider,
 	TextField,
+	Grid,
 } from "@material-ui/core"
 
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
@@ -17,11 +18,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 type Props = {
 	locked: boolean
-	label: string
-	opening: string
-	ending: string
-	char_count: number | null
-	body?: string
+	question?: string
+	answer?: string
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			color: theme.palette.text.secondary,
 		},
 		column: {
-			flexBasis: "40%",
+			flexBasis: "100%",
 		},
 		btn: {
 			color: theme.palette.error.main,
@@ -46,48 +44,69 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CredentialProperties = ({ locked, label, opening, char_count, ending, body }: Props) => {
+const CredentialSQA = ({ locked, question, answer }: Props) => {
 	const classes = useStyles()
 
-	const [showProp, setShowProp] = useState("")
+	const [showQA, setShowQA] = useState({
+		q: "",
+		a: "",
+	})
 
 	useEffect(() => {
-		if (!locked && body) {
-			setShowProp(body)
+		if (!locked && question && answer) {
+			setShowQA({
+				q: question,
+				a: answer,
+			})
 		} else {
-			const charCount = char_count ? char_count + 1 : 0
-
-			const asterisks = new Array(charCount).join("•")
-
-			const encryptedEmail = opening + asterisks + ending
-
-			setShowProp(encryptedEmail)
+			setShowQA({
+				q: "••••••••••",
+				a: "••••••••••",
+			})
 		}
 	}, [locked])
 
 	const handleChange = (event: any) => {
-		setShowProp(event.target.value)
+		setShowQA({
+			...showQA,
+			[event.target.name]: event.target.value,
+		})
 	}
 
 	return (
 		<Accordion defaultExpanded style={{ borderRadius: 8 }}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 				<div className={classes.column}>
-					<Typography className={classes.heading}>{label}</Typography>
-				</div>
-				<div className={classes.column}>
-					<Typography className={classes.secondaryHeading}>See {label}</Typography>
+					<Typography className={classes.heading}>
+						Security Question and Answer
+					</Typography>
 				</div>
 			</AccordionSummary>
 			<AccordionDetails>
-				<TextField
-					label={label}
-					variant="outlined"
-					disabled={locked}
-					value={showProp}
-					onChange={handleChange}
-					fullWidth
-				/>
+				<Grid container spacing={3}>
+					<Grid item xs={12}>
+						<TextField
+							label="Security Question"
+							variant="outlined"
+							disabled={locked}
+							value={showQA.q}
+							onChange={handleChange}
+							name="q"
+							fullWidth
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							label="Security Answer"
+							variant="outlined"
+							disabled={locked}
+							value={showQA.a}
+							onChange={handleChange}
+							name="a"
+							fullWidth
+						/>
+					</Grid>
+				</Grid>
 			</AccordionDetails>
 			<Divider />
 			{!locked && (
@@ -101,4 +120,4 @@ const CredentialProperties = ({ locked, label, opening, char_count, ending, body
 	)
 }
 
-export default CredentialProperties
+export default CredentialSQA

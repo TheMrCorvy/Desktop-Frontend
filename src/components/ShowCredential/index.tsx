@@ -7,6 +7,7 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
 import UnlockData from "../UnlockData"
 import CredentialProperties from "./CredentialProperties"
+import CredentialSQA from "./CredentialSQA"
 
 type Props = {
 	credential: CredentialT
@@ -111,6 +112,23 @@ const ShowCredential = ({ credential }: Props) => {
 						char_count={5}
 						ending=""
 						body={credential.security_codes.unique_security_code}
+					/>
+				</Grid>
+			)}
+			{credential.security_question_answer && (
+				<Grid item xs={12} md={6}>
+					<CredentialSQA
+						locked={locked}
+						question={
+							!locked
+								? credential.security_question_answer.security_question
+								: undefined
+						}
+						answer={
+							!locked
+								? credential.security_question_answer.security_answer
+								: undefined
+						}
 					/>
 				</Grid>
 			)}
