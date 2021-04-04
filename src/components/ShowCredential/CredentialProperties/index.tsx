@@ -16,13 +16,13 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 type Props = {
-	email: {
-		opening: string
-		char_count: number
-		ending: string
-		email?: string
-	}
 	locked: boolean
+	label: string
+	subTitle: string
+	opening: string
+	char_count: number
+	ending: string
+	body?: string
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -47,18 +47,26 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const EmailCredential = ({ email, locked }: Props) => {
+const CredentialProperties = ({
+	locked,
+	label,
+	subTitle,
+	opening,
+	char_count,
+	ending,
+	body,
+}: Props) => {
 	const classes = useStyles()
 
 	const [showEmail, setShowEmail] = useState("")
 
 	useEffect(() => {
-		if (!locked && email.email) {
-			setShowEmail(email.email)
+		if (!locked && body) {
+			setShowEmail(body)
 		} else {
-			const asterisks = new Array(email.char_count).join("•")
+			const asterisks = new Array(char_count).join("•")
 
-			const encryptedEmail = email.opening + asterisks + email.ending
+			const encryptedEmail = opening + asterisks + ending
 
 			setShowEmail(encryptedEmail)
 		}
@@ -75,14 +83,12 @@ const EmailCredential = ({ email, locked }: Props) => {
 					<Typography className={classes.heading}>Email</Typography>
 				</div>
 				<div className={classes.column}>
-					<Typography className={classes.secondaryHeading}>
-						See the email for this credential
-					</Typography>
+					<Typography className={classes.secondaryHeading}>{subTitle}</Typography>
 				</div>
 			</AccordionSummary>
 			<AccordionDetails>
 				<TextField
-					label="Email"
+					label={label}
 					variant="outlined"
 					disabled={locked}
 					value={showEmail}
@@ -102,4 +108,4 @@ const EmailCredential = ({ email, locked }: Props) => {
 	)
 }
 
-export default EmailCredential
+export default CredentialProperties

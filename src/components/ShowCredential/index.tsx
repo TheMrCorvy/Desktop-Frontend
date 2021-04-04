@@ -6,7 +6,7 @@ import { Grid, Typography } from "@material-ui/core"
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
 import UnlockData from "../UnlockData"
-import EmailCredential from "./EmailCredential"
+import CredentialProperties from "./CredentialProperties"
 
 type Props = {
 	credential: CredentialT
@@ -43,7 +43,17 @@ const ShowCredential = ({ credential }: Props) => {
 				<UnlockData toggleLock={() => setLocked(!locked)} locked={locked} />
 			</Grid>
 			<Grid item xs={12} md={6}>
-				{credential.email && <EmailCredential locked={locked} email={credential.email} />}
+				{credential.email && (
+					<CredentialProperties
+						locked={locked}
+						label="Email"
+						subTitle="Show Email"
+						opening={credential.email.opening}
+						char_count={credential.email.char_count}
+						ending={credential.email.ending}
+						body={credential.email.email}
+					/>
+				)}
 			</Grid>
 		</>
 	)
