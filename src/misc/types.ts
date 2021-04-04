@@ -35,8 +35,8 @@ export type CredentialT = {
 	}
 	security_codes?: {
 		unique_security_code?: string
-		multiple_security_codes?: string[]
-		crypto_currency_access_code?: string[]
+		multiple_security_codes?: string
+		crypto_currency_access_code?: string
 	}
 	created_at: string
 	updated_at: string
