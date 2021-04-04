@@ -7,6 +7,7 @@ export type CredentialT = {
 	description?: string
 	last_seen: string
 	recently_seen: boolean | string
+	user_name: string | null
 	email?: {
 		opening: string
 		char_count: number

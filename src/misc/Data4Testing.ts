@@ -57,6 +57,7 @@ export const credential4Testing: CredentialT[] = [
 		description: "roses are red, violets are blue, lorem ipsum this is a description",
 		last_seen: "2021-02-15 17:32:23",
 		recently_seen: "",
+		user_name: "example name",
 		email: {
 			opening: "fa",
 			char_count: 7,
@@ -140,6 +141,7 @@ export const credential4Testing: CredentialT[] = [
 		description: "I know the last description didn't rhyme",
 		last_seen: "2021-02-15 17:32:23",
 		recently_seen: true,
+		user_name: null,
 		email: {
 			opening: "fa",
 			char_count: 7,
@@ -223,6 +225,7 @@ export const credential4Testing: CredentialT[] = [
 		description: "",
 		last_seen: "2021-02-15 17:32:23",
 		recently_seen: true,
+		user_name: "example name 2",
 		email: {
 			opening: "fa",
 			char_count: 7,
