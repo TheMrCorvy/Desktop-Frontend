@@ -54,10 +54,23 @@ const ShowCredential = ({ credential }: Props) => {
 
 			setMultipleCodes([...Array(length)].map((value: undefined) => "•••••"))
 		}
-	}, [credential, locked])
 
-	// console.log(multipleCodes)
-	// console.log(credential)
+		if (!locked && credential.security_codes?.crypto_currency_access_code) {
+			const words = credential.security_codes?.crypto_currency_access_code
+
+			if (words) {
+				const arr = words.match(/\S+/g)
+
+				setCryptoAccess(arr)
+			}
+		}
+
+		if (locked && credential.security_codes?.crypto_currency_access_code) {
+			const length = credential.security_codes?.crypto_code_length
+
+			setCryptoAccess([...Array(length)].map((value: undefined) => "•••••"))
+		}
+	}, [credential, locked])
 
 	return (
 		<>
@@ -162,6 +175,16 @@ const ShowCredential = ({ credential }: Props) => {
 						body={multipleCodes}
 						locked={locked}
 						label="Multiple Security Codes"
+					/>
+				</Grid>
+			)}
+			{cryptoAccess && (
+				<Grid item xs={12} md={6}>
+					<CredentialCodes
+						body={cryptoAccess}
+						locked={locked}
+						label="Crypto Currency Access Codes"
+						isCrypto
 					/>
 				</Grid>
 			)}
