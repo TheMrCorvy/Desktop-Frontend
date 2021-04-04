@@ -58,6 +58,7 @@ export const credential4Testing: CredentialT[] = [
 		last_seen: "2021-02-15 17:32:23",
 		recently_seen: "",
 		user_name: "example name",
+		char_count: 12,
 		email: {
 			opening: "fa",
 			char_count: 7,
@@ -142,6 +143,7 @@ export const credential4Testing: CredentialT[] = [
 		last_seen: "2021-02-15 17:32:23",
 		recently_seen: true,
 		user_name: null,
+		char_count: null,
 		email: {
 			opening: "fa",
 			char_count: 7,
@@ -226,6 +228,7 @@ export const credential4Testing: CredentialT[] = [
 		last_seen: "2021-02-15 17:32:23",
 		recently_seen: true,
 		user_name: "example name 2",
+		char_count: 14,
 		email: {
 			opening: "fa",
 			char_count: 7,

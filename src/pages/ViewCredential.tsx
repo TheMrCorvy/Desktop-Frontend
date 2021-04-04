@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		container: {
 			background: theme.palette.type === "dark" ? "#333" : "#f2f2f2",
 			minHeight: "100vh",
-			paddingTop: "7rem",
+			paddingTop: "5.5rem",
+			paddingBottom: "5.5rem",
 
 			[theme.breakpoints.down("xs")]: {
 				paddingTop: "1rem",
@@ -68,6 +69,8 @@ const ViewCredential: FC = (props: any) => {
 		logo_url: null,
 		last_seen: "",
 		recently_seen: "",
+		user_name: null,
+		char_count: null,
 		created_at: "",
 		updated_at: "",
 	})

@@ -18,10 +18,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 type Props = {
 	locked: boolean
 	label: string
-	subTitle: string
 	opening: string
-	char_count: number
 	ending: string
+	char_count: number | null
 	body?: string
 }
 
@@ -47,43 +46,37 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CredentialProperties = ({
-	locked,
-	label,
-	subTitle,
-	opening,
-	char_count,
-	ending,
-	body,
-}: Props) => {
+const CredentialProperties = ({ locked, label, opening, char_count, ending, body }: Props) => {
 	const classes = useStyles()
 
-	const [showEmail, setShowEmail] = useState("")
+	const [showProp, setShowProp] = useState("")
 
 	useEffect(() => {
 		if (!locked && body) {
-			setShowEmail(body)
+			setShowProp(body)
 		} else {
-			const asterisks = new Array(char_count).join("•")
+			const charCount = char_count ? char_count + 1 : 0
+
+			const asterisks = new Array(charCount).join("•")
 
 			const encryptedEmail = opening + asterisks + ending
 
-			setShowEmail(encryptedEmail)
+			setShowProp(encryptedEmail)
 		}
 	})
 
 	const handleChange = (event: any) => {
-		setShowEmail(event.target.value)
+		setShowProp(event.target.value)
 	}
 
 	return (
 		<Accordion defaultExpanded style={{ borderRadius: 8 }}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 				<div className={classes.column}>
-					<Typography className={classes.heading}>Email</Typography>
+					<Typography className={classes.heading}>{label}</Typography>
 				</div>
 				<div className={classes.column}>
-					<Typography className={classes.secondaryHeading}>{subTitle}</Typography>
+					<Typography className={classes.secondaryHeading}>See {label}</Typography>
 				</div>
 			</AccordionSummary>
 			<AccordionDetails>
@@ -91,7 +84,7 @@ const CredentialProperties = ({
 					label={label}
 					variant="outlined"
 					disabled={locked}
-					value={showEmail}
+					value={showProp}
 					onChange={handleChange}
 					fullWidth
 				/>
