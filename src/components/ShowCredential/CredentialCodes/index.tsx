@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			color: theme.palette.text.secondary,
 		},
 		column: {
-			flexBasis: "40%",
+			flexBasis: "100%",
 		},
 		btn: {
 			color: theme.palette.error.main,
@@ -50,14 +50,10 @@ const useStyles = makeStyles((theme: Theme) =>
 const CredentialCodes = ({ locked, label, body }: Props) => {
 	const classes = useStyles()
 
-	const [showCodes, setShowCodes] = useState<string[]>([""])
+	const [showCodes, setShowCodes] = useState<string[]>(body)
 
 	useEffect(() => {
-		if (!locked && body) {
-			setShowCodes(body)
-		} else {
-			setShowCodes(["•••••"])
-		}
+		setShowCodes(body)
 	}, [locked])
 
 	const handleChange = (event: any) => {
@@ -70,20 +66,19 @@ const CredentialCodes = ({ locked, label, body }: Props) => {
 				<div className={classes.column}>
 					<Typography className={classes.heading}>{label}</Typography>
 				</div>
-				<div className={classes.column}>
-					<Typography className={classes.secondaryHeading}>See {label}</Typography>
-				</div>
 			</AccordionSummary>
 			<AccordionDetails>
 				<Grid container spacing={4}>
-					{showCodes.map((code) => (
-						<Chip
-							icon={locked ? <LockIcon /> : <LockOpenIcon />}
-							key={code}
-							label={code}
-							color="primary"
-							disabled={locked}
-						/>
+					{showCodes.map((code: string, index: number) => (
+						<Grid item key={index}>
+							<Chip
+								icon={locked ? <LockIcon /> : <LockOpenIcon />}
+								key={code}
+								label={code}
+								color="primary"
+								disabled={locked}
+							/>
+						</Grid>
 					))}
 				</Grid>
 			</AccordionDetails>

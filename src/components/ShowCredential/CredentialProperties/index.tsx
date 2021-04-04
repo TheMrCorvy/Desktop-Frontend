@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			color: theme.palette.text.secondary,
 		},
 		column: {
-			flexBasis: "40%",
+			flexBasis: "100%",
 		},
 		btn: {
 			color: theme.palette.error.main,
@@ -74,9 +74,6 @@ const CredentialProperties = ({ locked, label, opening, char_count, ending, body
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 				<div className={classes.column}>
 					<Typography className={classes.heading}>{label}</Typography>
-				</div>
-				<div className={classes.column}>
-					<Typography className={classes.secondaryHeading}>See {label}</Typography>
 				</div>
 			</AccordionSummary>
 			<AccordionDetails>

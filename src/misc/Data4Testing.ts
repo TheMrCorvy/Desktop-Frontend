@@ -86,9 +86,11 @@ export const credential4Testing: CredentialT[] = [
 		security_codes: {
 			unique_security_code: "D7WK29JDU8",
 			multiple_security_codes:
-				"D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8",
+				" D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 ",
+			multiple_code_length: 11,
 			crypto_currency_access_code:
 				"Lorem ipsum dolor sit amet consectetur adipisicing elit Eaque odio accusamus cumque nemo veniam? Perferendis consequatur incidunt fugiat delectus reiciendis atque Ipsam excepturi molestiae quasi ratione id veniam pariatur laborum",
+			crypto_code_length: 30,
 		},
 		created_at: "2021-02-15 17:32:23",
 		updated_at: "2021-02-15 17:32:23",
@@ -130,10 +132,11 @@ export const credential4Testing: CredentialT[] = [
 		},
 		security_codes: {
 			unique_security_code: "D7WK29JDU8",
-			multiple_security_codes:
-				"D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8",
+			multiple_security_codes: null,
+			multiple_code_length: 0,
 			crypto_currency_access_code:
 				"Lorem ipsum dolor sit amet consectetur adipisicing elit Eaque odio accusamus cumque nemo veniam? Perferendis consequatur incidunt fugiat delectus reiciendis atque Ipsam excepturi molestiae quasi ratione id veniam pariatur laborum",
+			crypto_code_length: 30,
 		},
 		created_at: "2021-02-15 17:32:23",
 		updated_at: "2021-02-15 17:32:23",
@@ -174,11 +177,13 @@ export const credential4Testing: CredentialT[] = [
 			security_answer: "42",
 		},
 		security_codes: {
-			unique_security_code: "D7WK29JDU8",
+			unique_security_code: null,
 			multiple_security_codes:
-				"D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8",
+				" D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 ",
+			multiple_code_length: 11,
 			crypto_currency_access_code:
 				"Lorem ipsum dolor sit amet consectetur adipisicing elit Eaque odio accusamus cumque nemo veniam? Perferendis consequatur incidunt fugiat delectus reiciendis atque Ipsam excepturi molestiae quasi ratione id veniam pariatur laborum",
+			crypto_code_length: 30,
 		},
 		created_at: "2021-02-15 17:32:23",
 		updated_at: "2021-02-15 17:32:23",

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { CredentialT } from "../../misc/types"
 
 import { Grid, Typography } from "@material-ui/core"
@@ -33,8 +33,31 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ShowCredential = ({ credential }: Props) => {
 	const [locked, setLocked] = useState(true)
+	const [multipleCodes, setMultipleCodes] = useState<string[] | null>(null)
+	const [cryptoAccess, setCryptoAccess] = useState<string[] | null>(null)
 
 	const classes = useStyles()
+
+	useEffect(() => {
+		if (!locked && credential.security_codes?.multiple_security_codes) {
+			const codes = credential.security_codes?.multiple_security_codes
+
+			if (codes) {
+				const arr = codes.match(/\S+/g)
+
+				setMultipleCodes(arr)
+			}
+		}
+
+		if (locked && credential.security_codes?.multiple_security_codes) {
+			const length = credential.security_codes?.multiple_code_length
+
+			setMultipleCodes([...Array(length)].map((value: undefined) => "•••••"))
+		}
+	}, [credential, locked])
+
+	// console.log(multipleCodes)
+	// console.log(credential)
 
 	return (
 		<>
@@ -133,12 +156,12 @@ const ShowCredential = ({ credential }: Props) => {
 					/>
 				</Grid>
 			)}
-			{credential.security_codes?.multiple_security_codes && (
+			{multipleCodes && (
 				<Grid item xs={12} md={6}>
 					<CredentialCodes
-						label="Multiple Securiti Codes"
+						body={multipleCodes}
 						locked={locked}
-						body={credential.security_codes?.multiple_security_codes}
+						label="Multiple Security Codes"
 					/>
 				</Grid>
 			)}
