@@ -75,7 +75,7 @@ export const credential4Testing: CredentialT[] = [
 		},
 		phone_number: {
 			opening: "+54",
-			char_count: 6,
+			char_count: 7,
 			ending: "31",
 			phone_number: "+54-011-5555-5531",
 		},
@@ -122,7 +122,7 @@ export const credential4Testing: CredentialT[] = [
 		},
 		phone_number: {
 			opening: "+54",
-			char_count: 6,
+			char_count: 7,
 			ending: "31",
 			phone_number: "+54-011-5555-5531",
 		},
@@ -168,7 +168,7 @@ export const credential4Testing: CredentialT[] = [
 		},
 		phone_number: {
 			opening: "+54",
-			char_count: 6,
+			char_count: 7,
 			ending: "31",
 			phone_number: "+54-011-5555-5531",
 		},
