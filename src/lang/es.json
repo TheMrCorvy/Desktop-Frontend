@@ -230,5 +230,6 @@
 	],
 	"authorize": ["Varifica tu Identidad"],
 	"credential_info": ["Creado", "Actualizado", "Visto por Última Vez"],
-	"info_is_visible": ["Mostrar", "Ocultar"]
+	"info_is_visible": ["Mostrar", "Ocultar"],
+	"actions": ["Copia", "Eliminar"]
 }

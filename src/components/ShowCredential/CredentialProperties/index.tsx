@@ -15,8 +15,14 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../../redux/store"
+
+import { translate } from "../../../lang"
+
 type Props = {
 	locked: boolean
+	visible: boolean
 	label: string
 	opening: string
 	ending: string
@@ -46,13 +52,23 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CredentialProperties = ({ locked, label, opening, char_count, ending, body }: Props) => {
+const CredentialProperties = ({
+	locked,
+	visible,
+	label,
+	opening,
+	char_count,
+	ending,
+	body,
+}: Props) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const classes = useStyles()
 
 	const [showProp, setShowProp] = useState("")
 
 	useEffect(() => {
-		if (!locked && body) {
+		if ((!locked && body) || (visible && body)) {
 			setShowProp(body)
 		} else {
 			const charCount = char_count ? char_count + 1 : 0
@@ -87,13 +103,20 @@ const CredentialProperties = ({ locked, label, opening, char_count, ending, body
 				/>
 			</AccordionDetails>
 			<Divider />
-			{!locked && (
-				<AccordionActions>
-					<Button size="small" className={classes.btn}>
-						Remove
-					</Button>
-				</AccordionActions>
-			)}
+			{!locked ||
+				(visible && (
+					<AccordionActions>
+						{visible && (
+							<Button color="secondary">{translate("actions", lng, 0)}</Button>
+						)}
+
+						{!locked && (
+							<Button size="small" className={classes.btn}>
+								{translate("actions", lng, 1)}
+							</Button>
+						)}
+					</AccordionActions>
+				))}
 		</Accordion>
 	)
 }

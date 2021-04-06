@@ -218,5 +218,6 @@
 	],
 	"authorize": ["Verify your Identity"],
 	"credential_info": ["Created At", "Updated At", "Last Seen"],
-	"info_is_visible": ["Show", "Hide"]
+	"info_is_visible": ["Show", "Hide"],
+	"actions": ["Copy", "Remove"]
 }
