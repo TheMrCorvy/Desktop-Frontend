@@ -5,7 +5,6 @@ import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
-	Divider,
 	Grid,
 	Chip,
 	useMediaQuery,
@@ -86,7 +85,6 @@ const CredentialCodes = ({ locked, visible, label, body, isCrypto }: Props) => {
 					))}
 				</Grid>
 			</AccordionDetails>
-			<Divider />
 			<CardFooter locked={locked} visible={visible} />
 		</Accordion>
 	)

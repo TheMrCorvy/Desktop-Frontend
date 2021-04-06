@@ -5,7 +5,6 @@ import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
-	Divider,
 	TextField,
 	Grid,
 } from "@material-ui/core"
@@ -115,7 +114,6 @@ const CredentialSQA = ({ locked, visible, question, answer }: Props) => {
 					</Grid>
 				</Grid>
 			</AccordionDetails>
-			<Divider />
 			<CardFooter locked={locked} visible={visible} />
 		</Accordion>
 	)

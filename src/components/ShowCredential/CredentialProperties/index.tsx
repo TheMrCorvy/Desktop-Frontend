@@ -5,7 +5,6 @@ import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
-	Divider,
 	TextField,
 } from "@material-ui/core"
 
@@ -68,7 +67,7 @@ const CredentialProperties = ({
 
 			setShowProp(encryptedEmail)
 		}
-	}, [locked])
+	}, [locked, visible])
 
 	const handleChange = (event: any) => {
 		setShowProp(event.target.value)
@@ -91,7 +90,6 @@ const CredentialProperties = ({
 					fullWidth
 				/>
 			</AccordionDetails>
-			<Divider />
 			<CardFooter locked={locked} visible={visible} />
 		</Accordion>
 	)

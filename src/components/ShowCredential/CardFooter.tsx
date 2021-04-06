@@ -1,6 +1,6 @@
 import React from "react"
 
-import { AccordionActions, Button } from "@material-ui/core"
+import { AccordionActions, Button, Divider } from "@material-ui/core"
 
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
@@ -24,15 +24,18 @@ const CardFooter = ({ locked, visible }: { locked: boolean; visible: boolean }) 
 
 	if (!locked || visible) {
 		return (
-			<AccordionActions>
-				{visible && <Button color="secondary">{translate("actions", lng, 0)}</Button>}
+			<>
+				<Divider />
+				<AccordionActions>
+					{visible && <Button color="secondary">{translate("actions", lng, 0)}</Button>}
 
-				{!locked && (
-					<Button size="small" className={classes.btn}>
-						{translate("actions", lng, 1)}
-					</Button>
-				)}
-			</AccordionActions>
+					{!locked && (
+						<Button size="small" className={classes.btn}>
+							{translate("actions", lng, 1)}
+						</Button>
+					)}
+				</AccordionActions>
+			</>
 		)
 	} else {
 		return null
