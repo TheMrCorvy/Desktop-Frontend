@@ -1,6 +1,6 @@
 import React from "react"
 
-import { IconButton, Tooltip } from "@material-ui/core"
+import { Fab, Tooltip } from "@material-ui/core"
 
 import VisibilityIcon from "@material-ui/icons/Visibility"
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff"
@@ -21,9 +21,15 @@ const DisplayData = ({ toggleDisplay, visible, testing }: Props): JSX.Element =>
 
 	return (
 		<Tooltip title="titulo" placement="right">
-			<IconButton color="primary" onClick={toggleDisplay} data-testid="test_toggle_display">
+			<Fab
+				color="secondary"
+				onClick={toggleDisplay}
+				data-testid="test_toggle_display"
+				size="small"
+				style={{ boxShadow: "none" }}
+			>
 				{visible ? <VisibilityOffIcon /> : <VisibilityIcon />}
-			</IconButton>
+			</Fab>
 		</Tooltip>
 	)
 }

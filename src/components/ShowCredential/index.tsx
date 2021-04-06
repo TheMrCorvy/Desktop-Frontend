@@ -1,193 +1,75 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { CredentialT } from "../../misc/types"
 
 import { Grid, Typography } from "@material-ui/core"
 
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles"
 
 import UnlockData from "../UnlockData"
-import CredentialProperties from "./CredentialProperties"
-import CredentialSQA from "./CredentialSQA"
-import CredentialCodes from "./CredentialCodes"
+import DisplayData from "../DisplayData"
+import GoBackBtn from "../GoBackBtn"
+import ShowInfo from "./ShowInfo"
 
 type Props = {
 	credential: CredentialT
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		title: {
-			display: "flex",
-			textAlign: "center",
-			alignItems: "center",
-			textTransform: "capitalize",
-		},
-		lockIcon: {
-			display: "flex",
-			textAlign: "center",
-			alignItems: "center",
-			justifyContent: "center",
-		},
-	})
-)
+const useStyles = makeStyles({
+	title: {
+		display: "flex",
+		textAlign: "center",
+		alignItems: "center",
+		textTransform: "capitalize",
+	},
+	lockIcon: {
+		display: "flex",
+		textAlign: "center",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+})
 
 const ShowCredential = ({ credential }: Props) => {
 	const [locked, setLocked] = useState(true)
-	const [multipleCodes, setMultipleCodes] = useState<string[] | null>(null)
-	const [cryptoAccess, setCryptoAccess] = useState<string[] | null>(null)
+
+	const [visible, setVisible] = useState(false)
 
 	const classes = useStyles()
 
-	useEffect(() => {
-		if (!locked && credential.security_codes?.multiple_security_codes) {
-			const codes = credential.security_codes?.multiple_security_codes
-
-			if (codes) {
-				const arr = codes.match(/\S+/g)
-
-				setMultipleCodes(arr)
-			}
-		}
-
-		if (locked && credential.security_codes?.multiple_security_codes) {
-			const length = credential.security_codes?.multiple_code_length
-
-			setMultipleCodes([...Array(length)].map((value: undefined) => "•••••"))
-		}
-
-		if (!locked && credential.security_codes?.crypto_currency_access_code) {
-			const words = credential.security_codes?.crypto_currency_access_code
-
-			if (words) {
-				const arr = words.match(/\S+/g)
-
-				setCryptoAccess(arr)
-			}
-		}
-
-		if (locked && credential.security_codes?.crypto_currency_access_code) {
-			const length = credential.security_codes?.crypto_code_length
-
-			setCryptoAccess([...Array(length)].map((value: undefined) => "•••••"))
-		}
-	}, [credential, locked])
+	const toggleVisibility = () => {
+		setVisible(!visible)
+	}
 
 	return (
 		<>
-			<Grid item xs={10} sm={11} className={classes.title}>
+			<Grid item xs={4} sm={5} className={classes.title}>
 				<Typography variant="h6">{credential.company_name}</Typography>
+			</Grid>
+			<Grid item xs={2} sm={1} className={classes.lockIcon}>
+				<GoBackBtn />
+			</Grid>
+			<Grid item xs={2} sm={5}>
+				<DisplayData toggleDisplay={toggleVisibility} visible={visible} />
 			</Grid>
 			<Grid item xs={2} sm={1} className={classes.lockIcon}>
 				<UnlockData toggleLock={() => setLocked(!locked)} locked={locked} />
 			</Grid>
-			{credential.user_name && (
-				<Grid item xs={12} md={6}>
-					<CredentialProperties
-						locked={locked}
-						label="Name"
-						opening=""
-						char_count={credential.char_count}
-						ending=""
-						body={credential.user_name}
-					/>
+
+			<ShowInfo credential={credential} visible={visible} locked={locked} />
+
+			<Grid item xs={12}>
+				<Grid container>
+					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
+						<Typography variant="h6">Created At: {credential.created_at}</Typography>
+					</Grid>
+					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
+						<Typography variant="h6">Updated At: {credential.updated_at}</Typography>
+					</Grid>
+					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
+						<Typography variant="h6">Last Seen: {credential.last_seen}</Typography>
+					</Grid>
 				</Grid>
-			)}
-			{credential.email && (
-				<Grid item xs={12} md={6}>
-					<CredentialProperties
-						locked={locked}
-						label="Email"
-						opening={credential.email.opening}
-						char_count={credential.email.char_count}
-						ending={credential.email.ending}
-						body={credential.email.email}
-					/>
-				</Grid>
-			)}
-			{credential.password && (
-				<Grid item xs={12} md={6}>
-					<CredentialProperties
-						locked={locked}
-						label="Password"
-						opening=""
-						char_count={credential.password.char_count}
-						ending=""
-						body={credential.password.password}
-					/>
-				</Grid>
-			)}
-			{credential.username && (
-				<Grid item xs={12} md={6}>
-					<CredentialProperties
-						locked={locked}
-						label="Username"
-						opening=""
-						char_count={credential.username.char_count}
-						ending=""
-						body={credential.username.username}
-					/>
-				</Grid>
-			)}
-			{credential.phone_number && (
-				<Grid item xs={12} md={6}>
-					<CredentialProperties
-						locked={locked}
-						label="Phone Number"
-						opening={credential.phone_number.opening}
-						char_count={credential.phone_number.char_count}
-						ending={credential.phone_number.ending}
-						body={credential.phone_number.phone_number}
-					/>
-				</Grid>
-			)}
-			{credential.security_codes?.unique_security_code && (
-				<Grid item xs={12} md={6}>
-					<CredentialProperties
-						locked={locked}
-						label="Unique Security Code"
-						opening=""
-						char_count={5}
-						ending=""
-						body={credential.security_codes.unique_security_code}
-					/>
-				</Grid>
-			)}
-			{credential.security_question_answer && (
-				<Grid item xs={12} md={6}>
-					<CredentialSQA
-						locked={locked}
-						question={
-							!locked
-								? credential.security_question_answer.security_question
-								: undefined
-						}
-						answer={
-							!locked
-								? credential.security_question_answer.security_answer
-								: undefined
-						}
-					/>
-				</Grid>
-			)}
-			{multipleCodes && (
-				<Grid item xs={12} md={6}>
-					<CredentialCodes
-						body={multipleCodes}
-						locked={locked}
-						label="Multiple Security Codes"
-					/>
-				</Grid>
-			)}
-			{cryptoAccess && (
-				<Grid item xs={12} md={6}>
-					<CredentialCodes
-						body={cryptoAccess}
-						locked={locked}
-						label="Crypto Currency Access Codes"
-						isCrypto
-					/>
-				</Grid>
-			)}
+			</Grid>
 		</>
 	)
 }
