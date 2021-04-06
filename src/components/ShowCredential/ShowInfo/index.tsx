@@ -62,6 +62,22 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 		}
 	}, [credential, locked, visible])
 
+	const sQuestion = () => {
+		if (visible || !locked) {
+			return credential.security_question_answer?.security_question
+		} else {
+			return undefined
+		}
+	}
+
+	const sAnswer = () => {
+		if (visible || !locked) {
+			return credential.security_question_answer?.security_answer
+		} else {
+			return undefined
+		}
+	}
+
 	return (
 		<>
 			{credential.user_name && (
@@ -147,16 +163,8 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 					<CredentialSQA
 						locked={locked}
 						visible={visible}
-						question={
-							!locked
-								? credential.security_question_answer.security_question
-								: undefined
-						}
-						answer={
-							!locked
-								? credential.security_question_answer.security_answer
-								: undefined
-						}
+						question={sQuestion()}
+						answer={sAnswer()}
 					/>
 				</Grid>
 			)}
