@@ -71,7 +71,13 @@ const AccessManagement = ({ testing }: { testing?: boolean }) => {
 					<CardHeader
 						title={translate("access_management", lng, 0)}
 						action={
-							<UnlockData toggleLock={callApi} locked={locked} testing={testing} />
+							<UnlockData
+								toggleLock={callApi}
+								locked={locked}
+								testing={testing}
+								lockedTitle={translate("access_management", lng, 1)}
+								unlockedTitle={translate("access_management", lng, 2)}
+							/>
 						}
 					/>
 					<CardContent>

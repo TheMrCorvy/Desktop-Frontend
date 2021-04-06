@@ -28,10 +28,12 @@ import LoginOptions from "../Sections/LoginOptions"
 type Props = {
 	toggleLock: () => void
 	locked: boolean
+	lockedTitle: string
+	unlockedTitle: string
 	testing?: boolean
 }
 
-const UnlockData = ({ toggleLock, locked, testing }: Props) => {
+const UnlockData = ({ toggleLock, locked, lockedTitle, unlockedTitle, testing }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)
@@ -54,7 +56,7 @@ const UnlockData = ({ toggleLock, locked, testing }: Props) => {
 		}
 	}
 
-	const tooltipTitle = translate("access_management", lng, locked ? 1 : 2)
+	const tooltipTitle = locked ? lockedTitle : unlockedTitle
 
 	return (
 		<>

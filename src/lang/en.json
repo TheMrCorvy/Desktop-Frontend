@@ -206,7 +206,12 @@
 		"Suggestion"
 	],
 	"available_slots": ["Available Slots"],
-	"access_management": ["Access Management", "Edit Your Account", "Save Changes"],
+	"access_management": [
+		"Access Management",
+		"Edit Your Account",
+		"Save Changes",
+		"Edit Credential"
+	],
 	"recently_seen": [
 		"Has been recently seen",
 		"Credential",

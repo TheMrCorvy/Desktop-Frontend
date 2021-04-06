@@ -73,7 +73,12 @@ const ShowCredential = ({ credential }: Props) => {
 				<DisplayData toggleDisplay={toggleVisibility} visible={visible} />
 			</Grid>
 			<Grid item xs={2} sm={1} className={classes.lockIcon}>
-				<UnlockData toggleLock={toggleLock} locked={locked} />
+				<UnlockData
+					toggleLock={toggleLock}
+					locked={locked}
+					lockedTitle={translate("access_management", lng, 3)}
+					unlockedTitle={translate("access_management", lng, 2)}
+				/>
 			</Grid>
 
 			<ShowInfo credential={credential} visible={visible} locked={locked} />
