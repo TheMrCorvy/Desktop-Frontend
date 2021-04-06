@@ -71,7 +71,7 @@ const CredentialSQA = ({ locked, visible, question, answer }: Props) => {
 				a: "••••••••••",
 			})
 		}
-	}, [locked])
+	}, [locked, visible])
 
 	const handleChange = (event: any) => {
 		setShowQA({

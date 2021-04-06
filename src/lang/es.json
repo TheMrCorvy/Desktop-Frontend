@@ -136,7 +136,10 @@
 		"Número de Teléfono",
 		"Confirmar",
 		"Código Email Principal",
-		"Código Email Recuperación"
+		"Código Email Recuperación",
+		"Contraseña",
+		"Nombre de Usuario",
+		"Código de Seguridad Único"
 	],
 	"before_using_security_code": [
 		"El código de seguridad que ingreses solo funcionará una única vez, asegurate de renovarlo apenas ingreses."
@@ -231,6 +234,6 @@
 	],
 	"authorize": ["Varifica tu Identidad"],
 	"credential_info": ["Creado", "Actualizado", "Visto por Última Vez"],
-	"info_is_visible": ["Mostrar", "Ocultar"],
+	"info_is_visible": ["Ocultar", "Mostrar"],
 	"actions": ["Copia", "Eliminar"]
 }

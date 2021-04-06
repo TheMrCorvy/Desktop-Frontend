@@ -27,38 +27,40 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 	const [cryptoAccess, setCryptoAccess] = useState<string[] | null>(null)
 
 	useEffect(() => {
-		if (!locked && credential.security_codes?.multiple_security_codes) {
-			const codes = credential.security_codes?.multiple_security_codes
+		if (!locked || visible) {
+			if (credential.security_codes?.multiple_security_codes) {
+				const codes = credential.security_codes?.multiple_security_codes
 
-			if (codes) {
-				const arr = codes.match(/\S+/g)
+				if (codes) {
+					const arr = codes.match(/\S+/g)
 
-				setMultipleCodes(arr)
+					setMultipleCodes(arr)
+				}
+			}
+
+			if (credential.security_codes?.crypto_currency_access_code) {
+				const words = credential.security_codes?.crypto_currency_access_code
+
+				if (words) {
+					const arr = words.match(/\S+/g)
+
+					setCryptoAccess(arr)
+				}
+			}
+		} else {
+			if (credential.security_codes?.multiple_security_codes) {
+				const length = credential.security_codes?.multiple_code_length
+
+				setMultipleCodes([...Array(length)].map(() => "•••••"))
+			}
+
+			if (credential.security_codes?.crypto_currency_access_code) {
+				const length = credential.security_codes?.crypto_code_length
+
+				setCryptoAccess([...Array(length)].map(() => "•••••"))
 			}
 		}
-
-		if (locked && credential.security_codes?.multiple_security_codes) {
-			const length = credential.security_codes?.multiple_code_length
-
-			setMultipleCodes([...Array(length)].map((value: undefined) => "•••••"))
-		}
-
-		if (!locked && credential.security_codes?.crypto_currency_access_code) {
-			const words = credential.security_codes?.crypto_currency_access_code
-
-			if (words) {
-				const arr = words.match(/\S+/g)
-
-				setCryptoAccess(arr)
-			}
-		}
-
-		if (locked && credential.security_codes?.crypto_currency_access_code) {
-			const length = credential.security_codes?.crypto_code_length
-
-			setCryptoAccess([...Array(length)].map((value: undefined) => "•••••"))
-		}
-	}, [credential, locked])
+	}, [credential, locked, visible])
 
 	return (
 		<>
@@ -67,7 +69,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
-						label="Name"
+						label={translate("auth_form_texts", lng, 6)}
 						opening=""
 						char_count={credential.char_count}
 						ending=""
@@ -80,7 +82,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
-						label="Email"
+						label={translate("auth_form_texts", lng, 0)}
 						opening={credential.email.opening}
 						char_count={credential.email.char_count}
 						ending={credential.email.ending}
@@ -93,7 +95,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
-						label="Password"
+						label={translate("auth_form_texts", lng, 11)}
 						opening=""
 						char_count={credential.password.char_count}
 						ending=""
@@ -106,7 +108,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
-						label="Username"
+						label={translate("auth_form_texts", lng, 12)}
 						opening=""
 						char_count={credential.username.char_count}
 						ending=""
@@ -119,7 +121,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
-						label="Phone Number"
+						label={translate("auth_form_texts", lng, 7)}
 						opening={credential.phone_number.opening}
 						char_count={credential.phone_number.char_count}
 						ending={credential.phone_number.ending}
@@ -132,7 +134,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
-						label="Unique Security Code"
+						label={translate("auth_form_texts", lng, 13)}
 						opening=""
 						char_count={5}
 						ending=""

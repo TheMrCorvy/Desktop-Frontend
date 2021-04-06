@@ -44,7 +44,19 @@ const ShowCredential = ({ credential }: Props) => {
 	const classes = useStyles()
 
 	const toggleVisibility = () => {
+		if (!locked && visible) {
+			setLocked(true)
+		}
+
 		setVisible(!visible)
+	}
+
+	const toggleLock = () => {
+		if (!visible && locked) {
+			setVisible(true)
+		}
+
+		setLocked(!locked)
 	}
 
 	return (
@@ -59,7 +71,7 @@ const ShowCredential = ({ credential }: Props) => {
 				<DisplayData toggleDisplay={toggleVisibility} visible={visible} />
 			</Grid>
 			<Grid item xs={2} sm={1} className={classes.lockIcon}>
-				<UnlockData toggleLock={() => setLocked(!locked)} locked={locked} />
+				<UnlockData toggleLock={toggleLock} locked={locked} />
 			</Grid>
 
 			<ShowInfo credential={credential} visible={visible} locked={locked} />
