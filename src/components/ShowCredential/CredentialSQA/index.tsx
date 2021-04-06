@@ -5,19 +5,24 @@ import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
-	AccordionActions,
-	Button,
 	Divider,
 	TextField,
 	Grid,
 } from "@material-ui/core"
 
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
-
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+
+import { useSelector } from "react-redux"
+import { RootState } from "../../../redux/store"
+
+import { translate } from "../../../lang"
+
+import CardFooter from "../CardFooter"
 
 type Props = {
 	locked: boolean
+	visible: boolean
 	question?: string
 	answer?: string
 }
@@ -44,7 +49,9 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CredentialSQA = ({ locked, question, answer }: Props) => {
+const CredentialSQA = ({ locked, visible, question, answer }: Props) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const classes = useStyles()
 
 	const [showQA, setShowQA] = useState({
@@ -53,7 +60,7 @@ const CredentialSQA = ({ locked, question, answer }: Props) => {
 	})
 
 	useEffect(() => {
-		if (!locked && question && answer) {
+		if ((!locked && question && answer) || (visible && question && answer)) {
 			setShowQA({
 				q: question,
 				a: answer,
@@ -78,7 +85,7 @@ const CredentialSQA = ({ locked, question, answer }: Props) => {
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 				<div className={classes.column}>
 					<Typography className={classes.heading}>
-						Security Question and Answer
+						{translate("encryption_examples", lng, 10)}
 					</Typography>
 				</div>
 			</AccordionSummary>
@@ -86,7 +93,7 @@ const CredentialSQA = ({ locked, question, answer }: Props) => {
 				<Grid container spacing={3}>
 					<Grid item xs={12}>
 						<TextField
-							label="Security Question"
+							label={translate("encryption_examples", lng, 5)}
 							variant="outlined"
 							disabled={locked}
 							value={showQA.q}
@@ -97,7 +104,7 @@ const CredentialSQA = ({ locked, question, answer }: Props) => {
 					</Grid>
 					<Grid item xs={12}>
 						<TextField
-							label="Security Answer"
+							label={translate("encryption_examples", lng, 6)}
 							variant="outlined"
 							disabled={locked}
 							value={showQA.a}
@@ -109,13 +116,7 @@ const CredentialSQA = ({ locked, question, answer }: Props) => {
 				</Grid>
 			</AccordionDetails>
 			<Divider />
-			{!locked && (
-				<AccordionActions>
-					<Button size="small" className={classes.btn}>
-						Remove
-					</Button>
-				</AccordionActions>
-			)}
+			<CardFooter locked={locked} visible={visible} />
 		</Accordion>
 	)
 }

@@ -5,8 +5,6 @@ import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
-	AccordionActions,
-	Button,
 	Divider,
 	TextField,
 } from "@material-ui/core"
@@ -14,11 +12,7 @@ import {
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-
-import { useSelector } from "react-redux"
-import { RootState } from "../../../redux/store"
-
-import { translate } from "../../../lang"
+import CardFooter from "../CardFooter"
 
 type Props = {
 	locked: boolean
@@ -46,9 +40,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		column: {
 			flexBasis: "100%",
 		},
-		btn: {
-			color: theme.palette.error.main,
-		},
 	})
 )
 
@@ -61,8 +52,6 @@ const CredentialProperties = ({
 	ending,
 	body,
 }: Props) => {
-	const { lng } = useSelector((state: RootState) => state.lng)
-
 	const classes = useStyles()
 
 	const [showProp, setShowProp] = useState("")
@@ -103,20 +92,7 @@ const CredentialProperties = ({
 				/>
 			</AccordionDetails>
 			<Divider />
-			{!locked ||
-				(visible && (
-					<AccordionActions>
-						{visible && (
-							<Button color="secondary">{translate("actions", lng, 0)}</Button>
-						)}
-
-						{!locked && (
-							<Button size="small" className={classes.btn}>
-								{translate("actions", lng, 1)}
-							</Button>
-						)}
-					</AccordionActions>
-				))}
+			<CardFooter locked={locked} visible={visible} />
 		</Accordion>
 	)
 }

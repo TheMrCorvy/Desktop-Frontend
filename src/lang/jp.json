@@ -47,7 +47,8 @@
 		"Security Answer",
 		"Unique Security Code (example: kj1dn3k32a)",
 		"Multiple Security Codes",
-		"Credentials for Cryptocurrency Wallet"
+		"Credentials for Cryptocurrency Wallet",
+		"Security Question and Answer"
 	],
 	"encrypted_examples": [
 		"m***@email.com",

@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react"
 
 import { Grid } from "@material-ui/core"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../../redux/store"
+
+import { translate } from "../../../lang"
+
 import CredentialProperties from "../CredentialProperties"
 import CredentialSQA from "../CredentialSQA"
 import CredentialCodes from "../CredentialCodes"
@@ -15,6 +20,8 @@ type Props = {
 }
 
 const ShowInfo = ({ credential, locked, visible }: Props) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const [multipleCodes, setMultipleCodes] = useState<string[] | null>(null)
 
 	const [cryptoAccess, setCryptoAccess] = useState<string[] | null>(null)
@@ -58,6 +65,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 			{credential.user_name && (
 				<Grid item xs={12} md={6}>
 					<CredentialProperties
+						visible={visible}
 						locked={locked}
 						label="Name"
 						opening=""
@@ -70,6 +78,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 			{credential.email && (
 				<Grid item xs={12} md={6}>
 					<CredentialProperties
+						visible={visible}
 						locked={locked}
 						label="Email"
 						opening={credential.email.opening}
@@ -82,6 +91,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 			{credential.password && (
 				<Grid item xs={12} md={6}>
 					<CredentialProperties
+						visible={visible}
 						locked={locked}
 						label="Password"
 						opening=""
@@ -94,6 +104,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 			{credential.username && (
 				<Grid item xs={12} md={6}>
 					<CredentialProperties
+						visible={visible}
 						locked={locked}
 						label="Username"
 						opening=""
@@ -106,6 +117,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 			{credential.phone_number && (
 				<Grid item xs={12} md={6}>
 					<CredentialProperties
+						visible={visible}
 						locked={locked}
 						label="Phone Number"
 						opening={credential.phone_number.opening}
@@ -118,6 +130,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 			{credential.security_codes?.unique_security_code && (
 				<Grid item xs={12} md={6}>
 					<CredentialProperties
+						visible={visible}
 						locked={locked}
 						label="Unique Security Code"
 						opening=""
@@ -131,6 +144,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 				<Grid item xs={12} md={6}>
 					<CredentialSQA
 						locked={locked}
+						visible={visible}
 						question={
 							!locked
 								? credential.security_question_answer.security_question
@@ -147,18 +161,20 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 			{multipleCodes && (
 				<Grid item xs={12} md={6}>
 					<CredentialCodes
+						visible={visible}
 						body={multipleCodes}
 						locked={locked}
-						label="Multiple Security Codes"
+						label={translate("encryption_examples", lng, 8)}
 					/>
 				</Grid>
 			)}
 			{cryptoAccess && (
 				<Grid item xs={12} md={6}>
 					<CredentialCodes
+						visible={visible}
 						body={cryptoAccess}
 						locked={locked}
-						label="Crypto Currency Access Codes"
+						label={translate("encryption_examples", lng, 9)}
 						isCrypto
 					/>
 				</Grid>

@@ -54,7 +54,8 @@
 		"Respuesta de Seguridad",
 		"Código Único de Seguridad (ejemplo: kj1dn3k32a)",
 		"Múltiples Códigos de Seguridad",
-		"Credenciales de Acceso a Billetera Criptográfica"
+		"Credenciales de Acceso a Billetera Criptográfica",
+		"Pregunta y Respuesta de Seguridad"
 	],
 	"encrypted_examples": [
 		"m***@email.com",

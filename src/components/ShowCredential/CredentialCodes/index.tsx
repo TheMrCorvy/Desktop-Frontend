@@ -5,10 +5,7 @@ import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
-	AccordionActions,
-	Button,
 	Divider,
-	TextField,
 	Grid,
 	Chip,
 	useMediaQuery,
@@ -20,8 +17,11 @@ import LockOpenIcon from "@material-ui/icons/LockOpen"
 import LockIcon from "@material-ui/icons/Lock"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
+import CardFooter from "../CardFooter"
+
 type Props = {
 	locked: boolean
+	visible: boolean
 	label: string
 	body: string[]
 	isCrypto?: boolean
@@ -49,11 +49,19 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CredentialCodes = ({ locked, label, body, isCrypto }: Props) => {
+const CredentialCodes = ({ locked, visible, label, body, isCrypto }: Props) => {
 	const classes = useStyles()
 
 	const theme = useTheme()
 	const matches = useMediaQuery(theme.breakpoints.down("sm"))
+
+	const showLabel = (number: number, code: string) => {
+		if ((isCrypto && visible) || (isCrypto && !locked)) {
+			return number + 1 + ") " + code
+		} else {
+			return code
+		}
+	}
 
 	return (
 		<Accordion defaultExpanded style={{ borderRadius: 8 }}>
@@ -69,9 +77,9 @@ const CredentialCodes = ({ locked, label, body, isCrypto }: Props) => {
 							<Chip
 								icon={locked ? <LockIcon /> : <LockOpenIcon />}
 								key={code}
-								label={isCrypto && !locked ? index + 1 + ") " + code : code}
+								label={showLabel(index, code)}
 								color="secondary"
-								disabled={locked}
+								disabled={!visible}
 								size={matches ? "small" : "medium"}
 							/>
 						</Grid>
@@ -79,13 +87,7 @@ const CredentialCodes = ({ locked, label, body, isCrypto }: Props) => {
 				</Grid>
 			</AccordionDetails>
 			<Divider />
-			{!locked && (
-				<AccordionActions>
-					<Button size="small" className={classes.btn}>
-						Remove
-					</Button>
-				</AccordionActions>
-			)}
+			<CardFooter locked={locked} visible={visible} />
 		</Accordion>
 	)
 }
