@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		column: {
 			flexBasis: "100%",
 		},
-		btn: {
-			color: theme.palette.error.main,
+		textColor: {
+			color: theme.palette.type === "dark" ? "white" : "black",
 		},
 	})
 )
@@ -99,6 +99,11 @@ const CredentialSQA = ({ locked, visible, question, answer }: Props) => {
 							onChange={handleChange}
 							name="q"
 							fullWidth
+							InputProps={{
+								classes: {
+									input: visible ? classes.textColor : "",
+								},
+							}}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -110,6 +115,11 @@ const CredentialSQA = ({ locked, visible, question, answer }: Props) => {
 							onChange={handleChange}
 							name="a"
 							fullWidth
+							InputProps={{
+								classes: {
+									input: visible ? classes.textColor : "",
+								},
+							}}
 						/>
 					</Grid>
 				</Grid>

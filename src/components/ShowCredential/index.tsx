@@ -43,12 +43,14 @@ const ShowCredential = ({ credential }: Props) => {
 
 	const classes = useStyles()
 
-	const toggleVisibility = () => {
+	const toggleVisibility = (agent: string) => {
 		if (!locked && visible) {
 			setLocked(true)
 		}
 
 		setVisible(!visible)
+
+		console.log(agent)
 	}
 
 	const toggleLock = () => {
@@ -79,17 +81,17 @@ const ShowCredential = ({ credential }: Props) => {
 			<Grid item xs={12}>
 				<Grid container>
 					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
-						<Typography variant="h6">
+						<Typography variant="subtitle1">
 							{translate("credential_info", lng, 0)}: {credential.created_at}
 						</Typography>
 					</Grid>
 					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
-						<Typography variant="h6">
+						<Typography variant="subtitle1">
 							{translate("credential_info", lng, 1)}: {credential.updated_at}
 						</Typography>
 					</Grid>
 					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
-						<Typography variant="h6">
+						<Typography variant="subtitle1">
 							{translate("credential_info", lng, 2)}: {credential.last_seen}
 						</Typography>
 					</Grid>

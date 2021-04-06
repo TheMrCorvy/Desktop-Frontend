@@ -42,9 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		column: {
 			flexBasis: "100%",
 		},
-		btn: {
-			color: theme.palette.error.main,
-		},
 	})
 )
 

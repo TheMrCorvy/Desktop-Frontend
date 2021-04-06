@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		column: {
 			flexBasis: "100%",
 		},
+		textColor: {
+			color: theme.palette.type === "dark" ? "white" : "black",
+		},
 	})
 )
 
@@ -88,6 +91,11 @@ const CredentialProperties = ({
 					value={showProp}
 					onChange={handleChange}
 					fullWidth
+					InputProps={{
+						classes: {
+							input: visible ? classes.textColor : "",
+						},
+					}}
 				/>
 			</AccordionDetails>
 			<CardFooter locked={locked} visible={visible} />
