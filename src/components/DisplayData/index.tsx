@@ -13,14 +13,15 @@ import { translate } from "../../lang"
 type Props = {
 	toggleDisplay: () => void
 	visible: boolean
-	testing?: boolean
 }
 
-const DisplayData = ({ toggleDisplay, visible, testing }: Props): JSX.Element => {
+const DisplayData = ({ toggleDisplay, visible }: Props): JSX.Element => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const title = translate("info_is_visible", lng, !visible ? 0 : 1)
+
 	return (
-		<Tooltip title="titulo" placement="right">
+		<Tooltip title={title} placement="right">
 			<Fab
 				color="secondary"
 				onClick={toggleDisplay}

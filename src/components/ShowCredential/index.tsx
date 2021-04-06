@@ -5,6 +5,11 @@ import { Grid, Typography } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+
+import { translate } from "../../lang"
+
 import UnlockData from "../UnlockData"
 import DisplayData from "../DisplayData"
 import GoBackBtn from "../GoBackBtn"
@@ -30,6 +35,8 @@ const useStyles = makeStyles({
 })
 
 const ShowCredential = ({ credential }: Props) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const [locked, setLocked] = useState(true)
 
 	const [visible, setVisible] = useState(false)
@@ -60,13 +67,19 @@ const ShowCredential = ({ credential }: Props) => {
 			<Grid item xs={12}>
 				<Grid container>
 					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
-						<Typography variant="h6">Created At: {credential.created_at}</Typography>
+						<Typography variant="h6">
+							{translate("credential_info", lng, 0)}: {credential.created_at}
+						</Typography>
 					</Grid>
 					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
-						<Typography variant="h6">Updated At: {credential.updated_at}</Typography>
+						<Typography variant="h6">
+							{translate("credential_info", lng, 1)}: {credential.updated_at}
+						</Typography>
 					</Grid>
 					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
-						<Typography variant="h6">Last Seen: {credential.last_seen}</Typography>
+						<Typography variant="h6">
+							{translate("credential_info", lng, 2)}: {credential.last_seen}
+						</Typography>
 					</Grid>
 				</Grid>
 			</Grid>

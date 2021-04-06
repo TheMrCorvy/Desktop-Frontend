@@ -216,5 +216,7 @@
 	"before_unload": [
 		"Your session will be closed if you refresh the page. Are you sure you want to log out?"
 	],
-	"authorize": ["Verify your Identity"]
+	"authorize": ["Verify your Identity"],
+	"credential_info": ["Created At", "Updated At", "Last Seen"],
+	"info_is_visible": ["Show", "Hide"]
 }
