@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 import { AccordionActions, Button, Divider } from "@material-ui/core"
 
@@ -9,6 +9,14 @@ import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
+import Snackbar from "../Snackbar"
+
+type Props = {
+	locked: boolean
+	visible: boolean
+	textToCopy: string
+}
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		btn: {
@@ -17,17 +25,40 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CardFooter = ({ locked, visible }: { locked: boolean; visible: boolean }) => {
+const CardFooter = ({ locked, visible, textToCopy }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const [copied, setCopied] = useState(false)
+
 	const classes = useStyles()
+
+	const copyToClipboard = () => {
+		navigator.clipboard.writeText(textToCopy)
+
+		setCopied(true)
+	}
+
+	useEffect(() => {
+		if (copied) {
+			const timer = setTimeout(() => {
+				setCopied(false)
+			}, 4000)
+			return () => {
+				clearTimeout(timer)
+			}
+		}
+	}, [copied])
 
 	if (!locked || visible) {
 		return (
 			<>
 				<Divider />
 				<AccordionActions>
-					{visible && <Button color="secondary">{translate("actions", lng, 0)}</Button>}
+					{visible && (
+						<Button color="secondary" onClick={copyToClipboard}>
+							{translate("actions", lng, 0)}
+						</Button>
+					)}
 
 					{!locked && (
 						<Button size="small" className={classes.btn}>
@@ -35,6 +66,10 @@ const CardFooter = ({ locked, visible }: { locked: boolean; visible: boolean }) 
 						</Button>
 					)}
 				</AccordionActions>
+
+				{copied && (
+					<Snackbar open={copied} message={translate("copy", lng)} duration={3500} />
+				)}
 			</>
 		)
 	} else {

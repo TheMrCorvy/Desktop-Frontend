@@ -82,7 +82,7 @@ const CredentialCodes = ({ locked, visible, label, body, isCrypto }: Props) => {
 					))}
 				</Grid>
 			</AccordionDetails>
-			<CardFooter locked={locked} visible={visible} />
+			<CardFooter locked={locked} visible={visible} textToCopy={body[0]} />
 		</Accordion>
 	)
 }

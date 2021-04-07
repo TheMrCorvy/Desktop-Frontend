@@ -228,5 +228,6 @@
 	"authorize": ["Verify your Identity"],
 	"credential_info": ["Created At", "Updated At", "Last Seen"],
 	"info_is_visible": ["かくす", "見る"],
-	"actions": ["Copy", "Remove"]
+	"actions": ["Copy", "Remove"],
+	"copy": ["Text copied to clipboard"]
 }

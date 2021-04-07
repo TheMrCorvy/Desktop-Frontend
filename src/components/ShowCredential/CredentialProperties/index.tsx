@@ -98,7 +98,7 @@ const CredentialProperties = ({
 					}}
 				/>
 			</AccordionDetails>
-			<CardFooter locked={locked} visible={visible} />
+			<CardFooter locked={locked} visible={visible} textToCopy={body ? body : showProp} />
 		</Accordion>
 	)
 }

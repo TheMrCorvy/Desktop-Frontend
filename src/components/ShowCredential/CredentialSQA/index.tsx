@@ -124,7 +124,7 @@ const CredentialSQA = ({ locked, visible, question, answer }: Props) => {
 					</Grid>
 				</Grid>
 			</AccordionDetails>
-			<CardFooter locked={locked} visible={visible} />
+			<CardFooter locked={locked} visible={visible} textToCopy={showQA.a} />
 		</Accordion>
 	)
 }
