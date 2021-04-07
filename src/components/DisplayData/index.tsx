@@ -35,11 +35,11 @@ const DisplayData = ({ toggleDisplay, visible }: Props): JSX.Element => {
 			<Fab
 				color="secondary"
 				onClick={() => getUserAgent()}
-				data-testid="test_toggle_display"
+				data-testid="test_visibility_btn"
 				size="small"
 				style={{ boxShadow: "none" }}
 			>
-				{visible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+				{visible ? <VisibilityOffIcon /> : <VisibilityIcon data-testid="test_is_visible" />}
 			</Fab>
 		</Tooltip>
 	)
