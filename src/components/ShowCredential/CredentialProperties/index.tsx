@@ -91,7 +91,8 @@ const CredentialProperties = ({
 					value={showProp}
 					onChange={handleChange}
 					fullWidth
-					InputProps={{
+					inputProps={{
+						"data-testid": "test_credential_prop",
 						classes: {
 							input: visible ? classes.textColor : "",
 						},
