@@ -2,7 +2,7 @@ import { render } from "@testing-library/react"
 
 import { Provider } from "react-redux"
 
-import store from "../../../../redux/store"
+import store from "../../redux/store"
 
 import { library } from "@fortawesome/fontawesome-svg-core"
 import {
@@ -38,7 +38,6 @@ it("renders properly, and shows text properly", () => {
 		],
 		cardElevation: 0,
 		buttonText: "test btn",
-		linkUrl: "/register",
 	}
 
 	const { getByTestId, getByText } = render(
@@ -57,17 +56,14 @@ it("renders properly, and shows text properly", () => {
 
 	expect(pricingCard).toBeTruthy()
 
-	//first item
 	const firstText = getByText("test 1st text")
 
 	expect(firstText.innerHTML).toBe(testCard.listItems[0].text)
 
-	//second item
 	const secondText = getByText("test 2nd text")
 
 	expect(secondText.innerHTML).toBe(testCard.listItems[1].text)
 
-	//third item
 	const thirdText = getByText("test 3rd text")
 
 	expect(thirdText.innerHTML).toBe(testCard.listItems[2].text)

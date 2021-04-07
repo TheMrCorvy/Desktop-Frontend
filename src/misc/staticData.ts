@@ -1,4 +1,4 @@
-import { PricingCardT } from "../components/Sections/Pricing/PricingCard"
+import { PricingCardT } from "../components/PricingCard"
 import { translate } from "../lang"
 
 export type RecommendedAppsType = {

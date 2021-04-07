@@ -5,13 +5,13 @@ import { Container, Grid, Typography, Hidden, Divider } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../../redux/store"
+import { RootState } from "../../redux/store"
 
-import { translate } from "../../../lang"
+import { translate } from "../../lang"
 
-import * as es from "../../../lang/es.json"
+import * as es from "../../lang/es.json"
 
-import DialogComponent from "../../Dialog"
+import DialogComponent from "../Dialog"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

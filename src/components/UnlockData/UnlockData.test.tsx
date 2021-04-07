@@ -15,6 +15,8 @@ it("renders properly", () => {
 					locked = !locked
 				}}
 				locked={locked}
+				lockedTitle="locked"
+				unlockedTitle="unlocked"
 			/>
 		</Provider>
 	)

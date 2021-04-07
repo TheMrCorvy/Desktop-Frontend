@@ -69,7 +69,7 @@ const RecentAccessTable = ({ testing }: { testing?: boolean }) => {
 				setCredentials(recentlySeen4Testing)
 
 				setLoading(false)
-			}, 5000)
+			}, 4000)
 
 			return () => {
 				clearTimeout(fakeTimer)

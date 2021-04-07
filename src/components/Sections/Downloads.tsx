@@ -7,10 +7,10 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 import { purple, indigo } from "@material-ui/core/colors"
 
 import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "../../../redux/store"
-import { showError } from "../../../redux/actions/errorHandlingActions"
+import { RootState } from "../../redux/store"
+import { showError } from "../../redux/actions/errorHandlingActions"
 
-import { translate } from "../../../lang"
+import { translate } from "../../lang"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

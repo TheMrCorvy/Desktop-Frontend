@@ -1,4 +1,4 @@
-import { OpinionCardT } from "../components/Sections/Opinions/OpinionCard"
+import { OpinionCardT } from "../components/OpinionCard"
 import { UserT } from "./ajaxManager"
 import { CredentialT } from "./types"
 import { RecentlySeenT } from "../components/Sections/RecentAccessTable"

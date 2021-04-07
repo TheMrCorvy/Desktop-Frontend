@@ -13,7 +13,7 @@ import { translate } from "../../lang"
 import UnlockData from "../UnlockData"
 import DisplayData from "../DisplayData"
 import GoBackBtn from "../GoBackBtn"
-import ShowInfo from "./ShowInfo"
+import ShowInfo from "../ShowCredential/ShowInfo"
 
 type Props = {
 	credential: CredentialT

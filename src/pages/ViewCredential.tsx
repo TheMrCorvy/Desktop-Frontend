@@ -19,7 +19,7 @@ import { findCredential, DBErrorT, getUser, putCredential } from "../misc/indexe
 import { findCredentialFromApi } from "../misc/ajaxManager"
 
 import Snackbar from "../components/Snackbar"
-import ShowCredential from "../components/ShowCredential"
+import ShowCredential from "../components/Sections/ShowCredential"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

@@ -8,11 +8,11 @@ import { grey } from "@material-ui/core/colors"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
+import { RootState } from "../redux/store"
 
-import { translate } from "../../lang"
+import { translate } from "../lang"
 
-import TranslateButton from "../../components/Navbar/NavbarButtons/TranslateButton"
+import TranslateButton from "./Navbar/NavbarButtons/TranslateButton"
 
 const useStyles = makeStyles({
 	root: {

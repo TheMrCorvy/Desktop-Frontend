@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import "../../../styles/styles.css"
+import "../../styles/styles.css"
 
 import {
 	Container,
@@ -18,9 +18,9 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../../redux/store"
+import { RootState } from "../../redux/store"
 
-import { translate } from "../../../lang"
+import { translate } from "../../lang"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

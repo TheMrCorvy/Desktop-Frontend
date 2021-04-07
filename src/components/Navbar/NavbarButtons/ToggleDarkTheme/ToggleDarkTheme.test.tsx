@@ -44,8 +44,6 @@ describe("it toggles between dark and light theme", () => {
 
 		fireEvent.click(lightThemeBtn)
 
-		// now go to the dark theme again
-
 		const darkThemeBtn = getByTestId("test_theme_is_light")
 
 		expect(darkThemeBtn).toBeTruthy()

@@ -22,7 +22,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconName } from "@fortawesome/fontawesome-svg-core"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../../../redux/store"
+import { RootState } from "../../redux/store"
 
 export type ListItemT = {
 	icon: IconName
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const PricingCard = (props: PricingCardT) => {
+const PricingCard = ({ title, subtitle, cardElevation, listItems, buttonText }: PricingCardT) => {
 	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const muiTheme = useTheme()
@@ -74,22 +74,18 @@ const PricingCard = (props: PricingCardT) => {
 	const classes = useStyles()
 
 	return (
-		<Card
-			className={classes.card}
-			elevation={props.cardElevation}
-			data-testid="test_pricing_card"
-		>
+		<Card className={classes.card} elevation={cardElevation} data-testid="test_pricing_card">
 			<CardHeader
-				title={props.title}
+				title={title}
 				className={classes.textCenter}
-				subheader={props.subtitle}
+				subheader={subtitle}
 				classes={{
 					subheader: classes.textColor,
 				}}
 			/>
 			<CardContent className={classes.paddingBottomSm}>
 				<List component="nav" aria-label="accounts benefits">
-					{props.listItems.map((item, index) => (
+					{listItems.map((item, index) => (
 						<React.Fragment key={index}>
 							<ListItem button>
 								<ListItemIcon>
@@ -115,7 +111,7 @@ const PricingCard = (props: PricingCardT) => {
 					size="large"
 					disableElevation
 				>
-					{props.buttonText}
+					{buttonText}
 				</Button>
 			</CardActions>
 		</Card>

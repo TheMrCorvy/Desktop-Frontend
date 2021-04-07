@@ -1,15 +1,15 @@
 import React, { FC, useEffect, useState } from "react"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../../redux/store"
+import { RootState } from "../../redux/store"
 
-import { translate } from "../../../lang"
+import { translate } from "../../lang"
 
-import Opinions from "../Opinions"
+import Opinions from "./Opinions"
 
-import { OpinionCardT } from "../Opinions/OpinionCard"
+import { OpinionCardT } from "../OpinionCard"
 
-import { rating4Testing, suggestion4Testing } from "../../../misc/Data4Testing"
+import { rating4Testing, suggestion4Testing } from "../../misc/Data4Testing"
 
 type FeedbackT = {
 	suggestions: OpinionCardT[]

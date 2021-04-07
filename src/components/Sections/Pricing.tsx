@@ -5,15 +5,15 @@ import { Container, Grid, Paper, Typography, Divider } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../../redux/store"
+import { RootState } from "../../redux/store"
 
-import { translate } from "../../../lang"
+import { translate } from "../../lang"
 
-import DialogComponent from "../../../components/Dialog"
+import DialogComponent from "../Dialog"
 
-import PricingCard, { PricingCardT } from "./PricingCard"
+import PricingCard, { PricingCardT } from "../PricingCard"
 
-import { pricingInfo } from "../../../misc/staticData"
+import { pricingInfo } from "../../misc/staticData"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
