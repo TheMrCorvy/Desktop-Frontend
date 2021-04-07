@@ -127,7 +127,8 @@
 		"Recovery Email Code",
 		"Password",
 		"Username",
-		"Unique Security Code"
+		"Unique Security Code",
+		"Registered Name"
 	],
 	"before_using_security_code": [
 		"The security code you enter will work only once, so make sure to renew it immediately after the login."

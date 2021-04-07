@@ -139,7 +139,8 @@
 		"Código Email Recuperación",
 		"Contraseña",
 		"Nombre de Usuario",
-		"Código de Seguridad Único"
+		"Código de Seguridad Único",
+		"Nombre Registrado"
 	],
 	"before_using_security_code": [
 		"El código de seguridad que ingreses solo funcionará una única vez, asegurate de renovarlo apenas ingreses."

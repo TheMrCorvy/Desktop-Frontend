@@ -85,7 +85,7 @@ const ShowInfo = ({ credential, locked, visible }: Props) => {
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
-						label={translate("auth_form_texts", lng, 6)}
+						label={translate("auth_form_texts", lng, 14)}
 						opening=""
 						char_count={credential.char_count}
 						ending=""
