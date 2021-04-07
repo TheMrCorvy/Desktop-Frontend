@@ -60,7 +60,7 @@ const CredentialCodes = ({ locked, visible, label, body, isCrypto }: Props) => {
 	}
 
 	return (
-		<Accordion defaultExpanded style={{ borderRadius: 8 }}>
+		<Accordion defaultExpanded style={{ borderRadius: 8 }} data-testid="test_credential_codes">
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 				<div className={classes.column}>
 					<Typography className={classes.heading}>{label}</Typography>
@@ -77,6 +77,7 @@ const CredentialCodes = ({ locked, visible, label, body, isCrypto }: Props) => {
 								color="secondary"
 								disabled={!visible}
 								size={matches ? "small" : "medium"}
+								data-testid={"test_chip_" + index}
 							/>
 						</Grid>
 					))}
