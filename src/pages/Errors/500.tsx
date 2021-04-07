@@ -8,11 +8,11 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 import HomeIcon from "@material-ui/icons/Home"
 
 import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "../../../redux/store"
+import { RootState } from "../../redux/store"
 
-import { translate } from "../../../lang"
+import { translate } from "../../lang"
 
-import { clearError } from "../../../redux/actions/errorHandlingActions"
+import { clearError } from "../../redux/actions/errorHandlingActions"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

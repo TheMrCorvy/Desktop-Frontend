@@ -18,19 +18,19 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 
 /************************************************************************************ redux related */
 import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "../../redux/store"
+import { RootState } from "../redux/store"
 
-import { login } from "../../redux/actions/authTokenActions"
-import { translate } from "../../lang"
+import { login } from "../redux/actions/authTokenActions"
+import { translate } from "../lang"
 
 /************************************************************************************ manage info */
-import { ApiResponseLoginT } from "../../misc/ajaxManager"
+import { ApiResponseLoginT } from "../misc/ajaxManager"
 
-import { initiateDB } from "../../misc/indexedDB"
+import { initiateDB } from "../misc/indexedDB"
 
 /************************************************************************************ my components */
-import Snackbar from "../../components/Snackbar"
-import LoginOptions from "../../components/Sections/LoginOptions"
+import Snackbar from "../components/Snackbar"
+import LoginOptions from "../components/Sections/LoginOptions"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

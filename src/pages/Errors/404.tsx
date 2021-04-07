@@ -8,9 +8,9 @@ import { makeStyles } from "@material-ui/core/styles"
 import HomeIcon from "@material-ui/icons/Home"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../../redux/store"
+import { RootState } from "../../redux/store"
 
-import { translate } from "../../../lang"
+import { translate } from "../../lang"
 
 const useStyles = makeStyles({
 	container: {

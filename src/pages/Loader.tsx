@@ -7,9 +7,9 @@ import { makeStyles } from "@material-ui/core/styles"
 import Skeleton from "@material-ui/lab/Skeleton"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
+import { RootState } from "../redux/store"
 
-import { translate } from "../../lang"
+import { translate } from "../lang"
 
 const useStyles = makeStyles({
 	container: {

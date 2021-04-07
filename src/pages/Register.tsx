@@ -16,12 +16,12 @@ import { Link } from "react-router-dom"
 import ReCAPTCHA from "react-google-recaptcha"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
+import { RootState } from "../redux/store"
 
-import { translate } from "../../lang"
+import { translate } from "../lang"
 
-import RegisterSteps from "../../components/Sections/RegisterSteps"
-import RegisterDialog from "../../components/Sections/RegisterDialog"
+import RegisterSteps from "../components/Sections/RegisterSteps"
+import RegisterDialog from "../components/Sections/RegisterDialog"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
