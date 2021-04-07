@@ -147,7 +147,6 @@ export const credential4Testing: CredentialT[] = [
 		company_id: 5,
 		company_name: "test 3",
 		logo_url: null,
-		description: "",
 		last_seen: "2021-02-15 17:32:23",
 		recently_seen: true,
 		user_name: "example name 2",

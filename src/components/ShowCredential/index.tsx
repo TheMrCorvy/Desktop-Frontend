@@ -63,43 +63,87 @@ const ShowCredential = ({ credential }: Props) => {
 
 	return (
 		<>
-			<Grid item xs={4} sm={5} className={classes.title}>
-				<Typography variant="h6">{credential.company_name}</Typography>
-			</Grid>
-			<Grid item xs={2} sm={1} className={classes.lockIcon}>
-				<GoBackBtn />
-			</Grid>
-			<Grid item xs={2} sm={5}>
-				<DisplayData toggleDisplay={toggleVisibility} visible={visible} />
-			</Grid>
-			<Grid item xs={2} sm={1} className={classes.lockIcon}>
-				<UnlockData
-					toggleLock={toggleLock}
-					locked={locked}
-					lockedTitle={translate("access_management", lng, 3)}
-					unlockedTitle={translate("access_management", lng, 2)}
-				/>
+			<Grid item xs={12} md={3}>
+				<Grid container spacing={4}>
+					<Grid item xs={12}>
+						<Grid container justify="space-between" spacing={3}>
+							<Grid item className={classes.title}>
+								<Typography variant="h6">{credential.company_name}</Typography>
+							</Grid>
+							<Grid item className={classes.lockIcon}>
+								<GoBackBtn />
+							</Grid>
+						</Grid>
+					</Grid>
+					{credential.description && (
+						<Grid item xs={12}>
+							<Typography variant="body1">{credential.description}</Typography>
+						</Grid>
+					)}
+					<Grid item xs={12}>
+						<Grid container justify="space-between" spacing={2}>
+							<Grid item>
+								<Typography variant="body2">
+									{translate("credential_info", lng, 0)}:
+								</Typography>
+							</Grid>
+							<Grid item>
+								<Typography color="secondary" variant="body2">
+									{credential.created_at}
+								</Typography>
+							</Grid>
+						</Grid>
+					</Grid>
+					<Grid item xs={12}>
+						<Grid container justify="space-between" spacing={2}>
+							<Grid item>
+								<Typography variant="body2">
+									{translate("credential_info", lng, 1)}:
+								</Typography>
+							</Grid>
+							<Grid item>
+								<Typography color="secondary" variant="body2">
+									{credential.updated_at}
+								</Typography>
+							</Grid>
+						</Grid>
+					</Grid>
+					<Grid item xs={12}>
+						<Grid container justify="space-between" spacing={2}>
+							<Grid item>
+								<Typography variant="body2">
+									{translate("credential_info", lng, 2)}:
+								</Typography>
+							</Grid>
+							<Grid item>
+								<Typography color="secondary" variant="body2">
+									{credential.last_seen}
+								</Typography>
+							</Grid>
+						</Grid>
+					</Grid>
+
+					<Grid item xs={12}>
+						<Grid container justify="space-around">
+							<Grid item>
+								<DisplayData toggleDisplay={toggleVisibility} visible={visible} />
+							</Grid>
+							<Grid item className={classes.lockIcon}>
+								<UnlockData
+									toggleLock={toggleLock}
+									locked={locked}
+									lockedTitle={translate("access_management", lng, 3)}
+									unlockedTitle={translate("access_management", lng, 2)}
+								/>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid>
 			</Grid>
 
-			<ShowInfo credential={credential} visible={visible} locked={locked} />
-
-			<Grid item xs={12}>
-				<Grid container>
-					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
-						<Typography variant="subtitle1">
-							{translate("credential_info", lng, 0)}: {credential.created_at}
-						</Typography>
-					</Grid>
-					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
-						<Typography variant="subtitle1">
-							{translate("credential_info", lng, 1)}: {credential.updated_at}
-						</Typography>
-					</Grid>
-					<Grid item xs={12} sm={6} md={4} className={(classes.title, classes.lockIcon)}>
-						<Typography variant="subtitle1">
-							{translate("credential_info", lng, 2)}: {credential.last_seen}
-						</Typography>
-					</Grid>
+			<Grid item xs={12} md={9}>
+				<Grid container spacing={4}>
+					<ShowInfo credential={credential} visible={visible} locked={locked} />
 				</Grid>
 			</Grid>
 		</>
