@@ -99,7 +99,8 @@ const CredentialSQA = ({ locked, visible, question, answer }: Props) => {
 							onChange={handleChange}
 							name="q"
 							fullWidth
-							InputProps={{
+							inputProps={{
+								"data-testid": "test_credential_sqa_question",
 								classes: {
 									input: visible ? classes.textColor : "",
 								},
@@ -115,7 +116,8 @@ const CredentialSQA = ({ locked, visible, question, answer }: Props) => {
 							onChange={handleChange}
 							name="a"
 							fullWidth
-							InputProps={{
+							inputProps={{
+								"data-testid": "test_credential_sqa_answer",
 								classes: {
 									input: visible ? classes.textColor : "",
 								},
