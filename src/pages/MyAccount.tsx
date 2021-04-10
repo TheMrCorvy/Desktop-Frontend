@@ -15,9 +15,11 @@ import Downloads from "../components/Sections/Downloads"
 import AccessManagement from "../components/Sections/AccessManagement"
 import CredentialCard from "../components/CredentialCard"
 
-import { getUser } from "../misc/indexedDB"
+import { getUser, getCredentials } from "../misc/indexedDB"
 import RecentAccessTable from "../components/Sections/RecentAccessTable"
 import { UserT } from "../misc/ajaxManager"
+import UpdateRole from "../components/Sections/UpdateRole"
+import { CredentialT } from "../misc/types"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -41,6 +43,8 @@ const MyAccount: FC = () => {
 
 	const [user, setUser] = useState<UserT | null>(null)
 
+	const [credentials, setCredentials] = useState<CredentialT[]>([])
+
 	const classes = useStyles()
 
 	const dispatch = useDispatch()
@@ -53,6 +57,16 @@ const MyAccount: FC = () => {
 				dispatch(showError(translate("error_messages", lng, 0)))
 			}
 		})
+
+		getCredentials().then((data) => {
+			if (data.userData && data.credentials) {
+				setCredentials(data.credentials)
+			} else {
+				dispatch(showError(translate("error_messages", lng, 0)))
+
+				console.error(data.error)
+			}
+		})
 	}, [])
 
 	const isUserAllowed = () => {
@@ -63,6 +77,18 @@ const MyAccount: FC = () => {
 		}
 
 		return null
+	}
+
+	const canBuySlots = () => {
+		if (user !== null) {
+			if (user.role !== "premium") {
+				if (user.slots_available + credentials.length < 20) {
+					return true
+				}
+			}
+		}
+
+		return false
 	}
 
 	return (
@@ -89,6 +115,8 @@ const MyAccount: FC = () => {
 						</Grid>
 					</Grid>
 				)}
+
+				{user && <UpdateRole userRole={user.role} canBuySlots={canBuySlots()} />}
 			</Grid>
 			{isUserAllowed()}
 			<Downloads />

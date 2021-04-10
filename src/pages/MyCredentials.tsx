@@ -25,6 +25,7 @@ import { CredentialT } from "../misc/types"
 
 /************************************************************************************ ajax */
 import { ApiResponseGetCredentialsT, getCredentialsFromApi, UserT } from "../misc/ajaxManager"
+import UpdateRole from "../components/Sections/UpdateRole"
 
 type Sort = {
 	by: By
@@ -165,6 +166,18 @@ const MyCredentials: FC = () => {
 		return null
 	}
 
+	const canBuySlots = () => {
+		if (user !== null) {
+			if (user.role !== "premium") {
+				if (user.slots_available + credentials.length < 20) {
+					return true
+				}
+			}
+		}
+
+		return false
+	}
+
 	return (
 		<>
 			<Container
@@ -200,6 +213,8 @@ const MyCredentials: FC = () => {
 							<Snackbar open={error} message={snackbarMessage} />
 						</>
 					)}
+
+					{user && <UpdateRole userRole={user.role} canBuySlots={canBuySlots()} />}
 				</Grid>
 			</Container>
 			{isUserAllowedToFeedbackForm()}
