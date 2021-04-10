@@ -27,21 +27,22 @@ export const dropDatabase = (): void | DBErrorT => {
 
 		db.delete()
 	} catch (error) {
-		return { failed: true, error }
+		console.error(error)
+		return undefined
 	}
 }
 
 export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
-	try {
-		//here I use put so when the user login or registers there won't be any error of "same key/id"
-		const userStored = await putUser(user)
+	//here I use put so when the user login or registers there won't be any error of "same key/id"
+	return Promise.all([putCredentials(credentials), putUser(user)])
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
 
-		const credentialsStored = await putCredentials(credentials)
-
-		return { userStored, credentialsStored }
-	} catch (error) {
-		return { failed: true, error }
-	}
+			return undefined
+		})
 }
 
 export const getCredentials = async () => {
@@ -73,23 +74,31 @@ export const getUser = async () => {
 }
 
 export const putUser = async (user: UserT) => {
-	try {
-		const db = new PasuSewaDatabase()
+	const db = new PasuSewaDatabase()
 
-		return await db.users.put(user)
-	} catch (error) {
-		return { failed: true, error }
-	}
+	return Promise.all([db.users.put(user)])
+		.then((data) => {
+			return data[0]
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
 }
 
 export const putCredentials = async (credentials: CredentialT[]) => {
-	try {
-		const db = new PasuSewaDatabase()
+	const db = new PasuSewaDatabase()
 
-		return await db.credentials.bulkPut(credentials)
-	} catch (error) {
-		return { failed: true, error }
-	}
+	return Promise.all([db.credentials.bulkPut(credentials)])
+		.then((data) => {
+			return data[0]
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
 }
 
 export const putCredential = async (credential: CredentialT) => {

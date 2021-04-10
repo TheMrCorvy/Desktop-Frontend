@@ -107,16 +107,16 @@ const Login: FC = () => {
 		setIsRobot(true)
 	}
 
-	const onAuthSuccess = (res: ApiResponseLoginT) => {
-		initiateDB(res.user_data, res.user_credentials).then((storedData) => {
-			if (storedData.failed) {
-				console.log(storedData)
+	const onAuthSuccess = async (res: ApiResponseLoginT) => {
+		const db = await initiateDB(res.user_data, res.user_credentials)
 
-				setError(true)
-			} else {
-				dispatch(login(res.token))
-			}
-		})
+		if (db === undefined) {
+			setError(true)
+
+			return
+		}
+
+		dispatch(login(res.token))
 	}
 
 	return (
