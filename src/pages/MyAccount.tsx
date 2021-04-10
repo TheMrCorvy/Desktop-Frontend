@@ -55,6 +55,16 @@ const MyAccount: FC = () => {
 		})
 	}, [])
 
+	const isUserAllowed = () => {
+		if (user !== null) {
+			if (user.role === "premium" || user.role === "admin") {
+				return <FeedbackForm />
+			}
+		}
+
+		return null
+	}
+
 	return (
 		<Container maxWidth="xl" className={classes.container}>
 			<Grid container justify="center">
@@ -80,11 +90,7 @@ const MyAccount: FC = () => {
 					</Grid>
 				)}
 			</Grid>
-			{user !== null && (
-				<FeedbackForm
-					allowed={user.role === "premium" || user.role === "admin" ? true : false}
-				/>
-			)}
+			{isUserAllowed()}
 			<Downloads />
 		</Container>
 	)

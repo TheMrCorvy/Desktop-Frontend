@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent, useEffect } from "react"
+import React, { FC, useState, ChangeEvent } from "react"
 
 import { Container, Grid, Typography, Select, MenuItem, TextField, Button } from "@material-ui/core"
 import Rating from "@material-ui/lab/Rating"
@@ -6,9 +6,9 @@ import Rating from "@material-ui/lab/Rating"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
+import { RootState } from "../redux/store"
 
-import { translate } from "../../lang"
+import { translate } from "../lang"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const FeedbackForm = ({ allowed }: { allowed: boolean }) => {
+const FeedbackForm: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [feedbackType, setFeedbackType] = useState("suggestion")
@@ -67,7 +67,7 @@ const FeedbackForm = ({ allowed }: { allowed: boolean }) => {
 		})
 	}
 
-	return !allowed ? null : (
+	return (
 		<Container maxWidth="sm" className={classes.container} data-testid="test_feedback_form">
 			<Grid container justify="center" spacing={4}>
 				<Grid item xs={12}>

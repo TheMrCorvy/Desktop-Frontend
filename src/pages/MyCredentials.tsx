@@ -24,7 +24,7 @@ import FeedbackForm from "../components/FeedbackForm"
 import { CredentialT } from "../misc/types"
 
 /************************************************************************************ ajax */
-import { ApiResponseGetCredentialsT, getCredentialsFromApi } from "../misc/ajaxManager"
+import { ApiResponseGetCredentialsT, getCredentialsFromApi, UserT } from "../misc/ajaxManager"
 
 type Sort = {
 	by: By
@@ -66,6 +66,8 @@ const MyCredentials: FC = () => {
 
 	const dispatch = useDispatch()
 
+	const [user, setUser] = useState<UserT | null>(null)
+
 	const [credentials, setCredentials] = useState<CredentialT[]>([])
 
 	const [availableSlots, setAvailableSlots] = useState<number>(0)
@@ -75,6 +77,14 @@ const MyCredentials: FC = () => {
 	const [snackbarMessage, setSnackbarMessage] = useState("")
 
 	useEffect(() => {
+		getUser().then((user: any) => {
+			if (user !== undefined && !user.failed) {
+				setUser(user)
+			} else {
+				dispatch(showError(translate("error_messages", lng, 0)))
+			}
+		})
+
 		getCredentials().then((data) => {
 			if (data.userData && data.credentials) {
 				setAvailableSlots(data.userData.slots_available)
@@ -145,6 +155,16 @@ const MyCredentials: FC = () => {
 		dispatch(showError(translate("error_messages", lng, 0)))
 	}
 
+	const isUserAllowedToFeedbackForm = () => {
+		if (user !== null) {
+			if (user.role === "premium" || user.role === "admin") {
+				return <FeedbackForm />
+			}
+		}
+
+		return null
+	}
+
 	return (
 		<>
 			<Container
@@ -182,7 +202,7 @@ const MyCredentials: FC = () => {
 					)}
 				</Grid>
 			</Container>
-			<FeedbackForm />
+			{isUserAllowedToFeedbackForm()}
 			<Downloads />
 		</>
 	)
