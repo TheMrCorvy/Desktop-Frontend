@@ -81,18 +81,22 @@ const ViewCredential: FC = (props: any) => {
 		// since the url param is a string, we have to convert it into a number
 		const id = Number(props.match.params.credentialId)
 
-		findCredential(id).then((result: any) => {
-			if (!result || result.error || result === undefined) {
-				setError(true)
-
-				setSnackbarMessage(translate("error_messages", lng, 0))
-
-				console.error(result.error)
-			} else {
-				setCredential(result)
-			}
-		})
+		obtainCredential(id)
 	}, [])
+
+	const obtainCredential = async (id: number) => {
+		const data = await findCredential(id)
+
+		if (data === undefined) {
+			setError(true)
+
+			setSnackbarMessage(translate("error_messages", lng, 0))
+
+			return
+		}
+
+		setCredential(data)
+	}
 
 	const getFromApi = async () => {
 		setError(false)
