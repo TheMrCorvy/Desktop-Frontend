@@ -8,7 +8,7 @@ import FeedbackForm from "./index"
 it("renders properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
-			<FeedbackForm testing />
+			<FeedbackForm allowed={true} />
 		</Provider>
 	)
 
@@ -21,7 +21,7 @@ describe("checking if the user can write properly on the form", () => {
 	it("writes on the text input", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<FeedbackForm testing />
+				<FeedbackForm allowed={true} />
 			</Provider>
 		)
 
@@ -35,7 +35,7 @@ describe("checking if the user can write properly on the form", () => {
 	it("selects the type of feedback", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<FeedbackForm testing />
+				<FeedbackForm allowed={true} />
 			</Provider>
 		)
 

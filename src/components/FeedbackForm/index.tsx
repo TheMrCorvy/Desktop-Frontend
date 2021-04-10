@@ -5,13 +5,10 @@ import Rating from "@material-ui/lab/Rating"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
-import { showError } from "../../redux/actions/errorHandlingActions"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
-
-import { getUser } from "../../misc/indexedDB"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -33,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const FeedbackForm = ({ testing }: { testing?: boolean }) => {
+const FeedbackForm = ({ allowed }: { allowed: boolean }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [feedbackType, setFeedbackType] = useState("suggestion")
@@ -42,33 +39,9 @@ const FeedbackForm = ({ testing }: { testing?: boolean }) => {
 
 	const [feedbackBody, setFeedbackBody] = useState("")
 
-	const [allowed, setAllowed] = useState(true)
-
-	const dispatch = useDispatch()
-
 	const classes = useStyles()
 
 	const maxTxt = 190
-
-	useEffect(() => {
-		const errMsg = translate("error_messages", lng, 0)
-
-		if (!testing) {
-			getUser()
-				.then((user: any) => {
-					if (user === undefined || user.failed) {
-						dispatch(showError(errMsg))
-					} else if (user.role !== "premium") {
-						setAllowed(false)
-					}
-				})
-				.catch(() => {
-					dispatch(showError(errMsg))
-				})
-		} else {
-			setAllowed(true)
-		}
-	})
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
 		setFeedbackType(event.target.value as string)

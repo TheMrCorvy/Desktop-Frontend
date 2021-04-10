@@ -17,6 +17,7 @@ import CredentialCard from "../components/CredentialCard"
 
 import { getUser } from "../misc/indexedDB"
 import RecentAccessTable from "../components/Sections/RecentAccessTable"
+import { UserT } from "../misc/ajaxManager"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const MyAccount: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [availableSlots, setAvailableSlots] = useState(0)
+	const [user, setUser] = useState<UserT | null>(null)
 
 	const classes = useStyles()
 
@@ -47,7 +48,7 @@ const MyAccount: FC = () => {
 	useEffect(() => {
 		getUser().then((user: any) => {
 			if (user !== undefined && !user.failed) {
-				setAvailableSlots(user.slots_available)
+				setUser(user)
 			} else {
 				dispatch(showError(translate("error_messages", lng, 0)))
 			}
@@ -59,7 +60,7 @@ const MyAccount: FC = () => {
 			<Grid container justify="center">
 				<AccessManagement />
 
-				{availableSlots >= 1 && (
+				{user && user.slots_available >= 1 && (
 					<Grid item xs={12} md={10} lg={8} className={classes.availableSlots}>
 						<Grid container spacing={4}>
 							<Grid item xs={12}>
@@ -71,12 +72,19 @@ const MyAccount: FC = () => {
 								</Typography>
 							</Grid>
 
-							<CredentialCard availableSlots={availableSlots} credentials={[]} />
+							<CredentialCard
+								availableSlots={user.slots_available}
+								credentials={[]}
+							/>
 						</Grid>
 					</Grid>
 				)}
 			</Grid>
-			<FeedbackForm />
+			{user !== null && (
+				<FeedbackForm
+					allowed={user.role === "premium" || user.role === "admin" ? true : false}
+				/>
+			)}
 			<Downloads />
 		</Container>
 	)
