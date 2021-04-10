@@ -78,28 +78,23 @@ const MyCredentials: FC = () => {
 	const [snackbarMessage, setSnackbarMessage] = useState("")
 
 	useEffect(() => {
-		getUser().then((user: any) => {
-			if (user !== undefined && !user.failed) {
-				setUser(user)
-			} else {
-				dispatch(showError(translate("error_messages", lng, 0)))
-			}
-		})
-
-		getCredentials().then((data) => {
-			if (data.userData && data.credentials) {
-				setAvailableSlots(data.userData.slots_available)
-
-				setCredentials(data.credentials)
-			} else {
-				setError(true)
-
-				setSnackbarMessage(translate("error_messages", lng, 0))
-
-				console.error(data.error)
-			}
-		})
+		obtainFromDB("credentials")
+		obtainFromDB("user")
 	}, [])
+
+	const obtainFromDB = async (option: string) => {
+		let data: any
+
+		option === "user" ? (data = await getUser()) : (data = await getCredentials())
+
+		if (data === undefined) {
+			dispatch(showError(translate("error_messages", lng, 0)))
+
+			return
+		}
+
+		option === "user" ? setUser(data) : setCredentials(data)
+	}
 
 	const orderBy = (sort: Sort) => {
 		// the [...credentials] is very important, since a sorted array its still the same,

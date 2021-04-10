@@ -45,27 +45,31 @@ export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
 }
 
 export const getCredentials = async () => {
-	try {
-		const db = new PasuSewaDatabase()
+	const db = new PasuSewaDatabase()
 
-		const credentials = await db.credentials.toArray()
+	return Promise.all([db.credentials.toArray()])
+		.then((data) => {
+			return data[0]
+		})
+		.catch((error) => {
+			console.error(error)
 
-		const userData = await db.users.orderBy("id").first()
-
-		return { userData, credentials }
-	} catch (error) {
-		return { failed: true, error }
-	}
+			return undefined
+		})
 }
 
 export const getUser = async () => {
-	try {
-		const db = new PasuSewaDatabase()
+	const db = new PasuSewaDatabase()
 
-		return await db.users.orderBy("id").first()
-	} catch (error) {
-		return { failed: true, error }
-	}
+	return Promise.all([db.users.orderBy("id").first()])
+		.then((data) => {
+			return data[0]
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
 }
 
 export const putUser = async (user: UserT) => {
