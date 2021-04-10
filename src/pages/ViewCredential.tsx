@@ -101,32 +101,25 @@ const ViewCredential: FC = (props: any) => {
 	const getFromApi = async () => {
 		setError(false)
 
-		let localUser = await getUser().then((user: any) => user)
+		const newCredential: { credential: CredentialT } = findCredentialFromApi(token)
 
-		if (localUser === undefined || localUser.failed) {
-			return fatalError(localUser)
-		}
-
-		const newCredential: { credential: CredentialT } = findCredentialFromApi(
-			localUser.id,
-			token
-		)
-
-		putCredential(newCredential.credential).then((result: any) => {
-			if (result.failed) {
-				fatalError(result)
-			}
-		})
+		updateCredential(newCredential.credential)
 
 		setCredential(newCredential.credential)
 	}
 
-	const fatalError = (error: DBErrorT) => {
+	const updateCredential = async (c: CredentialT) => {
+		const data = await putCredential(c)
+
+		if (data === undefined) {
+			fatalError()
+		}
+	}
+
+	const fatalError = () => {
 		setError(true)
 
 		setSnackbarMessage(translate("error_messages", lng, 2))
-
-		console.error({ error })
 
 		dispatch(showError(translate("error_messages", lng, 0)))
 	}

@@ -46,7 +46,7 @@ export const getCredentialsFromApi = (id: number, token: string | null) => {
 	return apiResponse
 }
 
-export const findCredentialFromApi = (id: number, token: string | null) => {
+export const findCredentialFromApi = (token: string | null) => {
 	const { REACT_APP_ENV_LOCAL } = process.env
 
 	let apiResponse: {
