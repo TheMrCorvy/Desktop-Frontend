@@ -91,7 +91,17 @@ export const generateCoinbaseCharge = async (apiKey: string, body: CoinbaseCharg
 	})
 		.then((res) => res.json())
 		.then((data) => {
-			return data.data
+			const res = {
+				success: true,
+				data: data.data,
+			}
+
+			return res
 		})
-		.catch((error: any) => error)
+		.catch((error: any) => {
+			return {
+				successful: false,
+				err: error,
+			}
+		})
 }
