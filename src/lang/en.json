@@ -230,5 +230,29 @@
 	"credential_info": ["Created At", "Updated At", "Last Seen"],
 	"info_is_visible": ["Hide", "Show"],
 	"actions": ["Copy", "Remove"],
-	"copy": ["Text copied to clipboard"]
+	"copy": ["Text copied to clipboard"],
+	"update_role_titles": [
+		"Buy Slots",
+		"Buy Premium",
+		"It is advisable to Read before Paying",
+		"None of these payments are recurring.",
+		"What happens if I don't renew my Premium subscription?",
+		"Payments take time to be credited.",
+		"How do I cancel my Premium subscription?"
+	],
+	"update_role_texts": [
+		"This means, you must manually renew month by month (or by the selected period) your subscription to the Premium role.",
+
+		"You will still have all your credentials stored and backed up in the Cloud, securely encrypted, and you will still be able to export them, but you will not be able to see them within the app.",
+
+		"During the payment process, especially if you choose to pay using cryptocurrencies, it is possible that the accreditation of the payment takes from a few minutes to a few hours.",
+
+		"Please be patient, once you have clicked on the last step, PasuSewa will store your open payment, in order to be verified when necessary.",
+
+		"If you want to cancel your premium subscription, PasuSewa will give you a file with your credentials (decrypted) so that you can keep it in a safe place.",
+
+		"Once you confirm that your credentials are in a safe place, PasuSewa will delete all the credentials in your account, until you have the maximum capacity available (5 slots, or the amount that you have previously purchased).",
+
+		"To remove your Premium role, you can do it from the \"Manage Access\" panel."
+	]
 }

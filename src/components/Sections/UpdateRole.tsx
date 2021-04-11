@@ -8,6 +8,8 @@ import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
+import DialogComponent from "../Dialog"
+
 type Props = {
 	userRole: "free" | "semi-premium" | "premium" | "admin"
 	canBuySlots: boolean
@@ -26,9 +28,17 @@ const useStyles = makeStyles({
 	text: {
 		textAlign: "center",
 	},
+	listItem: {
+		marginBottom: "3rem",
+	},
+	flatBtn: {
+		boxShadow: "none",
+	},
 })
 
 const UpdateRole = ({ userRole, canBuySlots }: Props) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const classes = useStyles()
 
 	if (userRole === "premium") {
@@ -46,7 +56,9 @@ const UpdateRole = ({ userRole, canBuySlots }: Props) => {
 						<Grid item xs={12} md={5} className={classes.text}>
 							<Grid container spacing={4}>
 								<Grid item xs={12}>
-									<Typography variant="h5">Pagar Slots</Typography>
+									<Typography variant="h5">
+										{translate("update_role_titles", lng, 0)}
+									</Typography>
 								</Grid>
 								<Grid item xs={12}>
 									<Button variant="contained" color="secondary" disableElevation>
@@ -75,7 +87,9 @@ const UpdateRole = ({ userRole, canBuySlots }: Props) => {
 				<Grid item xs={12} md={5} className={classes.text}>
 					<Grid container spacing={4}>
 						<Grid item xs={12}>
-							<Typography variant="h5">Pagar Premium</Typography>
+							<Typography variant="h5">
+								{translate("update_role_titles", lng, 1)}
+							</Typography>
 						</Grid>
 						<Grid item xs={12}>
 							<Button variant="contained" color="secondary" disableElevation>
@@ -93,9 +107,55 @@ const UpdateRole = ({ userRole, canBuySlots }: Props) => {
 					<Divider orientation="horizontal" />
 				</Grid>
 				<Grid item>
-					<Button variant="contained" color="secondary" disableElevation>
-						modal
-					</Button>
+					<DialogComponent
+						title={translate("update_role_titles", lng, 2)}
+						tooltipPlacement="bottom"
+						className={classes.flatBtn}
+					>
+						<ul>
+							<li className={classes.listItem}>
+								<Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 3)}
+								</Typography>
+								<Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 0)}
+								</Typography>
+							</li>
+							<li className={classes.listItem}>
+								<Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 4)}
+								</Typography>
+								<Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 1)}
+								</Typography>
+							</li>
+							<li className={classes.listItem}>
+								<Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 5)}
+								</Typography>
+								<Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 2)}
+								</Typography>
+								<Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 3)}
+								</Typography>
+							</li>
+							<li className={classes.listItem}>
+								<Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 6)}
+								</Typography>
+								<Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 4)}
+								</Typography>
+								<Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 5)}
+								</Typography>
+								<Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 6)}
+								</Typography>
+							</li>
+						</ul>
+					</DialogComponent>
 				</Grid>
 			</Grid>
 		</Grid>

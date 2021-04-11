@@ -242,5 +242,29 @@
 	"credential_info": ["Creado", "Actualizado", "Visto por Última Vez"],
 	"info_is_visible": ["Ocultar", "Mostrar"],
 	"actions": ["Copiar", "Eliminar"],
-	"copy": ["Texto copiado al portapapeles"]
+	"copy": ["Texto copiado al portapapeles"],
+	"update_role_titles": [
+		"Pagar Slots",
+		"Pagar Premium",
+		"Es recomendable Leer antes de Pagar",
+		"Ningún pago es recurrente.",
+		"¿Qué pasa si no renuevo mi suscripción Premium?",
+		"Los pagos demoran en acreditarse.",
+		"¿Cómo cancelo mi suscripción Premium?"
+	],
+	"update_role_texts": [
+		"Esto quiere decir, deberás renovar manualmente mes a mes (o por el período seleccionado) tu suscripción al rol Premium.",
+
+		"Todavía tendrás todas tus credenciales almacenadas y respaldadas en la Nube, encriptadas de forma segura, y aún podrás exportarlas, pero no podrás verlas dentro de la app.",
+
+		"Durante el proceso de pago, sobre todo si eliges pagar mediante criptomonedas, es posible que la acreditación del pago demore desde unos minutos, hasta algunas horas.",
+
+		"Por favor se paciente, una vez hecho click en el último paso, PasuSewa almacenará tu orden de pago abierta para ser verificada cuando sea necesario.",
+
+		"Si deseas cancelar tu suscripción premium, PasuSewa te dará un archivo con tus credenciales (desencriptadas) para que lo guardes en un lugar seguro.",
+
+		"Una vez que confirmes que tus credenciales están en un lugar seguro, PasuSewa eliminará todas las credenciales a tu nombre, hasta quedar con la capacidad máxima disponible en tu cuenta (5 espacios, o la cantidad que hayas comprado previamente).",
+
+		"Para remover tu rol Premium, podrás hacerlo desde el panel de \"Administrar Acceso\"."
+	]
 }
