@@ -70,7 +70,7 @@
 		"*****"
 	],
 	"more_info": ["Ver más Información"],
-	"go_back": ["Volver"],
+	"go_back": ["Volver", "Cancelar"],
 	"pricing_title": ["Precios"],
 	"about_prices": ["Acerca de los Precios"],
 	"tier_free": [
@@ -250,7 +250,8 @@
 		"Ningún pago es recurrente.",
 		"¿Qué pasa si no renuevo mi suscripción Premium?",
 		"Los pagos demoran en acreditarse.",
-		"¿Cómo cancelo mi suscripción Premium?"
+		"¿Cómo cancelo mi suscripción Premium?",
+		"Sección de Pagos"
 	],
 	"update_role_texts": [
 		"Esto quiere decir, deberás renovar manualmente mes a mes (o por el período seleccionado) tu suscripción al rol Premium.",
@@ -265,6 +266,12 @@
 
 		"Una vez que confirmes que tus credenciales están en un lugar seguro, PasuSewa eliminará todas las credenciales a tu nombre, hasta quedar con la capacidad máxima disponible en tu cuenta (5 espacios, o la cantidad que hayas comprado previamente).",
 
-		"Para remover tu rol Premium, podrás hacerlo desde el panel de \"Administrar Acceso\"."
-	]
+		"Para remover tu rol Premium, podrás hacerlo desde el panel de \"Administrar Acceso\".",
+
+		"Paquete/s de Espacio/s",
+
+		"Mes/Meses"
+	],
+	"amount": ["Cantidad"],
+	"countinue": ["Continuar"]
 }

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 
 import { Grid, Button, Typography, Divider, Hidden } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
@@ -9,6 +9,7 @@ import { RootState } from "../../redux/store"
 import { translate } from "../../lang"
 
 import DialogComponent from "../Dialog"
+import PurchaseDialog from "../PurchaseDialog"
 
 type Props = {
 	userRole: "free" | "semi-premium" | "premium" | "admin"
@@ -61,14 +62,10 @@ const UpdateRole = ({ userRole, canBuySlots }: Props) => {
 									</Typography>
 								</Grid>
 								<Grid item xs={12}>
-									<Button variant="contained" color="secondary" disableElevation>
-										modal
-									</Button>
+									<PurchaseDialog method="PayPal" type="slots" />
 								</Grid>
 								<Grid item xs={12}>
-									<Button variant="contained" color="secondary" disableElevation>
-										modal
-									</Button>
+									<PurchaseDialog method="Crypto" type="slots" />
 								</Grid>
 							</Grid>
 						</Grid>
@@ -92,14 +89,10 @@ const UpdateRole = ({ userRole, canBuySlots }: Props) => {
 							</Typography>
 						</Grid>
 						<Grid item xs={12}>
-							<Button variant="contained" color="secondary" disableElevation>
-								modal
-							</Button>
+							<PurchaseDialog method="PayPal" type="premium" />
 						</Grid>
 						<Grid item xs={12}>
-							<Button variant="contained" color="secondary" disableElevation>
-								modal
-							</Button>
+							<PurchaseDialog method="Crypto" type="premium" />
 						</Grid>
 					</Grid>
 				</Grid>

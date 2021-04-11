@@ -63,7 +63,7 @@
 		"*****"
 	],
 	"more_info": ["See more Information"],
-	"go_back": ["Go Back"],
+	"go_back": ["Go Back", "Cancel"],
 	"pricing_title": ["Pricing"],
 	"about_prices": ["About the Prices"],
 	"tier_free": [
@@ -97,7 +97,7 @@
 	],
 	"about_slots": [
 		"What are \"Slots\"?",
-		"Let's imagine that you want to store the credentials of a Google account. A Google account may include: an Email, Name, Phone Number, a Security Code, a Backup Email, among others.",
+		"Let's imagine that you want to store the credentials of a Google account. A Google account may include: an Email, Name, 電話番号, a Security Code, a Backup Email, among others.",
 		"Instead of having space only for an Email, a Password, and a Description, like with other password managers, We include all the mentioned credentials, and more, within a Single \"Slot\", in this way each account you enter will consume One Slot that you have available."
 	],
 	"feedback_titles": [
@@ -121,7 +121,7 @@
 		"Anti-Fishing Secret",
 		"Security Code",
 		"名前",
-		"Phone Number",
+		"電話番号",
 		"Confirm",
 		"Main Email Code",
 		"Recovery Email Code",
@@ -238,7 +238,8 @@
 		"None of these payments are recurring.",
 		"What happens if I don't renew my Premium subscription?",
 		"Payments take time to be credited.",
-		"How do I cancel my Premium subscription?"
+		"How do I cancel my Premium subscription?",
+		"Purchase Section"
 	],
 	"update_role_texts": [
 		"This means, you must manually renew month by month (or by the selected period) your subscription to the Premium role.",
@@ -253,6 +254,12 @@
 
 		"Once you confirm that your credentials are in a safe place, PasuSewa will delete all the credentials in your account, until you have the maximum capacity available (5 slots, or the amount that you have previously purchased).",
 
-		"To remove your Premium role, you can do it from the \"Manage Access\" panel."
-	]
+		"To remove your Premium role, you can do it from the \"Manage Access\" panel.",
+
+		"Slot/s Package/s",
+
+		"Month/s"
+	],
+	"amount": ["Amount"],
+	"countinue": ["Continue"]
 }
