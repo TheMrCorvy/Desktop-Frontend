@@ -19,10 +19,16 @@ import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
+import PurchaseButton from "./PurchaseButton"
+
 type Props = {
 	method: Method
 	type: PurchaseType
 }
+
+type Method = "PayPal" | "Crypto"
+
+type PurchaseType = "premium" | "slots"
 
 const useStyles = makeStyles({
 	btn: {
@@ -46,10 +52,6 @@ const useStyles = makeStyles({
 		},
 	},
 })
-
-type Method = "PayPal" | "Crypto"
-
-type PurchaseType = "premium" | "slots"
 
 const PurchaseDialog = ({ method, type }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -102,7 +104,7 @@ const PurchaseDialog = ({ method, type }: Props) => {
 					{translate("update_role_titles", lng, 7)}
 				</DialogTitle>
 				<DialogContent>
-					{step === 1 && (
+					{step === 1 ? (
 						<>
 							<FormControl fullWidth className={classes.formControl}>
 								<InputLabel htmlFor="modal-input" color="secondary">
@@ -136,6 +138,14 @@ const PurchaseDialog = ({ method, type }: Props) => {
 								</Button>
 							</FormControl>
 						</>
+					) : (
+						<PurchaseButton
+							amount={amount}
+							type={type}
+							method={method}
+							goBack={() => setStep(1)}
+							cancelBtn={translate("go_back", lng, 0)}
+						/>
 					)}
 				</DialogContent>
 				<DialogActions>
