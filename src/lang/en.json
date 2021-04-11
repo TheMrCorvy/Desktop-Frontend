@@ -263,5 +263,11 @@
 		"Month/s"
 	],
 	"amount": ["Amount"],
-	"countinue": ["Continue"]
+	"countinue": ["Continue"],
+	"purchase_now": ["Purchase Now"],
+	"purchase_name": ["Package of Slots", "Purchase Premium Role"],
+	"purchase_description": [
+		"Purchase a package of Slots to store your credentials on PasuSewa. You can use one of the following options. Accreditation may take a few hours.",
+		"Purchase access to the PasuSewa Premium role. You can use one of the following options. Accreditation may take a few hours."
+	]
 }

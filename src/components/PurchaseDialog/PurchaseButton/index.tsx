@@ -19,6 +19,7 @@ type Props = {
 	method: "PayPal" | "Crypto"
 	type: "slots" | "premium"
 	goBack: () => void
+	testing?: boolean
 }
 
 const useStyles = makeStyles({
@@ -31,7 +32,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const PurchaseButton = ({ amount, method, type, goBack }: Props) => {
+const PurchaseButton = ({ amount, method, type, goBack, testing }: Props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
@@ -46,13 +47,11 @@ const PurchaseButton = ({ amount, method, type, goBack }: Props) => {
 
 	const [cryptoUrl, setCryptoUrl] = useState("")
 
-	const [cryptoCode, setCryptoCode] = useState("")
-
 	const [loading, setLoading] = useState(true)
 
 	const [error, setError] = useState(false)
 
-	const [isFirstCall, setIsForstCall] = useState(true)
+	const [firstCall, setFirstCall] = useState(true)
 
 	const onSuccess = (details: any) => {
 		console.log("success!")
@@ -101,10 +100,16 @@ const PurchaseButton = ({ amount, method, type, goBack }: Props) => {
 				)
 			}
 		} else {
-			if (REACT_APP_COINBASE_API_KEY) {
+			if (REACT_APP_COINBASE_API_KEY && firstCall) {
+				setFirstCall(false)
+
+				const name = translate("purchase_name", lng, type === "slots" ? 0 : 1)
+
+				const description = translate("purchase_description", lng, type === "slots" ? 0 : 1)
+
 				const charge: CoinbaseChargeT = {
-					name: "testing" + type,
-					description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
+					name,
+					description,
 					local_price: {
 						amount: finalAmount,
 						currency: "USD",
@@ -112,28 +117,19 @@ const PurchaseButton = ({ amount, method, type, goBack }: Props) => {
 					pricing_type: "fixed_price",
 				}
 
-				if (isFirstCall) {
-					setIsForstCall(false)
+				const coinbaseCharge = generateCoinbaseCharge(REACT_APP_COINBASE_API_KEY, charge)
 
-					const coinbaseCharge = generateCoinbaseCharge(
-						REACT_APP_COINBASE_API_KEY,
-						charge
-					)
+				coinbaseCharge.then((data: any) => {
+					if (!data.success) {
+						onError(data.err)
+					} else {
+						setCryptoUrl(data.data.hosted_url)
 
-					coinbaseCharge.then((data: any) => {
-						if (!data.success) {
-							onError(data.err)
-						} else {
-							setCryptoCode(data.data.code)
+						setLoading(false)
 
-							setCryptoUrl(data.data.hosted_url)
-
-							setLoading(false)
-
-							console.log(data.data)
-						}
-					})
-				}
+						console.log(data.data.code)
+					}
+				})
 			}
 
 			return (
@@ -143,7 +139,7 @@ const PurchaseButton = ({ amount, method, type, goBack }: Props) => {
 					{cryptoUrl && (
 						<a href={cryptoUrl} target="_blank" className={classes.link}>
 							<Button variant="contained" color="primary" disableElevation>
-								purchase now
+								{translate("purchase_now", lng)}
 							</Button>
 						</a>
 					)}

@@ -275,5 +275,11 @@
 		"Mes/Meses"
 	],
 	"amount": ["Cantidad"],
-	"countinue": ["Continuar"]
+	"countinue": ["Continuar"],
+	"purchase_now": ["Pagar Ahora"],
+	"purchase_name": ["Paquete de Espacios", "Pagar Rol Premium"],
+	"purchase_description": [
+		"Pagar por un paquete de espacios para almacenar tus credenciales en PasuSewa. Puedes usar una de las siguientes opciones. Es posible que la acreditación se demore algunas horas.",
+		"Pagar por el acceso al rol Premium de PasuSewa. Puedes usar una de las siguientes opciones. Es posible que la acreditación se demore algunas horas."
+	]
 }
