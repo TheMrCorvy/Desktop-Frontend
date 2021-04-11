@@ -107,11 +107,10 @@ const PurchaseDialog = ({ method, type }: Props) => {
 					{step === 1 ? (
 						<>
 							<FormControl fullWidth className={classes.formControl}>
-								<InputLabel htmlFor="modal-input" color="secondary">
+								<InputLabel htmlFor="modal-input">
 									{translate("amount", lng)}
 								</InputLabel>
 								<Input
-									color="secondary"
 									id="modal-input"
 									value={amount}
 									startAdornment={

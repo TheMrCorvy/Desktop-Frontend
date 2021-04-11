@@ -1,6 +1,8 @@
-import React, { useRef } from "react"
+import React from "react"
 
-import { Button } from "@material-ui/core"
+import { Button, Grid } from "@material-ui/core"
+
+import { PayPalButton } from "react-paypal-button-v2"
 
 type Props = {
 	amount: number
@@ -11,49 +13,90 @@ type Props = {
 }
 
 const PurchaseButton = ({ amount, method, type, cancelBtn, goBack }: Props) => {
-	const paypal = useRef<HTMLHeadingElement>(null)
+	const { REACT_APP_ENV_LOCAL, REACT_APP_PAYPAL_CLIENT_ID } = process.env
+
+	const onSuccess = (details: any, data: any) => {
+		console.log("success!")
+		console.log(details)
+		console.log(data)
+	}
+
+	const onError = (error: any) => {
+		console.log("error...")
+		console.log(error)
+	}
 
 	const renderPaymentMethod = () => {
+		const finalAmount = type === "slots" ? amount * 10 : amount * 5
+
 		if (method === "PayPal") {
-			// window.paypal
-			// 	.Buttons({
-			// 		createOrder: (data, actions, err) => {
-			// 			return actions.order.create({
-			// 				intent: "CAPTURE",
-			// 				purchase_units: [
-			// 					{
-			// 						description: "Cool looking table",
-			// 						amount: {
-			// 							currency_code: "USD",
-			// 							value: 650.0,
-			// 						},
-			// 					},
-			// 				],
-			// 			})
-			// 		},
-			// 		onApprove: async (data, actions) => {
-			// 			const order = await actions.order.capture()
-			// 			console.log(order)
-			// 		},
-			// 		onError: (err) => {
-			// 			console.error(err)
-			// 		},
-			// 	})
-			// 	.render(paypal.current)
+			if (REACT_APP_ENV_LOCAL) {
+				return (
+					<PayPalButton
+						amount={finalAmount}
+						shippingPreference="NO_SHIPPING"
+						onSuccess={onSuccess}
+						onError={onError}
+						catchError={onError}
+					/>
+				)
+			} else {
+				return (
+					<PayPalButton
+						amount={finalAmount}
+						shippingPreference="NO_SHIPPING"
+						onSuccess={onSuccess}
+						onError={onError}
+						catchError={onError}
+						options={{
+							clientId: REACT_APP_PAYPAL_CLIENT_ID,
+						}}
+					/>
+				)
+			}
 		} else {
+			return (
+				<>
+					<Button variant="contained" color="primary">
+						crypto
+					</Button>
+				</>
+			)
 		}
 	}
 
 	return (
 		<>
-			<div>
-				<div ref={paypal}></div>
-				{cancelBtn && (
-					<Button variant="contained" color="primary" onClick={() => goBack()}>
-						{cancelBtn}
-					</Button>
-				)}
-			</div>
+			<Grid container justify="center" spacing={2}>
+				<Grid
+					item
+					xs={12}
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						textAlign: "center",
+						alignItems: "center",
+					}}
+				>
+					{renderPaymentMethod()}
+				</Grid>
+				<Grid
+					item
+					xs={12}
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						textAlign: "center",
+						alignItems: "center",
+					}}
+				>
+					{cancelBtn && (
+						<Button variant="contained" color="secondary" onClick={() => goBack()}>
+							{cancelBtn}
+						</Button>
+					)}
+				</Grid>
+			</Grid>
 		</>
 	)
 }
