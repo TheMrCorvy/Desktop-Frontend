@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 
 import { Button, Grid } from "@material-ui/core"
 
 import { PayPalButton } from "react-paypal-button-v2"
+
+import Snackbar from "../../Snackbar"
 
 type Props = {
 	amount: number
@@ -15,15 +17,20 @@ type Props = {
 const PurchaseButton = ({ amount, method, type, cancelBtn, goBack }: Props) => {
 	const { REACT_APP_ENV_LOCAL, REACT_APP_PAYPAL_CLIENT_ID } = process.env
 
-	const onSuccess = (details: any, data: any) => {
+	const [message, setMessage] = useState<string | null>(null)
+
+	const onSuccess = (details: any) => {
 		console.log("success!")
-		console.log(details)
-		console.log(data)
+		console.log("Order id: " + details.id)
+
+		setMessage("pago procesado con exito, por favor espere...")
 	}
 
 	const onError = (error: any) => {
 		console.log("error...")
 		console.log(error)
+
+		setMessage("vaya! parece que hubo un error...")
 	}
 
 	const renderPaymentMethod = () => {
@@ -38,6 +45,7 @@ const PurchaseButton = ({ amount, method, type, cancelBtn, goBack }: Props) => {
 						onSuccess={onSuccess}
 						onError={onError}
 						catchError={onError}
+						data-testid="test_paypal_btn"
 					/>
 				)
 			} else {
@@ -97,6 +105,9 @@ const PurchaseButton = ({ amount, method, type, cancelBtn, goBack }: Props) => {
 					)}
 				</Grid>
 			</Grid>
+			{message && (
+				<Snackbar message={message} open={message ? true : false} duration={45000} />
+			)}
 		</>
 	)
 }
