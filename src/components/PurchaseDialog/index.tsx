@@ -143,7 +143,6 @@ const PurchaseDialog = ({ method, type }: Props) => {
 							type={type}
 							method={method}
 							goBack={() => setStep(1)}
-							cancelBtn={translate("go_back", lng, 0)}
 						/>
 					)}
 				</DialogContent>

@@ -208,8 +208,10 @@
 		"Hay un error en tus datos almacenados, así que te cerraremos la sesión.",
 		"Hubo un error, por favor intente de nuevo más tarde.",
 		"Parace que algo salió mal... Por favor intenta de nuevo más tarde, o intenta contactar con los administradores del sitio/app.",
-		"Hubo un error tratando de instalar la PWA."
+		"Hubo un error tratando de instalar la PWA.",
+		"Vaya! Parece que algo salió mal..."
 	],
+	"success_message": ["Pago acreditado con éxito, por favor espera mientras confirmamos..."],
 	"retry": ["Renintentar"],
 	"feedback_form": [
 		"Deja tu Comentario",

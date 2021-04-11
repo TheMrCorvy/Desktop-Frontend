@@ -2,6 +2,11 @@ import React, { useState } from "react"
 
 import { Button, Grid } from "@material-ui/core"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../../redux/store"
+
+import { translate } from "../../../lang"
+
 import { PayPalButton } from "react-paypal-button-v2"
 
 import Snackbar from "../../Snackbar"
@@ -11,10 +16,11 @@ type Props = {
 	method: "PayPal" | "Crypto"
 	type: "slots" | "premium"
 	goBack: () => void
-	cancelBtn?: string
 }
 
-const PurchaseButton = ({ amount, method, type, cancelBtn, goBack }: Props) => {
+const PurchaseButton = ({ amount, method, type, goBack }: Props) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const { REACT_APP_ENV_LOCAL, REACT_APP_PAYPAL_CLIENT_ID } = process.env
 
 	const [message, setMessage] = useState<string | null>(null)
@@ -23,14 +29,14 @@ const PurchaseButton = ({ amount, method, type, cancelBtn, goBack }: Props) => {
 		console.log("success!")
 		console.log("Order id: " + details.id)
 
-		setMessage("pago procesado con exito, por favor espere...")
+		setMessage(translate("success_message", lng))
 	}
 
 	const onError = (error: any) => {
 		console.log("error...")
 		console.log(error)
 
-		setMessage("vaya! parece que hubo un error...")
+		setMessage(translate("error_messages", lng, 6))
 	}
 
 	const renderPaymentMethod = () => {
@@ -98,11 +104,9 @@ const PurchaseButton = ({ amount, method, type, cancelBtn, goBack }: Props) => {
 						alignItems: "center",
 					}}
 				>
-					{cancelBtn && (
-						<Button variant="contained" color="secondary" onClick={() => goBack()}>
-							{cancelBtn}
-						</Button>
-					)}
+					<Button variant="contained" color="secondary" onClick={() => goBack()}>
+						{translate("go_back", lng, 0)}
+					</Button>
 				</Grid>
 			</Grid>
 			{message && (
