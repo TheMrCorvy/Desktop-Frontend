@@ -67,3 +67,31 @@ export const findCredentialFromApi = (token: string | null) => {
 
 	return apiResponse
 }
+
+export type CoinbaseChargeT = {
+	name: string
+	description: string
+	local_price: {
+		amount: number
+		currency: string
+	}
+	pricing_type: string
+}
+
+export const generateCoinbaseCharge = async (apiKey: string, body: CoinbaseChargeT) => {
+	return await fetch("https://api.commerce.coinbase.com/charges", {
+		method: "POST",
+		mode: "cors",
+		headers: {
+			"Content-Type": "application/json",
+			"X-CC-Version": "2018-03-22",
+			"X-CC-Api-Key": apiKey,
+		},
+		body: JSON.stringify(body),
+	})
+		.then((res) => res.json())
+		.then((data) => {
+			return data.data
+		})
+		.catch((error: any) => error)
+}
