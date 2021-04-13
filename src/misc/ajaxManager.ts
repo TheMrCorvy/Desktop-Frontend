@@ -78,8 +78,8 @@ export type CoinbaseChargeT = {
 	pricing_type: string
 }
 
-export const generateCoinbaseCharge = async (apiKey: string, body: CoinbaseChargeT) => {
-	return await fetch("https://api.commerce.coinbase.com/charges", {
+export const generateCoinbaseCharge = (apiKey: string, body: CoinbaseChargeT) => {
+	return fetch("https://api.commerce.coinbase.com/charges", {
 		method: "POST",
 		mode: "cors",
 		headers: {
@@ -94,6 +94,28 @@ export const generateCoinbaseCharge = async (apiKey: string, body: CoinbaseCharg
 			const res = {
 				success: true,
 				data: data.data,
+			}
+
+			return res
+		})
+		.catch((error: any) => {
+			return {
+				successful: false,
+				err: error,
+			}
+		})
+}
+
+export const getLang = (langId: string) => {
+	return fetch("https://api.jsonbin.io/v3/b/" + langId, {
+		method: "GET",
+		mode: "cors",
+	})
+		.then((res) => res.json())
+		.then((data) => {
+			const res = {
+				success: true,
+				data: data.record,
 			}
 
 			return res

@@ -36,10 +36,13 @@ const Loader: FC = () => {
 			<Grid container justify="center" className={classes.centerAll} spacing={0}>
 				<Grid item xs={12} md={6}>
 					<Typography variant="h4" paragraph gutterBottom>
-						{translate("loading", lng)}
+						Loading... Please wait...
 					</Typography>
 
 					<Skeleton animation="wave" />
+					<Typography variant="h4" paragraph gutterBottom>
+						Cargando... Por favor espere...
+					</Typography>
 				</Grid>
 			</Grid>
 		</Container>
