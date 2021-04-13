@@ -12,7 +12,7 @@ import { RootState } from "../redux/store"
 import { translate } from "../lang"
 
 /************************************************************************************ indexedDB */
-import { DBErrorT, getCredentials, getUser, initiateDB } from "../misc/indexedDB"
+import { getCredentials, getUser, initiateDB } from "../misc/indexedDB"
 
 /************************************************************************************ types & components */
 import OrderBar, { By, Direction } from "../components/OrderBar"
@@ -120,7 +120,7 @@ const MyCredentials: FC = () => {
 		let localUser = await getUser().then((user: any) => user)
 
 		if (localUser === undefined || localUser.failed) {
-			return fatalError(localUser)
+			return fatalError()
 		}
 
 		const newCredentials: ApiResponseGetCredentialsT = getCredentialsFromApi(
@@ -130,23 +130,21 @@ const MyCredentials: FC = () => {
 
 		const user = { ...localUser, availableSlots: newCredentials.slots_available }
 
-		initiateDB(user, newCredentials.user_credentials).then((result: any) => {
-			if (result.failed) {
-				fatalError(result)
-			}
-		})
+		const data = await initiateDB(user, newCredentials.user_credentials)
+
+		if (data === undefined) {
+			fatalError()
+		}
 
 		setAvailableSlots(newCredentials.slots_available)
 
 		setCredentials(newCredentials.user_credentials)
 	}
 
-	const fatalError = (error: DBErrorT) => {
+	const fatalError = () => {
 		setError(true)
 
 		setSnackbarMessage(translate("error_messages", lng, 2))
-
-		console.error({ error })
 
 		dispatch(showError(translate("error_messages", lng, 0)))
 	}

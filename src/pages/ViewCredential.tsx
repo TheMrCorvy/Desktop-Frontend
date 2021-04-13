@@ -14,7 +14,7 @@ import { RootState } from "../redux/store"
 import { translate } from "../lang"
 
 import { CredentialT } from "../misc/types"
-import { findCredential, DBErrorT, getUser, putCredential } from "../misc/indexedDB"
+import { findCredential, putCredential } from "../misc/indexedDB"
 
 import { findCredentialFromApi } from "../misc/ajaxManager"
 

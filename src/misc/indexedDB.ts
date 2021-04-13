@@ -2,11 +2,6 @@ import Dexie, { Table } from "dexie"
 import { CredentialT } from "./types"
 import { UserT } from "./ajaxManager"
 
-export type DBErrorT = {
-	failed: boolean
-	error: any
-}
-
 class PasuSewaDatabase extends Dexie {
 	users!: Table<UserT>
 	credentials!: Table<CredentialT>
@@ -21,7 +16,7 @@ class PasuSewaDatabase extends Dexie {
 	}
 }
 
-export const dropDatabase = (): void | DBErrorT => {
+export const dropDatabase = (): void => {
 	try {
 		const db = new PasuSewaDatabase()
 
