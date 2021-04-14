@@ -22,6 +22,8 @@ type Props = {
 	testing?: boolean
 }
 
+let firstCall = true
+
 const useStyles = makeStyles({
 	link: {
 		textDecoration: "none",
@@ -32,7 +34,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, testing }) => {
+const PurchaseButton: FC<Props> = ({ amount, method, type, goBack }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
@@ -50,8 +52,6 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, testing }) =>
 	const [loading, setLoading] = useState(true)
 
 	const [error, setError] = useState(false)
-
-	const [firstCall, setFirstCall] = useState(true)
 
 	const onSuccess = (details: any) => {
 		console.log("success!")
@@ -74,82 +74,97 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, testing }) =>
 		const finalAmount = type === "slots" ? amount * 10 : amount * 5
 
 		if (method === "PayPal") {
-			if (REACT_APP_ENV_LOCAL) {
-				return (
-					<PayPalButton
-						amount={finalAmount}
-						shippingPreference="NO_SHIPPING"
-						onSuccess={onSuccess}
-						onError={onError}
-						catchError={onError}
-						data-testid="test_paypal_btn"
-					/>
-				)
-			} else {
-				return (
-					<PayPalButton
-						amount={finalAmount}
-						shippingPreference="NO_SHIPPING"
-						onSuccess={onSuccess}
-						onError={onError}
-						catchError={onError}
-						options={{
-							clientId: REACT_APP_PAYPAL_CLIENT_ID,
-						}}
-					/>
-				)
-			}
+			return renderPaypalOption(finalAmount)
 		} else {
-			if (REACT_APP_COINBASE_API_KEY && firstCall) {
-				setFirstCall(false)
+			return renderCryptoOption(finalAmount)
+		}
+	}
 
-				const name = translate("purchase_name", lng, type === "slots" ? 0 : 1)
+	const renderCryptoOption = (finalAmount: number) => {
+		if (REACT_APP_COINBASE_API_KEY && firstCall) {
+			firstCall = false
 
-				const description = translate("purchase_description", lng, type === "slots" ? 0 : 1)
+			const name = translate("purchase_name", lng, type === "slots" ? 0 : 1)
 
-				const charge: CoinbaseChargeT = {
-					name,
-					description,
-					local_price: {
-						amount: finalAmount,
-						currency: "USD",
-					},
-					pricing_type: "fixed_price",
+			const description = translate("purchase_description", lng, type === "slots" ? 0 : 1)
+
+			const charge: CoinbaseChargeT = {
+				name,
+				description,
+				local_price: {
+					amount: finalAmount,
+					currency: "USD",
+				},
+				pricing_type: "fixed_price",
+			}
+
+			const coinbaseCharge = generateCoinbaseCharge(REACT_APP_COINBASE_API_KEY, charge)
+
+			coinbaseCharge.then((data: any) => {
+				if (!data.success) {
+					onError(data.err)
+
+					return null
 				}
 
-				const coinbaseCharge = generateCoinbaseCharge(REACT_APP_COINBASE_API_KEY, charge)
+				setCryptoUrl(data.data.hosted_url)
 
-				coinbaseCharge.then((data: any) => {
-					if (!data.success) {
-						onError(data.err)
-					} else {
-						setCryptoUrl(data.data.hosted_url)
+				setLoading(false)
 
-						setLoading(false)
+				console.log(data.data.code)
+			})
+		}
 
-						console.log(data.data.code)
-					}
-				})
-			}
+		return (
+			<>
+				{loading && <CircularProgress className={classes.marginBottom} />}
 
-			return (
-				<>
-					{loading && <CircularProgress className={classes.marginBottom} />}
-
-					{cryptoUrl && (
+				{cryptoUrl && (
+					<>
 						<a href={cryptoUrl} target="_blank" className={classes.link}>
 							<Button variant="contained" color="primary" disableElevation>
 								{translate("purchase_now", lng)}
 							</Button>
 						</a>
-					)}
-
-					{error && (
 						<Typography variant="body2" className={classes.marginBottom}>
-							{translate("error_messages", lng, 6)}
+							Esta dirección de pago estará disponible solo por 1 hora.
 						</Typography>
-					)}
-				</>
+					</>
+				)}
+
+				{error && (
+					<Typography variant="body2" className={classes.marginBottom}>
+						{translate("error_messages", lng, 6)}
+					</Typography>
+				)}
+			</>
+		)
+	}
+
+	const renderPaypalOption = (finalAmount: number) => {
+		if (REACT_APP_ENV_LOCAL) {
+			return (
+				<PayPalButton
+					amount={finalAmount}
+					shippingPreference="NO_SHIPPING"
+					onSuccess={onSuccess}
+					onError={onError}
+					catchError={onError}
+					data-testid="test_paypal_btn"
+				/>
+			)
+		} else {
+			return (
+				<PayPalButton
+					amount={finalAmount}
+					shippingPreference="NO_SHIPPING"
+					onSuccess={onSuccess}
+					onError={onError}
+					catchError={onError}
+					options={{
+						clientId: REACT_APP_PAYPAL_CLIENT_ID,
+					}}
+				/>
 			)
 		}
 	}
