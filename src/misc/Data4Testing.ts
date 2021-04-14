@@ -176,7 +176,7 @@ export const credential4Testing: CredentialT[] = [
 			security_answer: "42",
 		},
 		security_codes: {
-			unique_security_code: null,
+			unique_security_code: "D7WK29JDU8",
 			multiple_security_codes:
 				" D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 ",
 			multiple_code_length: 11,

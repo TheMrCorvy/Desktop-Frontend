@@ -81,7 +81,7 @@ const ShowInfo: FC<Props> = ({ credential, locked, visible }) => {
 	return (
 		<>
 			{credential.user_name && (
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} data-testid="test_credential_name">
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
@@ -94,7 +94,7 @@ const ShowInfo: FC<Props> = ({ credential, locked, visible }) => {
 				</Grid>
 			)}
 			{credential.email && (
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} data-testid="test_credential_email">
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
@@ -107,7 +107,7 @@ const ShowInfo: FC<Props> = ({ credential, locked, visible }) => {
 				</Grid>
 			)}
 			{credential.password && (
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} data-testid="test_credential_pass">
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
@@ -120,7 +120,7 @@ const ShowInfo: FC<Props> = ({ credential, locked, visible }) => {
 				</Grid>
 			)}
 			{credential.username && (
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} data-testid="test_credential_username">
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
@@ -133,7 +133,7 @@ const ShowInfo: FC<Props> = ({ credential, locked, visible }) => {
 				</Grid>
 			)}
 			{credential.phone_number && (
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} data-testid="test_credential_phone">
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
@@ -146,7 +146,7 @@ const ShowInfo: FC<Props> = ({ credential, locked, visible }) => {
 				</Grid>
 			)}
 			{credential.security_codes?.unique_security_code && (
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} data-testid="test_credential_unique_code">
 					<CredentialProperties
 						visible={visible}
 						locked={locked}
@@ -159,7 +159,7 @@ const ShowInfo: FC<Props> = ({ credential, locked, visible }) => {
 				</Grid>
 			)}
 			{credential.security_question_answer && (
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} data-testid="test_credential_sqa">
 					<CredentialSQA
 						locked={locked}
 						visible={visible}
@@ -169,7 +169,7 @@ const ShowInfo: FC<Props> = ({ credential, locked, visible }) => {
 				</Grid>
 			)}
 			{multipleCodes && (
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} data-testid="test_credential_multiple_code">
 					<CredentialCodes
 						visible={visible}
 						body={multipleCodes}
@@ -179,7 +179,7 @@ const ShowInfo: FC<Props> = ({ credential, locked, visible }) => {
 				</Grid>
 			)}
 			{cryptoAccess && (
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} data-testid="test_credential_crypto_access">
 					<CredentialCodes
 						visible={visible}
 						body={cryptoAccess}
