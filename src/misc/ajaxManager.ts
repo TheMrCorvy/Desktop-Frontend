@@ -92,7 +92,7 @@ export const generateCoinbaseCharge = (apiKey: string, body: CoinbaseChargeT) =>
 		.then((res) => res.json())
 		.then((data) => {
 			const res = {
-				success: true,
+				successful: true,
 				data: data.data,
 			}
 

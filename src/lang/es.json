@@ -281,5 +281,8 @@
 	"purchase_description": [
 		"Pagar por un paquete de espacios para almacenar tus credenciales en PasuSewa. Puedes usar una de las siguientes opciones. Es posible que la acreditación se demore algunas horas.",
 		"Pagar por el acceso al rol Premium de PasuSewa. Puedes usar una de las siguientes opciones. Es posible que la acreditación se demore algunas horas."
+	],
+	"crypto_purchase_warning": [
+		"Advertencia: Esta dirección de pago solo estará disponible por 1 hora."
 	]
 }
