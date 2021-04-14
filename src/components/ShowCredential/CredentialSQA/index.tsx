@@ -101,6 +101,8 @@ const CredentialSQA: FC<Props> = ({ locked, visible, question, answer }) => {
 							fullWidth
 							inputProps={{
 								"data-testid": "test_credential_sqa_question",
+							}}
+							InputProps={{
 								classes: {
 									input: visible ? classes.textColor : "",
 								},
@@ -118,6 +120,8 @@ const CredentialSQA: FC<Props> = ({ locked, visible, question, answer }) => {
 							fullWidth
 							inputProps={{
 								"data-testid": "test_credential_sqa_answer",
+							}}
+							InputProps={{
 								classes: {
 									input: visible ? classes.textColor : "",
 								},

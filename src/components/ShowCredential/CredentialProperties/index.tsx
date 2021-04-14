@@ -91,11 +91,14 @@ const CredentialProperties: FC<Props> = ({
 					value={showProp}
 					onChange={handleChange}
 					fullWidth
-					inputProps={{
-						"data-testid": "test_credential_prop",
+					className={visible ? classes.textColor : ""}
+					InputProps={{
 						classes: {
 							input: visible ? classes.textColor : "",
 						},
+					}}
+					inputProps={{
+						"data-testid": "test_credential_prop",
 					}}
 				/>
 			</AccordionDetails>
