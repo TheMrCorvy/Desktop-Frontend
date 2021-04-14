@@ -69,7 +69,7 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack }) => {
 		}
 
 		if (!REACT_APP_COINBASE_API_KEY && method === "Crypto") {
-			onError("There is no api key for coinbase")
+			onError("There is no api key for coinbase.")
 		}
 	}, [])
 
@@ -120,11 +120,7 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack }) => {
 		setCryptoCode(data.data.code)
 
 		setLoading(false)
-
-		return
 	}
-
-	console.log(cryptoCode)
 
 	const renderCryptoOption = () => {
 		return (
