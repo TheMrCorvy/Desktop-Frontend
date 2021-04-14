@@ -105,25 +105,3 @@ export const generateCoinbaseCharge = (apiKey: string, body: CoinbaseChargeT) =>
 			}
 		})
 }
-
-export const getLang = (langId: string) => {
-	return fetch("https://api.jsonbin.io/v3/b/" + langId, {
-		method: "GET",
-		mode: "cors",
-	})
-		.then((res) => res.json())
-		.then((data) => {
-			const res = {
-				success: true,
-				data: data.record,
-			}
-
-			return res
-		})
-		.catch((error: any) => {
-			return {
-				successful: false,
-				err: error,
-			}
-		})
-}
