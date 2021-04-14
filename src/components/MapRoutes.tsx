@@ -1,4 +1,4 @@
-import React, { lazy } from "react"
+import React, { FC, lazy } from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
 import { RouteType } from "../misc/routes"
 
@@ -10,7 +10,9 @@ import { RootState } from "../redux/store"
 const NotFound = lazy(() => import("../pages/Errors/404"))
 const Error500 = lazy(() => import("../pages/Errors/500"))
 
-export default function RoutesComponent(props: { routes: RouteType[] }) {
+type Props = { routes: RouteType[] }
+
+const RoutesComponent: FC<Props> = (props) => {
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const { err } = useSelector((state: RootState) => state.err)
@@ -49,3 +51,5 @@ export default function RoutesComponent(props: { routes: RouteType[] }) {
 		</>
 	)
 }
+
+export default RoutesComponent

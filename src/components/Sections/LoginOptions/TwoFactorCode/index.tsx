@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from "react"
+import React, { FC, useState, useEffect, ChangeEvent } from "react"
 
 import { useForm } from "react-hook-form"
 
@@ -24,7 +24,7 @@ type FormInputs = {
 	verificationCode: string | number
 }
 
-const TwoFactorCode = ({ onAuthSuccess, endpoint, isRobot, testing }: Props) => {
+const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [formData, setFormData] = useState<FormInputs>({

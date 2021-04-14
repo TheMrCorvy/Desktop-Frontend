@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 
 import { Grid, Button, Typography, Divider, Hidden } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const UpdateRole = ({ userRole, canBuySlots }: Props) => {
+const UpdateRole: FC<Props> = ({ userRole, canBuySlots }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()

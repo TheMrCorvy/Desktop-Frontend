@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 
 import { Container, Divider, Grid, Hidden, Typography, Link } from "@material-ui/core"
 
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const DownloadsPage = () => {
+const DownloadsPage: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()

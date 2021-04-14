@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { FC, ReactElement } from "react"
 
 import { Paper, Zoom, useScrollTrigger, Fab } from "@material-ui/core"
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
@@ -8,6 +8,8 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp"
 import Navbar from "./Navbar"
 import Drawer from "./Navbar/Drawer"
 import Footer from "./Footer"
+
+type Props = { children: ReactElement }
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const Layout = (props: { children: ReactElement }) => {
+const Layout: FC<Props> = (props) => {
 	const classes = useStyles()
 
 	const trigger = useScrollTrigger({

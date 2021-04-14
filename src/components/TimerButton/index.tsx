@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { FC, useState, useEffect } from "react"
 import { Button } from "@material-ui/core"
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 	size?: "small" | "medium" | "large" | undefined
 }
 
-const TimerButton = ({ title, initialTime, color, size }: Props) => {
+const TimerButton: FC<Props> = ({ title, initialTime, color, size }) => {
 	const [time, setTime] = useState(0)
 
 	const [timerIsOn, setTimerIsOn] = useState(false)

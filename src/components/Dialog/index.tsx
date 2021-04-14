@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react"
+import React, { FC, ReactElement, useState } from "react"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
@@ -37,7 +37,13 @@ type Props = {
 	tooltipTitle?: string
 }
 
-const DialogComponent = ({ children, title, tooltipPlacement, className, tooltipTitle }: Props) => {
+const DialogComponent: FC<Props> = ({
+	children,
+	title,
+	tooltipPlacement,
+	className,
+	tooltipTitle,
+}) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)

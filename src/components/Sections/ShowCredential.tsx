@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { CredentialT } from "../../misc/types"
 
 import { Grid, Typography } from "@material-ui/core"
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const ShowCredential = ({ credential }: Props) => {
+const ShowCredential: FC<Props> = ({ credential }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [locked, setLocked] = useState(true)

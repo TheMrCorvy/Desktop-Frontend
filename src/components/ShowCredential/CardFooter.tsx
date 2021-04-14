@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { FC, useState, useEffect } from "react"
 
 import { AccordionActions, Button, Divider } from "@material-ui/core"
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CardFooter = ({ locked, visible, textToCopy }: Props) => {
+const CardFooter: FC<Props> = ({ locked, visible, textToCopy }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [copied, setCopied] = useState(false)

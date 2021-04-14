@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { useForm } from "react-hook-form"
 
 import {
@@ -36,7 +36,7 @@ type FormInputs = {
 	mainEmail?: string
 }
 
-const EmailCode = ({ onAuthSuccess, endpoint, isRobot, isRecovery, testing }: Props) => {
+const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const { register, errors, handleSubmit } = useForm()

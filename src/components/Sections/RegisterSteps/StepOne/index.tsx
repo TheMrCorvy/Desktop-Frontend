@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 
 import {
 	Grid,
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const StepOne = ({ nextStep, isRobot, testing }: Props) => {
+const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const { register, errors, handleSubmit, getValues } = useForm()

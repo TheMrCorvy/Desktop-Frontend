@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 
 import { Container, Grid, Button, Typography, Divider, Hidden } from "@material-ui/core"
 
@@ -11,6 +11,8 @@ import { RootState } from "../../redux/store"
 import { showError } from "../../redux/actions/errorHandlingActions"
 
 import { translate } from "../../lang"
+
+type Props = { alternative?: boolean; testing?: boolean }
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -52,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 let deferredPrompt: any
 
-const Downloads = ({ alternative, testing }: { alternative?: boolean; testing?: boolean }) => {
+const Downloads: FC<Props> = ({ alternative, testing }) => {
 	const classes = useStyles()
 
 	const { lng } = useSelector((state: RootState) => state.lng)

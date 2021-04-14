@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 
 import { Fab, Tooltip } from "@material-ui/core"
 
@@ -15,7 +15,7 @@ type Props = {
 	visible: boolean
 }
 
-const DisplayData = ({ toggleDisplay, visible }: Props): JSX.Element => {
+const DisplayData: FC<Props> = ({ toggleDisplay, visible }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const title = translate("info_is_visible", lng, !visible ? 1 : 0)

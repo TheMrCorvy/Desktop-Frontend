@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 
 import {
 	Typography,
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CredentialSQA = ({ locked, visible, question, answer }: Props) => {
+const CredentialSQA: FC<Props> = ({ locked, visible, question, answer }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()

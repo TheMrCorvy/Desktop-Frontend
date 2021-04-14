@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { Link } from "react-router-dom"
 
 import { Grid, Card, CardActionArea, Avatar, CardContent, Typography } from "@material-ui/core"
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CredentialCard = ({ credentials, availableSlots }: Props) => {
+const CredentialCard: FC<Props> = ({ credentials, availableSlots }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()

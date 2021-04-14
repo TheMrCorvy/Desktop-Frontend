@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 
 import {
 	Typography,
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CredentialProperties = ({
+const CredentialProperties: FC<Props> = ({
 	locked,
 	visible,
 	label,
@@ -53,7 +53,7 @@ const CredentialProperties = ({
 	char_count,
 	ending,
 	body,
-}: Props) => {
+}) => {
 	const classes = useStyles()
 
 	const [showProp, setShowProp] = useState("")

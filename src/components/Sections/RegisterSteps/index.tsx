@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import { Button, Typography, Paper, MobileStepper } from "@material-ui/core"
@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import StepOne from "./StepOne"
 import StepTwo from "./StepTwo"
 import StepThree from "./StepThree"
+
+type Props = { isRobot: boolean }
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const RegisterSteps = ({ isRobot }: { isRobot: boolean }) => {
+const RegisterSteps: FC<Props> = ({ isRobot }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()

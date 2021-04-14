@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 
 import {
 	Card,
@@ -63,7 +63,13 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const PricingCard = ({ title, subtitle, cardElevation, listItems, buttonText }: PricingCardT) => {
+const PricingCard: FC<PricingCardT> = ({
+	title,
+	subtitle,
+	cardElevation,
+	listItems,
+	buttonText,
+}) => {
 	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const muiTheme = useTheme()

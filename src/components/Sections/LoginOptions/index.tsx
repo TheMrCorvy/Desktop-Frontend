@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 import { Button, Grid } from "@material-ui/core"
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const LoginOptions = ({ onAuthSuccess, isRobot, testing, endpointAlt }: Props) => {
+const LoginOptions: FC<Props> = ({ onAuthSuccess, isRobot, testing, endpointAlt }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()

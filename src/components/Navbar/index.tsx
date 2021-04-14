@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { Link } from "react-router-dom"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const Navbar = () => {
+const Navbar: FC = () => {
 	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const { lng } = useSelector((state: RootState) => state.lng)

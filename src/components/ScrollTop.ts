@@ -1,11 +1,11 @@
-import { useEffect } from "react"
+import { FC, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 import { clearError } from "../redux/actions/errorHandlingActions"
 
-export default function ScrollTop() {
+const ScrollTop: FC = () => {
 	const { err } = useSelector((state: RootState) => state.err)
 
 	const dispatch = useDispatch()
@@ -22,3 +22,5 @@ export default function ScrollTop() {
 
 	return null
 }
+
+export default ScrollTop

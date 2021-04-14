@@ -1,4 +1,4 @@
-import react, { useState } from "react"
+import react, { FC, useState } from "react"
 
 import {
 	IconButton,
@@ -33,7 +33,7 @@ type Props = {
 	testing?: boolean
 }
 
-const UnlockData = ({ toggleLock, locked, lockedTitle, unlockedTitle, testing }: Props) => {
+const UnlockData: FC<Props> = ({ toggleLock, locked, lockedTitle, unlockedTitle, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)

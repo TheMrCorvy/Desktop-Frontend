@@ -1,4 +1,4 @@
-import Recat from "react"
+import Recat, { FC } from "react"
 
 import { Card, CardHeader, CardContent, CardActions, Avatar, Typography } from "@material-ui/core"
 
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const OpinionCard = ({ user, date, opinion }: OpinionCardT) => {
+const OpinionCard: FC<OpinionCardT> = ({ user, date, opinion }) => {
 	const classes = useStyles()
 
 	const avatar = user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase()

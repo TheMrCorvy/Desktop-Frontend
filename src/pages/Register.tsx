@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { makeStyles, Theme, createStyles, useTheme } from "@material-ui/core/styles"
 
 import {
@@ -22,6 +22,8 @@ import { translate } from "../lang"
 
 import RegisterSteps from "../components/Sections/RegisterSteps"
 import RegisterDialog from "../components/Sections/RegisterDialog"
+
+type Props = { testing?: boolean }
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -77,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const Register = ({ testing }: { testing?: boolean }) => {
+const Register: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()

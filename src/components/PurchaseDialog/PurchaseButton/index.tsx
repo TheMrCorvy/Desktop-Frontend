@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 
 import { Button, Grid, CircularProgress, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const PurchaseButton = ({ amount, method, type, goBack, testing }: Props) => {
+const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()

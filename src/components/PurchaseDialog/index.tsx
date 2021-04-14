@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react"
+import React, { FC, useState, ChangeEvent } from "react"
 
 import {
 	Dialog,
@@ -53,7 +53,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const PurchaseDialog = ({ method, type }: Props) => {
+const PurchaseDialog: FC<Props> = ({ method, type }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)

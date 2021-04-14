@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 
 import {
@@ -20,6 +20,8 @@ import { RootState } from "../../../redux/store"
 import { translate } from "../../../lang"
 
 import { recentlySeen4Testing } from "../../../misc/Data4Testing"
+
+type Props = { testing?: boolean }
 
 export type RecentlySeenT = {
 	name: string
@@ -53,7 +55,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const RecentAccessTable = ({ testing }: { testing?: boolean }) => {
+const RecentAccessTable: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [credentials, setCredentials] = useState<RecentlySeenT[]>([])

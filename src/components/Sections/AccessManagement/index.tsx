@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 
 import {
 	Card,
@@ -22,6 +22,8 @@ import UnlockData from "../../UnlockData"
 
 import { secretKey4Testing, user4Testing } from "../../../misc/Data4Testing"
 
+type Props = { testing?: boolean }
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		backdrop: {
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const AccessManagement = ({ testing }: { testing?: boolean }) => {
+const AccessManagement: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [locked, setLocked] = useState(true)

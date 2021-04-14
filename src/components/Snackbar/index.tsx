@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { Snackbar as SnackbarMui } from "@material-ui/core"
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 	horizontalPosition?: "center" | "left" | "right"
 }
 
-const Snackbar = ({ message, open, duration, verticalPosition, horizontalPosition }: Props) => {
+const Snackbar: FC<Props> = ({ message, open, duration, verticalPosition, horizontalPosition }) => {
 	//this part is necessary to autohide the snackbar
 	const [isOpen, setIsOpen] = useState<boolean>(open)
 

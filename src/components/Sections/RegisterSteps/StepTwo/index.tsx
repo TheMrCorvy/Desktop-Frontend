@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { Grid, FormControl, InputLabel, OutlinedInput, Button, Typography } from "@material-ui/core"
 
 import { useSelector } from "react-redux"
@@ -18,7 +18,7 @@ type FormInputs = {
 	recoveryEmailCode: number | string
 }
 
-const StepTwo = ({ nextStep, isRobot, testing }: Props) => {
+const StepTwo: FC<Props> = ({ nextStep, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const { register, errors, handleSubmit } = useForm()

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { useForm } from "react-hook-form"
 
 import { Grid, Button, OutlinedInput, InputLabel, FormControl, Typography } from "@material-ui/core"
@@ -26,7 +26,7 @@ type FormInputs = {
 	securityCode: string
 }
 
-const SecurityCode = ({ onAuthSuccess, endpoint, isRobot, testing }: Props) => {
+const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const { register, errors, handleSubmit } = useForm()

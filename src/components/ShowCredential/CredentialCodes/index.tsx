@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 
 import {
 	Typography,
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const CredentialCodes = ({ locked, visible, label, body, isCrypto }: Props) => {
+const CredentialCodes: FC<Props> = ({ locked, visible, label, body, isCrypto }) => {
 	const classes = useStyles()
 
 	const theme = useTheme()

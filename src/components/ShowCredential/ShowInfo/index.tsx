@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 
 import { Grid } from "@material-ui/core"
 
@@ -19,7 +19,7 @@ type Props = {
 	visible: boolean
 }
 
-const ShowInfo = ({ credential, locked, visible }: Props) => {
+const ShowInfo: FC<Props> = ({ credential, locked, visible }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [multipleCodes, setMultipleCodes] = useState<string[] | null>(null)

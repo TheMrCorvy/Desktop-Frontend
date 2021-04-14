@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 
 import { Container, Typography, Grid } from "@material-ui/core"
 
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const Opinions = ({ title, opinions }: Props) => {
+const Opinions: FC<Props> = ({ title, opinions }) => {
 	const classes = useStyles()
 
 	return (

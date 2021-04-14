@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 
 import {
 	Grid,
@@ -56,7 +56,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const StepThree = ({ isRobot, testing, alter }: Props) => {
+const StepThree: FC<Props> = ({ isRobot, testing, alter }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [userData, setUserData] = useState<UserData>({

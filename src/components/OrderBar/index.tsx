@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 
 import { Button, Divider, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
@@ -10,6 +10,10 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
+
+type Props = {
+	sortCredentials: Function
+}
 
 type OrderT = {
 	by: By
@@ -32,7 +36,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const OrderBar = ({ sortCredentials }: { sortCredentials: Function }) => {
+const OrderBar: FC<Props> = ({ sortCredentials }) => {
 	const [order, setOrder] = useState<OrderT>({
 		by: "created_at",
 		arrow: ArrowUpwardIcon,
