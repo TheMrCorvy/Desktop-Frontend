@@ -2,12 +2,12 @@ import Dexie, { Table } from "dexie"
 import { CredentialT } from "./types"
 import { UserT } from "./ajaxManager"
 
-class PasuSewaDatabase extends Dexie {
+class PasuNashiDatabase extends Dexie {
 	users!: Table<UserT>
 	credentials!: Table<CredentialT>
 
 	constructor() {
-		super("PasuSewa")
+		super("PasuNashi")
 		this.version(1).stores({
 			users: "id,name,mainEmail,recoveryEmail,phone,availableSlots,role",
 			credentials:
@@ -18,7 +18,7 @@ class PasuSewaDatabase extends Dexie {
 
 export const dropDatabase = (): void => {
 	try {
-		const db = new PasuSewaDatabase()
+		const db = new PasuNashiDatabase()
 
 		db.delete()
 	} catch (error) {
@@ -41,7 +41,7 @@ export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
 }
 
 export const getCredentials = async () => {
-	const db = new PasuSewaDatabase()
+	const db = new PasuNashiDatabase()
 
 	return Promise.all([db.credentials.toArray()])
 		.then((data) => {
@@ -55,7 +55,7 @@ export const getCredentials = async () => {
 }
 
 export const getUser = async () => {
-	const db = new PasuSewaDatabase()
+	const db = new PasuNashiDatabase()
 
 	return Promise.all([db.users.orderBy("id").first()])
 		.then((data) => {
@@ -69,7 +69,7 @@ export const getUser = async () => {
 }
 
 export const putUser = async (user: UserT) => {
-	const db = new PasuSewaDatabase()
+	const db = new PasuNashiDatabase()
 
 	return Promise.all([db.users.put(user)])
 		.then((data) => {
@@ -83,7 +83,7 @@ export const putUser = async (user: UserT) => {
 }
 
 export const putCredentials = async (credentials: CredentialT[]) => {
-	const db = new PasuSewaDatabase()
+	const db = new PasuNashiDatabase()
 
 	return Promise.all([db.credentials.bulkPut(credentials)])
 		.then((data) => {
@@ -97,7 +97,7 @@ export const putCredentials = async (credentials: CredentialT[]) => {
 }
 
 export const putCredential = async (credential: CredentialT) => {
-	const db = new PasuSewaDatabase()
+	const db = new PasuNashiDatabase()
 
 	return Promise.all([db.credentials.put(credential)])
 		.then((data) => {
@@ -111,7 +111,7 @@ export const putCredential = async (credential: CredentialT) => {
 }
 
 export const findCredential = async (credentialId: number) => {
-	const db = new PasuSewaDatabase()
+	const db = new PasuNashiDatabase()
 
 	return Promise.all([db.credentials.get(credentialId)])
 		.then((data) => {

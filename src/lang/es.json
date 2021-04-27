@@ -1,5 +1,5 @@
 {
-	"app_name": ["PasuSewa"],
+	"app_name": ["PasuNashi"],
 	"home": ["Inicio"],
 	"translate": ["Traducir"],
 	"navbar_login_btn": ["Ingresar"],
@@ -12,10 +12,10 @@
 	"install": ["Instalar"],
 	"desktop": ["Escritorio"],
 	"web_version": ["Versión Web"],
-	"landing_title": ["¿Qué es PasuSewa?"],
+	"landing_title": ["¿Qué es PasuNashi?"],
 	"landing_texts": [
-		"PasuSewa es el gestor de contraseñas más completo que puedas encontrar en la web.",
-		"\"PasuSewa\" proviene de la frase",
+		"PasuNashi es el gestor de contraseñas más completo que puedas encontrar en la web.",
+		"\"PasuNashi\" proviene de la frase",
 		"「私たちはあなたのパスワードの世話をします。」",
 		"(watashitachi wa anata no pasuwaado no sewa o shimasu)",
 		"Que luego fue contraida a",
@@ -23,7 +23,7 @@
 		"(pasuwaado sewa)",
 		"Y por último",
 		"「パス世話」",
-		"(PasuSewa)"
+		"(PasuNashi)"
 	],
 	"about_title": ["¿Cómo Funciona?"],
 	"about_subtitle": ["¿Qué es eso de \"Secciones Sensibles\"?"],
@@ -109,10 +109,10 @@
 	],
 	"feedback_titles": [
 		"¿En qué estamos trabajando actualmente?",
-		"¿Qué opinan los usuarios de PasuSewa?"
+		"¿Qué opinan los usuarios de PasuNashi?"
 	],
 	"footer_texts": [
-		"PasuSewa es un proyecto de Código Abierto, con el objetivo de mantener la privacidad, y falicitar la vida de nuestros usuarios en internet.",
+		"PasuNashi es un proyecto de Código Abierto, con el objetivo de mantener la privacidad, y falicitar la vida de nuestros usuarios en internet.",
 		"La idea de este proyecto es siempre tratar de quitarle un peso de encima a nuestros usuarios, custodiando sus contraseñas, enseñando diferentes técnicas para mantener tu privacidad online, entre otros."
 	],
 	"loading": ["Cargando, por favor espere..."],
@@ -182,13 +182,13 @@
 	"anti_fishing_texts": [
 		"¿Qué es un \"Secreto Anti-Fishing\"?",
 		"Una técnica de hacking muy conocida es el llamado \"fishing\", en el cual un impostor te envía un email (solo por dar un ejemplo) haciendose pasar por la empresa o la persona real, pidiendo alguna clase de información.",
-		"Por ejemplo, imagina que un día recibes un email de PasuSewa diciendo que necesitamos verificar tu identidad, y para eso se te pide que respondas con algún código de seguridad. Al hacer esto le estarás dando acceso total a tu cuenta a quien sea que está del otro lado.",
-		"Para evitar eso, cada vez que recibas una notificación de PasuSewa, dentro de dicha notificación se incluirá una palabra secreta que solo tú conoces. Dicha palabra secreta es el \"Secreto Anti-Fishing\".",
+		"Por ejemplo, imagina que un día recibes un email de PasuNashi diciendo que necesitamos verificar tu identidad, y para eso se te pide que respondas con algún código de seguridad. Al hacer esto le estarás dando acceso total a tu cuenta a quien sea que está del otro lado.",
+		"Para evitar eso, cada vez que recibas una notificación de PasuNashi, dentro de dicha notificación se incluirá una palabra secreta que solo tú conoces. Dicha palabra secreta es el \"Secreto Anti-Fishing\".",
 		"Ya que un impostor no sabrá cuál es tu palabra secreta, no podrá incluirla en el medio por el cual te haya contactado, y así sabrás que no estás hablando con la empresa o la persona original."
 	],
 	"downloads_page_titles": ["Otras Descargas que Recomendamos", "Privacidad", "Seguridad"],
 	"downloads_page_texts": [
-		"En PasuSewa nos preocupamos por nuestros usuarios, después de todo, la idea original detrás del proyecto era el poder facilitarle la vida a las personas. Es por eso que decidimos ir un paso más allá, y tratar de enseñar un mínimo sobre cómo y porqué proteger mejor la privacidad de nuestros usuarios en línea.",
+		"En PasuNashi nos preocupamos por nuestros usuarios, después de todo, la idea original detrás del proyecto era el poder facilitarle la vida a las personas. Es por eso que decidimos ir un paso más allá, y tratar de enseñar un mínimo sobre cómo y porqué proteger mejor la privacidad de nuestros usuarios en línea.",
 		"En esta sección podrás encontrar algunas apps y consejos útiles para mantener tu privacidad y seguridad en línea.",
 		"Ninguna de las Apps o servicios mencionados esponsorean ni patrocinan lo dicho en esta página.",
 		"En terminos de privacidad hay muchas opciones, como usar algún VPN, o un navegador que no registre las Cookies, etc. Pero aquí nos vamos a concentrar en 3 apps o servicios específicos que te resultarán muy útiles para mantener tu privacidad en Internet.",
@@ -262,11 +262,11 @@
 
 		"Durante el proceso de pago, sobre todo si eliges pagar mediante criptomonedas, es posible que la acreditación del pago demore desde unos minutos, hasta algunas horas.",
 
-		"Por favor se paciente, una vez hecho click en el último paso, PasuSewa almacenará tu orden de pago abierta para ser verificada cuando sea necesario.",
+		"Por favor se paciente, una vez hecho click en el último paso, PasuNashi almacenará tu orden de pago abierta para ser verificada cuando sea necesario.",
 
-		"Si deseas cancelar tu suscripción premium, PasuSewa te dará un archivo con tus credenciales (desencriptadas) para que lo guardes en un lugar seguro.",
+		"Si deseas cancelar tu suscripción premium, PasuNashi te dará un archivo con tus credenciales (desencriptadas) para que lo guardes en un lugar seguro.",
 
-		"Una vez que confirmes que tus credenciales están en un lugar seguro, PasuSewa eliminará todas las credenciales a tu nombre, hasta quedar con la capacidad máxima disponible en tu cuenta (5 espacios, o la cantidad que hayas comprado previamente).",
+		"Una vez que confirmes que tus credenciales están en un lugar seguro, PasuNashi eliminará todas las credenciales a tu nombre, hasta quedar con la capacidad máxima disponible en tu cuenta (5 espacios, o la cantidad que hayas comprado previamente).",
 
 		"Para remover tu rol Premium, podrás hacerlo desde el panel de \"Administrar Acceso\".",
 
@@ -279,8 +279,8 @@
 	"purchase_now": ["Pagar Ahora"],
 	"purchase_name": ["Paquete de Espacios", "Pagar Rol Premium"],
 	"purchase_description": [
-		"Pagar por un paquete de espacios para almacenar tus credenciales en PasuSewa. Puedes usar una de las siguientes opciones. Es posible que la acreditación se demore algunas horas.",
-		"Pagar por el acceso al rol Premium de PasuSewa. Puedes usar una de las siguientes opciones. Es posible que la acreditación se demore algunas horas."
+		"Pagar por un paquete de espacios para almacenar tus credenciales en PasuNashi. Puedes usar una de las siguientes opciones. Es posible que la acreditación se demore algunas horas.",
+		"Pagar por el acceso al rol Premium de PasuNashi. Puedes usar una de las siguientes opciones. Es posible que la acreditación se demore algunas horas."
 	],
 	"crypto_purchase_warning": [
 		"Advertencia: Esta dirección de pago solo estará disponible por 1 hora."
