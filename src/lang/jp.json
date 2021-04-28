@@ -271,5 +271,10 @@
 	],
 	"crypto_purchase_warning": [
 		"Warning: This cryptocurrency address will be available only for 1 hour."
+	],
+	"stop_premium": [
+		"Stop Premium Subscription",
+		"If you cancel your premium subscription, パスなし will still save all your credentials and passwords, with the disadvantage that (once the valid period of your subscription is over) you will no longer be able to see your credentials decrypted, but you can export them at any time to have them available when you need them.",
+		"パスなし will only prevent you from seeing your credentials if the amount of them exceeds the amount currently available in your account. For example, if you bought 5 slots, then went to Premium and loaded 30 credentials, at the end of your Premium subscription you should delete 20 credentials since you'd still have available the 5 extra slots that you previously purchased (plus the 5 included in the Free plan)."
 	]
 }

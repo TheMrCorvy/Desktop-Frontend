@@ -283,5 +283,10 @@
 	],
 	"crypto_purchase_warning": [
 		"Advertencia: Esta dirección de pago solo estará disponible por 1 hora."
+	],
+	"stop_premium": [
+		"Dejar de ser Premium",
+		"Si cancelas tu suscripción Premium PasuNashi aún guardará todas tus credenciales y contraseñas, con la desventaja de que (una vez finalizado el período válido de tu suscripción) ya no podrás ver tus credenciales desencriptadas, pero sí podrás exportarlas en todo momento para tenerlas disponibles cuando las necesites.",
+		"PasuNashi solo te impedirá ver tus credenciales si la cantidad de las mismas a tu nombre, supera la cantidad disponible en tu cuenta actualmente. Es decir, si compraste 5 espacios, luego fuiste a Premium y cargaste 30 credenciales, al finalizar tu suscripción Premium deberás eliminar 20 credenciales ya que todavía tendrias disponible los 5 espacios extra que compraste previamente (más los 5 incluídos en el plan Free)."
 	]
 }

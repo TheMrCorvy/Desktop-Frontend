@@ -3,6 +3,11 @@ import React, { FC } from "react"
 import { Button, Grid, Typography } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+
+import { translate } from "../../lang"
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		stopPremiumBtn: {
@@ -16,32 +21,21 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const StopPremium: FC = () => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const classes = useStyles()
 
 	return (
 		<Grid item xs={12} style={{ marginTop: 25, textAlign: "center" }}>
 			<Grid container spacing={4}>
 				<Grid item xs={12}>
-					<Typography variant="h5">Dejar de ser Premium</Typography>
+					<Typography variant="h5">{translate("stop_premium", lng, 0)}</Typography>
 				</Grid>
 				<Grid item xs={12}>
-					<Typography variant="body2">
-						Si cancelas tu suscripción premium PasuNashi aún guardará todas tus
-						credenciales y contraseñas, con la desventaja de que (una vez finalizado el
-						período válido de tu suscripción) ya no podrás ver tus credenciales, pero sí
-						podrás exportarlas en todo momento para tenerlas disponibles cuando las
-						necesites.
-					</Typography>
+					<Typography variant="body2">{translate("stop_premium", lng, 1)}</Typography>
 				</Grid>
 				<Grid item xs={12}>
-					<Typography variant="body2">
-						PasuNashi solo te impedirá ver tus credenciales si la cantidad de las mismas
-						a tu nombre, supera la cantidad disponible en tu cuenta actualmente. Es
-						decir, si compraste 5 espacios, luego fuiste a premium y cargaste 30
-						credenciales, al finalizar tu suscripción premium deberás eliminar 20
-						credenciales ya que todavía tendrias disponible los 5 espacios extra que
-						compraste previamente (más los 5 incluídos en el plan Free).
-					</Typography>
+					<Typography variant="body2">{translate("stop_premium", lng, 2)}</Typography>
 				</Grid>
 				<Grid item xs={12}>
 					<Button
@@ -50,7 +44,7 @@ const StopPremium: FC = () => {
 						color="secondary"
 						className={classes.stopPremiumBtn}
 					>
-						DEJAR DE SER PREMIUM
+						{translate("stop_premium", lng, 0)}
 					</Button>
 				</Grid>
 			</Grid>
