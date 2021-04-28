@@ -11,7 +11,7 @@ import { RootState } from "../../redux/store"
 import { translate } from "../../lang"
 
 type Props = {
-	toggleDisplay: (agent: string) => void
+	toggleDisplay: () => void
 	visible: boolean
 }
 
@@ -20,21 +20,11 @@ const DisplayData: FC<Props> = ({ toggleDisplay, visible }) => {
 
 	const title = translate("info_is_visible", lng, !visible ? 1 : 0)
 
-	const getUserAgent = () => {
-		const userAgentInfo = navigator.userAgent
-
-		const variosStrings = userAgentInfo.split("(")
-
-		const stringFinal = variosStrings[1].split(")")
-
-		toggleDisplay(stringFinal[0])
-	}
-
 	return (
 		<Tooltip title={title} placement="right">
 			<Fab
 				color="secondary"
-				onClick={() => getUserAgent()}
+				onClick={() => toggleDisplay()}
 				data-testid="test_visibility_btn"
 				size="small"
 				style={{ boxShadow: "none" }}

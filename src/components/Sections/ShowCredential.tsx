@@ -43,14 +43,16 @@ const ShowCredential: FC<Props> = ({ credential }) => {
 
 	const classes = useStyles()
 
-	const toggleVisibility = (agent: string) => {
+	const toggleVisibility = () => {
 		if (!locked && visible) {
 			setLocked(true)
 		}
 
-		setVisible(!visible)
-
-		console.log(agent)
+		if (!visible) {
+			getDecryptedCredential().then(() => setVisible(true))
+		} else {
+			setVisible(false)
+		}
 	}
 
 	const toggleLock = () => {
@@ -58,7 +60,27 @@ const ShowCredential: FC<Props> = ({ credential }) => {
 			setVisible(true)
 		}
 
-		setLocked(!locked)
+		if (locked) {
+			getDecryptedCredential().then(() => setLocked(false))
+		} else {
+			setLocked(true)
+		}
+	}
+
+	const getDecryptedCredential = async () => {
+		const agent = await Promise.resolve(getUserAgent())
+
+		console.log(agent)
+	}
+
+	const getUserAgent = () => {
+		const userAgentInfo = navigator.userAgent
+
+		const multipleStrings = userAgentInfo.split("(")
+
+		const finalStrings = multipleStrings[1].split(")")
+
+		return finalStrings[0]
 	}
 
 	return (
