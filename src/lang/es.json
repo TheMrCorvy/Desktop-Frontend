@@ -245,7 +245,7 @@
 	"actions": ["Copiar", "Eliminar"],
 	"copy": ["Texto copiado al portapapeles"],
 	"update_role_titles": [
-		"Pagar Slots",
+		"Pagar Espacios",
 		"Pagar Premium",
 		"Es recomendable Leer antes de Pagar",
 		"Ningún pago es recurrente.",
