@@ -8,6 +8,7 @@ import {
 	TextField,
 	Backdrop,
 	CircularProgress,
+	Button,
 } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
@@ -19,6 +20,7 @@ import { translate } from "../../../lang"
 
 import StepThree from "../RegisterSteps/StepThree"
 import UnlockData from "../../UnlockData"
+import StopPremium from "../StopPremium"
 
 import { secretKey4Testing, user4Testing } from "../../../misc/Data4Testing"
 
@@ -35,6 +37,15 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		marginTop: {
 			marginTop: "3rem",
+		},
+		textCenter: {
+			textAlign: "center",
+		},
+		exportBtn: {
+			backgroundColor: theme.palette.type === "dark" ? "#1fad2c" : "#1ebd2d",
+			"&:hover": {
+				backgroundColor: theme.palette.type === "dark" ? "#15a122" : "#1cad29",
+			},
 		},
 	})
 )
@@ -142,16 +153,30 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 									fullWidth
 								/>
 							</Grid>
+
 							{!locked && !testing && (
-								<Grid item xs={12} className={classes.marginTop}>
-									<StepThree
-										isRobot={false}
-										alter={{
-											email: user4Testing.email,
-											secretKey: secretKey4Testing,
-										}}
-									/>
-								</Grid>
+								<>
+									<Grid item xs={12} className={classes.textCenter}>
+										<Button
+											variant="contained"
+											disableElevation
+											color="primary"
+											className={classes.exportBtn}
+										>
+											Export Credentials
+										</Button>
+									</Grid>
+									<Grid item xs={12} className={classes.marginTop}>
+										<StepThree
+											isRobot={false}
+											alter={{
+												email: user4Testing.email,
+												secretKey: secretKey4Testing,
+											}}
+										/>
+									</Grid>
+									{user4Testing.role === "premium" && <StopPremium />}
+								</>
 							)}
 						</Grid>
 					</CardContent>

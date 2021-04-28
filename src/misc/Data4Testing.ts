@@ -40,7 +40,7 @@ export const user4Testing: UserT = {
 	recovery_email: "email_2@gmail.com",
 	phone_number: "+54 011 1234-5678",
 	slots_available: 2,
-	role: "admin",
+	role: "premium",
 	id: 100,
 	anti_fishing_secret: "@Leonard1618",
 }
