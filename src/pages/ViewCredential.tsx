@@ -4,8 +4,6 @@ import { Container, Grid, Typography, Button } from "@material-ui/core"
 
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-
 /************************************************************************************ redux related */
 import { showError } from "../redux/actions/errorHandlingActions"
 import { useSelector, useDispatch } from "react-redux"
