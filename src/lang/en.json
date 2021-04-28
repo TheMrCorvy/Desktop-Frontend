@@ -112,10 +112,10 @@
 	"continue": ["Continue"],
 	"error_404": ["Page Not Found"],
 	"login_subtitle": ["Please check that you are visiting the correct URL"],
-	"login_options": ["Verification Code", "Email", "Recovery Email", "Security Code"],
+	"login_options": ["2 Factor Code", "Email", "Recovery Email", "Security Code"],
 	"auth_form_texts": [
 		"Email",
-		"Verification Code",
+		"2 Factor Code",
 		"Main Email",
 		"Recovery Email",
 		"Anti-Fishing Secret",

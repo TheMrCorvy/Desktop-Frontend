@@ -120,14 +120,14 @@
 	"error_404": ["Página No Encontrada"],
 	"login_subtitle": ["Por favor, comprueba que estás visitando la URL correcta"],
 	"login_options": [
-		"Código de Verificación",
+		"Código de Doble Factor",
 		"Email",
 		"Email de Recuperación",
 		"Código de Seguridad"
 	],
 	"auth_form_texts": [
 		"Email",
-		"Código de Verificación",
+		"Código de Doble Factor",
 		"Email Principal",
 		"Email de Recuperación",
 		"Secreto Anti-Fishing",
