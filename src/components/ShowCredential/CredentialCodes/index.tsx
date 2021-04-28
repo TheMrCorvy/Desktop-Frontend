@@ -59,6 +59,8 @@ const CredentialCodes: FC<Props> = ({ locked, visible, label, body, isCrypto }) 
 		}
 	}
 
+	const textToCopy = !isCrypto ? body[0] : body.join(" ")
+
 	return (
 		<Accordion defaultExpanded style={{ borderRadius: 8 }} data-testid="test_credential_codes">
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -83,7 +85,7 @@ const CredentialCodes: FC<Props> = ({ locked, visible, label, body, isCrypto }) 
 					))}
 				</Grid>
 			</AccordionDetails>
-			<CardFooter locked={locked} visible={visible} textToCopy={body[0]} />
+			<CardFooter locked={locked} visible={visible} textToCopy={textToCopy} />
 		</Accordion>
 	)
 }
