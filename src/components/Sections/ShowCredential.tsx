@@ -17,6 +17,7 @@ import ShowInfo from "../ShowCredential/ShowInfo"
 
 type Props = {
 	credential: CredentialT
+	getDecryptedCredential: (decrypted: true, agent: string) => Promise<any>
 }
 
 const useStyles = makeStyles({
@@ -34,7 +35,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const ShowCredential: FC<Props> = ({ credential }) => {
+const ShowCredential: FC<Props> = ({ credential, getDecryptedCredential }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [locked, setLocked] = useState(true)
@@ -49,7 +50,7 @@ const ShowCredential: FC<Props> = ({ credential }) => {
 		}
 
 		if (!visible) {
-			getDecryptedCredential().then(() => setVisible(true))
+			getDecryptedCredential(true, getUserAgent()).then(() => setVisible(true))
 		} else {
 			setVisible(false)
 		}
@@ -61,16 +62,10 @@ const ShowCredential: FC<Props> = ({ credential }) => {
 		}
 
 		if (locked) {
-			getDecryptedCredential().then(() => setLocked(false))
+			getDecryptedCredential(true, getUserAgent()).then(() => setLocked(false))
 		} else {
 			setLocked(true)
 		}
-	}
-
-	const getDecryptedCredential = async () => {
-		const agent = await Promise.resolve(getUserAgent())
-
-		console.log(agent)
 	}
 
 	const getUserAgent = () => {

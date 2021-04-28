@@ -46,7 +46,7 @@ export const getCredentialsFromApi = (id: number, token: string | null) => {
 	return apiResponse
 }
 
-export const findCredentialFromApi = (token: string | null) => {
+export const findCredentialFromApi = (token: string | null, decrypted: boolean, agent?: string) => {
 	const { REACT_APP_ENV_LOCAL } = process.env
 
 	let apiResponse: {
@@ -54,15 +54,19 @@ export const findCredentialFromApi = (token: string | null) => {
 	}
 
 	if (REACT_APP_ENV_LOCAL) {
-		apiResponse = {
-			credential: credential4Testing[0],
-		}
-	} else {
 		//i'm going to leave this until i'll start making the api
+
 		apiResponse = {
 			credential: credential4Testing[0],
 		}
+
 		console.log("getting the fresh data, using the token: " + token)
+		console.log(`It was a petition for the credential ${decrypted ? "decripted" : "encrypted"}`)
+		console.log("user agent was (if required): " + agent)
+	} else {
+		apiResponse = {
+			credential: credential4Testing[0],
+		}
 	}
 
 	return apiResponse

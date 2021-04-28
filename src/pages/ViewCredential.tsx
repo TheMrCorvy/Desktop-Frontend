@@ -98,10 +98,14 @@ const ViewCredential: FC = (props: any) => {
 		setCredential(data)
 	}
 
-	const getFromApi = async () => {
+	const getFromApi = async (decrypted: boolean, agent?: string) => {
 		setError(false)
 
-		const newCredential: { credential: CredentialT } = findCredentialFromApi(token)
+		const newCredential: { credential: CredentialT } = await findCredentialFromApi(
+			token,
+			decrypted,
+			agent
+		)
 
 		updateCredential(newCredential.credential)
 
@@ -138,7 +142,7 @@ const ViewCredential: FC = (props: any) => {
 								className={classes.errorBtn}
 								disableElevation
 								size="large"
-								onClick={getFromApi}
+								onClick={() => getFromApi(false)}
 							>
 								{translate("retry", lng)}
 							</Button>
@@ -146,7 +150,7 @@ const ViewCredential: FC = (props: any) => {
 						<Snackbar open={error} message={snackbarMessage} />
 					</>
 				) : (
-					<ShowCredential credential={credential} />
+					<ShowCredential credential={credential} getDecryptedCredential={getFromApi} />
 				)}
 			</Grid>
 		</Container>
