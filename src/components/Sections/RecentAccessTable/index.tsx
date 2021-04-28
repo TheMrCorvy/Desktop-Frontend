@@ -25,13 +25,12 @@ type Props = { testing?: boolean }
 
 export type RecentlySeenT = {
 	name: string
-	recently_seen: string
+	last_seen: string
 	id: 1
 	created_at: string
 	updated_at: string
-	coords: string
-	device: string
-	version: string
+	accessing_device: string
+	accessing_platform: string
 }
 
 const useStyles = makeStyles({
@@ -94,20 +93,17 @@ const RecentAccessTable: FC<Props> = ({ testing }) => {
 							<Table className={classes.table} size="small">
 								<TableHead>
 									<TableRow>
-										<TableCell align="center">
+										<TableCell align="left">
 											{translate("recently_seen", lng, 1)}
 										</TableCell>
-										<TableCell align="center">
+										<TableCell align="left">
 											{translate("recently_seen", lng, 2)}
 										</TableCell>
-										<TableCell align="center">
+										<TableCell align="left">
 											{translate("recently_seen", lng, 3)}
 										</TableCell>
-										<TableCell align="center">
+										<TableCell align="right">
 											{translate("recently_seen", lng, 4)}
-										</TableCell>
-										<TableCell align="center">
-											{translate("recently_seen", lng, 5)}
 										</TableCell>
 									</TableRow>
 								</TableHead>
@@ -125,27 +121,24 @@ const RecentAccessTable: FC<Props> = ({ testing }) => {
 												>
 													{credential.name}
 												</TableCell>
-												<TableCell align="right">
-													{credential.recently_seen}
+												<TableCell align="left">
+													{credential.last_seen}
 												</TableCell>
-												<TableCell align="right">
-													{credential.coords}
-												</TableCell>
-												<TableCell align="right">
-													{credential.device}
+												<TableCell align="left">
+													{credential.accessing_device}
 												</TableCell>
 												<TableCell
 													align="right"
 													className={classes.textCapitalize}
 												>
-													{credential.version}
+													{credential.accessing_platform}
 												</TableCell>
 											</TableRow>
 										))
 									) : (
 										<TableRow>
 											<TableCell colSpan={5}>
-												{translate("recently_seen", lng, 6)}
+												{translate("recently_seen", lng, 5)}
 											</TableCell>
 										</TableRow>
 									)}
@@ -154,7 +147,7 @@ const RecentAccessTable: FC<Props> = ({ testing }) => {
 						</TableContainer>
 						{credentials.length >= 1 && (
 							<Typography variant="body2" className={classes.subTitle}>
-								{translate("recently_seen", lng, 7)}
+								{translate("recently_seen", lng, 6)}
 							</Typography>
 						)}
 					</>

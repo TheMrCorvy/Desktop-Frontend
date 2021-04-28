@@ -192,12 +192,11 @@ export const credential4Testing: CredentialT[] = [
 export const recentlySeen4Testing: RecentlySeenT[] = [
 	{
 		name: "test 1",
-		recently_seen: "2021-02-23 17:32:23",
+		last_seen: "2021-02-23 17:32:23",
 		id: 1,
 		created_at: "2021-02-15 17:32:23",
 		updated_at: "2021-02-15 17:32:23",
-		coords: "78.829345, -12.846204",
-		device: "Macintosh; Intel Mac OS X 11_2_3",
-		version: "web",
+		accessing_device: "Macintosh; Intel Mac OS X 11_2_3",
+		accessing_platform: "web",
 	},
 ]
