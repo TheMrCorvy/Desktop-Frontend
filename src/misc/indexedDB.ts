@@ -123,3 +123,17 @@ export const findCredential = async (credentialId: number) => {
 			return undefined
 		})
 }
+
+export const forgetCredential = async (credentialId: number) => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.all([db.credentials.where("id").equals(credentialId).delete()])
+		.then((data) => {
+			return data[0]
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}

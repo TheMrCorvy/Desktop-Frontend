@@ -9,6 +9,8 @@ import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
+import { forgetCredential } from "../../misc/indexedDB"
+
 type Props = {
 	credentialId: number
 	testing?: boolean
@@ -19,8 +21,13 @@ const DeleteCredential: FC<Props> = ({ credentialId, testing }) => {
 
 	const [open, setOpen] = useState(false)
 
-	const deleteCredential = () => {
+	const deleteCredential = async () => {
+		let data: any
+
+		data = await forgetCredential(credentialId)
+
 		console.log(credentialId)
+		console.log(data)
 
 		setOpen(false)
 	}
