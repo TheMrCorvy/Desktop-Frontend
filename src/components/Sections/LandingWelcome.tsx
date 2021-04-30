@@ -117,28 +117,21 @@ const LandingWelcome: FC = () => {
 							¿Por qué necesitas un gestor de contraseñas?
 						</Typography>
 						<Typography paragraph gutterBottom variant="body2">
-							El peor enemigo de la productividad es tener que recordar todas tus
-							contraseñas.
+							Aumenta tu productividad quitando todas tus contraseñas de tu memoria.
 						</Typography>
-						<Typography paragraph gutterBottom variant="body2">
-							La memoria humana no es infalible, por lo cual, lo que la mayría de la
-							gente suele hacer es usar nombres y fechas fáciles de recordar para así
-							no olvidarlas, lo que implica hacer que éstas sean fáciles de deducir.
-						</Typography>
+
 						<Typography
 							variant="h5"
 							gutterBottom
 							paragraph
-							className={classes.secondarySpacing}
+							className={classes.mainSpacing}
 						>
-							¿En qué es diferente PasuNashi de los demás servicios que existen en la
-							web?
+							¿Por qué usar PasuNashi?
 						</Typography>
 						<Typography gutterBottom paragraph variant="body2">
-							El mundo está dando un giro hacia el abandono de las contraseñas, pero
-							aún no es posible abandonarlas completamente. Aquí es donde entra
-							PasuNashi, aportando su granito de arena en la batalla por el abandono
-							de todas las contraseñas
+							Gracias a PasuNashi no tendrás que recordar ni siquiera una sola
+							contraseña maestra ya que utiliza la autenticación de 2 factores para
+							mantener tus credenciales a salvo.
 						</Typography>
 					</CardContent>
 					<CardActions className={classes.cardActions}>
