@@ -275,5 +275,6 @@
 		"パスなし will only prevent you from seeing your credentials if the amount of them exceeds the amount currently available in your account. For example, if you bought 5 slots, then went to Premium and loaded 30 credentials, at the end of your Premium subscription you should delete 20 credentials since you'd still have available the 5 extra slots that you previously purchased (plus the 5 included in the Free plan)."
 	],
 	"delete_credential_confirmation": ["Are you sure you want to delete this credential?"],
-	"delete": ["Delete"]
+	"delete": ["Delete"],
+	"edit_codes": ["Edit Codes"]
 }

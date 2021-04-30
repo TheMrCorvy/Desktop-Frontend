@@ -17,6 +17,7 @@ import LockIcon from "@material-ui/icons/Lock"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 import CardFooter from "../CardFooter"
+import EditCredentialCodes from "./EditCredentialCodes"
 
 type Props = {
 	locked: boolean
@@ -83,6 +84,7 @@ const CredentialCodes: FC<Props> = ({ locked, visible, label, body, isCrypto }) 
 							/>
 						</Grid>
 					))}
+					{!locked && <EditCredentialCodes codes={body} />}
 				</Grid>
 			</AccordionDetails>
 			<CardFooter locked={locked} visible={visible} textToCopy={textToCopy} />

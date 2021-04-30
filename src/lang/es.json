@@ -287,5 +287,6 @@
 		"PasuNashi solo te impedirá ver tus credenciales si la cantidad de las mismas a tu nombre, supera la cantidad disponible en tu cuenta actualmente. Es decir, si compraste 5 espacios, luego fuiste a Premium y cargaste 30 credenciales, al finalizar tu suscripción Premium deberás eliminar 20 credenciales ya que todavía tendrias disponible los 5 espacios extra que compraste previamente (más los 5 incluídos en el plan Free)."
 	],
 	"delete_credential_confirmation": ["¿Estás seguro que deseas eliminar esta credencial?"],
-	"delete": ["Borrar"]
+	"delete": ["Borrar"],
+	"edit_codes": ["Editar Códigos"]
 }
