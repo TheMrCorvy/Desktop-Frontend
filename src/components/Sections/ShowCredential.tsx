@@ -14,6 +14,7 @@ import UnlockData from "../UnlockData"
 import DisplayData from "../DisplayData"
 import GoBackBtn from "../GoBackBtn"
 import ShowInfo from "../ShowCredential/ShowInfo"
+import DeleteCredential from "../DeleteCredential"
 
 type Props = {
 	credential: CredentialT
@@ -145,6 +146,11 @@ const ShowCredential: FC<Props> = ({ credential, getDecryptedCredential }) => {
 							<Grid item>
 								<DisplayData toggleDisplay={toggleVisibility} visible={visible} />
 							</Grid>
+							{!locked && (
+								<Grid item>
+									<DeleteCredential credentialId={credential.id} />
+								</Grid>
+							)}
 							<Grid item className={classes.lockIcon}>
 								<UnlockData
 									toggleLock={toggleLock}
