@@ -1,4 +1,5 @@
 import React, { FC, useState } from "react"
+import { useHistory } from "react-router-dom"
 
 import { IconButton, Tooltip, Button, Dialog, DialogActions, DialogTitle } from "@material-ui/core"
 
@@ -21,6 +22,8 @@ const DeleteCredential: FC<Props> = ({ credentialId, testing }) => {
 
 	const [open, setOpen] = useState(false)
 
+	const history = useHistory()
+
 	const deleteCredential = async () => {
 		let data: any
 
@@ -30,6 +33,8 @@ const DeleteCredential: FC<Props> = ({ credentialId, testing }) => {
 		console.log(data)
 
 		setOpen(false)
+
+		history.goBack()
 	}
 
 	const openDialog = () => {
