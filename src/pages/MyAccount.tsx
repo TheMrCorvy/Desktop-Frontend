@@ -17,8 +17,10 @@ import CredentialCard from "../components/CredentialCard"
 
 import { getUser, getCredentials } from "../misc/indexedDB"
 import RecentAccessTable from "../components/Sections/RecentAccessTable"
-import { UserT } from "../misc/ajaxManager"
 import UpdateRole from "../components/Sections/UpdateRole"
+import CopyInvitationCode from "../components/Sections/CopyInvitationCode"
+
+import { UserT } from "../misc/ajaxManager"
 import { CredentialT } from "../misc/types"
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -79,8 +81,11 @@ const MyAccount: FC = () => {
 	}
 
 	const canBuySlots = () => {
+		// user exists?
 		if (user !== null) {
+			// user is already premium?
 			if (user.role !== "premium") {
+				// user can purchase more slots?
 				if (user.slots_available + credentials.length < 20) {
 					return true
 				}
@@ -94,6 +99,12 @@ const MyAccount: FC = () => {
 		<Container maxWidth="xl" className={classes.container}>
 			<Grid container justify="center">
 				<AccessManagement />
+
+				{user && (
+					<Grid item xs={12} md={6} lg={5} className={classes.availableSlots}>
+						<CopyInvitationCode code={user.invitation_code} />
+					</Grid>
+				)}
 
 				{user && user.slots_available >= 1 && (
 					<Grid item xs={12} md={10} lg={8} className={classes.availableSlots}>

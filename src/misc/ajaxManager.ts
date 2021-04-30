@@ -10,6 +10,7 @@ export type UserT = {
 	id: number
 	phone_number: string
 	anti_fishing_secret: string
+	invitation_code: string
 }
 
 export type ApiResponseLoginT = {

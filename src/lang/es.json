@@ -241,6 +241,7 @@
 	"info_is_visible": ["Ocultar", "Mostrar"],
 	"actions": ["Copiar", "Eliminar"],
 	"copy": ["Texto copiado al portapapeles"],
+	"click_to_copy": ["Click para Copiar"],
 	"update_role_titles": [
 		"Pagar Espacios",
 		"Pagar Premium",
@@ -288,5 +289,6 @@
 	],
 	"delete_credential_confirmation": ["¿Estás seguro que deseas eliminar esta credencial?"],
 	"delete": ["Borrar"],
-	"edit_codes": ["Editar Códigos"]
+	"edit_codes": ["Editar Códigos"],
+	"invitation_code": ["Código de Invitación"]
 }

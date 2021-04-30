@@ -229,6 +229,7 @@
 	"info_is_visible": ["かくす", "見る"],
 	"actions": ["Copy", "Remove"],
 	"copy": ["Text copied to clipboard"],
+	"click_to_copy": ["Click to Copy"],
 	"update_role_titles": [
 		"Buy Slots",
 		"Buy Premium",
@@ -276,5 +277,6 @@
 	],
 	"delete_credential_confirmation": ["Are you sure you want to delete this credential?"],
 	"delete": ["Delete"],
-	"edit_codes": ["Edit Codes"]
+	"edit_codes": ["Edit Codes"],
+	"invitation_code": ["Invitation Code"]
 }
