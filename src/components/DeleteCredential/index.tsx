@@ -47,7 +47,7 @@ const DeleteCredential: FC<Props> = ({ credentialId, testing }) => {
 
 	return (
 		<>
-			<Tooltip title="Delete" placement="bottom">
+			<Tooltip title={translate("delete", lng)} placement="bottom">
 				<IconButton aria-label="delete" color="primary" onClick={openDialog}>
 					<DeleteIcon />
 				</IconButton>
@@ -59,14 +59,14 @@ const DeleteCredential: FC<Props> = ({ credentialId, testing }) => {
 				aria-describedby="alert-dialog-description"
 			>
 				<DialogTitle id="alert-dialog-title">
-					Are you sure you want to delete this credential?
+					{translate("delete_credential_confirmation", lng)}
 				</DialogTitle>
 				<DialogActions>
 					<Button onClick={closeDialog} color="secondary">
 						{translate("go_back", lng)}
 					</Button>
 					<Button onClick={deleteCredential} color="primary" autoFocus>
-						Delete
+						{translate("delete", lng)}
 					</Button>
 				</DialogActions>
 			</Dialog>
