@@ -109,43 +109,36 @@ const LandingWelcome: FC = () => {
 							{translate("landing_texts", lng, 0)}
 						</Typography>
 						<Typography
-							variant="subtitle2"
+							variant="h5"
 							gutterBottom
+							paragraph
 							className={classes.mainSpacing}
 						>
-							{translate("landing_texts", lng, 1)}
-
-							<Tooltip placement="top" title={translate("landing_texts", lng, 3)}>
-								<Typography component="span">
-									{translate("landing_texts", lng, 2)}
-								</Typography>
-							</Tooltip>
+							¿Por qué necesitas un gestor de contraseñas?
+						</Typography>
+						<Typography paragraph gutterBottom variant="body2">
+							El peor enemigo de la productividad es tener que recordar todas tus
+							contraseñas.
+						</Typography>
+						<Typography paragraph gutterBottom variant="body2">
+							La memoria humana no es infalible, por lo cual, lo que la mayría de la
+							gente suele hacer es usar nombres y fechas fáciles de recordar para así
+							no olvidarlas, lo que implica hacer que éstas sean fáciles de deducir.
 						</Typography>
 						<Typography
-							variant="subtitle2"
+							variant="h5"
 							gutterBottom
+							paragraph
 							className={classes.secondarySpacing}
 						>
-							{translate("landing_texts", lng, 4)}
-
-							<Tooltip placement="top" title={translate("landing_texts", lng, 6)}>
-								<Typography component="span">
-									{translate("landing_texts", lng, 5)}
-								</Typography>
-							</Tooltip>
+							¿En qué es diferente PasuNashi de los demás servicios que existen en la
+							web?
 						</Typography>
-						<Typography
-							variant="subtitle2"
-							gutterBottom
-							className={classes.secondarySpacing}
-						>
-							{translate("landing_texts", lng, 7)}
-
-							<Tooltip placement="top" title={translate("landing_texts", lng, 9)}>
-								<Typography component="span">
-									{translate("landing_texts", lng, 8)}
-								</Typography>
-							</Tooltip>
+						<Typography gutterBottom paragraph variant="body2">
+							El mundo está dando un giro hacia el abandono de las contraseñas, pero
+							aún no es posible abandonarlas completamente. Aquí es donde entra
+							PasuNashi, aportando su granito de arena en la batalla por el abandono
+							de todas las contraseñas
 						</Typography>
 					</CardContent>
 					<CardActions className={classes.cardActions}>
