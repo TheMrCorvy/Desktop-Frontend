@@ -21,6 +21,8 @@ import { translate } from "../../../lang"
 
 import { recentlySeen4Testing } from "../../../misc/Data4Testing"
 
+import { getRecentlySeen, putRecentlySeen } from "../../../misc/indexedDB"
+
 type Props = { testing?: boolean }
 
 export type RecentlySeenT = {
@@ -65,22 +67,42 @@ const RecentAccessTable: FC<Props> = ({ testing }) => {
 
 	useEffect(() => {
 		if (!testing) {
-			//fake api call on component did mount
-			const fakeTimer = setTimeout(() => {
-				setCredentials(recentlySeen4Testing)
-
-				setLoading(false)
-			}, 4000)
-
-			return () => {
-				clearTimeout(fakeTimer)
-			}
+			obtainRecentAccess()
 		} else {
 			setCredentials(recentlySeen4Testing)
 
 			setLoading(false)
 		}
 	}, [])
+
+	const obtainRecentAccess = async () => {
+		let data: any
+
+		data = await getRecentlySeen()
+
+		if (data === undefined) {
+			return getFromApi()
+		}
+
+		setCredentials(data)
+
+		setLoading(false)
+	}
+
+	const getFromApi = async () => {
+		//fake api call on component did mount
+		const fakeTimer = setTimeout(() => {
+			setCredentials(recentlySeen4Testing)
+
+			putRecentlySeen(recentlySeen4Testing)
+
+			setLoading(false)
+		}, 4000)
+
+		return () => {
+			clearTimeout(fakeTimer)
+		}
+	}
 
 	return (
 		<Card className={classes.card} elevation={2} data-testid="test_recently_seen_table">

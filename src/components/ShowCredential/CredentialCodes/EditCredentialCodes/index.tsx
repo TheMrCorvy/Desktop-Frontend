@@ -4,7 +4,7 @@ import { Button, Grid } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
 
 import { translate } from "../../../../lang"

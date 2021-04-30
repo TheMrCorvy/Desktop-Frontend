@@ -1,10 +1,13 @@
 import Dexie, { Table } from "dexie"
+
 import { CredentialT } from "./types"
 import { UserT } from "./ajaxManager"
+import { RecentlySeenT } from "../components/Sections/RecentAccessTable"
 
 class PasuNashiDatabase extends Dexie {
 	users!: Table<UserT>
 	credentials!: Table<CredentialT>
+	recently_seen!: Table<RecentlySeenT>
 
 	constructor() {
 		super("PasuNashi")
@@ -12,6 +15,8 @@ class PasuNashiDatabase extends Dexie {
 			users: "id,name,mainEmail,recoveryEmail,phone,availableSlots,role",
 			credentials:
 				"id,user_id,company_id,company_name,logo_url,description,last_seen,recently_seen,email,password,username,phone_number,security_question_answer,security_codes,created_at,updated_at",
+			recently_seen:
+				"id,name,last_seen,created_at,updated_at,accessing_device,accessing_platform",
 		})
 	}
 }
@@ -128,6 +133,38 @@ export const forgetCredential = (credentialId: number) => {
 	const db = new PasuNashiDatabase()
 
 	return Promise.resolve(db.credentials.where("id").equals(credentialId).delete())
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+export const getRecentlySeen = () => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.recently_seen.toArray())
+		.then((data) => {
+			if (data.length === 0) {
+				return undefined
+			} else {
+				return data
+			}
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+export const putRecentlySeen = (recent: RecentlySeenT[]) => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.recently_seen.bulkPut(recent))
 		.then((data) => {
 			return data
 		})
