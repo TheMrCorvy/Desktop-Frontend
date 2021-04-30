@@ -27,7 +27,7 @@ export const dropDatabase = (): void => {
 	}
 }
 
-export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
+export const initiateDB = (user: UserT, credentials: CredentialT[]) => {
 	//here I use put so when the user login or registers there won't be any error of "same key/id"
 	return Promise.all([putCredentials(credentials), putUser(user)])
 		.then((data) => {
@@ -40,12 +40,12 @@ export const initiateDB = async (user: UserT, credentials: CredentialT[]) => {
 		})
 }
 
-export const getCredentials = async () => {
+export const getCredentials = () => {
 	const db = new PasuNashiDatabase()
 
-	return Promise.all([db.credentials.toArray()])
+	return Promise.resolve(db.credentials.toArray())
 		.then((data) => {
-			return data[0]
+			return data
 		})
 		.catch((error) => {
 			console.error(error)
@@ -54,12 +54,12 @@ export const getCredentials = async () => {
 		})
 }
 
-export const getUser = async () => {
+export const getUser = () => {
 	const db = new PasuNashiDatabase()
 
-	return Promise.all([db.users.orderBy("id").first()])
+	return Promise.resolve(db.users.orderBy("id").first())
 		.then((data) => {
-			return data[0]
+			return data
 		})
 		.catch((error) => {
 			console.error(error)
@@ -68,12 +68,12 @@ export const getUser = async () => {
 		})
 }
 
-export const putUser = async (user: UserT) => {
+export const putUser = (user: UserT) => {
 	const db = new PasuNashiDatabase()
 
-	return Promise.all([db.users.put(user)])
+	return Promise.resolve(db.users.put(user))
 		.then((data) => {
-			return data[0]
+			return data
 		})
 		.catch((error) => {
 			console.error(error)
@@ -82,12 +82,12 @@ export const putUser = async (user: UserT) => {
 		})
 }
 
-export const putCredentials = async (credentials: CredentialT[]) => {
+export const putCredentials = (credentials: CredentialT[]) => {
 	const db = new PasuNashiDatabase()
 
-	return Promise.all([db.credentials.bulkPut(credentials)])
+	return Promise.resolve(db.credentials.bulkPut(credentials))
 		.then((data) => {
-			return data[0]
+			return data
 		})
 		.catch((error) => {
 			console.error(error)
@@ -96,12 +96,12 @@ export const putCredentials = async (credentials: CredentialT[]) => {
 		})
 }
 
-export const putCredential = async (credential: CredentialT) => {
+export const putCredential = (credential: CredentialT) => {
 	const db = new PasuNashiDatabase()
 
-	return Promise.all([db.credentials.put(credential)])
+	return Promise.resolve(db.credentials.put(credential))
 		.then((data) => {
-			return data[0]
+			return data
 		})
 		.catch((error) => {
 			console.error(error)
@@ -110,12 +110,12 @@ export const putCredential = async (credential: CredentialT) => {
 		})
 }
 
-export const findCredential = async (credentialId: number) => {
+export const findCredential = (credentialId: number) => {
 	const db = new PasuNashiDatabase()
 
-	return Promise.all([db.credentials.get(credentialId)])
+	return Promise.resolve(db.credentials.get(credentialId))
 		.then((data) => {
-			return data[0]
+			return data
 		})
 		.catch((error) => {
 			console.error(error)
@@ -124,12 +124,12 @@ export const findCredential = async (credentialId: number) => {
 		})
 }
 
-export const forgetCredential = async (credentialId: number) => {
+export const forgetCredential = (credentialId: number) => {
 	const db = new PasuNashiDatabase()
 
-	return Promise.all([db.credentials.where("id").equals(credentialId).delete()])
+	return Promise.resolve(db.credentials.where("id").equals(credentialId).delete())
 		.then((data) => {
-			return data[0]
+			return data
 		})
 		.catch((error) => {
 			console.error(error)
