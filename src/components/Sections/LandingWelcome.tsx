@@ -97,12 +97,12 @@ const LandingWelcome: FC = () => {
 					<CardContent>
 						<Hidden xsDown>
 							<Typography variant="h3" gutterBottom>
-								{translate("landing_title", lng)}
+								{translate("landing_titles", lng, 0)}
 							</Typography>
 						</Hidden>
 						<Hidden smUp>
 							<Typography variant="h4" gutterBottom>
-								{translate("landing_title", lng)}
+								{translate("landing_titles", lng, 0)}
 							</Typography>
 						</Hidden>
 						<Typography variant="subtitle1" gutterBottom>
@@ -114,10 +114,10 @@ const LandingWelcome: FC = () => {
 							paragraph
 							className={classes.mainSpacing}
 						>
-							¿Por qué necesitas un gestor de contraseñas?
+							{translate("landing_titles", lng, 1)}
 						</Typography>
 						<Typography paragraph gutterBottom variant="body2">
-							Aumenta tu productividad quitando todas tus contraseñas de tu memoria.
+							{translate("landing_texts", lng, 1)}
 						</Typography>
 
 						<Typography
@@ -126,12 +126,10 @@ const LandingWelcome: FC = () => {
 							paragraph
 							className={classes.mainSpacing}
 						>
-							¿Por qué usar PasuNashi?
+							{translate("landing_titles", lng, 2)}
 						</Typography>
 						<Typography gutterBottom paragraph variant="body2">
-							Gracias a PasuNashi no tendrás que recordar ni siquiera una sola
-							contraseña maestra ya que utiliza la autenticación de 2 factores para
-							mantener tus credenciales a salvo.
+							{translate("landing_texts", lng, 2)}
 						</Typography>
 					</CardContent>
 					<CardActions className={classes.cardActions}>

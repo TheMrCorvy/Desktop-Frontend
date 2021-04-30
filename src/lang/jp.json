@@ -12,18 +12,15 @@
 	"install": ["Install"],
 	"desktop": ["Desktop"],
 	"web_version": ["Web Version"],
-	"landing_title": ["What is パスなし?"],
+	"landing_titles": [
+		"What is パスなし?",
+		"Why do I need a Passowrd Manager?",
+		"Why would I use パスなし?"
+	],
 	"landing_texts": [
 		"パスなし is the most complete password manager on the Web.",
-		"\"パスなし\" comes from the phrase ",
-		"「私たちはあなたのパスワードの世話をします。」",
-		"(watashitachi wa anata no pasuwaado no sewa o shimasu)",
-		"Then it was shortened to",
-		"「パスワード世話。」",
-		"(pasuwaado sewa)",
-		"And lastly to",
-		"「ﾊﾟｽなし」",
-		"(パスなし)"
+		"Improve your productivity by removing all your passwords from your head.",
+		"Thanks to パスなし you won't even have to remember a single master password as we use 2-factor authentication to keep your credentials safe."
 	],
 	"about_title": ["How does this works?"],
 	"about_subtitle": ["What are the \"Vulnerable Sections\"?"],

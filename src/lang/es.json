@@ -12,18 +12,15 @@
 	"install": ["Instalar"],
 	"desktop": ["Escritorio"],
 	"web_version": ["Versión Web"],
-	"landing_title": ["¿Qué es PasuNashi?"],
+	"landing_titles": [
+		"¿Qué es PasuNashi?",
+		"¿Por qué necesitas un gestor de contraseñas?",
+		"¿Por qué usar PasuNashi?"
+	],
 	"landing_texts": [
 		"PasuNashi es el gestor de contraseñas más completo que puedas encontrar en la web.",
-		"\"PasuNashi\" proviene de la frase",
-		"「私たちはあなたのパスワードの世話をします。」",
-		"(watashitachi wa anata no pasuwaado no sewa o shimasu)",
-		"Que luego fue contraida a",
-		"「パスワード世話。」",
-		"(pasuwaado sewa)",
-		"Y por último",
-		"「パス世話」",
-		"(PasuNashi)"
+		"Aumenta tu productividad quitando todas tus contraseñas de tu memoria.",
+		"Gracias a PasuNashi no tendrás que recordar ni siquiera una sola contraseña maestra ya que utiliza la autenticación de 2 factores para mantener tus credenciales a salvo."
 	],
 	"about_title": ["¿Cómo Funciona?"],
 	"about_subtitle": ["¿Qué es eso de \"Secciones Sensibles\"?"],
