@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, ChangeEvent, useState } from "react"
 
 import {
 	Button,
@@ -55,16 +55,26 @@ const EditCredentialCodes: FC<Props> = ({ codes }) => {
 		setOpen(false)
 	}
 
-	const removeCode = (i: number) => {
-		let editedArray: string[] = []
+	const removeCode = (code: string) => {
+		const editedArray: string[] = []
 
-		for (let index = 0; index < editingCodes.length; index++) {
-			if (index !== i) {
-				editedArray.push(editingCodes[index])
+		editingCodes.forEach((codeValue) => {
+			if (codeValue !== code) {
+				editedArray.push(codeValue)
 			}
-		}
+		})
 
 		setEditingCodes(editedArray)
+	}
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const newArray = [...editingCodes]
+
+		const index = Number(e.target.id)
+
+		newArray[index] = e.target.value
+
+		setEditingCodes(newArray)
 	}
 
 	return (
@@ -95,9 +105,10 @@ const EditCredentialCodes: FC<Props> = ({ codes }) => {
 								<FormControl variant="outlined" fullWidth>
 									<InputLabel>{index + 1}</InputLabel>
 									<OutlinedInput
-										id={index + "-" + code}
-										defaultValue={code}
+										id={`${index}`}
 										label={`${index + 1}`}
+										value={code}
+										onChange={handleChange}
 										endAdornment={
 											<InputAdornment position="end">
 												<Tooltip
@@ -106,7 +117,7 @@ const EditCredentialCodes: FC<Props> = ({ codes }) => {
 												>
 													<IconButton
 														aria-label="delete code"
-														onClick={() => removeCode(index)}
+														onClick={() => removeCode(code)}
 													>
 														<DeleteIcon />
 													</IconButton>
