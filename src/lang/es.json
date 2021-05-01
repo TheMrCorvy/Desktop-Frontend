@@ -137,7 +137,8 @@
 		"Contraseña",
 		"Nombre de Usuario",
 		"Código de Seguridad Único",
-		"Nombre Registrado"
+		"Nombre Registrado",
+		"(Opcional)"
 	],
 	"before_using_security_code": [
 		"El código de seguridad que ingreses solo funcionará una única vez, asegurate de renovarlo apenas ingreses."

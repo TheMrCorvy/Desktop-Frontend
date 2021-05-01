@@ -213,7 +213,6 @@ const StepThree: FC<Props> = ({ isRobot, testing, alter }) => {
 										{userData.secretKey}
 									</Typography>
 									<br />
-
 									{translate("click_to_copy", lng)}
 								</Typography>
 							</CopyText>

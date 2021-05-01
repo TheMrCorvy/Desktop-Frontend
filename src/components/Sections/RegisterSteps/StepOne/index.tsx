@@ -66,6 +66,9 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 		message: translate("form_validation_messages", lng, 3),
 	}
 
+	const invitationCodeLabel =
+		translate("invitation_code", lng) + " " + translate("auth_form_texts", lng, 15)
+
 	const onSubmit = (data: FormInputs) => {
 		if (testing) return
 
@@ -309,6 +312,40 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 						{errors.antiFishingSecret_confirmation && (
 							<Typography variant="body2">
 								{errors.antiFishingSecret_confirmation.message}
+							</Typography>
+						)}
+					</FormControl>
+				</Grid>
+				<Grid item xs={12}>
+					<FormControl variant="outlined" fullWidth>
+						<InputLabel color="secondary">{invitationCodeLabel}</InputLabel>
+						<OutlinedInput
+							label={invitationCodeLabel}
+							name="invitation_code"
+							required
+							type="text"
+							inputProps={{
+								ref: register({
+									required: {
+										value: false,
+										message: "",
+									},
+									maxLength: {
+										value: 50,
+										message: maxCharMessage,
+									},
+									minLength: {
+										value: 5,
+										message: minCharMessage,
+									},
+								}),
+							}}
+							error={errors?.invitation_code ? true : false}
+							color="secondary"
+						/>
+						{errors.invitation_code && (
+							<Typography variant="body2">
+								{errors.invitation_code.message}
 							</Typography>
 						)}
 					</FormControl>
