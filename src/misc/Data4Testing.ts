@@ -86,8 +86,7 @@ export const credential4Testing: CredentialT[] = [
 		},
 		security_codes: {
 			unique_security_code: "D7WK29JDU8",
-			multiple_security_codes:
-				" D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 ",
+			multiple_security_codes: "codigo-1 codigo-2 codigo-2",
 			multiple_code_length: 11,
 			crypto_currency_access_code:
 				"Lorem ipsum dolor sit amet consectetur adipisicing elit Eaque odio accusamus cumque nemo veniam? Perferendis consequatur incidunt fugiat delectus reiciendis atque Ipsam excepturi molestiae quasi ratione id veniam pariatur laborum",
