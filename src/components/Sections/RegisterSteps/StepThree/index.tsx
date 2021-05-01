@@ -9,6 +9,7 @@ import {
 	Button,
 	Typography,
 	CircularProgress,
+	CardActionArea,
 } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
@@ -20,6 +21,7 @@ import { translate } from "../../../../lang"
 import { useForm } from "react-hook-form"
 
 import { QRCode } from "react-qrcode-logo"
+import CopyText from "../../../CopyText"
 
 type Props = {
 	isRobot: boolean
@@ -53,6 +55,10 @@ const useStyles = makeStyles({
 	qrContainer: {
 		display: "flex",
 		justifyContent: "center",
+	},
+	cardActionArea: {
+		minHeight: "100%",
+		borderRadius: 8,
 	},
 })
 
@@ -192,19 +198,26 @@ const StepThree: FC<Props> = ({ isRobot, testing, alter }) => {
 						)}
 					</Grid>
 					<Grid item xs={12} sm={6} className={classes.centerAll}>
-						<Typography paragraph gutterBottom variant="subtitle1">
-							{translate("copy_paste_secret_key", lng)}
-							<br />
-							<Typography
-								paragraph
-								gutterBottom
-								variant="h6"
-								component="span"
-								className={classes.secretKey}
-							>
-								{userData.secretKey}
-							</Typography>
-						</Typography>
+						<CardActionArea className={classes.cardActionArea}>
+							<CopyText body={userData.secretKey}>
+								<Typography paragraph gutterBottom variant="subtitle1">
+									{translate("copy_paste_secret_key", lng)}
+									<br />
+									<Typography
+										paragraph
+										gutterBottom
+										variant="h6"
+										component="span"
+										className={classes.secretKey}
+									>
+										{userData.secretKey}
+									</Typography>
+									<br />
+
+									{translate("click_to_copy", lng)}
+								</Typography>
+							</CopyText>
+						</CardActionArea>
 					</Grid>
 				</>
 			)}
