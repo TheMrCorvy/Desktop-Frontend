@@ -20,9 +20,12 @@ const CopyText: FC<Props> = ({ children, body, duration }) => {
 
 	useEffect(() => {
 		if (copied) {
-			const timer = setTimeout(() => {
-				setCopied(false)
-			}, 4000)
+			const timer = setTimeout(
+				() => {
+					setCopied(false)
+				},
+				duration ? duration + 500 : 4000
+			)
 			return () => {
 				clearTimeout(timer)
 			}
