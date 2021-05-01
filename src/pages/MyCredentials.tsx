@@ -71,8 +71,6 @@ const MyCredentials: FC = () => {
 
 	const [credentials, setCredentials] = useState<CredentialT[]>([])
 
-	const [availableSlots, setAvailableSlots] = useState<number>(0)
-
 	const [error, setError] = useState<boolean>(false)
 
 	const [snackbarMessage, setSnackbarMessage] = useState("")
@@ -136,8 +134,6 @@ const MyCredentials: FC = () => {
 			fatalError()
 		}
 
-		setAvailableSlots(newCredentials.slots_available)
-
 		setCredentials(newCredentials.user_credentials)
 	}
 
@@ -179,11 +175,11 @@ const MyCredentials: FC = () => {
 				data-testid="test_my_credentials_page"
 			>
 				<Grid container justify="space-around" spacing={4}>
-					{!error ? (
+					{!error && user ? (
 						<>
 							<OrderBar sortCredentials={orderBy} />
 							<CredentialCard
-								availableSlots={availableSlots}
+								availableSlots={user.slots_available}
 								credentials={credentials}
 							/>
 						</>
