@@ -14,10 +14,9 @@ import { forgetCredential } from "../../misc/indexedDB"
 
 type Props = {
 	credentialId: number
-	testing?: boolean
 }
 
-const DeleteCredential: FC<Props> = ({ credentialId, testing }) => {
+const DeleteCredential: FC<Props> = ({ credentialId }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)
@@ -48,16 +47,16 @@ const DeleteCredential: FC<Props> = ({ credentialId, testing }) => {
 	return (
 		<>
 			<Tooltip title={translate("delete", lng)} placement="bottom">
-				<IconButton aria-label="delete" color="primary" onClick={openDialog}>
+				<IconButton
+					aria-label="delete"
+					color="primary"
+					onClick={openDialog}
+					data-testid="test_open_delete_dialog"
+				>
 					<DeleteIcon />
 				</IconButton>
 			</Tooltip>
-			<Dialog
-				open={open}
-				onClose={closeDialog}
-				aria-labelledby="alert-dialog-title"
-				aria-describedby="alert-dialog-description"
-			>
+			<Dialog open={open} onClose={closeDialog} data-testid="test_delete_dialog">
 				<DialogTitle id="alert-dialog-title">
 					{translate("delete_credential_confirmation", lng)}
 				</DialogTitle>
