@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const EditCredentialCodes: FC<Props> = ({ codes }) => {
+const EditCodes: FC<Props> = ({ codes }) => {
 	const theme = useTheme()
 
 	const fullScreen = useMediaQuery(theme.breakpoints.down("sm"))
@@ -86,6 +86,7 @@ const EditCredentialCodes: FC<Props> = ({ codes }) => {
 					variant="contained"
 					disableElevation
 					onClick={handleClickOpen}
+					data-testid="test_open_modal"
 				>
 					{translate("edit_codes", lng)}
 				</Button>
@@ -96,6 +97,7 @@ const EditCredentialCodes: FC<Props> = ({ codes }) => {
 				onClose={handleClose}
 				aria-labelledby="edit-dialog"
 				scroll="paper"
+				data-testid="test_modal"
 			>
 				<DialogTitle id="edit-dialog">{translate("edit_codes", lng)}</DialogTitle>
 				<DialogContent>
@@ -124,6 +126,9 @@ const EditCredentialCodes: FC<Props> = ({ codes }) => {
 												</Tooltip>
 											</InputAdornment>
 										}
+										inputProps={{
+											"data-testid": `test_${index}`,
+										}}
 									/>
 								</FormControl>
 							</Grid>
@@ -153,4 +158,4 @@ const EditCredentialCodes: FC<Props> = ({ codes }) => {
 	)
 }
 
-export default EditCredentialCodes
+export default EditCodes
