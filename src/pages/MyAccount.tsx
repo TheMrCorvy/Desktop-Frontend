@@ -1,6 +1,17 @@
 import React, { FC, useEffect, useState } from "react"
 
-import { Container, Grid, Typography } from "@material-ui/core"
+import {
+	Container,
+	Grid,
+	Typography,
+	Button,
+	Card,
+	CardActionArea,
+	CardActions,
+	CardContent,
+	CardHeader,
+	TextField,
+} from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
@@ -18,10 +29,11 @@ import CredentialCard from "../components/CredentialCard"
 import { getUser, getCredentials } from "../misc/indexedDB"
 import RecentAccessTable from "../components/Sections/RecentAccessTable"
 import UpdateRole from "../components/Sections/UpdateRole"
-import CopyInvitationCode from "../components/Sections/CopyInvitationCode"
 
 import { UserT } from "../misc/ajaxManager"
 import { CredentialT } from "../misc/types"
+
+import CopyText from "../components/CopyText"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -102,7 +114,34 @@ const MyAccount: FC = () => {
 
 				{user && (
 					<Grid item xs={12} md={6} lg={5} className={classes.availableSlots}>
-						<CopyInvitationCode code={user.invitation_code} />
+						<Card style={{ borderRadius: 8 }}>
+							<CardActionArea>
+								<CopyText body={user.invitation_code}>
+									<>
+										<CardHeader title={translate("invitation_code", lng)} />
+										<CardContent>
+											<TextField
+												variant="filled"
+												disabled
+												defaultValue={user.invitation_code}
+											/>
+										</CardContent>
+										<CardActions
+											style={{
+												display: "flex",
+												justifyContent: "center",
+												alignItems: "center",
+												textAlign: "center",
+											}}
+										>
+											<Button color="secondary">
+												{translate("click_to_copy", lng)}
+											</Button>
+										</CardActions>
+									</>
+								</CopyText>
+							</CardActionArea>
+						</Card>
 					</Grid>
 				)}
 
