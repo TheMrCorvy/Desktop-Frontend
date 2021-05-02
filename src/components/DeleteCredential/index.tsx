@@ -18,7 +18,9 @@ import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
-import { forgetCredential, getUser, putUser } from "../../misc/indexedDB"
+import { forgetCredential, getUser, putUser, getCredentials } from "../../misc/indexedDB"
+
+import { maxSlots } from "../../misc/staticData"
 
 type Props = {
 	credentialId: number
@@ -47,18 +49,35 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 
 		const user = await getUser()
 
-		if (user === undefined) {
+		const credentials = await getCredentials()
+
+		if (user === undefined || credentials === undefined) {
 			fatalError(2)
 
 			return
 		}
 
-		const updatedUser = await putUser({ ...user, slots_available: user.slots_available + 1 })
+		const checkRole = {
+			free:
+				user.role === "free" &&
+				user.slots_available + 1 + credentials.length <= maxSlots.free,
+			semi_premium:
+				user.role === "semi-premium" &&
+				user.slots_available + 1 + credentials.length <= maxSlots.semi_premium,
+			premium: user.role === "premium" ? true : false,
+			admin: user.role === "admin" ? true : false,
+		}
 
-		if (updatedUser === undefined) {
-			fatalError(2)
+		if (checkRole.free || checkRole.semi_premium || checkRole.premium || checkRole.admin) {
+			putUser({ ...user, slots_available: user.slots_available + 1 }).then((updatedUser) => {
+				if (updatedUser === undefined) {
+					fatalError(2)
+				}
+			})
+		} else {
+			closeDialog()
 
-			return
+			history.goBack()
 		}
 
 		closeDialog()
