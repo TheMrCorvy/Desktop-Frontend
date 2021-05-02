@@ -115,9 +115,9 @@ const MyCredentials: FC = () => {
 	const getFromApi = async () => {
 		setError(false)
 
-		let localUser = await getUser().then((user: any) => user)
+		let localUser = await getUser()
 
-		if (localUser === undefined || localUser.failed) {
+		if (localUser === undefined) {
 			return fatalError()
 		}
 

@@ -10,7 +10,7 @@ import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
-import { forgetCredential } from "../../misc/indexedDB"
+import { forgetCredential, getUser, putUser } from "../../misc/indexedDB"
 
 type Props = {
 	credentialId: number
@@ -24,16 +24,35 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 	const history = useHistory()
 
 	const deleteCredential = async () => {
-		let data: any
+		await forgetCredential(credentialId)
 
-		data = await forgetCredential(credentialId)
+		const user = await getUser()
 
-		console.log(credentialId)
-		console.log(data)
+		if (user === undefined) {
+			fatalError("Error obtaining the user.")
 
-		setOpen(false)
+			closeDialog()
+
+			return
+		}
+
+		const updatedUser = await putUser({ ...user, slots_available: user.slots_available + 1 })
+
+		if (updatedUser === undefined) {
+			fatalError("Error updating the user.")
+
+			closeDialog()
+
+			return
+		}
+
+		closeDialog()
 
 		history.goBack()
+	}
+
+	const fatalError = (err: string) => {
+		console.log(err)
 	}
 
 	const openDialog = () => {
