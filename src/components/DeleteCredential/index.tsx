@@ -26,11 +26,10 @@ type Props = {
 
 /*
  * 1: error calling the api
- * 2: error obtaining the user from indexed DB
- * 3: error updating the user in the indexed DB
- * 4: other
+ * 2: indexed DB error
+ * 3: other / unkown error
  */
-type ErrorOptions = 1 | 2 | 3 | 4
+type ErrorOptions = 1 | 2 | 3
 
 const DeleteCredential: FC<Props> = ({ credentialId }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -57,7 +56,7 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 		const updatedUser = await putUser({ ...user, slots_available: user.slots_available + 1 })
 
 		if (updatedUser === undefined) {
-			fatalError(3)
+			fatalError(2)
 
 			return
 		}
@@ -84,7 +83,7 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 	const renderDialog = () => {
 		let dialogTitle = !error
 			? translate("delete_credential_confirmation", lng)
-			: "There was an error..."
+			: translate("error_messages", lng, 6)
 
 		let dialogText: string
 
@@ -105,17 +104,17 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 		} else {
 			switch (errorOption) {
 				case 1:
-					dialogText = "Error calling the api"
+					dialogText = translate("error_messages", lng, 4)
 					break
 				case 2:
-					dialogText = "Error obtaining the user's data"
+					dialogText = translate("error_messages", lng, 7)
 					break
 				case 3:
-					dialogText = "Error updating the user's data"
+					dialogText = translate("error_messages", lng, 8)
 					break
 
 				default:
-					dialogText = "Unknown error..."
+					dialogText = translate("error_messages", lng, 8)
 					break
 			}
 

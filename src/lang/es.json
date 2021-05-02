@@ -205,9 +205,11 @@
 		"Hubo un error obteniendo tus datos, si quieres reintentar, puedes hacer click en el botón debajo.",
 		"Hay un error en tus datos almacenados, así que te cerraremos la sesión.",
 		"Hubo un error, por favor intente de nuevo más tarde.",
-		"Parace que algo salió mal... Por favor intenta de nuevo más tarde, o intenta contactar con los administradores del sitio/app.",
+		"Parace que algo salió mal... Por favor intenta de nuevo más tarde, o intenta contactar con los administradores del sitio web/app.",
 		"Hubo un error tratando de instalar la PWA.",
-		"Vaya! Parece que algo salió mal..."
+		"Vaya! Parece que algo salió mal...",
+		"Hubo un error tratando de actualizar la información de tu cuenta, te recomendamos que cierres la sesión, la vuelvas a iniciar, y vuelvas a intentarlo.",
+		"Ocurrió un error desconocido... Te recomendamos que cierres la sesión, la vuelvas a iniciar, y vuelvas a intentarlo. Si el problema persiste, por favor contacta a los administradores del sitio web/app"
 	],
 	"success_message": ["Pago acreditado con éxito, por favor espera mientras confirmamos..."],
 	"retry": ["Renintentar"],
