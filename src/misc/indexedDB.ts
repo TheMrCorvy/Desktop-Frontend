@@ -64,8 +64,6 @@ export const getUser = () => {
 
 	return Promise.resolve(db.users.orderBy("id").first())
 		.then((data) => {
-			throw new Error("error")
-
 			return data
 		})
 		.catch((error) => {
@@ -80,8 +78,6 @@ export const putUser = (user: UserT) => {
 
 	return Promise.resolve(db.users.put(user))
 		.then((data) => {
-			throw new Error("error")
-
 			return data
 		})
 		.catch((error) => {
