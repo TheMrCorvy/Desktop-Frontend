@@ -9,6 +9,11 @@ export type RecommendedAppsType = {
 	linkOfficialPage?: string
 }
 
+export const maxSlots = {
+	free: 5,
+	semi_premium: 20,
+}
+
 export const recommendedTwoFactorApps = (lang: string): RecommendedAppsType[] => {
 	return [
 		{

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState, useEffect } from "react"
 import { CredentialT } from "../../misc/types"
 
 import { Grid, Typography } from "@material-ui/core"
@@ -42,6 +42,12 @@ const ShowCredential: FC<Props> = ({ credential, getDecryptedCredential }) => {
 	const [locked, setLocked] = useState(true)
 
 	const [visible, setVisible] = useState(false)
+
+	const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+	useEffect(() => {
+		setIsAuthenticated(!locked)
+	}, [locked])
 
 	const classes = useStyles()
 
@@ -146,7 +152,7 @@ const ShowCredential: FC<Props> = ({ credential, getDecryptedCredential }) => {
 							<Grid item>
 								<DisplayData toggleDisplay={toggleVisibility} visible={visible} />
 							</Grid>
-							{!locked && (
+							{isAuthenticated && (
 								<Grid item>
 									<DeleteCredential credentialId={credential.id} />
 								</Grid>

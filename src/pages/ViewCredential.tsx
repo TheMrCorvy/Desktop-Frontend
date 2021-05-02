@@ -12,12 +12,13 @@ import { RootState } from "../redux/store"
 import { translate } from "../lang"
 
 import { CredentialT } from "../misc/types"
-import { findCredential, putCredential } from "../misc/indexedDB"
+import { findCredential, getCredentials, getUser, putCredential } from "../misc/indexedDB"
 
 import { findCredentialFromApi } from "../misc/ajaxManager"
 
 import Snackbar from "../components/Snackbar"
 import ShowCredential from "../components/Sections/ShowCredential"
+import { maxSlots } from "../misc/staticData"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -76,7 +77,7 @@ const ViewCredential: FC = (props: any) => {
 	const [snackbarMessage, setSnackbarMessage] = useState("")
 
 	useEffect(() => {
-		// since the url param is a string, we have to convert it into a number
+		// since the url param is a string, we must convert it into a number
 		const id = Number(props.match.params.credentialId)
 
 		obtainCredential(id)
@@ -97,17 +98,45 @@ const ViewCredential: FC = (props: any) => {
 	}
 
 	const getFromApi = async (decrypted: boolean, agent?: string) => {
+		const isAllowedToSee = await checkUser()
+
+		if (!isAllowedToSee) return
+
 		setError(false)
 
-		const newCredential: { credential: CredentialT } = await findCredentialFromApi(
-			token,
-			decrypted,
-			agent
-		)
+		const newCredential: any = await findCredentialFromApi(token, decrypted, agent)
 
 		updateCredential(newCredential.credential)
 
 		setCredential(newCredential.credential)
+	}
+
+	const checkUser = async () => {
+		const user = await getUser()
+
+		const credentials = await getCredentials()
+
+		if (user === undefined || credentials === undefined) {
+			// get the user's data from api
+
+			//this false is just until I create the api
+			return false
+		}
+
+		if (user.role === "free" && credentials.length + user.slots_available > maxSlots.free) {
+			// the user can't see their credential
+			return false
+		}
+
+		if (
+			user.role === "semi-premium" &&
+			credentials.length + user.slots_available > maxSlots.semi_premium
+		) {
+			// the user also cant se the credential
+			return false
+		}
+
+		return true
 	}
 
 	const updateCredential = async (c: CredentialT) => {
