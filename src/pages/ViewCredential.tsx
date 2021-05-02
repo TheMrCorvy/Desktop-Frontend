@@ -100,7 +100,7 @@ const ViewCredential: FC = (props: any) => {
 	const getFromApi = async (decrypted: boolean, agent?: string) => {
 		const isAllowedToSee = await checkUser()
 
-		if (!isAllowedToSee) return
+		if (!isAllowedToSee) return false
 
 		setError(false)
 
@@ -109,6 +109,8 @@ const ViewCredential: FC = (props: any) => {
 		updateCredential(newCredential.credential)
 
 		setCredential(newCredential.credential)
+
+		return true
 	}
 
 	const checkUser = async () => {
@@ -119,7 +121,7 @@ const ViewCredential: FC = (props: any) => {
 		if (user === undefined || credentials === undefined) {
 			// get the user's data from api
 
-			//this false is just until I create the api
+			//this false is here just until I implement the api
 			return false
 		}
 

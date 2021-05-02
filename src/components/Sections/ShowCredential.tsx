@@ -18,7 +18,7 @@ import DeleteCredential from "../DeleteCredential"
 
 type Props = {
 	credential: CredentialT
-	getDecryptedCredential: (decrypted: true, agent: string) => Promise<any>
+	getDecryptedCredential: (decrypted: true, agent: string) => Promise<boolean>
 }
 
 const useStyles = makeStyles({
@@ -57,19 +57,33 @@ const ShowCredential: FC<Props> = ({ credential, getDecryptedCredential }) => {
 		}
 
 		if (!visible) {
-			getDecryptedCredential(true, getUserAgent()).then(() => setVisible(true))
+			getDecryptedCredential(true, getUserAgent()).then((isAllowed) => {
+				if (isAllowed) {
+					setVisible(true)
+				} else {
+					console.log("user is not allowed")
+				}
+			})
 		} else {
 			setVisible(false)
 		}
 	}
 
 	const toggleLock = () => {
-		if (!visible && locked) {
-			setVisible(true)
-		}
-
 		if (locked) {
-			getDecryptedCredential(true, getUserAgent()).then(() => setLocked(false))
+			getDecryptedCredential(true, getUserAgent()).then((isAllowed) => {
+				if (isAllowed) {
+					if (!visible && locked) {
+						setVisible(true)
+					}
+
+					setLocked(false)
+				} else {
+					console.log("user is not allowed")
+				}
+
+				setIsAuthenticated(true)
+			})
 		} else {
 			setLocked(true)
 		}
