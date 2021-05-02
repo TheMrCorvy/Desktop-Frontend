@@ -15,6 +15,7 @@ import DisplayData from "../DisplayData"
 import GoBackBtn from "../GoBackBtn"
 import ShowInfo from "../ShowCredential/ShowInfo"
 import DeleteCredential from "../DeleteCredential"
+import Snackbar from "../Snackbar"
 
 type Props = {
 	credential: CredentialT
@@ -45,9 +46,21 @@ const ShowCredential: FC<Props> = ({ credential, getDecryptedCredential }) => {
 
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+	const [showSnackbar, setShowSnackbar] = useState(false)
+
 	useEffect(() => {
 		setIsAuthenticated(!locked)
-	}, [locked])
+
+		if (showSnackbar) {
+			const timer = setTimeout(() => {
+				setShowSnackbar(false)
+			}, 12500)
+
+			return () => {
+				clearTimeout(timer)
+			}
+		}
+	}, [locked, showSnackbar])
 
 	const classes = useStyles()
 
@@ -61,7 +74,7 @@ const ShowCredential: FC<Props> = ({ credential, getDecryptedCredential }) => {
 				if (isAllowed) {
 					setVisible(true)
 				} else {
-					console.log("user is not allowed")
+					setShowSnackbar(true)
 				}
 			})
 		} else {
@@ -79,7 +92,7 @@ const ShowCredential: FC<Props> = ({ credential, getDecryptedCredential }) => {
 
 					setLocked(false)
 				} else {
-					console.log("user is not allowed")
+					setShowSnackbar(true)
 				}
 
 				setIsAuthenticated(true)
@@ -189,6 +202,14 @@ const ShowCredential: FC<Props> = ({ credential, getDecryptedCredential }) => {
 					<ShowInfo credential={credential} visible={visible} locked={locked} />
 				</Grid>
 			</Grid>
+
+			{showSnackbar && (
+				<Snackbar
+					open={showSnackbar}
+					message={translate("access_denied_message", lng)}
+					duration={12000}
+				/>
+			)}
 		</>
 	)
 }
