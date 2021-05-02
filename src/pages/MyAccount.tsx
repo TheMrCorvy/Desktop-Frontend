@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from "react"
 
+/******************************************************************************** mui */
 import {
 	Container,
 	Grid,
 	Typography,
-	Button,
 	Card,
 	CardActionArea,
 	CardActions,
@@ -15,25 +15,27 @@ import {
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
+/******************************************************************************** redux */
 import { showError } from "../redux/actions/errorHandlingActions"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 
 import { translate } from "../lang"
 
+/******************************************************************************** components */
 import FeedbackForm from "../components/FeedbackForm"
 import Downloads from "../components/Sections/Downloads"
 import AccessManagement from "../components/Sections/AccessManagement"
 import CredentialCard from "../components/CredentialCard"
-
-import { getUser, getCredentials } from "../misc/indexedDB"
 import RecentAccessTable from "../components/Sections/RecentAccessTable"
 import UpdateRole from "../components/Sections/UpdateRole"
-
-import { UserT } from "../misc/ajaxManager"
-import { CredentialT } from "../misc/types"
-
 import CopyText from "../components/CopyText"
+
+/******************************************************************************** indexedDB */
+import { getUser, getCredentials } from "../misc/indexedDB"
+
+/******************************************************************************** types */
+import { CredentialT, UserT } from "../misc/types"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -134,9 +136,9 @@ const MyAccount: FC = () => {
 												textAlign: "center",
 											}}
 										>
-											<Button color="secondary">
+											<Typography color="secondary" variant="subtitle1">
 												{translate("click_to_copy", lng)}
-											</Button>
+											</Typography>
 										</CardActions>
 									</>
 								</CopyText>

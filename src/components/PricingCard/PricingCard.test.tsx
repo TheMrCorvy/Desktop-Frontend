@@ -16,7 +16,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 library.add(faSyncAlt, faLock, faLockOpen, faFingerprint, faWallet, faUsers, faStar)
 
-import PricingCard, { PricingCardT } from "./index"
+import PricingCard from "./index"
+import { PricingCardT } from "../../misc/types"
 
 it("renders properly, and shows text properly", () => {
 	const testCard: PricingCardT = {

@@ -1,8 +1,6 @@
 import Dexie, { Table } from "dexie"
 
-import { CredentialT } from "./types"
-import { UserT } from "./ajaxManager"
-import { RecentlySeenT } from "../components/Sections/RecentAccessTable"
+import { CredentialT, UserT, RecentlySeenT } from "./types"
 
 class PasuNashiDatabase extends Dexie {
 	users!: Table<UserT>

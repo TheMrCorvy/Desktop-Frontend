@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react"
+import React, { FC } from "react"
 
-import { Grid, Button, Typography, Divider, Hidden } from "@material-ui/core"
+import { Grid, Typography, Divider, Hidden } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"

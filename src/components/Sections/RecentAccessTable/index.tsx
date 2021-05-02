@@ -23,17 +23,9 @@ import { recentlySeen4Testing } from "../../../misc/Data4Testing"
 
 import { getRecentlySeen, putRecentlySeen } from "../../../misc/indexedDB"
 
-type Props = { testing?: boolean }
+import { RecentlySeenT } from "../../../misc/types"
 
-export type RecentlySeenT = {
-	name: string
-	last_seen: string
-	id: 1
-	created_at: string
-	updated_at: string
-	accessing_device: string
-	accessing_platform: string
-}
+type Props = { testing?: boolean }
 
 const useStyles = makeStyles({
 	table: {

@@ -8,7 +8,7 @@ import DisplayData from "./index"
 it("renders properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
-			<DisplayData toggleDisplay={(something: string) => {}} visible={false} />
+			<DisplayData toggleDisplay={() => {}} visible={false} />
 		</Provider>
 	)
 
@@ -21,7 +21,7 @@ describe("checking if toogles the visibility icon properly", () => {
 	it("toggles visibility", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<DisplayData toggleDisplay={(something: string) => {}} visible={false} />
+				<DisplayData toggleDisplay={() => {}} visible={false} />
 			</Provider>
 		)
 

@@ -1,5 +1,7 @@
 import React, { FC } from "react"
+import { Link } from "react-router-dom"
 
+/******************************************************************************** mui */
 import {
 	Card,
 	CardHeader,
@@ -18,24 +20,14 @@ import { useTheme } from "@material-ui/core/styles"
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { IconName } from "@fortawesome/fontawesome-svg-core"
-
+/******************************************************************************** redux */
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
-export type ListItemT = {
-	icon: IconName
-	text: string
-}
+/******************************************************************************** types & fontawesome */
+import { PricingCardT } from "../../misc/types"
 
-export type PricingCardT = {
-	title: string
-	subtitle: string
-	cardElevation: number
-	listItems: ListItemT[]
-	buttonText: string
-}
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -59,6 +51,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		textColor: {
 			color:
 				theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.54)",
+		},
+		link: {
+			textDecoration: "none",
 		},
 	})
 )
@@ -111,14 +106,16 @@ const PricingCard: FC<PricingCardT> = ({
 				</List>
 			</CardContent>
 			<CardActions className={classes.cardAction}>
-				<Button
-					color={theme === "dark" ? "secondary" : "primary"}
-					variant="contained"
-					size="large"
-					disableElevation
-				>
-					{buttonText}
-				</Button>
+				<Link to="/register" className={classes.link}>
+					<Button
+						color={theme === "dark" ? "secondary" : "primary"}
+						variant="contained"
+						size="large"
+						disableElevation
+					>
+						{buttonText}
+					</Button>
+				</Link>
 			</CardActions>
 		</Card>
 	)

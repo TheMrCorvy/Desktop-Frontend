@@ -1,19 +1,20 @@
 import React, { FC } from "react"
 
+/******************************************************************************** mui */
 import { Container, Divider, Grid, Hidden, Typography, Link } from "@material-ui/core"
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
+/******************************************************************************** redux */
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
-import {
-	recommendedTwoFactorApps,
-	recommendedApps,
-	RecommendedAppsType,
-} from "../../misc/staticData"
+/******************************************************************************** types & components */
+import { recommendedTwoFactorApps, recommendedApps } from "../../misc/staticData"
+
+import { RecommendedAppsT } from "../../misc/types"
 
 import Downloads from "../../components/Sections/Downloads"
 
@@ -48,11 +49,11 @@ const DownloadsPage: FC = () => {
 
 	const classes = useStyles()
 
-	const recommendedTwoFA: RecommendedAppsType[] = recommendedTwoFactorApps(lng)
+	const recommendedTwoFA: RecommendedAppsT[] = recommendedTwoFactorApps(lng)
 
-	const otherApps: RecommendedAppsType[] = recommendedApps(lng)
+	const otherApps: RecommendedAppsT[] = recommendedApps(lng)
 
-	const mapRecommendations = (apps: RecommendedAppsType[]) => {
+	const mapRecommendations = (apps: RecommendedAppsT[]) => {
 		return (
 			<ul>
 				{apps.map((app) => (

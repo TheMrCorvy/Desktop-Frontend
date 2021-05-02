@@ -13,7 +13,7 @@ import TwoFactorCode from "./TwoFactorCode"
 import EmailCode from "./EmailCode"
 import SecurityCode from "./SecurityCode"
 
-import { ApiResponseLoginT } from "../../../misc/ajaxManager"
+import { ApiResponseLoginT } from "../../../misc/types"
 
 type Props = {
 	onAuthSuccess: (res: ApiResponseLoginT) => void

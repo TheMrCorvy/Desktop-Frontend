@@ -6,11 +6,6 @@ import { makeStyles } from "@material-ui/core/styles"
 
 import Skeleton from "@material-ui/lab/Skeleton"
 
-import { useSelector } from "react-redux"
-import { RootState } from "../redux/store"
-
-import { translate } from "../lang"
-
 const useStyles = makeStyles({
 	container: {
 		flexGrow: 1,
@@ -27,8 +22,6 @@ const useStyles = makeStyles({
 })
 
 const Loader: FC = () => {
-	const { lng } = useSelector((state: RootState) => state.lng)
-
 	const classes = useStyles()
 
 	return (

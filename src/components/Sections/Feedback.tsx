@@ -7,7 +7,7 @@ import { translate } from "../../lang"
 
 import Opinions from "./Opinions"
 
-import { OpinionCardT } from "../OpinionCard"
+import { OpinionCardT } from "../../misc/types"
 
 import { rating4Testing, suggestion4Testing } from "../../misc/Data4Testing"
 

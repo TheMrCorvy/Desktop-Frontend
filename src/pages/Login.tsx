@@ -24,7 +24,7 @@ import { login } from "../redux/actions/authTokenActions"
 import { translate } from "../lang"
 
 /************************************************************************************ manage info */
-import { ApiResponseLoginT } from "../misc/ajaxManager"
+import { ApiResponseLoginT } from "../misc/types"
 
 import { initiateDB } from "../misc/indexedDB"
 

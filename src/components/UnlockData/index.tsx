@@ -1,5 +1,6 @@
 import react, { FC, useState } from "react"
 
+/******************************************************************************** mui */
 import {
 	IconButton,
 	Tooltip,
@@ -16,12 +17,14 @@ import { useTheme } from "@material-ui/core/styles"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import LockIcon from "@material-ui/icons/Lock"
 
+/******************************************************************************** redux */
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
-import { ApiResponseLoginT } from "../../misc/ajaxManager"
+/******************************************************************************** types & components */
+import { ApiResponseLoginT } from "../../misc/types"
 
 import LoginOptions from "../Sections/LoginOptions"
 

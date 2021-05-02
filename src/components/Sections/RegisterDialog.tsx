@@ -10,7 +10,8 @@ import { translate } from "../../lang"
 
 import DialogComponent from "../Dialog"
 
-import { recommendedTwoFactorApps, RecommendedAppsType } from "../../misc/staticData"
+import { recommendedTwoFactorApps } from "../../misc/staticData"
+import { RecommendedAppsT } from "../../misc/types"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -34,7 +35,7 @@ const RegisterDialog: FC = () => {
 
 	const classes = useStyles()
 
-	const recommendedApps: RecommendedAppsType[] = recommendedTwoFactorApps(lng)
+	const recommendedApps: RecommendedAppsT[] = recommendedTwoFactorApps(lng)
 
 	return (
 		<DialogComponent

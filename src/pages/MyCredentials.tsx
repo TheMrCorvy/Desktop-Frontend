@@ -1,10 +1,10 @@
 import React, { FC, useState, useEffect } from "react"
 
-/************************************************************************************ mui related */
+/************************************************************************************ mui  */
 import { Container, Grid, Button, Typography } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
-/************************************************************************************ redux related */
+/************************************************************************************ redux  */
 import { showError } from "../redux/actions/errorHandlingActions"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
@@ -20,12 +20,13 @@ import CredentialCard from "../components/CredentialCard"
 import Downloads from "../components/Sections/Downloads"
 import Snackbar from "../components/Snackbar"
 import FeedbackForm from "../components/FeedbackForm"
+import UpdateRole from "../components/Sections/UpdateRole"
 
-import { CredentialT } from "../misc/types"
+/******************************************************************************** types */
+import { CredentialT, ApiResponseGetCredentialsT, UserT } from "../misc/types"
 
 /************************************************************************************ ajax */
-import { ApiResponseGetCredentialsT, getCredentialsFromApi, UserT } from "../misc/ajaxManager"
-import UpdateRole from "../components/Sections/UpdateRole"
+import { getCredentialsFromApi } from "../misc/ajaxManager"
 
 type Sort = {
 	by: By

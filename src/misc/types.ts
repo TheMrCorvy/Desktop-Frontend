@@ -1,3 +1,43 @@
+import { LazyExoticComponent } from "react"
+import { IconName } from "@fortawesome/fontawesome-svg-core"
+
+/******************************************************************************** routes */
+export type RouteT = {
+	component: LazyExoticComponent<any>
+	requiresAuth: boolean
+	path: string
+	guestOnly?: boolean
+}
+
+/******************************************************************************** opinion card */
+export type OpinionCardT = {
+	user: {
+		firstName: string
+		lastName: string
+	}
+	date: string
+	opinion: {
+		body: string
+		isRating: boolean
+		rating?: number
+	}
+}
+
+/******************************************************************************** pricing card */
+export type ListItemT = {
+	icon: IconName
+	text: string
+}
+
+export type PricingCardT = {
+	title: string
+	subtitle: string
+	cardElevation: number
+	listItems: ListItemT[]
+	buttonText: string
+}
+
+/******************************************************************************** credential card */
 export type CredentialT = {
 	id: number
 	user_id: number
@@ -42,4 +82,61 @@ export type CredentialT = {
 	}
 	created_at: string
 	updated_at: string
+}
+
+/******************************************************************************** user */
+export type UserT = {
+	name: string
+	email: string
+	recovery_email: string
+	slots_available: number
+	role: "free" | "semi-premium" | "premium" | "admin"
+	id: number
+	phone_number: string
+	anti_fishing_secret: string
+	invitation_code: string
+}
+
+/******************************************************************************** recommended apps */
+export type RecommendedAppsT = {
+	appName: string
+	bodyText: string
+	linkAppleStore: string
+	linkPlayStore: string
+	linkOfficialPage?: string
+}
+
+/******************************************************************************** recently seen */
+export type RecentlySeenT = {
+	name: string
+	last_seen: string
+	id: 1
+	created_at: string
+	updated_at: string
+	accessing_device: string
+	accessing_platform: string
+}
+
+/******************************************************************************** ajax */
+export type ApiResponseLoginT = {
+	token: string
+	user_data: UserT
+	user_credentials: CredentialT[]
+	isAuthorized?: boolean
+}
+
+export type ApiResponseGetCredentialsT = {
+	slots_available: number
+	user_credentials: CredentialT[]
+}
+
+/******************************************************************************** coinbase charge */
+export type CoinbaseChargeT = {
+	name: string
+	description: string
+	local_price: {
+		amount: number
+		currency: string
+	}
+	pricing_type: string
 }

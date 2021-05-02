@@ -1,7 +1,6 @@
-import { OpinionCardT } from "../components/OpinionCard"
-import { UserT } from "./ajaxManager"
-import { CredentialT } from "./types"
-import { RecentlySeenT } from "../components/Sections/RecentAccessTable"
+import { OpinionCardT } from "./types"
+import { UserT } from "./types"
+import { CredentialT, RecentlySeenT } from "./types"
 
 export const suggestion4Testing: OpinionCardT[] = [
 	{

@@ -1,20 +1,12 @@
-import { PricingCardT } from "../components/PricingCard"
+import { PricingCardT, RecommendedAppsT } from "./types"
 import { translate } from "../lang"
-
-export type RecommendedAppsType = {
-	appName: string
-	bodyText: string
-	linkAppleStore: string
-	linkPlayStore: string
-	linkOfficialPage?: string
-}
 
 export const maxSlots = {
 	free: 5,
 	semi_premium: 20,
 }
 
-export const recommendedTwoFactorApps = (lang: string): RecommendedAppsType[] => {
+export const recommendedTwoFactorApps = (lang: string): RecommendedAppsT[] => {
 	return [
 		{
 			appName: "Microsoft Authenticator",
@@ -40,7 +32,7 @@ export const recommendedTwoFactorApps = (lang: string): RecommendedAppsType[] =>
 	]
 }
 
-export const recommendedApps = (lang: string): RecommendedAppsType[] => {
+export const recommendedApps = (lang: string): RecommendedAppsT[] => {
 	return [
 		{
 			appName: "Firefox Focus",

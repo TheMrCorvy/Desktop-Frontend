@@ -8,6 +8,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
+
 import CopyText from "../CopyText"
 
 type Props = {

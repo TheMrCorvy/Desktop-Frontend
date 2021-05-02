@@ -1,18 +1,23 @@
 import React, { FC, useState, useEffect } from "react"
 
+/******************************************************************************** mui */
 import { Button, Grid, CircularProgress, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
+/******************************************************************************** redux */
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
 
+/******************************************************************************** other */
 import { PayPalButton } from "react-paypal-button-v2"
 
 import Snackbar from "../../Snackbar"
 
-import { generateCoinbaseCharge, CoinbaseChargeT } from "../../../misc/ajaxManager"
+import { generateCoinbaseCharge } from "../../../misc/ajaxManager"
+
+import { CoinbaseChargeT } from "../../../misc/types"
 
 type Props = {
 	amount: number

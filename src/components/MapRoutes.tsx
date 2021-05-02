@@ -1,6 +1,6 @@
 import React, { FC, lazy } from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
-import { RouteType } from "../misc/routes"
+import { RouteT } from "../misc/types"
 
 import ScrollTop from "./ScrollTop"
 
@@ -10,14 +10,14 @@ import { RootState } from "../redux/store"
 const NotFound = lazy(() => import("../pages/Errors/404"))
 const Error500 = lazy(() => import("../pages/Errors/500"))
 
-type Props = { routes: RouteType[] }
+type Props = { routes: RouteT[] }
 
 const RoutesComponent: FC<Props> = (props) => {
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const { err } = useSelector((state: RootState) => state.err)
 
-	const evaluateRoutes = (r: RouteType, i: number) => {
+	const evaluateRoutes = (r: RouteT, i: number) => {
 		if (err !== null) {
 			return <Route component={Error500} key={i} />
 		}
@@ -43,9 +43,7 @@ const RoutesComponent: FC<Props> = (props) => {
 		<>
 			<ScrollTop />
 			<Switch>
-				{props.routes.map((route: RouteType, index: number) =>
-					evaluateRoutes(route, index)
-				)}
+				{props.routes.map((route: RouteT, index: number) => evaluateRoutes(route, index))}
 				<Route component={NotFound} />
 			</Switch>
 		</>

@@ -11,7 +11,8 @@ import { translate } from "../../lang"
 
 import DialogComponent from "../Dialog"
 
-import PricingCard, { PricingCardT } from "../PricingCard"
+import PricingCard from "../PricingCard"
+import { PricingCardT } from "../../misc/types"
 
 import { pricingInfo } from "../../misc/staticData"
 

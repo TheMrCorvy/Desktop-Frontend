@@ -8,18 +8,7 @@ import { red } from "@material-ui/core/colors"
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
-export type OpinionCardT = {
-	user: {
-		firstName: string
-		lastName: string
-	}
-	date: string
-	opinion: {
-		body: string
-		isRating: boolean
-		rating?: number
-	}
-}
+import { OpinionCardT } from "../../misc/types"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

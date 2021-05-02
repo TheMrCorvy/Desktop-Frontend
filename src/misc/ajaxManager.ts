@@ -1,29 +1,5 @@
-import { CredentialT } from "./types"
+import { CredentialT, CoinbaseChargeT, ApiResponseGetCredentialsT } from "./types"
 import { credential4Testing } from "./Data4Testing"
-
-export type UserT = {
-	name: string
-	email: string
-	recovery_email: string
-	slots_available: number
-	role: "free" | "semi-premium" | "premium" | "admin"
-	id: number
-	phone_number: string
-	anti_fishing_secret: string
-	invitation_code: string
-}
-
-export type ApiResponseLoginT = {
-	token: string
-	user_data: UserT
-	user_credentials: CredentialT[]
-	isAuthorized?: boolean
-}
-
-export type ApiResponseGetCredentialsT = {
-	slots_available: number
-	user_credentials: CredentialT[]
-}
 
 export const getCredentialsFromApi = (id: number, token: string | null) => {
 	const { REACT_APP_ENV_LOCAL } = process.env
@@ -71,16 +47,6 @@ export const findCredentialFromApi = (token: string | null, decrypted: boolean, 
 	}
 
 	return apiResponse
-}
-
-export type CoinbaseChargeT = {
-	name: string
-	description: string
-	local_price: {
-		amount: number
-		currency: string
-	}
-	pricing_type: string
 }
 
 export const generateCoinbaseCharge = (apiKey: string, body: CoinbaseChargeT) => {

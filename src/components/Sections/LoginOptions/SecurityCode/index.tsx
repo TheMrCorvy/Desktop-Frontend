@@ -10,7 +10,7 @@ import { translate } from "../../../../lang"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 
-import { ApiResponseLoginT } from "../../../../misc/ajaxManager"
+import { ApiResponseLoginT } from "../../../../misc/types"
 
 type Props = {
 	onAuthSuccess: (res: ApiResponseLoginT) => void

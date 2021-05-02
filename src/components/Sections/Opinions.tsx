@@ -6,7 +6,8 @@ import { red } from "@material-ui/core/colors"
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
-import OpinionCard, { OpinionCardT } from "../OpinionCard"
+import OpinionCard from "../OpinionCard"
+import { OpinionCardT } from "../../misc/types"
 
 type Props = {
 	title: string
