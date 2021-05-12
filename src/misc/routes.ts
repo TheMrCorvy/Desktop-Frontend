@@ -8,6 +8,7 @@ const DownloadsPage = lazy(() => import("../pages/DownloadsPage"))
 const MyCredentials = lazy(() => import("../pages/MyCredentials"))
 const MyAccount = lazy(() => import("../pages/MyAccount"))
 const ViewCredential = lazy(() => import("../pages/ViewCredential"))
+const CreateCredential = lazy(() => import("../pages/CreateCredential"))
 
 const routes: RouteT[] = [
 	{
@@ -46,6 +47,11 @@ const routes: RouteT[] = [
 		component: ViewCredential,
 		requiresAuth: true,
 		path: "/view-credential/:credentialId",
+	},
+	{
+		component: CreateCredential,
+		requiresAuth: true,
+		path: "/create-credential",
 	},
 ]
 

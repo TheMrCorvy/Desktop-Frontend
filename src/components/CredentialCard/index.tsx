@@ -146,16 +146,18 @@ const CredentialCard: FC<Props> = ({ credentials, availableSlots }) => {
 					key={index}
 					data-testid={"test_available_slot_" + index}
 				>
-					<Card className={classes.cardAlter} variant="outlined">
-						<CardActionArea className={classes.cardAlter}>
-							<CardContent className={classes.addCredential}>
-								<ControlPointIcon
-									fontSize="large"
-									className={classes.textPrimary}
-								/>
-							</CardContent>
-						</CardActionArea>
-					</Card>
+					<Link to="/create-credential" className={classes.link}>
+						<Card className={classes.cardAlter} variant="outlined">
+							<CardActionArea className={classes.cardAlter}>
+								<CardContent className={classes.addCredential}>
+									<ControlPointIcon
+										fontSize="large"
+										className={classes.textPrimary}
+									/>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Link>
 				</Grid>
 			))}
 		</>
