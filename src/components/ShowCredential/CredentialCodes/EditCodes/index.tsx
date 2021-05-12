@@ -26,7 +26,7 @@ import { translate } from "../../../../lang"
 
 type Props = {
 	codes: string[]
-	option?: 1 | 2
+	option: 1 | 2
 }
 
 const useStyles = makeStyles({
