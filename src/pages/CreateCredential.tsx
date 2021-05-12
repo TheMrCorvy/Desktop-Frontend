@@ -153,6 +153,29 @@ const CreateCredential: FC = () => {
 							</AccordionDetails>
 						</Accordion>
 					</Grid>
+					<Grid item xs={12} md={6} lg={4}>
+						<Accordion defaultExpanded style={{ borderRadius: 8 }}>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+								<div className={classes.column}>
+									<Typography className={classes.heading}>'label'</Typography>
+								</div>
+							</AccordionSummary>
+							<AccordionDetails>
+								<TextField
+									label="label"
+									variant="outlined"
+									fullWidth
+									multiline
+									className={classes.textColor}
+									InputProps={{
+										classes: {
+											input: classes.textColor,
+										},
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
+					</Grid>
 				</Grid>
 			</Container>
 		</>
