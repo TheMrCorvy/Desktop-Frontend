@@ -1,4 +1,5 @@
 import { render } from "@testing-library/react"
+import { BrowserRouter } from "react-router-dom"
 
 import { Provider } from "react-redux"
 
@@ -43,13 +44,15 @@ it("renders properly, and shows text properly", () => {
 
 	const { getByTestId, getByText } = render(
 		<Provider store={store}>
-			<PricingCard
-				title={testCard.title}
-				subtitle={testCard.subtitle}
-				cardElevation={testCard.cardElevation}
-				listItems={testCard.listItems}
-				buttonText={testCard.buttonText}
-			/>
+			<BrowserRouter>
+				<PricingCard
+					title={testCard.title}
+					subtitle={testCard.subtitle}
+					cardElevation={testCard.cardElevation}
+					listItems={testCard.listItems}
+					buttonText={testCard.buttonText}
+				/>
+			</BrowserRouter>
 		</Provider>
 	)
 
