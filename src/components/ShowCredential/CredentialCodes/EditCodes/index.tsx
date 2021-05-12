@@ -26,6 +26,7 @@ import { translate } from "../../../../lang"
 
 type Props = {
 	codes: string[]
+	option?: 1 | 2
 }
 
 const useStyles = makeStyles({
@@ -34,7 +35,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const EditCodes: FC<Props> = ({ codes }) => {
+const EditCodes: FC<Props> = ({ codes, option }) => {
 	const theme = useTheme()
 
 	const fullScreen = useMediaQuery(theme.breakpoints.down("sm"))
@@ -77,85 +78,139 @@ const EditCodes: FC<Props> = ({ codes }) => {
 		setEditingCodes(newArray)
 	}
 
-	return (
-		<>
-			<Grid item xs={12} className={classes.textCenter}>
-				<Button
-					size="large"
-					color="primary"
-					variant="contained"
-					disableElevation
-					onClick={handleClickOpen}
-					data-testid="test_open_modal"
+	if (option === 1) {
+		return (
+			<>
+				<Grid item xs={12} className={classes.textCenter}>
+					<Button
+						size="large"
+						color="primary"
+						variant="contained"
+						disableElevation
+						onClick={handleClickOpen}
+						data-testid="test_open_modal"
+					>
+						{translate("edit_codes", lng)}
+					</Button>
+				</Grid>
+				<Dialog
+					fullScreen={fullScreen}
+					open={open}
+					onClose={handleClose}
+					aria-labelledby="edit-dialog"
+					scroll="paper"
+					data-testid="test_modal"
 				>
-					{translate("edit_codes", lng)}
-				</Button>
-			</Grid>
-			<Dialog
-				fullScreen={fullScreen}
-				open={open}
-				onClose={handleClose}
-				aria-labelledby="edit-dialog"
-				scroll="paper"
-				data-testid="test_modal"
-			>
-				<DialogTitle id="edit-dialog">{translate("edit_codes", lng)}</DialogTitle>
-				<DialogContent>
-					<Grid container justify="space-around" spacing={4}>
-						{editingCodes.map((code: string, index: number) => (
-							<Grid key={index} item xs={12} md={6}>
-								<FormControl variant="outlined" fullWidth>
-									<InputLabel>{index + 1}</InputLabel>
-									<OutlinedInput
-										id={`${index}`}
-										label={`${index + 1}`}
-										value={code}
-										onChange={handleChange}
-										endAdornment={
-											<InputAdornment position="end">
-												<Tooltip
-													title={translate("delete", lng)}
-													placement="top"
-												>
-													<IconButton
-														aria-label="delete code"
-														onClick={() => removeCode(code)}
+					<DialogTitle id="edit-dialog">{translate("edit_codes", lng)}</DialogTitle>
+					<DialogContent>
+						<Grid container justify="space-around" spacing={4}>
+							{editingCodes.map((code: string, index: number) => (
+								<Grid key={index} item xs={12} md={6}>
+									<FormControl variant="outlined" fullWidth>
+										<InputLabel>{index + 1}</InputLabel>
+										<OutlinedInput
+											id={`${index}`}
+											label={`${index + 1}`}
+											value={code}
+											onChange={handleChange}
+											endAdornment={
+												<InputAdornment position="end">
+													<Tooltip
+														title={translate("delete", lng)}
+														placement="top"
 													>
-														<DeleteIcon />
-													</IconButton>
-												</Tooltip>
-											</InputAdornment>
-										}
-										inputProps={{
-											"data-testid": `test_${index}`,
-										}}
-									/>
-								</FormControl>
-							</Grid>
-						))}
+														<IconButton
+															aria-label={translate(
+																"edit_codes",
+																lng,
+																2
+															)}
+															onClick={() => removeCode(code)}
+														>
+															<DeleteIcon />
+														</IconButton>
+													</Tooltip>
+												</InputAdornment>
+											}
+											inputProps={{
+												"data-testid": `test_${index}`,
+											}}
+										/>
+									</FormControl>
+								</Grid>
+							))}
 
-						<Grid item xs={12} className={classes.textCenter}>
-							<Button
-								variant="outlined"
-								color="primary"
-								onClick={() => setEditingCodes([...editingCodes, ""])}
-							>
-								añadir código
-							</Button>
+							<Grid item xs={12} className={classes.textCenter}>
+								<Button
+									variant="outlined"
+									color="primary"
+									onClick={() => setEditingCodes([...editingCodes, ""])}
+								>
+									{translate("edit_codes", lng, 1)}
+								</Button>
+							</Grid>
 						</Grid>
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={handleClose} color="default">
+							{translate("go_back", lng)}
+						</Button>
+						<Button onClick={handleClose} color="primary">
+							{translate("access_management", lng, 2)}
+						</Button>
+					</DialogActions>
+				</Dialog>
+			</>
+		)
+	} else {
+		return (
+			<>
+				<Grid container justify="space-around" spacing={4}>
+					{editingCodes.map((code: string, index: number) => (
+						<Grid key={index} item xs={12} md={6}>
+							<FormControl variant="outlined" fullWidth>
+								<InputLabel>{index + 1}</InputLabel>
+								<OutlinedInput
+									id={`${index}`}
+									label={`${index + 1}`}
+									value={code}
+									onChange={handleChange}
+									endAdornment={
+										<InputAdornment position="end">
+											<Tooltip
+												title={translate("delete", lng)}
+												placement="top"
+											>
+												<IconButton
+													aria-label={translate("edit_codes", lng, 2)}
+													onClick={() => removeCode(code)}
+												>
+													<DeleteIcon />
+												</IconButton>
+											</Tooltip>
+										</InputAdornment>
+									}
+									inputProps={{
+										"data-testid": `test_${index}`,
+									}}
+								/>
+							</FormControl>
+						</Grid>
+					))}
+
+					<Grid item xs={12} className={classes.textCenter}>
+						<Button
+							variant="outlined"
+							color="primary"
+							onClick={() => setEditingCodes([...editingCodes, ""])}
+						>
+							{translate("edit_codes", lng, 1)}
+						</Button>
 					</Grid>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={handleClose} color="default">
-						{translate("go_back", lng)}
-					</Button>
-					<Button onClick={handleClose} color="primary">
-						{translate("access_management", lng, 2)}
-					</Button>
-				</DialogActions>
-			</Dialog>
-		</>
-	)
+				</Grid>
+			</>
+		)
+	}
 }
 
 export default EditCodes
