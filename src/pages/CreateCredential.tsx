@@ -59,7 +59,7 @@ const CreateCredential: FC = () => {
 	return (
 		<>
 			<Container maxWidth="xl" className={classes.container}>
-				<Grid container justify="space-between">
+				<Grid container justify="space-around">
 					<Grid item xs={12} md={6} lg={4}>
 						<Accordion defaultExpanded style={{ borderRadius: 8 }}>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -96,7 +96,12 @@ const CreateCredential: FC = () => {
 									id="free-solo-demo"
 									freeSolo
 									fullWidth
-									options={top100Films.map((option) => option.title)}
+									options={top100Films.sort(
+										(a, b) =>
+											-b.title.charAt(0).localeCompare(a.title.charAt(0))
+									)}
+									groupBy={(option) => option.title.charAt(0)}
+									getOptionLabel={(option) => option.title}
 									renderInput={(params) => (
 										<TextField
 											{...params}
