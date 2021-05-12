@@ -18,6 +18,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
+import EditCodes from "../components/ShowCredential/CredentialCodes/EditCodes"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -173,6 +174,18 @@ const CreateCredential: FC = () => {
 										},
 									}}
 								/>
+							</AccordionDetails>
+						</Accordion>
+					</Grid>
+					<Grid item xs={12} md={6} lg={4}>
+						<Accordion defaultExpanded style={{ borderRadius: 8 }}>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+								<div className={classes.column}>
+									<Typography className={classes.heading}>'label'</Typography>
+								</div>
+							</AccordionSummary>
+							<AccordionDetails>
+								<EditCodes codes={[""]} option={2} />
 							</AccordionDetails>
 						</Accordion>
 					</Grid>
