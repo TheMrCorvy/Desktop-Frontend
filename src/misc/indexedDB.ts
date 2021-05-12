@@ -45,7 +45,7 @@ export const initiateDB = (user: UserT, credentials: CredentialT[]) => {
 		})
 }
 
-export const getCredentials = () => {
+export const getCredentials = (): Promise<CredentialT[] | undefined> => {
 	const db = new PasuNashiDatabase()
 
 	return Promise.resolve(db.credentials.toArray())
@@ -59,7 +59,7 @@ export const getCredentials = () => {
 		})
 }
 
-export const getUser = () => {
+export const getUser = (): Promise<UserT | undefined> => {
 	const db = new PasuNashiDatabase()
 
 	return Promise.resolve(db.users.orderBy("id").first())
@@ -115,7 +115,7 @@ export const putCredential = (credential: CredentialT) => {
 		})
 }
 
-export const findCredential = (credentialId: number) => {
+export const findCredential = (credentialId: number): Promise<CredentialT | undefined> => {
 	const db = new PasuNashiDatabase()
 
 	return Promise.resolve(db.credentials.get(credentialId))
@@ -129,7 +129,7 @@ export const findCredential = (credentialId: number) => {
 		})
 }
 
-export const forgetCredential = (credentialId: number) => {
+export const forgetCredential = (credentialId: number): Promise<number | undefined> => {
 	const db = new PasuNashiDatabase()
 
 	return Promise.resolve(db.credentials.where("id").equals(credentialId).delete())
@@ -143,7 +143,7 @@ export const forgetCredential = (credentialId: number) => {
 		})
 }
 
-export const getRecentlySeen = () => {
+export const getRecentlySeen = (): Promise<RecentlySeenT[] | undefined> => {
 	const db = new PasuNashiDatabase()
 
 	return Promise.resolve(db.recently_seen.toArray())
@@ -175,7 +175,7 @@ export const putRecentlySeen = (recent: RecentlySeenT[]) => {
 		})
 }
 
-export const getCompanies = () => {
+export const getCompanies = (): Promise<CompanyT[] | undefined> => {
 	const db = new PasuNashiDatabase()
 
 	return Promise.resolve(db.companies.toArray())
