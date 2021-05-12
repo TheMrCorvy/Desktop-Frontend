@@ -43,7 +43,7 @@ export type CredentialT = {
 	user_id: number
 	company_id: number | null
 	company_name: string
-	logo_url: string | null
+	url_logo: string | null
 	description?: string
 	last_seen: string
 	recently_seen: boolean | string
@@ -139,4 +139,11 @@ export type CoinbaseChargeT = {
 		currency: string
 	}
 	pricing_type: string
+}
+
+/******************************************************************************** company type */
+export type CompanyT = {
+	id: number
+	name: string
+	url_logo: string
 }

@@ -65,7 +65,7 @@ const ViewCredential: FC = (props: any) => {
 		user_id: 0,
 		company_id: null,
 		company_name: "",
-		logo_url: null,
+		url_logo: null,
 		last_seen: "",
 		recently_seen: "",
 		user_name: null,

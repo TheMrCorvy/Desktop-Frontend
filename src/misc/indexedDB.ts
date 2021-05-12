@@ -1,11 +1,12 @@
 import Dexie, { Table } from "dexie"
 
-import { CredentialT, UserT, RecentlySeenT } from "./types"
+import { CredentialT, UserT, RecentlySeenT, CompanyT } from "./types"
 
 class PasuNashiDatabase extends Dexie {
 	users!: Table<UserT>
 	credentials!: Table<CredentialT>
 	recently_seen!: Table<RecentlySeenT>
+	companies!: Table<CompanyT>
 
 	constructor() {
 		super("PasuNashi")
@@ -15,6 +16,7 @@ class PasuNashiDatabase extends Dexie {
 				"id,user_id,company_id,company_name,logo_url,description,last_seen,recently_seen,email,password,username,phone_number,security_question_answer,security_codes,created_at,updated_at",
 			recently_seen:
 				"id,name,last_seen,created_at,updated_at,accessing_device,accessing_platform",
+			companies: "id,name,url_logo",
 		})
 	}
 }
@@ -163,6 +165,34 @@ export const putRecentlySeen = (recent: RecentlySeenT[]) => {
 	const db = new PasuNashiDatabase()
 
 	return Promise.resolve(db.recently_seen.bulkPut(recent))
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+export const getCompanies = () => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.companies.toArray())
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+export const putCompanies = (companies: CompanyT[]) => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.companies.bulkPut(companies))
 		.then((data) => {
 			return data
 		})
