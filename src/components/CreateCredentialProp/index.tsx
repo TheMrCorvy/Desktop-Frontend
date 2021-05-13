@@ -1,13 +1,12 @@
 import React, { FC, useState } from "react"
 
 import {
-	Container,
-	Grid,
 	Typography,
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
 	TextField,
+	Grid,
 } from "@material-ui/core"
 
 import Autocomplete from "@material-ui/lab/Autocomplete"
@@ -20,12 +19,12 @@ import { CompanyT } from "../../misc/types"
 
 import EditCodes from "../ShowCredential/CredentialCodes/EditCodes"
 
-type LayoutOptions = "text field" | "select option" | "multiline" | "multiple code"
+type LayoutOptions = "text field" | "select option" | "multiline" | "multiple codes" | "sqa"
 
 type Props = {
 	layout: LayoutOptions
 	label: string
-	isOptional: boolean
+	isMandatory?: boolean
 	defaultExpanded?: boolean
 	companies?: CompanyT[]
 	maxChar?: number
@@ -61,23 +60,9 @@ const useStyles = makeStyles((theme: Theme) =>
 const CreateCredentialProp: FC<Props> = (props) => {
 	const [charCount, setCharCount] = useState(0)
 
-	const { layout, label, isOptional, defaultExpanded, companies, maxChar } = props
+	const { layout, label, isMandatory, defaultExpanded, companies, maxChar } = props
 
 	const classes = useStyles()
-
-	const sortCompanies = () => {
-		if (companies) {
-			return companies.sort((a, b) => -b.name.charAt(0).localeCompare(a.name.charAt(0)))
-		} else {
-			return [
-				{
-					id: 0,
-					name: "",
-					url_logo: "",
-				},
-			]
-		}
-	}
 
 	const renderBody = (option: LayoutOptions) => {
 		switch (option) {
@@ -95,12 +80,29 @@ const CreateCredentialProp: FC<Props> = (props) => {
 						}}
 					/>
 				)
+
 			case "select option":
+				let options: CompanyT[]
+
+				if (companies) {
+					options = companies.sort(
+						(a, b) => -b.name.charAt(0).localeCompare(a.name.charAt(0))
+					)
+				} else {
+					options = [
+						{
+							id: 0,
+							name: "",
+							url_logo: "",
+						},
+					]
+				}
+
 				return (
 					<Autocomplete
 						freeSolo
 						fullWidth
-						options={sortCompanies()}
+						options={options}
 						groupBy={(option) => option.name.charAt(0)}
 						getOptionLabel={(option) => option.name}
 						renderInput={(params) => (
@@ -108,6 +110,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 						)}
 					/>
 				)
+
 			case "multiline":
 				return (
 					<TextField
@@ -123,8 +126,43 @@ const CreateCredentialProp: FC<Props> = (props) => {
 						}}
 					/>
 				)
-			case "multiple code":
+
+			case "multiple codes":
 				return <EditCodes codes={[""]} option={2} />
+
+			case "sqa":
+				return (
+					<>
+						<Grid container spacing={4}>
+							<Grid item xs={12}>
+								<TextField
+									label="security question"
+									variant="outlined"
+									fullWidth
+									className={classes.textColor}
+									InputProps={{
+										classes: {
+											input: classes.textColor,
+										},
+									}}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<TextField
+									label="security answer"
+									variant="outlined"
+									fullWidth
+									className={classes.textColor}
+									InputProps={{
+										classes: {
+											input: classes.textColor,
+										},
+									}}
+								/>
+							</Grid>
+						</Grid>
+					</>
+				)
 
 			default:
 				return null
@@ -137,7 +175,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography className={classes.heading}>{label}</Typography>
 					<Typography className={classes.secondaryHeading}>
-						{isOptional ? "(Optional)" : "(Mandatory)"}
+						{isMandatory ? "(Mandatory)" : "(Optional)"}
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>{renderBody(layout)}</AccordionDetails>
