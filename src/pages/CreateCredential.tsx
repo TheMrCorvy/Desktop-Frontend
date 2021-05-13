@@ -43,16 +43,21 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		heading: {
 			fontSize: theme.typography.pxToRem(15),
+			flexBasis: "80%",
+			flexShrink: 0,
 		},
 		secondaryHeading: {
 			fontSize: theme.typography.pxToRem(15),
 			color: theme.palette.text.secondary,
 		},
-		column: {
-			flexBasis: "100%",
-		},
 		textColor: {
 			color: theme.palette.type === "dark" ? "white" : "black",
+		},
+		textCenter: {
+			textAlign: "center",
+		},
+		borderRadius: {
+			borderRadius: 8,
 		},
 	})
 )
@@ -95,16 +100,72 @@ const CreateCredential: FC = () => {
 		<>
 			<Container maxWidth="xl" className={classes.container}>
 				<Grid container justify="space-around" spacing={4}>
+					<Grid item xs={12} className={classes.textCenter}>
+						<Typography variant="h2">Create Credential</Typography>
+					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<Accordion defaultExpanded style={{ borderRadius: 8 }}>
+						<Accordion defaultExpanded className={classes.borderRadius}>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<div className={classes.column}>
-									<Typography className={classes.heading}>'label'</Typography>
-								</div>
+								<Typography className={classes.heading}>Select Company</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Mandatory)
+								</Typography>
+							</AccordionSummary>
+							<AccordionDetails>
+								<Autocomplete
+									freeSolo
+									fullWidth
+									options={companies.sort(
+										(a, b) => -b.name.charAt(0).localeCompare(a.name.charAt(0))
+									)}
+									groupBy={(option) => option.name.charAt(0)}
+									getOptionLabel={(option) => option.name}
+									renderInput={(params) => (
+										<TextField
+											{...params}
+											label="Select Company"
+											variant="outlined"
+										/>
+									)}
+								/>
+							</AccordionDetails>
+						</Accordion>
+					</Grid>
+					<Grid item xs={12} md={6} lg={4}>
+						<Accordion defaultExpanded className={classes.borderRadius}>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+								<Typography className={classes.heading}>Description</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Optional)
+								</Typography>
 							</AccordionSummary>
 							<AccordionDetails>
 								<TextField
-									label="label"
+									label="Description"
+									variant="outlined"
+									fullWidth
+									multiline
+									className={classes.textColor}
+									InputProps={{
+										classes: {
+											input: classes.textColor,
+										},
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
+					</Grid>
+					<Grid item xs={12} md={6} lg={4}>
+						<Accordion className={classes.borderRadius}>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+								<Typography className={classes.heading}>Registered Name</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Optional)
+								</Typography>
+							</AccordionSummary>
+							<AccordionDetails>
+								<TextField
+									label="Registered Name"
 									variant="outlined"
 									fullWidth
 									className={classes.textColor}
@@ -118,42 +179,132 @@ const CreateCredential: FC = () => {
 						</Accordion>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<Accordion defaultExpanded style={{ borderRadius: 8 }}>
+						<Accordion className={classes.borderRadius}>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<div className={classes.column}>
-									<Typography className={classes.heading}>
-										select company
-									</Typography>
-								</div>
+								<Typography className={classes.heading}>Email</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Optional)
+								</Typography>
 							</AccordionSummary>
 							<AccordionDetails>
-								<Autocomplete
-									id="free-solo-demo"
-									freeSolo
+								<TextField
+									label="Email"
+									variant="outlined"
 									fullWidth
-									options={companies.sort(
-										(a, b) => -b.name.charAt(0).localeCompare(a.name.charAt(0))
-									)}
-									groupBy={(option) => option.name.charAt(0)}
-									getOptionLabel={(option) => option.name}
-									renderInput={(params) => (
-										<TextField
-											{...params}
-											label="freeSolo"
-											margin="normal"
-											variant="outlined"
-										/>
-									)}
+									className={classes.textColor}
+									InputProps={{
+										classes: {
+											input: classes.textColor,
+										},
+									}}
+									type="email"
 								/>
 							</AccordionDetails>
 						</Accordion>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<Accordion defaultExpanded style={{ borderRadius: 8 }}>
+						<Accordion className={classes.borderRadius}>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<div className={classes.column}>
-									<Typography className={classes.heading}>'label'</Typography>
-								</div>
+								<Typography className={classes.heading}>Password</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Optional)
+								</Typography>
+							</AccordionSummary>
+							<AccordionDetails>
+								<TextField
+									label="Password"
+									variant="outlined"
+									fullWidth
+									className={classes.textColor}
+									InputProps={{
+										classes: {
+											input: classes.textColor,
+										},
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
+					</Grid>
+					<Grid item xs={12} md={6} lg={4}>
+						<Accordion className={classes.borderRadius}>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+								<Typography className={classes.heading}>UserName</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Optional)
+								</Typography>
+							</AccordionSummary>
+							<AccordionDetails>
+								<TextField
+									label="UserName"
+									variant="outlined"
+									fullWidth
+									className={classes.textColor}
+									InputProps={{
+										classes: {
+											input: classes.textColor,
+										},
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
+					</Grid>
+					<Grid item xs={12} md={6} lg={4}>
+						<Accordion className={classes.borderRadius}>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+								<Typography className={classes.heading}>Phone Number</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Optional)
+								</Typography>
+							</AccordionSummary>
+							<AccordionDetails>
+								<TextField
+									label="Phone Number"
+									variant="outlined"
+									fullWidth
+									className={classes.textColor}
+									InputProps={{
+										classes: {
+											input: classes.textColor,
+										},
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
+					</Grid>
+					<Grid item xs={12} md={6} lg={4}>
+						<Accordion className={classes.borderRadius}>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+								<Typography className={classes.heading}>
+									Unique Security Code
+								</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Optional)
+								</Typography>
+							</AccordionSummary>
+							<AccordionDetails>
+								<TextField
+									label="Unique Security Code"
+									variant="outlined"
+									fullWidth
+									className={classes.textColor}
+									InputProps={{
+										classes: {
+											input: classes.textColor,
+										},
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
+					</Grid>
+					<Grid item xs={12} md={6} lg={4}>
+						<Accordion className={classes.borderRadius}>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+								<Typography className={classes.heading}>
+									Security Question & Answer
+								</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Optional)
+								</Typography>
 							</AccordionSummary>
 							<AccordionDetails>
 								<Grid container spacing={3}>
@@ -188,34 +339,27 @@ const CreateCredential: FC = () => {
 						</Accordion>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<Accordion defaultExpanded style={{ borderRadius: 8 }}>
+						<Accordion className={classes.borderRadius}>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<div className={classes.column}>
-									<Typography className={classes.heading}>'label'</Typography>
-								</div>
+								<Typography className={classes.heading}>Crypto Access</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Optional)
+								</Typography>
 							</AccordionSummary>
 							<AccordionDetails>
-								<TextField
-									label="label"
-									variant="outlined"
-									fullWidth
-									multiline
-									className={classes.textColor}
-									InputProps={{
-										classes: {
-											input: classes.textColor,
-										},
-									}}
-								/>
+								<EditCodes codes={[""]} option={2} />
 							</AccordionDetails>
 						</Accordion>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<Accordion defaultExpanded style={{ borderRadius: 8 }}>
+						<Accordion className={classes.borderRadius}>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<div className={classes.column}>
-									<Typography className={classes.heading}>'label'</Typography>
-								</div>
+								<Typography className={classes.heading}>
+									Multiple Security Codes
+								</Typography>
+								<Typography className={classes.secondaryHeading}>
+									(Optional)
+								</Typography>
 							</AccordionSummary>
 							<AccordionDetails>
 								<EditCodes codes={[""]} option={2} />
