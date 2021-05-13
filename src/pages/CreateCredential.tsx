@@ -91,9 +91,6 @@ const CreateCredential: FC = () => {
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<CreateCredentialProp label="Security Question & Answer" layout="sqa" />
-					</Grid>
-					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp label="Registered Name" layout="text field" />
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -107,6 +104,9 @@ const CreateCredential: FC = () => {
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp label="Phone Number" layout="text field" />
+					</Grid>
+					<Grid item xs={12} md={6} lg={4}>
+						<CreateCredentialProp label="Security Question & Answer" layout="sqa" />
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp label="Unique Security Code" layout="text field" />

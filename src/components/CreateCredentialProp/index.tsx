@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState, ChangeEvent } from "react"
 
 import {
 	Typography,
@@ -40,6 +40,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			fontSize: theme.typography.pxToRem(15),
 			flexBasis: "80%",
 			flexShrink: 0,
+
+			[theme.breakpoints.down("xs")]: {
+				flexBasis: "70%",
+			},
 		},
 		secondaryHeading: {
 			fontSize: theme.typography.pxToRem(15),
@@ -58,11 +62,63 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const CreateCredentialProp: FC<Props> = (props) => {
-	const [charCount, setCharCount] = useState(0)
-
 	const { layout, label, isMandatory, defaultExpanded, companies, maxChar } = props
 
+	const [mainCharCount, setMainCharCount] = useState(0)
+
+	const [secondCharCount, setSecondCharCount] = useState(0)
+
+	const [mainText, setMainText] = useState("")
+
+	const [secondText, setSecondText] = useState("")
+
 	const classes = useStyles()
+
+	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
+		const target = event.target as HTMLInputElement
+
+		const inputType = target.getAttribute("input-type")
+
+		const variant = target.getAttribute("variant")
+
+		switch (inputType) {
+			case "text field":
+				setMainText(target.value)
+
+				setMainCharCount(target.value.length)
+				break
+
+			case "select option":
+				setMainText(target.value)
+
+				setMainCharCount(target.value.length)
+				break
+
+			case "multiline":
+				setMainText(target.value)
+
+				setMainCharCount(target.value.length)
+				break
+
+			case "sqa":
+				if (variant && variant === "security question") {
+					setMainText(target.value)
+
+					setMainCharCount(target.value.length)
+				}
+
+				if (variant && variant === "security answer") {
+					setSecondText(target.value)
+
+					setSecondCharCount(target.value.length)
+				}
+
+				break
+
+			default:
+				break
+		}
+	}
 
 	const renderBody = (option: LayoutOptions) => {
 		switch (option) {
@@ -78,6 +134,11 @@ const CreateCredentialProp: FC<Props> = (props) => {
 								input: classes.textColor,
 							},
 						}}
+						inputProps={{
+							"input-type": layout,
+						}}
+						value={mainText}
+						onChange={handleChange}
 					/>
 				)
 
@@ -106,7 +167,16 @@ const CreateCredentialProp: FC<Props> = (props) => {
 						groupBy={(option) => option.name.charAt(0)}
 						getOptionLabel={(option) => option.name}
 						renderInput={(params) => (
-							<TextField {...params} label={label} variant="outlined" />
+							<TextField
+								{...params}
+								label={label}
+								variant="outlined"
+								inputProps={{
+									"input-type": layout,
+								}}
+								value={mainText}
+								onChange={handleChange}
+							/>
 						)}
 					/>
 				)
@@ -124,6 +194,11 @@ const CreateCredentialProp: FC<Props> = (props) => {
 								input: classes.textColor,
 							},
 						}}
+						inputProps={{
+							"input-type": layout,
+						}}
+						value={mainText}
+						onChange={handleChange}
 					/>
 				)
 
@@ -145,6 +220,12 @@ const CreateCredentialProp: FC<Props> = (props) => {
 											input: classes.textColor,
 										},
 									}}
+									inputProps={{
+										"input-type": layout,
+										variant: "security question",
+									}}
+									value={mainText}
+									onChange={handleChange}
 								/>
 							</Grid>
 							<Grid item xs={12}>
@@ -158,6 +239,12 @@ const CreateCredentialProp: FC<Props> = (props) => {
 											input: classes.textColor,
 										},
 									}}
+									inputProps={{
+										"input-type": layout,
+										variant: "security answer",
+									}}
+									value={secondText}
+									onChange={handleChange}
 								/>
 							</Grid>
 						</Grid>
