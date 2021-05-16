@@ -78,7 +78,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
 		const target = event.target as HTMLInputElement
 
-		const inputType = target.getAttribute("input-type")
+		const inputType = target.getAttribute("type")
 
 		const variant = target.getAttribute("variant")
 
@@ -137,7 +137,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 								},
 							}}
 							inputProps={{
-								"input-type": layout,
+								type: layout,
 							}}
 							value={mainText}
 							onChange={handleChange}
@@ -181,11 +181,12 @@ const CreateCredentialProp: FC<Props> = (props) => {
 									{...params}
 									label={label}
 									variant="outlined"
-									inputProps={{
-										"input-type": layout,
-									}}
 									value={mainText}
 									onChange={handleChange}
+									InputProps={{
+										...params.InputProps,
+										type: layout,
+									}}
 								/>
 							)}
 						/>
@@ -212,7 +213,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 								},
 							}}
 							inputProps={{
-								"input-type": layout,
+								type: layout,
 							}}
 							value={mainText}
 							onChange={handleChange}
@@ -243,7 +244,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 									},
 								}}
 								inputProps={{
-									"input-type": layout,
+									type: layout,
 									variant: "security question",
 								}}
 								value={mainText}
@@ -267,7 +268,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 									},
 								}}
 								inputProps={{
-									"input-type": layout,
+									type: layout,
 									variant: "security answer",
 								}}
 								value={secondText}
