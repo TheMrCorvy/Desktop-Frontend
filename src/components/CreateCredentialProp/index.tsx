@@ -28,6 +28,7 @@ type Props = {
 	defaultExpanded?: boolean
 	companies?: CompanyT[]
 	maxChar?: number
+	isCrypto?: boolean
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -62,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const CreateCredentialProp: FC<Props> = (props) => {
-	const { layout, label, isMandatory, defaultExpanded, companies, maxChar } = props
+	const { layout, label, isMandatory, defaultExpanded, companies, maxChar, isCrypto } = props
 
 	const [mainCharCount, setMainCharCount] = useState(0)
 
@@ -124,22 +125,29 @@ const CreateCredentialProp: FC<Props> = (props) => {
 		switch (option) {
 			case "text field":
 				return (
-					<TextField
-						label={label}
-						variant="outlined"
-						fullWidth
-						className={classes.textColor}
-						InputProps={{
-							classes: {
-								input: classes.textColor,
-							},
-						}}
-						inputProps={{
-							"input-type": layout,
-						}}
-						value={mainText}
-						onChange={handleChange}
-					/>
+					<>
+						<TextField
+							label={label}
+							variant="outlined"
+							fullWidth
+							className={classes.textColor}
+							InputProps={{
+								classes: {
+									input: classes.textColor,
+								},
+							}}
+							inputProps={{
+								"input-type": layout,
+							}}
+							value={mainText}
+							onChange={handleChange}
+						/>
+						{maxChar && (
+							<Typography variant="body1">
+								{mainCharCount} / {maxChar}
+							</Typography>
+						)}
+					</>
 				)
 
 			case "select option":
@@ -160,93 +168,116 @@ const CreateCredentialProp: FC<Props> = (props) => {
 				}
 
 				return (
-					<Autocomplete
-						freeSolo
-						fullWidth
-						options={options}
-						groupBy={(option) => option.name.charAt(0)}
-						getOptionLabel={(option) => option.name}
-						renderInput={(params) => (
-							<TextField
-								{...params}
-								label={label}
-								variant="outlined"
-								inputProps={{
-									"input-type": layout,
-								}}
-								value={mainText}
-								onChange={handleChange}
-							/>
-						)}
-					/>
-				)
-
-			case "multiline":
-				return (
-					<TextField
-						label={label}
-						variant="outlined"
-						fullWidth
-						multiline
-						className={classes.textColor}
-						InputProps={{
-							classes: {
-								input: classes.textColor,
-							},
-						}}
-						inputProps={{
-							"input-type": layout,
-						}}
-						value={mainText}
-						onChange={handleChange}
-					/>
-				)
-
-			case "multiple codes":
-				return <EditCodes codes={[""]} option={2} />
-
-			case "sqa":
-				return (
 					<>
-						<Grid container spacing={4}>
-							<Grid item xs={12}>
+						<Autocomplete
+							freeSolo
+							fullWidth
+							size="small"
+							options={options}
+							groupBy={(option) => option.name.charAt(0)}
+							getOptionLabel={(option) => option.name}
+							renderInput={(params) => (
 								<TextField
-									label="security question"
+									{...params}
+									label={label}
 									variant="outlined"
-									fullWidth
-									className={classes.textColor}
-									InputProps={{
-										classes: {
-											input: classes.textColor,
-										},
-									}}
 									inputProps={{
 										"input-type": layout,
-										variant: "security question",
 									}}
 									value={mainText}
 									onChange={handleChange}
 								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									label="security answer"
-									variant="outlined"
-									fullWidth
-									className={classes.textColor}
-									InputProps={{
-										classes: {
-											input: classes.textColor,
-										},
-									}}
-									inputProps={{
-										"input-type": layout,
-										variant: "security answer",
-									}}
-									value={secondText}
-									onChange={handleChange}
-								/>
-							</Grid>
+							)}
+						/>
+						{maxChar && (
+							<Typography variant="body1">
+								{mainCharCount} / {maxChar}
+							</Typography>
+						)}
+					</>
+				)
+
+			case "multiline":
+				return (
+					<>
+						<TextField
+							label={label}
+							variant="outlined"
+							fullWidth
+							multiline
+							className={classes.textColor}
+							InputProps={{
+								classes: {
+									input: classes.textColor,
+								},
+							}}
+							inputProps={{
+								"input-type": layout,
+							}}
+							value={mainText}
+							onChange={handleChange}
+						/>
+						{maxChar && (
+							<Typography variant="body1">
+								{mainCharCount} / {maxChar}
+							</Typography>
+						)}
+					</>
+				)
+
+			case "multiple codes":
+				return <EditCodes codes={[""]} option={2} isCrypto={isCrypto ? isCrypto : false} />
+
+			case "sqa":
+				return (
+					<>
+						<Grid item xs={12}>
+							<TextField
+								label="security question"
+								variant="outlined"
+								fullWidth
+								className={classes.textColor}
+								InputProps={{
+									classes: {
+										input: classes.textColor,
+									},
+								}}
+								inputProps={{
+									"input-type": layout,
+									variant: "security question",
+								}}
+								value={mainText}
+								onChange={handleChange}
+							/>
+							{maxChar && (
+								<Typography variant="body1">
+									{mainCharCount} / {maxChar}
+								</Typography>
+							)}
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								label="security answer"
+								variant="outlined"
+								fullWidth
+								className={classes.textColor}
+								InputProps={{
+									classes: {
+										input: classes.textColor,
+									},
+								}}
+								inputProps={{
+									"input-type": layout,
+									variant: "security answer",
+								}}
+								value={secondText}
+								onChange={handleChange}
+							/>
+							{maxChar && (
+								<Typography variant="body1">
+									{secondCharCount} / {maxChar}
+								</Typography>
+							)}
 						</Grid>
 					</>
 				)
@@ -265,7 +296,17 @@ const CreateCredentialProp: FC<Props> = (props) => {
 						{isMandatory ? "(Mandatory)" : "(Optional)"}
 					</Typography>
 				</AccordionSummary>
-				<AccordionDetails>{renderBody(layout)}</AccordionDetails>
+				<AccordionDetails>
+					<Grid container spacing={4}>
+						{layout === "sqa" ? (
+							renderBody(layout)
+						) : (
+							<Grid item xs={12}>
+								{renderBody(layout)}
+							</Grid>
+						)}
+					</Grid>
+				</AccordionDetails>
 			</Accordion>
 		</>
 	)

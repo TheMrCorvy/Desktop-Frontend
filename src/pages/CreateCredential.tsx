@@ -15,6 +15,8 @@ import { getCompanies, putCompanies } from "../misc/indexedDB"
 
 import CreateCredentialProp from "../components/CreateCredentialProp"
 
+import { calcMaxChar } from "../misc/staticData"
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		container: {
@@ -81,6 +83,7 @@ const CreateCredential: FC = () => {
 							label="Select Company"
 							isMandatory
 							defaultExpanded
+							maxChar={calcMaxChar("sm")}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -88,28 +91,57 @@ const CreateCredential: FC = () => {
 							defaultExpanded
 							label="Description"
 							layout="multiline"
+							maxChar={calcMaxChar("lg")}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<CreateCredentialProp label="Registered Name" layout="text field" />
+						<CreateCredentialProp
+							label="Registered Name"
+							layout="text field"
+							maxChar={calcMaxChar("sm")}
+						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<CreateCredentialProp label="email" layout="text field" />
+						<CreateCredentialProp
+							label="email"
+							layout="text field"
+							maxChar={calcMaxChar("sm")}
+						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<CreateCredentialProp label="password" layout="text field" />
+						<CreateCredentialProp
+							label="password"
+							layout="text field"
+							maxChar={calcMaxChar("sm")}
+						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<CreateCredentialProp label="Username" layout="text field" />
+						<CreateCredentialProp
+							label="Username"
+							layout="text field"
+							maxChar={calcMaxChar("sm")}
+						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<CreateCredentialProp label="Phone Number" layout="text field" />
+						<CreateCredentialProp
+							label="Phone Number"
+							layout="text field"
+							maxChar={calcMaxChar("xs")}
+						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<CreateCredentialProp label="Security Question & Answer" layout="sqa" />
+						<CreateCredentialProp
+							label="Security Question & Answer"
+							layout="sqa"
+							maxChar={calcMaxChar("sm")}
+						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<CreateCredentialProp label="Unique Security Code" layout="text field" />
+						<CreateCredentialProp
+							label="Unique Security Code"
+							layout="text field"
+							maxChar={calcMaxChar("xs")}
+						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
@@ -118,7 +150,11 @@ const CreateCredential: FC = () => {
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
-						<CreateCredentialProp label="Crypto Access" layout="multiple codes" />
+						<CreateCredentialProp
+							label="Crypto Access"
+							layout="multiple codes"
+							isCrypto={true}
+						/>
 					</Grid>
 				</Grid>
 			</Container>

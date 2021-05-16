@@ -27,6 +27,7 @@ import { translate } from "../../../../lang"
 type Props = {
 	codes: string[]
 	option: 1 | 2
+	isCrypto: boolean
 }
 
 const useStyles = makeStyles({
@@ -35,7 +36,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const EditCodes: FC<Props> = ({ codes, option }) => {
+const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 	const theme = useTheme()
 
 	const fullScreen = useMediaQuery(theme.breakpoints.down("sm"))
@@ -71,7 +72,7 @@ const EditCodes: FC<Props> = ({ codes, option }) => {
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const newArray = [...editingCodes]
 
-		const index = Number(e.target.id)
+		const index = Number(e.target.id.substring(5))
 
 		newArray[index] = e.target.value
 
@@ -109,7 +110,7 @@ const EditCodes: FC<Props> = ({ codes, option }) => {
 									<FormControl variant="outlined" fullWidth>
 										<InputLabel>{index + 1}</InputLabel>
 										<OutlinedInput
-											id={`${index}`}
+											id={`${isCrypto ? "word" : "code"}-${index}`}
 											label={`${index + 1}`}
 											value={code}
 											onChange={handleChange}
@@ -171,7 +172,7 @@ const EditCodes: FC<Props> = ({ codes, option }) => {
 							<FormControl variant="outlined" fullWidth>
 								<InputLabel>{index + 1}</InputLabel>
 								<OutlinedInput
-									id={`${index}`}
+									id={`${isCrypto ? "word" : "code"}-${index}`}
 									label={`${index + 1}`}
 									value={code}
 									onChange={handleChange}

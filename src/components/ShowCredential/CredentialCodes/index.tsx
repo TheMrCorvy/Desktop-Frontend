@@ -84,7 +84,9 @@ const CredentialCodes: FC<Props> = ({ locked, visible, label, body, isCrypto }) 
 							/>
 						</Grid>
 					))}
-					{!locked && <EditCodes option={1} codes={body} />}
+					{!locked && (
+						<EditCodes option={1} codes={body} isCrypto={isCrypto ? isCrypto : false} />
+					)}
 				</Grid>
 			</AccordionDetails>
 			<CardFooter locked={locked} visible={visible} textToCopy={textToCopy} />
