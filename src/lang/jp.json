@@ -125,7 +125,7 @@
 		"Password",
 		"Username",
 		"Unique Security Code",
-		"Registered Name",
+		"Your Name",
 		"(Optional)"
 	],
 	"before_using_security_code": [

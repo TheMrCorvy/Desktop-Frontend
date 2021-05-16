@@ -147,3 +147,6 @@ export type CompanyT = {
 	name: string
 	url_logo: string
 }
+
+/******************************************************************************** maximum characters per str */
+export type CharSizesT = "xs" | "sm" | "md" | "lg" | "xl"
