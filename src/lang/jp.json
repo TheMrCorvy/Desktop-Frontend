@@ -126,7 +126,8 @@
 		"Username",
 		"Unique Security Code",
 		"Your Name",
-		"(Optional)"
+		"(Optional)",
+		"(Mandatory)"
 	],
 	"before_using_security_code": [
 		"The security code you enter will work only once, so make sure to renew it immediately after the login."
@@ -284,5 +285,9 @@
 	"invitation_code": ["Invitation Code"],
 	"access_denied_message": [
 		"You have more credentials than the allowed for your role. You won't be able to see it, but you'll be able to delete it after unlocking it."
-	]
+	],
+	"create_credential": ["Create Credential"],
+	"save": ["Save"],
+	"select_company": ["Select Company"],
+	"description": ["Description"]
 }

@@ -15,6 +15,11 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+
+import { translate } from "../../lang"
+
 import { CompanyT } from "../../misc/types"
 
 import EditCodes from "../ShowCredential/CredentialCodes/EditCodes"
@@ -63,6 +68,8 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const CreateCredentialProp: FC<Props> = (props) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const { layout, label, isMandatory, defaultExpanded, companies, maxChar, isCrypto } = props
 
 	const [mainCharCount, setMainCharCount] = useState(0)
@@ -294,7 +301,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography className={classes.heading}>{label}</Typography>
 					<Typography className={classes.secondaryHeading}>
-						{isMandatory ? "(Mandatory)" : "(Optional)"}
+						{translate("auth_form_texts", lng, isMandatory ? 16 : 15)}
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>

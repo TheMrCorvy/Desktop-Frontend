@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react"
 
-import { Container, Grid, Typography } from "@material-ui/core"
+import { Button, Container, Grid, Typography } from "@material-ui/core"
 
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
@@ -16,6 +16,7 @@ import { getCompanies, putCompanies } from "../misc/indexedDB"
 import CreateCredentialProp from "../components/CreateCredentialProp"
 
 import { calcMaxChar } from "../misc/staticData"
+import { translate } from "../lang"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -31,6 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		textCenter: {
 			textAlign: "center",
+		},
+		submitBtn: {
+			borderRadius: 8,
+			marginTop: 30,
 		},
 	})
 )
@@ -74,13 +79,13 @@ const CreateCredential: FC = () => {
 			<Container maxWidth="xl" className={classes.container}>
 				<Grid container justify="space-around" spacing={4}>
 					<Grid item xs={12} className={classes.textCenter}>
-						<Typography variant="h2">Create Credential</Typography>
+						<Typography variant="h2">{translate("create_credential", lng)}</Typography>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
 							layout="select option"
 							companies={companies}
-							label="Select Company"
+							label={translate("select_company", lng)}
 							isMandatory
 							defaultExpanded
 							maxChar={calcMaxChar("sm")}
@@ -89,72 +94,84 @@ const CreateCredential: FC = () => {
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
 							defaultExpanded
-							label="Description"
+							label={translate("description", lng)}
 							layout="multiline"
 							maxChar={calcMaxChar("lg")}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label="Registered Name"
+							label={translate("auth_form_texts", lng, 14)}
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label="email"
+							label={translate("auth_form_texts", lng, 0)}
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label="password"
+							label={translate("auth_form_texts", lng, 11)}
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label="Username"
+							label={translate("auth_form_texts", lng, 12)}
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label="Phone Number"
+							label={translate("auth_form_texts", lng, 7)}
 							layout="text field"
 							maxChar={calcMaxChar("xs")}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label="Security Question & Answer"
+							label={translate("encryption_examples", lng, 10)}
 							layout="sqa"
 							maxChar={calcMaxChar("sm")}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label="Unique Security Code"
+							label={translate("auth_form_texts", lng, 13)}
 							layout="text field"
 							maxChar={calcMaxChar("xs")}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label="Multiple Security Codes"
+							label={translate("encryption_examples", lng, 8)}
 							layout="multiple codes"
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label="Crypto Access"
+							label={translate("encryption_examples", lng, 9)}
 							layout="multiple codes"
 							isCrypto={true}
 						/>
+					</Grid>
+					<Grid item xs={12} md={6} className={classes.textCenter}>
+						<Button
+							color="secondary"
+							variant="contained"
+							disableElevation
+							fullWidth
+							size="large"
+							className={classes.submitBtn}
+						>
+							{translate("save", lng)}
+						</Button>
 					</Grid>
 				</Grid>
 			</Container>

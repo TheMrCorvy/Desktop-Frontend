@@ -138,7 +138,8 @@
 		"Nombre de Usuario",
 		"Código de Seguridad Único",
 		"Tu Nombre",
-		"(Opcional)"
+		"(Opcional)",
+		"(Obligatorio)"
 	],
 	"before_using_security_code": [
 		"El código de seguridad que ingreses solo funcionará una única vez, asegurate de renovarlo apenas ingreses."
@@ -296,5 +297,9 @@
 	"invitation_code": ["Código de Invitación"],
 	"access_denied_message": [
 		"Tienes más credenciales de las que permite tu rol. No podrás verla, pero sí podrás eliminarla despues de desbloquearla."
-	]
+	],
+	"create_credential": ["Crear Credencial"],
+	"save": ["Guardar"],
+	"select_company": ["Select Company"],
+	"description": ["Descripción"]
 }
