@@ -145,12 +145,13 @@ const CreateCredentialProp: FC<Props> = (props) => {
 							}}
 							inputProps={{
 								type: layout,
+								"data-testid": "test_text_field",
 							}}
 							value={mainText}
 							onChange={handleChange}
 						/>
 						{maxChar && (
-							<Typography variant="body1">
+							<Typography variant="body1" data-testid="test_max_char">
 								{mainCharCount} / {maxChar}
 							</Typography>
 						)}
@@ -178,8 +179,8 @@ const CreateCredentialProp: FC<Props> = (props) => {
 					<>
 						<Autocomplete
 							freeSolo
+							data-testid="test_select_option"
 							fullWidth
-							size="small"
 							options={options}
 							groupBy={(option) => option.name.charAt(0)}
 							getOptionLabel={(option) => option.name}
@@ -221,6 +222,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 							}}
 							inputProps={{
 								type: layout,
+								"data-testid": "test_multiline",
 							}}
 							value={mainText}
 							onChange={handleChange}
@@ -253,6 +255,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 								inputProps={{
 									type: layout,
 									variant: "security question",
+									"data-testid": "test_sqa_question",
 								}}
 								value={mainText}
 								onChange={handleChange}
@@ -277,6 +280,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 								inputProps={{
 									type: layout,
 									variant: "security answer",
+									"data-testid": "test_sqa_answer",
 								}}
 								value={secondText}
 								onChange={handleChange}
@@ -297,10 +301,14 @@ const CreateCredentialProp: FC<Props> = (props) => {
 
 	return (
 		<>
-			<Accordion defaultExpanded={defaultExpanded} className={classes.borderRadius}>
+			<Accordion
+				defaultExpanded={defaultExpanded}
+				className={classes.borderRadius}
+				data-testid="test_accordion"
+			>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography className={classes.heading}>{label}</Typography>
-					<Typography className={classes.secondaryHeading}>
+					<Typography className={classes.secondaryHeading} data-testid="test_mandatory">
 						{translate("auth_form_texts", lng, isMandatory ? 16 : 15)}
 					</Typography>
 				</AccordionSummary>

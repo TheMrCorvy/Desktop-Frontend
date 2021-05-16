@@ -166,7 +166,7 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 	} else {
 		return (
 			<>
-				<Grid container justify="space-around" spacing={4}>
+				<Grid container justify="space-around" spacing={4} data-testid="test_edit_codes">
 					{editingCodes.map((code: string, index: number) => (
 						<Grid key={index} item xs={12} md={6}>
 							<FormControl variant="outlined" fullWidth>

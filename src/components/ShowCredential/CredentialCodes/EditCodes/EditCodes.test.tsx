@@ -9,7 +9,7 @@ describe("opens dialog properly", () => {
 	it("opens dialog properly", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<EditCredentialCodes option={1} codes={["code 1", "code 2"]} />
+				<EditCredentialCodes option={1} codes={["code 1", "code 2"]} isCrypto={true} />
 			</Provider>
 		)
 
@@ -25,7 +25,7 @@ describe("opens dialog properly", () => {
 	it("renders all text fields properly", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<EditCredentialCodes option={1} codes={["code 1", "code 2"]} />
+				<EditCredentialCodes option={1} codes={["code 1", "code 2"]} isCrypto={false} />
 			</Provider>
 		)
 
