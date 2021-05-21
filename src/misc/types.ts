@@ -78,7 +78,7 @@ export type CredentialT = {
 		multiple_security_codes: string | null
 		multiple_code_length: number
 		crypto_currency_access_code: string | null
-		crypto_code_length: number
+		crypto_code_length: number | null
 	}
 	created_at: string
 	updated_at: string
