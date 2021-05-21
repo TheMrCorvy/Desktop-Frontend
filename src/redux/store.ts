@@ -5,6 +5,7 @@ import themeReducer from "./reducers/themeReducer"
 import drawerReducer from "./reducers/drawerReducer"
 import authTokenReducer from "./reducers/authTokenReducer"
 import errorHandlingReducer from "./reducers/errorHandlingReducer"
+import credentialReducer from "./reducers/credentialReducer"
 
 const rootReducer = combineReducers({
 	lng: langReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
 	open: drawerReducer,
 	token: authTokenReducer,
 	err: errorHandlingReducer,
+	credential: credentialReducer,
 })
 
 const store = createStore(rootReducer)

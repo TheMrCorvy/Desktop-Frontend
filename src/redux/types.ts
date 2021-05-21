@@ -1,3 +1,5 @@
+import { CredentialT } from "../misc/types"
+
 /******************************************************************************** translations */
 export const SET_LANGUAGE = "SET_LANGUAGE"
 
@@ -68,4 +70,13 @@ export interface ErrorMessageI {
 export interface ErrorI {
 	type: typeof ERROR_500
 	payload: string | null
+}
+
+/******************************************************************************** create / edit credential */
+
+export const EDIT_CREDENTIAL = "EDIT_CREDENTIAL"
+
+export interface EditCredentialI {
+	type: typeof EDIT_CREDENTIAL
+	payload: CredentialT
 }
