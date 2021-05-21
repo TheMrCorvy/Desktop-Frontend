@@ -38,10 +38,6 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		accordion: {
-			width: "100%",
-			borderRadius: 8,
-		},
 		heading: {
 			fontSize: theme.typography.pxToRem(15),
 			flexBasis: "80%",
@@ -299,12 +295,13 @@ const CreateCredentialProp: FC<Props> = (props) => {
 		}
 	}
 
+	//don't know why, but the class "borderRadius" doesn't apply the border radius, but the style does...
 	return (
 		<>
 			<Accordion
 				defaultExpanded={defaultExpanded}
-				className={classes.borderRadius}
 				data-testid="test_accordion"
+				style={{ borderRadius: 8 }}
 			>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography className={classes.heading}>{label}</Typography>
