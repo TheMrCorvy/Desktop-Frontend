@@ -161,7 +161,7 @@ const CreateCredential: FC = () => {
 							isCrypto={true}
 						/>
 					</Grid>
-					<Grid item xs={12} md={6} className={classes.textCenter}>
+					<Grid item xs={12} md={7} className={classes.textCenter}>
 						<Button
 							color="secondary"
 							variant="contained"

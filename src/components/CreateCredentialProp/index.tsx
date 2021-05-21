@@ -239,7 +239,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 					<>
 						<Grid item xs={12}>
 							<TextField
-								label="security question"
+								label={translate("encryption_examples", lng, 5)}
 								variant="outlined"
 								fullWidth
 								className={classes.textColor}
@@ -264,7 +264,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								label="security answer"
+								label={translate("encryption_examples", lng, 6)}
 								variant="outlined"
 								fullWidth
 								className={classes.textColor}
