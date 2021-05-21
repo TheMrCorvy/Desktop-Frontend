@@ -9,6 +9,7 @@ import {
 	Backdrop,
 	CircularProgress,
 	Button,
+	Typography,
 } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
@@ -37,6 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		marginTop: {
 			marginTop: "3rem",
+		},
+		smallMarginTop: {
+			marginTop: 20,
 		},
 		textCenter: {
 			textAlign: "center",
@@ -163,8 +167,16 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 											color="primary"
 											className={classes.exportBtn}
 										>
-											Export Credentials
+											{translate("export_credentials", lng, 0)}
 										</Button>
+										<Typography
+											variant="body2"
+											paragraph
+											gutterBottom
+											className={classes.smallMarginTop}
+										>
+											{translate("export_credentials", lng, 1)}
+										</Typography>
 									</Grid>
 									<Grid item xs={12} className={classes.marginTop}>
 										<StepThree

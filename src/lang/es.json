@@ -301,5 +301,9 @@
 	"create_credential": ["Crear Credencial"],
 	"save": ["Guardar"],
 	"select_company": ["Select Company"],
-	"description": ["Descripción"]
+	"description": ["Descripción"],
+	"export_credentials": [
+		"Exportar Credenciales",
+		"Te enviaremos todas tus credenciales en un archivo de excel a tu email, se recomienda encarecidamente que borre el archivo recibido lo antes posible para que sus credenciales estén a salvo."
+	]
 }
