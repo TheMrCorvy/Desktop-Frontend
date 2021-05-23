@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState } from "react"
+import React, { FC, ChangeEvent, useState, useEffect } from "react"
 
 import {
 	Button,
@@ -19,15 +19,28 @@ import {
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import DeleteIcon from "@material-ui/icons/Delete"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../redux/store"
+import { editCredential } from "../../../../redux/actions/credentialActions"
 
 import { translate } from "../../../../lang"
+
+import {
+	AccessCredentialPropT,
+	CredentialPropValueT,
+	ReduxCredentialT,
+} from "../../../../misc/types"
 
 type Props = {
 	codes: string[]
 	option: 1 | 2
 	isCrypto: boolean
+}
+
+type Baggage = {
+	oldCredential: ReduxCredentialT
+	prop: AccessCredentialPropT
+	newValue: CredentialPropValueT
 }
 
 const useStyles = makeStyles({
@@ -44,6 +57,9 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 	const classes = useStyles()
 
 	const { lng } = useSelector((state: RootState) => state.lng)
+	const { credential } = useSelector((state: RootState) => state.credential)
+
+	const dispatch = useDispatch()
 
 	const [open, setOpen] = useState(false)
 
@@ -78,6 +94,20 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 
 		setEditingCodes(newArray)
 	}
+
+	useEffect(() => {
+		let baggage: Baggage = {
+			oldCredential: credential,
+			newValue: editingCodes,
+			prop: "multiple_security_code",
+		}
+
+		if (isCrypto) {
+			baggage.prop = "crypto_currency_access_codes"
+		}
+
+		dispatch(editCredential(baggage))
+	}, [editingCodes])
 
 	if (option === 1) {
 		return (

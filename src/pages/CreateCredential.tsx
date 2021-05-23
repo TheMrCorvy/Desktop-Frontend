@@ -7,17 +7,17 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { clearCredential, editCredential } from "../redux/actions/credentialActions"
+import { translate } from "../lang"
 
 import { CompanyT, AccessCredentialPropT } from "../misc/types"
 
 import { companies4Testing } from "../misc/Data4Testing"
+import { calcMaxChar } from "../misc/staticData"
 
 import { getCompanies, putCompanies } from "../misc/indexedDB"
 
 import CreateCredentialProp from "../components/CreateCredentialProp"
-
-import { calcMaxChar } from "../misc/staticData"
-import { translate } from "../lang"
+import GoBackBtn from "../components/GoBackBtn"
 
 type EditingCredential = {
 	mainText: string
@@ -116,6 +116,9 @@ const CreateCredential: FC = () => {
 				<Grid container justify="space-around" spacing={4}>
 					<Grid item xs={12} className={classes.textCenter}>
 						<Typography variant="h2">{translate("create_credential", lng)}</Typography>
+					</Grid>
+					<Grid item xs={12} className={classes.textCenter}>
+						<GoBackBtn />
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
