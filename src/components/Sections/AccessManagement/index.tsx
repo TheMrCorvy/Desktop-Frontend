@@ -10,9 +10,17 @@ import {
 	CircularProgress,
 	Button,
 	Typography,
+	IconButton,
+	InputAdornment,
+	FormControl,
+	InputLabel,
+	OutlinedInput,
+	Tooltip,
 } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import FileCopyIcon from "@material-ui/icons/FileCopy"
+import AutorenewIcon from "@material-ui/icons/Autorenew"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
@@ -24,6 +32,7 @@ import UnlockData from "../../UnlockData"
 import StopPremium from "../StopPremium"
 
 import { secretKey4Testing, user4Testing } from "../../../misc/Data4Testing"
+import CopyText from "../../CopyText"
 
 type Props = { testing?: boolean }
 
@@ -146,7 +155,7 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 									fullWidth
 								/>
 							</Grid>
-							<Grid item xs={12}>
+							<Grid item xs={12} md={6}>
 								<TextField
 									variant="outlined"
 									label={translate("auth_form_texts", lng, 4)}
@@ -156,6 +165,51 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 									disabled={locked}
 									fullWidth
 								/>
+							</Grid>
+							<Grid item xs={12} md={6}>
+								<FormControl fullWidth variant="outlined">
+									<InputLabel htmlFor="standard-adornment-password">
+										{translate("login_options", lng, 3)}
+									</InputLabel>
+									<OutlinedInput
+										type={locked ? "password" : "text"}
+										label={translate("login_options", lng, 3)}
+										defaultValue={user4Testing.security_access_code}
+										disabled
+										endAdornment={
+											!locked && (
+												<InputAdornment position="end">
+													<CopyText
+														body={user4Testing.security_access_code}
+													>
+														<Tooltip
+															placement="bottom"
+															title={translate("actions", lng, 0)}
+														>
+															<IconButton>
+																<FileCopyIcon />
+															</IconButton>
+														</Tooltip>
+													</CopyText>
+												</InputAdornment>
+											)
+										}
+										startAdornment={
+											!locked && (
+												<InputAdornment position="end">
+													<Tooltip
+														placement="bottom"
+														title={translate("actions", lng, 2)}
+													>
+														<IconButton>
+															<AutorenewIcon />
+														</IconButton>
+													</Tooltip>
+												</InputAdornment>
+											)
+										}
+									/>
+								</FormControl>
 							</Grid>
 
 							{!locked && !testing && (

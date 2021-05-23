@@ -231,7 +231,7 @@
 	"authorize": ["Verify your Identity"],
 	"credential_info": ["Created At", "Updated At", "Last Seen"],
 	"info_is_visible": ["かくす", "見る"],
-	"actions": ["Copy", "Remove"],
+	"actions": ["コピー", "Remove", "Renew"],
 	"copy": ["Text copied to clipboard"],
 	"click_to_copy": ["Click to Copy"],
 	"update_role_titles": [

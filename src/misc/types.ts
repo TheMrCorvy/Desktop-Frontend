@@ -121,15 +121,16 @@ export type CredentialPropValueT = number | string | string[]
 
 /******************************************************************************** user */
 export type UserT = {
+	id: number
 	name: string
 	email: string
 	recovery_email: string
+	phone_number: string
 	slots_available: number
 	role: "free" | "semi-premium" | "premium" | "admin"
-	id: number
-	phone_number: string
 	anti_fishing_secret: string
 	invitation_code: string
+	security_access_code: string
 }
 
 /******************************************************************************** recommended apps */

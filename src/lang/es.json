@@ -243,7 +243,7 @@
 	"authorize": ["Verifica tu Identidad"],
 	"credential_info": ["Creado", "Actualizado", "Visto por Última Vez"],
 	"info_is_visible": ["Ocultar", "Mostrar"],
-	"actions": ["Copiar", "Eliminar"],
+	"actions": ["Copiar", "Eliminar", "Renovar"],
 	"copy": ["Texto copiado al portapapeles"],
 	"click_to_copy": ["Click para Copiar"],
 	"update_role_titles": [
