@@ -84,6 +84,23 @@ export type CredentialT = {
 	updated_at: string
 }
 
+export type ReduxCredentialT = {
+	id?: number
+	company_id?: number
+	company_name?: string
+	description?: string
+	user_name?: string
+	email?: string
+	password?: string
+	username?: string
+	phone_number?: string
+	security_question?: string
+	security_answer?: string
+	unique_security_code?: string
+	multiple_security_code?: string | string[]
+	crypto_currency_access_codes?: string | string[]
+}
+
 /******************************************************************************** user */
 export type UserT = {
 	name: string
