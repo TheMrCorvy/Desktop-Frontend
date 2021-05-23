@@ -1,24 +1,18 @@
-import { EDIT_CREDENTIAL, EditCredentialI } from "../types"
+import { EDIT_CREDENTIAL, EditCredentialI, CREATE_CREDENTIAL } from "../types"
 
-import { CredentialT } from "../../misc/types"
+import { ReduxCredentialT } from "../../misc/types"
 
-let initialState: CredentialT = {
-	id: 0,
-	user_id: 0,
-	company_id: null,
-	company_name: "",
-	url_logo: null,
-	last_seen: "",
-	recently_seen: "",
-	user_name: null,
-	char_count: null,
-	created_at: "",
-	updated_at: "",
-}
+let initialState: ReduxCredentialT = {}
 
 const credentialReducer = (state = initialState, action: EditCredentialI) => {
 	switch (action.type) {
 		case EDIT_CREDENTIAL:
+			return {
+				...state,
+				credential: action.payload,
+			}
+
+		case CREATE_CREDENTIAL:
 			return {
 				...state,
 				credential: action.payload,

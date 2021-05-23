@@ -101,6 +101,24 @@ export type ReduxCredentialT = {
 	crypto_currency_access_codes?: string | string[]
 }
 
+export type AccessCredentialPropT =
+	| "id"
+	| "company_id"
+	| "company_id"
+	| "description"
+	| "user_name"
+	| "email"
+	| "password"
+	| "username"
+	| "phone_number"
+	| "security_question"
+	| "security_answer"
+	| "unique_security_code"
+	| "multiple_security_code"
+	| "crypto_currency_access_codes"
+
+export type CredentialPropValueT = number | string | string[]
+
 /******************************************************************************** user */
 export type UserT = {
 	name: string

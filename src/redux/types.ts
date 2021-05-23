@@ -1,4 +1,4 @@
-import { CredentialT } from "../misc/types"
+import { ReduxCredentialT } from "../misc/types"
 
 /******************************************************************************** translations */
 export const SET_LANGUAGE = "SET_LANGUAGE"
@@ -76,7 +76,9 @@ export interface ErrorI {
 
 export const EDIT_CREDENTIAL = "EDIT_CREDENTIAL"
 
+export const CREATE_CREDENTIAL = "CREATE_CREDENTIAL"
+
 export interface EditCredentialI {
-	type: typeof EDIT_CREDENTIAL
-	payload: CredentialT
+	type: typeof EDIT_CREDENTIAL | typeof CREATE_CREDENTIAL
+	payload: ReduxCredentialT
 }
