@@ -22,7 +22,6 @@ import { translate } from "../lang"
 
 import RegisterSteps from "../components/Sections/RegisterSteps"
 import RegisterDialog from "../components/Sections/RegisterDialog"
-import { validateReCaptch } from "../misc/ajaxManager"
 
 type Props = { testing?: boolean }
 
@@ -91,15 +90,9 @@ const Register: FC<Props> = ({ testing }) => {
 
 	const { REACT_APP_RECAPTCHA_SITE_KEY } = process.env
 
-	const handleChangeCaptcha = async (captchaResponse: string | null) => {
+	const handleChangeCaptcha = (captchaResponse: string | null) => {
 		if (captchaResponse) {
 			setIsRobot(false)
-
-			if (captchaResponse) {
-				const data = await validateReCaptch(captchaResponse)
-
-				console.log(data)
-			}
 		}
 	}
 
