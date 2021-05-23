@@ -34,6 +34,10 @@ const Feedback: FC = () => {
 			})
 		} else {
 			//here will be the api call to fetch the feedback, depending on the current language
+			setFeedback({
+				suggestions: suggestion4Testing,
+				ratings: rating4Testing,
+			})
 		}
 	}, [])
 	return (
