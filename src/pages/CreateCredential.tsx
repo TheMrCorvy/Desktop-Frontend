@@ -4,10 +4,11 @@ import { Button, Container, Grid, Typography } from "@material-ui/core"
 
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
+import { editCredential } from "../redux/actions/credentialActions"
 
-import { CompanyT, AccessCredentialPropT } from "../misc/types"
+import { CompanyT, AccessCredentialPropT, ReduxCredentialT } from "../misc/types"
 
 import { companies4Testing } from "../misc/Data4Testing"
 
@@ -22,6 +23,7 @@ type EditingCredential = {
 	mainText: string
 	secondText: string
 	accessCredentialProp: AccessCredentialPropT
+	editingOption: "question" | "answer" | ""
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -49,6 +51,10 @@ const useStyles = makeStyles((theme: Theme) =>
 const CreateCredential: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const { credential } = useSelector((state: RootState) => state.credential)
+
+	const dispatch = useDispatch()
+
 	const classes = useStyles()
 
 	const [companies, setCompanies] = useState<CompanyT[]>([
@@ -62,6 +68,10 @@ const CreateCredential: FC = () => {
 	useEffect(() => {
 		obtainCompanies()
 	}, [])
+
+	useEffect(() => {
+		console.log(credential)
+	}, [credential])
 
 	const obtainCompanies = async () => {
 		const data = await getCompanies()
@@ -80,8 +90,22 @@ const CreateCredential: FC = () => {
 		setCompanies(data)
 	}
 
-	const editCredential = (edit: EditingCredential) => {
-		console.log(edit)
+	const dispatchEditCredential = (edit: EditingCredential) => {
+		let baggage = {
+			oldCredential: credential,
+			prop: edit.accessCredentialProp,
+			newValue: "",
+		}
+
+		if (edit.editingOption === "answer") {
+			baggage.prop = "security_answer"
+
+			baggage.newValue = edit.secondText
+		} else {
+			baggage.newValue = edit.mainText
+		}
+
+		dispatch(editCredential(baggage))
 	}
 
 	return (
@@ -100,7 +124,7 @@ const CreateCredential: FC = () => {
 							defaultExpanded
 							maxChar={calcMaxChar("sm")}
 							accessCredentialProp="company_name"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -110,7 +134,7 @@ const CreateCredential: FC = () => {
 							layout="multiline"
 							maxChar={calcMaxChar("lg")}
 							accessCredentialProp="description"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -119,7 +143,7 @@ const CreateCredential: FC = () => {
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
 							accessCredentialProp="user_name"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -128,7 +152,7 @@ const CreateCredential: FC = () => {
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
 							accessCredentialProp="email"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -137,7 +161,7 @@ const CreateCredential: FC = () => {
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
 							accessCredentialProp="password"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -146,7 +170,7 @@ const CreateCredential: FC = () => {
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
 							accessCredentialProp="username"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -155,7 +179,7 @@ const CreateCredential: FC = () => {
 							layout="text field"
 							maxChar={calcMaxChar("xs")}
 							accessCredentialProp="phone_number"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -164,7 +188,7 @@ const CreateCredential: FC = () => {
 							layout="sqa"
 							maxChar={calcMaxChar("sm")}
 							accessCredentialProp="security_question"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -173,7 +197,7 @@ const CreateCredential: FC = () => {
 							layout="text field"
 							maxChar={calcMaxChar("xs")}
 							accessCredentialProp="unique_security_code"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -181,7 +205,7 @@ const CreateCredential: FC = () => {
 							label={translate("encryption_examples", lng, 8)}
 							layout="multiple codes"
 							accessCredentialProp="multiple_security_code"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -190,7 +214,7 @@ const CreateCredential: FC = () => {
 							layout="multiple codes"
 							isCrypto={true}
 							accessCredentialProp="crypto_currency_access_codes"
-							editCredentialProp={editCredential}
+							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={7} className={classes.textCenter}>

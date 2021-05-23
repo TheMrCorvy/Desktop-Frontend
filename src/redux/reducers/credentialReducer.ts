@@ -1,8 +1,8 @@
-import { EDIT_CREDENTIAL, EditCredentialI } from "../types"
+import { EDIT_CREDENTIAL, EditCredentialI, CredentialI } from "../types"
 
-import { ReduxCredentialT } from "../../misc/types"
-
-let initialState: ReduxCredentialT = {}
+let initialState: CredentialI = {
+	credential: {},
+}
 
 const credentialReducer = (state = initialState, action: EditCredentialI) => {
 	switch (action.type) {

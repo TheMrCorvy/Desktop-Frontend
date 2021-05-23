@@ -30,6 +30,7 @@ type ExportEdits = {
 	mainText: string
 	secondText: string
 	accessCredentialProp: AccessCredentialPropT
+	editingOption: "question" | "answer" | ""
 }
 
 type Props = {
@@ -94,6 +95,8 @@ const CreateCredentialProp: FC<Props> = (props) => {
 
 	const [secondText, setSecondText] = useState("")
 
+	const [editingOption, setEditingOption] = useState<"question" | "answer" | "">("")
+
 	const classes = useStyles()
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
@@ -127,12 +130,16 @@ const CreateCredentialProp: FC<Props> = (props) => {
 					setMainText(target.value)
 
 					setMainCharCount(target.value.length)
+
+					setEditingOption("question")
 				}
 
 				if (variant && variant === "security answer") {
 					setSecondText(target.value)
 
 					setSecondCharCount(target.value.length)
+
+					setEditingOption("answer")
 				}
 
 				break
@@ -147,6 +154,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 			mainText,
 			secondText,
 			accessCredentialProp,
+			editingOption,
 		}
 
 		editCredentialProp(edits)
