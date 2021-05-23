@@ -6,9 +6,9 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
-import { editCredential } from "../redux/actions/credentialActions"
+import { clearCredential, editCredential } from "../redux/actions/credentialActions"
 
-import { CompanyT, AccessCredentialPropT, ReduxCredentialT } from "../misc/types"
+import { CompanyT, AccessCredentialPropT } from "../misc/types"
 
 import { companies4Testing } from "../misc/Data4Testing"
 
@@ -67,6 +67,8 @@ const CreateCredential: FC = () => {
 
 	useEffect(() => {
 		obtainCompanies()
+
+		dispatch(clearCredential())
 	}, [])
 
 	useEffect(() => {

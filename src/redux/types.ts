@@ -76,11 +76,13 @@ export interface ErrorI {
 
 export const EDIT_CREDENTIAL = "EDIT_CREDENTIAL"
 
+export const CLEAR_CREDENTIAL = "CLEAR_CREDENTIAL"
+
 export interface CredentialI {
 	credential: ReduxCredentialT
 }
 
 export interface EditCredentialI {
-	type: typeof EDIT_CREDENTIAL
+	type: typeof EDIT_CREDENTIAL | typeof CLEAR_CREDENTIAL
 	payload: ReduxCredentialT
 }
