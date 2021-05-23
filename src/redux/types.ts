@@ -76,9 +76,7 @@ export interface ErrorI {
 
 export const EDIT_CREDENTIAL = "EDIT_CREDENTIAL"
 
-export const CREATE_CREDENTIAL = "CREATE_CREDENTIAL"
-
 export interface EditCredentialI {
-	type: typeof EDIT_CREDENTIAL | typeof CREATE_CREDENTIAL
+	type: typeof EDIT_CREDENTIAL
 	payload: ReduxCredentialT
 }

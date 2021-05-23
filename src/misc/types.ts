@@ -37,7 +37,7 @@ export type PricingCardT = {
 	buttonText: string
 }
 
-/******************************************************************************** credential card */
+/******************************************************************************** credential */
 export type CredentialT = {
 	id: number
 	user_id: number
@@ -104,7 +104,7 @@ export type ReduxCredentialT = {
 export type AccessCredentialPropT =
 	| "id"
 	| "company_id"
-	| "company_id"
+	| "company_name"
 	| "description"
 	| "user_name"
 	| "email"

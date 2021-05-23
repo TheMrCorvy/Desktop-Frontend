@@ -1,4 +1,4 @@
-import { CREATE_CREDENTIAL, EditCredentialI, EDIT_CREDENTIAL } from "../types"
+import { EditCredentialI, EDIT_CREDENTIAL } from "../types"
 
 import { AccessCredentialPropT, CredentialPropValueT, ReduxCredentialT } from "../../misc/types"
 
@@ -12,14 +12,6 @@ export const editCredential = (editing: CredentialProp): EditCredentialI => {
 	return {
 		type: EDIT_CREDENTIAL,
 		payload: { ...editing.oldCredential, [editing.prop]: editing.newValue },
-	}
-}
-
-// this action will be fired when the user enters the create credential view, so the inputs will be empty
-export const createCredential = (): EditCredentialI => {
-	return {
-		type: CREATE_CREDENTIAL,
-		payload: {},
 	}
 }
 

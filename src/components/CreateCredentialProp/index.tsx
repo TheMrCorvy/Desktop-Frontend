@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent } from "react"
+import React, { FC, useState, useEffect, ChangeEvent } from "react"
 
 import {
 	Typography,
@@ -20,15 +20,23 @@ import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
-import { CompanyT } from "../../misc/types"
+import { AccessCredentialPropT, CompanyT } from "../../misc/types"
 
 import EditCodes from "../ShowCredential/CredentialCodes/EditCodes"
 
 type LayoutOptions = "text field" | "select option" | "multiline" | "multiple codes" | "sqa"
 
+type ExportEdits = {
+	mainText: string
+	secondText: string
+	accessCredentialProp: AccessCredentialPropT
+}
+
 type Props = {
 	layout: LayoutOptions
 	label: string
+	accessCredentialProp: AccessCredentialPropT
+	editCredentialProp: (edits: ExportEdits) => void
 	isMandatory?: boolean
 	defaultExpanded?: boolean
 	companies?: CompanyT[]
@@ -66,7 +74,17 @@ const useStyles = makeStyles((theme: Theme) =>
 const CreateCredentialProp: FC<Props> = (props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const { layout, label, isMandatory, defaultExpanded, companies, maxChar, isCrypto } = props
+	const {
+		layout,
+		label,
+		isMandatory,
+		defaultExpanded,
+		companies,
+		maxChar,
+		isCrypto,
+		accessCredentialProp,
+		editCredentialProp,
+	} = props
 
 	const [mainCharCount, setMainCharCount] = useState(0)
 
@@ -123,6 +141,16 @@ const CreateCredentialProp: FC<Props> = (props) => {
 				break
 		}
 	}
+
+	useEffect(() => {
+		const edits: ExportEdits = {
+			mainText,
+			secondText,
+			accessCredentialProp,
+		}
+
+		editCredentialProp(edits)
+	}, [mainText, secondText])
 
 	const renderBody = (option: LayoutOptions) => {
 		switch (option) {

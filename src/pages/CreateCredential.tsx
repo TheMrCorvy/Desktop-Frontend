@@ -7,7 +7,7 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 
-import { CompanyT } from "../misc/types"
+import { CompanyT, AccessCredentialPropT } from "../misc/types"
 
 import { companies4Testing } from "../misc/Data4Testing"
 
@@ -17,6 +17,12 @@ import CreateCredentialProp from "../components/CreateCredentialProp"
 
 import { calcMaxChar } from "../misc/staticData"
 import { translate } from "../lang"
+
+type EditingCredential = {
+	mainText: string
+	secondText: string
+	accessCredentialProp: AccessCredentialPropT
+}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -74,6 +80,10 @@ const CreateCredential: FC = () => {
 		setCompanies(data)
 	}
 
+	const editCredential = (edit: EditingCredential) => {
+		console.log(edit)
+	}
+
 	return (
 		<>
 			<Container maxWidth="xl" className={classes.container}>
@@ -89,6 +99,8 @@ const CreateCredential: FC = () => {
 							isMandatory
 							defaultExpanded
 							maxChar={calcMaxChar("sm")}
+							accessCredentialProp="company_name"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -97,6 +109,8 @@ const CreateCredential: FC = () => {
 							label={translate("description", lng)}
 							layout="multiline"
 							maxChar={calcMaxChar("lg")}
+							accessCredentialProp="description"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -104,6 +118,8 @@ const CreateCredential: FC = () => {
 							label={translate("auth_form_texts", lng, 14)}
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
+							accessCredentialProp="user_name"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -111,6 +127,8 @@ const CreateCredential: FC = () => {
 							label={translate("auth_form_texts", lng, 0)}
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
+							accessCredentialProp="email"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -118,6 +136,8 @@ const CreateCredential: FC = () => {
 							label={translate("auth_form_texts", lng, 11)}
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
+							accessCredentialProp="password"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -125,6 +145,8 @@ const CreateCredential: FC = () => {
 							label={translate("auth_form_texts", lng, 12)}
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
+							accessCredentialProp="username"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -132,6 +154,8 @@ const CreateCredential: FC = () => {
 							label={translate("auth_form_texts", lng, 7)}
 							layout="text field"
 							maxChar={calcMaxChar("xs")}
+							accessCredentialProp="phone_number"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -139,6 +163,8 @@ const CreateCredential: FC = () => {
 							label={translate("encryption_examples", lng, 10)}
 							layout="sqa"
 							maxChar={calcMaxChar("sm")}
+							accessCredentialProp="security_question"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -146,12 +172,16 @@ const CreateCredential: FC = () => {
 							label={translate("auth_form_texts", lng, 13)}
 							layout="text field"
 							maxChar={calcMaxChar("xs")}
+							accessCredentialProp="unique_security_code"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
 							label={translate("encryption_examples", lng, 8)}
 							layout="multiple codes"
+							accessCredentialProp="multiple_security_code"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
@@ -159,6 +189,8 @@ const CreateCredential: FC = () => {
 							label={translate("encryption_examples", lng, 9)}
 							layout="multiple codes"
 							isCrypto={true}
+							accessCredentialProp="crypto_currency_access_codes"
+							editCredentialProp={editCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={7} className={classes.textCenter}>
