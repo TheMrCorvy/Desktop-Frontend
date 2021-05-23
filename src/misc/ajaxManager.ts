@@ -76,3 +76,30 @@ export const generateCoinbaseCharge = (apiKey: string, body: CoinbaseChargeT) =>
 			}
 		})
 }
+
+export const validateReCaptch = async (captchaResponse: string) => {
+	const { REACT_APP_RECAPTCHA_SECRET_KEY } = process.env
+
+	return await fetch("https://www.google.com/recaptcha/api/siteverify", {
+		method: "POST",
+		body: JSON.stringify({
+			secret: REACT_APP_RECAPTCHA_SECRET_KEY,
+			response: captchaResponse,
+		}),
+	})
+		.then((res) => res.json())
+		.then((data) => {
+			const res = {
+				successful: true,
+				data: data.data,
+			}
+
+			return res
+		})
+		.catch((error: any) => {
+			return {
+				successful: false,
+				err: error,
+			}
+		})
+}
