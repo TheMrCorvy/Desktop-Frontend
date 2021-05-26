@@ -57,7 +57,7 @@ const PurchaseDialog: FC<Props> = ({ method, type }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [open, setOpen] = useState(false)
-	const [amount, setAmount] = useState(1)
+	const [amount, setAmount] = useState<"" | number>("")
 	const [step, setStep] = useState(1)
 
 	const classes = useStyles()
@@ -71,8 +71,8 @@ const PurchaseDialog: FC<Props> = ({ method, type }) => {
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const newAmount = Number(event.target.value)
 
-		if (newAmount <= 0) {
-			setAmount(1)
+		if (event.target.value === "") {
+			setAmount("")
 		} else {
 			setAmount(newAmount)
 		}
@@ -129,6 +129,7 @@ const PurchaseDialog: FC<Props> = ({ method, type }) => {
 							</FormControl>
 							<FormControl fullWidth className={classes.formControl}>
 								<Button
+									disabled={!amount}
 									variant="outlined"
 									className={classes.continueBtn}
 									onClick={() => setStep(2)}
@@ -138,12 +139,14 @@ const PurchaseDialog: FC<Props> = ({ method, type }) => {
 							</FormControl>
 						</>
 					) : (
-						<PurchaseButton
-							amount={amount}
-							type={type}
-							method={method}
-							goBack={() => setStep(1)}
-						/>
+						amount !== "" && (
+							<PurchaseButton
+								amount={amount}
+								type={type}
+								method={method}
+								goBack={() => setStep(1)}
+							/>
+						)
 					)}
 				</DialogContent>
 				<DialogActions>

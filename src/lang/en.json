@@ -14,7 +14,7 @@
 	"web_version": ["Web Version"],
 	"landing_titles": [
 		"What is PasuNashi?",
-		"Why do I need a Passowrd Manager?",
+		"Why do I need a Password Manager?",
 		"Why would I use PasuNashi?"
 	],
 	"landing_texts": [
@@ -151,7 +151,7 @@
 	],
 	"register_dialog_texts": [
 		"What is an app to generate temporary access codes?",
-		"In order to guarantee the maximum possible security for your account, we recommend using an app that generates TOTP codes (Time-based One Time Passowrds).",
+		"In order to guarantee the maximum possible security for your account, we recommend using an app that generates TOTP codes (Time-based One Time Passwords).",
 		"These generated codes will be renewed every 30 seconds, and will only be valid once.",
 		"Next we will ask you to scan a QR code with an app, or to copy and paste the Secret Key provided next to the QR code.",
 		"PLEASE DO NOT SHARE THE QR CODE OR THE SECRET KEY WITH ANYONE, as this will give them access to your account and all your passwords.",
