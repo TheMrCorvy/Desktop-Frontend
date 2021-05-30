@@ -123,10 +123,10 @@ export const pricingInfo = (lang: string): PricingCardT[] => {
 				icon: "fingerprint",
 				text: translate("tier_premium", lang, 6),
 			},
-			{
-				icon: "file-import",
-				text: translate("tier_premium", lang, 8),
-			},
+			// {
+			// 	icon: "file-import",
+			// 	text: translate("tier_premium", lang, 8),
+			// },
 			{
 				icon: "users",
 				text: translate("tier_premium", lang, 4),
