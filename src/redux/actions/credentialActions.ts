@@ -1,6 +1,11 @@
 import { CLEAR_CREDENTIAL, EditCredentialI, EDIT_CREDENTIAL } from "../types"
 
-import { AccessCredentialPropT, CredentialPropValueT, ReduxCredentialT } from "../../misc/types"
+import {
+	AccessCredentialPropT,
+	CredentialPropValueT,
+	CredentialT,
+	ReduxCredentialT,
+} from "../../misc/types"
 
 type CredentialProp = {
 	oldCredential: ReduxCredentialT
@@ -17,6 +22,13 @@ export const editCredential = (editing: CredentialProp): EditCredentialI => {
 
 // This action will be called when entering the create credential view
 export const clearCredential = (): EditCredentialI => {
+	return {
+		type: CLEAR_CREDENTIAL,
+		payload: {},
+	}
+}
+
+export const initializeCredential = (credentialDB: CredentialT): EditCredentialI => {
 	return {
 		type: CLEAR_CREDENTIAL,
 		payload: {},

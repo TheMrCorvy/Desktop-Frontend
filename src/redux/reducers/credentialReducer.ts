@@ -1,4 +1,10 @@
-import { EDIT_CREDENTIAL, EditCredentialI, CredentialI, CLEAR_CREDENTIAL } from "../types"
+import {
+	EDIT_CREDENTIAL,
+	INITIALIZE_CREDENTIAL,
+	EditCredentialI,
+	CredentialI,
+	CLEAR_CREDENTIAL,
+} from "../types"
 
 let initialState: CredentialI = {
 	credential: {},
@@ -13,6 +19,12 @@ const credentialReducer = (state = initialState, action: EditCredentialI) => {
 			}
 
 		case CLEAR_CREDENTIAL:
+			return {
+				...state,
+				credential: action.payload,
+			}
+
+		case INITIALIZE_CREDENTIAL:
 			return {
 				...state,
 				credential: action.payload,
