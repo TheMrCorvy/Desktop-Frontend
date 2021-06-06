@@ -75,10 +75,6 @@ const ShowCredential: FC<Props> = ({ credentialP, getDecryptedCredential }) => {
 		}
 	}, [credentialP])
 
-	useEffect(() => {
-		console.log(credential)
-	}, [credential])
-
 	const toggleVisibility = () => {
 		if (!locked && visible) {
 			setLocked(true)
@@ -141,11 +137,11 @@ const ShowCredential: FC<Props> = ({ credentialP, getDecryptedCredential }) => {
 							</Grid>
 						</Grid>
 					</Grid>
-					{/* {credential.description && (
+					{credential.description && (
 						<Grid item xs={12}>
 							<Typography variant="body1">{credential.description}</Typography>
 						</Grid>
-					)} */}
+					)}
 					<Grid item xs={12}>
 						<Grid container justify="space-between" spacing={2}>
 							<Grid item>

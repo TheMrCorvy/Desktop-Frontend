@@ -112,3 +112,8 @@ const calcAsterisks = (charCount: number): string => {
 const createCodesArr = (arrLength: number | null) => {
 	return Array.from(new Array(arrLength), () => "•••••")
 }
+
+/* acá viene otra acción más que va a setear los valores de la credencial que vengan de la api.
+cuando el usuario desbloquee o visualice la credencial, se despacha "clearCredential", y despues se despacha tambien la
+4ta action que pone los datos desencriptados que devolvió la api, en el estado global
+*/
