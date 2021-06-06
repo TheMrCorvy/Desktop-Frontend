@@ -7,6 +7,7 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 /************************************************************************************ redux related */
 import { showError } from "../redux/actions/errorHandlingActions"
 import { useSelector, useDispatch } from "react-redux"
+import { clearCredential } from "../redux/actions/credentialActions"
 import { RootState } from "../redux/store"
 
 import { translate } from "../lang"
@@ -81,6 +82,8 @@ const ViewCredential: FC = (props: any) => {
 		const id = Number(props.match.params.credentialId)
 
 		obtainCredential(id)
+
+		dispatch(clearCredential())
 	}, [])
 
 	const obtainCredential = async (id: number) => {
@@ -179,7 +182,7 @@ const ViewCredential: FC = (props: any) => {
 						<Snackbar open={error} message={snackbarMessage} />
 					</>
 				) : (
-					<ShowCredential credential={credential} getDecryptedCredential={getFromApi} />
+					<ShowCredential credentialP={credential} getDecryptedCredential={getFromApi} />
 				)}
 			</Grid>
 		</Container>

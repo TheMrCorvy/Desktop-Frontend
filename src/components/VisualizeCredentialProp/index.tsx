@@ -75,20 +75,24 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	}
 
 	const setLockedValues = () => {
-		const body = new Array(char_count).join("•")
+		if (propName !== "description") {
+			const body = new Array(char_count).join("•")
 
-		setMainValue(opening + body + ending)
-		setSecondValue(opening + body + ending)
+			setMainValue(opening + body + ending)
+			setSecondValue(opening + body + ending)
 
-		if (codes) {
-			const lockedCodes = [...Array(codes.length)].map(() => "•••••")
+			if (codes) {
+				const lockedCodes = [...Array(codes.length)].map(() => "•••••")
 
-			setCredCodes(lockedCodes)
+				setCredCodes(lockedCodes)
+			}
+		} else {
+			//set value from redux state
 		}
 	}
-
-	const setUnlockedValues = () => {
+const setUnlockedValues = () => {
 		//take the values from redux
+        
 	}
 
 	return <>{selectInputType}</>
