@@ -8,11 +8,41 @@ import CreateCredentialProp from "./index"
 it("renders all layout options properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
-			<CreateCredentialProp label="test layout" layout="multiline" defaultExpanded />
-			<CreateCredentialProp label="test layout" layout="multiple codes" defaultExpanded />
-			<CreateCredentialProp label="test layout" layout="select option" defaultExpanded />
-			<CreateCredentialProp label="test layout" layout="sqa" defaultExpanded />
-			<CreateCredentialProp label="test layout" layout="text field" defaultExpanded />
+			<CreateCredentialProp
+				accessCredentialProp="description"
+				editCredentialProp={(editing: any) => {}}
+				label="test layout"
+				layout="multiline"
+				defaultExpanded
+			/>
+			<CreateCredentialProp
+				accessCredentialProp="description"
+				editCredentialProp={(editing: any) => {}}
+				label="test layout"
+				layout="multiple codes"
+				defaultExpanded
+			/>
+			<CreateCredentialProp
+				accessCredentialProp="description"
+				editCredentialProp={(editing: any) => {}}
+				label="test layout"
+				layout="select option"
+				defaultExpanded
+			/>
+			<CreateCredentialProp
+				accessCredentialProp="description"
+				editCredentialProp={(editing: any) => {}}
+				label="test layout"
+				layout="sqa"
+				defaultExpanded
+			/>
+			<CreateCredentialProp
+				accessCredentialProp="description"
+				editCredentialProp={(editing: any) => {}}
+				label="test layout"
+				layout="text field"
+				defaultExpanded
+			/>
 		</Provider>
 	)
 
@@ -45,6 +75,8 @@ it("renders all options properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
 			<CreateCredentialProp
+				accessCredentialProp="description"
+				editCredentialProp={(editing: any) => {}}
 				label="test is mandatory & max char"
 				layout="text field"
 				defaultExpanded
@@ -67,7 +99,12 @@ describe("testing accordion & writing on the input", () => {
 	it("opens accordion properly", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<CreateCredentialProp label="test default expanded" layout="multiline" />
+				<CreateCredentialProp
+					accessCredentialProp="description"
+					editCredentialProp={(editing: any) => {}}
+					label="test default expanded"
+					layout="multiline"
+				/>
 			</Provider>
 		)
 	})
@@ -75,7 +112,12 @@ describe("testing accordion & writing on the input", () => {
 	it("writes on the inputs properly", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
-				<CreateCredentialProp label="test layout" layout="text field" />
+				<CreateCredentialProp
+					accessCredentialProp="description"
+					editCredentialProp={(editing: any) => {}}
+					label="test layout"
+					layout="text field"
+				/>
 			</Provider>
 		)
 
