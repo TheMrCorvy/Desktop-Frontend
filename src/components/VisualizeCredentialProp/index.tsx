@@ -16,8 +16,9 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
+import { editCredential } from "../../redux/actions/credentialActions"
 
 import { translate } from "../../lang"
 
@@ -33,8 +34,6 @@ type Props = {
 	isCrypto?: boolean
 	maxChar?: number
 }
-
-type PossibleStates = string | number | string[] | null | undefined
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -69,17 +68,13 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	const { credential } = useSelector((state: RootState) => state.credential)
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [mainValue, setMainValue] = useState<PossibleStates>("")
-
-	const [secondValue, setSecondValue] = useState<PossibleStates>("")
-
-	const [codes, setCodes] = useState<PossibleStates>([""])
-
 	const [mainCharCount, setMainCharCount] = useState<number | null | undefined>(0)
 
 	const [secondCharCount, setSecondCharCount] = useState<number | null | undefined>(0)
 
 	const classes = useStyles()
+
+	const dispatch = useDispatch()
 
 	const textToCopy = (): string => {
 		if (isCrypto && propName === "crypto_currency_access_codes") {
@@ -104,20 +99,9 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 
 		const secondChar = credential.security_answer
 
-		if (propName === "security_question") {
-			setMainValue(mainChar)
+		setMainCharCount(mainChar ? mainChar.length : 0)
 
-			setSecondValue(secondChar)
-		} else if (
-			propName === "crypto_currency_access_codes" ||
-			propName === "multiple_security_code"
-		) {
-			setCodes(credential[propName])
-		} else {
-			setMainValue(mainChar)
-
-			setMainCharCount(mainChar.length)
-		}
+		setSecondCharCount(secondChar ? secondChar.length : 0)
 	}, [credential])
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
@@ -129,9 +113,15 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 
 		switch (type) {
 			case "text field":
-				setMainValue(target.value)
-
 				setMainCharCount(target.value.length)
+
+				dispatch(
+					editCredential({
+						oldCredential: credential,
+						prop: propName,
+						newValue: target.value,
+					})
+				)
 
 				break
 
@@ -141,6 +131,10 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	}
 
 	const renderLayout = () => {
+		const mainChar = credential[propName] as string
+
+		const secondChar = credential.security_answer
+
 		if (propName === "description") {
 			return "multiline"
 		}
@@ -169,7 +163,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 						type: "text field",
 						"data-testid": "test_text_field",
 					}}
-					value={mainValue}
+					value={mainChar}
 					onChange={handleChange}
 					disabled={locked}
 				/>
