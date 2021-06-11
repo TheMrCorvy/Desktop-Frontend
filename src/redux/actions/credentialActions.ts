@@ -167,13 +167,19 @@ export const setDecryptedCredential = (credentialApi: CredentialT): EditCredenti
 		}
 
 		if (credentialApi.security_codes.multiple_security_codes) {
-			decryptedCred.multiple_security_code =
-				credentialApi.security_codes.multiple_security_codes
+			const stringArr = credentialApi.security_codes.multiple_security_codes.match(
+				/\S+/g
+			) as string[]
+
+			decryptedCred.multiple_security_code = stringArr
 		}
 
 		if (credentialApi.security_codes.crypto_currency_access_code) {
-			decryptedCred.crypto_currency_access_codes =
-				credentialApi.security_codes.crypto_currency_access_code
+			const stringArr = credentialApi.security_codes.crypto_currency_access_code.match(
+				/\S+/g
+			) as string[]
+
+			decryptedCred.crypto_currency_access_codes = stringArr
 		}
 	}
 
