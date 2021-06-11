@@ -20,16 +20,12 @@ import { makeStyles, useTheme } from "@material-ui/core/styles"
 import DeleteIcon from "@material-ui/icons/Delete"
 
 import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "../../../../redux/store"
-import { editCredential } from "../../../../redux/actions/credentialActions"
+import { RootState } from "../../redux/store"
+import { editCredential } from "../../redux/actions/credentialActions"
 
-import { translate } from "../../../../lang"
+import { translate } from "../../lang"
 
-import {
-	AccessCredentialPropT,
-	CredentialPropValueT,
-	ReduxCredentialT,
-} from "../../../../misc/types"
+import { AccessCredentialPropT, CredentialPropValueT, ReduxCredentialT } from "../../misc/types"
 
 type Props = {
 	codes: string[]

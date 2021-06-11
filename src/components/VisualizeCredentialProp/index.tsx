@@ -14,18 +14,18 @@ type Props = {
 	maxChar?: number
 }
 
-type ValuePossibleStates = string | number | string[] | null | undefined
+type PossibleStates = string | number | string[] | null | undefined
 
 const VisualizeCredentialProp: FC<Props> = (props) => {
 	const { label, locked, visible, propName, isCrypto, maxChar } = props
 
 	const { credential } = useSelector((state: RootState) => state.credential)
 
-	const [mainValue, setMainValue] = useState<ValuePossibleStates>("")
+	const [mainValue, setMainValue] = useState<PossibleStates>("")
 
-	const [secondValue, setSecondValue] = useState<ValuePossibleStates>("")
+	const [secondValue, setSecondValue] = useState<PossibleStates>("")
 
-	const [credCodes, setCredCodes] = useState<ValuePossibleStates>([""])
+	const [credCodes, setCredCodes] = useState<PossibleStates>([""])
 
 	const [mainMaxChar, setMainMaxChar] = useState(0)
 

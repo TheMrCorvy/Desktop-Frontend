@@ -22,7 +22,7 @@ import { translate } from "../../lang"
 
 import { AccessCredentialPropT, CompanyT } from "../../misc/types"
 
-import EditCodes from "../ShowCredential/CredentialCodes/EditCodes"
+import EditCodes from "../EditCodes"
 
 type LayoutOptions = "text field" | "select option" | "multiline" | "multiple codes" | "sqa"
 
