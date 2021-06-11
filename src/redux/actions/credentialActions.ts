@@ -99,6 +99,7 @@ export const initializeCredential = (credentialDB: CredentialT): EditCredentialI
 		initialC.username = calcAsterisks(credentialDB.username.char_count)
 	}
 
+	initialC.id = credentialDB.id
 	initialC.company_name = credentialDB.company_name
 	initialC.company_id = credentialDB.company_id
 	initialC.created_at = credentialDB.created_at

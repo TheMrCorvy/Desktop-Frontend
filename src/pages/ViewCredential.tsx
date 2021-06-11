@@ -7,7 +7,7 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 /************************************************************************************ redux related */
 import { showError } from "../redux/actions/errorHandlingActions"
 import { useSelector, useDispatch } from "react-redux"
-import { clearCredential } from "../redux/actions/credentialActions"
+import { clearCredential, initializeCredential } from "../redux/actions/credentialActions"
 import { RootState } from "../redux/store"
 
 import { translate } from "../lang"
@@ -61,20 +61,6 @@ const ViewCredential: FC = (props: any) => {
 
 	const [error, setError] = useState(false)
 
-	const [credential, setCredential] = useState<CredentialT>({
-		id: 0,
-		user_id: 0,
-		company_id: null,
-		company_name: "",
-		url_logo: null,
-		last_seen: "",
-		recently_seen: "",
-		user_name: null,
-		char_count: null,
-		created_at: "",
-		updated_at: "",
-	})
-
 	const [snackbarMessage, setSnackbarMessage] = useState("")
 
 	useEffect(() => {
@@ -96,8 +82,7 @@ const ViewCredential: FC = (props: any) => {
 
 			return
 		}
-
-		setCredential(data)
+		dispatch(initializeCredential(data))
 	}
 
 	const getFromApi = async (decrypted: boolean, agent?: string) => {
@@ -111,7 +96,11 @@ const ViewCredential: FC = (props: any) => {
 
 		updateCredential(newCredential.credential)
 
-		setCredential(newCredential.credential)
+		if (decrypted) {
+			//other dispatch
+		} else {
+			dispatch(initializeCredential(newCredential.credential))
+		}
 
 		return true
 	}
@@ -182,7 +171,7 @@ const ViewCredential: FC = (props: any) => {
 						<Snackbar open={error} message={snackbarMessage} />
 					</>
 				) : (
-					<ShowCredential credentialP={credential} getDecryptedCredential={getFromApi} />
+					<ShowCredential getDecryptedCredential={getFromApi} />
 				)}
 			</Grid>
 		</Container>

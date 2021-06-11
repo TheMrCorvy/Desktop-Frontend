@@ -1,14 +1,11 @@
 import React, { FC, useState, useEffect } from "react"
-import { CredentialT } from "../../misc/types"
 
 import { Grid, Typography } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
-
-import { initializeCredential } from "../../redux/actions/credentialActions"
 
 import { translate } from "../../lang"
 
@@ -20,7 +17,6 @@ import DeleteCredential from "../DeleteCredential"
 import Snackbar from "../Snackbar"
 
 type Props = {
-	credentialP: CredentialT
 	getDecryptedCredential: (decrypted: true, agent: string) => Promise<boolean>
 }
 
@@ -39,7 +35,7 @@ const useStyles = makeStyles({
 	},
 })
 
-const ShowCredential: FC<Props> = ({ credentialP, getDecryptedCredential }) => {
+const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 	const { credential } = useSelector((state: RootState) => state.credential)
 
@@ -53,7 +49,7 @@ const ShowCredential: FC<Props> = ({ credentialP, getDecryptedCredential }) => {
 
 	const classes = useStyles()
 
-	const dispatch = useDispatch()
+	useEffect(() => console.log(credential), [credential])
 
 	useEffect(() => {
 		setIsAuthenticated(!locked)
@@ -68,12 +64,6 @@ const ShowCredential: FC<Props> = ({ credentialP, getDecryptedCredential }) => {
 			}
 		}
 	}, [locked, showSnackbar])
-
-	useEffect(() => {
-		if (credentialP.id !== 0) {
-			dispatch(initializeCredential(credentialP))
-		}
-	}, [credentialP])
 
 	const toggleVisibility = () => {
 		if (!locked && visible) {
@@ -125,12 +115,12 @@ const ShowCredential: FC<Props> = ({ credentialP, getDecryptedCredential }) => {
 
 	return (
 		<>
-			<Grid item xs={12} md={3}>
+			<Grid item xs={12} md={4}>
 				<Grid container spacing={4}>
 					<Grid item xs={12}>
 						<Grid container justify="space-between" spacing={3}>
 							<Grid item className={classes.title}>
-								<Typography variant="h6">{credentialP.company_name}</Typography>
+								<Typography variant="h6">{credential.company_name}</Typography>
 							</Grid>
 							<Grid item className={classes.lockIcon}>
 								<GoBackBtn />
@@ -151,7 +141,7 @@ const ShowCredential: FC<Props> = ({ credentialP, getDecryptedCredential }) => {
 							</Grid>
 							<Grid item>
 								<Typography color="secondary" variant="body2">
-									{credentialP.created_at}
+									{credential.created_at}
 								</Typography>
 							</Grid>
 						</Grid>
@@ -165,7 +155,7 @@ const ShowCredential: FC<Props> = ({ credentialP, getDecryptedCredential }) => {
 							</Grid>
 							<Grid item>
 								<Typography color="secondary" variant="body2">
-									{credentialP.updated_at}
+									{credential.updated_at}
 								</Typography>
 							</Grid>
 						</Grid>
@@ -179,7 +169,7 @@ const ShowCredential: FC<Props> = ({ credentialP, getDecryptedCredential }) => {
 							</Grid>
 							<Grid item>
 								<Typography color="secondary" variant="body2">
-									{credentialP.last_seen}
+									{credential.last_seen}
 								</Typography>
 							</Grid>
 						</Grid>
@@ -190,9 +180,9 @@ const ShowCredential: FC<Props> = ({ credentialP, getDecryptedCredential }) => {
 							<Grid item>
 								<DisplayData toggleDisplay={toggleVisibility} visible={visible} />
 							</Grid>
-							{isAuthenticated && (
+							{isAuthenticated && credential.id && (
 								<Grid item>
-									<DeleteCredential credentialId={credentialP.id} />
+									<DeleteCredential credentialId={credential.id} />
 								</Grid>
 							)}
 							<Grid item className={classes.lockIcon}>

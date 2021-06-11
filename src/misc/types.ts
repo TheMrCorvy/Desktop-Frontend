@@ -86,7 +86,7 @@ export type CredentialT = {
 
 export type ReduxCredentialT = {
 	id?: number
-	company_id?: number
+	company_id?: number | null
 	company_name?: string
 	description?: string
 	user_name?: string
