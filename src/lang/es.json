@@ -293,7 +293,7 @@
 	],
 	"delete_credential_confirmation": ["¿Estás seguro que deseas eliminar esta credencial?"],
 	"delete": ["Borrar"],
-	"edit_codes": ["Editar Códigos", "Añadir Código", "Eliminar Código"],
+	"edit_codes": ["Editar Códigos", "Añadir Otro Código", "Eliminar Código"],
 	"invitation_code": ["Código de Invitación"],
 	"access_denied_message": [
 		"Tienes más credenciales de las que permite tu rol. No podrás verla, pero sí podrás eliminarla despues de desbloquearla."

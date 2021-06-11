@@ -1,5 +1,20 @@
 import React, { FC, useState, useEffect } from "react"
 
+import {
+	Typography,
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	TextField,
+	Grid,
+} from "@material-ui/core"
+
+import Autocomplete from "@material-ui/lab/Autocomplete"
+
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
+
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+
 import { AccessCredentialPropT } from "../../misc/types"
 
 import { useSelector } from "react-redux"
@@ -16,6 +31,33 @@ type Props = {
 
 type PossibleStates = string | number | string[] | null | undefined
 
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		heading: {
+			fontSize: theme.typography.pxToRem(15),
+			flexBasis: "80%",
+			flexShrink: 0,
+
+			[theme.breakpoints.down("xs")]: {
+				flexBasis: "70%",
+			},
+		},
+		secondaryHeading: {
+			fontSize: theme.typography.pxToRem(15),
+			color: theme.palette.text.secondary,
+		},
+		textColor: {
+			color: theme.palette.type === "dark" ? "white" : "black",
+		},
+		textCenter: {
+			textAlign: "center",
+		},
+		borderRadius: {
+			borderRadius: 8,
+		},
+	})
+)
+
 const VisualizeCredentialProp: FC<Props> = (props) => {
 	const { label, locked, visible, propName, isCrypto, maxChar } = props
 
@@ -30,6 +72,8 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	const [mainMaxChar, setMainMaxChar] = useState(0)
 
 	const [secondMaxchar, setSecondMaxChar] = useState(0)
+
+	const classes = useStyles()
 
 	useEffect(() => {
 		if (propName === "security_question") {
@@ -51,7 +95,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 		}
 	}, [credential])
 
-	const selectInputType = () => {
+	const lockedLayout = () => {
 		if (propName === "description") {
 			return "multiline"
 		}
@@ -60,14 +104,43 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 			return "multiple codes"
 		}
 
-		if (propName === "security_answer" || propName === "security_question") {
+		if (propName === "security_question") {
 			return "sqa"
 		}
 
 		return "text field"
 	}
 
-	return <>{selectInputType}</>
+	const unlockedLayout = () => {}
+
+	const renderLayout = () => {
+		if (locked) {
+			return <>{lockedLayout}</>
+		} else {
+			return <>{unlockedLayout}</>
+		}
+	}
+
+	return (
+		<>
+			<Accordion defaultExpanded style={{ borderRadius: 8 }}>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+					<Typography className={classes.heading}>{label}</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Grid container spacing={4}>
+						{propName === "security_question" ? (
+							renderLayout
+						) : (
+							<Grid item xs={12}>
+								{renderLayout}
+							</Grid>
+						)}
+					</Grid>
+				</AccordionDetails>
+			</Accordion>
+		</>
+	)
 }
 
 export default VisualizeCredentialProp
