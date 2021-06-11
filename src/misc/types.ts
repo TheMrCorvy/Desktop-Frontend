@@ -98,8 +98,8 @@ export type ReduxCredentialT = {
 	security_question?: string
 	security_answer?: string
 	unique_security_code?: string
-	multiple_security_code?: string | string[]
-	crypto_currency_access_codes?: string | string[]
+	multiple_security_code?: string[]
+	crypto_currency_access_codes?: string[]
 	created_at?: string
 	updated_at?: string
 	last_seen?: string

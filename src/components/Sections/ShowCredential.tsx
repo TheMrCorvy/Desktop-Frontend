@@ -12,9 +12,9 @@ import { translate } from "../../lang"
 import UnlockData from "../UnlockData"
 import DisplayData from "../DisplayData"
 import GoBackBtn from "../GoBackBtn"
-// import ShowInfo from "../ShowCredential/ShowInfo"
 import DeleteCredential from "../DeleteCredential"
 import Snackbar from "../Snackbar"
+import VisualizeCredentialProp from "../VisualizeCredentialProp"
 
 type Props = {
 	getDecryptedCredential: (decrypted: true, agent: string) => Promise<boolean>
@@ -115,7 +115,7 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 
 	return (
 		<>
-			<Grid item xs={12} md={4}>
+			<Grid item xs={12} md={3}>
 				<Grid container spacing={4}>
 					<Grid item xs={12}>
 						<Grid container justify="space-between" spacing={3}>
@@ -198,11 +198,16 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 				</Grid>
 			</Grid>
 
-			{/* <Grid item xs={12} md={9}>
+			<Grid item xs={12} md={9}>
 				<Grid container spacing={4}>
-					<ShowInfo credential={credential} visible={visible} locked={locked} />
+					<VisualizeCredentialProp
+						label="prueba"
+						locked={locked}
+						visible={visible}
+						propName="email"
+					/>
 				</Grid>
-			</Grid> */}
+			</Grid>
 
 			{showSnackbar && (
 				<Snackbar
