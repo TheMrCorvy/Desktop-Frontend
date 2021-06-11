@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react"
+import React, { FC, ChangeEvent, useState, useEffect } from "react"
 
 import {
 	Typography,
@@ -71,12 +71,6 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	const { credential } = useSelector((state: RootState) => state.credential)
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [mainValue, setMainValue] = useState<PossibleStates>("")
-
-	const [secondValue, setSecondValue] = useState<PossibleStates>("")
-
-	const [credCodes, setCredCodes] = useState<PossibleStates>([""])
-
 	const [mainMaxChar, setMainMaxChar] = useState(0)
 
 	const [secondMaxchar, setSecondMaxChar] = useState(0)
@@ -102,26 +96,21 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	}
 
 	useEffect(() => {
-		if (propName === "security_question") {
-			setMainValue(credential.security_question)
-
-			setSecondValue(credential.security_answer)
-		} else if (
-			propName === "crypto_currency_access_codes" ||
-			propName === "multiple_security_code"
-		) {
-			setCredCodes(credential[propName])
-		} else {
-			setMainValue(credential[propName])
-		}
-
 		if (maxChar) {
 			setMainMaxChar(maxChar)
 			setSecondMaxChar(maxChar)
 		}
-	}, [credential])
+	}, [])
+
+	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
+		const target = event.target as HTMLInputElement
+
+		console.log(target.value)
+	}
 
 	const renderLayout = () => {
+		const value = credential[propName]
+
 		if (propName === "description") {
 			return "multiline"
 		}
@@ -134,7 +123,33 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 			return "sqa"
 		}
 
-		return "text field"
+		return (
+			<>
+				<TextField
+					label={label}
+					variant="outlined"
+					fullWidth
+					className={classes.textColor}
+					InputProps={{
+						classes: {
+							input: classes.textColor,
+						},
+					}}
+					inputProps={{
+						type: "",
+						"data-testid": "test_text_field",
+					}}
+					value={value}
+					onChange={handleChange}
+					disabled={locked}
+				/>
+				{maxChar && (
+					<Typography variant="body1" data-testid="test_max_char">
+						{mainMaxChar} / {maxChar}
+					</Typography>
+				)}
+			</>
+		)
 	}
 
 	const cardFooter = () => {
