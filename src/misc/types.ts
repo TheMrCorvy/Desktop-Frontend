@@ -99,6 +99,9 @@ export type ReduxCredentialT = {
 	unique_security_code?: string
 	multiple_security_code?: string | string[]
 	crypto_currency_access_codes?: string | string[]
+	created_at?: string,
+	updated_at?: string,
+	last_seen?: string
 }
 
 export type AccessCredentialPropT =
