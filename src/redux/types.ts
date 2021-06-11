@@ -80,11 +80,17 @@ export const CLEAR_CREDENTIAL = "CLEAR_CREDENTIAL"
 
 export const INITIALIZE_CREDENTIAL = "INITIALIZE_CREDENTIAL"
 
+export const SET_DECRYPTED_CREDENTIAL = "SET_DECRYPTED_CREDENTIAL"
+
 export interface CredentialI {
 	credential: ReduxCredentialT
 }
 
 export interface EditCredentialI {
-	type: typeof EDIT_CREDENTIAL | typeof CLEAR_CREDENTIAL | typeof INITIALIZE_CREDENTIAL
+	type:
+		| typeof EDIT_CREDENTIAL
+		| typeof CLEAR_CREDENTIAL
+		| typeof INITIALIZE_CREDENTIAL
+		| typeof SET_DECRYPTED_CREDENTIAL
 	payload: ReduxCredentialT
 }

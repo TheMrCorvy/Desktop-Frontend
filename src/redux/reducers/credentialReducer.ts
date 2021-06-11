@@ -4,6 +4,7 @@ import {
 	EditCredentialI,
 	CredentialI,
 	CLEAR_CREDENTIAL,
+	SET_DECRYPTED_CREDENTIAL,
 } from "../types"
 
 let initialState: CredentialI = {
@@ -25,6 +26,12 @@ const credentialReducer = (state = initialState, action: EditCredentialI) => {
 			}
 
 		case INITIALIZE_CREDENTIAL:
+			return {
+				...state,
+				credential: action.payload,
+			}
+
+		case SET_DECRYPTED_CREDENTIAL:
 			return {
 				...state,
 				credential: action.payload,

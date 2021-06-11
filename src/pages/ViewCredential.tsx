@@ -7,19 +7,24 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 /************************************************************************************ redux related */
 import { showError } from "../redux/actions/errorHandlingActions"
 import { useSelector, useDispatch } from "react-redux"
-import { clearCredential, initializeCredential } from "../redux/actions/credentialActions"
+import {
+	clearCredential,
+	initializeCredential,
+	setDecryptedCredential,
+} from "../redux/actions/credentialActions"
 import { RootState } from "../redux/store"
 
 import { translate } from "../lang"
 
-import { CredentialT } from "../misc/types"
+/************************************************************************************ misc */
 import { findCredential, getCredentials, getUser, putCredential } from "../misc/indexedDB"
-
+import { maxSlots } from "../misc/staticData"
+import { CredentialT } from "../misc/types"
 import { findCredentialFromApi } from "../misc/ajaxManager"
 
+/************************************************************************************ components */
 import Snackbar from "../components/Snackbar"
 import ShowCredential from "../components/Sections/ShowCredential"
-import { maxSlots } from "../misc/staticData"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -97,7 +102,7 @@ const ViewCredential: FC = (props: any) => {
 		updateCredential(newCredential.credential)
 
 		if (decrypted) {
-			//other dispatch
+			dispatch(setDecryptedCredential(newCredential.credential))
 		} else {
 			dispatch(initializeCredential(newCredential.credential))
 		}
