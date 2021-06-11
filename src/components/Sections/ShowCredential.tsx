@@ -12,6 +12,7 @@ import { translate } from "../../lang"
 
 import { findCredential } from "../../misc/indexedDB"
 import { CredentialT } from "../../misc/types"
+import { calcMaxChar } from "../../misc/staticData"
 
 import UnlockData from "../UnlockData"
 import DisplayData from "../DisplayData"
@@ -99,17 +100,18 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 		} else {
 			const id = credential.id ? credential.id : 0
 
-			obtainCredential(id).then((credentialDB: any) => {
-				if (credentialDB) {
-					setVisible(false)
+			id !== 0 &&
+				obtainCredential(id).then((credentialDB: any) => {
+					if (credentialDB) {
+						setVisible(false)
 
-					dispatch(initializeCredential(credentialDB))
-				} else {
-					setSnackbarMessage(translate("error_messages", lng, 3))
+						dispatch(initializeCredential(credentialDB))
+					} else {
+						setSnackbarMessage(translate("error_messages", lng, 3))
 
-					setShowSnackbar(true)
-				}
-			})
+						setShowSnackbar(true)
+					}
+				})
 		}
 	}
 
@@ -231,10 +233,11 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 			<Grid item xs={12} md={9}>
 				<Grid container spacing={4}>
 					<VisualizeCredentialProp
-						label="prueba"
+						label={translate("auth_form_texts", lng, 0)}
 						locked={locked}
 						visible={visible}
 						propName="email"
+						maxChar={calcMaxChar("xs")}
 					/>
 				</Grid>
 			</Grid>

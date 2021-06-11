@@ -12,8 +12,6 @@ import {
 	Divider,
 } from "@material-ui/core"
 
-import Autocomplete from "@material-ui/lab/Autocomplete"
-
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
@@ -71,9 +69,15 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	const { credential } = useSelector((state: RootState) => state.credential)
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [mainMaxChar, setMainMaxChar] = useState(0)
+	const [mainValue, setMainValue] = useState<PossibleStates>("")
 
-	const [secondMaxchar, setSecondMaxChar] = useState(0)
+	const [secondValue, setSecondValue] = useState<PossibleStates>("")
+
+	const [codes, setCodes] = useState<PossibleStates>([""])
+
+	const [mainCharCount, setMainCharCount] = useState<number | null | undefined>(0)
+
+	const [secondCharCount, setSecondCharCount] = useState<number | null | undefined>(0)
 
 	const classes = useStyles()
 
@@ -96,21 +100,47 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	}
 
 	useEffect(() => {
-		if (maxChar) {
-			setMainMaxChar(maxChar)
-			setSecondMaxChar(maxChar)
+		const mainChar = credential[propName] as string
+
+		const secondChar = credential.security_answer
+
+		if (propName === "security_question") {
+			setMainValue(mainChar)
+
+			setSecondValue(secondChar)
+		} else if (
+			propName === "crypto_currency_access_codes" ||
+			propName === "multiple_security_code"
+		) {
+			setCodes(credential[propName])
+		} else {
+			setMainValue(mainChar)
+
+			setMainCharCount(mainChar.length)
 		}
-	}, [])
+	}, [credential])
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
 		const target = event.target as HTMLInputElement
 
-		console.log(target.value)
+		const type = target.getAttribute("type")
+
+		const variant = target.getAttribute("variant")
+
+		switch (type) {
+			case "text field":
+				setMainValue(target.value)
+
+				setMainCharCount(target.value.length)
+
+				break
+
+			default:
+				break
+		}
 	}
 
 	const renderLayout = () => {
-		const value = credential[propName]
-
 		if (propName === "description") {
 			return "multiline"
 		}
@@ -136,16 +166,16 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 						},
 					}}
 					inputProps={{
-						type: "",
+						type: "text field",
 						"data-testid": "test_text_field",
 					}}
-					value={value}
+					value={mainValue}
 					onChange={handleChange}
 					disabled={locked}
 				/>
 				{maxChar && (
 					<Typography variant="body1" data-testid="test_max_char">
-						{mainMaxChar} / {maxChar}
+						{mainCharCount} / {maxChar}
 					</Typography>
 				)}
 			</>
@@ -171,7 +201,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 
 	return (
 		<>
-			<Grid item xs={12} md={4}>
+			<Grid item xs={12} md={6}>
 				<Accordion defaultExpanded style={{ borderRadius: 8 }}>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 						<Typography className={classes.heading}>{label}</Typography>
