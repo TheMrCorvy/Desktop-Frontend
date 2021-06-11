@@ -41,7 +41,7 @@ export const initializeCredential = (credentialDB: CredentialT): EditCredentialI
 
 		asterisks = calcAsterisks(credentialDB.email.char_count)
 
-		initialC.email = credentialDB.email.ending + asterisks + credentialDB.email.ending
+		initialC.email = credentialDB.email.opening + asterisks + credentialDB.email.ending
 	}
 	if (credentialDB.password) {
 		/** */
