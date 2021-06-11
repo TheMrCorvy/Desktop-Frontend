@@ -2,61 +2,54 @@ import React, { FC, useState, useEffect } from "react"
 
 import { AccessCredentialPropT } from "../../misc/types"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+
 type Props = {
 	label: string
 	locked: boolean
 	visible: boolean
-	opening: string
-	char_count: number
-	ending: string
 	propName: AccessCredentialPropT
-	codes?: string[]
 	isCrypto?: boolean
-	sqa?: {
-		q: string
-		a: string
-	}
 	maxChar?: number
 }
 
+type ValuePossibleStates = string | number | string[] | null | undefined
+
 const VisualizeCredentialProp: FC<Props> = (props) => {
-	const {
-		label,
-		locked,
-		visible,
-		opening,
-		char_count,
-		ending,
-		propName,
-		codes,
-		isCrypto,
-		sqa,
-		maxChar,
-	} = props
+	const { label, locked, visible, propName, isCrypto, maxChar } = props
 
-	const [mainValue, setMainValue] = useState("")
+	const { credential } = useSelector((state: RootState) => state.credential)
 
-	const [secondValue, setSecondValue] = useState("")
+	const [mainValue, setMainValue] = useState<ValuePossibleStates>("")
 
-	const [credCodes, setCredCodes] = useState<string[]>([""])
+	const [secondValue, setSecondValue] = useState<ValuePossibleStates>("")
+
+	const [credCodes, setCredCodes] = useState<ValuePossibleStates>([""])
 
 	const [mainMaxChar, setMainMaxChar] = useState(0)
 
 	const [secondMaxchar, setSecondMaxChar] = useState(0)
 
 	useEffect(() => {
-		if (codes) {
-			setCredCodes(codes)
-		}
-	}, [])
+		if (propName === "security_question") {
+			setMainValue(credential.security_question)
 
-	useEffect(() => {
-		if (locked || !visible) {
-			setLockedValues()
+			setSecondValue(credential.security_answer)
+		} else if (
+			propName === "crypto_currency_access_codes" ||
+			propName === "multiple_security_code"
+		) {
+			setCredCodes(credential[propName])
 		} else {
-			setUnlockedValues()
+			setMainValue(credential[propName])
 		}
-	}, [locked, visible])
+
+		if (maxChar) {
+			setMainMaxChar(maxChar)
+			setSecondMaxChar(maxChar)
+		}
+	}, [credential])
 
 	const selectInputType = () => {
 		if (propName === "description") {
@@ -72,27 +65,6 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 		}
 
 		return "text field"
-	}
-
-	const setLockedValues = () => {
-		if (propName !== "description") {
-			const body = new Array(char_count).join("•")
-
-			setMainValue(opening + body + ending)
-			setSecondValue(opening + body + ending)
-
-			if (codes) {
-				const lockedCodes = [...Array(codes.length)].map(() => "•••••")
-
-				setCredCodes(lockedCodes)
-			}
-		} else {
-			//set value from redux state
-		}
-	}
-const setUnlockedValues = () => {
-		//take the values from redux
-        
 	}
 
 	return <>{selectInputType}</>
