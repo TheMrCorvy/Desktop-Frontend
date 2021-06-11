@@ -4,10 +4,14 @@ import { Grid, Typography } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
+import { initializeCredential } from "../../redux/actions/credentialActions"
 
 import { translate } from "../../lang"
+
+import { findCredential } from "../../misc/indexedDB"
+import { CredentialT } from "../../misc/types"
 
 import UnlockData from "../UnlockData"
 import DisplayData from "../DisplayData"
@@ -47,9 +51,11 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 
 	const [showSnackbar, setShowSnackbar] = useState(false)
 
+	const [snackbarMessage, setSnackbarMessage] = useState("")
+
 	const classes = useStyles()
 
-	useEffect(() => console.log(credential), [credential])
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		setIsAuthenticated(!locked)
@@ -65,6 +71,16 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 		}
 	}, [locked, showSnackbar])
 
+	const obtainCredential = async (id: number) => {
+		const data = await findCredential(id)
+
+		if (data === undefined) {
+			return undefined
+		}
+
+		return data
+	}
+
 	const toggleVisibility = () => {
 		if (!locked && visible) {
 			setLocked(true)
@@ -76,10 +92,24 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 					setVisible(true)
 				} else {
 					setShowSnackbar(true)
+
+					setSnackbarMessage(translate("access_denied_message", lng))
 				}
 			})
 		} else {
-			setVisible(false)
+			const id = credential.id ? credential.id : 0
+
+			obtainCredential(id).then((credentialDB: any) => {
+				if (credentialDB) {
+					setVisible(false)
+
+					dispatch(initializeCredential(credentialDB))
+				} else {
+					setSnackbarMessage(translate("error_messages", lng, 3))
+
+					setShowSnackbar(true)
+				}
+			})
 		}
 	}
 
@@ -210,11 +240,7 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 			</Grid>
 
 			{showSnackbar && (
-				<Snackbar
-					open={showSnackbar}
-					message={translate("access_denied_message", lng)}
-					duration={12000}
-				/>
+				<Snackbar open={showSnackbar} message={snackbarMessage} duration={12000} />
 			)}
 		</>
 	)
