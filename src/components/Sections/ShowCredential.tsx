@@ -306,7 +306,6 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 							locked={locked}
 							visible={visible}
 							propName="multiple_security_code"
-							maxChar={calcMaxChar("xs")}
 						/>
 					)}
 					{credential.crypto_currency_access_codes && (
@@ -315,7 +314,6 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 							locked={locked}
 							visible={visible}
 							propName="crypto_currency_access_codes"
-							maxChar={calcMaxChar("xs")}
 							isCrypto
 						/>
 					)}
