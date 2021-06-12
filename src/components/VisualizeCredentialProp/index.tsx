@@ -131,9 +131,9 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	}
 
 	const renderLayout = () => {
-		const mainChar = credential[propName] as string
+		const mainChar = credential[propName] ? credential[propName] : ""
 
-		const secondChar = credential.security_answer
+		const secondChar = credential.security_answer ? credential.security_answer : ""
 
 		if (propName === "description") {
 			return "multiline"
