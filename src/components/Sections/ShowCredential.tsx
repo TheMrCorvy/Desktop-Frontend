@@ -160,9 +160,17 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 						</Grid>
 					</Grid>
 					{credential.description && (
-						<Grid item xs={12}>
-							<Typography variant="body1">{credential.description}</Typography>
-						</Grid>
+						// <Grid item xs={12}>
+						// 	<Typography variant="body1">{credential.description}</Typography>
+						// </Grid>
+						<VisualizeCredentialProp
+							label="description"
+							locked={locked}
+							visible={visible}
+							propName="description"
+							maxChar={calcMaxChar("xl")}
+							isCrypto
+						/>
 					)}
 					<Grid item xs={12}>
 						<Grid container justify="space-between" spacing={2}>

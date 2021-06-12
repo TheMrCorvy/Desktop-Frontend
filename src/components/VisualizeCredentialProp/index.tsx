@@ -136,13 +136,50 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 		const secondChar = credential.security_answer ? credential.security_answer : ""
 
 		if (propName === "description") {
-			return "multiline"
+			return locked ? (
+				<Typography variant="body1">{credential.description}</Typography>
+			) : (
+				<>
+					<TextField
+						label={label}
+						variant="outlined"
+						fullWidth
+						multiline
+						className={classes.textColor}
+						InputProps={{
+							classes: {
+								input: classes.textColor,
+							},
+						}}
+						inputProps={{
+							type: "text field",
+							"data-testid": "test_text_field",
+						}}
+						value={mainChar}
+						onChange={handleChange}
+						disabled={locked}
+					/>
+					{maxChar && (
+						<Typography variant="body1" data-testid="test_max_char">
+							{mainCharCount} / {maxChar}
+						</Typography>
+					)}
+				</>
+			)
 		}
 
 		if (propName === "multiple_security_code" || propName === "crypto_currency_access_codes") {
 			const codes = isCrypto
 				? credential.crypto_currency_access_codes
 				: credential.multiple_security_code
+
+			const showCodesLabel = (number: number, code: string) => {
+				if ((isCrypto && visible) || (isCrypto && !locked)) {
+					return number + 1 + ") " + code
+				} else {
+					return code
+				}
+			}
 
 			return (
 				<Grid container spacing={4} justify="space-around">
@@ -206,14 +243,6 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 		)
 	}
 
-	const showCodesLabel = (number: number, code: string) => {
-		if ((isCrypto && visible) || (isCrypto && !locked)) {
-			return number + 1 + ") " + code
-		} else {
-			return code
-		}
-	}
-
 	const cardFooter = () => {
 		if (!locked || visible) {
 			return (
@@ -233,7 +262,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 
 	return (
 		<>
-			<Grid item xs={12} md={6}>
+			<Grid item xs={12} md={propName !== "description" ? 6 : 12}>
 				<Accordion defaultExpanded style={{ borderRadius: 8 }}>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 						<Typography className={classes.heading}>{label}</Typography>
@@ -249,7 +278,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 							)}
 						</Grid>
 					</AccordionDetails>
-					{cardFooter()}
+					{propName !== "description" && cardFooter()}
 				</Accordion>
 			</Grid>
 		</>
