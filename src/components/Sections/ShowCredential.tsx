@@ -232,13 +232,34 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 
 			<Grid item xs={12} md={9}>
 				<Grid container spacing={4}>
-					<VisualizeCredentialProp
-						label={translate("auth_form_texts", lng, 0)}
-						locked={locked}
-						visible={visible}
-						propName="email"
-						maxChar={calcMaxChar("xs")}
-					/>
+					{credential.email && (
+						<VisualizeCredentialProp
+							label={translate("auth_form_texts", lng, 0)}
+							locked={locked}
+							visible={visible}
+							propName="email"
+							maxChar={calcMaxChar("xs")}
+						/>
+					)}
+					{credential.multiple_security_code && (
+						<VisualizeCredentialProp
+							label="multiple codes"
+							locked={locked}
+							visible={visible}
+							propName="multiple_security_code"
+							maxChar={calcMaxChar("xs")}
+						/>
+					)}
+					{credential.crypto_currency_access_codes && (
+						<VisualizeCredentialProp
+							label="crypto codes"
+							locked={locked}
+							visible={visible}
+							propName="crypto_currency_access_codes"
+							maxChar={calcMaxChar("xs")}
+							isCrypto
+						/>
+					)}
 				</Grid>
 			</Grid>
 

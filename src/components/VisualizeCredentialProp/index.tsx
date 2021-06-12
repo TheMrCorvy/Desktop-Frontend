@@ -10,11 +10,15 @@ import {
 	AccordionActions,
 	Button,
 	Divider,
+	Chip,
+	useMediaQuery,
 } from "@material-ui/core"
 
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
+import { Theme, createStyles, makeStyles, useTheme } from "@material-ui/core/styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import LockOpenIcon from "@material-ui/icons/LockOpen"
+import LockIcon from "@material-ui/icons/Lock"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
@@ -25,6 +29,7 @@ import { translate } from "../../lang"
 import { AccessCredentialPropT } from "../../misc/types"
 
 import CopyText from "../CopyText"
+import EditCodes from "../EditCodes"
 
 type Props = {
 	label: string
@@ -46,18 +51,11 @@ const useStyles = makeStyles((theme: Theme) =>
 				flexBasis: "70%",
 			},
 		},
-		secondaryHeading: {
-			fontSize: theme.typography.pxToRem(15),
-			color: theme.palette.text.secondary,
-		},
 		textColor: {
 			color: theme.palette.type === "dark" ? "white" : "black",
 		},
 		textCenter: {
 			textAlign: "center",
-		},
-		borderRadius: {
-			borderRadius: 8,
 		},
 	})
 )
@@ -73,6 +71,8 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	const [secondCharCount, setSecondCharCount] = useState<number | null | undefined>(0)
 
 	const classes = useStyles()
+	const theme = useTheme()
+	const matches = useMediaQuery(theme.breakpoints.down("sm"))
 
 	const dispatch = useDispatch()
 
@@ -88,7 +88,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 		}
 
 		if (typeof credential[propName] === "string" && credential[propName] !== undefined) {
-			return credential[propName] as string
+			return credential[propName] ? (credential[propName] as string) : ""
 		}
 
 		return ""
@@ -140,7 +140,37 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 		}
 
 		if (propName === "multiple_security_code" || propName === "crypto_currency_access_codes") {
-			return "multiple codes"
+			const codes = isCrypto
+				? credential.crypto_currency_access_codes
+				: credential.multiple_security_code
+
+			return (
+				<Grid container spacing={4} justify="space-around">
+					{codes &&
+						codes.map((code: string, index: number) => (
+							<Grid item key={index}>
+								<Chip
+									icon={locked ? <LockIcon /> : <LockOpenIcon />}
+									key={code}
+									label={showCodesLabel(index, code)}
+									color="secondary"
+									disabled={!visible}
+									size={matches ? "small" : "medium"}
+									data-testid={"test_chip_" + index}
+								/>
+							</Grid>
+						))}
+					{!locked && (
+						<Grid item xs={12} className={classes.textCenter}>
+							<EditCodes
+								codes={codes ? codes : [""]}
+								option={1}
+								isCrypto={isCrypto ? isCrypto : false}
+							/>
+						</Grid>
+					)}
+				</Grid>
+			)
 		}
 
 		if (propName === "security_question") {
@@ -174,6 +204,14 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 				)}
 			</>
 		)
+	}
+
+	const showCodesLabel = (number: number, code: string) => {
+		if ((isCrypto && visible) || (isCrypto && !locked)) {
+			return number + 1 + ") " + code
+		} else {
+			return code
+		}
 	}
 
 	const cardFooter = () => {
