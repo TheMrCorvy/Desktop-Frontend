@@ -7,9 +7,6 @@ import {
 	AccordionSummary,
 	TextField,
 	Grid,
-	AccordionActions,
-	Button,
-	Divider,
 	Chip,
 	useMediaQuery,
 } from "@material-ui/core"
@@ -28,7 +25,7 @@ import { translate } from "../../lang"
 
 import { AccessCredentialPropT } from "../../misc/types"
 
-import CopyText from "../CopyText"
+import CardFooter from "./CardFooter"
 import EditCodes from "../EditCodes"
 
 type Props = {
@@ -111,26 +108,30 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
 		const target = event.target as HTMLInputElement
 
-		const type = target.getAttribute("type")
-
 		const variant = target.getAttribute("variant")
 
-		switch (type) {
-			case "text field":
-				setMainCharCount(target.value.length)
+		if (variant === "main text") {
+			setMainCharCount(target.value.length)
 
-				dispatch(
-					editCredential({
-						oldCredential: credential,
-						prop: propName,
-						newValue: target.value,
-					})
-				)
+			dispatch(
+				editCredential({
+					oldCredential: credential,
+					prop: propName,
+					newValue: target.value,
+				})
+			)
+		}
 
-				break
+		if (variant === "second text") {
+			setSecondCharCount(target.value.length)
 
-			default:
-				break
+			dispatch(
+				editCredential({
+					oldCredential: credential,
+					prop: "security_answer",
+					newValue: target.value,
+				})
+			)
 		}
 	}
 
@@ -139,37 +140,8 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 
 		const secondChar = credential.security_answer ? credential.security_answer : ""
 
-		if (propName === "description") {
-			return locked ? (
-				<Typography variant="body1">{credential.description}</Typography>
-			) : (
-				<>
-					<TextField
-						label={label}
-						variant="outlined"
-						fullWidth
-						multiline
-						className={classes.textColor}
-						InputProps={{
-							classes: {
-								input: classes.textColor,
-							},
-						}}
-						inputProps={{
-							type: "text field",
-							"data-testid": "test_text_field",
-						}}
-						value={mainChar}
-						onChange={handleChange}
-						disabled={locked}
-					/>
-					{maxChar && (
-						<Typography variant="body1" data-testid="test_max_char">
-							{mainCharCount} / {maxChar}
-						</Typography>
-					)}
-				</>
-			)
+		if (propName === "description" && locked) {
+			return <Typography variant="body1">{credential.description}</Typography>
 		}
 
 		if (propName === "multiple_security_code" || propName === "crypto_currency_access_codes") {
@@ -229,15 +201,14 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 								},
 							}}
 							inputProps={{
-								type: "sqa",
-								variant: "security question",
+								variant: "main text",
 								"data-testid": "test_sqa_question",
 							}}
 							value={mainChar}
 							onChange={handleChange}
 							disabled={locked}
 						/>
-						{maxChar && (
+						{maxChar && visible && (
 							<Typography variant="body1">
 								{mainCharCount} / {maxChar}
 							</Typography>
@@ -255,15 +226,14 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 								},
 							}}
 							inputProps={{
-								type: "sqa",
-								variant: "security answer",
+								variant: "second text",
 								"data-testid": "test_sqa_answer",
 							}}
 							value={secondChar}
 							onChange={handleChange}
 							disabled={locked}
 						/>
-						{maxChar && (
+						{maxChar && visible && (
 							<Typography variant="body1">
 								{secondCharCount} / {maxChar}
 							</Typography>
@@ -274,54 +244,36 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 		}
 
 		return (
-			<>
-				<TextField
-					label={label}
-					variant="outlined"
-					fullWidth
-					className={classes.textColor}
-					InputProps={{
-						classes: {
-							input: classes.textColor,
-						},
-					}}
-					inputProps={{
-						type: "text field",
-						"data-testid": "test_text_field",
-					}}
-					value={mainChar}
-					onChange={handleChange}
-					disabled={locked}
-				/>
-				{maxChar && (
-					<Typography variant="body1" data-testid="test_max_char">
-						{mainCharCount} / {maxChar}
-					</Typography>
-				)}
-			</>
+			<TextField
+				label={label}
+				variant="outlined"
+				fullWidth
+				multiline={propName === "description" ? true : false}
+				className={classes.textColor}
+				InputProps={{
+					classes: {
+						input: classes.textColor,
+					},
+				}}
+				inputProps={{
+					variant: "main text",
+					"data-testid": "test_text_field",
+				}}
+				value={mainChar}
+				onChange={handleChange}
+				disabled={locked}
+			/>
 		)
-	}
-
-	const cardFooter = () => {
-		if (!locked || visible) {
-			return (
-				<>
-					<Divider />
-					<AccordionActions>
-						<CopyText body={textToCopy()}>
-							<Button color="secondary">{translate("actions", lng, 0)}</Button>
-						</CopyText>
-					</AccordionActions>
-				</>
-			)
-		}
-
-		return null
 	}
 
 	return (
 		<>
-			<Grid item xs={12} md={propName !== "description" ? 6 : 12}>
+			<Grid
+				item
+				xs={12}
+				md={propName !== "description" ? 6 : 12}
+				xl={propName !== "description" ? 4 : 12}
+			>
 				<Accordion defaultExpanded style={{ borderRadius: 8 }}>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 						<Typography className={classes.heading}>{label}</Typography>
@@ -333,11 +285,21 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 							) : (
 								<Grid item xs={12}>
 									{renderLayout()}
+									{maxChar && visible && (
+										<Typography variant="body1" data-testid="test_max_char">
+											{mainCharCount} / {maxChar}
+										</Typography>
+									)}
 								</Grid>
 							)}
 						</Grid>
 					</AccordionDetails>
-					{propName !== "description" && cardFooter()}
+					{propName !== "description" && visible && (
+						<CardFooter
+							textToCopy={textToCopy()}
+							label={translate("actions", lng, 0)}
+						/>
+					)}
 				</Accordion>
 			</Grid>
 		</>
