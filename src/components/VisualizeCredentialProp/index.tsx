@@ -141,7 +141,11 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 		const secondChar = credential.security_answer ? credential.security_answer : ""
 
 		if (propName === "description" && locked) {
-			return <Typography variant="body1">{credential.description}</Typography>
+			return (
+				<Typography variant="body1" data-testid="test_description">
+					{credential.description}
+				</Typography>
+			)
 		}
 
 		if (propName === "multiple_security_code" || propName === "crypto_currency_access_codes") {
@@ -158,7 +162,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 			}
 
 			return (
-				<Grid container spacing={4} justify="space-around">
+				<Grid container spacing={4} justify="space-around" data-testid="test_codes">
 					{codes &&
 						codes.map((code: string, index: number) => (
 							<Grid item key={index}>
@@ -169,12 +173,16 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 									color="secondary"
 									disabled={!visible}
 									size={matches ? "small" : "medium"}
-									data-testid={"test_chip_" + index}
 								/>
 							</Grid>
 						))}
 					{!locked && (
-						<Grid item xs={12} className={classes.textCenter}>
+						<Grid
+							item
+							xs={12}
+							className={classes.textCenter}
+							data-testid="test_unlocked_codes"
+						>
 							<EditCodes
 								codes={codes ? codes : [""]}
 								option={1}
@@ -202,7 +210,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 							}}
 							inputProps={{
 								variant: "main text",
-								"data-testid": "test_sqa_question",
+								"data-testid": "test_security_question",
 							}}
 							value={mainChar}
 							onChange={handleChange}
@@ -227,7 +235,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 							}}
 							inputProps={{
 								variant: "second text",
-								"data-testid": "test_sqa_answer",
+								"data-testid": "test_security_answer",
 							}}
 							value={secondChar}
 							onChange={handleChange}

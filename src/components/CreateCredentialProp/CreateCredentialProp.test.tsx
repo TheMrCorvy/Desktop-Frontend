@@ -5,7 +5,7 @@ import store from "../../redux/store"
 
 import CreateCredentialProp from "./index"
 
-it("renders all layout options properly", () => {
+it("renders all layouts options properly", () => {
 	const { getByTestId } = render(
 		<Provider store={store}>
 			<CreateCredentialProp
