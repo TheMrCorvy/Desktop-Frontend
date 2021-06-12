@@ -114,7 +114,7 @@ export const initializeCredential = (credentialDB: CredentialT): EditCredentialI
 }
 
 const calcAsterisks = (charCount: number): string => {
-	return new Array(charCount).join("•")
+	return new Array(++charCount).join("•")
 }
 
 const createCodesArr = (arrLength: number | null) => {

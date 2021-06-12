@@ -160,9 +160,6 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 						</Grid>
 					</Grid>
 					{credential.description && (
-						// <Grid item xs={12}>
-						// 	<Typography variant="body1">{credential.description}</Typography>
-						// </Grid>
 						<VisualizeCredentialProp
 							label="description"
 							locked={locked}
@@ -266,6 +263,15 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 							propName="crypto_currency_access_codes"
 							maxChar={calcMaxChar("xs")}
 							isCrypto
+						/>
+					)}
+					{credential.security_question && (
+						<VisualizeCredentialProp
+							label="sqa"
+							locked={locked}
+							visible={visible}
+							propName="security_question"
+							maxChar={calcMaxChar("sm")}
 						/>
 					)}
 				</Grid>

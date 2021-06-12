@@ -87,6 +87,10 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 			return credential.multiple_security_code[0]
 		}
 
+		if (propName === "security_question") {
+			return credential.security_answer ? credential.security_answer : ""
+		}
+
 		if (typeof credential[propName] === "string" && credential[propName] !== undefined) {
 			return credential[propName] ? (credential[propName] as string) : ""
 		}
@@ -211,7 +215,62 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 		}
 
 		if (propName === "security_question") {
-			return "sqa"
+			return (
+				<>
+					<Grid item xs={12}>
+						<TextField
+							label={translate("encryption_examples", lng, 5)}
+							variant="outlined"
+							fullWidth
+							className={classes.textColor}
+							InputProps={{
+								classes: {
+									input: classes.textColor,
+								},
+							}}
+							inputProps={{
+								type: "sqa",
+								variant: "security question",
+								"data-testid": "test_sqa_question",
+							}}
+							value={mainChar}
+							onChange={handleChange}
+							disabled={locked}
+						/>
+						{maxChar && (
+							<Typography variant="body1">
+								{mainCharCount} / {maxChar}
+							</Typography>
+						)}
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							label={translate("encryption_examples", lng, 6)}
+							variant="outlined"
+							fullWidth
+							className={classes.textColor}
+							InputProps={{
+								classes: {
+									input: classes.textColor,
+								},
+							}}
+							inputProps={{
+								type: "sqa",
+								variant: "security answer",
+								"data-testid": "test_sqa_answer",
+							}}
+							value={secondChar}
+							onChange={handleChange}
+							disabled={locked}
+						/>
+						{maxChar && (
+							<Typography variant="body1">
+								{secondCharCount} / {maxChar}
+							</Typography>
+						)}
+					</Grid>
+				</>
+			)
 		}
 
 		return (
