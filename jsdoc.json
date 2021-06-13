@@ -11,7 +11,23 @@
 	"opts": {
 		"destination": "./docs",
 		"recurse": true,
-		"template": "node_modules/better-docs/"
+		"template": "node_modules/clean-jsdoc-theme",
+		"theme_opts": {
+			"title": "PasuNashi",
+			"theme": "dark",
+			"menu": [
+				{
+					"title": "PasuNashi Web",
+					"link": "https://pasunashi.xyz",
+					"target": "_blank"
+				},
+				{
+					"title": "GitHub",
+					"link": "https://github.com/PasuSewa",
+					"target": "_blank"
+				}
+			]
+		}
 	},
 	"tags": {
 		"allowUnknownTags": ["category", "component"]
