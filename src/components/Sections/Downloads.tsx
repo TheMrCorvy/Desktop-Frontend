@@ -54,6 +54,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 let deferredPrompt: any
 
+/**
+ * @alias DownloadSection
+ *
+ * @property {boolean} [alternative] if true, title is big, false / undefined title is smaller
+ *
+ * @property {boolean} [testing] if testing the layout of the buttons
+ */
+
 const Downloads: FC<Props> = ({ alternative, testing }) => {
 	const classes = useStyles()
 
