@@ -2,6 +2,20 @@ import Dexie, { Table } from "dexie"
 
 import { CredentialT, UserT, RecentlySeenT, CompanyT } from "./types"
 
+/**
+ * @module IndexedDB
+ *
+ * @description This module contains all the methods to store, update, and delete stored objects on the IndexedDB. ALL THE METHODS WILL RETURN UNDEFINED IF SOMETHING WENT WRONG.
+ */
+
+/**
+ * @alias IndexedDB
+ *
+ * @extends Dexie
+ *
+ * @description The constructor doesn't receive any params, since its only used to initialize the database
+ */
+
 class PasuNashiDatabase extends Dexie {
 	users!: Table<UserT>
 	credentials!: Table<CredentialT>
@@ -21,6 +35,18 @@ class PasuNashiDatabase extends Dexie {
 	}
 }
 
+/**
+ * @module IndexedDB
+ *
+ * @method dropDatabase
+ *
+ * @alias dropDatabase
+ *
+ * @description The method to drop all the items inside the database, & the database itself
+ *
+ * @returns {void}
+ */
+
 export const dropDatabase = (): void => {
 	try {
 		const db = new PasuNashiDatabase()
@@ -31,6 +57,22 @@ export const dropDatabase = (): void => {
 		return undefined
 	}
 }
+
+/**
+ * @module IndexedDB
+ *
+ * @method initiateDB
+ *
+ * @alias initiateDB
+ *
+ * @description The method used to prepare the database, and store all the info returned from the api.
+ *
+ * @param {UserT} user The info of the authenticated user
+ *
+ * @param {CredentialT[]} credentials All the credentials that the current user has
+ *
+ * @returns {void}
+ */
 
 export const initiateDB = (user: UserT, credentials: CredentialT[]) => {
 	//here I use put so when the user login or registers there won't be any error of "same key/id"
@@ -44,6 +86,16 @@ export const initiateDB = (user: UserT, credentials: CredentialT[]) => {
 			return undefined
 		})
 }
+
+/**
+ * @module IndexedDB
+ *
+ * @method getCredentials
+ *
+ * @description The method to get all the credentials stored in the indexedDB
+ *
+ * @returns {Promise<CredentialT[]>}
+ */
 
 export const getCredentials = (): Promise<CredentialT[] | undefined> => {
 	const db = new PasuNashiDatabase()
@@ -59,6 +111,15 @@ export const getCredentials = (): Promise<CredentialT[] | undefined> => {
 		})
 }
 
+/**
+ * @module IndexedDB
+ *
+ * @method getUser
+ *
+ * @description The method to obtain all the user's data
+ *
+ * @returns {Promise<UserT>}
+ */
 export const getUser = (): Promise<UserT | undefined> => {
 	const db = new PasuNashiDatabase()
 
@@ -72,6 +133,18 @@ export const getUser = (): Promise<UserT | undefined> => {
 			return undefined
 		})
 }
+
+/**
+ * @module IndexedDB
+ *
+ * @method putUser
+ *
+ * @description The method to update user's info. It returns a promise of the updated user object
+ *
+ * @param {UserT} user The new user to store in the DB
+ *
+ * @returns {Promise<UserT>}
+ */
 
 export const putUser = (user: UserT) => {
 	const db = new PasuNashiDatabase()
@@ -87,6 +160,18 @@ export const putUser = (user: UserT) => {
 		})
 }
 
+/**
+ * @module IndexedDB
+ *
+ * @method putCredentials
+ *
+ * @description This method is used to update many credentials at once
+ *
+ * @param {CredentialT[]} credentials The credentials to update in the DB
+ *
+ * @returns {Promise<CredentialT[]>}
+ */
+
 export const putCredentials = (credentials: CredentialT[]) => {
 	const db = new PasuNashiDatabase()
 
@@ -100,6 +185,18 @@ export const putCredentials = (credentials: CredentialT[]) => {
 			return undefined
 		})
 }
+
+/**
+ * @module IndexedDB
+ *
+ * @method putCredential
+ *
+ * @description This method is used to update a single credential on the DB
+ *
+ * @param {CredentialT} credential The credential to update in the DB
+ *
+ * @returns {Promise<CredentialT>}
+ */
 
 export const putCredential = (credential: CredentialT) => {
 	const db = new PasuNashiDatabase()
@@ -115,6 +212,18 @@ export const putCredential = (credential: CredentialT) => {
 		})
 }
 
+/**
+ * @module IndexedDB
+ *
+ * @method findCredential
+ *
+ * @description The method to get a specific credential from the DB
+ *
+ * @param {number} credentialId The id of the credential
+ *
+ * @returns {Promise<CredentialT>}
+ */
+
 export const findCredential = (credentialId: number): Promise<CredentialT | undefined> => {
 	const db = new PasuNashiDatabase()
 
@@ -129,6 +238,18 @@ export const findCredential = (credentialId: number): Promise<CredentialT | unde
 		})
 }
 
+/**
+ * @module IndexedDB
+ *
+ * @method forgetCredential
+ *
+ * @description The method used to remove one credential from the DB
+ *
+ * @param {number} credentialId The ID of the credential to delete
+ *
+ * @returns {number} The id of the credential deleted.
+ */
+
 export const forgetCredential = (credentialId: number): Promise<number | undefined> => {
 	const db = new PasuNashiDatabase()
 
@@ -142,6 +263,16 @@ export const forgetCredential = (credentialId: number): Promise<number | undefin
 			return undefined
 		})
 }
+
+/**
+ * @module IndexedDB
+ *
+ * @method getRecentlySeen
+ *
+ * @description The method used to get the data for the "recently accessed" table. (Recently accessed credentials, basically).
+ *
+ * @returns {Promise<RecentlySeenT[]>}
+ */
 
 export const getRecentlySeen = (): Promise<RecentlySeenT[] | undefined> => {
 	const db = new PasuNashiDatabase()
@@ -161,6 +292,18 @@ export const getRecentlySeen = (): Promise<RecentlySeenT[] | undefined> => {
 		})
 }
 
+/**
+ * @module IndexedDB
+ *
+ * @method putRecentlySeen
+ *
+ * @description The method to store the response of the api for the recently accessed credentials
+ *
+ * @param {RecentlySeenT[]} recent The info returned from the api of the recently accessed credentials
+ *
+ * @returns {Promise<RecentlySeenT[]>}
+ */
+
 export const putRecentlySeen = (recent: RecentlySeenT[]) => {
 	const db = new PasuNashiDatabase()
 
@@ -175,6 +318,16 @@ export const putRecentlySeen = (recent: RecentlySeenT[]) => {
 		})
 }
 
+/**
+ * @module IndexedDB
+ *
+ * @method getCompanies
+ *
+ * @description The method to get all the options for the user to select when creating a new credential
+ *
+ * @returns  {Promise<CompanyT[]>}
+ */
+
 export const getCompanies = (): Promise<CompanyT[] | undefined> => {
 	const db = new PasuNashiDatabase()
 
@@ -188,6 +341,18 @@ export const getCompanies = (): Promise<CompanyT[] | undefined> => {
 			return undefined
 		})
 }
+
+/**
+ * @module IndexedDB
+ *
+ * @method putCompanies
+ *
+ * @description The method to store / update all the options for companies
+ *
+ * @param {CompanyT[]} companies All the companies to store in the DB
+ *
+ * @returns {Promise<CompanyT[]>}
+ */
 
 export const putCompanies = (companies: CompanyT[]) => {
 	const db = new PasuNashiDatabase()
