@@ -72,6 +72,52 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
+/**
+ * @alias CreateCredentialProp
+ *
+ * @description This component will be the card that shows the suer the inputs they must / should complete to register their credential, and will update the global state, where the credential is.
+ *
+ *@property {"text field" | "select option" | "multiline" | "multiple codes" | "sqa"} layoutOptions All the possible inputs for the credential props
+ *
+ * @property {string} label The input's label
+ *
+ * @property {AccessCredntialPropT} accessCredentialProp The name of the property the user will be editing
+ * 
+ * @property {function} editCredentialProp This function will dispatch an event to update the state of the credencial when the user changes anything
+ *
+ * @property {boolean} [isMandatory] If the user MUST complete this input
+ *
+ * @property {boolean} [defaultExpanded] If the card is open before the user does anything
+ *
+ * @property {CompanyT[]} [companies] An array of all the available companies for the user to select
+ *
+ * @property {number} maxChar The max amount of characters per input
+ *
+ * @property {boolean} isCrypto If the input is for crypto currency access words
+ *
+ * @example
+ * 
+ * <CreateCredentialProp
+		label="your security question & answer"
+		layout="sqa"
+		maxChar={191}
+		accessCredentialProp="security_question"
+		editCredentialProp={dispatchEditCredential}
+	/>
+
+	@example
+	<CreateCredentialProp
+		layout="select option"
+		companies={["", ""]}
+		label="select one or write your own"
+		isMandatory
+		defaultExpanded
+		maxChar={50}
+		accessCredentialProp="company_name"
+		editCredentialProp={dispatchEditCredential}
+	/>
+ */
+
 const CreateCredentialProp: FC<Props> = (props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
