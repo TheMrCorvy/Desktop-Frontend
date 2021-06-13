@@ -45,6 +45,21 @@ const useStyles = makeStyles({
 	},
 })
 
+/**
+ * @alias EditCodes
+ *
+ * @description This is the component responsible of managing the multiple codes property of a credential, receives the codes as an array, but here is the logic to update the codes on the global state.
+ *
+ * @property {string[]} codes The codes that will be rendered & dispatched to redux
+ *
+ * @property {1 | 2} option The layout for the codes (1: shows a button which opens a model. 2: shows every code inside an input)
+ *
+ * @property {boolean} isCrypto If the codes to edit are the words to access crypto currency wallets
+ *
+ * @example
+ * 		<EditCodes codes={["", ""]} option={1} isCrypto />
+ */
+
 const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 	const theme = useTheme()
 
