@@ -1,0 +1,53 @@
+Primero que nada, aclaro que este gestor de contraseñas NO es seguro, ya que la llave para desencriptar todo lo 
+almacendao en la base de datos, se encuentra en el servidor de backend como variable de entorno
+
+Este es un projecto personal en el que me esforcé por aprender un monton de tecnologías, algunas nuevas y otras no tanto, 
+como pueden ser react hooks, typescript, redux y sus respectivos hooks, entre otros. De igual manera traté siempre de seguir 
+los estandares, y respetar las buenas prácticas (algo a lo que aún no me habia acostumbrado...)
+
+mi intención original era usar next js para este proyecto, pero debido a algunos porblemas que no pude solucionar, y a que 
+no sabia bien como manejar el tema de la autenticación, decidí usar react js
+
+no olviden que pueden checkear la documentación generada con jsdocs aqui
+
+Como inicializar el proyecto
+
+Antes de nada, es necesario saber que hay un archivo .env.example. antes de comenzar el proceso de instalación es recomendable 
+tener el .env.local completo, y para eso se deben conseguir las siguientes llaves/variables:
+
+1) REACT_APP_ENV_LOCAL de no tener nada, la app asumirá que está en ambiente de produccion, en caso de tener algo 
+(cualqwuier cosa) la app asumirá lo contrario
+
+2) REACT_APP_RECAPTCHA_SITE_KEY & REACT_APP_RECAPTCHA_SECRET_KEY estos se consiguen registrandose en el siguiente sitio de 
+google: https://www.google.com/recaptcha/admin/site/
+
+3) REACT_APP_PAYPAL_CLIENT_ID el client id de paypal se puede conseguir en https://developer.paypal.com dentro de applications crear una app, y en la parte de live estarán disponibles las credenciales para dicha app recien creada
+
+4) REACT_APP_COINBASE_API_KEY la api key se consigue registrandose en https://commerce.coinbase.com y dentro de configuracion,
+crear una nueva api key
+
+Una vez configurado el entorno, lo siguiente es npm install
+
+## dependencias usadas en el proyecto:
+
+material ui para el diseño ui
+
+fontawesome para los íconos
+
+dexie para el manejo de indexed db (no lo recomiendo)
+
+react-google-recaptcha para la funcionalidad de captcha
+
+react-hook-form para la validación de formularios
+
+react-paypal-button-v2 para los pagos con paypal
+
+react-qrcode-logo para los codigos qrcode
+
+react-redux para el manejo del estado global
+
+jsdoc y gh-pages para la documentacion
+
+y aunque tecnicamente no es una dependencia use un video de youtube en lugar de i18n, ya que este paquete me dió unos cuantos 
+problemas
+
