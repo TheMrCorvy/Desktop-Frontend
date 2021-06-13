@@ -7,6 +7,22 @@ import { translate } from "../lang"
 
 import Snackbar from "./Snackbar"
 
+/**
+ * @module CopyText
+ *
+ * @alias CopyText
+ *
+ * @description This component will recieve 3 main things
+ *
+ * @param {string} body text for cpy
+ * @param {ReactElement} children call to action
+ * @param {number} duration the duration of the snackbar in milliseconds (optional)
+ *
+ * @example
+ * <CopyText body="some text" duration={30000}>
+ * 		<button>copy</button>
+ * </CopyText>
+ */
 type Props = {
 	body: string
 	children: ReactElement
