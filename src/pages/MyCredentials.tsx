@@ -19,7 +19,7 @@ import OrderBar, { By, Direction } from "../components/OrderBar"
 import CredentialCard from "../components/CredentialCard"
 import Downloads from "../components/Sections/Downloads"
 import Snackbar from "../components/Snackbar"
-import FeedbackForm from "../components/FeedbackForm"
+import FeedbackForm from "../components/Sections/FeedbackForm"
 import UpdateRole from "../components/Sections/UpdateRole"
 
 /******************************************************************************** types */

@@ -23,7 +23,7 @@ import { RootState } from "../redux/store"
 import { translate } from "../lang"
 
 /******************************************************************************** components */
-import FeedbackForm from "../components/FeedbackForm"
+import FeedbackForm from "../components/Sections/FeedbackForm"
 import Downloads from "../components/Sections/Downloads"
 import AccessManagement from "../components/Sections/AccessManagement"
 import CredentialCard from "../components/CredentialCard"
