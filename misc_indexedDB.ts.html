@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Adding meta -->
+    
+
+    <!-- Adding external script-->
+    
+
+    <!-- Adding external style-->
+    
+
+    <!-- Adding scripts-->
+    
+
+    <!-- Adding style-->
+    
+
+    <!-- Adding overlay script-->
+    
+
+    <!-- Adding overlay style-->
+    
+
+
+    <title>
+      misc/indexedDB.ts
+    </title>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/third-party/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/third-party/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/reset.css">
+    <link type="text/css" rel="stylesheet" href="styles/heading.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-base.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-dark.css">
+    
+    <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="display:none">
+    <defs>
+        <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
+            <g>
+                <path
+                    d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z" />
+                <path
+                    d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z" />
+            </g>
+        </symbol>
+        <symbol id='search-icon' viewBox="0 0 512 512">
+            <g>
+                <g>
+                    <path
+                        d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z" />
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path
+                        d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z" />
+                </g>
+            </g>
+        </symbol>
+        <symbol id="down-icon" viewBox="0 0 16 16">
+            <path 
+                fill-rule="evenodd" 
+                clip-rule="evenodd" 
+                d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"
+            >
+            </path>
+        </symbol>
+    </defs>
+</svg>
+  </head>
+
+  <body>
+
+    <nav class="navbar" id="navbar">
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">PasuNashi</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><ul><li class="menu-li"><a href='https://pasunashi.xyz' class=' menu-link' id='' target='_blank'>PasuNashi Web</a></li><li class="menu-li"><a href='https://github.com/PasuSewa' class=' menu-link' id='' target='_blank'>GitHub</a></li></ul><div class="accordion collapsed" id="9967940" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="IndexedDB.html">IndexedDB</a></li></ul> </div><div class="accordion collapsed" id="1219278" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=8951007><div class="accordion-heading child"><a href="module-IndexedDB.html">IndexedDB</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="module-IndexedDB.html#~dropDatabase">dropDatabase</a></li><li data-type='method'><a href="module-IndexedDB.html#~findCredential">findCredential</a></li><li data-type='method'><a href="module-IndexedDB.html#~forgetCredential">forgetCredential</a></li><li data-type='method'><a href="module-IndexedDB.html#~getCompanies">getCompanies</a></li><li data-type='method'><a href="module-IndexedDB.html#~getCredentials">getCredentials</a></li><li data-type='method'><a href="module-IndexedDB.html#~getRecentlySeen">getRecentlySeen</a></li><li data-type='method'><a href="module-IndexedDB.html#~getUser">getUser</a></li><li data-type='method'><a href="module-IndexedDB.html#~initiateDB">initiateDB</a></li><li data-type='method'><a href="module-IndexedDB.html#~putCompanies">putCompanies</a></li><li data-type='method'><a href="module-IndexedDB.html#~putCredential">putCredential</a></li><li data-type='method'><a href="module-IndexedDB.html#~putCredentials">putCredentials</a></li><li data-type='method'><a href="module-IndexedDB.html#~putRecentlySeen">putRecentlySeen</a></li><li data-type='method'><a href="module-IndexedDB.html#~putUser">putUser</a></li></ul></li><li class="accordion-list" id=""><a href="module-Translation.html">Translation</a></li></ul> </div><div class="accordion collapsed" id="1767505" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#CopyText">CopyText</a></li><li class="accordion-list" id=""><a href="global.html#CreateCredentialProp">CreateCredentialProp</a></li><li class="accordion-list" id=""><a href="global.html#DeleteCredential">DeleteCredential</a></li><li class="accordion-list" id=""><a href="global.html#Dialog">Dialog</a></li><li class="accordion-list" id=""><a href="global.html#EditCodes">EditCodes</a></li><li class="accordion-list" id=""><a href="global.html#MapRoutes">MapRoutes</a></li><li class="accordion-list" id=""><a href="global.html#PurchaseButton">PurchaseButton</a></li><li class="accordion-list" id=""><a href="global.html#PurchaseDialog">PurchaseDialog</a></li><li class="accordion-list" id=""><a href="global.html#Routes">Routes</a></li><li class="accordion-list" id=""><a href="global.html#Section_Downloads">Section_Downloads</a></li><li class="accordion-list" id=""><a href="global.html#Section_ShowCredential">Section_ShowCredential</a></li><li class="accordion-list" id=""><a href="global.html#Section_UpdateRole">Section_UpdateRole</a></li><li class="accordion-list" id=""><a href="global.html#Snackbar">Snackbar</a></li><li class="accordion-list" id=""><a href="global.html#VisualizeCredentialProp">VisualizeCredentialProp</a></li></ul> </div></div>
+      
+
+    </nav>
+    <div class="navbar-ham" id="navbar-ham">
+      <div>
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+      </div>
+    </div>
+
+    <div id="main" class="main-content">
+      
+      <h1 id='page-title' class="page-title">
+        misc/indexedDB.ts
+      </h1>
+      
+
+      
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Dexie, { Table } from "dexie"
+
+import { CredentialT, UserT, RecentlySeenT, CompanyT } from "./types"
+
+/**
+ * @module IndexedDB
+ *
+ * @description This module contains all the methods to store, update, and delete stored objects on the IndexedDB. ALL THE METHODS WILL RETURN UNDEFINED IF SOMETHING WENT WRONG.
+ */
+
+/**
+ * @alias IndexedDB
+ *
+ * @extends Dexie
+ *
+ * @description The constructor doesn't receive any params, since its only used to initialize the database
+ */
+
+class PasuNashiDatabase extends Dexie {
+	users!: Table&lt;UserT>
+	credentials!: Table&lt;CredentialT>
+	recently_seen!: Table&lt;RecentlySeenT>
+	companies!: Table&lt;CompanyT>
+
+	constructor() {
+		super("PasuNashi")
+		this.version(1).stores({
+			users: "id,name,mainEmail,recoveryEmail,phone,availableSlots,role",
+			credentials:
+				"id,user_id,company_id,company_name,logo_url,description,last_seen,recently_seen,email,password,username,phone_number,security_question_answer,security_codes,created_at,updated_at",
+			recently_seen:
+				"id,name,last_seen,created_at,updated_at,accessing_device,accessing_platform",
+			companies: "id,name,url_logo",
+		})
+	}
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method dropDatabase
+ *
+ * @alias dropDatabase
+ *
+ * @description The method to drop all the items inside the database, &amp; the database itself
+ *
+ * @returns {void}
+ */
+
+export const dropDatabase = (): void => {
+	try {
+		const db = new PasuNashiDatabase()
+
+		db.delete()
+	} catch (error) {
+		console.error(error)
+		return undefined
+	}
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method initiateDB
+ *
+ * @alias initiateDB
+ *
+ * @description The method used to prepare the database, and store all the info returned from the api.
+ *
+ * @param {UserT} user The info of the authenticated user
+ *
+ * @param {CredentialT[]} credentials All the credentials that the current user has
+ *
+ * @returns {void}
+ */
+
+export const initiateDB = (user: UserT, credentials: CredentialT[]) => {
+	//here I use put so when the user login or registers there won't be any error of "same key/id"
+	return Promise.all([putCredentials(credentials), putUser(user)])
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method getCredentials
+ *
+ * @description The method to get all the credentials stored in the indexedDB
+ *
+ * @returns {Promise&lt;CredentialT[]>}
+ */
+
+export const getCredentials = (): Promise&lt;CredentialT[] | undefined> => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.credentials.toArray())
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method getUser
+ *
+ * @description The method to obtain all the user's data
+ *
+ * @returns {Promise&lt;UserT>}
+ */
+export const getUser = (): Promise&lt;UserT | undefined> => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.users.orderBy("id").first())
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method putUser
+ *
+ * @description The method to update user's info. It returns a promise of the updated user object
+ *
+ * @param {UserT} user The new user to store in the DB
+ *
+ * @returns {Promise&lt;UserT>}
+ */
+
+export const putUser = (user: UserT) => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.users.put(user))
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method putCredentials
+ *
+ * @description This method is used to update many credentials at once
+ *
+ * @param {CredentialT[]} credentials The credentials to update in the DB
+ *
+ * @returns {Promise&lt;CredentialT[]>}
+ */
+
+export const putCredentials = (credentials: CredentialT[]) => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.credentials.bulkPut(credentials))
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method putCredential
+ *
+ * @description This method is used to update a single credential on the DB
+ *
+ * @param {CredentialT} credential The credential to update in the DB
+ *
+ * @returns {Promise&lt;CredentialT>}
+ */
+
+export const putCredential = (credential: CredentialT) => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.credentials.put(credential))
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method findCredential
+ *
+ * @description The method to get a specific credential from the DB
+ *
+ * @param {number} credentialId The id of the credential
+ *
+ * @returns {Promise&lt;CredentialT>}
+ */
+
+export const findCredential = (credentialId: number): Promise&lt;CredentialT | undefined> => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.credentials.get(credentialId))
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method forgetCredential
+ *
+ * @description The method used to remove one credential from the DB
+ *
+ * @param {number} credentialId The ID of the credential to delete
+ *
+ * @returns {number} The id of the credential deleted.
+ */
+
+export const forgetCredential = (credentialId: number): Promise&lt;number | undefined> => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.credentials.where("id").equals(credentialId).delete())
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method getRecentlySeen
+ *
+ * @description The method used to get the data for the "recently accessed" table. (Recently accessed credentials, basically).
+ *
+ * @returns {Promise&lt;RecentlySeenT[]>}
+ */
+
+export const getRecentlySeen = (): Promise&lt;RecentlySeenT[] | undefined> => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.recently_seen.toArray())
+		.then((data) => {
+			if (data.length === 0) {
+				return undefined
+			} else {
+				return data
+			}
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method putRecentlySeen
+ *
+ * @description The method to store the response of the api for the recently accessed credentials
+ *
+ * @param {RecentlySeenT[]} recent The info returned from the api of the recently accessed credentials
+ *
+ * @returns {Promise&lt;RecentlySeenT[]>}
+ */
+
+export const putRecentlySeen = (recent: RecentlySeenT[]) => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.recently_seen.bulkPut(recent))
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method getCompanies
+ *
+ * @description The method to get all the options for the user to select when creating a new credential
+ *
+ * @returns  {Promise&lt;CompanyT[]>}
+ */
+
+export const getCompanies = (): Promise&lt;CompanyT[] | undefined> => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.companies.toArray())
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+
+/**
+ * @module IndexedDB
+ *
+ * @method putCompanies
+ *
+ * @description The method to store / update all the options for companies
+ *
+ * @param {CompanyT[]} companies All the companies to store in the DB
+ *
+ * @returns {Promise&lt;CompanyT[]>}
+ */
+
+export const putCompanies = (companies: CompanyT[]) => {
+	const db = new PasuNashiDatabase()
+
+	return Promise.resolve(db.companies.bulkPut(companies))
+		.then((data) => {
+			return data
+		})
+		.catch((error) => {
+			console.error(error)
+
+			return undefined
+		})
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    </div>
+
+    <footer class="footer" id="footer">
+      
+    </footer>
+
+    <script src="scripts/third-party/prettify.js"></script>
+    <script src="scripts/third-party/lang-css.js"></script>
+    <script type="text/javascript" src="scripts/misc.js"></script>
+
+    <script>prettyPrint();</script>
+    <script src="scripts/linenumber.js"></script>
+    <script src="scripts/fix-code-block.js"></script>
+    <script src="scripts/fix-navbar.js"></script>
+    
+      <script src="scripts/search.js"></script>
+      <script src="scripts/third-party/fuse.js"></script>
+      <script>
+        var list = [{"title":"IndexedDB","link":"<a href=\"IndexedDB.html\">IndexedDB</a>"},{"title":"IndexedDB","link":"<a href=\"module-IndexedDB.html\">IndexedDB</a>"},{"title":"module:IndexedDB~dropDatabase","link":"<a href=\"module-IndexedDB.html#~dropDatabase\">module:IndexedDB~dropDatabase &rtrif; undefined</a>"},{"title":"module:IndexedDB~findCredential","link":"<a href=\"module-IndexedDB.html#~findCredential\">module:IndexedDB~findCredential &rtrif; undefined</a>"},{"title":"module:IndexedDB~forgetCredential","link":"<a href=\"module-IndexedDB.html#~forgetCredential\">module:IndexedDB~forgetCredential &rtrif; undefined</a>"},{"title":"module:IndexedDB~getCompanies","link":"<a href=\"module-IndexedDB.html#~getCompanies\">module:IndexedDB~getCompanies &rtrif; undefined</a>"},{"title":"module:IndexedDB~getCredentials","link":"<a href=\"module-IndexedDB.html#~getCredentials\">module:IndexedDB~getCredentials &rtrif; undefined</a>"},{"title":"module:IndexedDB~getRecentlySeen","link":"<a href=\"module-IndexedDB.html#~getRecentlySeen\">module:IndexedDB~getRecentlySeen &rtrif; undefined</a>"},{"title":"module:IndexedDB~getUser","link":"<a href=\"module-IndexedDB.html#~getUser\">module:IndexedDB~getUser &rtrif; undefined</a>"},{"title":"module:IndexedDB~initiateDB","link":"<a href=\"module-IndexedDB.html#~initiateDB\">module:IndexedDB~initiateDB &rtrif; undefined</a>"},{"title":"module:IndexedDB~putCompanies","link":"<a href=\"module-IndexedDB.html#~putCompanies\">module:IndexedDB~putCompanies &rtrif; undefined</a>"},{"title":"module:IndexedDB~putCredential","link":"<a href=\"module-IndexedDB.html#~putCredential\">module:IndexedDB~putCredential &rtrif; undefined</a>"},{"title":"module:IndexedDB~putCredentials","link":"<a href=\"module-IndexedDB.html#~putCredentials\">module:IndexedDB~putCredentials &rtrif; undefined</a>"},{"title":"module:IndexedDB~putRecentlySeen","link":"<a href=\"module-IndexedDB.html#~putRecentlySeen\">module:IndexedDB~putRecentlySeen &rtrif; undefined</a>"},{"title":"module:IndexedDB~putUser","link":"<a href=\"module-IndexedDB.html#~putUser\">module:IndexedDB~putUser &rtrif; undefined</a>"},{"title":"Translation","link":"<a href=\"module-Translation.html\">Translation</a>"},{"title":"CopyText","link":"<a href=\"global.html#CopyText\">CopyText</a>"},{"title":"CreateCredentialProp","link":"<a href=\"global.html#CreateCredentialProp\">CreateCredentialProp</a>"},{"title":"DeleteCredential","link":"<a href=\"global.html#DeleteCredential\">DeleteCredential</a>"},{"title":"Dialog","link":"<a href=\"global.html#Dialog\">Dialog</a>"},{"title":"EditCodes","link":"<a href=\"global.html#EditCodes\">EditCodes</a>"},{"title":"MapRoutes","link":"<a href=\"global.html#MapRoutes\">MapRoutes</a>"},{"title":"PurchaseButton","link":"<a href=\"global.html#PurchaseButton\">PurchaseButton</a>"},{"title":"PurchaseDialog","link":"<a href=\"global.html#PurchaseDialog\">PurchaseDialog</a>"},{"title":"Routes","link":"<a href=\"global.html#Routes\">Routes</a>"},{"title":"Section_Downloads","link":"<a href=\"global.html#Section_Downloads\">Section_Downloads</a>"},{"title":"Section_ShowCredential","link":"<a href=\"global.html#Section_ShowCredential\">Section_ShowCredential</a>"},{"title":"Section_UpdateRole","link":"<a href=\"global.html#Section_UpdateRole\">Section_UpdateRole</a>"},{"title":"Snackbar","link":"<a href=\"global.html#Snackbar\">Snackbar</a>"},{"title":"VisualizeCredentialProp","link":"<a href=\"global.html#VisualizeCredentialProp\">VisualizeCredentialProp</a>"}];
+        var options = 
+          setupSearch(list, options)
+      </script>
+    
+
+    
+
+    
+
+    
+
+    
+
+
+  </body>
+
+</html>

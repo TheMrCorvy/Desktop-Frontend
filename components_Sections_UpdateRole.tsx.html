@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Adding meta -->
+    
+
+    <!-- Adding external script-->
+    
+
+    <!-- Adding external style-->
+    
+
+    <!-- Adding scripts-->
+    
+
+    <!-- Adding style-->
+    
+
+    <!-- Adding overlay script-->
+    
+
+    <!-- Adding overlay style-->
+    
+
+
+    <title>
+      components/Sections/UpdateRole.tsx
+    </title>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/third-party/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/third-party/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/reset.css">
+    <link type="text/css" rel="stylesheet" href="styles/heading.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-base.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-dark.css">
+    
+    <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="display:none">
+    <defs>
+        <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
+            <g>
+                <path
+                    d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z" />
+                <path
+                    d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z" />
+            </g>
+        </symbol>
+        <symbol id='search-icon' viewBox="0 0 512 512">
+            <g>
+                <g>
+                    <path
+                        d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z" />
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path
+                        d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z" />
+                </g>
+            </g>
+        </symbol>
+        <symbol id="down-icon" viewBox="0 0 16 16">
+            <path 
+                fill-rule="evenodd" 
+                clip-rule="evenodd" 
+                d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"
+            >
+            </path>
+        </symbol>
+    </defs>
+</svg>
+  </head>
+
+  <body>
+
+    <nav class="navbar" id="navbar">
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">PasuNashi</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><ul><li class="menu-li"><a href='https://pasunashi.xyz' class=' menu-link' id='' target='_blank'>PasuNashi Web</a></li><li class="menu-li"><a href='https://github.com/PasuSewa' class=' menu-link' id='' target='_blank'>GitHub</a></li></ul><div class="accordion collapsed" id="9967940" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="IndexedDB.html">IndexedDB</a></li></ul> </div><div class="accordion collapsed" id="1219278" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=8951007><div class="accordion-heading child"><a href="module-IndexedDB.html">IndexedDB</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="module-IndexedDB.html#~dropDatabase">dropDatabase</a></li><li data-type='method'><a href="module-IndexedDB.html#~findCredential">findCredential</a></li><li data-type='method'><a href="module-IndexedDB.html#~forgetCredential">forgetCredential</a></li><li data-type='method'><a href="module-IndexedDB.html#~getCompanies">getCompanies</a></li><li data-type='method'><a href="module-IndexedDB.html#~getCredentials">getCredentials</a></li><li data-type='method'><a href="module-IndexedDB.html#~getRecentlySeen">getRecentlySeen</a></li><li data-type='method'><a href="module-IndexedDB.html#~getUser">getUser</a></li><li data-type='method'><a href="module-IndexedDB.html#~initiateDB">initiateDB</a></li><li data-type='method'><a href="module-IndexedDB.html#~putCompanies">putCompanies</a></li><li data-type='method'><a href="module-IndexedDB.html#~putCredential">putCredential</a></li><li data-type='method'><a href="module-IndexedDB.html#~putCredentials">putCredentials</a></li><li data-type='method'><a href="module-IndexedDB.html#~putRecentlySeen">putRecentlySeen</a></li><li data-type='method'><a href="module-IndexedDB.html#~putUser">putUser</a></li></ul></li><li class="accordion-list" id=""><a href="module-Translation.html">Translation</a></li></ul> </div><div class="accordion collapsed" id="1767505" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#CopyText">CopyText</a></li><li class="accordion-list" id=""><a href="global.html#CreateCredentialProp">CreateCredentialProp</a></li><li class="accordion-list" id=""><a href="global.html#DeleteCredential">DeleteCredential</a></li><li class="accordion-list" id=""><a href="global.html#Dialog">Dialog</a></li><li class="accordion-list" id=""><a href="global.html#EditCodes">EditCodes</a></li><li class="accordion-list" id=""><a href="global.html#MapRoutes">MapRoutes</a></li><li class="accordion-list" id=""><a href="global.html#PurchaseButton">PurchaseButton</a></li><li class="accordion-list" id=""><a href="global.html#PurchaseDialog">PurchaseDialog</a></li><li class="accordion-list" id=""><a href="global.html#Routes">Routes</a></li><li class="accordion-list" id=""><a href="global.html#Section_Downloads">Section_Downloads</a></li><li class="accordion-list" id=""><a href="global.html#Section_ShowCredential">Section_ShowCredential</a></li><li class="accordion-list" id=""><a href="global.html#Section_UpdateRole">Section_UpdateRole</a></li><li class="accordion-list" id=""><a href="global.html#Snackbar">Snackbar</a></li><li class="accordion-list" id=""><a href="global.html#VisualizeCredentialProp">VisualizeCredentialProp</a></li></ul> </div></div>
+      
+
+    </nav>
+    <div class="navbar-ham" id="navbar-ham">
+      <div>
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+      </div>
+    </div>
+
+    <div id="main" class="main-content">
+      
+      <h1 id='page-title' class="page-title">
+        components/Sections/UpdateRole.tsx
+      </h1>
+      
+
+      
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { FC } from "react"
+
+import { Grid, Typography, Divider, Hidden } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
+
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+
+import { translate } from "../../lang"
+
+import DialogComponent from "../Dialog"
+import PurchaseDialog from "../PurchaseDialog"
+
+type Props = {
+	userRole: "free" | "semi-premium" | "premium" | "admin"
+	canBuySlots: boolean
+}
+
+const useStyles = makeStyles({
+	container: {
+		marginTop: 150,
+	},
+	verticalDivider: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		textAlign: "center",
+	},
+	text: {
+		textAlign: "center",
+	},
+	listItem: {
+		marginBottom: "3rem",
+	},
+	flatBtn: {
+		boxShadow: "none",
+	},
+})
+
+/**
+ * @alias Section_UpdateRole
+ *
+ * @description This component will show the {@link PurchaseDialog} and must receive the following props:
+ *
+ * @property {"free" | "semi-premium" | "premium" | "admin"} userRole The user's role
+ *
+ * @property {boolean} canBuySlots If the user is actually allowed to buy more solts
+ */
+
+const UpdateRole: FC&lt;Props> = ({ userRole, canBuySlots }) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
+	const classes = useStyles()
+
+	if (userRole === "premium") {
+		return null
+	}
+
+	return (
+		&lt;Grid item xs={12} className={classes.container}>
+			&lt;Grid container justify="space-around" spacing={4}>
+				&lt;Grid item xs={12}>
+					&lt;Divider orientation="horizontal" />
+				&lt;/Grid>
+				{canBuySlots &amp;&amp; (
+					&lt;>
+						&lt;Grid item xs={12} md={5} className={classes.text}>
+							&lt;Grid container spacing={4}>
+								&lt;Grid item xs={12}>
+									&lt;Typography variant="h5">
+										{translate("update_role_titles", lng, 0)}
+									&lt;/Typography>
+								&lt;/Grid>
+								&lt;Grid item xs={12}>
+									&lt;PurchaseDialog method="PayPal" type="slots" />
+								&lt;/Grid>
+								&lt;Grid item xs={12}>
+									&lt;PurchaseDialog method="Crypto" type="slots" />
+								&lt;/Grid>
+							&lt;/Grid>
+						&lt;/Grid>
+						&lt;Hidden smDown>
+							&lt;Grid item xs={2} className={classes.verticalDivider}>
+								&lt;Divider orientation="vertical" flexItem />
+							&lt;/Grid>
+						&lt;/Hidden>
+						&lt;Hidden mdUp>
+							&lt;Grid item xs={12}>
+								&lt;Divider orientation="horizontal" />
+							&lt;/Grid>
+						&lt;/Hidden>
+					&lt;/>
+				)}
+				&lt;Grid item xs={12} md={5} className={classes.text}>
+					&lt;Grid container spacing={4}>
+						&lt;Grid item xs={12}>
+							&lt;Typography variant="h5">
+								{translate("update_role_titles", lng, 1)}
+							&lt;/Typography>
+						&lt;/Grid>
+						&lt;Grid item xs={12}>
+							&lt;PurchaseDialog method="PayPal" type="premium" />
+						&lt;/Grid>
+						&lt;Grid item xs={12}>
+							&lt;PurchaseDialog method="Crypto" type="premium" />
+						&lt;/Grid>
+					&lt;/Grid>
+				&lt;/Grid>
+				&lt;Grid item xs={12}>
+					&lt;Divider orientation="horizontal" />
+				&lt;/Grid>
+				&lt;Grid item>
+					&lt;DialogComponent
+						title={translate("update_role_titles", lng, 2)}
+						tooltipPlacement="bottom"
+						className={classes.flatBtn}
+					>
+						&lt;ul>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 3)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 0)}
+								&lt;/Typography>
+							&lt;/li>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 4)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 1)}
+								&lt;/Typography>
+							&lt;/li>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 5)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 2)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 3)}
+								&lt;/Typography>
+							&lt;/li>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 6)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 4)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 5)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 6)}
+								&lt;/Typography>
+							&lt;/li>
+						&lt;/ul>
+					&lt;/DialogComponent>
+				&lt;/Grid>
+			&lt;/Grid>
+		&lt;/Grid>
+	)
+}
+
+export default UpdateRole
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    </div>
+
+    <footer class="footer" id="footer">
+      
+    </footer>
+
+    <script src="scripts/third-party/prettify.js"></script>
+    <script src="scripts/third-party/lang-css.js"></script>
+    <script type="text/javascript" src="scripts/misc.js"></script>
+
+    <script>prettyPrint();</script>
+    <script src="scripts/linenumber.js"></script>
+    <script src="scripts/fix-code-block.js"></script>
+    <script src="scripts/fix-navbar.js"></script>
+    
+      <script src="scripts/search.js"></script>
+      <script src="scripts/third-party/fuse.js"></script>
+      <script>
+        var list = [{"title":"IndexedDB","link":"<a href=\"IndexedDB.html\">IndexedDB</a>"},{"title":"IndexedDB","link":"<a href=\"module-IndexedDB.html\">IndexedDB</a>"},{"title":"module:IndexedDB~dropDatabase","link":"<a href=\"module-IndexedDB.html#~dropDatabase\">module:IndexedDB~dropDatabase &rtrif; undefined</a>"},{"title":"module:IndexedDB~findCredential","link":"<a href=\"module-IndexedDB.html#~findCredential\">module:IndexedDB~findCredential &rtrif; undefined</a>"},{"title":"module:IndexedDB~forgetCredential","link":"<a href=\"module-IndexedDB.html#~forgetCredential\">module:IndexedDB~forgetCredential &rtrif; undefined</a>"},{"title":"module:IndexedDB~getCompanies","link":"<a href=\"module-IndexedDB.html#~getCompanies\">module:IndexedDB~getCompanies &rtrif; undefined</a>"},{"title":"module:IndexedDB~getCredentials","link":"<a href=\"module-IndexedDB.html#~getCredentials\">module:IndexedDB~getCredentials &rtrif; undefined</a>"},{"title":"module:IndexedDB~getRecentlySeen","link":"<a href=\"module-IndexedDB.html#~getRecentlySeen\">module:IndexedDB~getRecentlySeen &rtrif; undefined</a>"},{"title":"module:IndexedDB~getUser","link":"<a href=\"module-IndexedDB.html#~getUser\">module:IndexedDB~getUser &rtrif; undefined</a>"},{"title":"module:IndexedDB~initiateDB","link":"<a href=\"module-IndexedDB.html#~initiateDB\">module:IndexedDB~initiateDB &rtrif; undefined</a>"},{"title":"module:IndexedDB~putCompanies","link":"<a href=\"module-IndexedDB.html#~putCompanies\">module:IndexedDB~putCompanies &rtrif; undefined</a>"},{"title":"module:IndexedDB~putCredential","link":"<a href=\"module-IndexedDB.html#~putCredential\">module:IndexedDB~putCredential &rtrif; undefined</a>"},{"title":"module:IndexedDB~putCredentials","link":"<a href=\"module-IndexedDB.html#~putCredentials\">module:IndexedDB~putCredentials &rtrif; undefined</a>"},{"title":"module:IndexedDB~putRecentlySeen","link":"<a href=\"module-IndexedDB.html#~putRecentlySeen\">module:IndexedDB~putRecentlySeen &rtrif; undefined</a>"},{"title":"module:IndexedDB~putUser","link":"<a href=\"module-IndexedDB.html#~putUser\">module:IndexedDB~putUser &rtrif; undefined</a>"},{"title":"Translation","link":"<a href=\"module-Translation.html\">Translation</a>"},{"title":"CopyText","link":"<a href=\"global.html#CopyText\">CopyText</a>"},{"title":"CreateCredentialProp","link":"<a href=\"global.html#CreateCredentialProp\">CreateCredentialProp</a>"},{"title":"DeleteCredential","link":"<a href=\"global.html#DeleteCredential\">DeleteCredential</a>"},{"title":"Dialog","link":"<a href=\"global.html#Dialog\">Dialog</a>"},{"title":"EditCodes","link":"<a href=\"global.html#EditCodes\">EditCodes</a>"},{"title":"MapRoutes","link":"<a href=\"global.html#MapRoutes\">MapRoutes</a>"},{"title":"PurchaseButton","link":"<a href=\"global.html#PurchaseButton\">PurchaseButton</a>"},{"title":"PurchaseDialog","link":"<a href=\"global.html#PurchaseDialog\">PurchaseDialog</a>"},{"title":"Routes","link":"<a href=\"global.html#Routes\">Routes</a>"},{"title":"Section_Downloads","link":"<a href=\"global.html#Section_Downloads\">Section_Downloads</a>"},{"title":"Section_ShowCredential","link":"<a href=\"global.html#Section_ShowCredential\">Section_ShowCredential</a>"},{"title":"Section_UpdateRole","link":"<a href=\"global.html#Section_UpdateRole\">Section_UpdateRole</a>"},{"title":"Snackbar","link":"<a href=\"global.html#Snackbar\">Snackbar</a>"},{"title":"VisualizeCredentialProp","link":"<a href=\"global.html#VisualizeCredentialProp\">VisualizeCredentialProp</a>"}];
+        var options = 
+          setupSearch(list, options)
+      </script>
+    
+
+    
+
+    
+
+    
+
+    
+
+
+  </body>
+
+</html>
