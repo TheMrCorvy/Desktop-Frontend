@@ -12,6 +12,16 @@ const Error500 = lazy(() => import("../pages/Errors/500"))
 
 type Props = { routes: RouteT[] }
 
+/**
+ * @alias MapRoutes
+ *
+ * @description This component will map all the routes imported from {@link Routes}, and enable/disable routes that require auth.
+ *
+ * @param {RouteT[]} routes The routes imported from {@link Routes}
+ *
+ * @returns The routes for the app
+ */
+
 const RoutesComponent: FC<Props> = (props) => {
 	const { token } = useSelector((state: RootState) => state.token)
 

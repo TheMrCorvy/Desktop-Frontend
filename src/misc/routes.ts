@@ -10,6 +10,22 @@ const MyAccount = lazy(() => import("../pages/MyAccount"))
 const ViewCredential = lazy(() => import("../pages/ViewCredential"))
 const CreateCredential = lazy(() => import("../pages/CreateCredential"))
 
+/**
+ * @alias Routes
+ *
+ * @description Here are hardcoded all the available routes for the app, with the following properties:
+ *
+ * @property {React.LazyExoticComponent<any>} component this is the page / view that will be rendered in this route
+ *
+ * @property {boolean} requiresAuth If the route requires the user to be authenticated or not
+ *
+ * @property {string} path the url for the route starting with "/"
+ *
+ * @property {boolean} [guestOnly] if the route can only be seen if the user is not autheticated
+ *
+ * @returns {RouteT[]} An array all the available routes for the app
+ */
+
 const routes: RouteT[] = [
 	{
 		component: Landing,
