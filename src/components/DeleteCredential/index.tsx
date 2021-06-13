@@ -33,6 +33,18 @@ type Props = {
  */
 type ErrorOptions = 1 | 2 | 3
 
+/**
+ * @alias DeleteCredential
+ *
+ * @description This component will be the one that actially gives the order to delete a credential. It will delete it from the Indexed DB & call the api to delete it from the real DB.
+ *
+ * @property {number} credentialId The id of the credential to delete
+ *
+ * @example
+ *
+ *		<DeleteCredential credentialId={32} />
+ */
+
 const DeleteCredential: FC<Props> = ({ credentialId }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
