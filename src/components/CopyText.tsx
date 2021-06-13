@@ -20,9 +20,9 @@ type Props = {
  *
  * @description This component will receive 3 main things
  *
- * @param {string} body text for cpy
- * @param {ReactElement} children call to action
- * @param {number} [duration] the duration of the snackbar in milliseconds
+ * @property {string} body text for cpy
+ * @property {ReactElement} children call to action
+ * @property {number} [duration] the duration of the snackbar in milliseconds
  *
  * @example
  * <CopyText body="some text" duration={30000}>
