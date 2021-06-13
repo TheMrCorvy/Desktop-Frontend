@@ -53,6 +53,16 @@ const useStyles = makeStyles({
 	},
 })
 
+/**
+ * @alias PurchaseDialog
+ *
+ * @description This component will calculate the prices for the user's purchase, and load them into the {@link PurchaseButton}
+ *
+ * @property {"PayPal" | "Crypto"} method How is the user going to pay?
+ *
+ * @property {"premium" | "slots"} type What the user is going to buy
+ */
+
 const PurchaseDialog: FC<Props> = ({ method, type }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 

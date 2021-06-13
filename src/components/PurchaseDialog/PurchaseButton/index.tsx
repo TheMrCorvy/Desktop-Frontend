@@ -45,16 +45,38 @@ const useStyles = makeStyles({
 	},
 })
 
+/**
+ * @alias PurchaseButton
+ * 
+ * @description This component will be calling paypal's magic buttons or coinbase's api to generate a purchase button
+ * 
+ * @property {number} amount How much has to pay the user (in USD)
+ * 
+ * @property {"PayPal" | "Crypto"} method How is the user going to pay?
+ * 
+ * @property {"slots" | "premium"} type What the user is going to buy
+ * 
+ * @property {function} goBack This function is from the parent component. Its used when the user wants to go bak to calc the price step
+ * 
+ * @property {boolean} [testing] If the behavior of the component
+ * 
+ * @example 
+ * 
+ * <PurchaseButton
+		amount={100}
+		type={"premium"}
+		method={"Crypto"}
+		goBack={() => setStep(1)}
+	/>
+ */
+
 const PurchaseButton: FC<Props> = ({ amount, method, type, goBack }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
 
-	const {
-		REACT_APP_ENV_LOCAL,
-		REACT_APP_PAYPAL_CLIENT_ID,
-		REACT_APP_COINBASE_API_KEY,
-	} = process.env
+	const { REACT_APP_ENV_LOCAL, REACT_APP_PAYPAL_CLIENT_ID, REACT_APP_COINBASE_API_KEY } =
+		process.env
 
 	const [message, setMessage] = useState<string | null>(null)
 

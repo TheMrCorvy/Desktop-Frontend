@@ -37,6 +37,16 @@ const useStyles = makeStyles({
 	},
 })
 
+/**
+ * @alias Section_UpdateRole
+ *
+ * @description This component will show the {@link PurchaseDialog} and must receive the following props:
+ *
+ * @property {"free" | "semi-premium" | "premium" | "admin"} userRole The user's role
+ *
+ * @property {boolean} canBuySlots If the user is actually allowed to buy more solts
+ */
+
 const UpdateRole: FC<Props> = ({ userRole, canBuySlots }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
