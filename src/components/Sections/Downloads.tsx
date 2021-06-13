@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
 let deferredPrompt: any
 
 /**
- * @alias DownloadSection
+ * @alias Section_Downloads
  *
  * @property {boolean} [alternative] if true, title is big, false / undefined title is smaller
  *

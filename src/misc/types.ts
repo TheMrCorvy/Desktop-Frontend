@@ -6,8 +6,6 @@ import { IconName } from "@fortawesome/fontawesome-svg-core"
 /**
  * @alias RouteT
  *
- * @module GlobalTypes
- *
  * @description The type for the routes
  *
  * @property {React.LazyExoticComponent<any>} component the view to be rendered

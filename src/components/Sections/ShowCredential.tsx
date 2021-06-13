@@ -40,6 +40,14 @@ const useStyles = makeStyles({
 	},
 })
 
+/**
+ * @alias Section_ShowCredential
+ *
+ * @description This is the section that will show all the properties that a credential has, one each, using the {@link VisualizeCredentialProp} component
+ *
+ * @property {Function} getDecryptedCredential This function receives 2 params: 1- decrypted: true alweys, 2- agent: string (the user agent which is obtained inside of this component)
+ */
+
 const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 	const { credential } = useSelector((state: RootState) => state.credential)

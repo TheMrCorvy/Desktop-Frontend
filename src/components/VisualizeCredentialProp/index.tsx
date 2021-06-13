@@ -57,6 +57,24 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
+/**
+ * @alias VisualizeCredentialProp
+ *
+ * @description This component will show dynamically the appropiate input / component that the credential property requires.
+ *
+ * @property {string} label The label's text for the card
+ *
+ * @property {boolean} locked The state of the inputs, if the user can edit or not
+ *
+ * @property {boolean} visible The state of the view, if the suer can see the decrypted credential.
+ *
+ * @property {AccessCredentialPropT} propName This is the name to access the property of the credential stored on the global state.
+ *
+ * @property {boolean} [isCrypto] If the property is the cyprto currency access words
+ *
+ * @property {number} [maxChar] The amount of char that the user is allowed to write on the inputs
+ */
+
 const VisualizeCredentialProp: FC<Props> = (props) => {
 	const { label, locked, visible, propName, isCrypto, maxChar } = props
 
