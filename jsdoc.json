@@ -14,7 +14,7 @@
 		"template": "node_modules/better-docs/"
 	},
 	"tags": {
-		"allowUnknownTags": ["optional"]
+		"allowUnknownTags": ["category", "component"]
 	},
 	"plugins": ["node_modules/better-docs/typescript"]
 }

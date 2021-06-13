@@ -7,27 +7,28 @@ import { translate } from "../lang"
 
 import Snackbar from "./Snackbar"
 
+type Props = {
+	body: string
+	children: ReactElement
+	duration?: number
+}
+
 /**
- * @module CopyText
+ * @component
  *
  * @alias CopyText
  *
- * @description This component will recieve 3 main things
+ * @description This component will receive 3 main things
  *
  * @param {string} body text for cpy
  * @param {ReactElement} children call to action
- * @param {number} duration the duration of the snackbar in milliseconds (optional)
+ * @param {number} [duration] the duration of the snackbar in milliseconds
  *
  * @example
  * <CopyText body="some text" duration={30000}>
  * 		<button>copy</button>
  * </CopyText>
  */
-type Props = {
-	body: string
-	children: ReactElement
-	duration?: number
-}
 
 const CopyText: FC<Props> = ({ children, body, duration }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
