@@ -71,10 +71,6 @@ const CreateCredential: FC = () => {
 		dispatch(clearCredential())
 	}, [])
 
-	useEffect(() => {
-		console.log(credential)
-	}, [credential])
-
 	const obtainCompanies = async () => {
 		const data = await getCompanies()
 

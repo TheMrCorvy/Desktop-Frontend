@@ -12,7 +12,7 @@ type CredentialProp = {
 	prop: AccessCredentialPropT
 	newValue: CredentialPropValueT
 }
-// I'll use edit credential to manage the writing on the inputs, either for editing or creating a new one
+// this action is used to manage the writing on the inputs, either for editing or creating a new one
 export const editCredential = (editing: CredentialProp): EditCredentialI => {
 	return {
 		type: EDIT_CREDENTIAL,

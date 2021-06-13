@@ -2,7 +2,6 @@ import { LazyExoticComponent } from "react"
 import { IconName } from "@fortawesome/fontawesome-svg-core"
 
 /******************************************************************************** routes */
-
 export type RouteT = {
 	component: LazyExoticComponent<any>
 	requiresAuth: boolean
