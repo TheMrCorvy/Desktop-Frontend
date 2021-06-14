@@ -18,7 +18,7 @@ You can check out the docs generated with JsDocs on [this link](https://pasusewa
 
 First of all, you will need to properly set up the .env.local file. This projects include a .env.example file which shows what variables you need to fill up.
 
-##### All the variables needed on the environment are the following:
+##### All the variables needed in the environment are the following:
 
 1. REACT_APP_ENV_LOCAL: If there is nothing, the app will asume that the environment is "production", else, if there is anything, the app will change to "local" / "development" environment.
    <br/>
@@ -49,7 +49,7 @@ And last, there are a few components that aren't used outside of 1 or 2 parent c
 
 ## Project Dependencies
 
-Material UI - as the UI interface
+Material UI - As the UI interface
 
 Fontawesome - For the icons
 
