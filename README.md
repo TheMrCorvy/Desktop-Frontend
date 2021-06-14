@@ -1,6 +1,6 @@
 # PasuNashi
 
-First of all, this is NOT a secure password manager, since key to decrypt everything on the database is stored as an environment variable on the backend server.
+First of all, this is **NOT** a secure password manager, since key to decrypt everything on the database is stored as an environment variable on the backend server.
 
 This is a personal project in which I put all my effort to learn a lot of technologies, some new, and some not so much, like React Hooks, Typescript, Redux and its Hooks, and many more.
 
@@ -22,38 +22,43 @@ First of all, you will need to properly set up the .env.local file. This project
 
 1. REACT_APP_ENV_LOCAL: If there is nothing, the app will asume that the environment is "production", else, if there is anything, the app will change to "local" / "development" environment.
    <br/>
+   <br/>
 2. REACT_APP_RECAPTCHA_SITE_KEY & REACT_APP_RECAPTCHA_SECRET_KEY: These are required to use the Captcha component, you can get them signing up here: [Google ReCaptcha Admin Site](https://www.google.com/recaptcha/admin)
+   <br/>
    <br/>
 3. REACT_APP_PAYPAL_CLIENT_ID: This is your client ID for PayPal, you can get it on the [Developers Paypal](https://developer.paypal.com) site. Once signed up, create an application, and the go to the "live" credentials.
    No secret key is required to use the magic buttons of PayPal
-   <br>
-4. REACT_APP_COINBASE_API_KEY: This is required to use the Coinbase API in order tu let the user pay with cryptos.
+   <br/>
+   <br/>
+4. REACT_APP_COINBASE_API_KEY: This is required to use the Coinbase API in order to let the user pay with cryptos.
    You can get your Coinbase credentials on [Coinbase Commerce](https://commerce.coinbase.com)
    <br/>
-   Once you are done with all of that, the last thing is tu run
-   `npm install`
+   <br/>
+   Once you are done with all of that, the last thing is to run
+
+    `npm install`
 
 ---
 
 ## File Structure
 
-I don't know if this is a good practise or not, but I tried make everything as simple as possible.
+I don't know if this is a good practise or not, but I tried keep everything as simple as possible.
 
-Basically, all the components that don't require a unit test are stored in ther respective file, with the name of the component as the name of the file.
+Basically, all the components that don't require a unit test are stored in their respective file, with the name of the component as the name of the file.
 
-Then, the components that do have a test are stored in a folder with the name of the component, and with the test named as `componentName.test.tsx`.
+Then, the components that do have a test, are stored in a folder with the name of the component, and with the test named as `componentName.test.tsx`.
 
-And last, there are a few components that aren't used outside of 1 or 2 parent components, and those (for example the Drawer component, src/comps/Navbar/Drawer) are stored inside of the folder of the parent component.
+And lastly, there are a few components that aren't used outside of 1 or 2 parent components, and those are stored inside of the folder of the parent component (for example the Drawer component, src/comps/Navbar/Drawer).
 
 ---
 
 ## Project Dependencies
 
-Material UI - As the UI interface
+Material UI - As the UI
 
 Fontawesome - For the icons
 
-Dexie - To handle all the interactions with Indexed DB (I don't recomment using it, its really simple tu use, but very limited in my opinion).
+Dexie - To handle all the interactions with Indexed DB (I don't recomment using it, its really simple to use, but very limited in my opinion).
 
 react-google-recaptcha - As the Captcha component
 
