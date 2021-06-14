@@ -1,4 +1,4 @@
-#PasuNashi
+# PasuNashi
 
 First of all, this is NOT a secure password manager, since key to decrypt everything on the database is stored as an environment variable on the backend server.
 
@@ -14,15 +14,15 @@ You can check out the docs generated with JsDocs on [this link](https://pasusewa
 
 ---
 
-##How to initialize the project
+## How to initialize the project
 
 First of all, you will need to properly set up the .env.local file. This projects include a .env.example file which shows what variables you need to fill up.
 
-#####All the variables needed on the environment are the following:
+##### All the variables needed on the environment are the following:
 
 1. REACT_APP_ENV_LOCAL: If there is nothing, the app will asume that the environment is "production", else, if there is anything, the app will change to "local" / "development" environment.
    <br/>
-2. REACT_APP_RECAPTCHA_SITE_KEY & REACT_APP_RECAPTCHA_SECRET_KEY: These are required to use the Captcha component, you can get them signing up here: [Google ReCaptcha Admin Site](https://www.google.com/recaptcha/admin/site/)
+2. REACT_APP_RECAPTCHA_SITE_KEY & REACT_APP_RECAPTCHA_SECRET_KEY: These are required to use the Captcha component, you can get them signing up here: [Google ReCaptcha Admin Site](https://www.google.com/recaptcha/admin)
    <br/>
 3. REACT_APP_PAYPAL_CLIENT_ID: This is your client ID for PayPal, you can get it on the [Developers Paypal](https://developer.paypal.com) site. Once signed up, create an application, and the go to the "live" credentials.
    No secret key is required to use the magic buttons of PayPal
