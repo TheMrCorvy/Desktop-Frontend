@@ -4,7 +4,7 @@ import { credential4Testing } from "./Data4Testing"
 export const callApi = async ({ preferredLang, endpoint, method, envIs, body }: ApiCallI) => {
 	const localUrl = "http://localhost:8000/api/"
 
-	const productionUrl = "https://pasunashi-backend.herokuapp.com/api"
+	const productionUrl = "https://pasunashi-backend.herokuapp.com/api/"
 
 	const baseUri = envIs === "local" ? localUrl : productionUrl
 
