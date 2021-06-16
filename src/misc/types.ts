@@ -170,6 +170,14 @@ export type ApiResponseGetCredentialsT = {
 	user_credentials: CredentialT[]
 }
 
+export interface ApiCallI {
+	preferredLang: string
+	endpoint: string
+	method: "GET" | "POST"
+	envIs: "local" | "production"
+	body?: object
+}
+
 /******************************************************************************** coinbase charge */
 export type CoinbaseChargeT = {
 	name: string

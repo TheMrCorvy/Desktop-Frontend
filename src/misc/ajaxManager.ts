@@ -1,5 +1,32 @@
-import { CredentialT, CoinbaseChargeT, ApiResponseGetCredentialsT } from "./types"
+import { CredentialT, CoinbaseChargeT, ApiResponseGetCredentialsT, ApiCallI } from "./types"
 import { credential4Testing } from "./Data4Testing"
+
+export const callApi = async ({ preferredLang, endpoint, method, envIs, body }: ApiCallI) => {
+	const localUrl = "http://localhost:8000/api/"
+
+	const productionUrl = "https://pasunashi-backend.herokuapp.com/api"
+
+	const baseUri = envIs === "local" ? localUrl : productionUrl
+
+	return await fetch(baseUri + endpoint, {
+		method,
+		headers: new Headers({
+			"Content-Type": "application/json",
+			Accept: "application/json",
+			"Accept-Language": preferredLang,
+		}),
+		body: JSON.stringify(body),
+	})
+		.then((res) => res.json())
+		.then((response) => {
+			return response
+		})
+		.catch((response) => {
+			console.error(response)
+
+			return undefined
+		})
+}
 
 export const getCredentialsFromApi = (id: number, token: string | null) => {
 	const { REACT_APP_ENV_LOCAL } = process.env
