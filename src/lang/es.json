@@ -300,7 +300,7 @@
 	],
 	"create_credential": ["Crear Credencial"],
 	"save": ["Guardar"],
-	"select_company": ["Select Company"],
+	"select_company": ["Elige la Empresa de tu Credencial"],
 	"description": ["Descripción"],
 	"export_credentials": [
 		"Exportar Credenciales",
