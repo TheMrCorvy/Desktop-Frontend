@@ -57,6 +57,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const MyAccount: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const { REACT_APP_ENV_LOCAL } = process.env
+
 	const [user, setUser] = useState<UserT | null>(null)
 
 	const [credentials, setCredentials] = useState<CredentialT[]>([])
@@ -112,7 +114,7 @@ const MyAccount: FC = () => {
 	return (
 		<Container maxWidth="xl" className={classes.container}>
 			<Grid container justify="center">
-				<AccessManagement />
+				<AccessManagement testing={REACT_APP_ENV_LOCAL ? true : false} />
 
 				{user && (
 					<Grid item xs={12} md={6} lg={5} className={classes.availableSlots}>

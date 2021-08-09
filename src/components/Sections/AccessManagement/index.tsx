@@ -70,21 +70,31 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 
 	const [loading, setLoading] = useState(false)
 
+	const [secretKey, setSecretKey] = useState("")
+
 	const classes = useStyles()
 
-	const callApi = () => {
-		if (!testing) {
-			// here we'll call the api either to get the decrypted data, or to send the new data
-			setLoading(true)
+	const callApi = async () => {
+		// here we'll call the api either to get the decrypted data, or to send the new data
+		setLoading(true)
 
-			setTimeout(() => {
-				setLocked(!locked)
+		setTimeout(() => {
+			setLoading(false)
+		}, 3000)
+	}
 
-				setLoading(false)
-			}, 3000)
-		} else {
+	const renew2FA = () => {
+		setLoading(true)
+
+		callApi().then(() => {
+			setSecretKey(secretKey4Testing)
+		})
+	}
+
+	const toggleLock = () => {
+		callApi().then(() => {
 			setLocked(!locked)
-		}
+		})
 	}
 
 	return (
@@ -98,7 +108,7 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 						title={translate("access_management", lng, 0)}
 						action={
 							<UnlockData
-								toggleLock={callApi}
+								toggleLock={toggleLock}
 								locked={locked}
 								testing={testing}
 								lockedTitle={translate("access_management", lng, 1)}
@@ -212,7 +222,7 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 								</FormControl>
 							</Grid>
 
-							{!locked && !testing && (
+							{!locked && (
 								<>
 									<Grid item xs={12} className={classes.textCenter}>
 										<Button
@@ -232,14 +242,41 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 											{translate("export_credentials", lng, 1)}
 										</Typography>
 									</Grid>
-									<Grid item xs={12} className={classes.marginTop}>
-										<StepThree
-											isRobot={false}
-											alter={{
-												email: user4Testing.email,
-												secretKey: secretKey4Testing,
-											}}
-										/>
+									<Grid
+										item
+										xs={12}
+										className={classes.marginTop}
+										style={{
+											textAlign: "center",
+										}}
+									>
+										{!secretKey ? (
+											<>
+												<Button
+													variant="contained"
+													color="secondary"
+													size="large"
+													disableElevation
+													onClick={renew2FA}
+												>
+													{translate("renew_secret_2fa", lng)}
+												</Button>
+												<Typography
+													variant="body1"
+													className={classes.marginTop}
+												>
+													{translate("renew_secret_2fa", lng, 1)}
+												</Typography>
+											</>
+										) : (
+											<StepThree
+												isRobot={false}
+												alter={{
+													email: user4Testing.email,
+													secretKey: secretKey4Testing,
+												}}
+											/>
+										)}
 									</Grid>
 									{user4Testing.role === "premium" && <StopPremium />}
 								</>

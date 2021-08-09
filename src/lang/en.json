@@ -293,5 +293,9 @@
 	"export_credentials": [
 		"Export Credential",
 		"We will send you all your credentials inside an excel file directly to your email, it is strongly recommended that you delete the received file as soon as possible, so that your credentials are as safe as possible."
+	],
+	"renew_secret_2fa": [
+		"Renew 2FA Secret Key",
+		"Warning! This will automatically override any two factor code app that you've set up, so you can add a new one."
 	]
 }

@@ -305,5 +305,9 @@
 	"export_credentials": [
 		"Exportar Credenciales",
 		"Te enviaremos todas tus credenciales en un archivo de excel a tu email, se recomienda encarecidamente que borre el archivo recibido lo antes posible para que sus credenciales estén a salvo."
+	],
+	"renew_secret_2fa": [
+		"Renovar Doble Factor de Atuenticación",
+		"Cuidado! Esto anulará automáticamente cualquier aplicación de códigos de doble factor que hayas configurado, para que puedas añadir una nueva."
 	]
 }
