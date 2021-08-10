@@ -1,7 +1,7 @@
-import React, { FC, useState } from "react"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+import { FC, useState } from "react"
 
 import { Button, Typography, Paper, MobileStepper } from "@material-ui/core"
+import useStyles from "./styles"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
@@ -15,31 +15,6 @@ import StepTwo from "./StepTwo"
 import StepThree from "./StepThree"
 
 type Props = { isRobot: boolean }
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		header: {
-			display: "flex",
-			alignItems: "center",
-			minHeight: 50,
-			textAlign: "center",
-			justifyContent: "center",
-			borderTopLeftRadius: 8,
-			borderTopRightRadius: 8,
-			backgroundColor: theme.palette.background.default,
-			padding: 20,
-		},
-		stepperContent: {
-			backgroundColor: theme.palette.background.default,
-			padding: 25,
-		},
-		stepperFooter: {
-			backgroundColor: theme.palette.background.default,
-			borderBottomLeftRadius: 8,
-			borderBottomRightRadius: 8,
-		},
-	})
-)
 
 const RegisterSteps: FC<Props> = ({ isRobot }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)

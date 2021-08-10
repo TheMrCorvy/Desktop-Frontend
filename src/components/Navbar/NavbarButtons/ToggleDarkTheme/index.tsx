@@ -1,5 +1,3 @@
-import React from "react"
-
 import { IconButton, Tooltip } from "@material-ui/core"
 
 import Brightness4Icon from "@material-ui/icons/Brightness4"

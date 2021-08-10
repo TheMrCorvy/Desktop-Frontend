@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState, useEffect } from "react"
+import { FC, ReactElement, useState, useEffect } from "react"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"

@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState, useEffect } from "react"
+import { FC, ChangeEvent, useState, useEffect } from "react"
 
 import {
 	Button,
@@ -16,7 +16,9 @@ import {
 	Tooltip,
 } from "@material-ui/core"
 
-import { makeStyles, useTheme } from "@material-ui/core/styles"
+import useStyles from "./styles"
+import { useTheme } from "@material-ui/core/styles"
+
 import DeleteIcon from "@material-ui/icons/Delete"
 
 import { useSelector, useDispatch } from "react-redux"
@@ -38,12 +40,6 @@ type Baggage = {
 	prop: AccessCredentialPropT
 	newValue: CredentialPropValueT
 }
-
-const useStyles = makeStyles({
-	textCenter: {
-		textAlign: "center",
-	},
-})
 
 /**
  * @alias EditCodes

@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC } from "react"
 
 import {
 	Grid,
@@ -10,7 +10,7 @@ import {
 	InputAdornment,
 } from "@material-ui/core"
 
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+import useStyles from "./styles"
 
 import { useForm } from "react-hook-form"
 
@@ -34,22 +34,6 @@ type FormInputs = {
 	antiFishingSecret: string
 	antiFishingSecret_confirmation: string
 }
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		antiFishingDialog: {
-			boxShadow: "none",
-			background: theme.palette.primary.main,
-			"&:hover": {
-				background: theme.palette.primary.main,
-			},
-		},
-		divider: {
-			marginTop: 10,
-			marginBottom: 10,
-		},
-	})
-)
 
 const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)

@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC } from "react"
 
 import LandingWelcome from "../components/Sections/LandingWelcome"
 import Downloads from "../components/Sections/Downloads"

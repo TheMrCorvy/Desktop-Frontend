@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import { FC, useState } from "react"
 
 import {
 	Card,
@@ -18,7 +18,8 @@ import {
 	Tooltip,
 } from "@material-ui/core"
 
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import useStyles from "./styles"
+
 import FileCopyIcon from "@material-ui/icons/FileCopy"
 import AutorenewIcon from "@material-ui/icons/Autorenew"
 
@@ -35,33 +36,6 @@ import { secretKey4Testing, user4Testing } from "../../../misc/Data4Testing"
 import CopyText from "../../CopyText"
 
 type Props = { testing?: boolean }
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		backdrop: {
-			zIndex: theme.zIndex.drawer + 1,
-			color: "#fff",
-		},
-		borderRadius: {
-			borderRadius: 8,
-		},
-		marginTop: {
-			marginTop: "3rem",
-		},
-		smallMarginTop: {
-			marginTop: 20,
-		},
-		textCenter: {
-			textAlign: "center",
-		},
-		exportBtn: {
-			backgroundColor: theme.palette.type === "dark" ? "#1fad2c" : "#1ebd2d",
-			"&:hover": {
-				backgroundColor: theme.palette.type === "dark" ? "#15a122" : "#1cad29",
-			},
-		},
-	})
-)
 
 const AccessManagement: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)

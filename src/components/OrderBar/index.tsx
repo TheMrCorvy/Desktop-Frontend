@@ -1,7 +1,7 @@
-import React, { FC, useState } from "react"
+import { FC, useState } from "react"
 
 import { Button, Divider, Grid } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import useStyles from "./styles"
 
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward"
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward"
@@ -26,15 +26,6 @@ export type By = "created_at" | "company_name" | "updated_at" | "recently_seen"
 export type Direction = 1 | -1
 
 type Arrow = typeof ArrowUpwardIcon | typeof ArrowDownwardIcon
-
-const useStyles = makeStyles({
-	textCenter: {
-		textAlign: "center",
-	},
-	topDivider: {
-		marginBottom: "6rem",
-	},
-})
 
 const OrderBar: FC<Props> = ({ sortCredentials }) => {
 	const [order, setOrder] = useState<OrderT>({

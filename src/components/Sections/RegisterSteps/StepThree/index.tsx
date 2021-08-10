@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 
 import {
 	Grid,
@@ -12,7 +12,7 @@ import {
 	CardActionArea,
 } from "@material-ui/core"
 
-import { makeStyles } from "@material-ui/core/styles"
+import useStyles from "./styles"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
@@ -41,26 +41,6 @@ type UserData = {
 	secretKey: string
 	error?: any
 }
-
-const useStyles = makeStyles({
-	centerAll: {
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-		textAlign: "center",
-	},
-	secretKey: {
-		color: "#ff6200",
-	},
-	qrContainer: {
-		display: "flex",
-		justifyContent: "center",
-	},
-	cardActionArea: {
-		minHeight: "100%",
-		borderRadius: 8,
-	},
-})
 
 const StepThree: FC<Props> = ({ isRobot, testing, alter }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)

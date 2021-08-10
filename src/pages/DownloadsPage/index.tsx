@@ -1,9 +1,8 @@
-import React, { FC } from "react"
+import { FC } from "react"
 
 /******************************************************************************** mui */
 import { Container, Divider, Grid, Hidden, Typography, Link } from "@material-ui/core"
-
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+import useStyles from "./styles"
 
 /******************************************************************************** redux */
 import { useSelector } from "react-redux"
@@ -17,32 +16,6 @@ import { recommendedTwoFactorApps, recommendedApps } from "../../misc/staticData
 import { RecommendedAppsT } from "../../misc/types"
 
 import Downloads from "../../components/Sections/Downloads"
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		divider: {
-			marginBottom: "5rem",
-			marginTop: "5rem",
-		},
-		recommendedLinks: {
-			marginRight: 35,
-			color: theme.palette.primary.main,
-		},
-		marginBottom: {
-			marginBottom: "3rem",
-		},
-		landingSection: {
-			minHeight: "70vh",
-			display: "flex",
-			justifyContent: "center",
-			alignItems: "center",
-		},
-		container: {
-			paddingBottom: "5rem",
-			paddingTop: "2rem",
-		},
-	})
-)
 
 const DownloadsPage: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)

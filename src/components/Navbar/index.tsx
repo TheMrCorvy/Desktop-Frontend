@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC } from "react"
 import { Link } from "react-router-dom"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -18,7 +18,7 @@ import {
 	Hidden,
 } from "@material-ui/core"
 
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
+import useStyles from "./styles"
 
 import MenuIcon from "@material-ui/icons/Menu"
 
@@ -30,41 +30,6 @@ import { translate } from "../../lang"
 
 import { toggleDrawer } from "../../redux/actions/drawerActions"
 import { logOut } from "../../redux/actions/authTokenActions"
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			flexGrow: 1,
-		},
-		navbarItem: {
-			marginRight: theme.spacing(1),
-			marginLeft: theme.spacing(1),
-			color: "white",
-		},
-		title: {
-			flexGrow: 1,
-		},
-		appBar: {
-			top: "auto",
-			bottom: 0,
-		},
-		grow: {
-			flexGrow: 1,
-		},
-		fabButton: {
-			position: "absolute",
-			zIndex: 1,
-			top: -30,
-			left: 0,
-			right: 0,
-			margin: "0 auto",
-		},
-		link: {
-			textDecoration: "none",
-			color: "inherit",
-		},
-	})
-)
 
 const Navbar: FC = () => {
 	const { theme } = useSelector((state: RootState) => state.theme)

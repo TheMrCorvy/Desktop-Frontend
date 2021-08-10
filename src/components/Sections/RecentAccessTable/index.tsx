@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
-import { makeStyles } from "@material-ui/core/styles"
+import { FC, useEffect, useState } from "react"
 
 import {
 	Card,
@@ -14,6 +13,8 @@ import {
 	Typography,
 } from "@material-ui/core"
 
+import useStyles from "./styles"
+
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 
@@ -26,27 +27,6 @@ import { getRecentlySeen, putRecentlySeen } from "../../../misc/indexedDB"
 import { RecentlySeenT } from "../../../misc/types"
 
 type Props = { testing?: boolean }
-
-const useStyles = makeStyles({
-	table: {
-		minWidth: 650,
-	},
-	card: {
-		borderRadius: 8,
-		marginBottom: "3rem",
-	},
-	marginTop: {
-		marginTop: 20,
-	},
-	textCapitalize: {
-		textTransform: "capitalize",
-	},
-	subTitle: {
-		marginTop: 25,
-		float: "left",
-		paddingBottom: 25,
-	},
-})
 
 const RecentAccessTable: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)

@@ -1,9 +1,9 @@
-import React from "react"
+import { FC } from "react"
+
 import { Link } from "react-router-dom"
 
 import { Container, Grid, Typography, Button } from "@material-ui/core"
-
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+import useStyles from "./styles"
 
 import HomeIcon from "@material-ui/icons/Home"
 
@@ -14,34 +14,7 @@ import { translate } from "../../lang"
 
 import { clearError } from "../../redux/actions/errorHandlingActions"
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		container: {
-			flexGrow: 1,
-		},
-		centerAll: {
-			minHeight: "100vh",
-			display: "flex",
-			alignItems: "center",
-			textAlign: "center",
-		},
-		button: {
-			textDecoration: "none",
-		},
-		textDanger: {
-			color: theme.palette.error.main,
-		},
-		dangerBtn: {
-			color: "white",
-			background: theme.palette.error.main,
-			"&:hover": {
-				background: theme.palette.error.dark,
-			},
-		},
-	})
-)
-
-const Error500 = () => {
+const Error500: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 	const { err } = useSelector((state: RootState) => state.err)
 

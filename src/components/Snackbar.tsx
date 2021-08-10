@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import { FC, useState } from "react"
 import { Snackbar as SnackbarMui } from "@material-ui/core"
 
 type Props = {

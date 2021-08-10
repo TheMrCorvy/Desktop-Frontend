@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState, useEffect } from "react"
+import { FC, ChangeEvent, useState, useEffect } from "react"
 
 import {
 	Typography,
@@ -11,7 +11,8 @@ import {
 	useMediaQuery,
 } from "@material-ui/core"
 
-import { Theme, createStyles, makeStyles, useTheme } from "@material-ui/core/styles"
+import { useTheme } from "@material-ui/core/styles"
+import useStyles from "./styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
@@ -36,26 +37,6 @@ type Props = {
 	isCrypto?: boolean
 	maxChar?: number
 }
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		heading: {
-			fontSize: theme.typography.pxToRem(15),
-			flexBasis: "80%",
-			flexShrink: 0,
-
-			[theme.breakpoints.down("xs")]: {
-				flexBasis: "70%",
-			},
-		},
-		textColor: {
-			color: theme.palette.type === "dark" ? "white" : "black",
-		},
-		textCenter: {
-			textAlign: "center",
-		},
-	})
-)
 
 /**
  * @alias VisualizeCredentialProp

@@ -1,8 +1,8 @@
-import React, { FC, useState, useEffect } from "react"
+import { FC, useState, useEffect } from "react"
 
 /******************************************************************************** mui */
 import { Button, Grid, CircularProgress, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import useStyles from "./styles"
 
 /******************************************************************************** redux */
 import { useSelector } from "react-redux"
@@ -28,22 +28,6 @@ type Props = {
 }
 
 let firstCall = true
-
-const useStyles = makeStyles({
-	link: {
-		textDecoration: "none",
-		marginBottom: "2rem",
-	},
-	marginBottom: {
-		marginBottom: "2rem",
-	},
-	centerAll: {
-		display: "flex",
-		justifyContent: "center",
-		textAlign: "center",
-		alignItems: "center",
-	},
-})
 
 /**
  * @alias PurchaseButton

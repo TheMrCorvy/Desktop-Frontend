@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC } from "react"
 import { Link } from "react-router-dom"
 
 /************************************************************************************ mui related */
@@ -11,7 +11,7 @@ import {
 	ListItem,
 } from "@material-ui/core"
 
-import { makeStyles } from "@material-ui/core/styles"
+import useStyles from "./styles"
 
 /************************************************************************************ redux related */
 import { useSelector, useDispatch } from "react-redux"
@@ -23,17 +23,6 @@ import { logOut } from "../../../redux/actions/authTokenActions"
 import { translate } from "../../../lang"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
-const useStyles = makeStyles({
-	link: {
-		textDecoration: "none",
-		color: "inherit",
-	},
-	listItem: {
-		paddingTop: 20,
-		paddingBottom: 20,
-	},
-})
 
 const Drawer: FC = () => {
 	const { open } = useSelector((state: RootState) => state.open)

@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC } from "react"
 import { Grid, FormControl, InputLabel, OutlinedInput, Button, Typography } from "@material-ui/core"
 
 import { useSelector } from "react-redux"

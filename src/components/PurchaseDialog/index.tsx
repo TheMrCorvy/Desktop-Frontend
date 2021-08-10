@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent } from "react"
+import { FC, useState, ChangeEvent } from "react"
 
 import {
 	Dialog,
@@ -12,7 +12,9 @@ import {
 	InputAdornment,
 	useMediaQuery,
 } from "@material-ui/core"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
+
+import useStyles from "./styles"
+import { useTheme } from "@material-ui/core/styles"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
@@ -29,29 +31,6 @@ type Props = {
 type Method = "PayPal" | "Crypto"
 
 type PurchaseType = "premium" | "slots"
-
-const useStyles = makeStyles({
-	btn: {
-		textTransform: "none",
-		"&:hover": {
-			boxShadow:
-				"0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%)",
-		},
-	},
-	formControl: {
-		marginBottom: 20,
-	},
-
-	continueBtn: {
-		borderColor: "#1ebd2d",
-		color: "#1ebd2d",
-		"&:hover": {
-			borderColor: "#1cad29",
-			backgroundColor: "rgba(30,189,45, 0.1)",
-			color: "#1cad29",
-		},
-	},
-})
 
 /**
  * @alias PurchaseDialog

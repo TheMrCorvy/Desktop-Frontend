@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC } from "react"
 import { useForm } from "react-hook-form"
 
 import { Grid, Button, OutlinedInput, InputLabel, FormControl, Typography } from "@material-ui/core"

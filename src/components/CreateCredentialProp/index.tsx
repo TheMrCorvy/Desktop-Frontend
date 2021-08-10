@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, ChangeEvent } from "react"
+import { FC, useState, useEffect, ChangeEvent } from "react"
 
 import {
 	Typography,
@@ -11,7 +11,7 @@ import {
 
 import Autocomplete from "@material-ui/lab/Autocomplete"
 
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
+import useStyles from "./styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
@@ -44,33 +44,6 @@ type Props = {
 	maxChar?: number
 	isCrypto?: boolean
 }
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		heading: {
-			fontSize: theme.typography.pxToRem(15),
-			flexBasis: "80%",
-			flexShrink: 0,
-
-			[theme.breakpoints.down("xs")]: {
-				flexBasis: "70%",
-			},
-		},
-		secondaryHeading: {
-			fontSize: theme.typography.pxToRem(15),
-			color: theme.palette.text.secondary,
-		},
-		textColor: {
-			color: theme.palette.type === "dark" ? "white" : "black",
-		},
-		textCenter: {
-			textAlign: "center",
-		},
-		borderRadius: {
-			borderRadius: 8,
-		},
-	})
-)
 
 /**
  * @alias CreateCredentialProp

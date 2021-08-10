@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC, Fragment } from "react"
 import { Link } from "react-router-dom"
 
 /******************************************************************************** mui */
@@ -16,9 +16,8 @@ import {
 	CardActions,
 } from "@material-ui/core"
 
+import useStyles from "./styles"
 import { useTheme } from "@material-ui/core/styles"
-
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 /******************************************************************************** redux */
 import { useSelector } from "react-redux"
@@ -28,35 +27,6 @@ import { RootState } from "../../redux/store"
 import { PricingCardT } from "../../misc/types"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		textCenter: {
-			textAlign: "center",
-		},
-		paddingBottomSm: { paddingBottom: 10 },
-		card: {
-			borderRadius: 8,
-		},
-		cardAction: {
-			display: "flex",
-			justifyContent: "center",
-			textAlign: "center",
-			paddingBottom: "2.5rem",
-		},
-		divider: {
-			marginTop: 10,
-			marginBottom: 10,
-		},
-		textColor: {
-			color:
-				theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.54)",
-		},
-		link: {
-			textDecoration: "none",
-		},
-	})
-)
 
 const PricingCard: FC<PricingCardT> = ({
 	title,
@@ -87,7 +57,7 @@ const PricingCard: FC<PricingCardT> = ({
 			<CardContent className={classes.paddingBottomSm}>
 				<List component="nav" aria-label="accounts benefits">
 					{listItems.map((item, index) => (
-						<React.Fragment key={index}>
+						<Fragment key={index}>
 							<ListItem button>
 								<ListItemIcon>
 									<FontAwesomeIcon
@@ -101,7 +71,7 @@ const PricingCard: FC<PricingCardT> = ({
 								</ListItemText>
 							</ListItem>
 							<Divider className={classes.divider} />
-						</React.Fragment>
+						</Fragment>
 					))}
 				</List>
 			</CardContent>

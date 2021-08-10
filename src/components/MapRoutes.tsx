@@ -1,4 +1,4 @@
-import React, { FC, lazy } from "react"
+import { FC, lazy } from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
 import { RouteT } from "../misc/types"
 
