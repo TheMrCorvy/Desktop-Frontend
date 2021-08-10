@@ -40,15 +40,15 @@ First of all, you will need to properly set up the .env.local file. This project
 
 ---
 
-## File Structure
+## Folder Structure
 
 I don't know if this is a good practise or not, but I tried keep everything as simple as possible.
 
-Basically, all the components that don't require a unit test are stored in their respective file, with the name of the component as the name of the file.
+Basically, all the components that don't require a unit test, and don't use styles from Material-UI, are stored in their respective file, with the name of the component as the name of the file.
 
-Then, the components that do have a test, are stored in a folder with the name of the component, and with the test named as `componentName.test.tsx`.
+Then, the components that do have a test, and / or use the Material-UI styles, are stored in a folder with the name of the component, and with the test named as `componentName.test.tsx`, and styles as `styles.ts`.
 
-And lastly, there are a few components that aren't used outside of 1 or 2 parent components, and those are stored inside of the folder of the parent component (for example the Drawer component, src/comps/Navbar/Drawer).
+And lastly, there are a few components that aren't used outside of 1 or 2 parent components, and those are stored inside of the folder of the parent component (for example the Drawer component, which is in src/comps/Navbar/Drawer since it isn't used outside of the navbar).
 
 ---
 
