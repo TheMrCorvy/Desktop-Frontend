@@ -28,7 +28,7 @@
 
 
     <title>
-      components/DeleteCredential/index.tsx
+      components/Sections/Downloads/index.tsx
     </title>
 
     <!--[if lt IE 9]>
@@ -96,7 +96,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        components/DeleteCredential/index.tsx
+        components/Sections/Downloads/index.tsx
       </h1>
       
 
@@ -107,190 +107,260 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { FC, useState } from "react"
-import { useHistory } from "react-router-dom"
+            <pre class="prettyprint source linenums"><code>import { FC, useEffect, useState } from "react"
 
-import {
-	IconButton,
-	Tooltip,
-	Button,
-	Dialog,
-	DialogActions,
-	DialogTitle,
-	DialogContentText,
-} from "@material-ui/core"
+import { Container, Grid, Button, Typography, Divider, Hidden } from "@material-ui/core"
 
-import DeleteIcon from "@material-ui/icons/Delete"
+import useStyles from "./styles"
 
-import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
+import { useSelector, useDispatch } from "react-redux"
+import { RootState } from "../../../redux/store"
+import { showError } from "../../../redux/actions/errorHandlingActions"
 
-import { translate } from "../../lang"
+import { translate } from "../../../lang"
 
-import { forgetCredential, getUser, putUser, getCredentials } from "../../misc/indexedDB"
+type Props = { alternative?: boolean; testing?: boolean }
 
-import { maxSlots } from "../../misc/staticData"
-
-type Props = {
-	credentialId: number
-}
-
-/*
- * 1: error calling the api
- * 2: indexed DB error
- * 3: other / unkown error
- */
-type ErrorOptions = 1 | 2 | 3
+let deferredPrompt: any
 
 /**
- * @alias DeleteCredential
+ * @alias Section_Downloads
  *
- * @description This component will be the one that actially gives the order to delete a credential. It will delete it from the Indexed DB &amp; call the api to delete it from the real DB.
+ * @property {boolean} [alternative] if true, title is big, false / undefined title is smaller
  *
- * @property {number} credentialId The id of the credential to delete
- *
- * @example
- *
- *		&lt;DeleteCredential credentialId={32} />
+ * @property {boolean} [testing] if testing the layout of the buttons
  */
 
-const DeleteCredential: FC&lt;Props> = ({ credentialId }) => {
+const Downloads: FC&lt;Props> = ({ alternative, testing }) => {
+	const classes = useStyles()
+
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [open, setOpen] = useState(false)
+	const dispatch = useDispatch()
 
-	const [error, setError] = useState(false)
+	const [installable, setInstallable] = useState(testing ? true : false)
 
-	const [errorOption, setErrorOption] = useState&lt;ErrorOptions>(1)
+	useEffect(() => {
+		window.addEventListener("beforeinstallprompt", (e: Event) => {
+			e.preventDefault()
 
-	const history = useHistory()
+			deferredPrompt = e
 
-	const deleteCredential = async () => {
-		await forgetCredential(credentialId)
+			setInstallable(true)
 
-		const user = await getUser()
+			console.log("event handled successfully")
+		})
 
-		const credentials = await getCredentials()
+		window.addEventListener("appinstalled", () => {
+			console.log("INSTALL: Success")
+		})
+	}, [])
 
-		if (user === undefined || credentials === undefined) {
-			fatalError(2)
+	const handleInstallClick = () => {
+		setInstallable(false)
 
-			return
-		}
+		try {
+			deferredPrompt.prompt()
 
-		const checkRole = {
-			free:
-				user.role === "free" &amp;&amp;
-				user.slots_available + 1 + credentials.length &lt;= maxSlots.free,
-			semi_premium:
-				user.role === "semi-premium" &amp;&amp;
-				user.slots_available + 1 + credentials.length &lt;= maxSlots.semi_premium,
-			premium: user.role === "premium" ? true : false,
-			admin: user.role === "admin" ? true : false,
-		}
-
-		if (checkRole.free || checkRole.semi_premium || checkRole.premium || checkRole.admin) {
-			putUser({ ...user, slots_available: user.slots_available + 1 }).then((updatedUser) => {
-				if (updatedUser === undefined) {
-					fatalError(2)
+			deferredPrompt.userChoice.then((choiceResult: any) => {
+				if (choiceResult.outcome === "accepted") {
+					console.log("User accepted the install prompt")
+				} else {
+					console.log("User dismissed the install prompt")
 				}
 			})
-		} else {
-			closeDialog()
+		} catch (error) {
+			console.log(error)
 
-			history.goBack()
-		}
-
-		closeDialog()
-
-		history.goBack()
-	}
-
-	const fatalError = (option: ErrorOptions) => {
-		setErrorOption(option)
-
-		setError(true)
-	}
-
-	const openDialog = () => {
-		setOpen(true)
-	}
-
-	const closeDialog = () => {
-		setOpen(false)
-	}
-
-	const renderDialog = () => {
-		let dialogTitle = !error
-			? translate("delete_credential_confirmation", lng)
-			: translate("error_messages", lng, 6)
-
-		let dialogText: string
-
-		if (!error) {
-			return (
-				&lt;Dialog open={open} onClose={closeDialog} data-testid="test_delete_dialog">
-					&lt;DialogTitle id="alert-dialog-title">{dialogTitle}&lt;/DialogTitle>
-					&lt;DialogActions>
-						&lt;Button onClick={closeDialog} color="secondary">
-							{translate("go_back", lng)}
-						&lt;/Button>
-						&lt;Button onClick={deleteCredential} color="primary" autoFocus>
-							{translate("delete", lng)}
-						&lt;/Button>
-					&lt;/DialogActions>
-				&lt;/Dialog>
-			)
-		} else {
-			switch (errorOption) {
-				case 1:
-					dialogText = translate("error_messages", lng, 4)
-					break
-				case 2:
-					dialogText = translate("error_messages", lng, 7)
-					break
-				case 3:
-					dialogText = translate("error_messages", lng, 8)
-					break
-
-				default:
-					dialogText = translate("error_messages", lng, 8)
-					break
-			}
-
-			return (
-				&lt;Dialog open={open} onClose={closeDialog} data-testid="test_delete_dialog">
-					&lt;DialogTitle id="alert-dialog-title">{dialogTitle}&lt;/DialogTitle>
-					&lt;DialogContentText>{dialogText}&lt;/DialogContentText>
-					&lt;DialogActions>
-						&lt;Button onClick={closeDialog} color="secondary">
-							{translate("go_back", lng)}
-						&lt;/Button>
-					&lt;/DialogActions>
-				&lt;/Dialog>
-			)
+			dispatch(showError(translate("error_messages", lng, 5)))
 		}
 	}
 
 	return (
-		&lt;>
-			&lt;Tooltip title={translate("delete", lng)} placement="bottom">
-				&lt;IconButton
-					aria-label="delete"
-					color="primary"
-					onClick={openDialog}
-					data-testid="test_open_delete_dialog"
-				>
-					&lt;DeleteIcon />
-				&lt;/IconButton>
-			&lt;/Tooltip>
+		&lt;Container maxWidth="lg" className={classes.container} id="downloads-section">
+			&lt;Grid container justify="center" spacing={3}>
+				&lt;Grid item xs={12}>
+					&lt;Typography
+						gutterBottom
+						variant={alternative ? "h3" : "h4"}
+						className={classes.marginB}
+						data-testid="test_downloads"
+					>
+						{translate("downloads", lng)}
+					&lt;/Typography>
+				&lt;/Grid>
 
-			{renderDialog()}
-		&lt;/>
+				{installable &amp;&amp; (
+					&lt;>
+						&lt;Grid item xs={12} sm={5} lg={2}>
+							&lt;Grid container justify="space-between" spacing={1}>
+								&lt;Grid item xs={12}>
+									&lt;Typography gutterBottom variant="h5">
+										{translate("web_version", lng)}
+									&lt;/Typography>
+								&lt;/Grid>
+								&lt;Grid item xs={12}>
+									&lt;Button
+										variant="contained"
+										color="primary"
+										className={classes.webBtn}
+										onClick={handleInstallClick}
+									>
+										{translate("install", lng)}
+									&lt;/Button>
+								&lt;/Grid>
+							&lt;/Grid>
+						&lt;/Grid>
+
+						&lt;Hidden xsDown>
+							&lt;Divider orientation="vertical" flexItem />
+						&lt;/Hidden>
+
+						&lt;Hidden smUp>
+							&lt;Grid item xs={12}>
+								&lt;Divider orientation="horizontal" />
+							&lt;/Grid>
+						&lt;/Hidden>
+					&lt;/>
+				)}
+
+				&lt;Grid item xs={12} sm={5} lg={3}>
+					&lt;Grid container spacing={1}>
+						&lt;Grid item xs={12}>
+							&lt;Typography gutterBottom variant="h5">
+								{translate("desktop", lng)}
+							&lt;/Typography>
+						&lt;/Grid>
+						&lt;Grid item xs={4}>
+							&lt;Button variant="contained" color="primary">
+								PC
+							&lt;/Button>
+						&lt;/Grid>
+						&lt;Grid item xs={4}>
+							&lt;Button variant="contained" color="secondary">
+								Mac
+							&lt;/Button>
+						&lt;/Grid>
+						&lt;Grid item xs={4}>
+							&lt;Button
+								variant="contained"
+								color="primary"
+								className={classes.linuxBtn}
+							>
+								Linux
+							&lt;/Button>
+						&lt;/Grid>
+					&lt;/Grid>
+				&lt;/Grid>
+
+				{installable &amp;&amp; (
+					&lt;>
+						&lt;Hidden only={["xs", "lg", "xl"]}>
+							&lt;Grid item xs={6}>
+								&lt;Divider orientation="horizontal" />
+							&lt;/Grid>
+							&lt;Grid item xs={6}>
+								&lt;Divider orientation="horizontal" />
+							&lt;/Grid>
+						&lt;/Hidden>
+
+						&lt;Hidden mdDown>
+							&lt;Divider orientation="vertical" flexItem />
+						&lt;/Hidden>
+					&lt;/>
+				)}
+
+				&lt;Hidden smUp>
+					&lt;Grid item xs={12}>
+						&lt;Divider orientation="horizontal" />
+					&lt;/Grid>
+				&lt;/Hidden>
+
+				&lt;Grid item xs={12} sm={5} lg={3}>
+					&lt;Grid container justify="space-between" spacing={1}>
+						&lt;Grid item xs={12}>
+							&lt;Typography gutterBottom variant="h5">
+								Android
+							&lt;/Typography>
+						&lt;/Grid>
+
+						{installable ? (
+							&lt;>
+								&lt;Grid item xs={6}>
+									&lt;Button
+										variant="contained"
+										color="primary"
+										className={classes.androidBtn}
+									>
+										Play Store
+									&lt;/Button>
+								&lt;/Grid>
+								&lt;Grid item xs={6}>
+									&lt;Button
+										variant="contained"
+										color="primary"
+										className={classes.webBtn}
+										onClick={handleInstallClick}
+									>
+										{translate("install", lng)}
+									&lt;/Button>
+								&lt;/Grid>
+							&lt;/>
+						) : (
+							&lt;>
+								&lt;Grid item xs={12}>
+									&lt;Button
+										variant="contained"
+										color="primary"
+										className={classes.androidBtn}
+									>
+										Play Store
+									&lt;/Button>
+								&lt;/Grid>
+							&lt;/>
+						)}
+					&lt;/Grid>
+				&lt;/Grid>
+
+				{installable &amp;&amp; (
+					&lt;>
+						&lt;Hidden smUp>
+							&lt;Grid item xs={12}>
+								&lt;Divider orientation="horizontal" />
+							&lt;/Grid>
+						&lt;/Hidden>
+
+						&lt;Hidden xsDown>
+							&lt;Divider orientation="vertical" flexItem />
+						&lt;/Hidden>
+
+						&lt;Grid item xs={12} sm={5} lg={2}>
+							&lt;Grid container justify="space-between" spacing={1}>
+								&lt;Grid item xs={12}>
+									&lt;Typography gutterBottom variant="h5">
+										IOS
+									&lt;/Typography>
+								&lt;/Grid>
+								&lt;Grid item xs={12}>
+									&lt;Button
+										variant="contained"
+										color="primary"
+										className={classes.webBtn}
+										onClick={handleInstallClick}
+									>
+										{translate("install", lng)}
+									&lt;/Button>
+								&lt;/Grid>
+							&lt;/Grid>
+						&lt;/Grid>
+					&lt;/>
+				)}
+			&lt;/Grid>
+		&lt;/Container>
 	)
 }
 
-export default DeleteCredential
+export default Downloads
 </code></pre>
         </article>
     </section>

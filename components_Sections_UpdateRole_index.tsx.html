@@ -28,7 +28,7 @@
 
 
     <title>
-      components/DeleteCredential/index.tsx
+      components/Sections/UpdateRole/index.tsx
     </title>
 
     <!--[if lt IE 9]>
@@ -96,7 +96,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        components/DeleteCredential/index.tsx
+        components/Sections/UpdateRole/index.tsx
       </h1>
       
 
@@ -107,190 +107,154 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { FC, useState } from "react"
-import { useHistory } from "react-router-dom"
+            <pre class="prettyprint source linenums"><code>import { FC } from "react"
 
-import {
-	IconButton,
-	Tooltip,
-	Button,
-	Dialog,
-	DialogActions,
-	DialogTitle,
-	DialogContentText,
-} from "@material-ui/core"
+import { Grid, Typography, Divider, Hidden } from "@material-ui/core"
 
-import DeleteIcon from "@material-ui/icons/Delete"
+import useStyles from "./styles"
 
 import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
+import { RootState } from "../../../redux/store"
 
-import { translate } from "../../lang"
+import { translate } from "../../../lang"
 
-import { forgetCredential, getUser, putUser, getCredentials } from "../../misc/indexedDB"
-
-import { maxSlots } from "../../misc/staticData"
+import DialogComponent from "../../Dialog"
+import PurchaseDialog from "../../PurchaseDialog"
 
 type Props = {
-	credentialId: number
+	userRole: "free" | "semi-premium" | "premium" | "admin"
+	canBuySlots: boolean
 }
 
-/*
- * 1: error calling the api
- * 2: indexed DB error
- * 3: other / unkown error
- */
-type ErrorOptions = 1 | 2 | 3
-
 /**
- * @alias DeleteCredential
+ * @alias Section_UpdateRole
  *
- * @description This component will be the one that actially gives the order to delete a credential. It will delete it from the Indexed DB &amp; call the api to delete it from the real DB.
+ * @description This component will show the {@link PurchaseDialog} and must receive the following props:
  *
- * @property {number} credentialId The id of the credential to delete
+ * @property {"free" | "semi-premium" | "premium" | "admin"} userRole The user's role
  *
- * @example
- *
- *		&lt;DeleteCredential credentialId={32} />
+ * @property {boolean} canBuySlots If the user is actually allowed to buy more solts
  */
 
-const DeleteCredential: FC&lt;Props> = ({ credentialId }) => {
+const UpdateRole: FC&lt;Props> = ({ userRole, canBuySlots }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [open, setOpen] = useState(false)
+	const classes = useStyles()
 
-	const [error, setError] = useState(false)
-
-	const [errorOption, setErrorOption] = useState&lt;ErrorOptions>(1)
-
-	const history = useHistory()
-
-	const deleteCredential = async () => {
-		await forgetCredential(credentialId)
-
-		const user = await getUser()
-
-		const credentials = await getCredentials()
-
-		if (user === undefined || credentials === undefined) {
-			fatalError(2)
-
-			return
-		}
-
-		const checkRole = {
-			free:
-				user.role === "free" &amp;&amp;
-				user.slots_available + 1 + credentials.length &lt;= maxSlots.free,
-			semi_premium:
-				user.role === "semi-premium" &amp;&amp;
-				user.slots_available + 1 + credentials.length &lt;= maxSlots.semi_premium,
-			premium: user.role === "premium" ? true : false,
-			admin: user.role === "admin" ? true : false,
-		}
-
-		if (checkRole.free || checkRole.semi_premium || checkRole.premium || checkRole.admin) {
-			putUser({ ...user, slots_available: user.slots_available + 1 }).then((updatedUser) => {
-				if (updatedUser === undefined) {
-					fatalError(2)
-				}
-			})
-		} else {
-			closeDialog()
-
-			history.goBack()
-		}
-
-		closeDialog()
-
-		history.goBack()
-	}
-
-	const fatalError = (option: ErrorOptions) => {
-		setErrorOption(option)
-
-		setError(true)
-	}
-
-	const openDialog = () => {
-		setOpen(true)
-	}
-
-	const closeDialog = () => {
-		setOpen(false)
-	}
-
-	const renderDialog = () => {
-		let dialogTitle = !error
-			? translate("delete_credential_confirmation", lng)
-			: translate("error_messages", lng, 6)
-
-		let dialogText: string
-
-		if (!error) {
-			return (
-				&lt;Dialog open={open} onClose={closeDialog} data-testid="test_delete_dialog">
-					&lt;DialogTitle id="alert-dialog-title">{dialogTitle}&lt;/DialogTitle>
-					&lt;DialogActions>
-						&lt;Button onClick={closeDialog} color="secondary">
-							{translate("go_back", lng)}
-						&lt;/Button>
-						&lt;Button onClick={deleteCredential} color="primary" autoFocus>
-							{translate("delete", lng)}
-						&lt;/Button>
-					&lt;/DialogActions>
-				&lt;/Dialog>
-			)
-		} else {
-			switch (errorOption) {
-				case 1:
-					dialogText = translate("error_messages", lng, 4)
-					break
-				case 2:
-					dialogText = translate("error_messages", lng, 7)
-					break
-				case 3:
-					dialogText = translate("error_messages", lng, 8)
-					break
-
-				default:
-					dialogText = translate("error_messages", lng, 8)
-					break
-			}
-
-			return (
-				&lt;Dialog open={open} onClose={closeDialog} data-testid="test_delete_dialog">
-					&lt;DialogTitle id="alert-dialog-title">{dialogTitle}&lt;/DialogTitle>
-					&lt;DialogContentText>{dialogText}&lt;/DialogContentText>
-					&lt;DialogActions>
-						&lt;Button onClick={closeDialog} color="secondary">
-							{translate("go_back", lng)}
-						&lt;/Button>
-					&lt;/DialogActions>
-				&lt;/Dialog>
-			)
-		}
+	if (userRole === "premium") {
+		return null
 	}
 
 	return (
-		&lt;>
-			&lt;Tooltip title={translate("delete", lng)} placement="bottom">
-				&lt;IconButton
-					aria-label="delete"
-					color="primary"
-					onClick={openDialog}
-					data-testid="test_open_delete_dialog"
-				>
-					&lt;DeleteIcon />
-				&lt;/IconButton>
-			&lt;/Tooltip>
-
-			{renderDialog()}
-		&lt;/>
+		&lt;Grid item xs={12} className={classes.container}>
+			&lt;Grid container justify="space-around" spacing={4}>
+				&lt;Grid item xs={12}>
+					&lt;Divider orientation="horizontal" />
+				&lt;/Grid>
+				{canBuySlots &amp;&amp; (
+					&lt;>
+						&lt;Grid item xs={12} md={5} className={classes.text}>
+							&lt;Grid container spacing={4}>
+								&lt;Grid item xs={12}>
+									&lt;Typography variant="h5">
+										{translate("update_role_titles", lng, 0)}
+									&lt;/Typography>
+								&lt;/Grid>
+								&lt;Grid item xs={12}>
+									&lt;PurchaseDialog method="PayPal" type="slots" />
+								&lt;/Grid>
+								&lt;Grid item xs={12}>
+									&lt;PurchaseDialog method="Crypto" type="slots" />
+								&lt;/Grid>
+							&lt;/Grid>
+						&lt;/Grid>
+						&lt;Hidden smDown>
+							&lt;Grid item xs={2} className={classes.verticalDivider}>
+								&lt;Divider orientation="vertical" flexItem />
+							&lt;/Grid>
+						&lt;/Hidden>
+						&lt;Hidden mdUp>
+							&lt;Grid item xs={12}>
+								&lt;Divider orientation="horizontal" />
+							&lt;/Grid>
+						&lt;/Hidden>
+					&lt;/>
+				)}
+				&lt;Grid item xs={12} md={5} className={classes.text}>
+					&lt;Grid container spacing={4}>
+						&lt;Grid item xs={12}>
+							&lt;Typography variant="h5">
+								{translate("update_role_titles", lng, 1)}
+							&lt;/Typography>
+						&lt;/Grid>
+						&lt;Grid item xs={12}>
+							&lt;PurchaseDialog method="PayPal" type="premium" />
+						&lt;/Grid>
+						&lt;Grid item xs={12}>
+							&lt;PurchaseDialog method="Crypto" type="premium" />
+						&lt;/Grid>
+					&lt;/Grid>
+				&lt;/Grid>
+				&lt;Grid item xs={12}>
+					&lt;Divider orientation="horizontal" />
+				&lt;/Grid>
+				&lt;Grid item>
+					&lt;DialogComponent
+						title={translate("update_role_titles", lng, 2)}
+						tooltipPlacement="bottom"
+						className={classes.flatBtn}
+					>
+						&lt;ul>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 3)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 0)}
+								&lt;/Typography>
+							&lt;/li>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 4)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 1)}
+								&lt;/Typography>
+							&lt;/li>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 5)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 2)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 3)}
+								&lt;/Typography>
+							&lt;/li>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 6)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 4)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 5)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 6)}
+								&lt;/Typography>
+							&lt;/li>
+						&lt;/ul>
+					&lt;/DialogComponent>
+				&lt;/Grid>
+			&lt;/Grid>
+		&lt;/Grid>
 	)
 }
 
-export default DeleteCredential
+export default UpdateRole
 </code></pre>
         </article>
     </section>
