@@ -256,12 +256,12 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 							maxChar={calcMaxChar("sm")}
 						/>
 					)}
-					{credential.user_name && (
+					{credential.username && (
 						<VisualizeCredentialProp
 							label={translate("auth_form_texts", lng, 12)}
 							locked={locked}
 							visible={visible}
-							propName="user_name"
+							propName="username"
 							maxChar={calcMaxChar("sm")}
 						/>
 					)}
