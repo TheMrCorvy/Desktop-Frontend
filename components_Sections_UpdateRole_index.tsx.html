@@ -28,7 +28,7 @@
 
 
     <title>
-      components/PurchaseDialog/PurchaseButton/index.tsx
+      components/Sections/UpdateRole/index.tsx
     </title>
 
     <!--[if lt IE 9]>
@@ -96,7 +96,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        components/PurchaseDialog/PurchaseButton/index.tsx
+        components/Sections/UpdateRole/index.tsx
       </h1>
       
 
@@ -107,228 +107,154 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { FC, useState, useEffect } from "react"
+            <pre class="prettyprint source linenums"><code>import { FC } from "react"
 
-/******************************************************************************** mui */
-import { Button, Grid, CircularProgress, Typography } from "@material-ui/core"
+import { Grid, Typography, Divider, Hidden } from "@material-ui/core"
+
 import useStyles from "./styles"
 
-/******************************************************************************** redux */
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
 
-/******************************************************************************** other */
-import { PayPalButton } from "react-paypal-button-v2"
-
-import Snackbar from "../../Snackbar"
-
-import { generateCoinbaseCharge } from "../../../misc/ajaxManager"
-
-import { CoinbaseChargeT } from "../../../misc/types"
+import DialogComponent from "../../Dialog"
+import PurchaseDialog from "../../PurchaseDialog"
 
 type Props = {
-	amount: number
-	method: "PayPal" | "Crypto"
-	type: "slots" | "premium"
-	goBack: () => void
-	testing?: boolean
+	userRole: "free" | "semi-premium" | "premium" | "admin"
+	canBuySlots: boolean
 }
 
-let firstCall = true
-
 /**
- * @alias PurchaseButton
- * 
- * @description This component will be calling paypal's magic buttons or coinbase's api to generate a purchase button
- * 
- * @property {number} amount How much has to pay the user (in USD)
- * 
- * @property {"PayPal" | "Crypto"} method How is the user going to pay?
- * 
- * @property {"slots" | "premium"} type What the user is going to buy
- * 
- * @property {function} goBack This function is from the parent component. Its used when the user wants to go bak to calc the price step
- * 
- * @property {boolean} [testing] If the behavior of the component
- * 
- * @example 
- * 
- * &lt;PurchaseButton
-		amount={100}
-		type={"premium"}
-		method={"Crypto"}
-		goBack={() => setStep(1)}
-	/>
+ * @alias Section_UpdateRole
+ *
+ * @description This component will show the {@link PurchaseDialog} and must receive the following props:
+ *
+ * @property {"free" | "semi-premium" | "premium" | "admin"} userRole The user's role
+ *
+ * @property {boolean} canBuySlots If the user is actually allowed to buy more solts
  */
 
-const PurchaseButton: FC&lt;Props> = ({ amount, method, type, goBack }) => {
+const UpdateRole: FC&lt;Props> = ({ userRole, canBuySlots }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
 
-	const { REACT_APP_ENV_LOCAL, REACT_APP_PAYPAL_CLIENT_ID, REACT_APP_COINBASE_API_KEY } =
-		process.env
-
-	const [message, setMessage] = useState&lt;string | null>(null)
-
-	const [cryptoUrl, setCryptoUrl] = useState("")
-
-	const [cryptoCode, setCryptoCode] = useState("")
-
-	const [loading, setLoading] = useState(true)
-
-	const [error, setError] = useState(false)
-
-	const finalAmount = type === "slots" ? amount * 10 : amount * 5
-
-	useEffect(() => {
-		if (REACT_APP_COINBASE_API_KEY &amp;&amp; firstCall &amp;&amp; method === "Crypto") {
-			callCoinbaseAPI(finalAmount, REACT_APP_COINBASE_API_KEY)
-		}
-
-		if (!REACT_APP_COINBASE_API_KEY &amp;&amp; method === "Crypto") {
-			onError("There is no api key for coinbase.")
-		}
-	}, [])
-
-	const onSuccess = (details: any) => {
-		console.log("success!")
-		console.log("Order id: " + details.id)
-
-		setMessage(translate("success_message", lng))
-	}
-
-	const onError = (error: any) => {
-		console.log("error...")
-		console.error(error)
-
-		setMessage(translate("error_messages", lng, 6))
-
-		setError(true)
-		setLoading(false)
-	}
-
-	const callCoinbaseAPI = async (finalAmount: number, apiKey: string) => {
-		firstCall = false
-
-		const name = translate("purchase_name", lng, type === "slots" ? 0 : 1)
-
-		const description = translate("purchase_description", lng, type === "slots" ? 0 : 1)
-
-		const charge: CoinbaseChargeT = {
-			name,
-			description,
-			local_price: {
-				amount: finalAmount,
-				currency: "USD",
-			},
-			pricing_type: "fixed_price",
-		}
-
-		const data: any = await generateCoinbaseCharge(apiKey, charge)
-
-		if (!data.successful) {
-			onError(data.error)
-
-			return
-		}
-
-		setCryptoUrl(data.data.hosted_url)
-
-		setCryptoCode(data.data.code)
-
-		setLoading(false)
-	}
-
-	const renderCryptoOption = () => {
-		return (
-			&lt;>
-				{loading &amp;&amp; &lt;CircularProgress className={classes.marginBottom} />}
-
-				{cryptoUrl &amp;&amp; (
-					&lt;Grid container spacing={4} justify="center">
-						&lt;Grid item>
-							&lt;a href={cryptoUrl} target="_blank" className={classes.link}>
-								&lt;Button variant="contained" color="primary" disableElevation>
-									{translate("purchase_now", lng)}
-								&lt;/Button>
-							&lt;/a>
-						&lt;/Grid>
-
-						&lt;Grid item xs={12}>
-							&lt;Typography variant="body2" className={classes.marginBottom}>
-								{translate("crypto_purchase_warning", lng)}
-							&lt;/Typography>
-						&lt;/Grid>
-					&lt;/Grid>
-				)}
-			&lt;/>
-		)
-	}
-
-	const renderPaypalOption = () => {
-		if (REACT_APP_ENV_LOCAL) {
-			return (
-				&lt;PayPalButton
-					amount={finalAmount}
-					shippingPreference="NO_SHIPPING"
-					onSuccess={onSuccess}
-					onError={onError}
-					catchError={onError}
-					data-testid="test_paypal_btn"
-				/>
-			)
-		} else {
-			if (!REACT_APP_PAYPAL_CLIENT_ID) {
-				onError("There is no PayPal Client ID.")
-
-				return null
-			}
-
-			return (
-				&lt;PayPalButton
-					amount={finalAmount}
-					shippingPreference="NO_SHIPPING"
-					onSuccess={onSuccess}
-					onError={onError}
-					catchError={onError}
-					options={{
-						clientId: REACT_APP_PAYPAL_CLIENT_ID,
-					}}
-				/>
-			)
-		}
+	if (userRole === "premium") {
+		return null
 	}
 
 	return (
-		&lt;>
-			&lt;Grid container justify="center" spacing={2}>
-				&lt;Grid item xs={12} className={classes.centerAll}>
-					{method === "PayPal" ? renderPaypalOption() : renderCryptoOption()}
+		&lt;Grid item xs={12} className={classes.container}>
+			&lt;Grid container justify="space-around" spacing={4}>
+				&lt;Grid item xs={12}>
+					&lt;Divider orientation="horizontal" />
 				&lt;/Grid>
-				{error &amp;&amp; (
-					&lt;Grid item xs={12}>
-						&lt;Typography variant="body2" className={classes.marginBottom}>
-							{message}
-						&lt;/Typography>
-					&lt;/Grid>
+				{canBuySlots &amp;&amp; (
+					&lt;>
+						&lt;Grid item xs={12} md={5} className={classes.text}>
+							&lt;Grid container spacing={4}>
+								&lt;Grid item xs={12}>
+									&lt;Typography variant="h5">
+										{translate("update_role_titles", lng, 0)}
+									&lt;/Typography>
+								&lt;/Grid>
+								&lt;Grid item xs={12}>
+									&lt;PurchaseDialog method="PayPal" type="slots" />
+								&lt;/Grid>
+								&lt;Grid item xs={12}>
+									&lt;PurchaseDialog method="Crypto" type="slots" />
+								&lt;/Grid>
+							&lt;/Grid>
+						&lt;/Grid>
+						&lt;Hidden smDown>
+							&lt;Grid item xs={2} className={classes.verticalDivider}>
+								&lt;Divider orientation="vertical" flexItem />
+							&lt;/Grid>
+						&lt;/Hidden>
+						&lt;Hidden mdUp>
+							&lt;Grid item xs={12}>
+								&lt;Divider orientation="horizontal" />
+							&lt;/Grid>
+						&lt;/Hidden>
+					&lt;/>
 				)}
-				&lt;Grid item xs={12} className={classes.centerAll}>
-					&lt;Button variant="contained" color="secondary" onClick={() => goBack()}>
-						{translate("go_back", lng, 0)}
-					&lt;/Button>
+				&lt;Grid item xs={12} md={5} className={classes.text}>
+					&lt;Grid container spacing={4}>
+						&lt;Grid item xs={12}>
+							&lt;Typography variant="h5">
+								{translate("update_role_titles", lng, 1)}
+							&lt;/Typography>
+						&lt;/Grid>
+						&lt;Grid item xs={12}>
+							&lt;PurchaseDialog method="PayPal" type="premium" />
+						&lt;/Grid>
+						&lt;Grid item xs={12}>
+							&lt;PurchaseDialog method="Crypto" type="premium" />
+						&lt;/Grid>
+					&lt;/Grid>
+				&lt;/Grid>
+				&lt;Grid item xs={12}>
+					&lt;Divider orientation="horizontal" />
+				&lt;/Grid>
+				&lt;Grid item>
+					&lt;DialogComponent
+						title={translate("update_role_titles", lng, 2)}
+						tooltipPlacement="bottom"
+						className={classes.flatBtn}
+					>
+						&lt;ul>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 3)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 0)}
+								&lt;/Typography>
+							&lt;/li>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 4)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 1)}
+								&lt;/Typography>
+							&lt;/li>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 5)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 2)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 3)}
+								&lt;/Typography>
+							&lt;/li>
+							&lt;li className={classes.listItem}>
+								&lt;Typography variant="body1" paragraph>
+									{translate("update_role_titles", lng, 6)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 4)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 5)}
+								&lt;/Typography>
+								&lt;Typography variant="body2" paragraph>
+									{translate("update_role_texts", lng, 6)}
+								&lt;/Typography>
+							&lt;/li>
+						&lt;/ul>
+					&lt;/DialogComponent>
 				&lt;/Grid>
 			&lt;/Grid>
-			{message &amp;&amp; (
-				&lt;Snackbar message={message} open={message ? true : false} duration={45000} />
-			)}
-		&lt;/>
+		&lt;/Grid>
 	)
 }
 
-export default PurchaseButton
+export default UpdateRole
 </code></pre>
         </article>
     </section>

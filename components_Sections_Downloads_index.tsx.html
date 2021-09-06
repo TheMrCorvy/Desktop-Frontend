@@ -28,7 +28,7 @@
 
 
     <title>
-      components/PurchaseDialog/PurchaseButton/index.tsx
+      components/Sections/Downloads/index.tsx
     </title>
 
     <!--[if lt IE 9]>
@@ -96,7 +96,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        components/PurchaseDialog/PurchaseButton/index.tsx
+        components/Sections/Downloads/index.tsx
       </h1>
       
 
@@ -107,228 +107,226 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { FC, useState, useEffect } from "react"
+            <pre class="prettyprint source linenums"><code>import { FC, useEffect, useState } from "react"
 
-/******************************************************************************** mui */
-import { Button, Grid, CircularProgress, Typography } from "@material-ui/core"
+import { Container, Grid, Button, Typography, Divider, Hidden } from "@material-ui/core"
+
 import useStyles from "./styles"
 
-/******************************************************************************** redux */
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../redux/store"
+import { showError } from "../../../redux/actions/errorHandlingActions"
 
 import { translate } from "../../../lang"
 
-/******************************************************************************** other */
-import { PayPalButton } from "react-paypal-button-v2"
+type Props = { alternative?: boolean; testing?: boolean }
 
-import Snackbar from "../../Snackbar"
-
-import { generateCoinbaseCharge } from "../../../misc/ajaxManager"
-
-import { CoinbaseChargeT } from "../../../misc/types"
-
-type Props = {
-	amount: number
-	method: "PayPal" | "Crypto"
-	type: "slots" | "premium"
-	goBack: () => void
-	testing?: boolean
-}
-
-let firstCall = true
+let deferredPrompt: any
 
 /**
- * @alias PurchaseButton
- * 
- * @description This component will be calling paypal's magic buttons or coinbase's api to generate a purchase button
- * 
- * @property {number} amount How much has to pay the user (in USD)
- * 
- * @property {"PayPal" | "Crypto"} method How is the user going to pay?
- * 
- * @property {"slots" | "premium"} type What the user is going to buy
- * 
- * @property {function} goBack This function is from the parent component. Its used when the user wants to go bak to calc the price step
- * 
- * @property {boolean} [testing] If the behavior of the component
- * 
- * @example 
- * 
- * &lt;PurchaseButton
-		amount={100}
-		type={"premium"}
-		method={"Crypto"}
-		goBack={() => setStep(1)}
-	/>
+ * @alias Section_Downloads
+ *
+ * @property {boolean} [alternative] if true, title is big, false / undefined title is smaller
+ *
+ * @property {boolean} [testing] if testing the layout of the buttons
  */
 
-const PurchaseButton: FC&lt;Props> = ({ amount, method, type, goBack }) => {
-	const { lng } = useSelector((state: RootState) => state.lng)
-
+const Downloads: FC&lt;Props> = ({ alternative }) => {
 	const classes = useStyles()
 
-	const { REACT_APP_ENV_LOCAL, REACT_APP_PAYPAL_CLIENT_ID, REACT_APP_COINBASE_API_KEY } =
-		process.env
+	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [message, setMessage] = useState&lt;string | null>(null)
-
-	const [cryptoUrl, setCryptoUrl] = useState("")
-
-	const [cryptoCode, setCryptoCode] = useState("")
-
-	const [loading, setLoading] = useState(true)
-
-	const [error, setError] = useState(false)
-
-	const finalAmount = type === "slots" ? amount * 10 : amount * 5
+	const dispatch = useDispatch()
 
 	useEffect(() => {
-		if (REACT_APP_COINBASE_API_KEY &amp;&amp; firstCall &amp;&amp; method === "Crypto") {
-			callCoinbaseAPI(finalAmount, REACT_APP_COINBASE_API_KEY)
-		}
+		window.addEventListener("beforeinstallprompt", (e: Event) => {
+			e.preventDefault()
 
-		if (!REACT_APP_COINBASE_API_KEY &amp;&amp; method === "Crypto") {
-			onError("There is no api key for coinbase.")
-		}
+			deferredPrompt = e
+
+			console.log("event handled successfully")
+		})
+
+		window.addEventListener("appinstalled", () => {
+			console.log("INSTALL: Success")
+		})
 	}, [])
 
-	const onSuccess = (details: any) => {
-		console.log("success!")
-		console.log("Order id: " + details.id)
+	const handleInstallClick = () => {
+		try {
+			deferredPrompt.prompt()
 
-		setMessage(translate("success_message", lng))
-	}
+			deferredPrompt.userChoice.then((choiceResult: any) => {
+				if (choiceResult.outcome === "accepted") {
+					console.log("User accepted the install prompt")
+				} else {
+					console.log("User dismissed the install prompt")
+				}
+			})
+		} catch (error) {
+			console.log(error)
 
-	const onError = (error: any) => {
-		console.log("error...")
-		console.error(error)
-
-		setMessage(translate("error_messages", lng, 6))
-
-		setError(true)
-		setLoading(false)
-	}
-
-	const callCoinbaseAPI = async (finalAmount: number, apiKey: string) => {
-		firstCall = false
-
-		const name = translate("purchase_name", lng, type === "slots" ? 0 : 1)
-
-		const description = translate("purchase_description", lng, type === "slots" ? 0 : 1)
-
-		const charge: CoinbaseChargeT = {
-			name,
-			description,
-			local_price: {
-				amount: finalAmount,
-				currency: "USD",
-			},
-			pricing_type: "fixed_price",
-		}
-
-		const data: any = await generateCoinbaseCharge(apiKey, charge)
-
-		if (!data.successful) {
-			onError(data.error)
-
-			return
-		}
-
-		setCryptoUrl(data.data.hosted_url)
-
-		setCryptoCode(data.data.code)
-
-		setLoading(false)
-	}
-
-	const renderCryptoOption = () => {
-		return (
-			&lt;>
-				{loading &amp;&amp; &lt;CircularProgress className={classes.marginBottom} />}
-
-				{cryptoUrl &amp;&amp; (
-					&lt;Grid container spacing={4} justify="center">
-						&lt;Grid item>
-							&lt;a href={cryptoUrl} target="_blank" className={classes.link}>
-								&lt;Button variant="contained" color="primary" disableElevation>
-									{translate("purchase_now", lng)}
-								&lt;/Button>
-							&lt;/a>
-						&lt;/Grid>
-
-						&lt;Grid item xs={12}>
-							&lt;Typography variant="body2" className={classes.marginBottom}>
-								{translate("crypto_purchase_warning", lng)}
-							&lt;/Typography>
-						&lt;/Grid>
-					&lt;/Grid>
-				)}
-			&lt;/>
-		)
-	}
-
-	const renderPaypalOption = () => {
-		if (REACT_APP_ENV_LOCAL) {
-			return (
-				&lt;PayPalButton
-					amount={finalAmount}
-					shippingPreference="NO_SHIPPING"
-					onSuccess={onSuccess}
-					onError={onError}
-					catchError={onError}
-					data-testid="test_paypal_btn"
-				/>
-			)
-		} else {
-			if (!REACT_APP_PAYPAL_CLIENT_ID) {
-				onError("There is no PayPal Client ID.")
-
-				return null
-			}
-
-			return (
-				&lt;PayPalButton
-					amount={finalAmount}
-					shippingPreference="NO_SHIPPING"
-					onSuccess={onSuccess}
-					onError={onError}
-					catchError={onError}
-					options={{
-						clientId: REACT_APP_PAYPAL_CLIENT_ID,
-					}}
-				/>
-			)
+			dispatch(showError(translate("error_messages", lng, 5)))
 		}
 	}
 
 	return (
-		&lt;>
-			&lt;Grid container justify="center" spacing={2}>
-				&lt;Grid item xs={12} className={classes.centerAll}>
-					{method === "PayPal" ? renderPaypalOption() : renderCryptoOption()}
+		&lt;Container maxWidth="lg" className={classes.container} id="downloads-section">
+			&lt;Grid container justify="center" spacing={3}>
+				&lt;Grid item xs={12}>
+					&lt;Typography
+						gutterBottom
+						variant={alternative ? "h3" : "h4"}
+						className={classes.marginB}
+						data-testid="test_downloads"
+					>
+						{translate("downloads", lng)}
+					&lt;/Typography>
 				&lt;/Grid>
-				{error &amp;&amp; (
-					&lt;Grid item xs={12}>
-						&lt;Typography variant="body2" className={classes.marginBottom}>
-							{message}
-						&lt;/Typography>
+
+				&lt;Grid item xs={12} sm={5} lg={2}>
+					&lt;Grid container justify="space-between" spacing={1}>
+						&lt;Grid item xs={12}>
+							&lt;Typography gutterBottom variant="h5">
+								{translate("web_version", lng)}
+							&lt;/Typography>
+						&lt;/Grid>
+						&lt;Grid item xs={12}>
+							&lt;Button
+								variant="contained"
+								color="primary"
+								className={classes.webBtn}
+								onClick={handleInstallClick}
+							>
+								{translate("install", lng)}
+							&lt;/Button>
+						&lt;/Grid>
 					&lt;/Grid>
-				)}
-				&lt;Grid item xs={12} className={classes.centerAll}>
-					&lt;Button variant="contained" color="secondary" onClick={() => goBack()}>
-						{translate("go_back", lng, 0)}
-					&lt;/Button>
+				&lt;/Grid>
+
+				&lt;Hidden xsDown>
+					&lt;Divider orientation="vertical" flexItem />
+				&lt;/Hidden>
+
+				&lt;Hidden smUp>
+					&lt;Grid item xs={12}>
+						&lt;Divider orientation="horizontal" />
+					&lt;/Grid>
+				&lt;/Hidden>
+
+				&lt;Grid item xs={12} sm={5} lg={3}>
+					&lt;Grid container spacing={1}>
+						&lt;Grid item xs={12}>
+							&lt;Typography gutterBottom variant="h5">
+								{translate("desktop", lng)}
+							&lt;/Typography>
+						&lt;/Grid>
+						&lt;Grid item xs={4}>
+							&lt;Button variant="contained" color="primary">
+								PC
+							&lt;/Button>
+						&lt;/Grid>
+						&lt;Grid item xs={4}>
+							&lt;Button variant="contained" color="secondary">
+								Mac
+							&lt;/Button>
+						&lt;/Grid>
+						&lt;Grid item xs={4}>
+							&lt;Button
+								variant="contained"
+								color="primary"
+								className={classes.linuxBtn}
+							>
+								Linux
+							&lt;/Button>
+						&lt;/Grid>
+					&lt;/Grid>
+				&lt;/Grid>
+
+				&lt;Hidden only={["xs", "lg", "xl"]}>
+					&lt;Grid item xs={6}>
+						&lt;Divider orientation="horizontal" />
+					&lt;/Grid>
+					&lt;Grid item xs={6}>
+						&lt;Divider orientation="horizontal" />
+					&lt;/Grid>
+				&lt;/Hidden>
+
+				&lt;Hidden mdDown>
+					&lt;Divider orientation="vertical" flexItem />
+				&lt;/Hidden>
+
+				&lt;Hidden smUp>
+					&lt;Grid item xs={12}>
+						&lt;Divider orientation="horizontal" />
+					&lt;/Grid>
+				&lt;/Hidden>
+
+				&lt;Grid item xs={12} sm={5} lg={3}>
+					&lt;Grid container justify="space-between" spacing={1}>
+						&lt;Grid item xs={12}>
+							&lt;Typography gutterBottom variant="h5">
+								Android
+							&lt;/Typography>
+						&lt;/Grid>
+
+						&lt;Grid item xs={6}>
+							&lt;Button
+								variant="contained"
+								color="primary"
+								className={classes.androidBtn}
+							>
+								Play Store
+							&lt;/Button>
+						&lt;/Grid>
+						&lt;Grid item xs={6}>
+							&lt;Button
+								variant="contained"
+								color="primary"
+								className={classes.webBtn}
+								onClick={handleInstallClick}
+							>
+								{translate("install", lng)}
+							&lt;/Button>
+						&lt;/Grid>
+					&lt;/Grid>
+				&lt;/Grid>
+
+				&lt;Hidden smUp>
+					&lt;Grid item xs={12}>
+						&lt;Divider orientation="horizontal" />
+					&lt;/Grid>
+				&lt;/Hidden>
+
+				&lt;Hidden xsDown>
+					&lt;Divider orientation="vertical" flexItem />
+				&lt;/Hidden>
+
+				&lt;Grid item xs={12} sm={5} lg={2}>
+					&lt;Grid container justify="space-between" spacing={1}>
+						&lt;Grid item xs={12}>
+							&lt;Typography gutterBottom variant="h5">
+								IOS
+							&lt;/Typography>
+						&lt;/Grid>
+						&lt;Grid item xs={12}>
+							&lt;Button
+								variant="contained"
+								color="primary"
+								className={classes.webBtn}
+								onClick={handleInstallClick}
+							>
+								{translate("install", lng)}
+							&lt;/Button>
+						&lt;/Grid>
+					&lt;/Grid>
 				&lt;/Grid>
 			&lt;/Grid>
-			{message &amp;&amp; (
-				&lt;Snackbar message={message} open={message ? true : false} duration={45000} />
-			)}
-		&lt;/>
+		&lt;/Container>
 	)
 }
 
-export default PurchaseButton
+export default Downloads
 </code></pre>
         </article>
     </section>
