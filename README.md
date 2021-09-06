@@ -54,22 +54,22 @@ And lastly, there are a few components that aren't used outside of 1 or 2 parent
 
 ## Project Dependencies
 
-Material UI - As the UI
+[Material UI](https://material-ui.com/) - As the UI
 
-Fontawesome - For the icons
+[Fontawesome](https://fontawesome.com/) - For the icons
 
-Dexie - To handle all the interactions with Indexed DB (I don't recomment using it, its really simple to use, but very limited in my opinion).
+[Dexie](https://www.npmjs.com/package/dexie) - To handle all the interactions with Indexed DB (I don't recomment using it, its really simple to use, but very limited in my opinion).
 
-react-google-recaptcha - As the Captcha component
+[react-google-recaptcha](https://www.npmjs.com/package/react-google-recaptcha) - As the Captcha component
 
-react-hook-form - To handle all the forms
+[react-hook-form](https://www.npmjs.com/package/react-hook-form) - To handle all the forms
 
-react-paypal-button-v2 - To create PayPal's magic buttons
+[react-paypal-button-v2](https://www.npmjs.com/package/react-paypal-button-v2) - To create PayPal's magic buttons
 
-react-qrcode-logo - For the QR codes
+[react-qrcode-logo](https://www.npmjs.com/package/react-qrcode-logo) - For the QR codes
 
-react-redux - To handle the global state
+[react-redux](https://www.npmjs.com/package/react-redux) - To handle the global state
 
-JsDocs and gh-pages - For the documenation
+[JsDocs](https://www.npmjs.com/package/jsdocs) and [gh-pages](https://www.npmjs.com/package/gh-pages) - For the documenation
 
 And lastly, this is not a dependency perse, but since I had a lot of problems using the package i18n, I decided to follow [this tutorial](https://www.youtube.com/watch?v=GtaKTDNQ6vo&list=PLXlNY59rhzeIlEiTIznuqji-ORgKjEhGa) to make the translation system.
