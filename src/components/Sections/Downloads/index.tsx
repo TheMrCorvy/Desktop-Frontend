@@ -29,7 +29,7 @@ const Downloads: FC<Props> = ({ alternative, testing }) => {
 
 	const dispatch = useDispatch()
 
-	const [installable, setInstallable] = useState(testing ? true : false)
+	// const [installable, setInstallable] = useState(testing ? true : false)
 
 	useEffect(() => {
 		window.addEventListener("beforeinstallprompt", (e: Event) => {
@@ -37,7 +37,7 @@ const Downloads: FC<Props> = ({ alternative, testing }) => {
 
 			deferredPrompt = e
 
-			setInstallable(true)
+			// setInstallable(true)
 
 			console.log("event handled successfully")
 		})
@@ -48,7 +48,7 @@ const Downloads: FC<Props> = ({ alternative, testing }) => {
 	}, [])
 
 	const handleInstallClick = () => {
-		setInstallable(false)
+		// setInstallable(false)
 
 		try {
 			deferredPrompt.prompt()
@@ -81,39 +81,35 @@ const Downloads: FC<Props> = ({ alternative, testing }) => {
 					</Typography>
 				</Grid>
 
-				{installable && (
-					<>
-						<Grid item xs={12} sm={5} lg={2}>
-							<Grid container justify="space-between" spacing={1}>
-								<Grid item xs={12}>
-									<Typography gutterBottom variant="h5">
-										{translate("web_version", lng)}
-									</Typography>
-								</Grid>
-								<Grid item xs={12}>
-									<Button
-										variant="contained"
-										color="primary"
-										className={classes.webBtn}
-										onClick={handleInstallClick}
-									>
-										{translate("install", lng)}
-									</Button>
-								</Grid>
-							</Grid>
+				<Grid item xs={12} sm={5} lg={2}>
+					<Grid container justify="space-between" spacing={1}>
+						<Grid item xs={12}>
+							<Typography gutterBottom variant="h5">
+								{translate("web_version", lng)}
+							</Typography>
 						</Grid>
+						<Grid item xs={12}>
+							<Button
+								variant="contained"
+								color="primary"
+								className={classes.webBtn}
+								onClick={handleInstallClick}
+							>
+								{translate("install", lng)}
+							</Button>
+						</Grid>
+					</Grid>
+				</Grid>
 
-						<Hidden xsDown>
-							<Divider orientation="vertical" flexItem />
-						</Hidden>
+				<Hidden xsDown>
+					<Divider orientation="vertical" flexItem />
+				</Hidden>
 
-						<Hidden smUp>
-							<Grid item xs={12}>
-								<Divider orientation="horizontal" />
-							</Grid>
-						</Hidden>
-					</>
-				)}
+				<Hidden smUp>
+					<Grid item xs={12}>
+						<Divider orientation="horizontal" />
+					</Grid>
+				</Hidden>
 
 				<Grid item xs={12} sm={5} lg={3}>
 					<Grid container spacing={1}>
@@ -144,22 +140,18 @@ const Downloads: FC<Props> = ({ alternative, testing }) => {
 					</Grid>
 				</Grid>
 
-				{installable && (
-					<>
-						<Hidden only={["xs", "lg", "xl"]}>
-							<Grid item xs={6}>
-								<Divider orientation="horizontal" />
-							</Grid>
-							<Grid item xs={6}>
-								<Divider orientation="horizontal" />
-							</Grid>
-						</Hidden>
+				<Hidden only={["xs", "lg", "xl"]}>
+					<Grid item xs={6}>
+						<Divider orientation="horizontal" />
+					</Grid>
+					<Grid item xs={6}>
+						<Divider orientation="horizontal" />
+					</Grid>
+				</Hidden>
 
-						<Hidden mdDown>
-							<Divider orientation="vertical" flexItem />
-						</Hidden>
-					</>
-				)}
+				<Hidden mdDown>
+					<Divider orientation="vertical" flexItem />
+				</Hidden>
 
 				<Hidden smUp>
 					<Grid item xs={12}>
@@ -175,77 +167,57 @@ const Downloads: FC<Props> = ({ alternative, testing }) => {
 							</Typography>
 						</Grid>
 
-						{installable ? (
-							<>
-								<Grid item xs={6}>
-									<Button
-										variant="contained"
-										color="primary"
-										className={classes.androidBtn}
-									>
-										Play Store
-									</Button>
-								</Grid>
-								<Grid item xs={6}>
-									<Button
-										variant="contained"
-										color="primary"
-										className={classes.webBtn}
-										onClick={handleInstallClick}
-									>
-										{translate("install", lng)}
-									</Button>
-								</Grid>
-							</>
-						) : (
-							<>
-								<Grid item xs={12}>
-									<Button
-										variant="contained"
-										color="primary"
-										className={classes.androidBtn}
-									>
-										Play Store
-									</Button>
-								</Grid>
-							</>
-						)}
+						<Grid item xs={6}>
+							<Button
+								variant="contained"
+								color="primary"
+								className={classes.androidBtn}
+							>
+								Play Store
+							</Button>
+						</Grid>
+						<Grid item xs={6}>
+							<Button
+								variant="contained"
+								color="primary"
+								className={classes.webBtn}
+								onClick={handleInstallClick}
+							>
+								{translate("install", lng)}
+							</Button>
+						</Grid>
 					</Grid>
 				</Grid>
 
-				{installable && (
-					<>
-						<Hidden smUp>
-							<Grid item xs={12}>
-								<Divider orientation="horizontal" />
-							</Grid>
-						</Hidden>
+				<Hidden smUp>
+					<Grid item xs={12}>
+						<Divider orientation="horizontal" />
+					</Grid>
+				</Hidden>
 
-						<Hidden xsDown>
-							<Divider orientation="vertical" flexItem />
-						</Hidden>
+				<Hidden xsDown>
+					<Divider orientation="vertical" flexItem />
+				</Hidden>
 
-						<Grid item xs={12} sm={5} lg={2}>
-							<Grid container justify="space-between" spacing={1}>
-								<Grid item xs={12}>
-									<Typography gutterBottom variant="h5">
-										IOS
-									</Typography>
-								</Grid>
-								<Grid item xs={12}>
-									<Button
-										variant="contained"
-										color="primary"
-										className={classes.webBtn}
-										onClick={handleInstallClick}
-									>
-										{translate("install", lng)}
-									</Button>
-								</Grid>
-							</Grid>
+				<Grid item xs={12} sm={5} lg={2}>
+					<Grid container justify="space-between" spacing={1}>
+						<Grid item xs={12}>
+							<Typography gutterBottom variant="h5">
+								IOS
+							</Typography>
 						</Grid>
-					</>
-				)}
+						<Grid item xs={12}>
+							<Button
+								variant="contained"
+								color="primary"
+								className={classes.webBtn}
+								onClick={handleInstallClick}
+							>
+								{translate("install", lng)}
+							</Button>
+						</Grid>
+					</Grid>
+				</Grid>
 			</Grid>
 		</Container>
 	)
