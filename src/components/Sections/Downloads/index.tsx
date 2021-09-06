@@ -22,22 +22,18 @@ let deferredPrompt: any
  * @property {boolean} [testing] if testing the layout of the buttons
  */
 
-const Downloads: FC<Props> = ({ alternative, testing }) => {
+const Downloads: FC<Props> = ({ alternative }) => {
 	const classes = useStyles()
 
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
 
-	// const [installable, setInstallable] = useState(testing ? true : false)
-
 	useEffect(() => {
 		window.addEventListener("beforeinstallprompt", (e: Event) => {
 			e.preventDefault()
 
 			deferredPrompt = e
-
-			// setInstallable(true)
 
 			console.log("event handled successfully")
 		})
@@ -48,8 +44,6 @@ const Downloads: FC<Props> = ({ alternative, testing }) => {
 	}, [])
 
 	const handleInstallClick = () => {
-		// setInstallable(false)
-
 		try {
 			deferredPrompt.prompt()
 
