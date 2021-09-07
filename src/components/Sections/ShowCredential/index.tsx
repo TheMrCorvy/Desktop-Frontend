@@ -12,6 +12,7 @@ import { translate } from "../../../lang"
 
 import { findCredential } from "../../../misc/indexedDB"
 import { calcMaxChar } from "../../../misc/staticData"
+import { AccessCredentialPropT, CharSizesT } from "../../../misc/types"
 
 import UnlockData from "../../UnlockData"
 import DisplayData from "../../DisplayData"
@@ -35,6 +36,8 @@ type Props = {
 const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 	const { credential } = useSelector((state: RootState) => state.credential)
+
+	const { REACT_APP_ENV_LOCAL } = process.env
 
 	const [locked, setLocked] = useState(true)
 
@@ -123,6 +126,7 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 				setIsAuthenticated(true)
 			})
 		} else {
+			//actualizar indexed db
 			setLocked(true)
 		}
 	}
@@ -135,6 +139,37 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 		const finalStrings = multipleStrings[1].split(")")
 
 		return finalStrings[0]
+	}
+
+	const renderCredentialProp = (
+		propName: AccessCredentialPropT,
+		label: string,
+		maxChar?: CharSizesT,
+		isCrypto?: boolean
+	) => {
+		if (credential[propName]) {
+			return (
+				<VisualizeCredentialProp
+					label={label}
+					locked={locked}
+					visible={visible}
+					propName={propName}
+					maxChar={calcMaxChar(maxChar ? maxChar : "sm")}
+					isCrypto={isCrypto}
+				/>
+			)
+		} else if (!locked && !credential[propName]) {
+			return (
+				<VisualizeCredentialProp
+					label={label}
+					locked={locked}
+					visible={visible}
+					propName={propName}
+					maxChar={calcMaxChar(maxChar ? maxChar : "sm")}
+					isCrypto={isCrypto}
+				/>
+			)
+		}
 	}
 
 	return (
@@ -151,16 +186,7 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 							</Grid>
 						</Grid>
 					</Grid>
-					{credential.description && (
-						<VisualizeCredentialProp
-							label="description"
-							locked={locked}
-							visible={visible}
-							propName="description"
-							maxChar={calcMaxChar("xl")}
-							isCrypto
-						/>
-					)}
+					{renderCredentialProp("description", translate("description", lng), "xl")}
 					<Grid item xs={12}>
 						<Grid container justify="space-between" spacing={2}>
 							<Grid item>
@@ -217,6 +243,7 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 							<Grid item className={classes.lockIcon}>
 								<UnlockData
 									toggleLock={toggleLock}
+									testing={REACT_APP_ENV_LOCAL ? true : false}
 									locked={locked}
 									lockedTitle={translate("access_management", lng, 3)}
 									unlockedTitle={translate("access_management", lng, 2)}
@@ -229,85 +256,30 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 
 			<Grid item xs={12} md={9}>
 				<Grid container spacing={4}>
-					{credential.user_name && (
-						<VisualizeCredentialProp
-							label={translate("auth_form_texts", lng, 14)}
-							locked={locked}
-							visible={visible}
-							propName="user_name"
-							maxChar={calcMaxChar("sm")}
-						/>
+					{renderCredentialProp("user_name", translate("auth_form_texts", lng, 14))}
+					{renderCredentialProp("email", translate("auth_form_texts", lng, 0))}
+					{renderCredentialProp("password", translate("auth_form_texts", lng, 11))}
+					{renderCredentialProp("username", translate("auth_form_texts", lng, 12))}
+					{renderCredentialProp("phone_number", translate("auth_form_texts", lng, 7))}
+					{renderCredentialProp(
+						"security_question",
+						translate("encryption_examples", lng, 10)
 					)}
-					{credential.email && (
-						<VisualizeCredentialProp
-							label={translate("auth_form_texts", lng, 0)}
-							locked={locked}
-							visible={visible}
-							propName="email"
-							maxChar={calcMaxChar("sm")}
-						/>
+					{renderCredentialProp(
+						"unique_security_code",
+						translate("auth_form_texts", lng, 13),
+						"xs"
 					)}
-					{credential.password && (
-						<VisualizeCredentialProp
-							label={translate("auth_form_texts", lng, 11)}
-							locked={locked}
-							visible={visible}
-							propName="password"
-							maxChar={calcMaxChar("sm")}
-						/>
+					{renderCredentialProp(
+						"multiple_security_code",
+						translate("encryption_examples", lng, 8),
+						"xs"
 					)}
-					{credential.username && (
-						<VisualizeCredentialProp
-							label={translate("auth_form_texts", lng, 12)}
-							locked={locked}
-							visible={visible}
-							propName="username"
-							maxChar={calcMaxChar("sm")}
-						/>
-					)}
-					{credential.phone_number && (
-						<VisualizeCredentialProp
-							label={translate("auth_form_texts", lng, 7)}
-							locked={locked}
-							visible={visible}
-							propName="phone_number"
-							maxChar={calcMaxChar("sm")}
-						/>
-					)}
-					{credential.security_question && (
-						<VisualizeCredentialProp
-							label={translate("encryption_examples", lng, 10)}
-							locked={locked}
-							visible={visible}
-							propName="security_question"
-							maxChar={calcMaxChar("sm")}
-						/>
-					)}
-					{credential.unique_security_code && (
-						<VisualizeCredentialProp
-							label={translate("auth_form_texts", lng, 13)}
-							locked={locked}
-							visible={visible}
-							propName="unique_security_code"
-							maxChar={calcMaxChar("xs")}
-						/>
-					)}
-					{credential.multiple_security_code && (
-						<VisualizeCredentialProp
-							label={translate("encryption_examples", lng, 8)}
-							locked={locked}
-							visible={visible}
-							propName="multiple_security_code"
-						/>
-					)}
-					{credential.crypto_currency_access_codes && (
-						<VisualizeCredentialProp
-							label={translate("encryption_examples", lng, 9)}
-							locked={locked}
-							visible={visible}
-							propName="crypto_currency_access_codes"
-							isCrypto
-						/>
+					{renderCredentialProp(
+						"crypto_currency_access_codes",
+						translate("encryption_examples", lng, 9),
+						"xs",
+						true
 					)}
 				</Grid>
 			</Grid>

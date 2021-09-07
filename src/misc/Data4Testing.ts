@@ -68,28 +68,28 @@ export const credential4Testing: CredentialT[] = [
 			char_count: 9,
 			password: "123456789",
 		},
-		username: {
-			char_count: 12,
-			username: "xXUserNameXx",
-		},
-		phone_number: {
-			opening: "+54",
-			char_count: 7,
-			ending: "31",
-			phone_number: "+54-011-5555-5531",
-		},
-		security_question_answer: {
-			security_question: "what is the meaning of life?",
-			security_answer: "42",
-		},
-		security_codes: {
-			unique_security_code: "D7WK29JDU8",
-			multiple_security_codes: "codigo-1 codigo-2 codigo-2",
-			multiple_code_length: 11,
-			crypto_currency_access_code:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit Eaque odio accusamus cumque nemo veniam? Perferendis consequatur incidunt fugiat delectus reiciendis atque Ipsam excepturi molestiae quasi ratione id veniam pariatur laborum",
-			crypto_code_length: 30,
-		},
+		// username: {
+		// 	char_count: 12,
+		// 	username: "xXUserNameXx",
+		// },
+		// phone_number: {
+		// 	opening: "+54",
+		// 	char_count: 7,
+		// 	ending: "31",
+		// 	phone_number: "+54-011-5555-5531",
+		// },
+		// security_question_answer: {
+		// 	security_question: "what is the meaning of life?",
+		// 	security_answer: "42",
+		// },
+		// security_codes: {
+		// 	unique_security_code: "D7WK29JDU8",
+		// 	multiple_security_codes: "codigo-1 codigo-2 codigo-2",
+		// 	multiple_code_length: 11,
+		// 	crypto_currency_access_code:
+		// 		"Lorem ipsum dolor sit amet consectetur adipisicing elit Eaque odio accusamus cumque nemo veniam? Perferendis consequatur incidunt fugiat delectus reiciendis atque Ipsam excepturi molestiae quasi ratione id veniam pariatur laborum",
+		// 	crypto_code_length: 30,
+		// },
 		created_at: "2021-02-15 17:32:23",
 		updated_at: "2021-02-15 17:32:23",
 	},
