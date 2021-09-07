@@ -305,6 +305,8 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 						<CardFooter
 							textToCopy={textToCopy()}
 							label={translate("actions", lng, 0)}
+							locked={locked}
+							propName={propName}
 						/>
 					)}
 				</Accordion>

@@ -5,6 +5,7 @@ import {
 	CredentialI,
 	CLEAR_CREDENTIAL,
 	SET_DECRYPTED_CREDENTIAL,
+	DELETE_CREDENTIAL_PROPERTY,
 } from "../types"
 
 let initialState: CredentialI = {
@@ -32,6 +33,11 @@ const credentialReducer = (state = initialState, action: EditCredentialI) => {
 			}
 
 		case SET_DECRYPTED_CREDENTIAL:
+			return {
+				...state,
+				credential: action.payload,
+			}
+		case DELETE_CREDENTIAL_PROPERTY:
 			return {
 				...state,
 				credential: action.payload,

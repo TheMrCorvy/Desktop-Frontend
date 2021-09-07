@@ -82,6 +82,8 @@ export const INITIALIZE_CREDENTIAL = "INITIALIZE_CREDENTIAL"
 
 export const SET_DECRYPTED_CREDENTIAL = "SET_DECRYPTED_CREDENTIAL"
 
+export const DELETE_CREDENTIAL_PROPERTY = "DELETE_CREDENTIAL_PROPERTY"
+
 export interface CredentialI {
 	credential: ReduxCredentialT
 }
@@ -92,5 +94,6 @@ export interface EditCredentialI {
 		| typeof CLEAR_CREDENTIAL
 		| typeof INITIALIZE_CREDENTIAL
 		| typeof SET_DECRYPTED_CREDENTIAL
+		| typeof DELETE_CREDENTIAL_PROPERTY
 	payload: ReduxCredentialT
 }

@@ -1,4 +1,9 @@
-import { CLEAR_CREDENTIAL, EditCredentialI, EDIT_CREDENTIAL } from "../types"
+import {
+	CLEAR_CREDENTIAL,
+	DELETE_CREDENTIAL_PROPERTY,
+	EditCredentialI,
+	EDIT_CREDENTIAL,
+} from "../types"
 
 import {
 	AccessCredentialPropT,
@@ -12,6 +17,59 @@ type CredentialProp = {
 	prop: AccessCredentialPropT
 	newValue: CredentialPropValueT
 }
+
+export const removeCredentialProp = (
+	oldCredential: ReduxCredentialT,
+	propName: AccessCredentialPropT
+) => {
+	let newCredential: ReduxCredentialT = {
+		id: oldCredential.id,
+		user_id: oldCredential.user_id,
+		company_id: oldCredential.company_id,
+		company_name: oldCredential.company_name,
+		description: oldCredential.description,
+		created_at: oldCredential.created_at,
+		updated_at: oldCredential.updated_at,
+		last_seen: oldCredential.last_seen,
+	}
+
+	if (propName !== "user_name") {
+		newCredential.user_name = oldCredential.user_name
+	}
+	if (propName !== "email") {
+		newCredential.email = oldCredential.email
+	}
+	if (propName !== "password") {
+		newCredential.password = oldCredential.password
+	}
+	if (propName !== "username") {
+		newCredential.username = oldCredential.username
+	}
+	if (propName !== "phone_number") {
+		newCredential.phone_number = oldCredential.phone_number
+	}
+	if (propName !== "security_question") {
+		newCredential.security_question = oldCredential.security_question
+	}
+	if (propName !== "security_answer") {
+		newCredential.security_answer = oldCredential.security_answer
+	}
+	if (propName !== "unique_security_code") {
+		newCredential.unique_security_code = oldCredential.unique_security_code
+	}
+	if (propName !== "multiple_security_code") {
+		newCredential.multiple_security_code = oldCredential.multiple_security_code
+	}
+	if (propName !== "crypto_currency_access_codes") {
+		newCredential.crypto_currency_access_codes = oldCredential.crypto_currency_access_codes
+	}
+
+	return {
+		type: DELETE_CREDENTIAL_PROPERTY,
+		payload: newCredential,
+	}
+}
+
 // this action is used to manage the writing on the inputs, either for editing or creating a new one
 export const editCredential = (editing: CredentialProp): EditCredentialI => {
 	return {
