@@ -126,8 +126,10 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 				setIsAuthenticated(true)
 			})
 		} else {
-			//actualizar indexed db
+			//update indexed db
 			setLocked(true)
+
+			console.log(credential)
 		}
 	}
 
