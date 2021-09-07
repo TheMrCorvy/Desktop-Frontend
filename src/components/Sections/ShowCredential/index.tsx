@@ -182,7 +182,10 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 								<Typography variant="h6">{credential.company_name}</Typography>
 							</Grid>
 							<Grid item className={classes.lockIcon}>
-								<GoBackBtn />
+								<GoBackBtn
+									altText={!locked ? translate("go_back", lng, 1) : undefined}
+									altColor={!locked ? "primary" : undefined}
+								/>
 							</Grid>
 						</Grid>
 					</Grid>
