@@ -31,8 +31,8 @@ type FormInputs = {
 	phoneNumber: string
 	mainEmail: string
 	recoveryEmail: string
-	antiFishingSecret: string
-	antiFishingSecret_confirmation: string
+	secretAntiFishing: string
+	secretAntiFishing_confirmation: string
 }
 
 const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
@@ -56,10 +56,28 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 	const onSubmit = (data: FormInputs) => {
 		if (testing) return
 
-		console.log("production api call")
-		console.log(data)
+		const { REACT_APP_BASE_URI } = process.env
+		
+		if (REACT_APP_BASE_URI) {
+			fetch(REACT_APP_BASE_URI + "/auth/register/step-1", {
+				headers: {
+					Accept: "application/json",
+					"Accept-Language": lng,
+					"Content-type": "application/json"
+				},
+				method: "POST",
+				body: JSON.stringify(data),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(data)
 
-		nextStep()
+					// nextStep()
+				})
+				.catch((e) => {
+					console.log(e)
+				})
+		}
 	}
 
 	const validateInputs = (input: string, value: FormInputs) => {
@@ -67,7 +85,7 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 
 		if (input === "secret") {
 			validation =
-				value === getValues().antiFishingSecret ||
+				value === getValues().secretAntiFishing ||
 				translate("form_validation_messages", lng, 4)
 		} else if (input === "recovery email") {
 			validation =
@@ -214,7 +232,7 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 						<InputLabel>{translate("auth_form_texts", lng, 4)}</InputLabel>
 						<OutlinedInput
 							label={translate("auth_form_texts", lng, 4)}
-							name="antiFishingSecret"
+							name="secretAntiFishing"
 							required
 							type="password"
 							inputProps={{
@@ -233,7 +251,7 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 									},
 								}),
 							}}
-							error={errors?.antiFishingSecret ? true : false}
+							error={errors?.secretAntiFishing ? true : false}
 							endAdornment={
 								<InputAdornment position="end">
 									<DialogComponent
@@ -259,9 +277,9 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 								</InputAdornment>
 							}
 						/>
-						{errors.antiFishingSecret && (
+						{errors.secretAntiFishing && (
 							<Typography variant="body2">
-								{errors.antiFishingSecret.message}
+								{errors.secretAntiFishing.message}
 							</Typography>
 						)}
 					</FormControl>
@@ -271,7 +289,7 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 						<InputLabel>{translate("auth_form_texts", lng, 8)}</InputLabel>
 						<OutlinedInput
 							label={translate("auth_form_texts", lng, 8)}
-							name="antiFishingSecret_confirmation"
+							name="secretAntiFishing_confirmation"
 							required
 							type="password"
 							inputProps={{
@@ -291,11 +309,11 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 									validate: (value) => validateInputs("secret", value),
 								}),
 							}}
-							error={errors?.antiFishingSecret_confirmation ? true : false}
+							error={errors?.secretAntiFishing_confirmation ? true : false}
 						/>
-						{errors.antiFishingSecret_confirmation && (
+						{errors.secretAntiFishing_confirmation && (
 							<Typography variant="body2">
-								{errors.antiFishingSecret_confirmation.message}
+								{errors.secretAntiFishing_confirmation.message}
 							</Typography>
 						)}
 					</FormControl>
@@ -305,7 +323,7 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 						<InputLabel color="secondary">{invitationCodeLabel}</InputLabel>
 						<OutlinedInput
 							label={invitationCodeLabel}
-							name="invitation_code"
+							name="invitationCode"
 							required
 							type="text"
 							inputProps={{
@@ -324,13 +342,11 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 									},
 								}),
 							}}
-							error={errors?.invitation_code ? true : false}
+							error={errors?.invitationCode ? true : false}
 							color="secondary"
 						/>
-						{errors.invitation_code && (
-							<Typography variant="body2">
-								{errors.invitation_code.message}
-							</Typography>
+						{errors.invitationCode && (
+							<Typography variant="body2">{errors.invitationCode.message}</Typography>
 						)}
 					</FormControl>
 				</Grid>
