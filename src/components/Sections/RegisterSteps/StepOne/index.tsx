@@ -14,8 +14,10 @@ import useStyles from "./styles"
 
 import { useForm } from "react-hook-form"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../redux/store"
+
+import { toggleLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
 import DialogComponent from "../../../Dialog"
@@ -38,6 +40,8 @@ type FormInputs = {
 const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const dispatch = useDispatch()
+
 	const { register, errors, handleSubmit, getValues } = useForm()
 
 	const classes = useStyles()
@@ -56,23 +60,25 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 	const onSubmit = (data: FormInputs) => {
 		if (testing) return
 
+		dispatch(toggleLoading(true))
+
 		const { REACT_APP_BASE_URI } = process.env
-		
+
 		if (REACT_APP_BASE_URI) {
 			fetch(REACT_APP_BASE_URI + "/auth/register/step-1", {
 				headers: {
 					Accept: "application/json",
 					"Accept-Language": lng,
-					"Content-type": "application/json"
+					"Content-type": "application/json",
 				},
 				method: "POST",
 				body: JSON.stringify(data),
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					console.log(data)
+					dispatch(toggleLoading(false))
 
-					// nextStep()
+					nextStep()
 				})
 				.catch((e) => {
 					console.log(e)
