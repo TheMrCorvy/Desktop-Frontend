@@ -78,6 +78,8 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 				.then((data) => {
 					dispatch(toggleLoading(false))
 
+					console.log(data)
+
 					nextStep()
 				})
 				.catch((e) => {
