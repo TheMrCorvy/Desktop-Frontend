@@ -97,3 +97,17 @@ export interface EditCredentialI {
 		| typeof DELETE_CREDENTIAL_PROPERTY
 	payload: ReduxCredentialT
 }
+
+/******************************************************************************** show loading animation */
+export const TOGGLE_LOADING = "TOGGLE_LOADING"
+
+export interface LoadingStateI {
+	loading: boolean
+}
+
+interface ToggleLoadingAction {
+	type: typeof TOGGLE_LOADING
+	payload: boolean
+}
+
+export type LoadingAction = ToggleLoadingAction
