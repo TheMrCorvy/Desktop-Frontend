@@ -1,12 +1,14 @@
 import { FC, useState } from "react"
-import { Snackbar as SnackbarMui } from "@material-ui/core"
+import { Snackbar as MuiSnackbar } from "@material-ui/core"
+import MuiAlert, { AlertProps } from "@material-ui/lab/Alert"
 
 type Props = {
-	message: string
 	open: boolean
+	message: string
 	duration?: number
 	verticalPosition?: "bottom" | "top"
 	horizontalPosition?: "center" | "left" | "right"
+	isError?: boolean
 }
 
 /**
@@ -33,7 +35,9 @@ type Props = {
  * 	/>
  */
 
-const Snackbar: FC<Props> = ({ message, open, duration, verticalPosition, horizontalPosition }) => {
+const Snackbar: FC<Props> = (props) => {
+	const { message, open, duration, verticalPosition, horizontalPosition, isError } = props
+
 	//this part is necessary to autohide the snackbar
 	const [isOpen, setIsOpen] = useState<boolean>(open)
 
@@ -41,19 +45,41 @@ const Snackbar: FC<Props> = ({ message, open, duration, verticalPosition, horizo
 		setIsOpen(false)
 	}
 
-	return (
-		<SnackbarMui
-			anchorOrigin={{
-				vertical: verticalPosition ? verticalPosition : "bottom",
-				horizontal: horizontalPosition ? horizontalPosition : "left",
-			}}
-			open={isOpen}
-			autoHideDuration={duration && duration > 1000 ? duration : 6000}
-			message={message}
-			onClose={handleClose}
-			data-testid="test_snackbar"
-		/>
-	)
+	if (!isError) {
+		return (
+			<MuiSnackbar
+				anchorOrigin={{
+					vertical: verticalPosition ? verticalPosition : "bottom",
+					horizontal: horizontalPosition ? horizontalPosition : "left",
+				}}
+				open={isOpen}
+				autoHideDuration={duration && duration > 1000 ? duration : 6000}
+				message={message}
+				onClose={handleClose}
+				data-testid="test_snackbar"
+			/>
+		)
+	} else {
+		return (
+			<MuiSnackbar
+				anchorOrigin={{
+					vertical: verticalPosition ? verticalPosition : "bottom",
+					horizontal: horizontalPosition ? horizontalPosition : "left",
+				}}
+				open={isOpen}
+				autoHideDuration={duration && duration > 1000 ? duration : 6000}
+				message={message}
+				onClose={handleClose}
+				data-testid="test_snackbar"
+			>
+				<Alert severity="error">{message}</Alert>
+			</MuiSnackbar>
+		)
+	}
+}
+
+const Alert: FC<AlertProps> = (props) => {
+	return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
 export default Snackbar

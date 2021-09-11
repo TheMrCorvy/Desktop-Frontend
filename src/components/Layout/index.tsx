@@ -12,11 +12,13 @@ import { RootState } from "../../redux/store"
 import Navbar from "../Navbar"
 import Drawer from "../Navbar/Drawer"
 import Footer from "../Footer"
+import Snackbar from "../Snackbar"
 
 type Props = { children: ReactElement }
 
 const Layout: FC<Props> = (props) => {
 	const { loading } = useSelector((state: RootState) => state.loading)
+	const error = useSelector((state: RootState) => state.loading.error)
 
 	const classes = useStyles()
 
@@ -55,6 +57,15 @@ const Layout: FC<Props> = (props) => {
 
 				<Footer />
 			</Paper>
+			{error && (
+				<Snackbar
+					message={error}
+					open={true}
+					isError={true}
+					duration={25000}
+					horizontalPosition="center"
+				/>
+			)}
 		</>
 	)
 }

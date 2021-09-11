@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../redux/store"
 
-import { toggleLoading } from "../../../../redux/actions/loadingActions"
+import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
 import DialogComponent from "../../../Dialog"
@@ -75,15 +75,20 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 				body: JSON.stringify(data),
 			})
 				.then((res) => res.json())
-				.then((data) => {
-					dispatch(toggleLoading(false))
+				.then((response) => {
+					if (response.status === 200) {
+						dispatch(toggleLoading(false))
 
-					console.log(data)
+						nextStep()
+					} else {
+						console.log(response)
 
-					nextStep()
-				})
-				.catch((e) => {
-					console.log(e)
+						if (response.message) {
+							dispatch(setErrorLoading(response.message))
+						} else {
+							dispatch(setErrorLoading("Error..."))
+						}
+					}
 				})
 		}
 	}
