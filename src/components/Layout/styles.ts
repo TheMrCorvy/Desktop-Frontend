@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			bottom: theme.spacing(2),
 			right: theme.spacing(2),
 		},
+		backdrop: {
+			zIndex: theme.zIndex.drawer + 1,
+			color: "#fff",
+		},
 	})
 )
 
