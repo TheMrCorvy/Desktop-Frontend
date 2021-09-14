@@ -1,16 +1,19 @@
 import { FC } from "react"
 import { Grid, FormControl, InputLabel, OutlinedInput, Button, Typography } from "@material-ui/core"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../redux/store"
+
+import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
 import { useForm } from "react-hook-form"
 
 type Props = {
-	nextStep: () => void
+	nextStep: (token: string) => void
 	isRobot: boolean
 	testing?: boolean
+	email?: string
 }
 
 type FormInputs = {
@@ -18,8 +21,10 @@ type FormInputs = {
 	recoveryEmailCode: number | string
 }
 
-const StepTwo: FC<Props> = ({ nextStep, isRobot, testing }) => {
+const StepTwo: FC<Props> = ({ nextStep, isRobot, testing, email }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+
+	const dispatch = useDispatch()
 
 	const { register, errors, handleSubmit } = useForm()
 
@@ -30,10 +35,42 @@ const StepTwo: FC<Props> = ({ nextStep, isRobot, testing }) => {
 	const onSubmit = (data: FormInputs) => {
 		if (testing) return
 
-		console.log("production api call")
-		console.log(data)
+		dispatch(toggleLoading(true))
 
-		nextStep()
+		const { REACT_APP_BASE_URI } = process.env
+
+		if (REACT_APP_BASE_URI) {
+			fetch(REACT_APP_BASE_URI + "/auth/register/step-2", {
+				headers: {
+					Accept: "application/json",
+					"Accept-Language": lng,
+					"Content-type": "application/json",
+				},
+				method: "POST",
+				body: JSON.stringify({
+					mainEmailCode: data.mainEmailCode,
+					recoveryEmailCode: data.recoveryEmailCode,
+					mainEmail: email,
+				}),
+			})
+				.then((res) => res.json())
+				.then((response) => {
+					if (response.status === 200) {
+						dispatch(toggleLoading(false))
+
+						nextStep(response.data.token)
+						console.log(response)
+					} else {
+						console.log(response)
+
+						if (response.message) {
+							dispatch(setErrorLoading(response.message))
+						} else {
+							dispatch(setErrorLoading("Error..."))
+						}
+					}
+				})
+		}
 	}
 
 	return (

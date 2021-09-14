@@ -23,7 +23,7 @@ import { translate } from "../../../../lang"
 import DialogComponent from "../../../Dialog"
 
 type Props = {
-	nextStep: () => void
+	nextStep: (email: string) => void
 	isRobot: boolean
 	testing?: boolean
 }
@@ -79,7 +79,7 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 					if (response.status === 200) {
 						dispatch(toggleLoading(false))
 
-						nextStep()
+						nextStep(response.data.registered_email)
 					} else {
 						console.log(response)
 

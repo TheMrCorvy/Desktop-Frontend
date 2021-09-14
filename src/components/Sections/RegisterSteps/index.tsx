@@ -3,28 +3,47 @@ import { FC, useState } from "react"
 import { Button, Typography, Paper, MobileStepper } from "@material-ui/core"
 import useStyles from "./styles"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../redux/store"
+import { login } from "../../../redux/actions/authTokenActions"
+import { showError } from "../../../redux/actions/errorHandlingActions"
 
 import { translate } from "../../../lang"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
+import { CredentialT, UserT } from "../../../misc/types"
+
 import StepOne from "./StepOne"
 import StepTwo from "./StepTwo"
 import StepThree from "./StepThree"
 
+import { initiateDB } from "../../../misc/indexedDB"
+
 type Props = { isRobot: boolean }
+
+type AuthResponse = {
+	user_data: UserT
+	user_credentials: CredentialT[]
+	token: string
+}
 
 const RegisterSteps: FC<Props> = ({ isRobot }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+	const dispatch = useDispatch()
 
 	const classes = useStyles()
 
 	const [activeStep, setActiveStep] = useState(0)
 
-	const handleNext = () => {
+	const [stepResponse, setStepResponse] = useState("")
+
+	const handleNext = (response?: string) => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1)
+
+		if (response) {
+			setStepResponse(response)
+		}
 	}
 
 	const handleBack = () => {
@@ -36,13 +55,31 @@ const RegisterSteps: FC<Props> = ({ isRobot }) => {
 			case 0:
 				return <StepOne isRobot={isRobot} nextStep={handleNext} />
 			case 1:
-				return <StepTwo isRobot={isRobot} nextStep={handleNext} />
+				return <StepTwo isRobot={isRobot} nextStep={handleNext} email={stepResponse} />
 			case 2:
-				return <StepThree isRobot={isRobot} />
+				return (
+					<StepThree
+						isRobot={isRobot}
+						token={stepResponse}
+						onAuthSuccess={handleAuthSuccess}
+					/>
+				)
 
 			default:
 				return <StepOne isRobot={isRobot} nextStep={handleNext} />
 		}
+	}
+
+	const handleAuthSuccess = async (res: AuthResponse) => {
+		const db = await initiateDB(res.user_data, res.user_credentials)
+
+		if (db === undefined) {
+			dispatch(showError(translate("error_messages", lng, 6)))
+
+			return
+		}
+
+		dispatch(login(res.token))
 	}
 
 	return (
@@ -77,7 +114,7 @@ const RegisterSteps: FC<Props> = ({ isRobot }) => {
 				nextButton={
 					<Button
 						size="small"
-						onClick={handleNext}
+						onClick={() => handleNext}
 						color="secondary"
 						disabled={activeStep === 2 || isRobot}
 						data-testid="test_next_step"

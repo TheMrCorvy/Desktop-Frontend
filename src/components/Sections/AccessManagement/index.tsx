@@ -71,6 +71,8 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 		})
 	}
 
+	const handleAuthSuccess = () => {}
+
 	return (
 		<>
 			<Backdrop className={classes.backdrop} open={loading}>
@@ -245,10 +247,8 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 										) : (
 											<StepThree
 												isRobot={false}
-												alter={{
-													email: user4Testing.email,
-													secretKey: secretKey4Testing,
-												}}
+												onAuthSuccess={handleAuthSuccess}
+												token="token"
 											/>
 										)}
 									</Grid>

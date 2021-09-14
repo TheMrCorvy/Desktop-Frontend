@@ -14,22 +14,29 @@ import {
 
 import useStyles from "./styles"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../redux/store"
+
+import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
 import { useForm } from "react-hook-form"
 
 import { QRCode } from "react-qrcode-logo"
 import CopyText from "../../../CopyText"
+import { CredentialT, UserT } from "../../../../misc/types"
+
+type AuthResponse = {
+	user_data: UserT
+	user_credentials: CredentialT[]
+	token: string
+}
 
 type Props = {
 	isRobot: boolean
+	onAuthSuccess: (apiResponse: AuthResponse) => void
+	token: string
 	testing?: boolean
-	alter?: {
-		email: string
-		secretKey: string
-	}
 }
 
 type FormInput = {
@@ -42,13 +49,23 @@ type UserData = {
 	error?: any
 }
 
-const StepThree: FC<Props> = ({ isRobot, testing, alter }) => {
+const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+	const dispatch = useDispatch()
 
 	const [userData, setUserData] = useState<UserData>({
 		email: "",
 		secretKey: "",
 	})
+
+	const { REACT_APP_BASE_URI } = process.env
+
+	const headers = {
+		Accept: "application/json",
+		"Accept-Language": lng,
+		"Content-type": "application/json",
+		Authorization: "Bearer " + token,
+	}
 
 	const { register, errors, handleSubmit } = useForm()
 
@@ -68,30 +85,57 @@ const StepThree: FC<Props> = ({ isRobot, testing, alter }) => {
 			return
 		}
 
-		//api call, just for now I'll simulate the api call
-		if (alter) {
-			setUserData({
-				email: alter.email,
-				secretKey: alter.secretKey,
-			})
-		} else {
-			const timer = setTimeout(() => {
-				setUserData({
-					email: "mr.corvy@gmail.com",
-					secretKey: "DCRMALCXPEZOFKZH",
+		if (REACT_APP_BASE_URI) {
+			//the component starts loading by default, so there's no need to dispatch a loading to redux
+			fetch(REACT_APP_BASE_URI + "/auth/refresh-2fa-secret", { headers })
+				.then((res) => res.json())
+				.then((response) => {
+					if (response.status === 200) {
+						setUserData({
+							email: response.email,
+							secretKey: response.secret,
+						})
+					} else {
+						handleError(response)
+					}
 				})
-			}, 5000)
-			return () => {
-				clearTimeout(timer)
-			}
 		}
 	}, [])
 
 	const onSubmit = (data: FormInput) => {
 		if (testing) return
 
-		console.log("production api call")
-		console.log(data)
+		dispatch(toggleLoading(true))
+
+		if (REACT_APP_BASE_URI) {
+			fetch(REACT_APP_BASE_URI + "/auth/register/step-3", {
+				headers,
+				method: "POST",
+				body: JSON.stringify({
+					twoFactorCode: data.verificationCode,
+				}),
+			})
+				.then((res) => res.json())
+				.then((response) => {
+					if (response.status === 200) {
+						dispatch(toggleLoading(false))
+
+						onAuthSuccess(response.data)
+					} else {
+						handleError(response)
+					}
+				})
+		}
+	}
+
+	const handleError = (error: any) => {
+		console.log(error)
+
+		if (error.message) {
+			dispatch(setErrorLoading(error.message))
+		} else {
+			dispatch(setErrorLoading("Error..."))
+		}
 	}
 
 	return (
