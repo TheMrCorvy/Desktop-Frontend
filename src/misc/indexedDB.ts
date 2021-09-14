@@ -78,6 +78,9 @@ export const initiateDB = (user: UserT, credentials: CredentialT[]) => {
 	//here I use put so when the user login or registers there won't be any error of "same key/id"
 	return Promise.all([putCredentials(credentials), putUser(user)])
 		.then((data) => {
+			if (data[0] === undefined || data[1] === undefined) {
+				return undefined
+			}
 			return data
 		})
 		.catch((error) => {
@@ -174,6 +177,10 @@ export const putUser = (user: UserT) => {
 
 export const putCredentials = (credentials: CredentialT[]) => {
 	const db = new PasuNashiDatabase()
+
+	if (credentials.length === 0) {
+		return "0"
+	}
 
 	return Promise.resolve(db.credentials.bulkPut(credentials))
 		.then((data) => {

@@ -12,7 +12,7 @@ import { translate } from "../../../lang"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import { CredentialT, UserT } from "../../../misc/types"
+import { ApiResponseLoginT, CredentialT, UserT } from "../../../misc/types"
 
 import StepOne from "./StepOne"
 import StepTwo from "./StepTwo"
@@ -21,12 +21,6 @@ import StepThree from "./StepThree"
 import { initiateDB } from "../../../misc/indexedDB"
 
 type Props = { isRobot: boolean }
-
-type AuthResponse = {
-	user_data: UserT
-	user_credentials: CredentialT[]
-	token: string
-}
 
 const RegisterSteps: FC<Props> = ({ isRobot }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -39,11 +33,11 @@ const RegisterSteps: FC<Props> = ({ isRobot }) => {
 	const [stepResponse, setStepResponse] = useState("")
 
 	const handleNext = (response?: string) => {
-		setActiveStep((prevActiveStep) => prevActiveStep + 1)
-
 		if (response) {
 			setStepResponse(response)
 		}
+
+		setActiveStep((prevActiveStep) => prevActiveStep + 1)
 	}
 
 	const handleBack = () => {
@@ -70,16 +64,15 @@ const RegisterSteps: FC<Props> = ({ isRobot }) => {
 		}
 	}
 
-	const handleAuthSuccess = async (res: AuthResponse) => {
+	const handleAuthSuccess = async (res: ApiResponseLoginT) => {
 		const db = await initiateDB(res.user_data, res.user_credentials)
 
 		if (db === undefined) {
 			dispatch(showError(translate("error_messages", lng, 6)))
-
-			return
+		} else {
+			dispatch(login(res.token))
 		}
-
-		dispatch(login(res.token))
+		console.log(res)
 	}
 
 	return (

@@ -60,13 +60,6 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 
 	const { REACT_APP_BASE_URI } = process.env
 
-	const headers = {
-		Accept: "application/json",
-		"Accept-Language": lng,
-		"Content-type": "application/json",
-		Authorization: "Bearer " + token,
-	}
-
 	const { register, errors, handleSubmit } = useForm()
 
 	const classes = useStyles()
@@ -85,16 +78,27 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 			return
 		}
 
-		if (REACT_APP_BASE_URI) {
+		if (REACT_APP_BASE_URI && token) {
 			//the component starts loading by default, so there's no need to dispatch a loading to redux
-			fetch(REACT_APP_BASE_URI + "/auth/refresh-2fa-secret", { headers })
+			fetch(REACT_APP_BASE_URI + "/auth/refresh-2fa-secret", {
+				headers: {
+					Accept: "application/json",
+					"Accept-Language": lng,
+					"Content-type": "application/json",
+					Authorization: "Bearer " + token,
+				},
+			})
 				.then((res) => res.json())
 				.then((response) => {
+					console.log(response)
+
 					if (response.status === 200) {
 						setUserData({
-							email: response.email,
-							secretKey: response.secret,
+							email: response.data.email,
+							secretKey: response.data.secret,
 						})
+
+						console.log(response)
 					} else {
 						handleError(response)
 					}
@@ -107,9 +111,14 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 
 		dispatch(toggleLoading(true))
 
-		if (REACT_APP_BASE_URI) {
+		if (REACT_APP_BASE_URI && token) {
 			fetch(REACT_APP_BASE_URI + "/auth/register/step-3", {
-				headers,
+				headers: {
+					Accept: "application/json",
+					"Accept-Language": lng,
+					"Content-type": "application/json",
+					Authorization: "Bearer " + token,
+				},
 				method: "POST",
 				body: JSON.stringify({
 					twoFactorCode: data.verificationCode,
@@ -119,7 +128,7 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 				.then((response) => {
 					if (response.status === 200) {
 						dispatch(toggleLoading(false))
-
+						console.log(response.data)
 						onAuthSuccess(response.data)
 					} else {
 						handleError(response)

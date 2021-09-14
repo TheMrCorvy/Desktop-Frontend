@@ -59,7 +59,6 @@ const StepTwo: FC<Props> = ({ nextStep, isRobot, testing, email }) => {
 						dispatch(toggleLoading(false))
 
 						nextStep(response.data.token)
-						console.log(response)
 					} else {
 						console.log(response)
 
