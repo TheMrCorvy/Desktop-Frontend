@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form"
 
 import { Grid, FormControl, InputLabel, OutlinedInput, Button, Typography } from "@material-ui/core"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../redux/store"
 
+import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
@@ -21,15 +22,17 @@ type Props = {
 
 type FormInputs = {
 	email: String
-	verificationCode: string | number
+	twoFactorCode: string | number
 }
 
 const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const dispatch = useDispatch()
+
 	const [formData, setFormData] = useState<FormInputs>({
 		email: "",
-		verificationCode: "",
+		twoFactorCode: "",
 	})
 
 	const { register, errors, handleSubmit } = useForm()
@@ -42,14 +45,12 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing })
 		if (testing) {
 			setFormData({
 				email: user4Testing.email,
-				verificationCode: 123456,
+				twoFactorCode: 123456,
 			})
 		}
 	}, [])
 
 	const onSubmit = (data: FormInputs) => {
-		let responseData: ApiResponseLoginT
-
 		if (testing) {
 			console.log(data)
 
@@ -58,8 +59,6 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing })
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
 			}
-
-			responseData = fakeResponse
 		} else {
 			let fakeResponse: ApiResponseLoginT
 
@@ -70,18 +69,42 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing })
 					user_credentials: credential4Testing,
 					isAuthorized: true,
 				}
+
+				onAuthSuccess(fakeResponse)
 			} else {
-				fakeResponse = {
-					token: "fake api authorization token",
-					user_data: user4Testing,
-					user_credentials: credential4Testing,
+				dispatch(toggleLoading(true))
+
+				const { REACT_APP_BASE_URI } = process.env
+
+				if (REACT_APP_BASE_URI) {
+					fetch(REACT_APP_BASE_URI + "/auth/login/two-factor-code", {
+						headers: {
+							Accept: "application/json",
+							"Accept-Language": lng,
+							"Content-type": "application/json",
+						},
+						method: "POST",
+						body: JSON.stringify(data),
+					})
+						.then((res) => res.json())
+						.then((response) => {
+							if (response.status === 200) {
+								dispatch(toggleLoading(false))
+
+								onAuthSuccess(response.data)
+							} else {
+								console.log(response)
+
+								if (response.message) {
+									dispatch(setErrorLoading(response.message))
+								} else {
+									dispatch(setErrorLoading("Error..."))
+								}
+							}
+						})
 				}
 			}
-
-			responseData = fakeResponse
 		}
-
-		onAuthSuccess(responseData)
 	}
 
 	const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -143,7 +166,7 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing })
 								<InputLabel>{translate("auth_form_texts", lng, 1)}</InputLabel>
 								<OutlinedInput
 									label={translate("auth_form_texts", lng, 1)}
-									name="verificationCode"
+									name="twoFactorCode"
 									type="number"
 									required
 									inputProps={{
@@ -163,13 +186,13 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing })
 											},
 										}),
 									}}
-									error={errors?.verificationCode ? true : false}
-									value={formData?.verificationCode}
+									error={errors?.twoFactorCode ? true : false}
+									value={formData?.twoFactorCode}
 									onChange={onChange}
 								/>
-								{errors.verificationCode && (
+								{errors.twoFactorCode && (
 									<Typography variant="body2">
-										{errors.verificationCode.message}
+										{errors.twoFactorCode.message}
 									</Typography>
 								)}
 							</FormControl>
