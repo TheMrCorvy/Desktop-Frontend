@@ -109,16 +109,14 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 	}
 
 	const sendCodeByEmail = () => {
-		const { REACT_APP_ENV_LOCAL } = process.env
+		const { REACT_APP_ENV_LOCAL_API } = process.env
 
 		if (emailPattern.value.test(formData.mailToSendCode)) {
-			console.log("calling api...")
-
 			const request: ApiCallI = {
 				preferredLang: lng,
-				endpoint: "send-code-by-email",
+				endpoint: "/send-code-by-email",
 				method: "POST",
-				envIs: REACT_APP_ENV_LOCAL ? "local" : "production",
+				envIs: REACT_APP_ENV_LOCAL_API ? "local" : "production",
 				body: {
 					email: formData.mailToSendCode,
 					isSecondary: isRecovery,
