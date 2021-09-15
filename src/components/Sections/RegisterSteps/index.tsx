@@ -72,7 +72,6 @@ const RegisterSteps: FC<Props> = ({ isRobot }) => {
 		} else {
 			dispatch(login(res.token))
 		}
-		console.log(res)
 	}
 
 	return (

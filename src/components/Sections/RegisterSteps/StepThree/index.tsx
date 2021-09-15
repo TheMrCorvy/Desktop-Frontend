@@ -90,15 +90,11 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 			})
 				.then((res) => res.json())
 				.then((response) => {
-					console.log(response)
-
 					if (response.status === 200) {
 						setUserData({
 							email: response.data.email,
 							secretKey: response.data.secret,
 						})
-
-						console.log(response)
 					} else {
 						handleError(response)
 					}
@@ -128,7 +124,7 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 				.then((response) => {
 					if (response.status === 200) {
 						dispatch(toggleLoading(false))
-						console.log(response.data)
+
 						onAuthSuccess(response.data)
 					} else {
 						handleError(response)
