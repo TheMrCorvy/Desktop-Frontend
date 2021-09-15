@@ -176,6 +176,7 @@ export interface ApiCallI {
 	method: "GET" | "POST"
 	envIs: "local" | "production"
 	body?: object
+	token?: string
 }
 
 /******************************************************************************** coinbase charge */
