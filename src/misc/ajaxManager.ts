@@ -1,8 +1,14 @@
-import { CredentialT, CoinbaseChargeT, ApiResponseGetCredentialsT, ApiCallI } from "./types"
+import {
+	CredentialT,
+	CoinbaseChargeT,
+	ApiResponseGetCredentialsT,
+	ApiCallI,
+	ApiResponseT,
+} from "./types"
 import { credential4Testing } from "./Data4Testing"
 
-export const callApi = async (params: ApiCallI) => {
-	const { preferredLang, endpoint, method, envIs, body, token } = params
+export const callApi = async (params: ApiCallI): Promise<ApiResponseT> => {
+	const { lng, endpoint, method, envIs, body, token } = params
 
 	const localUrl = "http://localhost:8000/api"
 
@@ -15,7 +21,7 @@ export const callApi = async (params: ApiCallI) => {
 		headers: new Headers({
 			"Content-Type": "application/json",
 			Accept: "application/json",
-			"Accept-Language": preferredLang,
+			"Accept-Language": lng,
 			Authorization: token ? "Bearer " + token : "",
 		}),
 		body: JSON.stringify(body),
@@ -27,7 +33,7 @@ export const callApi = async (params: ApiCallI) => {
 		.catch((response) => {
 			console.error(response)
 
-			return undefined
+			return response
 		})
 }
 

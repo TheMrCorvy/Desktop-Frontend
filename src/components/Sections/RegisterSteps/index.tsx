@@ -12,7 +12,7 @@ import { translate } from "../../../lang"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import { ApiResponseLoginT, CredentialT, UserT } from "../../../misc/types"
+import { ApiResponseLoginT } from "../../../misc/types"
 
 import StepOne from "./StepOne"
 import StepTwo from "./StepTwo"

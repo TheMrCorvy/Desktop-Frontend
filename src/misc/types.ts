@@ -171,13 +171,28 @@ export type ApiResponseGetCredentialsT = {
 }
 
 export interface ApiCallI {
-	preferredLang: string
+	lng: string
 	endpoint: string
 	method: "GET" | "POST"
 	envIs: "local" | "production"
 	body?: object
 	token?: string
 }
+
+interface ApiSuccessResponse {
+	message: string
+	data: any
+	status: number
+}
+
+interface ApiErrorResponse {
+	message: string
+	status: number
+	errors: any[]
+	request: null | any[]
+}
+
+export type ApiResponseT = ApiSuccessResponse | ApiErrorResponse
 
 /******************************************************************************** coinbase charge */
 export type CoinbaseChargeT = {
