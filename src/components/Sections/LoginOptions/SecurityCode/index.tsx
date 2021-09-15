@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form"
 
 import { Grid, Button, OutlinedInput, InputLabel, FormControl, Typography } from "@material-ui/core"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../redux/store"
 
+import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
@@ -29,6 +30,8 @@ type FormInputs = {
 const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const dispatch = useDispatch()
+
 	const { register, errors, handleSubmit } = useForm()
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)
@@ -40,8 +43,6 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) 
 	}
 
 	const onSubmit = (data: FormInputs) => {
-		let responseData: ApiResponseLoginT
-
 		if (testing) {
 			console.log(data)
 
@@ -51,30 +52,40 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) 
 				user_credentials: credential4Testing,
 			}
 
-			responseData = fakeResponse
+			onAuthSuccess(fakeResponse)
 		} else {
-			// here goes the api call, for now i'll just leave a fake response
-			let fakeResponse: ApiResponseLoginT
+			dispatch(toggleLoading(true))
 
-			if (endpoint !== "/login") {
-				fakeResponse = {
-					token: "fake api authorization token",
-					user_data: user4Testing,
-					user_credentials: credential4Testing,
-					isAuthorized: true,
-				}
-			} else {
-				fakeResponse = {
-					token: "fake api authorization token",
-					user_data: user4Testing,
-					user_credentials: credential4Testing,
-				}
+			const { REACT_APP_BASE_URI } = process.env
+
+			if (REACT_APP_BASE_URI) {
+				fetch(REACT_APP_BASE_URI + "/auth/login/security-code", {
+					headers: {
+						Accept: "application/json",
+						"Accept-Language": lng,
+						"Content-type": "application/json",
+					},
+					method: "POST",
+					body: JSON.stringify(data),
+				})
+					.then((res) => res.json())
+					.then((response) => {
+						if (response.status === 200) {
+							dispatch(toggleLoading(false))
+
+							onAuthSuccess(response.data)
+						} else {
+							console.log(response)
+
+							if (response.message) {
+								dispatch(setErrorLoading(response.message))
+							} else {
+								dispatch(setErrorLoading("Error..."))
+							}
+						}
+					})
 			}
-
-			responseData = fakeResponse
 		}
-
-		onAuthSuccess(responseData)
 	}
 
 	return (
@@ -155,7 +166,7 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) 
 								label={translate("auth_form_texts", lng, 4)}
 								name="antiFishingSecret"
 								required
-								type="text"
+								type="password"
 								inputProps={{
 									"data-testid": "test_anti_fishing_input",
 									ref: register({
@@ -189,7 +200,7 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) 
 								label={translate("auth_form_texts", lng, 5)}
 								name="securityCode"
 								required
-								type="string"
+								type="password"
 								inputProps={{
 									ref: register({
 										required: {
