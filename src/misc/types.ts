@@ -174,7 +174,6 @@ export interface ApiCallI {
 	lng: string
 	endpoint: string
 	method: "GET" | "POST"
-	envIs: "local" | "production"
 	body?: object
 	token?: string
 }
@@ -188,8 +187,10 @@ interface ApiSuccessResponse {
 interface ApiErrorResponse {
 	message: string
 	status: number
-	errors: any[]
-	request: null | any[]
+	data: {
+		errors: any
+	}
+	request: null | any
 }
 
 export type ApiResponseT = ApiSuccessResponse | ApiErrorResponse

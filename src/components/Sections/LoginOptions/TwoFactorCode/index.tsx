@@ -10,6 +10,8 @@ import { RootState } from "../../../../redux/store"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
+import { callApi } from "../../../../misc/ajaxManager"
+
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 import { ApiResponseLoginT } from "../../../../misc/types"
 
@@ -44,7 +46,7 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing })
 	useEffect(() => {
 		if (testing) {
 			setFormData({
-				email: user4Testing.email,
+				email: "mr.corvy@gmail.com",
 				twoFactorCode: 123456,
 			})
 		}
@@ -59,6 +61,8 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing })
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
 			}
+
+			onAuthSuccess(fakeResponse)
 		} else {
 			let fakeResponse: ApiResponseLoginT
 
@@ -74,35 +78,26 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing })
 			} else {
 				dispatch(toggleLoading(true))
 
-				const { REACT_APP_BASE_URI } = process.env
+				callApi({
+					lng,
+					endpoint: "/auth/login/two-factor-code",
+					method: "POST",
+					body: data,
+				}).then((response) => {
+					if (response.status === 200) {
+						dispatch(toggleLoading(false))
 
-				if (REACT_APP_BASE_URI) {
-					fetch(REACT_APP_BASE_URI + "/auth/login/two-factor-code", {
-						headers: {
-							Accept: "application/json",
-							"Accept-Language": lng,
-							"Content-type": "application/json",
-						},
-						method: "POST",
-						body: JSON.stringify(data),
-					})
-						.then((res) => res.json())
-						.then((response) => {
-							if (response.status === 200) {
-								dispatch(toggleLoading(false))
+						onAuthSuccess(response.data)
+					} else {
+						console.error(response)
 
-								onAuthSuccess(response.data)
-							} else {
-								console.log(response)
-
-								if (response.message) {
-									dispatch(setErrorLoading(response.message))
-								} else {
-									dispatch(setErrorLoading("Error..."))
-								}
-							}
-						})
-				}
+						if (response.message) {
+							dispatch(setErrorLoading(response.message))
+						} else {
+							dispatch(setErrorLoading("Error..."))
+						}
+					}
+				})
 			}
 		}
 	}

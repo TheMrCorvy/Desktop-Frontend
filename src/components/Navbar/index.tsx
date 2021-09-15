@@ -32,6 +32,8 @@ import { toggleDrawer } from "../../redux/actions/drawerActions"
 import { logOut } from "../../redux/actions/authTokenActions"
 import { toggleLoading, setErrorLoading } from "../../redux/actions/loadingActions"
 
+import { callApi } from "../../misc/ajaxManager"
+
 const Navbar: FC = () => {
 	const { theme } = useSelector((state: RootState) => state.theme)
 
@@ -39,40 +41,34 @@ const Navbar: FC = () => {
 
 	const { token } = useSelector((state: RootState) => state.token)
 
-	const { REACT_APP_BASE_URI } = process.env
-
 	const classes = useStyles()
 
 	const dispatch = useDispatch()
 
 	const callLogout = () => {
-		dispatch(toggleLoading(true))
+		if (token) {
+			dispatch(toggleLoading(true))
 
-		if (REACT_APP_BASE_URI && token) {
-			fetch(REACT_APP_BASE_URI + "/auth/logout", {
-				headers: {
-					Accept: "application/json",
-					"Accept-Language": lng,
-					"Content-type": "application/json",
-					Authorization: "Bearer " + token,
-				},
-			})
-				.then((res) => res.json())
-				.then((response) => {
-					if (response.status === 200) {
-						dispatch(toggleLoading(false))
+			callApi({
+				lng,
+				endpoint: "/auth/logout",
+				method: "GET",
+				token,
+			}).then((response) => {
+				if (response.status === 200) {
+					dispatch(toggleLoading(false))
 
-						dispatch(logOut())
+					dispatch(logOut())
+				} else {
+					console.error(response)
+
+					if (response.message) {
+						dispatch(setErrorLoading(response.message))
 					} else {
-						if (response.message) {
-							dispatch(setErrorLoading(response.message))
-						} else {
-							dispatch(setErrorLoading("Error..."))
-						}
-
-						console.log(response)
+						dispatch(setErrorLoading("Error..."))
 					}
-				})
+				}
+			})
 		}
 	}
 

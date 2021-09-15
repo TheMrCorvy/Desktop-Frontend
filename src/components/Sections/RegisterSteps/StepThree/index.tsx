@@ -20,6 +20,8 @@ import { RootState } from "../../../../redux/store"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
+import { callApi } from "../../../../misc/ajaxManager"
+
 import { useForm } from "react-hook-form"
 
 import { QRCode } from "react-qrcode-logo"
@@ -58,8 +60,6 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 		secretKey: "",
 	})
 
-	const { REACT_APP_BASE_URI } = process.env
-
 	const { register, errors, handleSubmit } = useForm()
 
 	const classes = useStyles()
@@ -78,28 +78,21 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 			return
 		}
 
-		if (REACT_APP_BASE_URI && token) {
-			//the component starts loading by default, so there's no need to dispatch a loading to redux
-			fetch(REACT_APP_BASE_URI + "/auth/refresh-2fa-secret", {
-				headers: {
-					Accept: "application/json",
-					"Accept-Language": lng,
-					"Content-type": "application/json",
-					Authorization: "Bearer " + token,
-				},
-			})
-				.then((res) => res.json())
-				.then((response) => {
-					if (response.status === 200) {
-						setUserData({
-							email: response.data.email,
-							secretKey: response.data.secret,
-						})
-					} else {
-						handleError(response)
-					}
+		callApi({
+			lng,
+			endpoint: "/auth/refresh-2fa-secret",
+			method: "GET",
+			token,
+		}).then((response) => {
+			if (response.status === 200) {
+				setUserData({
+					email: response.data.email,
+					secretKey: response.data.secret,
 				})
-		}
+			} else {
+				handleError(response)
+			}
+		})
 	}, [])
 
 	const onSubmit = (data: FormInput) => {
@@ -107,30 +100,23 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 
 		dispatch(toggleLoading(true))
 
-		if (REACT_APP_BASE_URI && token) {
-			fetch(REACT_APP_BASE_URI + "/auth/register/step-3", {
-				headers: {
-					Accept: "application/json",
-					"Accept-Language": lng,
-					"Content-type": "application/json",
-					Authorization: "Bearer " + token,
-				},
-				method: "POST",
-				body: JSON.stringify({
-					twoFactorCode: data.verificationCode,
-				}),
-			})
-				.then((res) => res.json())
-				.then((response) => {
-					if (response.status === 200) {
-						dispatch(toggleLoading(false))
+		callApi({
+			lng,
+			endpoint: "/auth/register/step-3",
+			method: "POST",
+			body: {
+				twoFactorCode: data.verificationCode,
+			},
+			token,
+		}).then((response) => {
+			if (response.status === 200) {
+				dispatch(toggleLoading(false))
 
-						onAuthSuccess(response.data)
-					} else {
-						handleError(response)
-					}
-				})
-		}
+				onAuthSuccess(response.data)
+			} else {
+				handleError(response)
+			}
+		})
 	}
 
 	const handleError = (error: any) => {

@@ -8,13 +8,15 @@ import {
 import { credential4Testing } from "./Data4Testing"
 
 export const callApi = async (params: ApiCallI): Promise<ApiResponseT> => {
-	const { lng, endpoint, method, envIs, body, token } = params
+	const { lng, endpoint, method, body, token } = params
 
 	const localUrl = "http://localhost:8000/api"
 
 	const productionUrl = "https://pasunashi-backend.herokuapp.com/api"
 
-	const baseUri = envIs === "local" ? localUrl : productionUrl
+	const { REACT_APP_USE_LOCAL_API } = process.env
+
+	const baseUri = REACT_APP_USE_LOCAL_API ? localUrl : productionUrl
 
 	return await fetch(baseUri + endpoint, {
 		method,
@@ -27,14 +29,8 @@ export const callApi = async (params: ApiCallI): Promise<ApiResponseT> => {
 		body: JSON.stringify(body),
 	})
 		.then((res) => res.json())
-		.then((response) => {
-			return response
-		})
-		.catch((response) => {
-			console.error(response)
-
-			return response
-		})
+		.then((response) => response)
+		.catch((response) => response)
 }
 
 export const getCredentialsFromApi = (id: number, token: string | null) => {

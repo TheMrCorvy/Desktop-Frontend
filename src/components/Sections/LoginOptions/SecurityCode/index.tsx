@@ -9,6 +9,8 @@ import { RootState } from "../../../../redux/store"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
+import { callApi } from "../../../../misc/ajaxManager"
+
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 
 import { ApiResponseLoginT } from "../../../../misc/types"
@@ -56,35 +58,26 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) 
 		} else {
 			dispatch(toggleLoading(true))
 
-			const { REACT_APP_BASE_URI } = process.env
+			callApi({
+				lng,
+				endpoint: "/auth/login/security-code",
+				method: "POST",
+				body: data,
+			}).then((response) => {
+				if (response.status === 200) {
+					dispatch(toggleLoading(false))
 
-			if (REACT_APP_BASE_URI) {
-				fetch(REACT_APP_BASE_URI + "/auth/login/security-code", {
-					headers: {
-						Accept: "application/json",
-						"Accept-Language": lng,
-						"Content-type": "application/json",
-					},
-					method: "POST",
-					body: JSON.stringify(data),
-				})
-					.then((res) => res.json())
-					.then((response) => {
-						if (response.status === 200) {
-							dispatch(toggleLoading(false))
+					onAuthSuccess(response.data)
+				} else {
+					console.error(response)
 
-							onAuthSuccess(response.data)
-						} else {
-							console.log(response)
-
-							if (response.message) {
-								dispatch(setErrorLoading(response.message))
-							} else {
-								dispatch(setErrorLoading("Error..."))
-							}
-						}
-					})
-			}
+					if (response.message) {
+						dispatch(setErrorLoading(response.message))
+					} else {
+						dispatch(setErrorLoading("Error..."))
+					}
+				}
+			})
 		}
 	}
 

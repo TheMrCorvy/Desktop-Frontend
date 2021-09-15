@@ -20,6 +20,8 @@ import { RootState } from "../../../../redux/store"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
+import { callApi } from "../../../../misc/ajaxManager"
+
 import DialogComponent from "../../../Dialog"
 
 type Props = {
@@ -62,35 +64,26 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 
 		dispatch(toggleLoading(true))
 
-		const { REACT_APP_BASE_URI } = process.env
+		callApi({
+			lng,
+			endpoint: "/auth/register/step-1",
+			method: "POST",
+			body: data,
+		}).then((response) => {
+			if (response.status === 200) {
+				dispatch(toggleLoading(false))
 
-		if (REACT_APP_BASE_URI) {
-			fetch(REACT_APP_BASE_URI + "/auth/register/step-1", {
-				headers: {
-					Accept: "application/json",
-					"Accept-Language": lng,
-					"Content-type": "application/json",
-				},
-				method: "POST",
-				body: JSON.stringify(data),
-			})
-				.then((res) => res.json())
-				.then((response) => {
-					if (response.status === 200) {
-						dispatch(toggleLoading(false))
+				nextStep(response.data.registered_email)
+			} else {
+				console.error(response)
 
-						nextStep(response.data.registered_email)
-					} else {
-						console.log(response)
-
-						if (response.message) {
-							dispatch(setErrorLoading(response.message))
-						} else {
-							dispatch(setErrorLoading("Error..."))
-						}
-					}
-				})
-		}
+				if (response.message) {
+					dispatch(setErrorLoading(response.message))
+				} else {
+					dispatch(setErrorLoading("Error..."))
+				}
+			}
+		})
 	}
 
 	const validateInputs = (input: string, value: FormInputs) => {

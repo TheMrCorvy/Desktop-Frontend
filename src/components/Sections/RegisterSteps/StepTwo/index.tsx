@@ -7,6 +7,8 @@ import { RootState } from "../../../../redux/store"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
+import { callApi } from "../../../../misc/ajaxManager"
+
 import { useForm } from "react-hook-form"
 
 type Props = {
@@ -37,39 +39,30 @@ const StepTwo: FC<Props> = ({ nextStep, isRobot, testing, email }) => {
 
 		dispatch(toggleLoading(true))
 
-		const { REACT_APP_BASE_URI } = process.env
+		callApi({
+			lng,
+			endpoint: "/auth/register/step-2",
+			method: "POST",
+			body: {
+				mainEmailCode: data.mainEmailCode,
+				recoveryEmailCode: data.recoveryEmailCode,
+				mainEmail: email,
+			},
+		}).then((response) => {
+			if (response.status === 200) {
+				dispatch(toggleLoading(false))
 
-		if (REACT_APP_BASE_URI) {
-			fetch(REACT_APP_BASE_URI + "/auth/register/step-2", {
-				headers: {
-					Accept: "application/json",
-					"Accept-Language": lng,
-					"Content-type": "application/json",
-				},
-				method: "POST",
-				body: JSON.stringify({
-					mainEmailCode: data.mainEmailCode,
-					recoveryEmailCode: data.recoveryEmailCode,
-					mainEmail: email,
-				}),
-			})
-				.then((res) => res.json())
-				.then((response) => {
-					if (response.status === 200) {
-						dispatch(toggleLoading(false))
+				nextStep(response.data.token)
+			} else {
+				console.error(response)
 
-						nextStep(response.data.token)
-					} else {
-						console.log(response)
-
-						if (response.message) {
-							dispatch(setErrorLoading(response.message))
-						} else {
-							dispatch(setErrorLoading("Error..."))
-						}
-					}
-				})
-		}
+				if (response.message) {
+					dispatch(setErrorLoading(response.message))
+				} else {
+					dispatch(setErrorLoading("Error..."))
+				}
+			}
+		})
 	}
 
 	return (

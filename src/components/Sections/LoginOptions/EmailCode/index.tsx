@@ -11,8 +11,9 @@ import {
 	InputAdornment,
 } from "@material-ui/core"
 
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
+import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 
 import { translate } from "../../../../lang"
 
@@ -21,7 +22,8 @@ import Snackbar from "../../../Snackbar"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 
-import { ApiCallI, ApiResponseLoginT } from "../../../../misc/types"
+import { ApiResponseLoginT } from "../../../../misc/types"
+
 import { callApi } from "../../../../misc/ajaxManager"
 
 type Props = {
@@ -40,6 +42,8 @@ type FormInputs = {
 
 const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+
+	const dispatch = useDispatch()
 
 	const { register, errors, handleSubmit } = useForm()
 
@@ -62,9 +66,7 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 	}
 
 	const onSubmit = (data: FormInputs) => {
-		let responseData: ApiResponseLoginT
-
-		if (testing) {
+		if (!testing) {
 			console.log(data)
 
 			const fakeResponse: ApiResponseLoginT = {
@@ -73,30 +75,35 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 				user_credentials: credential4Testing,
 			}
 
-			responseData = fakeResponse
+			onAuthSuccess(fakeResponse)
 		} else {
-			// here goes the api call, for now i'll just leave a fake response
-			let fakeResponse: ApiResponseLoginT
+			dispatch(toggleLoading(true))
 
-			if (endpoint !== "/login") {
-				fakeResponse = {
-					token: "fake api authorization token",
-					user_data: user4Testing,
-					user_credentials: credential4Testing,
-					isAuthorized: true,
-				}
-			} else {
-				fakeResponse = {
-					token: "fake api authorization token",
-					user_data: user4Testing,
-					user_credentials: credential4Testing,
-				}
-			}
+			callApi({
+				lng,
+				endpoint: "/auth/login/email-code",
+				method: "POST",
+				body: {
+					mainEmail: isRecovery ? data.mainEmail : data.mailToSendCode,
+					recoveryEmail: isRecovery ? data.mailToSendCode : null,
+					code: data.verificationCode,
+				},
+			}).then((response) => {
+				if (response.status === 200) {
+					dispatch(toggleLoading(false))
 
-			responseData = fakeResponse
+					onAuthSuccess(response.data)
+				} else {
+					console.error(response)
+
+					if (response.message) {
+						dispatch(setErrorLoading(response.message))
+					} else {
+						dispatch(setErrorLoading("Error..."))
+					}
+				}
+			})
 		}
-
-		onAuthSuccess(responseData)
 	}
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
@@ -109,21 +116,16 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 	}
 
 	const sendCodeByEmail = () => {
-		const { REACT_APP_ENV_LOCAL_API } = process.env
-
 		if (emailPattern.value.test(formData.mailToSendCode)) {
-			const request: ApiCallI = {
-				preferredLang: lng,
+			callApi({
+				lng,
 				endpoint: "/send-code-by-email",
 				method: "POST",
-				envIs: REACT_APP_ENV_LOCAL_API ? "local" : "production",
 				body: {
 					email: formData.mailToSendCode,
 					isSecondary: isRecovery,
 				},
-			}
-
-			callApi(request).then((res) => {
+			}).then((res) => {
 				setSnackbar({
 					open: true,
 					message: res.message,
