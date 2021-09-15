@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useState, useEffect } from "react"
 
 import {
 	Grid,
@@ -26,18 +26,22 @@ import { translate } from "../../lang"
 import RegisterSteps from "../../components/Sections/RegisterSteps"
 import RegisterDialog from "../../components/Sections/RegisterDialog"
 
-type Props = { testing?: boolean }
-
-const Register: FC<Props> = ({ testing }) => {
+const Register: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
 
 	const theme = useTheme()
 
-	const [isRobot, setIsRobot] = useState(testing ? false : true)
+	const [isRobot, setIsRobot] = useState(true)
 
-	const { REACT_APP_RECAPTCHA_SITE_KEY } = process.env
+	const { REACT_APP_RECAPTCHA_SITE_KEY, REACT_APP_ENV_LOCAL } = process.env
+
+	useEffect(() => {
+		if (REACT_APP_ENV_LOCAL) {
+			setIsRobot(false)
+		}
+	}, [])
 
 	const handleChangeCaptcha = (captchaResponse: string | null) => {
 		if (captchaResponse) {

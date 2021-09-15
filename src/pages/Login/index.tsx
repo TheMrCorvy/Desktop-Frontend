@@ -101,7 +101,6 @@ const Login: FC = () => {
 									<Grid item xs={12}>
 										<LoginOptions
 											isRobot={isRobot}
-											testing={REACT_APP_ENV_LOCAL ? true : false}
 											onAuthSuccess={onAuthSuccess}
 										/>
 									</Grid>
