@@ -33,7 +33,7 @@ describe("it locks and unlocks info properly", () => {
 
 		fireEvent.click(securityLock)
 
-		expect(nameInput.getAttribute("type")).toBe("text")
+		expect(nameInput.getAttribute("type")).toBe("password")
 
 		fireEvent.click(securityLock)
 
