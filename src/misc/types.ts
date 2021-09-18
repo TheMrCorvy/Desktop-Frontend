@@ -11,16 +11,11 @@ export type RouteT = {
 
 /******************************************************************************** opinion card */
 export type OpinionCardT = {
-	user: {
-		firstName: string
-		lastName: string
-	}
-	date: string
-	opinion: {
-		body: string
-		isRating: boolean
-		rating?: number
-	}
+	user_name: string
+	body: string
+	id: number
+	rating: number
+	type: boolean
 }
 
 /******************************************************************************** pricing card */

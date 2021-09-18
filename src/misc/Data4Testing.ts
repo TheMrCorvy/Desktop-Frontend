@@ -4,30 +4,21 @@ import { CredentialT, RecentlySeenT } from "./types"
 
 export const suggestion4Testing: OpinionCardT[] = [
 	{
-		user: {
-			firstName: "Name 1",
-			lastName: "Example",
-		},
-		date: "September 14, 2016",
-		opinion: {
-			body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem culpa optio animi deleniti ipsum dolorum voluptatem vel iste saepe ad sed maiores cupiditate, debitis nihil atque facilis minus! Alias, voluptatum.",
-			isRating: false,
-		},
+		user_name: "name of the user",
+		body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem culpa optio animi deleniti ipsum dolorum voluptatem vel iste saepe ad sed maiores cupiditate, debitis nihil atque facilis minus! Alias, voluptatum.",
+		type: true,
+		id: 1,
+		rating: 0,
 	},
 ]
 
 export const rating4Testing: OpinionCardT[] = [
 	{
-		user: {
-			firstName: "Name 1",
-			lastName: "Example",
-		},
-		date: "September 14, 2016",
-		opinion: {
-			body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem culpa optio animi deleniti ipsum dolorum voluptatem vel iste saepe ad sed maiores cupiditate, debitis nihil atque facilis minus! Alias, voluptatum.",
-			isRating: true,
-			rating: 2.5,
-		},
+		user_name: "name of the user",
+		body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem culpa optio animi deleniti ipsum dolorum voluptatem vel iste saepe ad sed maiores cupiditate, debitis nihil atque facilis minus! Alias, voluptatum.",
+		type: false,
+		id: 2,
+		rating: 7,
 	},
 ]
 

@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			color:
 				theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.54)",
 		},
+		title: {
+			textTransform: "capitalize",
+		},
 	})
 )
 

@@ -8,10 +8,10 @@ import { Rating } from "@material-ui/lab"
 
 import { OpinionCardT } from "../../misc/types"
 
-const OpinionCard: FC<OpinionCardT> = ({ user, date, opinion }) => {
+const OpinionCard: FC<OpinionCardT> = ({ user_name, body, rating, type }) => {
 	const classes = useStyles()
 
-	const avatar = user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase()
+	const avatar = user_name.charAt(0).toUpperCase() + user_name.charAt(1).toUpperCase()
 
 	return (
 		<Card data-testid="test_opinion_card">
@@ -21,10 +21,9 @@ const OpinionCard: FC<OpinionCardT> = ({ user, date, opinion }) => {
 						{avatar}
 					</Avatar>
 				}
-				title={user.lastName + " " + user.firstName}
-				subheader={date}
+				title={user_name}
 				classes={{
-					subheader: classes.textColor,
+					title: classes.title,
 				}}
 			/>
 			<CardContent>
@@ -35,12 +34,12 @@ const OpinionCard: FC<OpinionCardT> = ({ user, date, opinion }) => {
 					data-testid="test_card_body"
 					className={classes.textColor}
 				>
-					{opinion.body}
+					{body}
 				</Typography>
 			</CardContent>
-			{opinion.isRating && (
+			{!type && (
 				<CardActions disableSpacing data-testid="test_opinion_rating">
-					<Rating name="read-only" value={opinion.rating} precision={0.5} readOnly />
+					<Rating name="read-only" value={rating} precision={0.5} readOnly />
 				</CardActions>
 			)}
 		</Card>

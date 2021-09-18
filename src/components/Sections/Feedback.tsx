@@ -1,7 +1,8 @@
 import { FC, useEffect, useState } from "react"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
+import { setErrorLoading } from "../../redux/actions/loadingActions"
 
 import { translate } from "../../lang"
 
@@ -10,6 +11,8 @@ import Opinions from "./Opinions"
 import { OpinionCardT } from "../../misc/types"
 
 import { rating4Testing, suggestion4Testing } from "../../misc/Data4Testing"
+import { callApi } from "../../misc/ajaxManager"
+import { ApiCallI } from "../../misc/types"
 
 type FeedbackT = {
 	suggestions: OpinionCardT[]
@@ -17,6 +20,8 @@ type FeedbackT = {
 }
 
 const Feedback: FC = () => {
+	const dispatch = useDispatch()
+
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [feedback, setFeedback] = useState<FeedbackT>({
@@ -33,22 +38,45 @@ const Feedback: FC = () => {
 				ratings: rating4Testing,
 			})
 		} else {
-			//here will be the api call to fetch the feedback, depending on the current language
-			setFeedback({
-				suggestions: suggestion4Testing,
-				ratings: rating4Testing,
+			const params: ApiCallI = { lng, endpoint: "/feedback/index", method: "GET" }
+
+			callApi(params).then((response) => {
+				if (response.status === 200) {
+					setFeedback({
+						suggestions: response.data.feedback.suggestions,
+						ratings: response.data.feedback.ratings,
+					})
+				} else {
+					if (response.message) {
+						dispatch(setErrorLoading(response.message))
+					} else {
+						dispatch(setErrorLoading("Error..."))
+					}
+				}
 			})
 		}
 	}, [])
-	return (
-		<div data-testid="test_feedback">
-			<Opinions
-				title={translate("feedback_titles", lng, 0)}
-				opinions={feedback.suggestions}
-			/>
-			<Opinions title={translate("feedback_titles", lng, 1)} opinions={feedback.ratings} />
-		</div>
-	)
+
+	if (feedback.suggestions.length > 0 || feedback.ratings.length > 0) {
+		return (
+			<div data-testid="test_feedback">
+				{feedback.suggestions.length > 0 && (
+					<Opinions
+						title={translate("feedback_titles", lng, 0)}
+						opinions={feedback.suggestions}
+					/>
+				)}
+				{feedback.ratings.length > 0 && (
+					<Opinions
+						title={translate("feedback_titles", lng, 1)}
+						opinions={feedback.ratings}
+					/>
+				)}
+			</div>
+		)
+	} else {
+		return null
+	}
 }
 
 export default Feedback
