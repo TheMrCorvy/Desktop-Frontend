@@ -39,6 +39,7 @@ type Props = { testing?: boolean }
 
 const AccessManagement: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+	const { token } = useSelector((state: RootState) => state.token)
 
 	const [locked, setLocked] = useState(true)
 
@@ -230,7 +231,7 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 											<StepThree
 												isRobot={false}
 												onAuthSuccess={handleAuthSuccess}
-												token="token"
+												token={token ? token : ""}
 											/>
 										)}
 									</Grid>
