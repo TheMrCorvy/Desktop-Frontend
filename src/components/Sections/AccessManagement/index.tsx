@@ -200,24 +200,6 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 
 							{!locked && (
 								<>
-									<Grid item xs={12} className={classes.textCenter}>
-										<Button
-											variant="contained"
-											disableElevation
-											color="primary"
-											className={classes.exportBtn}
-										>
-											{translate("export_credentials", lng, 0)}
-										</Button>
-										<Typography
-											variant="body2"
-											paragraph
-											gutterBottom
-											className={classes.smallMarginTop}
-										>
-											{translate("export_credentials", lng, 1)}
-										</Typography>
-									</Grid>
 									<Grid
 										item
 										xs={12}
