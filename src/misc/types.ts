@@ -130,6 +130,7 @@ export type UserT = {
 	anti_fishing_secret: string
 	invitation_code: string
 	security_access_code: string
+	preferred_lang: string
 }
 
 /******************************************************************************** recommended apps */

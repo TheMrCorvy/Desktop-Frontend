@@ -31,6 +31,7 @@ import { initiateDB } from "../../misc/indexedDB"
 /************************************************************************************ my components */
 import Snackbar from "../../components/Snackbar"
 import LoginOptions from "../../components/Sections/LoginOptions"
+import { setLanguage } from "../../redux/actions/langActions"
 
 const Login: FC = () => {
 	const { REACT_APP_ENV_LOCAL, REACT_APP_RECAPTCHA_SITE_KEY } = process.env
@@ -68,6 +69,8 @@ const Login: FC = () => {
 
 			return
 		}
+
+		dispatch(setLanguage(res.user_data.preferred_lang))
 
 		dispatch(login(res.token))
 	}

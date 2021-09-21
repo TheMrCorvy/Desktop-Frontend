@@ -33,6 +33,7 @@ export const user4Testing: UserT = {
 	anti_fishing_secret: "@Leonard1618",
 	invitation_code: "AJFV8S67B4JSA8",
 	security_access_code: "AJF682JK9S",
+	preferred_lang: "en",
 }
 
 export const secretKey4Testing = "DCRMALCXPEZOFKZH"
