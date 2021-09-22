@@ -169,7 +169,7 @@ export type ApiResponseGetCredentialsT = {
 export interface ApiCallI {
 	lng: string
 	endpoint: string
-	method: "GET" | "POST"
+	method: "GET" | "POST" | "PUT" | "DELETE"
 	body?: object
 	token?: string
 }
