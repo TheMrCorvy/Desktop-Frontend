@@ -120,7 +120,7 @@ const MyCredentials: FC = () => {
 		dispatch(showError(translate("error_messages", lng, 0)))
 	}
 
-	const isUserAllowedToFeedbackForm = () => {
+	const isAllowed = () => {
 		if (user !== null) {
 			if (user.role === "premium" || user.role === "admin") {
 				return <FeedbackForm />
@@ -181,7 +181,7 @@ const MyCredentials: FC = () => {
 					{user && <UpdateRole userRole={user.role} canBuySlots={canBuySlots()} />}
 				</Grid>
 			</Container>
-			{isUserAllowedToFeedbackForm()}
+			{isAllowed()}
 			<Downloads />
 		</>
 	)
