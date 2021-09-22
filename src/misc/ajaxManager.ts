@@ -30,7 +30,11 @@ export const callApi = async (params: ApiCallI): Promise<ApiResponseT> => {
 	})
 		.then((res) => res.json())
 		.then((response) => response)
-		.catch((response) => response)
+		.catch((response) => {
+			console.error(response)
+
+			return response
+		})
 }
 
 export const getCredentialsFromApi = (id: number, token: string | null) => {
