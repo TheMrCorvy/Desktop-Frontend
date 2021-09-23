@@ -8,9 +8,13 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
 import { translate } from "../../../../lang"
 import { setLanguage } from "../../../../redux/actions/langActions"
+import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
+import { callApi } from "../../../../misc/ajaxManager"
+import { ApiCallI } from "../../../../misc/types"
 
 const TranslateButton = ({ ...rest }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+	const { token } = useSelector((state: RootState) => state.token)
 
 	const dispatch = useDispatch()
 
@@ -25,6 +29,30 @@ const TranslateButton = ({ ...rest }) => {
 
 		if (value !== "no change") {
 			dispatch(setLanguage(value))
+
+			if (!token) return
+
+			dispatch(toggleLoading(true))
+
+			const request: ApiCallI = {
+				endpoint: "/user/update-preferred-lang",
+				method: "PUT",
+				body: {
+					preferredLang: value,
+				},
+				token,
+				lng: value,
+			}
+
+			callApi(request).then((response) => {
+				if (response.status !== 200) {
+					dispatch(setErrorLoading(response.message))
+				}
+
+				dispatch(toggleLoading(false))
+
+				console.log(response)
+			})
 		}
 	}
 
