@@ -147,8 +147,6 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 
 			callApi(request).then((response) => {
 				if (response.status === 200) {
-					console.log(response)
-
 					dispatch(toggleLoading(false))
 
 					setForm(placeholder)
