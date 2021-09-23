@@ -57,6 +57,15 @@ type Form = {
 	security_access_code: string
 }
 
+const placeholder: Form = {
+	name: "•••••",
+	email: "•••••",
+	recovery_email: "•••••",
+	phone_number: "•••••",
+	anti_fishing_secret: "•••••",
+	security_access_code: "•••••",
+}
+
 const AccessManagement: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 	const { token } = useSelector((state: RootState) => state.token)
@@ -69,14 +78,7 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 
 	const [refreshSecret, setRefreshSecret] = useState(false)
 
-	const [form, setForm] = useState<Form>({
-		name: "•••••",
-		email: "•••••",
-		recovery_email: "•••••",
-		phone_number: "•••••",
-		anti_fishing_secret: "•••••",
-		security_access_code: "•••••",
-	})
+	const [form, setForm] = useState<Form>(placeholder)
 
 	const [userRole, setUserRole] = useState("")
 
@@ -140,6 +142,7 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 				token,
 				method: "PUT",
 				endpoint: "/user/update",
+				body: form,
 			}
 
 			callApi(request).then((response) => {
@@ -148,8 +151,12 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 
 					dispatch(toggleLoading(false))
 
+					setForm(placeholder)
+
 					setLocked(true)
 				} else {
+					console.error(response)
+
 					dispatch(setErrorLoading(response.message))
 				}
 			})
