@@ -24,6 +24,7 @@ type Props = {
 	method: "PayPal" | "Crypto"
 	type: "slots" | "premium"
 	goBack: () => void
+	initPaymentInstance: (code: string, finalAmount: number, verifyImmediately?: boolean) => void
 	testing?: boolean
 }
 
@@ -42,6 +43,8 @@ let firstCall = true
  * 
  * @property {function} goBack This function is from the parent component. Its used when the user wants to go bak to calc the price step
  * 
+ * @property {function} initPaymentInstance This function will give the api the required parameters to open a payment instance and verify the payment
+ * 
  * @property {boolean} [testing] If the behavior of the component
  * 
  * @example 
@@ -54,7 +57,7 @@ let firstCall = true
 	/>
  */
 
-const PurchaseButton: FC<Props> = ({ amount, method, type, goBack }) => {
+const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, initPaymentInstance }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
@@ -87,6 +90,8 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack }) => {
 	const onSuccess = (details: any) => {
 		console.log("success!")
 		console.log("Order id: " + details.id)
+
+		initPaymentInstance(details.id, finalAmount, true)
 
 		setMessage(translate("success_message", lng))
 	}
@@ -138,11 +143,16 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack }) => {
 			<>
 				{loading && <CircularProgress className={classes.marginBottom} />}
 
-				{cryptoUrl && (
+				{cryptoUrl && cryptoCode && (
 					<Grid container spacing={4} justify="center">
 						<Grid item>
 							<a href={cryptoUrl} target="_blank" className={classes.link}>
-								<Button variant="contained" color="primary" disableElevation>
+								<Button
+									variant="contained"
+									color="primary"
+									disableElevation
+									onClick={() => initPaymentInstance(cryptoCode, finalAmount)}
+								>
 									{translate("purchase_now", lng)}
 								</Button>
 							</a>

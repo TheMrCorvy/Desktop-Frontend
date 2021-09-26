@@ -16,12 +16,18 @@ import {
 import useStyles from "./styles"
 import { useTheme } from "@material-ui/core/styles"
 
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
+import { ApiCallI } from "../../misc/types"
+import { callApi } from "../../misc/ajaxManager"
+
+import { setErrorLoading } from "../../redux/actions/loadingActions"
+
 import PurchaseButton from "./PurchaseButton"
+import Snackbar from "../Snackbar"
 
 type Props = {
 	method: Method
@@ -44,10 +50,14 @@ type PurchaseType = "premium" | "slots"
 
 const PurchaseDialog: FC<Props> = ({ method, type }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+	const { token } = useSelector((state: RootState) => state.token)
+
+	const dispatch = useDispatch()
 
 	const [open, setOpen] = useState(false)
 	const [amount, setAmount] = useState<"" | number>("")
 	const [step, setStep] = useState(1)
+	const [message, setMessage] = useState("")
 
 	const classes = useStyles()
 
@@ -65,6 +75,41 @@ const PurchaseDialog: FC<Props> = ({ method, type }) => {
 		} else {
 			setAmount(newAmount)
 		}
+	}
+
+	const initPaymentInstance = (
+		code: string,
+		finalAmount: number,
+		verifyImmediately?: boolean
+	) => {
+		if (!token) return
+
+		const request: ApiCallI = {
+			lng,
+			method: "POST",
+			endpoint: "/start-payment-instance",
+			body: {
+				code,
+				amount: finalAmount,
+				type,
+				method,
+			},
+			token,
+		}
+
+		callApi(request).then((response) => {
+			setOpen(false)
+
+			if (response.status !== 200) {
+				dispatch(setErrorLoading(response.message))
+			} else {
+				setMessage(response.message)
+			}
+
+			if (verifyImmediately) {
+				// another api call
+			}
+		})
 	}
 
 	return (
@@ -134,6 +179,7 @@ const PurchaseDialog: FC<Props> = ({ method, type }) => {
 								type={type}
 								method={method}
 								goBack={() => setStep(1)}
+								initPaymentInstance={initPaymentInstance}
 							/>
 						)
 					)}
@@ -144,6 +190,10 @@ const PurchaseDialog: FC<Props> = ({ method, type }) => {
 					</Button>
 				</DialogActions>
 			</Dialog>
+
+			{message && (
+				<Snackbar message={message} open={message ? true : false} duration={45000} />
+			)}
 		</>
 	)
 }
