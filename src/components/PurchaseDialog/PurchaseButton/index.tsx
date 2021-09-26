@@ -88,9 +88,6 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, initPaymentIn
 	}, [])
 
 	const onSuccess = (details: any) => {
-		console.log("success!")
-		console.log("Order id: " + details.id)
-
 		initPaymentInstance(details.id, finalAmount, true)
 
 		setMessage(translate("success_message", lng))

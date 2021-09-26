@@ -107,7 +107,23 @@ const PurchaseDialog: FC<Props> = ({ method, type }) => {
 			}
 
 			if (verifyImmediately) {
-				// another api call
+				const verifyRequest: ApiCallI = {
+					lng,
+					method: "POST",
+					endpoint: "/verify-paypal-payment",
+					body: {
+						code,
+					},
+					token,
+				}
+
+				callApi(verifyRequest).then((response) => {
+					if (response.status !== 200) {
+						dispatch(setErrorLoading(response.message))
+					}
+
+					console.log(response)
+				})
 			}
 		})
 	}
