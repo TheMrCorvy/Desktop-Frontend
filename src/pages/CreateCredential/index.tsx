@@ -9,7 +9,7 @@ import { RootState } from "../../redux/store"
 import { clearCredential, editCredential } from "../../redux/actions/credentialActions"
 import { translate } from "../../lang"
 
-import { CompanyT, AccessCredentialPropT } from "../../misc/types"
+import { CompanyT, AccessCredentialPropT, ApiCallI } from "../../misc/types"
 
 import { companies4Testing } from "../../misc/Data4Testing"
 import { calcMaxChar } from "../../misc/staticData"
@@ -18,6 +18,8 @@ import { getCompanies, putCompanies } from "../../misc/indexedDB"
 
 import CreateCredentialProp from "../../components/CreateCredentialProp"
 import GoBackBtn from "../../components/GoBackBtn"
+import { callApi } from "../../misc/ajaxManager"
+import { setErrorLoading, toggleLoading } from "../../redux/actions/loadingActions"
 
 type EditingCredential = {
 	mainText: string
@@ -30,6 +32,8 @@ const CreateCredential: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const { credential } = useSelector((state: RootState) => state.credential)
+
+	const { token } = useSelector((state: RootState) => state.token)
 
 	const dispatch = useDispatch()
 
@@ -82,6 +86,38 @@ const CreateCredential: FC = () => {
 		}
 
 		dispatch(editCredential(baggage))
+	}
+
+	const submitForm = () => {
+		if (!token) return
+
+		dispatch(toggleLoading(true))
+
+		const request: ApiCallI = {
+			lng,
+			endpoint: "/credential/create",
+			method: "POST",
+			body: {
+				...credential,
+				accessing_device: "un dispositivo de acceso",
+				accessing_platform: "web",
+			},
+			token,
+		}
+
+		console.log(credential)
+
+		callApi(request).then((response) => {
+			if (response.status !== 200) {
+				dispatch(setErrorLoading(response.message))
+			} else {
+				console.log(response)
+
+				dispatch(toggleLoading(false))
+
+				// update indexed db to add the new credential, and reduce the amount of available slots by 1
+			}
+		})
 	}
 
 	return (
@@ -204,6 +240,7 @@ const CreateCredential: FC = () => {
 							fullWidth
 							size="large"
 							className={classes.submitBtn}
+							onClick={submitForm}
 						>
 							{translate("save", lng)}
 						</Button>
