@@ -6,12 +6,15 @@ import useStyles from "./styles"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
-import { clearCredential, editCredential } from "../../redux/actions/credentialActions"
+import {
+	clearCredential,
+	CredentialProp,
+	editCredential,
+} from "../../redux/actions/credentialActions"
 import { translate } from "../../lang"
 
 import { CompanyT, AccessCredentialPropT, ApiCallI } from "../../misc/types"
 
-import { companies4Testing } from "../../misc/Data4Testing"
 import { calcMaxChar } from "../../misc/staticData"
 
 import { getCompanies, putCompanies } from "../../misc/indexedDB"
@@ -57,17 +60,30 @@ const CreateCredential: FC = () => {
 		const data = await getCompanies()
 
 		if (data === undefined || data.length === 0) {
-			//call the api
-
-			setCompanies(companies4Testing)
-
-			//since the companies are not an essential thing, I don't think its necessary to handle the errors too much
-			await putCompanies(companies4Testing)
+			getFromApi()
 
 			return
 		}
 
 		setCompanies(data)
+	}
+
+	const getFromApi = () => {
+		const request: ApiCallI = {
+			lng,
+			method: "GET",
+			endpoint: "/companies/index",
+		}
+
+		callApi(request).then(async (response) => {
+			if (response.status !== 200) {
+				dispatch(setErrorLoading(response.message))
+			}
+
+			await putCompanies(response.data.companies)
+
+			setCompanies(response.data.companies)
+		})
 	}
 
 	const dispatchEditCredential = (edit: EditingCredential) => {
@@ -91,6 +107,17 @@ const CreateCredential: FC = () => {
 	const submitForm = () => {
 		if (!token) return
 
+		const autocomplete = document.getElementById("autocomplete-input") as HTMLInputElement
+
+		if (credential && autocomplete) {
+			let baggage: CredentialProp = {
+				oldCredential: credential,
+				prop: "company_name",
+				newValue: autocomplete.value,
+			}
+
+			dispatch(editCredential(baggage))
+		}
 		dispatch(toggleLoading(true))
 
 		const request: ApiCallI = {
@@ -104,8 +131,6 @@ const CreateCredential: FC = () => {
 			},
 			token,
 		}
-
-		console.log(credential)
 
 		callApi(request).then((response) => {
 			if (response.status !== 200) {

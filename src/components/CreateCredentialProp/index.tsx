@@ -235,6 +235,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 							options={options}
 							groupBy={(option) => option.name.charAt(0)}
 							getOptionLabel={(option) => option.name}
+							id="autocomplete-input"
 							renderInput={(params) => (
 								<TextField
 									{...params}

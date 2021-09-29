@@ -12,7 +12,7 @@ import {
 	ReduxCredentialT,
 } from "../../misc/types"
 
-type CredentialProp = {
+export type CredentialProp = {
 	oldCredential: ReduxCredentialT
 	prop: AccessCredentialPropT
 	newValue: CredentialPropValueT
