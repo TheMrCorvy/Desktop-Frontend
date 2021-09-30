@@ -15,21 +15,27 @@ import {
 
 import useStyles from "./styles"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
+import { setErrorLoading } from "../../../redux/actions/loadingActions"
 
 import { recentlySeen4Testing } from "../../../misc/Data4Testing"
 
 import { getRecentlySeen, putRecentlySeen } from "../../../misc/indexedDB"
 
-import { RecentlySeenT } from "../../../misc/types"
+import { ApiCallI, RecentlySeenT } from "../../../misc/types"
+
+import { callApi } from "../../../misc/ajaxManager"
 
 type Props = { testing?: boolean }
 
 const RecentAccessTable: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+	const { token } = useSelector((state: RootState) => state.token)
+
+	const dispatch = useDispatch()
 
 	const [credentials, setCredentials] = useState<RecentlySeenT[]>([])
 
@@ -62,18 +68,28 @@ const RecentAccessTable: FC<Props> = ({ testing }) => {
 	}
 
 	const getFromApi = async () => {
-		//fake api call on component did mount
-		const fakeTimer = setTimeout(() => {
-			setCredentials(recentlySeen4Testing)
+		if (!token) return
 
-			putRecentlySeen(recentlySeen4Testing)
+		const request: ApiCallI = {
+			lng,
+			method: "GET",
+			endpoint: "/credential/get-recently-seen",
+			token,
+		}
+
+		callApi(request).then((response) => {
+			if (response.status !== 200) {
+				dispatch(setErrorLoading(response.message))
+
+				return
+			}
+
+			setCredentials(response.data.recently_seen)
+
+			putRecentlySeen(response.data.recently_seen)
 
 			setLoading(false)
-		}, 4000)
-
-		return () => {
-			clearTimeout(fakeTimer)
-		}
+		})
 	}
 
 	return (
@@ -113,7 +129,7 @@ const RecentAccessTable: FC<Props> = ({ testing }) => {
 													scope="row"
 													className={classes.textCapitalize}
 												>
-													{credential.name}
+													{credential.company_name}
 												</TableCell>
 												<TableCell align="left">
 													{credential.last_seen}

@@ -144,7 +144,7 @@ export type RecommendedAppsT = {
 
 /******************************************************************************** recently seen */
 export type RecentlySeenT = {
-	name: string
+	company_name: string
 	last_seen: string
 	id: 1
 	created_at: string

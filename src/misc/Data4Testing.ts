@@ -181,7 +181,7 @@ export const credential4Testing: CredentialT[] = [
 
 export const recentlySeen4Testing: RecentlySeenT[] = [
 	{
-		name: "test 1",
+		company_name: "test 1",
 		last_seen: "2021-02-23 17:32:23",
 		id: 1,
 		created_at: "2021-02-15 17:32:23",
