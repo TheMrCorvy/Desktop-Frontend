@@ -44,31 +44,31 @@ export type CredentialT = {
 	recently_seen: boolean | string
 	user_name: string | null
 	char_count: number | null
-	email?: {
+	email: null | {
 		opening: string
 		char_count: number
 		ending: string
 		email?: string
 	}
-	password?: {
+	password: null | {
 		char_count: number
 		password?: string
 	}
-	username?: {
+	username: null | {
 		char_count: number
 		username?: string
 	}
-	phone_number?: {
+	phone_number: null | {
 		opening: string
 		char_count: number
 		ending: string
 		phone_number?: string
 	}
-	security_question_answer?: {
+	security_question_answer: null | {
 		security_question: string
 		security_answer: string
 	}
-	security_codes?: {
+	security_codes: null | {
 		unique_security_code: string | null
 		multiple_security_codes: string | null
 		multiple_code_length: number
