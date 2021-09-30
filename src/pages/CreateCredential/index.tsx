@@ -171,6 +171,7 @@ const CreateCredential: FC = () => {
 						<CreateCredentialProp
 							defaultExpanded
 							label={translate("description", lng)}
+							isMandatory
 							layout="multiline"
 							maxChar={calcMaxChar("lg")}
 							accessCredentialProp="description"
