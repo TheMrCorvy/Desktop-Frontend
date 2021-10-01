@@ -11,7 +11,7 @@ import { initializeCredential } from "../../../redux/actions/credentialActions"
 import { translate } from "../../../lang"
 
 import { findCredential } from "../../../misc/indexedDB"
-import { calcMaxChar } from "../../../misc/staticData"
+import { calcMaxChar, getUserAgent } from "../../../misc/staticData"
 import { AccessCredentialPropT, CharSizesT } from "../../../misc/types"
 
 import UnlockData from "../../UnlockData"
@@ -131,16 +131,6 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 
 			console.log(credential)
 		}
-	}
-
-	const getUserAgent = () => {
-		const userAgentInfo = navigator.userAgent
-
-		const multipleStrings = userAgentInfo.split("(")
-
-		const finalStrings = multipleStrings[1].split(")")
-
-		return finalStrings[0]
 	}
 
 	const renderCredentialProp = (

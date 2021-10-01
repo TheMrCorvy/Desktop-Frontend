@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react"
+import { useHistory } from "react-router-dom"
 
 import { Button, Container, Grid, Typography } from "@material-ui/core"
 
@@ -11,17 +12,16 @@ import {
 	CredentialProp,
 	editCredential,
 } from "../../redux/actions/credentialActions"
+import { showError } from "../../redux/actions/errorHandlingActions"
 import { translate } from "../../lang"
 
-import { CompanyT, AccessCredentialPropT, ApiCallI } from "../../misc/types"
-
-import { calcMaxChar } from "../../misc/staticData"
-
-import { getCompanies, putCompanies } from "../../misc/indexedDB"
+import { CompanyT, AccessCredentialPropT, ApiCallI, CredentialT } from "../../misc/types"
+import { calcMaxChar, getUserAgent } from "../../misc/staticData"
+import { getCompanies, getUser, putCompanies, putCredential, putUser } from "../../misc/indexedDB"
+import { callApi } from "../../misc/ajaxManager"
 
 import CreateCredentialProp from "../../components/CreateCredentialProp"
 import GoBackBtn from "../../components/GoBackBtn"
-import { callApi } from "../../misc/ajaxManager"
 import { setErrorLoading, toggleLoading } from "../../redux/actions/loadingActions"
 
 type EditingCredential = {
@@ -33,14 +33,14 @@ type EditingCredential = {
 
 const CreateCredential: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
-
 	const { credential } = useSelector((state: RootState) => state.credential)
-
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const dispatch = useDispatch()
 
 	const classes = useStyles()
+
+	const history = useHistory()
 
 	const [companies, setCompanies] = useState<CompanyT[]>([
 		{
@@ -126,7 +126,7 @@ const CreateCredential: FC = () => {
 			method: "POST",
 			body: {
 				...credential,
-				accessing_device: "un dispositivo de acceso",
+				accessing_device: getUserAgent(),
 				accessing_platform: "web",
 			},
 			token,
@@ -140,9 +140,42 @@ const CreateCredential: FC = () => {
 
 				dispatch(toggleLoading(false))
 
-				// update indexed db to add the new credential, and reduce the amount of available slots by 1
+				updateIndexedDB(response.data.credential)
 			}
 		})
+	}
+
+	const updateIndexedDB = async (credential: CredentialT) => {
+		const user = await getUser()
+
+		if (user === undefined) {
+			dispatch(showError(translate("error_messages", lng, 0)))
+
+			return
+		}
+
+		if (user.role === "free" || user.role === "semi-premium") {
+			const updatedUser = await putUser({
+				...user,
+				slots_available: user.slots_available - 1,
+			})
+
+			if (updatedUser === undefined) {
+				dispatch(showError(translate("error_messages", lng, 0)))
+
+				return
+			}
+		}
+
+		const updatedCredential = await putCredential(credential)
+
+		if (updatedCredential === undefined) {
+			dispatch(showError(translate("error_messages", lng, 0)))
+
+			return
+		}
+
+		history.push("/view-credential/" + credential.id)
 	}
 
 	return (
