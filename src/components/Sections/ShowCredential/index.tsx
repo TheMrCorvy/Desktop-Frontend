@@ -261,17 +261,17 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 						translate("encryption_examples", lng, 10)
 					)}
 					{renderCredentialProp(
-						"unique_security_code",
+						"unique_code",
 						translate("auth_form_texts", lng, 13),
 						"xs"
 					)}
 					{renderCredentialProp(
-						"multiple_security_code",
+						"multiple_codes",
 						translate("encryption_examples", lng, 8),
 						"xs"
 					)}
 					{renderCredentialProp(
-						"crypto_currency_access_codes",
+						"crypto_codes",
 						translate("encryption_examples", lng, 9),
 						"xs",
 						true

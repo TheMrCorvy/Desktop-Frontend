@@ -106,11 +106,11 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 		let baggage: Baggage = {
 			oldCredential: credential,
 			newValue: editingCodes,
-			prop: "multiple_security_code",
+			prop: "multiple_codes",
 		}
 
 		if (isCrypto) {
-			baggage.prop = "crypto_currency_access_codes"
+			baggage.prop = "crypto_codes"
 		}
 
 		dispatch(editCredential(baggage))

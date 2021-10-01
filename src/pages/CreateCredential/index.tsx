@@ -270,7 +270,7 @@ const CreateCredential: FC = () => {
 							label={translate("auth_form_texts", lng, 13)}
 							layout="text field"
 							maxChar={calcMaxChar("xs")}
-							accessCredentialProp="unique_security_code"
+							accessCredentialProp="unique_code"
 							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
@@ -278,7 +278,7 @@ const CreateCredential: FC = () => {
 						<CreateCredentialProp
 							label={translate("encryption_examples", lng, 8)}
 							layout="multiple codes"
-							accessCredentialProp="multiple_security_code"
+							accessCredentialProp="multiple_codes"
 							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
@@ -287,7 +287,7 @@ const CreateCredential: FC = () => {
 							label={translate("encryption_examples", lng, 9)}
 							layout="multiple codes"
 							isCrypto={true}
-							accessCredentialProp="crypto_currency_access_codes"
+							accessCredentialProp="crypto_codes"
 							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>

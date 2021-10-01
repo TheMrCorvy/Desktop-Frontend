@@ -73,14 +73,14 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	const dispatch = useDispatch()
 
 	const textToCopy = (): string => {
-		if (isCrypto && propName === "crypto_currency_access_codes") {
-			if (credential.crypto_currency_access_codes) {
-				return credential.crypto_currency_access_codes.join(" ")
+		if (isCrypto && propName === "crypto_codes") {
+			if (credential.crypto_codes) {
+				return credential.crypto_codes.join(" ")
 			}
 		}
 
-		if (credential.multiple_security_code && propName === "multiple_security_code") {
-			return credential.multiple_security_code[0]
+		if (credential.multiple_codes && propName === "multiple_codes") {
+			return credential.multiple_codes[0]
 		}
 
 		if (propName === "security_question") {
@@ -147,10 +147,8 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 			)
 		}
 
-		if (propName === "multiple_security_code" || propName === "crypto_currency_access_codes") {
-			const codes = isCrypto
-				? credential.crypto_currency_access_codes
-				: credential.multiple_security_code
+		if (propName === "multiple_codes" || propName === "crypto_codes") {
+			const codes = isCrypto ? credential.crypto_codes : credential.multiple_codes
 
 			const showCodesLabel = (number: number, code: string) => {
 				if ((isCrypto && visible) || (isCrypto && !locked)) {

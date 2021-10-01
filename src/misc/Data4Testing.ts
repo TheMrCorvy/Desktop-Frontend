@@ -74,13 +74,14 @@ export const credential4Testing: CredentialT[] = [
 			security_question: "what is the meaning of life?",
 			security_answer: "42",
 		},
-		security_codes: {
-			unique_security_code: "D7WK29JDU8",
-			multiple_security_codes: "codigo-1 codigo-2 codigo-2",
-			multiple_code_length: 11,
-			crypto_currency_access_code:
+		security_code: {
+			unique_code: "D7WK29JDU8",
+			unique_code_length: 10,
+			multiple_codes: "codigo-1 codigo-2 codigo-2",
+			multiple_codes_length: 11,
+			crypto_codes:
 				"Lorem ipsum dolor sit amet consectetur adipisicing elit Eaque odio accusamus cumque nemo veniam? Perferendis consequatur incidunt fugiat delectus reiciendis atque Ipsam excepturi molestiae quasi ratione id veniam pariatur laborum",
-			crypto_code_length: 30,
+			crypto_codes_length: 30,
 		},
 		created_at: "2021-02-15 17:32:23",
 		updated_at: "2021-02-15 17:32:23",
@@ -120,13 +121,14 @@ export const credential4Testing: CredentialT[] = [
 			security_question: "what is the meaning of life?",
 			security_answer: "42",
 		},
-		security_codes: {
-			unique_security_code: "D7WK29JDU8",
-			multiple_security_codes: null,
-			multiple_code_length: 0,
-			crypto_currency_access_code:
+		security_code: {
+			unique_code: "D7WK29JDU8",
+			unique_code_length: 10,
+			multiple_codes: null,
+			multiple_codes_length: 0,
+			crypto_codes:
 				"Lorem ipsum dolor sit amet consectetur adipisicing elit Eaque odio accusamus cumque nemo veniam? Perferendis consequatur incidunt fugiat delectus reiciendis atque Ipsam excepturi molestiae quasi ratione id veniam pariatur laborum",
-			crypto_code_length: 30,
+			crypto_codes_length: 30,
 		},
 		created_at: "2021-02-15 17:32:23",
 		updated_at: "2021-02-15 17:32:23",
@@ -165,14 +167,15 @@ export const credential4Testing: CredentialT[] = [
 			security_question: "what is the meaning of life?",
 			security_answer: "42",
 		},
-		security_codes: {
-			unique_security_code: "D7WK29JDU8",
-			multiple_security_codes:
+		security_code: {
+			unique_code: "D7WK29JDU8",
+			unique_code_length: 10,
+			multiple_codes:
 				" D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 D7WK29JDU8 ",
-			multiple_code_length: 11,
-			crypto_currency_access_code:
+			multiple_codes_length: 11,
+			crypto_codes:
 				"Lorem ipsum dolor sit amet consectetur adipisicing elit Eaque odio accusamus cumque nemo veniam? Perferendis consequatur incidunt fugiat delectus reiciendis atque Ipsam excepturi molestiae quasi ratione id veniam pariatur laborum",
-			crypto_code_length: 30,
+			crypto_codes_length: 30,
 		},
 		created_at: "2021-02-15 17:32:23",
 		updated_at: "2021-02-15 17:32:23",

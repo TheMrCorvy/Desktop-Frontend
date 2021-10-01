@@ -68,12 +68,13 @@ export type CredentialT = {
 		security_question: string
 		security_answer: string
 	}
-	security_codes: null | {
-		unique_security_code: string | null
-		multiple_security_codes: string | null
-		multiple_code_length: number
-		crypto_currency_access_code: string | null
-		crypto_code_length: number | null
+	security_code: null | {
+		unique_code: string | null
+		unique_code_length: number | null
+		multiple_codes: string | null
+		multiple_codes_length: number
+		crypto_codes: string | null
+		crypto_codes_length: number | null
 	}
 	created_at: string
 	updated_at: string
@@ -92,9 +93,12 @@ export type ReduxCredentialT = {
 	phone_number?: string
 	security_question?: string
 	security_answer?: string
-	unique_security_code?: string
-	multiple_security_code?: string[]
-	crypto_currency_access_codes?: string[]
+	unique_code?: string
+	unique_code_length?: number
+	multiple_codes?: string[]
+	multiple_codes_length?: number
+	crypto_codes?: string[]
+	crypto_codes_length?: number
 	created_at?: string
 	updated_at?: string
 	last_seen?: string
@@ -112,9 +116,12 @@ export type AccessCredentialPropT =
 	| "phone_number"
 	| "security_question"
 	| "security_answer"
-	| "unique_security_code"
-	| "multiple_security_code"
-	| "crypto_currency_access_codes"
+	| "unique_code"
+	| "unique_code_length"
+	| "multiple_codes"
+	| "multiple_codes_length"
+	| "crypto_codes"
+	| "crypto_codes_length"
 
 export type CredentialPropValueT = number | string | string[]
 

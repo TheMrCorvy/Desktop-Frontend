@@ -54,14 +54,14 @@ export const removeCredentialProp = (
 	if (propName !== "security_answer") {
 		newCredential.security_answer = oldCredential.security_answer
 	}
-	if (propName !== "unique_security_code") {
-		newCredential.unique_security_code = oldCredential.unique_security_code
+	if (propName !== "unique_code") {
+		newCredential.unique_code = oldCredential.unique_code
 	}
-	if (propName !== "multiple_security_code") {
-		newCredential.multiple_security_code = oldCredential.multiple_security_code
+	if (propName !== "multiple_codes") {
+		newCredential.multiple_codes = oldCredential.multiple_codes
 	}
-	if (propName !== "crypto_currency_access_codes") {
-		newCredential.crypto_currency_access_codes = oldCredential.crypto_currency_access_codes
+	if (propName !== "crypto_codes") {
+		newCredential.crypto_codes = oldCredential.crypto_codes
 	}
 
 	return {
@@ -124,27 +124,26 @@ export const initializeCredential = (credentialDB: CredentialT): EditCredentialI
 		initialC.phone_number =
 			credentialDB.phone_number.opening + asterisks + credentialDB.phone_number.ending
 	}
-	if (credentialDB.security_codes) {
+
+	if (credentialDB.security_code) {
 		/** */
 
-		if (credentialDB.security_codes.crypto_currency_access_code) {
+		if (credentialDB.security_code.crypto_codes_length) {
 			/** */
 
-			initialC.crypto_currency_access_codes = createCodesArr(
-				credentialDB.security_codes.crypto_code_length
+			initialC.crypto_codes = createCodesArr(credentialDB.security_code.crypto_codes_length)
+		}
+		if (credentialDB.security_code.multiple_codes_length) {
+			/** */
+
+			initialC.multiple_codes = createCodesArr(
+				credentialDB.security_code.multiple_codes_length
 			)
 		}
-		if (credentialDB.security_codes.multiple_security_codes) {
+		if (credentialDB.security_code.unique_code_length) {
 			/** */
 
-			initialC.multiple_security_code = createCodesArr(
-				credentialDB.security_codes.multiple_code_length
-			)
-		}
-		if (credentialDB.security_codes.unique_security_code) {
-			/** */
-
-			initialC.unique_security_code = calcAsterisks(10)
+			initialC.unique_code = calcAsterisks(10)
 		}
 	}
 	if (credentialDB.security_question_answer) {
@@ -219,25 +218,21 @@ export const setDecryptedCredential = (credentialApi: CredentialT): EditCredenti
 		decryptedCred.security_question = credentialApi.security_question_answer.security_question
 	}
 
-	if (credentialApi.security_codes) {
-		if (credentialApi.security_codes.unique_security_code) {
-			decryptedCred.unique_security_code = credentialApi.security_codes.unique_security_code
+	if (credentialApi.security_code) {
+		if (credentialApi.security_code.unique_code) {
+			decryptedCred.unique_code = credentialApi.security_code.unique_code
 		}
 
-		if (credentialApi.security_codes.multiple_security_codes) {
-			const stringArr = credentialApi.security_codes.multiple_security_codes.match(
-				/\S+/g
-			) as string[]
+		if (credentialApi.security_code.multiple_codes) {
+			const stringArr = credentialApi.security_code.multiple_codes.match(/\S+/g) as string[]
 
-			decryptedCred.multiple_security_code = stringArr
+			decryptedCred.multiple_codes = stringArr
 		}
 
-		if (credentialApi.security_codes.crypto_currency_access_code) {
-			const stringArr = credentialApi.security_codes.crypto_currency_access_code.match(
-				/\S+/g
-			) as string[]
+		if (credentialApi.security_code.crypto_codes) {
+			const stringArr = credentialApi.security_code.crypto_codes.match(/\S+/g) as string[]
 
-			decryptedCred.crypto_currency_access_codes = stringArr
+			decryptedCred.crypto_codes = stringArr
 		}
 	}
 
