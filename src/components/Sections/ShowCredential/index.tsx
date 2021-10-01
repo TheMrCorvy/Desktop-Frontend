@@ -7,12 +7,15 @@ import useStyles from "./styles"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../redux/store"
 import { initializeCredential } from "../../../redux/actions/credentialActions"
+import { showError } from "../../../redux/actions/errorHandlingActions"
+import { setErrorLoading, toggleLoading } from "../../../redux/actions/loadingActions"
 
 import { translate } from "../../../lang"
 
-import { findCredential } from "../../../misc/indexedDB"
+import { findCredential, putCredential } from "../../../misc/indexedDB"
 import { calcMaxChar, getUserAgent } from "../../../misc/staticData"
-import { AccessCredentialPropT, CharSizesT } from "../../../misc/types"
+import { AccessCredentialPropT, ApiCallI, CharSizesT, ReduxCredentialT } from "../../../misc/types"
+import { callApi } from "../../../misc/ajaxManager"
 
 import UnlockData from "../../UnlockData"
 import DisplayData from "../../DisplayData"
@@ -36,6 +39,7 @@ type Props = {
 const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 	const { credential } = useSelector((state: RootState) => state.credential)
+	const { token } = useSelector((state: RootState) => state.token)
 
 	const { REACT_APP_ENV_LOCAL } = process.env
 
@@ -126,11 +130,46 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 				setIsAuthenticated(true)
 			})
 		} else {
-			//update indexed db
-			setLocked(true)
-
-			console.log(credential)
+			updateCredential(credential)
 		}
+	}
+
+	const updateCredential = (credential: ReduxCredentialT) => {
+		if (!token) return
+
+		const request: ApiCallI = {
+			lng,
+			method: "PUT",
+			endpoint: "/credential/update",
+			body: {
+				...credential,
+				accessing_device: getUserAgent(),
+				accessing_platform: "web",
+			},
+			token,
+		}
+
+		dispatch(toggleLoading(true))
+
+		callApi(request).then(async (response) => {
+			if (response.status !== 200) {
+				dispatch(setErrorLoading(response.message))
+			}
+
+			const updatedCredential = await putCredential(response.data.updated_credential)
+
+			if (updatedCredential === undefined) {
+				dispatch(showError(translate("error_messages", lng, 0)))
+
+				return
+			}
+
+			dispatch(initializeCredential(response.data.updated_credential))
+
+			dispatch(toggleLoading(false))
+
+			setLocked(true)
+		})
 	}
 
 	const renderCredentialProp = (
