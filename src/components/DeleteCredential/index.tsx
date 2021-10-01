@@ -13,7 +13,7 @@ import {
 
 import DeleteIcon from "@material-ui/icons/Delete"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
@@ -21,6 +21,10 @@ import { translate } from "../../lang"
 import { forgetCredential, getUser, putUser, getCredentials } from "../../misc/indexedDB"
 
 import { maxSlots } from "../../misc/staticData"
+import { callApi } from "../../misc/ajaxManager"
+import { ApiCallI } from "../../misc/types"
+import { info } from "console"
+import { setErrorLoading, toggleLoading } from "../../redux/actions/loadingActions"
 
 type Props = {
 	credentialId: number
@@ -47,6 +51,9 @@ type ErrorOptions = 1 | 2 | 3
 
 const DeleteCredential: FC<Props> = ({ credentialId }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+	const { token } = useSelector((state: RootState) => state.token)
+
+	const dispatch = useDispatch()
 
 	const [open, setOpen] = useState(false)
 
@@ -57,6 +64,8 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 	const history = useHistory()
 
 	const deleteCredential = async () => {
+		if (!token) return
+
 		await forgetCredential(credentialId)
 
 		const user = await getUser()
@@ -76,25 +85,38 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 			semi_premium:
 				user.role === "semi-premium" &&
 				user.slots_available + 1 + credentials.length <= maxSlots.semi_premium,
-			premium: user.role === "premium" ? true : false,
-			admin: user.role === "admin" ? true : false,
 		}
 
-		if (checkRole.free || checkRole.semi_premium || checkRole.premium || checkRole.admin) {
+		if (checkRole.free || checkRole.semi_premium) {
 			putUser({ ...user, slots_available: user.slots_available + 1 }).then((updatedUser) => {
 				if (updatedUser === undefined) {
 					fatalError(2)
 				}
 			})
-		} else {
-			closeDialog()
-
-			history.goBack()
 		}
 
 		closeDialog()
 
-		history.goBack()
+		dispatch(toggleLoading(true))
+
+		const request: ApiCallI = {
+			lng,
+			method: "GET",
+			endpoint: "/credential/delete/" + credentialId,
+			token,
+		}
+
+		callApi(request).then((response) => {
+			if (response.status !== 200) {
+				console.log(response)
+
+				dispatch(setErrorLoading(response.message))
+			}
+
+			dispatch(toggleLoading(false))
+
+			history.goBack()
+		})
 	}
 
 	const fatalError = (option: ErrorOptions) => {
