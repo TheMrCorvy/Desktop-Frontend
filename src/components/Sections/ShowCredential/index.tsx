@@ -140,7 +140,7 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 		const request: ApiCallI = {
 			lng,
 			method: "PUT",
-			endpoint: "/credential/update",
+			endpoint: "/credential/update/" + credential.id,
 			body: {
 				...credential,
 				accessing_device: getUserAgent(),
@@ -154,9 +154,12 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 		callApi(request).then(async (response) => {
 			if (response.status !== 200) {
 				dispatch(setErrorLoading(response.message))
+				return
 			}
 
-			const updatedCredential = await putCredential(response.data.updated_credential)
+			console.log(response.data)
+
+			const updatedCredential = await putCredential(response.data.credential)
 
 			if (updatedCredential === undefined) {
 				dispatch(showError(translate("error_messages", lng, 0)))
@@ -164,7 +167,7 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 				return
 			}
 
-			dispatch(initializeCredential(response.data.updated_credential))
+			dispatch(initializeCredential(response.data.credential))
 
 			dispatch(toggleLoading(false))
 
