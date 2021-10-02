@@ -75,6 +75,8 @@ export const dropDatabase = (): void => {
  */
 
 export const initiateDB = (user: UserT, credentials: CredentialT[]) => {
+	dropDatabase()
+
 	//here I use put so when the user login or registers there won't be any error of "same key/id"
 	return Promise.all([putCredentials(credentials), putUser(user)])
 		.then((data) => {

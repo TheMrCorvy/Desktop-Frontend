@@ -153,7 +153,7 @@ export const initializeCredential = (credentialDB: CredentialT): EditCredentialI
 
 		initialC.security_answer = calcAsterisks(10)
 	}
-	if (credentialDB.user_name && credentialDB.char_count) {
+	if (credentialDB.char_count) {
 		/** */
 
 		asterisks = calcAsterisks(credentialDB.char_count)

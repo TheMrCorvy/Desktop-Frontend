@@ -87,6 +87,7 @@ export type ReduxCredentialT = {
 	company_name?: string
 	description?: string
 	user_name?: string
+	char_count?: null | string
 	email?: string
 	password?: string
 	username?: string
@@ -110,6 +111,7 @@ export type AccessCredentialPropT =
 	| "company_name"
 	| "description"
 	| "user_name"
+	| "char_count"
 	| "email"
 	| "password"
 	| "username"
