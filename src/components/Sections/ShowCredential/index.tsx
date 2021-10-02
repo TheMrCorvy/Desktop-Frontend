@@ -102,6 +102,8 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 				body: {
 					accessTo: "credential-data",
 					credentialId: credential.id,
+					accessingPlatform: "web",
+					accessingDevice: getUserAgent(),
 				},
 			}
 
@@ -152,6 +154,8 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 				body: {
 					accessTo: "credential-data",
 					credentialId: credential.id,
+					accessingPlatform: "web",
+					accessingDevice: getUserAgent(),
 				},
 			}
 

@@ -45,6 +45,7 @@ import CopyText from "../../CopyText"
 
 /******************************************************************************** api */
 import { callApi } from "../../../misc/ajaxManager"
+import { getUserAgent } from "../../../misc/staticData"
 
 type Props = { testing?: boolean }
 
@@ -120,6 +121,8 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 				endpoint: "/auth/grant-access",
 				body: {
 					accessTo: "user-data",
+					accessingPlatform: "web",
+					accessingDevice: getUserAgent(),
 				},
 			}
 
