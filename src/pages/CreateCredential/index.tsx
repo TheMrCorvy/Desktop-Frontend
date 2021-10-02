@@ -136,8 +136,6 @@ const CreateCredential: FC = () => {
 			if (response.status !== 200) {
 				dispatch(setErrorLoading(response.message))
 			} else {
-				console.log(response)
-
 				dispatch(toggleLoading(false))
 
 				updateIndexedDB(response.data.credential)

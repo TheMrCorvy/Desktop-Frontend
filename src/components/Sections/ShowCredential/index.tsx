@@ -6,7 +6,10 @@ import useStyles from "./styles"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../redux/store"
-import { initializeCredential } from "../../../redux/actions/credentialActions"
+import {
+	initializeCredential,
+	setDecryptedCredential,
+} from "../../../redux/actions/credentialActions"
 import { showError } from "../../../redux/actions/errorHandlingActions"
 import { setErrorLoading, toggleLoading } from "../../../redux/actions/loadingActions"
 
@@ -82,18 +85,40 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	}
 
 	const toggleVisibility = () => {
+		if (!token) return
+
 		if (!locked && visible) {
 			setLocked(true)
 		}
 
 		if (!visible) {
-			getDecryptedCredential(true, getUserAgent()).then((isAllowed) => {
-				if (isAllowed) {
-					setVisible(true)
-				} else {
+			dispatch(toggleLoading(true))
+
+			const request: ApiCallI = {
+				lng,
+				token,
+				method: "POST",
+				endpoint: "/auth/grant-access",
+				body: {
+					accessTo: "credential-data",
+					credentialId: credential.id,
+				},
+			}
+
+			callApi(request).then((response) => {
+				if (response.status !== 200) {
 					setShowSnackbar(true)
 
 					setSnackbarMessage(translate("access_denied_message", lng))
+
+					dispatch(setErrorLoading(response.message))
+				} else {
+					dispatch(toggleLoading(false))
+
+					setVisible(true)
+
+					// dispatch(setDecryptedCredential(response.data.decrypted_credential))
+					console.log(response.data.decrypted_credential)
 				}
 			})
 		} else {
@@ -115,19 +140,43 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	}
 
 	const toggleLock = () => {
+		if (!token) return
+
 		if (locked) {
-			getDecryptedCredential(true, getUserAgent()).then((isAllowed) => {
-				if (isAllowed) {
+			dispatch(toggleLoading(true))
+
+			const request: ApiCallI = {
+				lng,
+				token,
+				method: "POST",
+				endpoint: "/auth/grant-access",
+				body: {
+					accessTo: "credential-data",
+					credentialId: credential.id,
+				},
+			}
+
+			callApi(request).then((response) => {
+				if (response.status !== 200) {
+					setShowSnackbar(true)
+
+					setSnackbarMessage(translate("access_denied_message", lng))
+
+					dispatch(setErrorLoading(response.message))
+				} else {
+					dispatch(toggleLoading(false))
+
 					if (!visible && locked) {
 						setVisible(true)
 					}
 
 					setLocked(false)
-				} else {
-					setShowSnackbar(true)
-				}
 
-				setIsAuthenticated(true)
+					setIsAuthenticated(true)
+
+					// dispatch(setDecryptedCredential(response.data.decrypted_credential))
+					console.log(response.data.decrypted_credential)
+				}
 			})
 		} else {
 			updateCredential(credential)

@@ -178,66 +178,9 @@ const createCodesArr = (arrLength: number | null) => {
 	return Array.from(new Array(arrLength), () => "•••••")
 }
 
-export const setDecryptedCredential = (credentialApi: CredentialT): EditCredentialI => {
-	let decryptedCred: ReduxCredentialT = {}
-
-	decryptedCred.id = credentialApi.id
-	decryptedCred.user_id = credentialApi.user_id
-	decryptedCred.company_name = credentialApi.company_name
-	decryptedCred.company_id = credentialApi.company_id
-	decryptedCred.created_at = credentialApi.created_at
-	decryptedCred.updated_at = credentialApi.updated_at
-	decryptedCred.last_seen = credentialApi.last_seen
-
-	if (credentialApi.description) {
-		decryptedCred.description = credentialApi.description
-	}
-
-	if (credentialApi.user_name) {
-		decryptedCred.user_name = credentialApi.user_name
-	}
-
-	if (credentialApi.email) {
-		decryptedCred.email = credentialApi.email.email
-	}
-
-	if (credentialApi.password) {
-		decryptedCred.password = credentialApi.password.password
-	}
-
-	if (credentialApi.username) {
-		decryptedCred.username = credentialApi.username.username
-	}
-
-	if (credentialApi.phone_number) {
-		decryptedCred.phone_number = credentialApi.phone_number.phone_number
-	}
-
-	if (credentialApi.security_question_answer) {
-		decryptedCred.security_answer = credentialApi.security_question_answer.security_answer
-		decryptedCred.security_question = credentialApi.security_question_answer.security_question
-	}
-
-	if (credentialApi.security_code) {
-		if (credentialApi.security_code.unique_code) {
-			decryptedCred.unique_code = credentialApi.security_code.unique_code
-		}
-
-		if (credentialApi.security_code.multiple_codes) {
-			const stringArr = credentialApi.security_code.multiple_codes.match(/\S+/g) as string[]
-
-			decryptedCred.multiple_codes = stringArr
-		}
-
-		if (credentialApi.security_code.crypto_codes) {
-			const stringArr = credentialApi.security_code.crypto_codes.match(/\S+/g) as string[]
-
-			decryptedCred.crypto_codes = stringArr
-		}
-	}
-
+export const setDecryptedCredential = (credentialApi: ReduxCredentialT): EditCredentialI => {
 	return {
 		type: CLEAR_CREDENTIAL,
-		payload: decryptedCred,
+		payload: credentialApi,
 	}
 }
