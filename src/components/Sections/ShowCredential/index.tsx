@@ -117,8 +117,7 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 
 					setVisible(true)
 
-					// dispatch(setDecryptedCredential(response.data.decrypted_credential))
-					console.log(response.data.decrypted_credential)
+					dispatch(setDecryptedCredential(response.data.decrypted_credential))
 				}
 			})
 		} else {
@@ -174,8 +173,7 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 
 					setIsAuthenticated(true)
 
-					// dispatch(setDecryptedCredential(response.data.decrypted_credential))
-					console.log(response.data.decrypted_credential)
+					dispatch(setDecryptedCredential(response.data.decrypted_credential))
 				}
 			})
 		} else {
