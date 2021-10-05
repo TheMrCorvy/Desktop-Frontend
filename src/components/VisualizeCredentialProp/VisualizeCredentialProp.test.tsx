@@ -46,7 +46,7 @@ describe("testing the render options & the writing function", () => {
 							label="testing multiple codes / crypto codes"
 							locked={true}
 							visible={false}
-							propName="crypto_currency_access_codes"
+							propName="crypto_codes"
 						/>
 					</>
 				</ComponentForTesting>
@@ -66,7 +66,7 @@ describe("testing the render options & the writing function", () => {
 		expect(multipleCodes).toBeTruthy()
 	})
 
-	it("renders different if locked / unlocked", () => {
+	it("renders differently if locked / unlocked", () => {
 		const { getByTestId } = render(
 			<Provider store={store}>
 				<ComponentForTesting>
@@ -89,7 +89,7 @@ describe("testing the render options & the writing function", () => {
 							label="testing multiple codes / crypto codes"
 							locked={false}
 							visible={true}
-							propName="crypto_currency_access_codes"
+							propName="crypto_codes"
 						/>
 					</>
 				</ComponentForTesting>

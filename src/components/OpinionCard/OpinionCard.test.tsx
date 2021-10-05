@@ -14,9 +14,9 @@ it("renders properly a suggestion properly", () => {
 
 	const body = getByTestId("test_card_body")
 
-	expect(body.innerHTML).toBe(suggestion.opinion.body)
+	expect(body.innerHTML).toBe(suggestion.body)
 
-	const fullName = suggestion.user.lastName + " " + suggestion.user.firstName
+	const fullName = suggestion.user_name
 
 	const userName = getByText(fullName)
 
@@ -34,9 +34,9 @@ it("renders properly a rating properly", () => {
 
 	const body = getByTestId("test_card_body")
 
-	expect(body.innerHTML).toBe(rating.opinion.body)
+	expect(body.innerHTML).toBe(rating.body)
 
-	const fullName = rating.user.lastName + " " + rating.user.firstName
+	const fullName = rating.user_name
 
 	const userName = getByText(fullName)
 
