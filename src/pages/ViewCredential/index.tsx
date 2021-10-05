@@ -14,14 +14,15 @@ import {
 	setDecryptedCredential,
 } from "../../redux/actions/credentialActions"
 import { RootState } from "../../redux/store"
+import { toggleLoading, setErrorLoading } from "../../redux/actions/loadingActions"
 
 import { translate } from "../../lang"
 
 /************************************************************************************ misc */
 import { findCredential, getCredentials, getUser, putCredential } from "../../misc/indexedDB"
 import { maxSlots } from "../../misc/staticData"
-import { CredentialT } from "../../misc/types"
-import { findCredentialFromApi } from "../../misc/ajaxManager"
+import { ApiCallI, CredentialT } from "../../misc/types"
+import { callApi } from "../../misc/ajaxManager"
 
 /************************************************************************************ components */
 import Snackbar from "../../components/Snackbar"
@@ -39,14 +40,18 @@ const ViewCredential: FC = (props: any) => {
 
 	const [snackbarMessage, setSnackbarMessage] = useState("")
 
+	const [id, setId] = useState(0)
+
 	useEffect(() => {
 		// since the url param is a string, we must convert it into a number
-		const id = Number(props.match.params.credentialId)
+		setId(Number(props.match.params.credentialId))
 
-		obtainCredential(id)
+		if (id !== 0) {
+			obtainCredential(id)
 
-		dispatch(clearCredential())
-	}, [])
+			dispatch(clearCredential())
+		}
+	}, [id])
 
 	const obtainCredential = async (id: number) => {
 		const data = await findCredential(id)
@@ -66,19 +71,37 @@ const ViewCredential: FC = (props: any) => {
 
 		if (!isAllowedToSee) return false
 
+		if (!token) return
+
 		setError(false)
 
-		const newCredential: any = await findCredentialFromApi(token, decrypted, agent)
+		dispatch(toggleLoading(true))
 
-		updateCredential(newCredential.credential)
-
-		if (decrypted) {
-			dispatch(setDecryptedCredential(newCredential.credential))
-		} else {
-			dispatch(initializeCredential(newCredential.credential))
+		const request: ApiCallI = {
+			lng,
+			token,
+			endpoint: "/credential/find/" + id,
+			method: "GET",
 		}
 
-		return true
+		return callApi(request).then((response) => {
+			if (response.status !== 200) {
+				dispatch(setErrorLoading(response.message))
+
+				return false
+			}
+
+			dispatch(toggleLoading(false))
+
+			updateCredential(response.data.credential)
+
+			if (decrypted) {
+				dispatch(setDecryptedCredential(response.data.credential))
+			} else {
+				dispatch(initializeCredential(response.data.credential))
+			}
+			return true
+		})
 	}
 
 	const checkUser = async () => {

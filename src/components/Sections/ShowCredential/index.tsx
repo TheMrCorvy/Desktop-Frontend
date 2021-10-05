@@ -28,7 +28,7 @@ import Snackbar from "../../Snackbar"
 import VisualizeCredentialProp from "../../VisualizeCredentialProp"
 
 type Props = {
-	getDecryptedCredential: (decrypted: true, agent: string) => Promise<boolean>
+	getDecryptedCredential: (decrypted: true, agent: string) => Promise<boolean | undefined>
 }
 
 /**
