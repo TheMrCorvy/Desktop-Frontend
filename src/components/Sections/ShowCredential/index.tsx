@@ -208,8 +208,6 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 				return
 			}
 
-			console.log(response.data)
-
 			const updatedCredential = await putCredential(response.data.credential)
 
 			if (updatedCredential === undefined) {
@@ -223,6 +221,8 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 			dispatch(toggleLoading(false))
 
 			setLocked(true)
+
+			setVisible(false)
 		})
 	}
 

@@ -93,7 +93,7 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 	}
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const newArray = [...editingCodes]
+		const newArray = [...codes]
 
 		const index = Number(e.target.id.substring(5))
 
@@ -142,7 +142,7 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 					<DialogTitle id="edit-dialog">{translate("edit_codes", lng)}</DialogTitle>
 					<DialogContent>
 						<Grid container justify="space-around" spacing={4}>
-							{editingCodes.map((code: string, index: number) => (
+							{codes.map((code: string, index: number) => (
 								<Grid key={index} item xs={12} md={6}>
 									<FormControl variant="outlined" fullWidth>
 										<InputLabel>{index + 1}</InputLabel>
@@ -182,7 +182,7 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 								<Button
 									variant="outlined"
 									color="primary"
-									onClick={() => setEditingCodes([...editingCodes, ""])}
+									onClick={() => setEditingCodes([...codes, ""])}
 								>
 									{translate("edit_codes", lng, 1)}
 								</Button>
