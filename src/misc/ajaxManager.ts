@@ -1,11 +1,4 @@
-import {
-	CredentialT,
-	CoinbaseChargeT,
-	ApiResponseGetCredentialsT,
-	ApiCallI,
-	ApiResponseT,
-} from "./types"
-import { credential4Testing } from "./Data4Testing"
+import { CoinbaseChargeT, ApiCallI, ApiResponseT } from "./types"
 
 export const callApi = async (params: ApiCallI): Promise<ApiResponseT> => {
 	const { lng, endpoint, method, body, token } = params
@@ -35,54 +28,6 @@ export const callApi = async (params: ApiCallI): Promise<ApiResponseT> => {
 
 			return response
 		})
-}
-
-export const getCredentialsFromApi = (id: number, token: string | null) => {
-	const { REACT_APP_ENV_LOCAL } = process.env
-
-	let apiResponse: ApiResponseGetCredentialsT
-
-	if (REACT_APP_ENV_LOCAL) {
-		apiResponse = {
-			slots_available: 3,
-			user_credentials: credential4Testing,
-		}
-	} else {
-		//i'm going to leave this until i'll start making the api
-		apiResponse = {
-			slots_available: 3,
-			user_credentials: credential4Testing,
-		}
-		console.log("getting the fresh data, using the token: " + token)
-	}
-
-	return apiResponse
-}
-
-export const findCredentialFromApi = (token: string | null, decrypted: boolean, agent?: string) => {
-	const { REACT_APP_ENV_LOCAL } = process.env
-
-	let apiResponse: {
-		credential: CredentialT
-	}
-
-	if (REACT_APP_ENV_LOCAL) {
-		//i'm going to leave this until i'll start making the api
-
-		apiResponse = {
-			credential: credential4Testing[0],
-		}
-
-		console.log("getting the fresh data, using the token: " + token)
-		console.log(`It was a petition for the credential ${decrypted ? "decripted" : "encrypted"}`)
-		console.log("user agent was (if required): " + agent)
-	} else {
-		apiResponse = {
-			credential: credential4Testing[0],
-		}
-	}
-
-	return apiResponse
 }
 
 export const generateCoinbaseCharge = (apiKey: string, body: CoinbaseChargeT) => {
