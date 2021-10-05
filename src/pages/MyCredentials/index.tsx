@@ -9,11 +9,12 @@ import useStyles from "./styles"
 import { showError } from "../../redux/actions/errorHandlingActions"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
+import { toggleLoading, setErrorLoading } from "../../redux/actions/loadingActions"
 
 import { translate } from "../../lang"
 
 /************************************************************************************ indexedDB */
-import { getCredentials, getUser, initiateDB } from "../../misc/indexedDB"
+import { getCredentials, getUser, putCredentials } from "../../misc/indexedDB"
 
 /************************************************************************************ types & components */
 import OrderBar, { By, Direction } from "../../components/OrderBar"
@@ -24,10 +25,10 @@ import FeedbackForm from "../../components/Sections/FeedbackForm"
 import UpdateRole from "../../components/Sections/UpdateRole"
 
 /******************************************************************************** types */
-import { CredentialT, ApiResponseGetCredentialsT, UserT } from "../../misc/types"
+import { CredentialT, ApiResponseGetCredentialsT, UserT, ApiCallI } from "../../misc/types"
 
 /************************************************************************************ ajax */
-import { getCredentialsFromApi } from "../../misc/ajaxManager"
+import { callApi } from "../../misc/ajaxManager"
 
 type Sort = {
 	by: By
@@ -90,26 +91,38 @@ const MyCredentials: FC = () => {
 	const getFromApi = async () => {
 		setError(false)
 
+		if (!token) return
+
 		let localUser = await getUser()
 
 		if (localUser === undefined) {
 			return fatalError()
 		}
 
-		const newCredentials: ApiResponseGetCredentialsT = getCredentialsFromApi(
-			localUser.id,
-			token
-		)
+		dispatch(toggleLoading(true))
 
-		const user = { ...localUser, availableSlots: newCredentials.slots_available }
-
-		const data = await initiateDB(user, newCredentials.user_credentials)
-
-		if (data === undefined) {
-			fatalError()
+		const request: ApiCallI = {
+			lng,
+			token,
+			method: "GET",
+			endpoint: "/credential/index",
 		}
 
-		setCredentials(newCredentials.user_credentials)
+		callApi(request).then(async (response) => {
+			if (response.status !== 200) {
+				dispatch(setErrorLoading(response.message))
+			}
+
+			const data = await putCredentials(response.data.credentials)
+
+			if (data === undefined) {
+				fatalError()
+			}
+
+			setCredentials(response.data.credentials)
+
+			dispatch(toggleLoading(false))
+		})
 	}
 
 	const fatalError = () => {
