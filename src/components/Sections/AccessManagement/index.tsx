@@ -170,6 +170,29 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 		dispatch(login(data.token))
 	}
 
+	const generateNewCode = () => {
+		if (!token) return
+
+		dispatch(toggleLoading(true))
+
+		const request: ApiCallI = {
+			lng,
+			token,
+			method: "GET",
+			endpoint: "/auth/renew-security-code",
+		}
+
+		callApi(request).then((response) => {
+			if (response.status !== 200) {
+				dispatch(setErrorLoading(response.message))
+
+				return
+			}
+
+			setForm({ ...form, security_access_code: response.data.renewed_code })
+		})
+	}
+
 	return (
 		<Grid item xs={12} md={8} data-testid="test_access_management">
 			<Card className={classes.borderRadius} elevation={2}>
@@ -285,7 +308,7 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 													placement="bottom"
 													title={translate("actions", lng, 2)}
 												>
-													<IconButton>
+													<IconButton onClick={generateNewCode}>
 														<AutorenewIcon />
 													</IconButton>
 												</Tooltip>
