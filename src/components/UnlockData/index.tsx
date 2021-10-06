@@ -52,7 +52,7 @@ const UnlockData: FC<Props> = ({ toggleLock, locked, lockedTitle, unlockedTitle,
 	}
 
 	const onAuthSuccess = (res: ApiResponseLoginT) => {
-		if (res.isAuthorized) {
+		if (res.token) {
 			setOpen(false)
 
 			toggleLock()
