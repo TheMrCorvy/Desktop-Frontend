@@ -23,14 +23,17 @@ First of all, you will need to properly set up the .env.local file. This project
 1. REACT_APP_ENV_LOCAL: If there is nothing, the app will asume that the environment is "production", else, if there is anything, the app will change to "local" / "development" environment.
    <br/>
    <br/>
-2. REACT_APP_RECAPTCHA_SITE_KEY & REACT_APP_RECAPTCHA_SECRET_KEY: These are required to use the Captcha component, you can get them signing up here: [Google ReCaptcha Admin Site](https://www.google.com/recaptcha/admin)
+2. REACT_APP_USE_LOCAL_API: If empty, the app will call the production api, else, it will use http://localhost:8000/api (see src/misc/ajaxManajer.ts to change the base uri for both options).
    <br/>
    <br/>
-3. REACT_APP_PAYPAL_CLIENT_ID: This is your client ID for PayPal, you can get it on the [Developers Paypal](https://developer.paypal.com) site. Once signed up, create an application, and the go to the "live" credentials.
+3. REACT_APP_RECAPTCHA_SITE_KEY & REACT_APP_RECAPTCHA_SECRET_KEY: These are required to use the Captcha component, you can get them signing up here: [Google ReCaptcha Admin Site](https://www.google.com/recaptcha/admin)
+   <br/>
+   <br/>
+4. REACT_APP_PAYPAL_CLIENT_ID: This is your client ID for PayPal, you can get it on the [Developers Paypal](https://developer.paypal.com) site. Once signed up, create an application, and the go to the "live" credentials.
    No secret key is required to use the magic buttons of PayPal
    <br/>
    <br/>
-4. REACT_APP_COINBASE_API_KEY: This is required to use the Coinbase API in order to let the user pay with cryptos.
+5. REACT_APP_COINBASE_API_KEY: This is required to use the Coinbase API in order to let the user pay with cryptos.
    You can get your Coinbase credentials on [Coinbase Commerce](https://commerce.coinbase.com)
    <br/>
    <br/>
