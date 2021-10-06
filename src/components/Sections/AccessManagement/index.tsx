@@ -190,6 +190,8 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 			}
 
 			setForm({ ...form, security_access_code: response.data.renewed_code })
+
+			dispatch(toggleLoading(false))
 		})
 	}
 
