@@ -64,41 +64,28 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing })
 
 			onAuthSuccess(fakeResponse)
 		} else {
-			let fakeResponse: ApiResponseLoginT
+			dispatch(toggleLoading(true))
 
-			if (endpoint !== "/login") {
-				fakeResponse = {
-					token: "fake api authorization token",
-					user_data: user4Testing,
-					user_credentials: credential4Testing,
-					isAuthorized: true,
-				}
+			callApi({
+				lng,
+				endpoint: "/auth/login/two-factor-code",
+				method: "POST",
+				body: data,
+			}).then((response) => {
+				if (response.status === 200) {
+					dispatch(toggleLoading(false))
 
-				onAuthSuccess(fakeResponse)
-			} else {
-				dispatch(toggleLoading(true))
+					onAuthSuccess(response.data)
+				} else {
+					console.error(response)
 
-				callApi({
-					lng,
-					endpoint: "/auth/login/two-factor-code",
-					method: "POST",
-					body: data,
-				}).then((response) => {
-					if (response.status === 200) {
-						dispatch(toggleLoading(false))
-
-						onAuthSuccess(response.data)
+					if (response.message) {
+						dispatch(setErrorLoading(response.message))
 					} else {
-						console.error(response)
-
-						if (response.message) {
-							dispatch(setErrorLoading(response.message))
-						} else {
-							dispatch(setErrorLoading("Error..."))
-						}
+						dispatch(setErrorLoading("Error..."))
 					}
-				})
-			}
+				}
+			})
 		}
 	}
 

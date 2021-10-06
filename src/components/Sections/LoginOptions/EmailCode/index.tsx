@@ -66,14 +66,14 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 	}
 
 	const onSubmit = (data: FormInputs) => {
-		if (!testing) {
-			console.log(data)
-
+		if (testing) {
 			const fakeResponse: ApiResponseLoginT = {
 				token: "fake api authorization token",
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
 			}
+
+			console.log(fakeResponse)
 
 			onAuthSuccess(fakeResponse)
 		} else {
@@ -91,11 +91,9 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 			}).then((response) => {
 				if (response.status === 200) {
 					dispatch(toggleLoading(false))
-
 					onAuthSuccess(response.data)
 				} else {
 					console.error(response)
-
 					if (response.message) {
 						dispatch(setErrorLoading(response.message))
 					} else {
@@ -130,8 +128,6 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 					open: true,
 					message: res.message,
 				})
-
-				console.log(res)
 			})
 		}
 	}
