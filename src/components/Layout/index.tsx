@@ -1,4 +1,4 @@
-import { FC, ReactElement } from "react"
+import { FC, ReactElement, useEffect } from "react"
 
 import { Paper, Zoom, useScrollTrigger, Fab, Backdrop, CircularProgress } from "@material-ui/core"
 
@@ -17,8 +17,7 @@ import Snackbar from "../Snackbar"
 type Props = { children: ReactElement }
 
 const Layout: FC<Props> = (props) => {
-	const { loading } = useSelector((state: RootState) => state.loading)
-	const error = useSelector((state: RootState) => state.loading.error)
+	const loading = useSelector((state: RootState) => state.loading)
 
 	const classes = useStyles()
 
@@ -34,10 +33,12 @@ const Layout: FC<Props> = (props) => {
 		})
 	}
 
+	useEffect(() => console.log(loading.error), [loading.error])
+
 	return (
 		<>
-			{loading && (
-				<Backdrop open={loading} className={classes.backdrop}>
+			{loading.loading && (
+				<Backdrop open={loading.loading} className={classes.backdrop}>
 					<CircularProgress color="inherit" />
 				</Backdrop>
 			)}
@@ -57,9 +58,9 @@ const Layout: FC<Props> = (props) => {
 
 				<Footer />
 			</Paper>
-			{error && (
+			{loading.error && (
 				<Snackbar
-					message={error}
+					message={loading.error}
 					open={true}
 					isError={true}
 					duration={25000}

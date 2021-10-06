@@ -15,7 +15,8 @@ const loadingReducer = (state = initialState, action: LoadingAction) => {
 		case TOGGLE_LOADING:
 			return {
 				...state,
-				loading: action.payload,
+				loading: action.payload.loading,
+				error: action.payload.error,
 			}
 
 		case SET_LOADING_ERROR:

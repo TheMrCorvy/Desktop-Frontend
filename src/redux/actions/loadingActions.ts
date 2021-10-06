@@ -10,7 +10,10 @@ import {
 export const toggleLoading = (loading: boolean): ToggleLoadingAction => {
 	return {
 		type: TOGGLE_LOADING,
-		payload: loading,
+		payload: {
+			loading,
+			error: "",
+		},
 	}
 }
 

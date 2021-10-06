@@ -110,7 +110,10 @@ export interface LoadingStateI {
 
 export interface ToggleLoadingAction {
 	type: typeof TOGGLE_LOADING
-	payload: boolean
+	payload: {
+		loading: boolean
+		error: string
+	}
 }
 
 export interface SetErrorAction {
