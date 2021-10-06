@@ -346,8 +346,8 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 				<Grid container spacing={4}>
 					{renderCredentialProp("user_name", translate("auth_form_texts", lng, 14))}
 					{renderCredentialProp("email", translate("auth_form_texts", lng, 0))}
-					{renderCredentialProp("password", translate("auth_form_texts", lng, 11))}
 					{renderCredentialProp("username", translate("auth_form_texts", lng, 12))}
+					{renderCredentialProp("password", translate("auth_form_texts", lng, 11))}
 					{renderCredentialProp("phone_number", translate("auth_form_texts", lng, 7))}
 					{renderCredentialProp(
 						"security_question",

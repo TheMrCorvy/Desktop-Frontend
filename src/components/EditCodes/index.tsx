@@ -93,7 +93,7 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 	}
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const newArray = [...codes]
+		const newArray = option === 1 ? [...codes] : [...editingCodes]
 
 		const index = Number(e.target.id.substring(5))
 

@@ -101,7 +101,7 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 
 		const request: ApiCallI = {
 			lng,
-			method: "GET",
+			method: "DELETE",
 			endpoint: "/credential/delete/" + credentialId,
 			token,
 		}

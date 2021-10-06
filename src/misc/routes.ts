@@ -28,11 +28,6 @@ const CreateCredential = lazy(() => import("../pages/CreateCredential"))
 
 const routes: RouteT[] = [
 	{
-		component: Landing,
-		requiresAuth: false,
-		path: "/",
-	},
-	{
 		component: Login,
 		requiresAuth: false,
 		path: "/login",
@@ -68,6 +63,12 @@ const routes: RouteT[] = [
 		component: CreateCredential,
 		requiresAuth: true,
 		path: "/create-credential",
+	},
+	{
+		component: Landing,
+		requiresAuth: false,
+		path: "/",
+		guestOnly: true,
 	},
 ]
 

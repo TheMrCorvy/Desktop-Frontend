@@ -32,7 +32,7 @@ const UpdateRole: FC<Props> = ({ userRole, canBuySlots }) => {
 
 	const classes = useStyles()
 
-	if (userRole === "premium") {
+	if (userRole === "premium" || userRole === "admin") {
 		return null
 	}
 

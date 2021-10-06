@@ -28,6 +28,29 @@ const CredentialCard: FC<Props> = ({ credentials, availableSlots }) => {
 
 	return (
 		<>
+			{[...Array(availableSlots)].map((value: undefined, index: number) => (
+				<Grid
+					item
+					xs={12}
+					sm={6}
+					md={4}
+					key={index}
+					data-testid={"test_available_slot_" + index}
+				>
+					<Link to="/create-credential" className={classes.link}>
+						<Card className={classes.cardAlter} variant="outlined">
+							<CardActionArea className={classes.cardAlter}>
+								<CardContent className={classes.addCredential}>
+									<ControlPointIcon
+										fontSize="large"
+										className={classes.textPrimary}
+									/>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Link>
+				</Grid>
+			))}
 			{credentials.map((credential) => (
 				<Grid
 					item
@@ -86,29 +109,6 @@ const CredentialCard: FC<Props> = ({ credentials, availableSlots }) => {
 											/>
 										</Grid>
 									</Grid>
-								</CardContent>
-							</CardActionArea>
-						</Card>
-					</Link>
-				</Grid>
-			))}
-			{[...Array(availableSlots)].map((value: undefined, index: number) => (
-				<Grid
-					item
-					xs={12}
-					sm={6}
-					md={4}
-					key={index}
-					data-testid={"test_available_slot_" + index}
-				>
-					<Link to="/create-credential" className={classes.link}>
-						<Card className={classes.cardAlter} variant="outlined">
-							<CardActionArea className={classes.cardAlter}>
-								<CardContent className={classes.addCredential}>
-									<ControlPointIcon
-										fontSize="large"
-										className={classes.textPrimary}
-									/>
 								</CardContent>
 							</CardActionArea>
 						</Card>

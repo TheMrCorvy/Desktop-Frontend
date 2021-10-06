@@ -202,7 +202,6 @@ const CreateCredential: FC = () => {
 						<CreateCredentialProp
 							defaultExpanded
 							label={translate("description", lng)}
-							isMandatory
 							layout="multiline"
 							maxChar={calcMaxChar("lg")}
 							accessCredentialProp="description"
@@ -229,19 +228,19 @@ const CreateCredential: FC = () => {
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label={translate("auth_form_texts", lng, 11)}
+							label={translate("auth_form_texts", lng, 12)}
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
-							accessCredentialProp="password"
+							accessCredentialProp="username"
 							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} lg={4}>
 						<CreateCredentialProp
-							label={translate("auth_form_texts", lng, 12)}
+							label={translate("auth_form_texts", lng, 11)}
 							layout="text field"
 							maxChar={calcMaxChar("sm")}
-							accessCredentialProp="username"
+							accessCredentialProp="password"
 							editCredentialProp={dispatchEditCredential}
 						/>
 					</Grid>
