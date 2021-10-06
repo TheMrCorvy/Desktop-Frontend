@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect } from "react"
+import { FC, ReactElement } from "react"
 
 import { Paper, Zoom, useScrollTrigger, Fab, Backdrop, CircularProgress } from "@material-ui/core"
 
@@ -32,8 +32,6 @@ const Layout: FC<Props> = (props) => {
 			behavior: "smooth",
 		})
 	}
-
-	useEffect(() => console.log(loading.error), [loading.error])
 
 	return (
 		<>
