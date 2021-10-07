@@ -38,7 +38,11 @@ export type CredentialT = {
 	user_id: number
 	company_id: number | null
 	company_name: string
-	url_logo: string | null
+	company: null | {
+		id: number
+		url_logo: string
+		name: string
+	}
 	description?: string
 	last_seen: string
 	recently_seen: boolean | string

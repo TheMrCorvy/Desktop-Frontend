@@ -109,15 +109,15 @@ const CreateCredential: FC = () => {
 
 		const autocomplete = document.getElementById("autocomplete-input") as HTMLInputElement
 
-		if (credential && autocomplete) {
-			let baggage: CredentialProp = {
-				oldCredential: credential,
-				prop: "company_name",
-				newValue: autocomplete.value,
-			}
+		// if (credential && autocomplete) {
+		// 	let baggage: CredentialProp = {
+		// 		oldCredential: credential,
+		// 		prop: "company_name",
+		// 		newValue: autocomplete.value,
+		// 	}
 
-			dispatch(editCredential(baggage))
-		}
+		// 	dispatch(editCredential(baggage))
+		// }
 		dispatch(toggleLoading(true))
 
 		const request: ApiCallI = {
@@ -126,6 +126,7 @@ const CreateCredential: FC = () => {
 			method: "POST",
 			body: {
 				...credential,
+				company_name: autocomplete.value,
 				accessing_device: getUserAgent(),
 				accessing_platform: "web",
 			},

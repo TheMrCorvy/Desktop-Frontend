@@ -208,6 +208,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 							inputProps={{
 								variant: "main text",
 								"data-testid": "test_security_question",
+								spellCheck: "false",
 							}}
 							value={mainChar}
 							onChange={handleChange}
@@ -233,6 +234,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 							inputProps={{
 								variant: "second text",
 								"data-testid": "test_security_answer",
+								spellCheck: "false",
 							}}
 							value={secondChar}
 							onChange={handleChange}
@@ -263,6 +265,7 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 				inputProps={{
 					variant: "main text",
 					"data-testid": "test_text_field",
+					spellCheck: "false",
 				}}
 				value={mainChar}
 				onChange={handleChange}

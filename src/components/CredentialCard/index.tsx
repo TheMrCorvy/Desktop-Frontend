@@ -70,11 +70,11 @@ const CredentialCard: FC<Props> = ({ credentials, availableSlots }) => {
 								<CardContent>
 									<Grid container spacing={2}>
 										<Grid item xs={2} className={classes.addCredential}>
-											{credential.url_logo ? (
+											{credential.company ? (
 												<Avatar
 													aria-label="recipe"
-													src={credential.url_logo}
-													alt={credential.company_name}
+													src={credential.company.url_logo}
+													alt={credential.company.name}
 												/>
 											) : (
 												<Avatar

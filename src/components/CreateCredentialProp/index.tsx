@@ -197,6 +197,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 							inputProps={{
 								type: layout,
 								"data-testid": "test_text_field",
+								spellCheck: "false",
 							}}
 							value={mainText}
 							onChange={handleChange}
@@ -246,6 +247,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 									InputProps={{
 										...params.InputProps,
 										type: layout,
+										spellCheck: "false",
 									}}
 								/>
 							)}
@@ -275,6 +277,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 							inputProps={{
 								type: layout,
 								"data-testid": "test_multiline",
+								spellCheck: "false",
 							}}
 							value={mainText}
 							onChange={handleChange}
@@ -308,6 +311,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 									type: layout,
 									variant: "security question",
 									"data-testid": "test_sqa_question",
+									spellCheck: "false",
 								}}
 								value={mainText}
 								onChange={handleChange}
@@ -333,6 +337,7 @@ const CreateCredentialProp: FC<Props> = (props) => {
 									type: layout,
 									variant: "security answer",
 									"data-testid": "test_sqa_answer",
+									spellCheck: "false",
 								}}
 								value={secondText}
 								onChange={handleChange}
