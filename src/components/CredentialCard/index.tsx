@@ -16,6 +16,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import { CredentialT } from "../../misc/types"
 
+import useRandomColor from "./randomColorHook"
+
 type Props = {
 	credentials: CredentialT[]
 	availableSlots: number
@@ -25,6 +27,8 @@ const CredentialCard: FC<Props> = ({ credentials, availableSlots }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
+
+	const randomColor = useRandomColor
 
 	return (
 		<>
@@ -76,6 +80,9 @@ const CredentialCard: FC<Props> = ({ credentials, availableSlots }) => {
 												<Avatar
 													aria-label="recipe"
 													className={classes.avatar}
+													style={{
+														backgroundColor: randomColor(),
+													}}
 												>
 													{credential.company_name
 														.charAt(0)

@@ -1,10 +1,8 @@
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
-import { red } from "@material-ui/core/colors"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		avatar: {
-			backgroundColor: red[500],
 			color: "white",
 		},
 		card: {
