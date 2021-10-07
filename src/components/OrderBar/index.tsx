@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useState, useEffect } from "react"
 
 import { Button, Divider, Grid } from "@material-ui/core"
 import useStyles from "./styles"
@@ -29,8 +29,8 @@ type Arrow = typeof ArrowUpwardIcon | typeof ArrowDownwardIcon
 
 const OrderBar: FC<Props> = ({ sortCredentials }) => {
 	const [order, setOrder] = useState<OrderT>({
-		by: "created_at",
-		arrow: ArrowUpwardIcon,
+		by: "company_name",
+		arrow: ArrowDownwardIcon,
 		direction: 1,
 	})
 
@@ -38,23 +38,30 @@ const OrderBar: FC<Props> = ({ sortCredentials }) => {
 
 	const classes = useStyles()
 
+	useEffect(() => {
+		sortCredentials({
+			by: order.by,
+			direction: order.direction,
+		})
+	}, [])
+
 	const orderBy = (by: By) => {
 		let setArrow: Arrow
 
 		let direction: Direction
 
 		if (by === order.by) {
-			if (order.arrow === ArrowUpwardIcon) {
-				setArrow = ArrowDownwardIcon
+			if (order.arrow === ArrowDownwardIcon) {
+				setArrow = ArrowUpwardIcon
 
 				direction = -1 //down
 			} else {
-				setArrow = ArrowUpwardIcon
+				setArrow = ArrowDownwardIcon
 
 				direction = 1 //up
 			}
 		} else {
-			setArrow = ArrowUpwardIcon
+			setArrow = ArrowDownwardIcon
 
 			direction = 1 //up
 		}
@@ -70,6 +77,15 @@ const OrderBar: FC<Props> = ({ sortCredentials }) => {
 
 	return (
 		<>
+			<Grid item xs={6} sm={3} className={classes.textCenter}>
+				<Button
+					color="inherit"
+					endIcon={order.by === "company_name" && <order.arrow />}
+					onClick={() => orderBy("company_name")}
+				>
+					{translate("order_options", lng, 2)}
+				</Button>
+			</Grid>
 			<Grid item xs={6} sm={3} className={classes.textCenter}>
 				<Button
 					color="inherit"
@@ -94,15 +110,6 @@ const OrderBar: FC<Props> = ({ sortCredentials }) => {
 					data-testid="test_order_by_edited"
 				>
 					{translate("order_options", lng, 1)}
-				</Button>
-			</Grid>
-			<Grid item xs={6} sm={3} className={classes.textCenter}>
-				<Button
-					color="inherit"
-					endIcon={order.by === "company_name" && <order.arrow />}
-					onClick={() => orderBy("company_name")}
-				>
-					{translate("order_options", lng, 2)}
 				</Button>
 			</Grid>
 			<Grid item xs={12} sm={3} className={classes.textCenter}>

@@ -85,6 +85,7 @@ const MyCredentials: FC = () => {
 
 			return 0
 		})
+
 		setCredentials(credentialsSorted)
 	}
 
