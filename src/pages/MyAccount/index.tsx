@@ -71,7 +71,7 @@ const MyAccount: FC = () => {
 
 	const isUserAllowed = () => {
 		if (user !== null) {
-			if (user.role === "premium" || user.role === "admin") {
+			if (user.role === "premium") {
 				return <FeedbackForm />
 			}
 		}

@@ -25,7 +25,7 @@ import FeedbackForm from "../../components/Sections/FeedbackForm"
 import UpdateRole from "../../components/Sections/UpdateRole"
 
 /******************************************************************************** types */
-import { CredentialT, ApiResponseGetCredentialsT, UserT, ApiCallI } from "../../misc/types"
+import { CredentialT, UserT, ApiCallI } from "../../misc/types"
 
 /************************************************************************************ ajax */
 import { callApi } from "../../misc/ajaxManager"
@@ -136,7 +136,7 @@ const MyCredentials: FC = () => {
 
 	const isAllowed = () => {
 		if (user !== null) {
-			if (user.role === "premium" || user.role === "admin") {
+			if (user.role === "premium") {
 				return <FeedbackForm />
 			}
 		}
