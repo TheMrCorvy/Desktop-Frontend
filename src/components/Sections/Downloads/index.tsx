@@ -44,6 +44,8 @@ const Downloads: FC<Props> = ({ alternative }) => {
 	}, [])
 
 	const handleInstallClick = () => {
+		// this will be disabled for now
+		return
 		try {
 			deferredPrompt.prompt()
 
