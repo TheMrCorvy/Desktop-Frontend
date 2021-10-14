@@ -19,6 +19,9 @@ import { RootState } from "../../../redux/store"
 
 import { toggleDrawer } from "../../../redux/actions/drawerActions"
 import { logOut } from "../../../redux/actions/authTokenActions"
+import { toggleLoading, setErrorLoading } from "../../../redux/actions/loadingActions"
+
+import { callApi } from "../../../misc/ajaxManager"
 
 import { translate } from "../../../lang"
 
@@ -34,6 +37,33 @@ const Drawer: FC = () => {
 	const dispatch = useDispatch()
 
 	const classes = useStyles()
+
+	const callLogout = () => {
+		if (token) {
+			dispatch(toggleLoading(true))
+
+			callApi({
+				lng,
+				endpoint: "/auth/logout",
+				method: "GET",
+				token,
+			}).then((response) => {
+				if (response.status === 200) {
+					dispatch(toggleLoading(false))
+
+					dispatch(logOut())
+				} else {
+					console.error(response)
+
+					if (response.message) {
+						dispatch(setErrorLoading(response.message))
+					} else {
+						dispatch(setErrorLoading("Error..."))
+					}
+				}
+			})
+		}
+	}
 
 	return (
 		<SwipeableDrawer
@@ -111,11 +141,7 @@ const Drawer: FC = () => {
 								</ListItem>
 							</Link>
 							<Divider />
-							<ListItem
-								button
-								className={classes.listItem}
-								onClick={() => dispatch(logOut())}
-							>
+							<ListItem button className={classes.listItem} onClick={callLogout}>
 								<ListItemIcon>
 									<FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="2x" />
 								</ListItemIcon>
