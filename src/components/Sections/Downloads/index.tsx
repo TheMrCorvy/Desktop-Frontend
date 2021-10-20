@@ -114,23 +114,24 @@ const Downloads: FC<Props> = ({ alternative }) => {
 								{translate("desktop", lng)}
 							</Typography>
 						</Grid>
-						<Grid item xs={4}>
-							<Button variant="contained" color="primary">
-								PC
-							</Button>
-						</Grid>
-						<Grid item xs={4}>
-							<Button variant="contained" color="secondary">
-								Mac
-							</Button>
-						</Grid>
-						<Grid item xs={4}>
+						<Grid item xs={6}>
 							<Button
 								variant="contained"
 								color="primary"
-								className={classes.linuxBtn}
+								href="https://github.com/PasuSewa/Desktop-Frontend/releases/download/Ver.4.11/pasunashi.Setup.1.0.1.exe"
+								target="_blank"
 							>
-								Linux
+								Windows
+							</Button>
+						</Grid>
+						<Grid item xs={6}>
+							<Button
+								variant="contained"
+								color="secondary"
+								href="https://github.com/PasuSewa/Desktop-Frontend/releases/download/Ver.4.11/pasunashi-1.0.1.dmg"
+								target="_blank"
+							>
+								Mac
 							</Button>
 						</Grid>
 					</Grid>
