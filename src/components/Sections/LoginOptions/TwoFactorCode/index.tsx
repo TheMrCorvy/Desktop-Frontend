@@ -13,13 +13,14 @@ import { translate } from "../../../../lang"
 import { callApi } from "../../../../misc/ajaxManager"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
-import { ApiResponseLoginT } from "../../../../misc/types"
+import { ApiResponseLoginT, UserT } from "../../../../misc/types"
 
 type Props = {
 	onAuthSuccess: (res: ApiResponseLoginT) => void
 	endpoint: string
 	isRobot: boolean
 	testing?: boolean
+	user?: UserT
 }
 
 type FormInputs = {
@@ -27,7 +28,7 @@ type FormInputs = {
 	twoFactorCode: string | number
 }
 
-const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) => {
+const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, user }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
@@ -36,6 +37,15 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing })
 		email: "",
 		twoFactorCode: "",
 	})
+
+	useEffect(() => {
+		if (user) {
+			setFormData({
+				email: user.email,
+				twoFactorCode: "",
+			})
+		}
+	}, [])
 
 	const { register, errors, handleSubmit } = useForm()
 

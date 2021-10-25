@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 
 import { Button, Grid } from "@material-ui/core"
 import useStyles from "./styles"
@@ -13,7 +13,9 @@ import TwoFactorCode from "./TwoFactorCode"
 import EmailCode from "./EmailCode"
 import SecurityCode from "./SecurityCode"
 
-import { ApiResponseLoginT } from "../../../misc/types"
+import { ApiResponseLoginT, UserT } from "../../../misc/types"
+
+import { getUser } from "../../../misc/indexedDB"
 
 type Props = {
 	onAuthSuccess: (res: ApiResponseLoginT) => void
@@ -24,12 +26,29 @@ type Props = {
 
 const LoginOptions: FC<Props> = ({ onAuthSuccess, isRobot, testing, endpointAlt }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+	const { token } = useSelector((state: RootState) => state.token)
 
 	const classes = useStyles()
 
 	const [activeStep, setActiveStep] = useState(1)
 
 	const [activeOption, setActiveOption] = useState(0)
+
+	const [user, setUser] = useState<undefined | UserT>(undefined)
+
+	useEffect(() => {
+		if (token) {
+			obtainFromDB()
+		}
+	}, [])
+
+	const obtainFromDB = async () => {
+		let data: any = await getUser()
+
+		if (data !== undefined) {
+			setUser(data)
+		}
+	}
 
 	const handleNext = (option: number) => {
 		setActiveStep(activeStep + 1)
@@ -52,6 +71,7 @@ const LoginOptions: FC<Props> = ({ onAuthSuccess, isRobot, testing, endpointAlt 
 						testing={testing}
 						endpoint={endpoint}
 						onAuthSuccess={onAuthSuccess}
+						user={user}
 					/>
 				)
 			case 1:
@@ -62,6 +82,7 @@ const LoginOptions: FC<Props> = ({ onAuthSuccess, isRobot, testing, endpointAlt 
 						isRobot={isRobot}
 						testing={testing}
 						endpoint={endpoint}
+						user={user}
 					/>
 				)
 			case 2:
@@ -72,6 +93,7 @@ const LoginOptions: FC<Props> = ({ onAuthSuccess, isRobot, testing, endpointAlt 
 						isRobot={isRobot}
 						testing={testing}
 						endpoint={endpoint}
+						user={user}
 					/>
 				)
 			case 3:
@@ -81,6 +103,7 @@ const LoginOptions: FC<Props> = ({ onAuthSuccess, isRobot, testing, endpointAlt 
 						testing={testing}
 						endpoint={endpoint}
 						onAuthSuccess={onAuthSuccess}
+						user={user}
 					/>
 				)
 
@@ -91,6 +114,7 @@ const LoginOptions: FC<Props> = ({ onAuthSuccess, isRobot, testing, endpointAlt 
 						testing={testing}
 						endpoint={endpoint}
 						onAuthSuccess={onAuthSuccess}
+						user={user}
 					/>
 				)
 		}

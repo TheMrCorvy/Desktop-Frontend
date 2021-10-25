@@ -22,7 +22,7 @@ import Snackbar from "../../../Snackbar"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 
-import { ApiResponseLoginT } from "../../../../misc/types"
+import { ApiResponseLoginT, UserT } from "../../../../misc/types"
 
 import { callApi } from "../../../../misc/ajaxManager"
 
@@ -32,6 +32,7 @@ type Props = {
 	isRecovery: boolean
 	isRobot: boolean
 	testing?: boolean
+	user?: UserT
 }
 
 type FormInputs = {
@@ -40,8 +41,17 @@ type FormInputs = {
 	mainEmail?: string
 }
 
-const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, testing }) => {
+const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, testing, user }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+
+	useEffect(() => {
+		if (user) {
+			setFormData({
+				mainEmail: user.email,
+				mailToSendCode: user.recovery_email,
+			})
+		}
+	}, [])
 
 	const dispatch = useDispatch()
 

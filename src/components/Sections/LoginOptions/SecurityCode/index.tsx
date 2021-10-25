@@ -13,13 +13,14 @@ import { callApi } from "../../../../misc/ajaxManager"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 
-import { ApiResponseLoginT } from "../../../../misc/types"
+import { ApiResponseLoginT, UserT } from "../../../../misc/types"
 
 type Props = {
 	onAuthSuccess: (res: ApiResponseLoginT) => void
 	endpoint: string
 	isRobot: boolean
 	testing?: boolean
+	user?: UserT
 }
 
 type FormInputs = {
@@ -29,7 +30,7 @@ type FormInputs = {
 	securityCode: string
 }
 
-const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) => {
+const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, user }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
@@ -93,6 +94,7 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) 
 								name="mainEmail"
 								required
 								type="email"
+								defaultValue={user ? user.email : ""}
 								inputProps={{
 									"data-testid": "test_main_email_input",
 									ref: register({
@@ -126,6 +128,7 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing }) 
 								name="recoveryEmail"
 								required
 								type="email"
+								defaultValue={user ? user.recovery_email : ""}
 								inputProps={{
 									ref: register({
 										required: {
