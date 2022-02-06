@@ -9,7 +9,7 @@ import { RootState } from "../../../../redux/store"
 import { translate } from "../../../../lang"
 import { setLanguage } from "../../../../redux/actions/langActions"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
-import { callApi } from "../../../../misc/ajaxManager"
+import { useApi } from "../../../../hooks/useApi"
 import { ApiCallI } from "../../../../misc/types"
 
 const TranslateButton = ({ ...rest }) => {
@@ -17,6 +17,8 @@ const TranslateButton = ({ ...rest }) => {
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const dispatch = useDispatch()
+
+	const callApi = useApi
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 

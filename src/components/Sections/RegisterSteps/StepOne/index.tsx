@@ -20,29 +20,16 @@ import { RootState } from "../../../../redux/store"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
-import { callApi } from "../../../../misc/ajaxManager"
+import { useApi } from "../../../../hooks/useApi"
 
 import DialogComponent from "../../../Dialog"
-
-type Props = {
-	nextStep: (email: string) => void
-	isRobot: boolean
-	testing?: boolean
-}
-
-type FormInputs = {
-	name: string
-	phoneNumber: string
-	mainEmail: string
-	recoveryEmail: string
-	secretAntiFishing: string
-	secretAntiFishing_confirmation: string
-}
 
 const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
+
+	const callApi = useApi
 
 	const { register, errors, handleSubmit, getValues } = useForm()
 
@@ -371,6 +358,21 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 			</Grid>
 		</form>
 	)
+}
+
+type Props = {
+	nextStep: (email: string) => void
+	isRobot: boolean
+	testing?: boolean
+}
+
+type FormInputs = {
+	name: string
+	phoneNumber: string
+	mainEmail: string
+	recoveryEmail: string
+	secretAntiFishing: string
+	secretAntiFishing_confirmation: string
 }
 
 export default StepOne

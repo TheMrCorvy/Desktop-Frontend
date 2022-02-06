@@ -9,26 +9,11 @@ import { RootState } from "../../../../redux/store"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
-import { callApi } from "../../../../misc/ajaxManager"
+import { useApi } from "../../../../hooks/useApi"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 
 import { ApiResponseLoginT, UserT } from "../../../../misc/types"
-
-type Props = {
-	onAuthSuccess: (res: ApiResponseLoginT) => void
-	endpoint: string
-	isRobot: boolean
-	testing?: boolean
-	user?: UserT
-}
-
-type FormInputs = {
-	mainEmail: string
-	recoveryEmail: string
-	antiFishingSecret: string
-	securityCode: string
-}
 
 const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, user }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -44,6 +29,8 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, us
 		value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
 		message: translate("form_validation_messages", lng, 3),
 	}
+
+	const callApi = useApi
 
 	const onSubmit = (data: FormInputs) => {
 		if (testing) {
@@ -244,6 +231,21 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, us
 			</form>
 		</Grid>
 	)
+}
+
+type Props = {
+	onAuthSuccess: (res: ApiResponseLoginT) => void
+	endpoint: string
+	isRobot: boolean
+	testing?: boolean
+	user?: UserT
+}
+
+type FormInputs = {
+	mainEmail: string
+	recoveryEmail: string
+	antiFishingSecret: string
+	securityCode: string
 }
 
 export default SecurityCode

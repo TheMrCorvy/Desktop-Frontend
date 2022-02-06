@@ -22,7 +22,7 @@ import { translate } from "../../lang"
 import { findCredential, getCredentials, getUser, putCredential } from "../../misc/indexedDB"
 import { maxSlots } from "../../misc/staticData"
 import { ApiCallI, CredentialT } from "../../misc/types"
-import { callApi } from "../../misc/ajaxManager"
+import { useApi } from "../../hooks/useApi"
 
 /************************************************************************************ components */
 import Snackbar from "../../components/Snackbar"
@@ -41,6 +41,8 @@ const ViewCredential: FC = (props: any) => {
 	const [snackbarMessage, setSnackbarMessage] = useState("")
 
 	const [id, setId] = useState(0)
+
+	const callApi = useApi
 
 	useEffect(() => {
 		// since the url param is a string, we must convert it into a number

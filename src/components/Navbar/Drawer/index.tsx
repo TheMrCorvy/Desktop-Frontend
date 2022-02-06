@@ -21,7 +21,7 @@ import { toggleDrawer } from "../../../redux/actions/drawerActions"
 import { logOut } from "../../../redux/actions/authTokenActions"
 import { toggleLoading, setErrorLoading } from "../../../redux/actions/loadingActions"
 
-import { callApi } from "../../../misc/ajaxManager"
+import { useApi } from "../../../hooks/useApi"
 
 import { translate } from "../../../lang"
 
@@ -37,6 +37,8 @@ const Drawer: FC = () => {
 	const dispatch = useDispatch()
 
 	const classes = useStyles()
+
+	const callApi = useApi
 
 	const callLogout = () => {
 		if (token) {

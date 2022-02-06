@@ -22,7 +22,7 @@ import { RootState } from "../../redux/store"
 import { translate } from "../../lang"
 
 import { ApiCallI } from "../../misc/types"
-import { callApi } from "../../misc/ajaxManager"
+import { useApi } from "../../hooks/useApi"
 
 import { setErrorLoading } from "../../redux/actions/loadingActions"
 
@@ -58,6 +58,8 @@ const PurchaseDialog: FC<Props> = ({ method, type }) => {
 	const [amount, setAmount] = useState<"" | number>("")
 	const [step, setStep] = useState(1)
 	const [message, setMessage] = useState("")
+
+	const callApi = useApi
 
 	const classes = useStyles()
 

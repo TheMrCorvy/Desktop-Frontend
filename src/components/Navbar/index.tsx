@@ -32,7 +32,7 @@ import { toggleDrawer } from "../../redux/actions/drawerActions"
 import { logOut } from "../../redux/actions/authTokenActions"
 import { toggleLoading, setErrorLoading } from "../../redux/actions/loadingActions"
 
-import { callApi } from "../../misc/ajaxManager"
+import { useApi } from "../../hooks/useApi"
 
 const Navbar: FC = () => {
 	const { theme } = useSelector((state: RootState) => state.theme)
@@ -44,6 +44,8 @@ const Navbar: FC = () => {
 	const classes = useStyles()
 
 	const dispatch = useDispatch()
+
+	const callApi = useApi
 
 	const callLogout = () => {
 		if (token) {

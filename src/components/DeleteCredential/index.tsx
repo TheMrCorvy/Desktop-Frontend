@@ -21,9 +21,8 @@ import { translate } from "../../lang"
 import { forgetCredential, getUser, putUser, getCredentials } from "../../misc/indexedDB"
 
 import { maxSlots } from "../../misc/staticData"
-import { callApi } from "../../misc/ajaxManager"
+import { useApi } from "../../hooks/useApi"
 import { ApiCallI } from "../../misc/types"
-import { info } from "console"
 import { setErrorLoading, toggleLoading } from "../../redux/actions/loadingActions"
 
 type Props = {
@@ -62,6 +61,7 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 	const [errorOption, setErrorOption] = useState<ErrorOptions>(1)
 
 	const history = useHistory()
+	const callApi = useApi
 
 	const deleteCredential = async () => {
 		if (!token) return

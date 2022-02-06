@@ -11,7 +11,7 @@ import Opinions from "./Opinions"
 import { OpinionCardT } from "../../misc/types"
 
 import { rating4Testing, suggestion4Testing } from "../../misc/Data4Testing"
-import { callApi } from "../../misc/ajaxManager"
+import { useApi } from "../../hooks/useApi"
 import { ApiCallI } from "../../misc/types"
 
 type FeedbackT = {
@@ -23,6 +23,8 @@ const Feedback: FC = () => {
 	const dispatch = useDispatch()
 
 	const { lng } = useSelector((state: RootState) => state.lng)
+
+	const callApi = useApi
 
 	const [feedback, setFeedback] = useState<FeedbackT>({
 		suggestions: [],

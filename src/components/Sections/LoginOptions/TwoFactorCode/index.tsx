@@ -10,23 +10,10 @@ import { RootState } from "../../../../redux/store"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
-import { callApi } from "../../../../misc/ajaxManager"
+import { useApi } from "../../../../hooks/useApi"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 import { ApiResponseLoginT, UserT } from "../../../../misc/types"
-
-type Props = {
-	onAuthSuccess: (res: ApiResponseLoginT) => void
-	endpoint: string
-	isRobot: boolean
-	testing?: boolean
-	user?: UserT
-}
-
-type FormInputs = {
-	email: String
-	twoFactorCode: string | number
-}
 
 const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, user }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -37,6 +24,8 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, u
 		email: "",
 		twoFactorCode: "",
 	})
+
+	const callApi = useApi
 
 	useEffect(() => {
 		if (user) {
@@ -207,6 +196,19 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, u
 			</Grid>
 		</Grid>
 	)
+}
+
+type Props = {
+	onAuthSuccess: (res: ApiResponseLoginT) => void
+	endpoint: string
+	isRobot: boolean
+	testing?: boolean
+	user?: UserT
+}
+
+type FormInputs = {
+	email: String
+	twoFactorCode: string | number
 }
 
 export default TwoFactorCode

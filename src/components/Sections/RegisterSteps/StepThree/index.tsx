@@ -20,36 +20,13 @@ import { RootState } from "../../../../redux/store"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
-import { callApi } from "../../../../misc/ajaxManager"
+import { useApi } from "../../../../hooks/useApi"
 
 import { useForm } from "react-hook-form"
 
 import { QRCode } from "react-qrcode-logo"
 import CopyText from "../../../CopyText"
 import { CredentialT, UserT } from "../../../../misc/types"
-
-type AuthResponse = {
-	user_data: UserT
-	user_credentials: CredentialT[]
-	token: string
-}
-
-type Props = {
-	isRobot: boolean
-	onAuthSuccess: (apiResponse: AuthResponse) => void
-	token: string
-	testing?: boolean
-}
-
-type FormInput = {
-	verificationCode: string
-}
-
-type UserData = {
-	email: string
-	secretKey: string
-	error?: any
-}
 
 const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -63,6 +40,8 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 	const { register, errors, handleSubmit } = useForm()
 
 	const classes = useStyles()
+
+	const callApi = useApi
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
@@ -237,6 +216,29 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 			)}
 		</Grid>
 	)
+}
+
+type AuthResponse = {
+	user_data: UserT
+	user_credentials: CredentialT[]
+	token: string
+}
+
+type Props = {
+	isRobot: boolean
+	onAuthSuccess: (apiResponse: AuthResponse) => void
+	token: string
+	testing?: boolean
+}
+
+type FormInput = {
+	verificationCode: string
+}
+
+type UserData = {
+	email: string
+	secretKey: string
+	error?: any
 }
 
 export default StepThree

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import { FC, useEffect } from "react"
 
 import { Container, Grid, Button, Typography, Divider, Hidden } from "@material-ui/core"
 
@@ -9,18 +9,6 @@ import { RootState } from "../../../redux/store"
 import { showError } from "../../../redux/actions/errorHandlingActions"
 
 import { translate } from "../../../lang"
-
-type Props = { alternative?: boolean; testing?: boolean }
-
-let deferredPrompt: any
-
-/**
- * @alias Section_Downloads
- *
- * @property {boolean} [alternative] if true, title is big, false / undefined title is smaller
- *
- * @property {boolean} [testing] if testing the layout of the buttons
- */
 
 const Downloads: FC<Props> = ({ alternative }) => {
 	const classes = useStyles()
@@ -219,5 +207,17 @@ const Downloads: FC<Props> = ({ alternative }) => {
 		</Container>
 	)
 }
+
+type Props = { alternative?: boolean; testing?: boolean }
+
+let deferredPrompt: any
+
+/**
+ * @alias Section_Downloads
+ *
+ * @property {boolean} [alternative] if true, title is big, false / undefined title is smaller
+ *
+ * @property {boolean} [testing] if testing the layout of the buttons
+ */
 
 export default Downloads

@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import { CredentialT } from "../../misc/types"
 
-import useRandomColor from "./randomColorHook"
+import useRandomColor from "./useRabdomColors"
 
 type Props = {
 	credentials: CredentialT[]

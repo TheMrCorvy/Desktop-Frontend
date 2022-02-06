@@ -10,13 +10,6 @@ import CopyText from "../../CopyText"
 import { AccessCredentialPropT } from "../../../misc/types"
 import { translate } from "../../../lang"
 
-type Props = {
-	textToCopy: string
-	label: string
-	locked: boolean
-	propName: AccessCredentialPropT
-}
-
 const CardFooter: FC<Props> = ({ textToCopy, label, locked, propName }) => {
 	const { credential } = useSelector((state: RootState) => state.credential)
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -43,6 +36,13 @@ const CardFooter: FC<Props> = ({ textToCopy, label, locked, propName }) => {
 			</AccordionActions>
 		</>
 	)
+}
+
+type Props = {
+	textToCopy: string
+	label: string
+	locked: boolean
+	propName: AccessCredentialPropT
 }
 
 export default CardFooter

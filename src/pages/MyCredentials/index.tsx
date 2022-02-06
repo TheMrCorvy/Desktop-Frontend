@@ -28,12 +28,7 @@ import UpdateRole from "../../components/Sections/UpdateRole"
 import { CredentialT, UserT, ApiCallI } from "../../misc/types"
 
 /************************************************************************************ ajax */
-import { callApi } from "../../misc/ajaxManager"
-
-type Sort = {
-	by: By
-	direction: Direction
-}
+import { useApi } from "../../hooks/useApi"
 
 const MyCredentials: FC = () => {
 	const { token } = useSelector((state: RootState) => state.token)
@@ -50,6 +45,8 @@ const MyCredentials: FC = () => {
 	const [error, setError] = useState<boolean>(false)
 
 	const [snackbarMessage, setSnackbarMessage] = useState("")
+
+	const callApi = useApi
 
 	useEffect(() => {
 		obtainFromDB("credentials")
@@ -199,6 +196,11 @@ const MyCredentials: FC = () => {
 			<Downloads />
 		</>
 	)
+}
+
+type Sort = {
+	by: By
+	direction: Direction
 }
 
 export default MyCredentials

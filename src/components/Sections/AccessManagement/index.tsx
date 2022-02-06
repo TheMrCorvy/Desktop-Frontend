@@ -44,28 +44,8 @@ import StopPremium from "../StopPremium"
 import CopyText from "../../CopyText"
 
 /******************************************************************************** api */
-import { callApi } from "../../../misc/ajaxManager"
+import { useApi } from "../../../hooks/useApi"
 import { getUserAgent } from "../../../misc/staticData"
-
-type Props = { testing?: boolean }
-
-type Form = {
-	name: string
-	phone_number: string
-	email: string
-	recovery_email: string
-	anti_fishing_secret: string
-	security_access_code: string
-}
-
-const placeholder: Form = {
-	name: "•••••",
-	email: "•••••",
-	recovery_email: "•••••",
-	phone_number: "•••••",
-	anti_fishing_secret: "•••••",
-	security_access_code: "•••••",
-}
 
 const AccessManagement: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -82,6 +62,8 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 	const [form, setForm] = useState<Form>(placeholder)
 
 	const [userRole, setUserRole] = useState("")
+
+	const callApi = useApi
 
 	useEffect(() => {
 		obtainUser()
@@ -366,6 +348,26 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 			</Card>
 		</Grid>
 	)
+}
+
+type Props = { testing?: boolean }
+
+type Form = {
+	name: string
+	phone_number: string
+	email: string
+	recovery_email: string
+	anti_fishing_secret: string
+	security_access_code: string
+}
+
+const placeholder: Form = {
+	name: "•••••",
+	email: "•••••",
+	recovery_email: "•••••",
+	phone_number: "•••••",
+	anti_fishing_secret: "•••••",
+	security_access_code: "•••••",
 }
 
 export default AccessManagement

@@ -9,11 +9,6 @@ import { translate } from "../lang"
 
 import { useHistory } from "react-router-dom"
 
-type Props = {
-	altText?: string
-	altColor?: "default" | "inherit" | "primary" | "secondary"
-}
-
 const GoBackBtn: FC<Props> = ({ altText, altColor }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
@@ -30,6 +25,11 @@ const GoBackBtn: FC<Props> = ({ altText, altColor }) => {
 			{!altText ? translate("go_back", lng) : altText}
 		</Button>
 	)
+}
+
+type Props = {
+	altText?: string
+	altColor?: "default" | "inherit" | "primary" | "secondary"
 }
 
 export default GoBackBtn

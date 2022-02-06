@@ -11,7 +11,7 @@ import { RootState } from "../../../redux/store"
 import { translate } from "../../../lang"
 import { toggleLoading, setErrorLoading } from "../../../redux/actions/loadingActions"
 
-import { callApi } from "../../../misc/ajaxManager"
+import { useApi } from "../../../hooks/useApi"
 import { ApiCallI } from "../../../misc/types"
 import { calcMaxChar } from "../../../misc/staticData"
 
@@ -34,6 +34,8 @@ const FeedbackForm: FC = () => {
 	const classes = useStyles()
 
 	const maxTxt = calcMaxChar("sm")
+
+	const callApi = useApi
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
 		setFeedbackType(event.target.value as string)

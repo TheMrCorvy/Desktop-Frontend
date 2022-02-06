@@ -18,7 +18,7 @@ import { translate } from "../../../lang"
 import { findCredential, putCredential } from "../../../misc/indexedDB"
 import { calcMaxChar, getUserAgent } from "../../../misc/staticData"
 import { AccessCredentialPropT, ApiCallI, CharSizesT, ReduxCredentialT } from "../../../misc/types"
-import { callApi } from "../../../misc/ajaxManager"
+import { useApi } from "../../../hooks/useApi"
 
 import UnlockData from "../../UnlockData"
 import DisplayData from "../../DisplayData"
@@ -26,18 +26,6 @@ import GoBackBtn from "../../GoBackBtn"
 import DeleteCredential from "../../DeleteCredential"
 import Snackbar from "../../Snackbar"
 import VisualizeCredentialProp from "../../VisualizeCredentialProp"
-
-type Props = {
-	getDecryptedCredential: (decrypted: true, agent: string) => Promise<boolean | undefined>
-}
-
-/**
- * @alias Section_ShowCredential
- *
- * @description This is the section that will show all the properties that a credential has, one each, using the {@link VisualizeCredentialProp} component
- *
- * @property {Function} getDecryptedCredential This function receives 2 params: 1- decrypted: true alweys, 2- agent: string (the user agent which is obtained inside of this component)
- */
 
 const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -59,6 +47,8 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	const classes = useStyles()
 
 	const dispatch = useDispatch()
+
+	const callApi = useApi
 
 	useEffect(() => {
 		setIsAuthenticated(!locked)
@@ -378,4 +368,17 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 		</>
 	)
 }
+
+type Props = {
+	getDecryptedCredential: (decrypted: true, agent: string) => Promise<boolean | undefined>
+}
+
+/**
+ * @alias Section_ShowCredential
+ *
+ * @description This is the section that will show all the properties that a credential has, one each, using the {@link VisualizeCredentialProp} component
+ *
+ * @property {Function} getDecryptedCredential This function receives 2 params: 1- decrypted: true alweys, 2- agent: string (the user agent which is obtained inside of this component)
+ */
+
 export default ShowCredential

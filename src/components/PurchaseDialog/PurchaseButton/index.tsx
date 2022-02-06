@@ -15,7 +15,7 @@ import { PayPalButton } from "react-paypal-button-v2"
 
 import Snackbar from "../../Snackbar"
 
-import { generateCoinbaseCharge } from "../../../misc/ajaxManager"
+import { generateCoinbaseCharge } from "../../../hooks/useCoinbaseApi"
 
 import { CoinbaseChargeT } from "../../../misc/types"
 

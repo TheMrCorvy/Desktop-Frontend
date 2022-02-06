@@ -24,25 +24,12 @@ import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 
 import { ApiResponseLoginT, UserT } from "../../../../misc/types"
 
-import { callApi } from "../../../../misc/ajaxManager"
-
-type Props = {
-	onAuthSuccess: (res: ApiResponseLoginT) => void
-	endpoint: string
-	isRecovery: boolean
-	isRobot: boolean
-	testing?: boolean
-	user?: UserT
-}
-
-type FormInputs = {
-	mailToSendCode: String
-	verificationCode: number
-	mainEmail?: string
-}
+import { useApi } from "../../../../hooks/useApi"
 
 const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, testing, user }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
+
+	const callApi = useApi
 
 	useEffect(() => {
 		if (user) {
@@ -325,6 +312,21 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 			</Grid>
 		</>
 	)
+}
+
+type Props = {
+	onAuthSuccess: (res: ApiResponseLoginT) => void
+	endpoint: string
+	isRecovery: boolean
+	isRobot: boolean
+	testing?: boolean
+	user?: UserT
+}
+
+type FormInputs = {
+	mailToSendCode: String
+	verificationCode: number
+	mainEmail?: string
 }
 
 export default EmailCode

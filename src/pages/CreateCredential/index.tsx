@@ -18,7 +18,7 @@ import { translate } from "../../lang"
 import { CompanyT, AccessCredentialPropT, ApiCallI, CredentialT } from "../../misc/types"
 import { calcMaxChar, getUserAgent } from "../../misc/staticData"
 import { getCompanies, getUser, putCompanies, putCredential, putUser } from "../../misc/indexedDB"
-import { callApi } from "../../misc/ajaxManager"
+import { useApi } from "../../hooks/useApi"
 
 import CreateCredentialProp from "../../components/CreateCredentialProp"
 import GoBackBtn from "../../components/GoBackBtn"
@@ -41,6 +41,8 @@ const CreateCredential: FC = () => {
 	const classes = useStyles()
 
 	const history = useHistory()
+
+	const callApi = useApi
 
 	const [companies, setCompanies] = useState<CompanyT[]>([
 		{

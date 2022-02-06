@@ -1,12 +1,5 @@
-import React, { FC, useState, useEffect } from "react"
+import { FC, useState, useEffect } from "react"
 import { Button } from "@material-ui/core"
-
-type Props = {
-	title: string
-	initialTime?: number
-	color?: "inherit" | "primary" | "secondary" | "default" | undefined
-	size?: "small" | "medium" | "large" | undefined
-}
 
 const TimerButton: FC<Props> = ({ title, initialTime, color, size }) => {
 	const [time, setTime] = useState(0)
@@ -46,6 +39,13 @@ const TimerButton: FC<Props> = ({ title, initialTime, color, size }) => {
 			{time !== 0 ? time : title}
 		</Button>
 	)
+}
+
+type Props = {
+	title: string
+	initialTime?: number
+	color?: "inherit" | "primary" | "secondary" | "default" | undefined
+	size?: "small" | "medium" | "large" | undefined
 }
 
 export default TimerButton

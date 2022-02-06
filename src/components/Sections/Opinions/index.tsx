@@ -7,11 +7,6 @@ import useStyles from "./styles"
 import OpinionCard from "../../OpinionCard"
 import { OpinionCardT } from "../../../misc/types"
 
-type Props = {
-	title: string
-	opinions: OpinionCardT[]
-}
-
 const Opinions: FC<Props> = ({ title, opinions }) => {
 	const classes = useStyles()
 
@@ -37,6 +32,11 @@ const Opinions: FC<Props> = ({ title, opinions }) => {
 			</Container>
 		</div>
 	)
+}
+
+type Props = {
+	title: string
+	opinions: OpinionCardT[]
 }
 
 export default Opinions

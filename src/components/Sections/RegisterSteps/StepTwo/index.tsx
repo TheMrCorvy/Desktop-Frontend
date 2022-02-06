@@ -7,21 +7,9 @@ import { RootState } from "../../../../redux/store"
 import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadingActions"
 import { translate } from "../../../../lang"
 
-import { callApi } from "../../../../misc/ajaxManager"
+import { useApi } from "../../../../hooks/useApi"
 
 import { useForm } from "react-hook-form"
-
-type Props = {
-	nextStep: (token: string) => void
-	isRobot: boolean
-	testing?: boolean
-	email?: string
-}
-
-type FormInputs = {
-	mainEmailCode: number | string
-	recoveryEmailCode: number | string
-}
 
 const StepTwo: FC<Props> = ({ nextStep, isRobot, testing, email }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -29,6 +17,8 @@ const StepTwo: FC<Props> = ({ nextStep, isRobot, testing, email }) => {
 	const dispatch = useDispatch()
 
 	const { register, errors, handleSubmit } = useForm()
+
+	const callApi = useApi
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
@@ -155,6 +145,18 @@ const StepTwo: FC<Props> = ({ nextStep, isRobot, testing, email }) => {
 			</Grid>
 		</form>
 	)
+}
+
+type Props = {
+	nextStep: (token: string) => void
+	isRobot: boolean
+	testing?: boolean
+	email?: string
+}
+
+type FormInputs = {
+	mainEmailCode: number | string
+	recoveryEmailCode: number | string
 }
 
 export default StepTwo

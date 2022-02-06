@@ -27,9 +27,7 @@ import { getRecentlySeen, putRecentlySeen } from "../../../misc/indexedDB"
 
 import { ApiCallI, RecentlySeenT } from "../../../misc/types"
 
-import { callApi } from "../../../misc/ajaxManager"
-
-type Props = { testing?: boolean }
+import { useApi } from "../../../hooks/useApi"
 
 const RecentAccessTable: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -42,6 +40,8 @@ const RecentAccessTable: FC<Props> = ({ testing }) => {
 	const [loading, setLoading] = useState(true)
 
 	const classes = useStyles()
+
+	const callApi = useApi
 
 	useEffect(() => {
 		if (!testing) {
@@ -166,5 +166,7 @@ const RecentAccessTable: FC<Props> = ({ testing }) => {
 		</Card>
 	)
 }
+
+type Props = { testing?: boolean }
 
 export default RecentAccessTable
