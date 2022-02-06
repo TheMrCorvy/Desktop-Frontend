@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { AccessCredentialPropT, CharSizesT, ReduxCredentialT } from "../../../../misc/types"
-import { calcMaxChar } from "../../../../misc/staticData"
+import calcMaxChar from "../../../../hooks/useMaxChars"
 
 import VisualizeCredentialProp from "../../../UI-Components/VisualizeCredentialProp"
 

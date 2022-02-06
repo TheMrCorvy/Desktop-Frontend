@@ -45,7 +45,7 @@ import CopyText from "../../Utils/CopyText"
 
 /******************************************************************************** api */
 import { useApi } from "../../../hooks/useApi"
-import { getUserAgent } from "../../../misc/staticData"
+import getUserAgent from "../../../hooks/useUserAgent"
 
 const AccessManagement: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)

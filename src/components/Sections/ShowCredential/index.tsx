@@ -16,7 +16,7 @@ import { setErrorLoading, toggleLoading } from "../../../redux/actions/loadingAc
 import { translate } from "../../../lang"
 
 import { findCredential, putCredential } from "../../../misc/indexedDB"
-import { getUserAgent } from "../../../misc/staticData"
+import getUserAgent from "../../../hooks/useUserAgent"
 import { ApiCallI, ReduxCredentialT } from "../../../misc/types"
 import { useApi } from "../../../hooks/useApi"
 

@@ -1,4 +1,4 @@
-import { PricingCardT, RecommendedAppsT, CharSizesT } from "./types"
+import { PricingCardT, RecommendedAppsT } from "./types"
 import { translate } from "../lang"
 
 export const maxSlots = {
@@ -141,33 +141,4 @@ export const pricingInfo = (lang: string): PricingCardT[] => {
 	}
 
 	return [freeCard, semiPremiumCard, premiumCard]
-}
-
-export const calcMaxChar = (option: CharSizesT): number => {
-	//these values are the maximum characters that some columns in the database can store
-	switch (option) {
-		case "xs":
-			return 50
-		case "sm":
-			return 190
-		case "md":
-			return 250
-		case "lg":
-			return 500
-		case "xl":
-			return 1000
-
-		default:
-			return 0
-	}
-}
-
-export const getUserAgent = () => {
-	const userAgentInfo = navigator.userAgent
-
-	const multipleStrings = userAgentInfo.split("(")
-
-	const finalStrings = multipleStrings[1].split(")")
-
-	return finalStrings[0]
 }

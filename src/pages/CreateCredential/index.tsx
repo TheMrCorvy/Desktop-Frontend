@@ -7,16 +7,13 @@ import useStyles from "./styles"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
-import {
-	clearCredential,
-	CredentialProp,
-	editCredential,
-} from "../../redux/actions/credentialActions"
+import { clearCredential, editCredential } from "../../redux/actions/credentialActions"
 import { showError } from "../../redux/actions/errorHandlingActions"
 import { translate } from "../../lang"
 
 import { CompanyT, AccessCredentialPropT, ApiCallI, CredentialT } from "../../misc/types"
-import { calcMaxChar, getUserAgent } from "../../misc/staticData"
+import calcMaxChar from "../../hooks/useMaxChars"
+import getUserAgent from "../../hooks/useUserAgent"
 import { getCompanies, getUser, putCompanies, putCredential, putUser } from "../../misc/indexedDB"
 import { useApi } from "../../hooks/useApi"
 

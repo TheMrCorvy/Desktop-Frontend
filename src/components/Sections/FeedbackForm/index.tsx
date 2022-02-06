@@ -13,7 +13,7 @@ import { toggleLoading, setErrorLoading } from "../../../redux/actions/loadingAc
 
 import { useApi } from "../../../hooks/useApi"
 import { ApiCallI } from "../../../misc/types"
-import { calcMaxChar } from "../../../misc/staticData"
+import calcMaxChar from "../../../hooks/useMaxChars"
 
 import Snackbar from "../../Utils/Snackbar"
 
