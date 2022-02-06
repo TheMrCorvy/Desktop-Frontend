@@ -40,16 +40,23 @@ const CreateCredentialProp: FC<Props> = (props) => {
 	} = props
 
 	const [mainCharCount, setMainCharCount] = useState(0)
-
 	const [secondCharCount, setSecondCharCount] = useState(0)
-
 	const [mainText, setMainText] = useState("")
-
 	const [secondText, setSecondText] = useState("")
-
 	const [editingOption, setEditingOption] = useState<"question" | "answer" | "">("")
 
 	const classes = useStyles()
+
+	useEffect(() => {
+		const edits: ExportEdits = {
+			mainText,
+			secondText,
+			accessCredentialProp,
+			editingOption,
+		}
+
+		editCredentialProp(edits)
+	}, [mainText, secondText])
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
 		const target = event.target as HTMLInputElement
@@ -100,17 +107,6 @@ const CreateCredentialProp: FC<Props> = (props) => {
 				break
 		}
 	}
-
-	useEffect(() => {
-		const edits: ExportEdits = {
-			mainText,
-			secondText,
-			accessCredentialProp,
-			editingOption,
-		}
-
-		editCredentialProp(edits)
-	}, [mainText, secondText])
 
 	const renderBody = (option: LayoutOptions) => {
 		switch (option) {

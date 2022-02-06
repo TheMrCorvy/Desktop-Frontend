@@ -18,11 +18,9 @@ import { pricingInfo } from "../../../misc/staticData"
 
 const Pricing: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
-
 	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const classes = useStyles()
-
 	const info: PricingCardT[] = pricingInfo(lng)
 
 	return (

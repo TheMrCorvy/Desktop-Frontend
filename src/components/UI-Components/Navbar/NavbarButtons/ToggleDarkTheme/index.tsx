@@ -11,7 +11,6 @@ import { translate } from "../../../../../lang"
 
 const ToggleDarkTheme = ({ ...rest }) => {
 	const { theme } = useSelector((state: RootState) => state.theme)
-
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()

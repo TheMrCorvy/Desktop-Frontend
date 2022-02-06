@@ -30,18 +30,7 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const callApi = useApi
-
-	useEffect(() => {
-		if (user) {
-			setFormData({
-				mainEmail: user.email,
-				mailToSendCode: user.recovery_email,
-			})
-		}
-	}, [])
-
 	const dispatch = useDispatch()
-
 	const { register, errors, handleSubmit } = useForm()
 
 	const [formData, setFormData] = useState({
@@ -62,6 +51,25 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 		message: translate("form_validation_messages", lng, 3),
 	}
 
+	useEffect(() => {
+		if (user) {
+			setFormData({
+				mainEmail: user.email,
+				mailToSendCode: user.recovery_email,
+			})
+		}
+	}, [])
+
+	useEffect(() => {
+		if (snackbar.open) {
+			const snackTime = setTimeout(() => {
+				setSnackbar({ ...snackbar, open: false })
+			}, 30000)
+
+			return () => clearTimeout(snackTime)
+		}
+	}, [snackbar])
+
 	const onSubmit = (data: FormInputs) => {
 		if (testing) {
 			const fakeResponse: ApiResponseLoginT = {
@@ -69,36 +77,35 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
 			}
-
 			console.log(fakeResponse)
-
 			onAuthSuccess(fakeResponse)
-		} else {
-			dispatch(toggleLoading(true))
-
-			callApi({
-				lng,
-				endpoint: "/auth/login/email-code",
-				method: "POST",
-				body: {
-					mainEmail: isRecovery ? data.mainEmail : data.mailToSendCode,
-					recoveryEmail: isRecovery ? data.mailToSendCode : null,
-					code: data.verificationCode,
-				},
-			}).then((response) => {
-				if (response.status === 200) {
-					dispatch(toggleLoading(false))
-					onAuthSuccess(response.data)
-				} else {
-					console.error(response)
-					if (response.message) {
-						dispatch(setErrorLoading(response.message))
-					} else {
-						dispatch(setErrorLoading("Error..."))
-					}
-				}
-			})
+			return
 		}
+
+		dispatch(toggleLoading(true))
+
+		callApi({
+			lng,
+			endpoint: "/auth/login/email-code",
+			method: "POST",
+			body: {
+				mainEmail: isRecovery ? data.mainEmail : data.mailToSendCode,
+				recoveryEmail: isRecovery ? data.mailToSendCode : null,
+				code: data.verificationCode,
+			},
+		}).then((response) => {
+			if (response.status === 200) {
+				dispatch(toggleLoading(false))
+				onAuthSuccess(response.data)
+			} else {
+				console.error(response)
+				if (response.message) {
+					dispatch(setErrorLoading(response.message))
+				} else {
+					dispatch(setErrorLoading("Error..."))
+				}
+			}
+		})
 	}
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
@@ -128,16 +135,6 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 			})
 		}
 	}
-
-	useEffect(() => {
-		if (snackbar.open) {
-			const snackTime = setTimeout(() => {
-				setSnackbar({ ...snackbar, open: false })
-			}, 30000)
-
-			return () => clearTimeout(snackTime)
-		}
-	}, [snackbar])
 
 	return (
 		<>

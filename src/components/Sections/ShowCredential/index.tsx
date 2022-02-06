@@ -16,8 +16,8 @@ import { setErrorLoading, toggleLoading } from "../../../redux/actions/loadingAc
 import { translate } from "../../../lang"
 
 import { findCredential, putCredential } from "../../../misc/indexedDB"
-import { calcMaxChar, getUserAgent } from "../../../misc/staticData"
-import { AccessCredentialPropT, ApiCallI, CharSizesT, ReduxCredentialT } from "../../../misc/types"
+import { getUserAgent } from "../../../misc/staticData"
+import { ApiCallI, ReduxCredentialT } from "../../../misc/types"
 import { useApi } from "../../../hooks/useApi"
 
 import UnlockData from "../../Utils/UnlockData"
@@ -25,7 +25,7 @@ import DisplayData from "../../Utils/DisplayData"
 import GoBackBtn from "../../Utils/GoBackBtn"
 import DeleteCredential from "../../UI-Components/DeleteCredential"
 import Snackbar from "../../Utils/Snackbar"
-import VisualizeCredentialProp from "../../UI-Components/VisualizeCredentialProp"
+import CredentialProp from "./CredentialProp"
 
 const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -35,19 +35,13 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	const { REACT_APP_ENV_LOCAL } = process.env
 
 	const [locked, setLocked] = useState(true)
-
 	const [visible, setVisible] = useState(false)
-
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
-
 	const [showSnackbar, setShowSnackbar] = useState(false)
-
 	const [snackbarMessage, setSnackbarMessage] = useState("")
 
 	const classes = useStyles()
-
 	const dispatch = useDispatch()
-
 	const callApi = useApi
 
 	useEffect(() => {
@@ -97,82 +91,75 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 				},
 			}
 
-			callApi(request).then((response) => {
+			return callApi(request).then((response) => {
 				if (response.status !== 200) {
 					setShowSnackbar(true)
-
 					setSnackbarMessage(translate("access_denied_message", lng))
-
 					dispatch(setErrorLoading(response.message))
 				} else {
 					dispatch(toggleLoading(false))
-
 					setVisible(true)
-
 					dispatch(setDecryptedCredential(response.data.decrypted_credential))
 				}
 			})
-		} else {
-			const id = credential.id ? credential.id : 0
+		}
 
-			id !== 0 &&
-				obtainCredential(id).then((credentialDB: any) => {
-					if (credentialDB) {
-						setVisible(false)
+		const id = credential.id ? credential.id : 0
 
-						dispatch(initializeCredential(credentialDB))
-					} else {
-						setSnackbarMessage(translate("error_messages", lng, 3))
-
-						setShowSnackbar(true)
-					}
-				})
+		if (id !== 0) {
+			obtainCredential(id).then((credentialDB: any) => {
+				if (credentialDB) {
+					setVisible(false)
+					dispatch(initializeCredential(credentialDB))
+				} else {
+					setSnackbarMessage(translate("error_messages", lng, 3))
+					setShowSnackbar(true)
+				}
+			})
 		}
 	}
 
 	const toggleLock = () => {
 		if (!token) return
 
-		if (locked) {
-			dispatch(toggleLoading(true))
-
-			const request: ApiCallI = {
-				lng,
-				token,
-				method: "POST",
-				endpoint: "/auth/grant-access",
-				body: {
-					accessTo: "credential-data",
-					credentialId: credential.id,
-					accessingPlatform: "web",
-					accessingDevice: getUserAgent(),
-				},
-			}
-
-			callApi(request).then((response) => {
-				if (response.status !== 200) {
-					setShowSnackbar(true)
-
-					setSnackbarMessage(translate("access_denied_message", lng))
-
-					dispatch(setErrorLoading(response.message))
-				} else {
-					dispatch(toggleLoading(false))
-
-					if (!visible && locked) {
-						setVisible(true)
-					}
-
-					setLocked(false)
-
-					setIsAuthenticated(true)
-
-					dispatch(setDecryptedCredential(response.data.decrypted_credential))
-				}
-			})
-		} else {
+		if (!locked) {
 			updateCredential(credential)
+
+			return
 		}
+
+		dispatch(toggleLoading(true))
+
+		const request: ApiCallI = {
+			lng,
+			token,
+			method: "POST",
+			endpoint: "/auth/grant-access",
+			body: {
+				accessTo: "credential-data",
+				credentialId: credential.id,
+				accessingPlatform: "web",
+				accessingDevice: getUserAgent(),
+			},
+		}
+
+		callApi(request).then((response) => {
+			if (response.status !== 200) {
+				setShowSnackbar(true)
+				setSnackbarMessage(translate("access_denied_message", lng))
+				dispatch(setErrorLoading(response.message))
+			} else {
+				dispatch(toggleLoading(false))
+
+				if (!visible && locked) {
+					setVisible(true)
+				}
+
+				setLocked(false)
+				setIsAuthenticated(true)
+				dispatch(setDecryptedCredential(response.data.decrypted_credential))
+			}
+		})
 	}
 
 	const updateCredential = (credential: ReduxCredentialT) => {
@@ -216,37 +203,6 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 		})
 	}
 
-	const renderCredentialProp = (
-		propName: AccessCredentialPropT,
-		label: string,
-		maxChar?: CharSizesT,
-		isCrypto?: boolean
-	) => {
-		if (credential[propName]) {
-			return (
-				<VisualizeCredentialProp
-					label={label}
-					locked={locked}
-					visible={visible}
-					propName={propName}
-					maxChar={calcMaxChar(maxChar ? maxChar : "sm")}
-					isCrypto={isCrypto}
-				/>
-			)
-		} else if (!locked && !credential[propName]) {
-			return (
-				<VisualizeCredentialProp
-					label={label}
-					locked={locked}
-					visible={visible}
-					propName={propName}
-					maxChar={calcMaxChar(maxChar ? maxChar : "sm")}
-					isCrypto={isCrypto}
-				/>
-			)
-		}
-	}
-
 	return (
 		<>
 			<Grid item xs={12} md={3}>
@@ -264,7 +220,16 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 							</Grid>
 						</Grid>
 					</Grid>
-					{renderCredentialProp("description", translate("description", lng), "xl")}
+
+					<CredentialProp
+						propName="description"
+						label={translate("description", lng)}
+						maxChar="xl"
+						locked={locked}
+						visible={visible}
+						credential={credential}
+					/>
+
 					<Grid item xs={12}>
 						<Grid container justify="space-between" spacing={2}>
 							<Grid item>
@@ -334,31 +299,73 @@ const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 
 			<Grid item xs={12} md={9}>
 				<Grid container spacing={4}>
-					{renderCredentialProp("user_name", translate("auth_form_texts", lng, 14))}
-					{renderCredentialProp("email", translate("auth_form_texts", lng, 0))}
-					{renderCredentialProp("username", translate("auth_form_texts", lng, 12))}
-					{renderCredentialProp("password", translate("auth_form_texts", lng, 11))}
-					{renderCredentialProp("phone_number", translate("auth_form_texts", lng, 7))}
-					{renderCredentialProp(
-						"security_question",
-						translate("encryption_examples", lng, 10)
-					)}
-					{renderCredentialProp(
-						"unique_code",
-						translate("auth_form_texts", lng, 13),
-						"xs"
-					)}
-					{renderCredentialProp(
-						"multiple_codes",
-						translate("encryption_examples", lng, 8),
-						"xs"
-					)}
-					{renderCredentialProp(
-						"crypto_codes",
-						translate("encryption_examples", lng, 9),
-						"xs",
-						true
-					)}
+					<CredentialProp
+						propName="user_name"
+						label={translate("auth_form_texts", lng, 14)}
+						locked={locked}
+						visible={visible}
+						credential={credential}
+					/>
+					<CredentialProp
+						propName="email"
+						label={translate("auth_form_texts", lng, 0)}
+						locked={locked}
+						visible={visible}
+						credential={credential}
+					/>
+					<CredentialProp
+						propName="username"
+						label={translate("auth_form_texts", lng, 12)}
+						locked={locked}
+						visible={visible}
+						credential={credential}
+					/>
+					<CredentialProp
+						propName="password"
+						label={translate("auth_form_texts", lng, 11)}
+						locked={locked}
+						visible={visible}
+						credential={credential}
+					/>
+					<CredentialProp
+						propName="phone_number"
+						label={translate("auth_form_texts", lng, 7)}
+						locked={locked}
+						visible={visible}
+						credential={credential}
+					/>
+					<CredentialProp
+						propName="security_question"
+						label={translate("encryption_examples", lng, 10)}
+						locked={locked}
+						visible={visible}
+						credential={credential}
+					/>
+					<CredentialProp
+						propName="unique_code"
+						label={translate("auth_form_texts", lng, 13)}
+						locked={locked}
+						visible={visible}
+						credential={credential}
+						maxChar="xs"
+					/>
+					<CredentialProp
+						propName="multiple_codes"
+						label={translate("encryption_examples", lng, 8)}
+						locked={locked}
+						visible={visible}
+						credential={credential}
+						maxChar="xs"
+					/>
+					<CredentialProp
+						propName="crypto_codes"
+						label={translate("encryption_examples", lng, 9)}
+						locked={locked}
+						visible={visible}
+						credential={credential}
+						maxChar="xs"
+						isCrypto
+					/>
 				</Grid>
 			</Grid>
 

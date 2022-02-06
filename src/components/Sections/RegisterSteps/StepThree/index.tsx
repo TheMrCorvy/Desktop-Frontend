@@ -30,17 +30,15 @@ import { CredentialT, UserT } from "../../../../misc/types"
 
 const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
-	const dispatch = useDispatch()
 
 	const [userData, setUserData] = useState<UserData>({
 		email: "",
 		secretKey: "",
 	})
 
+	const dispatch = useDispatch()
 	const { register, errors, handleSubmit } = useForm()
-
 	const classes = useStyles()
-
 	const callApi = useApi
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)

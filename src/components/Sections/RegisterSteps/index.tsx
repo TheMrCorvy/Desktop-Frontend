@@ -20,16 +20,13 @@ import StepThree from "./StepThree"
 
 import { initiateDB } from "../../../misc/indexedDB"
 
-type Props = { isRobot: boolean }
-
 const RegisterSteps: FC<Props> = ({ isRobot }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
-	const dispatch = useDispatch()
 
+	const dispatch = useDispatch()
 	const classes = useStyles()
 
 	const [activeStep, setActiveStep] = useState(0)
-
 	const [stepResponse, setStepResponse] = useState("")
 
 	const handleNext = (response?: string) => {
@@ -119,5 +116,7 @@ const RegisterSteps: FC<Props> = ({ isRobot }) => {
 		</>
 	)
 }
+
+type Props = { isRobot: boolean }
 
 export default RegisterSteps

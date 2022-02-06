@@ -17,56 +17,6 @@ import {
 
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 
-type Props = {
-	children: ReactElement
-	title: string
-	tooltipPlacement:
-		| "left"
-		| "right"
-		| "top"
-		| "bottom"
-		| "bottom-end"
-		| "bottom-start"
-		| "left-end"
-		| "left-start"
-		| "right-end"
-		| "right-start"
-		| "top-end"
-		| "top-start"
-	className?: any
-	tooltipTitle?: string
-}
-
-/**
- * @alias Dialog
- *
- * @description A customizable call to action button that opens a dynamic dialog with the text as the children of the component
- *
- * @property {ReactElement} children The text that will be shown once the dialog opened
- *
- * @property {string} title The title of the dialog
- *
- * @property {"left" | "right" | "top" | "bottom" | "bottom-end" | "bottom-start" | "left-end" | "left-start" | "right-end" | "right-start" | "top-end" | "top-start"} tooltipPlacement The position where the tooltip will be
- *
- * @property {any} [className] The custom className that will be applied to the button
- *
- * @property {string} [tooltipTitle] The title for the tooltip
- *
- * @example
- *
- * <DialogComponent
- * 			title="title of the dialog"
- * 			tooltipPlacement="top"
- * 			className={classes.yourClassName}
- * 			tooltipTitle="title for the tooltip"
- *  >
- * 		<>
- * 			<p> lorem ipsum </p>
- * 			<p> lorem ipsum 2 </p>
- * 		</>
- *  </DialogComponent>
- */
-
 const DialogComponent: FC<Props> = ({
 	children,
 	title,
@@ -119,5 +69,55 @@ const DialogComponent: FC<Props> = ({
 		</>
 	)
 }
+
+type Props = {
+	children: ReactElement
+	title: string
+	tooltipPlacement:
+		| "left"
+		| "right"
+		| "top"
+		| "bottom"
+		| "bottom-end"
+		| "bottom-start"
+		| "left-end"
+		| "left-start"
+		| "right-end"
+		| "right-start"
+		| "top-end"
+		| "top-start"
+	className?: any
+	tooltipTitle?: string
+}
+
+/**
+ * @alias Dialog
+ *
+ * @description A customizable call to action button that opens a dynamic dialog with the text as the children of the component
+ *
+ * @property {ReactElement} children The text that will be shown once the dialog opened
+ *
+ * @property {string} title The title of the dialog
+ *
+ * @property {"left" | "right" | "top" | "bottom" | "bottom-end" | "bottom-start" | "left-end" | "left-start" | "right-end" | "right-start" | "top-end" | "top-start"} tooltipPlacement The position where the tooltip will be
+ *
+ * @property {any} [className] The custom className that will be applied to the button
+ *
+ * @property {string} [tooltipTitle] The title for the tooltip
+ *
+ * @example
+ *
+ * <DialogComponent
+ * 			title="title of the dialog"
+ * 			tooltipPlacement="top"
+ * 			className={classes.yourClassName}
+ * 			tooltipTitle="title for the tooltip"
+ *  >
+ * 		<>
+ * 			<p> lorem ipsum </p>
+ * 			<p> lorem ipsum 2 </p>
+ * 		</>
+ *  </DialogComponent>
+ */
 
 export default DialogComponent

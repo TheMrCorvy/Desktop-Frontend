@@ -34,14 +34,11 @@ const RecentAccessTable: FC<Props> = ({ testing }) => {
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const dispatch = useDispatch()
+	const classes = useStyles()
+	const callApi = useApi
 
 	const [credentials, setCredentials] = useState<RecentlySeenT[]>([])
-
 	const [loading, setLoading] = useState(true)
-
-	const classes = useStyles()
-
-	const callApi = useApi
 
 	useEffect(() => {
 		if (!testing) {

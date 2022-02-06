@@ -1,4 +1,4 @@
-import react, { FC, useState } from "react"
+import { FC, useState } from "react"
 
 /******************************************************************************** mui */
 import {
@@ -27,14 +27,6 @@ import { translate } from "../../../lang"
 import { ApiResponseLoginT } from "../../../misc/types"
 
 import LoginOptions from "../../Sections/LoginOptions"
-
-type Props = {
-	toggleLock: () => void
-	locked: boolean
-	lockedTitle: string
-	unlockedTitle: string
-	testing?: boolean
-}
 
 const UnlockData: FC<Props> = ({ toggleLock, locked, lockedTitle, unlockedTitle, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -96,4 +88,13 @@ const UnlockData: FC<Props> = ({ toggleLock, locked, lockedTitle, unlockedTitle,
 		</>
 	)
 }
+
+type Props = {
+	toggleLock: () => void
+	locked: boolean
+	lockedTitle: string
+	unlockedTitle: string
+	testing?: boolean
+}
+
 export default UnlockData

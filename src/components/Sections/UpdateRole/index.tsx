@@ -12,21 +12,6 @@ import { translate } from "../../../lang"
 import DialogComponent from "../../UI-Components/Dialog"
 import PurchaseDialog from "../../UI-Components/PurchaseDialog"
 
-type Props = {
-	userRole: "free" | "semi-premium" | "premium" | "admin"
-	canBuySlots: boolean
-}
-
-/**
- * @alias Section_UpdateRole
- *
- * @description This component will show the {@link PurchaseDialog} and must receive the following props:
- *
- * @property {"free" | "semi-premium" | "premium" | "admin"} userRole The user's role
- *
- * @property {boolean} canBuySlots If the user is actually allowed to buy more solts
- */
-
 const UpdateRole: FC<Props> = ({ userRole, canBuySlots }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
@@ -144,5 +129,20 @@ const UpdateRole: FC<Props> = ({ userRole, canBuySlots }) => {
 		</Grid>
 	)
 }
+
+type Props = {
+	userRole: "free" | "semi-premium" | "premium" | "admin"
+	canBuySlots: boolean
+}
+
+/**
+ * @alias Section_UpdateRole
+ *
+ * @description This component will show the {@link PurchaseDialog} and must receive the following props:
+ *
+ * @property {"free" | "semi-premium" | "premium" | "admin"} userRole The user's role
+ *
+ * @property {boolean} canBuySlots If the user is actually allowed to buy more solts
+ */
 
 export default UpdateRole

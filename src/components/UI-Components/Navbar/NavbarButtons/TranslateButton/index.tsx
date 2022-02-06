@@ -17,7 +17,6 @@ const TranslateButton = ({ ...rest }) => {
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const dispatch = useDispatch()
-
 	const callApi = useApi
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)

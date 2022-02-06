@@ -52,17 +52,11 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const dispatch = useDispatch()
-
 	const classes = useStyles()
-
 	const [locked, setLocked] = useState(true)
-
 	const [refreshSecret, setRefreshSecret] = useState(false)
-
 	const [form, setForm] = useState<Form>(placeholder)
-
 	const [userRole, setUserRole] = useState("")
-
 	const callApi = useApi
 
 	useEffect(() => {
@@ -93,10 +87,12 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 	const toggleLock = () => {
 		if (!token) return
 
-		if (locked) {
-			dispatch(toggleLoading(true))
+		dispatch(toggleLoading(true))
 
-			const request: ApiCallI = {
+		let request: ApiCallI
+
+		if (locked) {
+			request = {
 				lng,
 				token,
 				method: "POST",
@@ -107,43 +103,29 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 					accessingDevice: getUserAgent(),
 				},
 			}
-
-			callApi(request).then((response) => {
-				if (response.status === 200) {
-					setForm(response.data)
-
-					dispatch(toggleLoading(false))
-
-					setLocked(false)
-				} else {
-					dispatch(setErrorLoading(response.message))
-				}
-			})
 		} else {
-			dispatch(toggleLoading(true))
-
-			const request: ApiCallI = {
+			request = {
 				lng,
 				token,
 				method: "PUT",
 				endpoint: "/user/update",
 				body: form,
 			}
-
-			callApi(request).then((response) => {
-				if (response.status === 200) {
-					dispatch(toggleLoading(false))
-
-					setForm(placeholder)
-
-					setLocked(true)
-				} else {
-					console.error(response)
-
-					dispatch(setErrorLoading(response.message))
-				}
-			})
 		}
+
+		callApi(request).then((response) => {
+			if (response.status === 200) {
+				dispatch(toggleLoading(false))
+
+				setForm(locked ? response.data : placeholder)
+
+				setLocked(locked ? false : true)
+			} else {
+				console.error(response)
+
+				dispatch(setErrorLoading(response.message))
+			}
+		})
 	}
 
 	const secretWasAccepted = (data: ApiResponseLoginT) => {

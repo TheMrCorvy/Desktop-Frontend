@@ -29,15 +29,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const Drawer: FC = () => {
 	const { open } = useSelector((state: RootState) => state.open)
-
 	const { token } = useSelector((state: RootState) => state.token)
-
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
-
 	const classes = useStyles()
-
 	const callApi = useApi
 
 	const callLogout = () => {

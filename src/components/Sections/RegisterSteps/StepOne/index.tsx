@@ -28,11 +28,8 @@ const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
-
 	const callApi = useApi
-
 	const { register, errors, handleSubmit, getValues } = useForm()
-
 	const classes = useStyles()
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)

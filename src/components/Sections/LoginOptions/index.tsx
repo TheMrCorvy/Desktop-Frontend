@@ -17,13 +17,6 @@ import { ApiResponseLoginT, UserT } from "../../../misc/types"
 
 import { getUser } from "../../../misc/indexedDB"
 
-type Props = {
-	onAuthSuccess: (res: ApiResponseLoginT) => void
-	isRobot: boolean
-	endpointAlt?: boolean
-	testing?: boolean
-}
-
 const LoginOptions: FC<Props> = ({ onAuthSuccess, isRobot, testing, endpointAlt }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 	const { token } = useSelector((state: RootState) => state.token)
@@ -31,9 +24,7 @@ const LoginOptions: FC<Props> = ({ onAuthSuccess, isRobot, testing, endpointAlt 
 	const classes = useStyles()
 
 	const [activeStep, setActiveStep] = useState(1)
-
 	const [activeOption, setActiveOption] = useState(0)
-
 	const [user, setUser] = useState<undefined | UserT>(undefined)
 
 	useEffect(() => {
@@ -153,6 +144,13 @@ const LoginOptions: FC<Props> = ({ onAuthSuccess, isRobot, testing, endpointAlt 
 			)}
 		</Grid>
 	)
+}
+
+type Props = {
+	onAuthSuccess: (res: ApiResponseLoginT) => void
+	isRobot: boolean
+	endpointAlt?: boolean
+	testing?: boolean
 }
 
 export default LoginOptions

@@ -19,24 +19,13 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, u
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
+	const callApi = useApi
+	const { register, errors, handleSubmit } = useForm()
 
 	const [formData, setFormData] = useState<FormInputs>({
 		email: "",
 		twoFactorCode: "",
 	})
-
-	const callApi = useApi
-
-	useEffect(() => {
-		if (user) {
-			setFormData({
-				email: user.email,
-				twoFactorCode: "",
-			})
-		}
-	}, [])
-
-	const { register, errors, handleSubmit } = useForm()
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
@@ -51,41 +40,49 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, u
 		}
 	}, [])
 
+	useEffect(() => {
+		if (user) {
+			setFormData({
+				email: user.email,
+				twoFactorCode: "",
+			})
+		}
+	}, [])
+
 	const onSubmit = (data: FormInputs) => {
 		if (testing) {
 			console.log(data)
-
 			const fakeResponse: ApiResponseLoginT = {
 				token: "fake api authorization token",
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
 			}
-
 			onAuthSuccess(fakeResponse)
-		} else {
-			dispatch(toggleLoading(true))
-
-			callApi({
-				lng,
-				endpoint: "/auth/login/two-factor-code",
-				method: "POST",
-				body: data,
-			}).then((response) => {
-				if (response.status === 200) {
-					dispatch(toggleLoading(false))
-
-					onAuthSuccess(response.data)
-				} else {
-					console.error(response)
-
-					if (response.message) {
-						dispatch(setErrorLoading(response.message))
-					} else {
-						dispatch(setErrorLoading("Error..."))
-					}
-				}
-			})
+			return
 		}
+
+		dispatch(toggleLoading(true))
+
+		callApi({
+			lng,
+			endpoint: "/auth/login/two-factor-code",
+			method: "POST",
+			body: data,
+		}).then((response) => {
+			if (response.status === 200) {
+				dispatch(toggleLoading(false))
+
+				onAuthSuccess(response.data)
+			} else {
+				console.error(response)
+
+				if (response.message) {
+					dispatch(setErrorLoading(response.message))
+				} else {
+					dispatch(setErrorLoading("Error..."))
+				}
+			}
+		})
 	}
 
 	const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

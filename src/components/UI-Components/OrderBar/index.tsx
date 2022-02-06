@@ -11,30 +11,14 @@ import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
 
-type Props = {
-	sortCredentials: Function
-}
-
-type OrderT = {
-	by: By
-	arrow: Arrow
-	direction: Direction
-}
-
-export type By = "created_at" | "company_name" | "updated_at" | "last_seen"
-
-export type Direction = 1 | -1
-
-type Arrow = typeof ArrowUpwardIcon | typeof ArrowDownwardIcon
-
 const OrderBar: FC<Props> = ({ sortCredentials }) => {
+	const { lng } = useSelector((state: RootState) => state.lng)
+
 	const [order, setOrder] = useState<OrderT>({
 		by: "company_name",
 		arrow: ArrowDownwardIcon,
 		direction: 1,
 	})
-
-	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
 
@@ -127,5 +111,21 @@ const OrderBar: FC<Props> = ({ sortCredentials }) => {
 		</>
 	)
 }
+
+type Props = {
+	sortCredentials: Function
+}
+
+type OrderT = {
+	by: By
+	arrow: Arrow
+	direction: Direction
+}
+
+export type By = "created_at" | "company_name" | "updated_at" | "last_seen"
+
+export type Direction = 1 | -1
+
+type Arrow = typeof ArrowUpwardIcon | typeof ArrowDownwardIcon
 
 export default OrderBar

@@ -23,7 +23,6 @@ import { translate } from "../../../lang"
 
 const LandingWelcome: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
-
 	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const classes = useStyles()

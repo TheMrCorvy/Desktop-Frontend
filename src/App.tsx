@@ -6,9 +6,9 @@ import { useSelector } from "react-redux"
 import { RootState } from "./redux/store"
 
 /*********************************************************************************** mui related */
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles"
-import { blue } from "@material-ui/core/colors"
+import { ThemeProvider } from "@material-ui/core/styles"
 import { CssBaseline } from "@material-ui/core"
+import useCustomTheme from "./hooks/useCustomTheme"
 
 /*********************************************************************************** layout related components */
 import routes from "./misc/routes"
@@ -40,6 +40,7 @@ import {
 	faFileImport,
 	faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons"
+
 library.add(
 	faKey,
 	faCloudDownloadAlt,
@@ -62,28 +63,10 @@ library.add(
 
 const App: FC = () => {
 	const { theme } = useSelector((state: RootState) => state.theme)
-
 	const { token } = useSelector((state: RootState) => state.token)
-
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const globalTheme = createMuiTheme({
-		palette: {
-			type: theme,
-			primary: {
-				light: "#ff6200",
-				dark: "#ff6200",
-				main: "#ff6200",
-				contrastText: "#fff",
-			},
-			secondary: {
-				light: blue["A400"],
-				dark: blue["A400"],
-				main: blue["A400"],
-				contrastText: "#fff",
-			},
-		},
-	})
+	const globalTheme = useCustomTheme(theme)
 
 	const { REACT_APP_ENV_LOCAL } = process.env
 

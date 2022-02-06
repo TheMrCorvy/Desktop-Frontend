@@ -30,20 +30,30 @@ import { translate } from "../../../lang"
 import { AccessCredentialPropT, CredentialPropValueT, ReduxCredentialT } from "../../../misc/types"
 
 const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
-	const theme = useTheme()
-
-	const fullScreen = useMediaQuery(theme.breakpoints.down("sm"))
-
-	const classes = useStyles()
-
 	const { lng } = useSelector((state: RootState) => state.lng)
 	const { credential } = useSelector((state: RootState) => state.credential)
 
+	const theme = useTheme()
+	const fullScreen = useMediaQuery(theme.breakpoints.down("sm"))
+	const classes = useStyles()
 	const dispatch = useDispatch()
 
 	const [open, setOpen] = useState(false)
-
 	const [editingCodes, setEditingCodes] = useState<string[]>(codes)
+
+	useEffect(() => {
+		let baggage: Baggage = {
+			oldCredential: credential,
+			newValue: editingCodes,
+			prop: "multiple_codes",
+		}
+
+		if (isCrypto) {
+			baggage.prop = "crypto_codes"
+		}
+
+		dispatch(editCredential(baggage))
+	}, [editingCodes])
 
 	const handleClickOpen = () => {
 		setOpen(true)
@@ -74,20 +84,6 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 
 		setEditingCodes(newArray)
 	}
-
-	useEffect(() => {
-		let baggage: Baggage = {
-			oldCredential: credential,
-			newValue: editingCodes,
-			prop: "multiple_codes",
-		}
-
-		if (isCrypto) {
-			baggage.prop = "crypto_codes"
-		}
-
-		dispatch(editCredential(baggage))
-	}, [editingCodes])
 
 	if (option === 1) {
 		return (
@@ -173,55 +169,50 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 				</Dialog>
 			</>
 		)
-	} else {
-		return (
-			<>
-				<Grid container justify="space-around" spacing={4} data-testid="test_edit_codes">
-					{editingCodes.map((code: string, index: number) => (
-						<Grid key={index} item xs={12} md={6}>
-							<FormControl variant="outlined" fullWidth>
-								<InputLabel>{index + 1}</InputLabel>
-								<OutlinedInput
-									id={`${isCrypto ? "word" : "code"}-${index}`}
-									label={`${index + 1}`}
-									value={code}
-									onChange={handleChange}
-									endAdornment={
-										<InputAdornment position="end">
-											<Tooltip
-												title={translate("delete", lng)}
-												placement="top"
-											>
-												<IconButton
-													aria-label={translate("edit_codes", lng, 2)}
-													onClick={() => removeCode(code)}
-												>
-													<DeleteIcon />
-												</IconButton>
-											</Tooltip>
-										</InputAdornment>
-									}
-									inputProps={{
-										"data-testid": `test_${index}`,
-									}}
-								/>
-							</FormControl>
-						</Grid>
-					))}
-
-					<Grid item xs={12} className={classes.textCenter}>
-						<Button
-							variant="outlined"
-							color="primary"
-							onClick={() => setEditingCodes([...editingCodes, ""])}
-						>
-							{translate("edit_codes", lng, 1)}
-						</Button>
-					</Grid>
-				</Grid>
-			</>
-		)
 	}
+
+	return (
+		<Grid container justify="space-around" spacing={4} data-testid="test_edit_codes">
+			{editingCodes.map((code: string, index: number) => (
+				<Grid key={index} item xs={12} md={6}>
+					<FormControl variant="outlined" fullWidth>
+						<InputLabel>{index + 1}</InputLabel>
+						<OutlinedInput
+							id={`${isCrypto ? "word" : "code"}-${index}`}
+							label={`${index + 1}`}
+							value={code}
+							onChange={handleChange}
+							endAdornment={
+								<InputAdornment position="end">
+									<Tooltip title={translate("delete", lng)} placement="top">
+										<IconButton
+											aria-label={translate("edit_codes", lng, 2)}
+											onClick={() => removeCode(code)}
+										>
+											<DeleteIcon />
+										</IconButton>
+									</Tooltip>
+								</InputAdornment>
+							}
+							inputProps={{
+								"data-testid": `test_${index}`,
+							}}
+						/>
+					</FormControl>
+				</Grid>
+			))}
+
+			<Grid item xs={12} className={classes.textCenter}>
+				<Button
+					variant="outlined"
+					color="primary"
+					onClick={() => setEditingCodes([...editingCodes, ""])}
+				>
+					{translate("edit_codes", lng, 1)}
+				</Button>
+			</Grid>
+		</Grid>
+	)
 }
 
 type Props = {

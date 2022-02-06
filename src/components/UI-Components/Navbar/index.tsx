@@ -36,15 +36,11 @@ import { useApi } from "../../../hooks/useApi"
 
 const Navbar: FC = () => {
 	const { theme } = useSelector((state: RootState) => state.theme)
-
 	const { lng } = useSelector((state: RootState) => state.lng)
-
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const classes = useStyles()
-
 	const dispatch = useDispatch()
-
 	const callApi = useApi
 
 	const callLogout = () => {

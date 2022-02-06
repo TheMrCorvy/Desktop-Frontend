@@ -19,7 +19,6 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, us
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
-
 	const { register, errors, handleSubmit } = useForm()
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)
@@ -35,38 +34,37 @@ const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, us
 	const onSubmit = (data: FormInputs) => {
 		if (testing) {
 			console.log(data)
-
 			const fakeResponse: ApiResponseLoginT = {
 				token: "fake api authorization token",
 				user_data: user4Testing,
 				user_credentials: credential4Testing,
 			}
-
 			onAuthSuccess(fakeResponse)
-		} else {
-			dispatch(toggleLoading(true))
-
-			callApi({
-				lng,
-				endpoint: "/auth/login/security-code",
-				method: "POST",
-				body: data,
-			}).then((response) => {
-				if (response.status === 200) {
-					dispatch(toggleLoading(false))
-
-					onAuthSuccess(response.data)
-				} else {
-					console.error(response)
-
-					if (response.message) {
-						dispatch(setErrorLoading(response.message))
-					} else {
-						dispatch(setErrorLoading("Error..."))
-					}
-				}
-			})
+			return
 		}
+
+		dispatch(toggleLoading(true))
+
+		callApi({
+			lng,
+			endpoint: "/auth/login/security-code",
+			method: "POST",
+			body: data,
+		}).then((response) => {
+			if (response.status === 200) {
+				dispatch(toggleLoading(false))
+
+				onAuthSuccess(response.data)
+			} else {
+				console.error(response)
+
+				if (response.message) {
+					dispatch(setErrorLoading(response.message))
+				} else {
+					dispatch(setErrorLoading("Error..."))
+				}
+			}
+		})
 	}
 
 	return (

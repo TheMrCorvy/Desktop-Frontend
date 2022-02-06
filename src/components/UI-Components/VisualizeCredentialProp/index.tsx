@@ -36,14 +36,20 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const [mainCharCount, setMainCharCount] = useState<number | null | undefined>(0)
-
 	const [secondCharCount, setSecondCharCount] = useState<number | null | undefined>(0)
 
 	const classes = useStyles()
 	const theme = useTheme()
 	const matches = useMediaQuery(theme.breakpoints.down("sm"))
-
 	const dispatch = useDispatch()
+
+	useEffect(() => {
+		const mainChar = credential[propName] as string
+		const secondChar = credential.security_answer
+
+		setMainCharCount(mainChar ? mainChar.length : 0)
+		setSecondCharCount(secondChar ? secondChar.length : 0)
+	}, [credential])
 
 	const textToCopy = (): string => {
 		if (isCrypto && propName === "crypto_codes") {
@@ -66,16 +72,6 @@ const VisualizeCredentialProp: FC<Props> = (props) => {
 
 		return ""
 	}
-
-	useEffect(() => {
-		const mainChar = credential[propName] as string
-
-		const secondChar = credential.security_answer
-
-		setMainCharCount(mainChar ? mainChar.length : 0)
-
-		setSecondCharCount(secondChar ? secondChar.length : 0)
-	}, [credential])
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
 		const target = event.target as HTMLInputElement

@@ -30,15 +30,12 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const dispatch = useDispatch()
-
-	const [open, setOpen] = useState(false)
-
-	const [error, setError] = useState(false)
-
-	const [errorOption, setErrorOption] = useState<ErrorOptions>(1)
-
 	const history = useHistory()
 	const callApi = useApi
+
+	const [open, setOpen] = useState(false)
+	const [error, setError] = useState(false)
+	const [errorOption, setErrorOption] = useState<ErrorOptions>(1)
 
 	const deleteCredential = async () => {
 		if (!token) return
@@ -131,35 +128,35 @@ const DeleteCredential: FC<Props> = ({ credentialId }) => {
 					</DialogActions>
 				</Dialog>
 			)
-		} else {
-			switch (errorOption) {
-				case 1:
-					dialogText = translate("error_messages", lng, 4)
-					break
-				case 2:
-					dialogText = translate("error_messages", lng, 7)
-					break
-				case 3:
-					dialogText = translate("error_messages", lng, 8)
-					break
-
-				default:
-					dialogText = translate("error_messages", lng, 8)
-					break
-			}
-
-			return (
-				<Dialog open={open} onClose={closeDialog} data-testid="test_delete_dialog">
-					<DialogTitle id="alert-dialog-title">{dialogTitle}</DialogTitle>
-					<DialogContentText>{dialogText}</DialogContentText>
-					<DialogActions>
-						<Button onClick={closeDialog} color="secondary">
-							{translate("go_back", lng)}
-						</Button>
-					</DialogActions>
-				</Dialog>
-			)
 		}
+
+		switch (errorOption) {
+			case 1:
+				dialogText = translate("error_messages", lng, 4)
+				break
+			case 2:
+				dialogText = translate("error_messages", lng, 7)
+				break
+			case 3:
+				dialogText = translate("error_messages", lng, 8)
+				break
+
+			default:
+				dialogText = translate("error_messages", lng, 8)
+				break
+		}
+
+		return (
+			<Dialog open={open} onClose={closeDialog} data-testid="test_delete_dialog">
+				<DialogTitle id="alert-dialog-title">{dialogTitle}</DialogTitle>
+				<DialogContentText>{dialogText}</DialogContentText>
+				<DialogActions>
+					<Button onClick={closeDialog} color="secondary">
+						{translate("go_back", lng)}
+					</Button>
+				</DialogActions>
+			</Dialog>
+		)
 	}
 
 	return (

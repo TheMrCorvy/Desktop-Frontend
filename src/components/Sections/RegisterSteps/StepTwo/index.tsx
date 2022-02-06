@@ -15,9 +15,7 @@ const StepTwo: FC<Props> = ({ nextStep, isRobot, testing, email }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
-
 	const { register, errors, handleSubmit } = useForm()
-
 	const callApi = useApi
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)

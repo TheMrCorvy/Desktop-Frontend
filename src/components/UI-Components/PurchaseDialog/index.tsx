@@ -29,44 +29,21 @@ import { setErrorLoading } from "../../../redux/actions/loadingActions"
 import PurchaseButton from "./PurchaseButton"
 import Snackbar from "../../Utils/Snackbar"
 
-type Props = {
-	method: Method
-	type: PurchaseType
-}
-
-type Method = "PayPal" | "Crypto"
-
-type PurchaseType = "premium" | "slots"
-
-/**
- * @alias PurchaseDialog
- *
- * @description This component will calculate the prices for the user's purchase, and load them into the {@link PurchaseButton}
- *
- * @property {"PayPal" | "Crypto"} method How is the user going to pay?
- *
- * @property {"premium" | "slots"} type What the user is going to buy
- */
-
 const PurchaseDialog: FC<Props> = ({ method, type }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const dispatch = useDispatch()
+	const callApi = useApi
+	const classes = useStyles()
+	const fullScreen = useMediaQuery(useTheme().breakpoints.down("xs"))
 
 	const [open, setOpen] = useState(false)
 	const [amount, setAmount] = useState<"" | number>("")
 	const [step, setStep] = useState(1)
 	const [message, setMessage] = useState("")
 
-	const callApi = useApi
-
-	const classes = useStyles()
-
-	const fullScreen = useMediaQuery(useTheme().breakpoints.down("xs"))
-
 	const startAdornment = type === "slots" ? "$10 X" : "$5 X"
-
 	const endAdornment = translate("update_role_texts", lng, type === "slots" ? 7 : 8)
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -215,5 +192,24 @@ const PurchaseDialog: FC<Props> = ({ method, type }) => {
 		</>
 	)
 }
+
+type Props = {
+	method: Method
+	type: PurchaseType
+}
+
+type Method = "PayPal" | "Crypto"
+
+type PurchaseType = "premium" | "slots"
+
+/**
+ * @alias PurchaseDialog
+ *
+ * @description This component will calculate the prices for the user's purchase, and load them into the {@link PurchaseButton}
+ *
+ * @property {"PayPal" | "Crypto"} method How is the user going to pay?
+ *
+ * @property {"premium" | "slots"} type What the user is going to buy
+ */
 
 export default PurchaseDialog

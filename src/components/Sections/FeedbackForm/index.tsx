@@ -24,17 +24,12 @@ const FeedbackForm: FC = () => {
 	const dispatch = useDispatch()
 
 	const [feedbackType, setFeedbackType] = useState("suggestion")
-
 	const [rating, setRating] = useState<number>(0)
-
 	const [feedbackBody, setFeedbackBody] = useState("")
-
 	const [message, setMessage] = useState("")
 
 	const classes = useStyles()
-
 	const maxTxt = calcMaxChar("sm")
-
 	const callApi = useApi
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {

@@ -14,16 +14,10 @@ import { rating4Testing, suggestion4Testing } from "../../misc/Data4Testing"
 import { useApi } from "../../hooks/useApi"
 import { ApiCallI } from "../../misc/types"
 
-type FeedbackT = {
-	suggestions: OpinionCardT[]
-	ratings: OpinionCardT[]
-}
-
 const Feedback: FC = () => {
-	const dispatch = useDispatch()
-
 	const { lng } = useSelector((state: RootState) => state.lng)
 
+	const dispatch = useDispatch()
 	const callApi = useApi
 
 	const [feedback, setFeedback] = useState<FeedbackT>({
@@ -59,26 +53,30 @@ const Feedback: FC = () => {
 		}
 	}, [])
 
-	if (feedback.suggestions.length > 0 || feedback.ratings.length > 0) {
-		return (
-			<div data-testid="test_feedback">
-				{feedback.suggestions.length > 0 && (
-					<Opinions
-						title={translate("feedback_titles", lng, 0)}
-						opinions={feedback.suggestions}
-					/>
-				)}
-				{feedback.ratings.length > 0 && (
-					<Opinions
-						title={translate("feedback_titles", lng, 1)}
-						opinions={feedback.ratings}
-					/>
-				)}
-			</div>
-		)
-	} else {
+	if (!feedback.suggestions.length && !feedback.ratings.length) {
 		return null
 	}
+	return (
+		<div data-testid="test_feedback">
+			{feedback.suggestions.length > 0 && (
+				<Opinions
+					title={translate("feedback_titles", lng, 0)}
+					opinions={feedback.suggestions}
+				/>
+			)}
+			{feedback.ratings.length > 0 && (
+				<Opinions
+					title={translate("feedback_titles", lng, 1)}
+					opinions={feedback.ratings}
+				/>
+			)}
+		</div>
+	)
+}
+
+type FeedbackT = {
+	suggestions: OpinionCardT[]
+	ratings: OpinionCardT[]
 }
 
 export default Feedback

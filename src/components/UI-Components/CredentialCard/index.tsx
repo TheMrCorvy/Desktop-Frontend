@@ -18,16 +18,10 @@ import { CredentialT } from "../../../misc/types"
 
 import useRandomColor from "./useRabdomColors"
 
-type Props = {
-	credentials: CredentialT[]
-	availableSlots: number
-}
-
 const CredentialCard: FC<Props> = ({ credentials, availableSlots }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
-
 	const randomColor = useRandomColor
 
 	return (
@@ -124,6 +118,11 @@ const CredentialCard: FC<Props> = ({ credentials, availableSlots }) => {
 			))}
 		</>
 	)
+}
+
+type Props = {
+	credentials: CredentialT[]
+	availableSlots: number
 }
 
 export default CredentialCard

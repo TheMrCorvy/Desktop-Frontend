@@ -14,8 +14,6 @@ import Drawer from "../../UI-Components/Navbar/Drawer"
 import Footer from "../../UI-Components/Footer"
 import Snackbar from "../Snackbar"
 
-type Props = { children: ReactElement }
-
 const Layout: FC<Props> = (props) => {
 	const loading = useSelector((state: RootState) => state.loading)
 
@@ -68,5 +66,7 @@ const Layout: FC<Props> = (props) => {
 		</>
 	)
 }
+
+type Props = { children: ReactElement }
 
 export default Layout

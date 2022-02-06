@@ -38,11 +38,10 @@ const PricingCard: FC<PricingCardT> = ({
 	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const muiTheme = useTheme()
+	const classes = useStyles()
 
 	const iconColor =
 		theme === "dark" ? muiTheme.palette.secondary.main : muiTheme.palette.primary.main
-
-	const classes = useStyles()
 
 	return (
 		<Card className={classes.card} elevation={cardElevation} data-testid="test_pricing_card">
