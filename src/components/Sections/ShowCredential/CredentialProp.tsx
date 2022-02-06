@@ -1,8 +1,8 @@
 import { FC } from "react"
-import { AccessCredentialPropT, CharSizesT, ReduxCredentialT } from "../../../../misc/types"
-import calcMaxChar from "../../../../hooks/useMaxChars"
+import { AccessCredentialPropT, CharSizesT, ReduxCredentialT } from "../../../misc/types"
+import calcMaxChar from "../../../hooks/useMaxChars"
 
-import VisualizeCredentialProp from "../../../UI-Components/VisualizeCredentialProp"
+import VisualizeCredentialProp from "../../UI-Components/VisualizeCredentialProp"
 
 const CredentialProp: FC<Props> = ({
 	credential,

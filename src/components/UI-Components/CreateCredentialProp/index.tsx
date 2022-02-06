@@ -285,7 +285,6 @@ const CreateCredentialProp: FC<Props> = (props) => {
 		}
 	}
 
-	//don't know why, but the class "borderRadius" doesn't apply the border radius, but the style does...
 	return (
 		<>
 			<Accordion

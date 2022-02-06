@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import { FC } from "react"
 
 import {
 	Grid,
@@ -21,6 +21,7 @@ import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadin
 import { translate } from "../../../../lang"
 
 import { useApi } from "../../../../hooks/useApi"
+import useUserData from "./useUserData"
 
 import { useForm } from "react-hook-form"
 
@@ -31,11 +32,7 @@ import { CredentialT, UserT } from "../../../../misc/types"
 const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [userData, setUserData] = useState<UserData>({
-		email: "",
-		secretKey: "",
-	})
-
+	const { userData } = useUserData({ token, lng, testing })
 	const dispatch = useDispatch()
 	const { register, errors, handleSubmit } = useForm()
 	const classes = useStyles()
@@ -44,33 +41,6 @@ const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {
 	const requiredMessage = translate("form_validation_messages", lng, 0)
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
 	const minCharMessage = translate("form_validation_messages", lng, 2)
-
-	useEffect(() => {
-		if (testing) {
-			setUserData({
-				email: "mr.corvy@gmail.com",
-				secretKey: "DCRMALCXPEZOFKZH",
-			})
-
-			return
-		}
-
-		callApi({
-			lng,
-			endpoint: "/auth/refresh-2fa-secret",
-			method: "GET",
-			token,
-		}).then((response) => {
-			if (response.status === 200) {
-				setUserData({
-					email: response.data.email,
-					secretKey: response.data.secret,
-				})
-			} else {
-				handleError(response)
-			}
-		})
-	}, [])
 
 	const onSubmit = (data: FormInput) => {
 		if (testing) return
@@ -231,12 +201,6 @@ type Props = {
 
 type FormInput = {
 	verificationCode: string
-}
-
-type UserData = {
-	email: string
-	secretKey: string
-	error?: any
 }
 
 export default StepThree

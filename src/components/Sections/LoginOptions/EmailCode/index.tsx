@@ -25,23 +25,17 @@ import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 import { ApiResponseLoginT, UserT } from "../../../../misc/types"
 
 import { useApi } from "../../../../hooks/useApi"
+import useFormData from "./useFormData"
+import useSnackbar from "./useSnackbar"
 
-const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, testing, user }) => {
+const EmailCode: FC<Props> = ({ onAuthSuccess, isRobot, isRecovery, testing, user }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const callApi = useApi
 	const dispatch = useDispatch()
 	const { register, errors, handleSubmit } = useForm()
-
-	const [formData, setFormData] = useState({
-		mainEmail: "",
-		mailToSendCode: "",
-	})
-
-	const [snackbar, setSnackbar] = useState({
-		open: false,
-		message: "",
-	})
+	const { formData, setFormData } = useFormData(user)
+	const { snackbar, setSnackbar } = useSnackbar()
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
@@ -50,25 +44,6 @@ const EmailCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, isRecovery, te
 		value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
 		message: translate("form_validation_messages", lng, 3),
 	}
-
-	useEffect(() => {
-		if (user) {
-			setFormData({
-				mainEmail: user.email,
-				mailToSendCode: user.recovery_email,
-			})
-		}
-	}, [])
-
-	useEffect(() => {
-		if (snackbar.open) {
-			const snackTime = setTimeout(() => {
-				setSnackbar({ ...snackbar, open: false })
-			}, 30000)
-
-			return () => clearTimeout(snackTime)
-		}
-	}, [snackbar])
 
 	const onSubmit = (data: FormInputs) => {
 		if (testing) {

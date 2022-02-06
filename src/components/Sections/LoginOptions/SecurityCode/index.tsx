@@ -15,7 +15,7 @@ import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 
 import { ApiResponseLoginT, UserT } from "../../../../misc/types"
 
-const SecurityCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, user }) => {
+const SecurityCode: FC<Props> = ({ onAuthSuccess, isRobot, testing, user }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()

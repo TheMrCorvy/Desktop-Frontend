@@ -3,20 +3,21 @@ import { Button } from "@material-ui/core"
 
 const TimerButton: FC<Props> = ({ title, initialTime, color, size }) => {
 	const [time, setTime] = useState(0)
-
 	const [timerIsOn, setTimerIsOn] = useState(false)
 
 	useEffect(() => {
 		if (time === 0) {
 			setTimerIsOn(false)
-		} else {
-			if (timerIsOn) {
-				const timer = setTimeout(() => {
-					setTime(time - 1)
-				}, 1000)
-				return () => {
-					clearTimeout(timer)
-				}
+			return
+		}
+
+		if (timerIsOn) {
+			const timer = setTimeout(() => {
+				setTime(time - 1)
+			}, 1000)
+
+			return () => {
+				clearTimeout(timer)
 			}
 		}
 	}, [time])

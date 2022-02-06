@@ -12,7 +12,6 @@ const Error500 = lazy(() => import("../../pages/Errors/500"))
 
 const RoutesComponent: FC<Props> = (props) => {
 	const { token } = useSelector((state: RootState) => state.token)
-
 	const { err } = useSelector((state: RootState) => state.err)
 
 	const evaluateRoutes = (r: RouteT, i: number) => {

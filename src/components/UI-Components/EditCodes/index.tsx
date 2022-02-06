@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState, useEffect } from "react"
+import { FC, ChangeEvent, useState } from "react"
 
 import {
 	Button,
@@ -23,11 +23,10 @@ import DeleteIcon from "@material-ui/icons/Delete"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../redux/store"
-import { editCredential } from "../../../redux/actions/credentialActions"
 
 import { translate } from "../../../lang"
 
-import { AccessCredentialPropT, CredentialPropValueT, ReduxCredentialT } from "../../../misc/types"
+import useEditcodes from "./useEditcodes"
 
 const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -37,23 +36,14 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 	const fullScreen = useMediaQuery(theme.breakpoints.down("sm"))
 	const classes = useStyles()
 	const dispatch = useDispatch()
+	const { editingCodes, setEditingCodes, removeCode } = useEditcodes({
+		credential,
+		dispatch,
+		codes,
+		isCrypto,
+	})
 
 	const [open, setOpen] = useState(false)
-	const [editingCodes, setEditingCodes] = useState<string[]>(codes)
-
-	useEffect(() => {
-		let baggage: Baggage = {
-			oldCredential: credential,
-			newValue: editingCodes,
-			prop: "multiple_codes",
-		}
-
-		if (isCrypto) {
-			baggage.prop = "crypto_codes"
-		}
-
-		dispatch(editCredential(baggage))
-	}, [editingCodes])
 
 	const handleClickOpen = () => {
 		setOpen(true)
@@ -61,18 +51,6 @@ const EditCodes: FC<Props> = ({ codes, option, isCrypto }) => {
 
 	const handleClose = () => {
 		setOpen(false)
-	}
-
-	const removeCode = (code: string) => {
-		const editedArray: string[] = []
-
-		editingCodes.forEach((codeValue) => {
-			if (codeValue !== code) {
-				editedArray.push(codeValue)
-			}
-		})
-
-		setEditingCodes(editedArray)
 	}
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -219,12 +197,6 @@ type Props = {
 	codes: string[]
 	option: 1 | 2
 	isCrypto: boolean
-}
-
-type Baggage = {
-	oldCredential: ReduxCredentialT
-	prop: AccessCredentialPropT
-	newValue: CredentialPropValueT
 }
 
 /**

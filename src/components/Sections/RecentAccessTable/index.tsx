@@ -19,15 +19,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
-import { setErrorLoading } from "../../../redux/actions/loadingActions"
 
-import { recentlySeen4Testing } from "../../../misc/Data4Testing"
-
-import { getRecentlySeen, putRecentlySeen } from "../../../misc/indexedDB"
-
-import { ApiCallI, RecentlySeenT } from "../../../misc/types"
-
-import { useApi } from "../../../hooks/useApi"
+import useFetchCredentials from "./useFetchCredentials"
 
 const RecentAccessTable: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -35,59 +28,7 @@ const RecentAccessTable: FC<Props> = ({ testing }) => {
 
 	const dispatch = useDispatch()
 	const classes = useStyles()
-	const callApi = useApi
-
-	const [credentials, setCredentials] = useState<RecentlySeenT[]>([])
-	const [loading, setLoading] = useState(true)
-
-	useEffect(() => {
-		if (!testing) {
-			obtainRecentAccess()
-		} else {
-			setCredentials(recentlySeen4Testing)
-
-			setLoading(false)
-		}
-	}, [])
-
-	const obtainRecentAccess = async () => {
-		let data: any
-
-		data = await getRecentlySeen()
-
-		if (data === undefined) {
-			return getFromApi()
-		}
-
-		setCredentials(data)
-
-		setLoading(false)
-	}
-
-	const getFromApi = async () => {
-		if (!token) return
-
-		const request: ApiCallI = {
-			lng,
-			method: "GET",
-			endpoint: "/credential/get-recently-seen",
-			token,
-		}
-
-		callApi(request).then((response) => {
-			if (response.status !== 200) {
-				dispatch(setErrorLoading(response.message))
-
-				return
-			}
-
-			setCredentials(response.data.recently_seen)
-
-			putRecentlySeen(response.data.recently_seen)
-
-			setLoading(false)
-		})
-	}
+	const { credentials, loading } = useFetchCredentials({ lng, token, dispatch, testing })
 
 	return (
 		<Card className={classes.card} elevation={2} data-testid="test_recently_seen_table">

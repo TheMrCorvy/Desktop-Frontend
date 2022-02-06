@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, ChangeEvent } from "react"
+import { FC, ChangeEvent } from "react"
 
 import { useForm } from "react-hook-form"
 
@@ -11,43 +11,22 @@ import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadin
 import { translate } from "../../../../lang"
 
 import { useApi } from "../../../../hooks/useApi"
+import useFormData from "./useFormData"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 import { ApiResponseLoginT, UserT } from "../../../../misc/types"
 
-const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, user }) => {
+const TwoFactorCode: FC<Props> = ({ onAuthSuccess, isRobot, testing, user }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const dispatch = useDispatch()
 	const callApi = useApi
 	const { register, errors, handleSubmit } = useForm()
-
-	const [formData, setFormData] = useState<FormInputs>({
-		email: "",
-		twoFactorCode: "",
-	})
+	const { formData, setFormData } = useFormData({ user, testing })
 
 	const requiredMessage = translate("form_validation_messages", lng, 0)
 	const maxCharMessage = translate("form_validation_messages", lng, 1)
 	const minCharMessage = translate("form_validation_messages", lng, 2)
-
-	useEffect(() => {
-		if (testing) {
-			setFormData({
-				email: "mr.corvy@gmail.com",
-				twoFactorCode: 123456,
-			})
-		}
-	}, [])
-
-	useEffect(() => {
-		if (user) {
-			setFormData({
-				email: user.email,
-				twoFactorCode: "",
-			})
-		}
-	}, [])
 
 	const onSubmit = (data: FormInputs) => {
 		if (testing) {
@@ -69,11 +48,7 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, u
 			method: "POST",
 			body: data,
 		}).then((response) => {
-			if (response.status === 200) {
-				dispatch(toggleLoading(false))
-
-				onAuthSuccess(response.data)
-			} else {
+			if (response.status !== 200) {
 				console.error(response)
 
 				if (response.message) {
@@ -81,7 +56,12 @@ const TwoFactorCode: FC<Props> = ({ onAuthSuccess, endpoint, isRobot, testing, u
 				} else {
 					dispatch(setErrorLoading("Error..."))
 				}
+				return
 			}
+
+			dispatch(toggleLoading(false))
+
+			onAuthSuccess(response.data)
 		})
 	}
 

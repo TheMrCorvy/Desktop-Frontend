@@ -19,44 +19,6 @@ import { generateCoinbaseCharge } from "../../../../hooks/useCoinbaseApi"
 
 import { CoinbaseChargeT } from "../../../../misc/types"
 
-type Props = {
-	amount: number
-	method: "PayPal" | "Crypto"
-	type: "slots" | "premium"
-	goBack: () => void
-	initPaymentInstance: (code: string, finalAmount: number, verifyImmediately?: boolean) => void
-	testing?: boolean
-}
-
-let firstCall = true
-
-/**
- * @alias PurchaseButton
- * 
- * @description This component will be calling paypal's magic buttons or coinbase's api to generate a purchase button
- * 
- * @property {number} amount How much has to pay the user (in USD)
- * 
- * @property {"PayPal" | "Crypto"} method How is the user going to pay?
- * 
- * @property {"slots" | "premium"} type What the user is going to buy
- * 
- * @property {function} goBack This function is from the parent component. Its used when the user wants to go bak to calc the price step
- * 
- * @property {function} initPaymentInstance This function will give the api the required parameters to open a payment instance and verify the payment
- * 
- * @property {boolean} [testing] If the behavior of the component
- * 
- * @example 
- * 
- * <PurchaseButton
-		amount={100}
-		type={"premium"}
-		method={"Crypto"}
-		goBack={() => setStep(1)}
-	/>
- */
-
 const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, initPaymentInstance }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
@@ -66,13 +28,9 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, initPaymentIn
 		process.env
 
 	const [message, setMessage] = useState<string | null>(null)
-
 	const [cryptoUrl, setCryptoUrl] = useState("")
-
 	const [cryptoCode, setCryptoCode] = useState("")
-
 	const [loading, setLoading] = useState(true)
-
 	const [error, setError] = useState(false)
 
 	const finalAmount = type === "slots" ? amount * 10 : amount * 5
@@ -89,7 +47,6 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, initPaymentIn
 
 	const onSuccess = (details: any) => {
 		initPaymentInstance(details.id, finalAmount, true)
-
 		setMessage(translate("success_message", lng))
 	}
 
@@ -107,7 +64,6 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, initPaymentIn
 		firstCall = false
 
 		const name = translate("purchase_name", lng, type === "slots" ? 0 : 1)
-
 		const description = translate("purchase_description", lng, type === "slots" ? 0 : 1)
 
 		const charge: CoinbaseChargeT = {
@@ -129,9 +85,7 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, initPaymentIn
 		}
 
 		setCryptoUrl(data.data.hosted_url)
-
 		setCryptoCode(data.data.code)
-
 		setLoading(false)
 	}
 
@@ -225,5 +179,43 @@ const PurchaseButton: FC<Props> = ({ amount, method, type, goBack, initPaymentIn
 		</>
 	)
 }
+
+type Props = {
+	amount: number
+	method: "PayPal" | "Crypto"
+	type: "slots" | "premium"
+	goBack: () => void
+	initPaymentInstance: (code: string, finalAmount: number, verifyImmediately?: boolean) => void
+	testing?: boolean
+}
+
+let firstCall = true
+
+/**
+ * @alias PurchaseButton
+ * 
+ * @description This component will be calling paypal's magic buttons or coinbase's api to generate a purchase button
+ * 
+ * @property {number} amount How much has to pay the user (in USD)
+ * 
+ * @property {"PayPal" | "Crypto"} method How is the user going to pay?
+ * 
+ * @property {"slots" | "premium"} type What the user is going to buy
+ * 
+ * @property {function} goBack This function is from the parent component. Its used when the user wants to go bak to calc the price step
+ * 
+ * @property {function} initPaymentInstance This function will give the api the required parameters to open a payment instance and verify the payment
+ * 
+ * @property {boolean} [testing] If the behavior of the component
+ * 
+ * @example 
+ * 
+ * <PurchaseButton
+		amount={100}
+		type={"premium"}
+		method={"Crypto"}
+		goBack={() => setStep(1)}
+	/>
+ */
 
 export default PurchaseButton
