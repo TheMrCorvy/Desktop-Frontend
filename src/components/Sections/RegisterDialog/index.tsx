@@ -9,7 +9,7 @@ import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
 
-import DialogComponent from "../../Dialog"
+import DialogComponent from "../../UI-Components/Dialog"
 
 import { recommendedTwoFactorApps } from "../../../misc/staticData"
 import { RecommendedAppsT } from "../../../misc/types"

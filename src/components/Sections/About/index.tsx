@@ -11,7 +11,7 @@ import { translate } from "../../../lang"
 
 import * as es from "../../../lang/es.json"
 
-import DialogComponent from "../../Dialog"
+import DialogComponent from "../../UI-Components/Dialog"
 
 const About: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)

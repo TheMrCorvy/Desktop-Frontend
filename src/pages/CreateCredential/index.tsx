@@ -20,8 +20,8 @@ import { calcMaxChar, getUserAgent } from "../../misc/staticData"
 import { getCompanies, getUser, putCompanies, putCredential, putUser } from "../../misc/indexedDB"
 import { useApi } from "../../hooks/useApi"
 
-import CreateCredentialProp from "../../components/CreateCredentialProp"
-import GoBackBtn from "../../components/GoBackBtn"
+import CreateCredentialProp from "../../components/UI-Components/CreateCredentialProp"
+import GoBackBtn from "../../components/Utils/GoBackBtn"
 import { setErrorLoading, toggleLoading } from "../../redux/actions/loadingActions"
 
 type EditingCredential = {

@@ -20,12 +20,12 @@ import { calcMaxChar, getUserAgent } from "../../../misc/staticData"
 import { AccessCredentialPropT, ApiCallI, CharSizesT, ReduxCredentialT } from "../../../misc/types"
 import { useApi } from "../../../hooks/useApi"
 
-import UnlockData from "../../UnlockData"
-import DisplayData from "../../DisplayData"
-import GoBackBtn from "../../GoBackBtn"
-import DeleteCredential from "../../DeleteCredential"
-import Snackbar from "../../Snackbar"
-import VisualizeCredentialProp from "../../VisualizeCredentialProp"
+import UnlockData from "../../Utils/UnlockData"
+import DisplayData from "../../Utils/DisplayData"
+import GoBackBtn from "../../Utils/GoBackBtn"
+import DeleteCredential from "../../UI-Components/DeleteCredential"
+import Snackbar from "../../Utils/Snackbar"
+import VisualizeCredentialProp from "../../UI-Components/VisualizeCredentialProp"
 
 const ShowCredential: FC<Props> = ({ getDecryptedCredential }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)

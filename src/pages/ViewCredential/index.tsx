@@ -25,7 +25,7 @@ import { ApiCallI, CredentialT } from "../../misc/types"
 import { useApi } from "../../hooks/useApi"
 
 /************************************************************************************ components */
-import Snackbar from "../../components/Snackbar"
+import Snackbar from "../../components/Utils/Snackbar"
 import ShowCredential from "../../components/Sections/ShowCredential"
 
 const ViewCredential: FC = (props: any) => {

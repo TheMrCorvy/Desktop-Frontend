@@ -22,7 +22,7 @@ import { translate } from "../../../../lang"
 
 import { useApi } from "../../../../hooks/useApi"
 
-import DialogComponent from "../../../Dialog"
+import DialogComponent from "../../../UI-Components/Dialog"
 
 const StepOne: FC<Props> = ({ nextStep, isRobot, testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)

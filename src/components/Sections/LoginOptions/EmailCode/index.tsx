@@ -17,8 +17,8 @@ import { toggleLoading, setErrorLoading } from "../../../../redux/actions/loadin
 
 import { translate } from "../../../../lang"
 
-import TimerButton from "../../../TimerButton"
-import Snackbar from "../../../Snackbar"
+import TimerButton from "../../../Utils/TimerButton"
+import Snackbar from "../../../Utils/Snackbar"
 
 import { credential4Testing, user4Testing } from "../../../../misc/Data4Testing"
 

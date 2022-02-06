@@ -12,8 +12,8 @@ import { CssBaseline } from "@material-ui/core"
 
 /*********************************************************************************** layout related components */
 import routes from "./misc/routes"
-import MapRoutes from "./components/MapRoutes"
-import Layout from "./components/Layout"
+import MapRoutes from "./components/Utils/MapRoutes"
+import Layout from "./components/Utils/Layout"
 
 /*********************************************************************************** prevent reload if user is signed in */
 import { Beforeunload } from "react-beforeunload"

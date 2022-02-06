@@ -9,8 +9,8 @@ import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
 
-import DialogComponent from "../../Dialog"
-import PurchaseDialog from "../../PurchaseDialog"
+import DialogComponent from "../../UI-Components/Dialog"
+import PurchaseDialog from "../../UI-Components/PurchaseDialog"
 
 type Props = {
 	userRole: "free" | "semi-premium" | "premium" | "admin"

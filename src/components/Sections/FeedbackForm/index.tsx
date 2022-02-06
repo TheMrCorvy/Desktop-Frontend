@@ -15,7 +15,7 @@ import { useApi } from "../../../hooks/useApi"
 import { ApiCallI } from "../../../misc/types"
 import { calcMaxChar } from "../../../misc/staticData"
 
-import Snackbar from "../../Snackbar"
+import Snackbar from "../../Utils/Snackbar"
 
 const FeedbackForm: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)

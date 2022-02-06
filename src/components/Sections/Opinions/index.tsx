@@ -4,7 +4,7 @@ import { Container, Typography, Grid } from "@material-ui/core"
 
 import useStyles from "./styles"
 
-import OpinionCard from "../../OpinionCard"
+import OpinionCard from "../../UI-Components/OpinionCard"
 import { OpinionCardT } from "../../../misc/types"
 
 const Opinions: FC<Props> = ({ title, opinions }) => {

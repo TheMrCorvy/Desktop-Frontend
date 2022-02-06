@@ -29,7 +29,7 @@ import { ApiResponseLoginT } from "../../misc/types"
 import { initiateDB } from "../../misc/indexedDB"
 
 /************************************************************************************ my components */
-import Snackbar from "../../components/Snackbar"
+import Snackbar from "../../components/Utils/Snackbar"
 import LoginOptions from "../../components/Sections/LoginOptions"
 import { setLanguage } from "../../redux/actions/langActions"
 

@@ -25,7 +25,7 @@ import { useApi } from "../../../../hooks/useApi"
 import { useForm } from "react-hook-form"
 
 import { QRCode } from "react-qrcode-logo"
-import CopyText from "../../../CopyText"
+import CopyText from "../../../Utils/CopyText"
 import { CredentialT, UserT } from "../../../../misc/types"
 
 const StepThree: FC<Props> = ({ isRobot, onAuthSuccess, token, testing }) => {

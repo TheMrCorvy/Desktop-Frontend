@@ -17,10 +17,10 @@ import { translate } from "../../lang"
 import { getCredentials, getUser, putCredentials } from "../../misc/indexedDB"
 
 /************************************************************************************ types & components */
-import OrderBar, { By, Direction } from "../../components/OrderBar"
-import CredentialCard from "../../components/CredentialCard"
+import OrderBar, { By, Direction } from "../../components/UI-Components/OrderBar"
+import CredentialCard from "../../components/UI-Components/CredentialCard"
 import Downloads from "../../components/Sections/Downloads"
-import Snackbar from "../../components/Snackbar"
+import Snackbar from "../../components/Utils/Snackbar"
 import FeedbackForm from "../../components/Sections/FeedbackForm"
 import UpdateRole from "../../components/Sections/UpdateRole"
 

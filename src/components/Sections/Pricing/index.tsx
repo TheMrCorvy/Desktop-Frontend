@@ -9,9 +9,9 @@ import { RootState } from "../../../redux/store"
 
 import { translate } from "../../../lang"
 
-import DialogComponent from "../../Dialog"
+import DialogComponent from "../../UI-Components/Dialog"
 
-import PricingCard from "../../PricingCard"
+import PricingCard from "../../UI-Components/PricingCard"
 import { PricingCardT } from "../../../misc/types"
 
 import { pricingInfo } from "../../../misc/staticData"

@@ -26,10 +26,10 @@ import { translate } from "../../lang"
 import FeedbackForm from "../../components/Sections/FeedbackForm"
 import Downloads from "../../components/Sections/Downloads"
 import AccessManagement from "../../components/Sections/AccessManagement"
-import CredentialCard from "../../components/CredentialCard"
+import CredentialCard from "../../components/UI-Components/CredentialCard"
 import RecentAccessTable from "../../components/Sections/RecentAccessTable"
 import UpdateRole from "../../components/Sections/UpdateRole"
-import CopyText from "../../components/CopyText"
+import CopyText from "../../components/Utils/CopyText"
 
 /******************************************************************************** indexedDB */
 import { getUser, getCredentials } from "../../misc/indexedDB"

@@ -39,9 +39,9 @@ import { getUser } from "../../../misc/indexedDB"
 
 /******************************************************************************** components */
 import StepThree from "../RegisterSteps/StepThree"
-import UnlockData from "../../UnlockData"
+import UnlockData from "../../Utils/UnlockData"
 import StopPremium from "../StopPremium"
-import CopyText from "../../CopyText"
+import CopyText from "../../Utils/CopyText"
 
 /******************************************************************************** api */
 import { useApi } from "../../../hooks/useApi"
