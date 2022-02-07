@@ -1,11 +1,9 @@
 import { FC } from "react"
 
-/************************************************************************************ mui related */
 import { Container, Grid, Typography, Button } from "@material-ui/core"
 
 import useStyles from "./styles"
 
-/************************************************************************************ redux related */
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
 
@@ -13,7 +11,6 @@ import { translate } from "../../lang"
 
 import useCredential from "./useCredential"
 
-/************************************************************************************ components */
 import Snackbar from "../../components/Utils/Snackbar"
 import ShowCredential from "../../components/Sections/ShowCredential"
 
