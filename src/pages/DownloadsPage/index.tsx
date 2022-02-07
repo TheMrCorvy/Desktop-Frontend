@@ -1,6 +1,6 @@
 import { FC } from "react"
 
-import { Container, Divider, Grid, Hidden, Typography, Link } from "@material-ui/core"
+import { Container, Divider, Grid, Hidden, Typography } from "@material-ui/core"
 import useStyles from "./styles"
 
 import { useSelector } from "react-redux"
@@ -12,6 +12,7 @@ import { recommendedTwoFactorApps, recommendedApps } from "../../misc/staticData
 import { RecommendedAppsT } from "../../misc/types"
 
 import Downloads from "../../components/Sections/Downloads"
+import MapRecommendations from "../../components/Sections/MapRecommendations"
 
 const DownloadsPage: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -21,54 +22,6 @@ const DownloadsPage: FC = () => {
 	const recommendedTwoFA: RecommendedAppsT[] = recommendedTwoFactorApps(lng)
 
 	const otherApps: RecommendedAppsT[] = recommendedApps(lng)
-
-	const mapRecommendations = (apps: RecommendedAppsT[]) => {
-		return (
-			<ul>
-				{apps.map((app) => (
-					<li className={classes.marginBottom} key={app.appName}>
-						<Typography variant="h5" paragraph gutterBottom data-testid={app.appName}>
-							{app.appName}
-						</Typography>
-						<Typography variant="body1" paragraph gutterBottom>
-							{app.bodyText}
-						</Typography>
-						<Grid container spacing={2}>
-							<Grid item xs={12} sm={4} lg={3}>
-								<Link
-									className={classes.recommendedLinks}
-									href={app.linkPlayStore}
-									target="_blank"
-								>
-									Google PlayStore
-								</Link>
-							</Grid>
-							<Grid item xs={12} sm={4} lg={3}>
-								<Link
-									className={classes.recommendedLinks}
-									href={app.linkAppleStore}
-									target="_blank"
-								>
-									Apple AppStore
-								</Link>
-							</Grid>
-							<Grid item xs={12} sm={4} lg={3}>
-								{app.linkOfficialPage && (
-									<Link
-										className={classes.recommendedLinks}
-										href={app.linkOfficialPage}
-										target="_blank"
-									>
-										{translate("official_site", lng)}
-									</Link>
-								)}
-							</Grid>
-						</Grid>
-					</li>
-				))}
-			</ul>
-		)
-	}
 
 	return (
 		<Container maxWidth="xl" className={classes.container} data-testid="test_downloads_page">
@@ -117,7 +70,7 @@ const DownloadsPage: FC = () => {
 					</Typography>
 				</Grid>
 				<Grid item xs={12} sm={11} md={8}>
-					{mapRecommendations(otherApps)}
+					<MapRecommendations apps={otherApps} />
 				</Grid>
 				<Grid item xs={12} sm={11} md={8}>
 					<Divider className={classes.divider} />
@@ -143,7 +96,7 @@ const DownloadsPage: FC = () => {
 					</Typography>
 				</Grid>
 				<Grid item xs={12} sm={11} md={8}>
-					{mapRecommendations(recommendedTwoFA)}
+					<MapRecommendations apps={recommendedTwoFA} />
 				</Grid>
 			</Grid>
 		</Container>
