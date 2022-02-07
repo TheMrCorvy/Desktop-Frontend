@@ -6,7 +6,7 @@ import { translate } from "../../../lang"
 
 import { getUser } from "../../../misc/indexedDB"
 
-const useUser = ({ dispatch, lng }: Params) => {
+const useUser = ({ dispatch, lng, testing }: Params) => {
 	const [userRole, setUserRole] = useState("")
 
 	useEffect(() => {
@@ -14,6 +14,12 @@ const useUser = ({ dispatch, lng }: Params) => {
 	}, [])
 
 	const obtainUser = async () => {
+		if (testing) {
+			setUserRole("premium")
+
+			return
+		}
+
 		let user = await getUser()
 
 		if (user === undefined) {
@@ -33,6 +39,7 @@ const useUser = ({ dispatch, lng }: Params) => {
 type Params = {
 	dispatch: Dispatch
 	lng: string
+	testing: boolean | undefined
 }
 
 export default useUser

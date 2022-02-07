@@ -53,7 +53,7 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 	const dispatch = useDispatch()
 	const classes = useStyles()
 	const callApi = useApi
-	const { userRole } = useUser({ lng, dispatch })
+	const { userRole } = useUser({ lng, dispatch, testing })
 
 	const [locked, setLocked] = useState(true)
 	const [refreshSecret, setRefreshSecret] = useState(false)
@@ -70,6 +70,12 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 
 	const toggleLock = () => {
 		if (!token) return
+
+		if (testing) {
+			console.log("hola mundo")
+			setLocked(!locked)
+			return
+		}
 
 		dispatch(toggleLoading(true))
 
