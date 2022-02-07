@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from "react"
 import { AccessCredentialPropT } from "../../../misc/types"
 
-const useHandleChange = ({ accessCredentialProp, editCredentialProp }: Props) => {
+const useHandleChange = ({ accessCredentialProp, editCredentialProp }: Params) => {
 	const [mainCharCount, setMainCharCount] = useState(0)
 	const [secondCharCount, setSecondCharCount] = useState(0)
 	const [mainText, setMainText] = useState("")
@@ -21,9 +21,7 @@ const useHandleChange = ({ accessCredentialProp, editCredentialProp }: Props) =>
 
 	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
 		const target = event.target as HTMLInputElement
-
 		const inputType = target.getAttribute("type")
-
 		const variant = target.getAttribute("variant")
 
 		switch (inputType) {
@@ -78,7 +76,7 @@ const useHandleChange = ({ accessCredentialProp, editCredentialProp }: Props) =>
 	}
 }
 
-type Props = {
+type Params = {
 	accessCredentialProp: AccessCredentialPropT
 	editCredentialProp: (edits: ExportEdits) => void
 }

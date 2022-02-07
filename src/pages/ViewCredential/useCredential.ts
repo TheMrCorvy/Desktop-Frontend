@@ -127,7 +127,6 @@ const useCredential = ({ token, lng, dispatch, credentialId }: Params) => {
 	return {
 		error,
 		snackbarMessage,
-		id,
 		getFromApi,
 	}
 }
