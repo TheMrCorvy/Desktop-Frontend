@@ -1,28 +1,22 @@
-import { FC, useState, useEffect, ChangeEvent } from "react"
+import { FC } from "react"
 
-import {
-	Typography,
-	Accordion,
-	AccordionDetails,
-	AccordionSummary,
-	TextField,
-	Grid,
-} from "@material-ui/core"
-
-import Autocomplete from "@material-ui/lab/Autocomplete"
-
+import { Typography, Accordion, AccordionDetails, AccordionSummary, Grid } from "@material-ui/core"
 import useStyles from "./styles"
-
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
-
 import { translate } from "../../../lang"
 
 import { AccessCredentialPropT, CompanyT } from "../../../misc/types"
 
 import EditCodes from "../EditCodes"
+import Multiline from "./FormFields/Multiline"
+import TextField from "./FormFields/TextField"
+import SQA from "./FormFields/SQA"
+import SelectOption from "./FormFields/SelectOption"
+
+import useHandleChange from "./useHandleChange"
 
 const CreateCredentialProp: FC<Props> = (props) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -39,184 +33,49 @@ const CreateCredentialProp: FC<Props> = (props) => {
 		editCredentialProp,
 	} = props
 
-	const [mainCharCount, setMainCharCount] = useState(0)
-	const [secondCharCount, setSecondCharCount] = useState(0)
-	const [mainText, setMainText] = useState("")
-	const [secondText, setSecondText] = useState("")
-	const [editingOption, setEditingOption] = useState<"question" | "answer" | "">("")
-
 	const classes = useStyles()
-
-	useEffect(() => {
-		const edits: ExportEdits = {
-			mainText,
-			secondText,
-			accessCredentialProp,
-			editingOption,
-		}
-
-		editCredentialProp(edits)
-	}, [mainText, secondText])
-
-	const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
-		const target = event.target as HTMLInputElement
-
-		const inputType = target.getAttribute("type")
-
-		const variant = target.getAttribute("variant")
-
-		switch (inputType) {
-			case "text field":
-				setMainText(target.value)
-
-				setMainCharCount(target.value.length)
-				break
-
-			case "select option":
-				setMainText(target.value)
-
-				setMainCharCount(target.value.length)
-				break
-
-			case "multiline":
-				setMainText(target.value)
-
-				setMainCharCount(target.value.length)
-				break
-
-			case "sqa":
-				if (variant && variant === "security question") {
-					setMainText(target.value)
-
-					setMainCharCount(target.value.length)
-
-					setEditingOption("question")
-				}
-
-				if (variant && variant === "security answer") {
-					setSecondText(target.value)
-
-					setSecondCharCount(target.value.length)
-
-					setEditingOption("answer")
-				}
-
-				break
-
-			default:
-				break
-		}
-	}
+	const { handleChange, mainCharCount, secondCharCount, mainText, secondText } = useHandleChange({
+		accessCredentialProp,
+		editCredentialProp,
+	})
 
 	const renderBody = (option: LayoutOptions) => {
 		switch (option) {
 			case "text field":
 				return (
-					<>
-						<TextField
-							label={label}
-							variant="outlined"
-							fullWidth
-							className={classes.textColor}
-							InputProps={{
-								classes: {
-									input: classes.textColor,
-								},
-							}}
-							inputProps={{
-								type: layout,
-								"data-testid": "test_text_field",
-								spellCheck: "false",
-							}}
-							value={mainText}
-							onChange={handleChange}
-						/>
-						{maxChar && (
-							<Typography variant="body1" data-testid="test_max_char">
-								{mainCharCount} / {maxChar}
-							</Typography>
-						)}
-					</>
+					<TextField
+						mainCharCount={mainCharCount}
+						mainText={mainText}
+						handleChange={handleChange}
+						label={label}
+						layout={layout}
+						maxChar={maxChar}
+					/>
 				)
 
 			case "select option":
-				let options: CompanyT[]
-
-				if (companies) {
-					options = companies.sort(
-						(a, b) => -b.name.charAt(0).localeCompare(a.name.charAt(0))
-					)
-				} else {
-					options = [
-						{
-							id: 0,
-							name: "",
-							url_logo: "",
-						},
-					]
-				}
-
 				return (
-					<>
-						<Autocomplete
-							freeSolo
-							data-testid="test_select_option"
-							fullWidth
-							options={options}
-							groupBy={(option) => option.name.charAt(0)}
-							getOptionLabel={(option) => option.name}
-							id="autocomplete-input"
-							renderInput={(params) => (
-								<TextField
-									{...params}
-									label={label}
-									variant="outlined"
-									value={mainText}
-									onChange={handleChange}
-									InputProps={{
-										...params.InputProps,
-										type: layout,
-										spellCheck: "false",
-									}}
-								/>
-							)}
-						/>
-						{maxChar && (
-							<Typography variant="body1">
-								{mainCharCount} / {maxChar}
-							</Typography>
-						)}
-					</>
+					<SelectOption
+						mainCharCount={mainCharCount}
+						mainText={mainText}
+						handleChange={handleChange}
+						label={label}
+						layout={layout}
+						maxChar={maxChar}
+						companies={companies}
+					/>
 				)
 
 			case "multiline":
 				return (
-					<>
-						<TextField
-							label={label}
-							variant="outlined"
-							fullWidth
-							multiline
-							className={classes.textColor}
-							InputProps={{
-								classes: {
-									input: classes.textColor,
-								},
-							}}
-							inputProps={{
-								type: layout,
-								"data-testid": "test_multiline",
-								spellCheck: "false",
-							}}
-							value={mainText}
-							onChange={handleChange}
-						/>
-						{maxChar && (
-							<Typography variant="body1">
-								{mainCharCount} / {maxChar}
-							</Typography>
-						)}
-					</>
+					<Multiline
+						mainCharCount={mainCharCount}
+						mainText={mainText}
+						handleChange={handleChange}
+						label={label}
+						layout={layout}
+						maxChar={maxChar}
+					/>
 				)
 
 			case "multiple codes":
@@ -224,60 +83,15 @@ const CreateCredentialProp: FC<Props> = (props) => {
 
 			case "sqa":
 				return (
-					<>
-						<Grid item xs={12}>
-							<TextField
-								label={translate("encryption_examples", lng, 5)}
-								variant="outlined"
-								fullWidth
-								className={classes.textColor}
-								InputProps={{
-									classes: {
-										input: classes.textColor,
-									},
-								}}
-								inputProps={{
-									type: layout,
-									variant: "security question",
-									"data-testid": "test_sqa_question",
-									spellCheck: "false",
-								}}
-								value={mainText}
-								onChange={handleChange}
-							/>
-							{maxChar && (
-								<Typography variant="body1">
-									{mainCharCount} / {maxChar}
-								</Typography>
-							)}
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								label={translate("encryption_examples", lng, 6)}
-								variant="outlined"
-								fullWidth
-								className={classes.textColor}
-								InputProps={{
-									classes: {
-										input: classes.textColor,
-									},
-								}}
-								inputProps={{
-									type: layout,
-									variant: "security answer",
-									"data-testid": "test_sqa_answer",
-									spellCheck: "false",
-								}}
-								value={secondText}
-								onChange={handleChange}
-							/>
-							{maxChar && (
-								<Typography variant="body1">
-									{secondCharCount} / {maxChar}
-								</Typography>
-							)}
-						</Grid>
-					</>
+					<SQA
+						mainCharCount={mainCharCount}
+						mainText={mainText}
+						handleChange={handleChange}
+						secondCharCount={secondCharCount}
+						secondText={secondText}
+						layout={layout}
+						maxChar={maxChar}
+					/>
 				)
 
 			default:
