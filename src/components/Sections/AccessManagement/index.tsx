@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, ChangeEvent } from "react"
+import { FC, useState, ChangeEvent } from "react"
 
 /******************************************************************************** MUI */
 import {
@@ -27,7 +27,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 
 /******************************************************************************** redux actions */
-import { showError } from "../../../redux/actions/errorHandlingActions"
+
 import { login } from "../../../redux/actions/authTokenActions"
 import { toggleLoading, setErrorLoading } from "../../../redux/actions/loadingActions"
 import { translate } from "../../../lang"
@@ -35,18 +35,16 @@ import { translate } from "../../../lang"
 /******************************************************************************** types */
 import { ApiCallI, ApiResponseLoginT } from "../../../misc/types"
 
-/******************************************************************************** indexedDB */
-import { getUser } from "../../../misc/indexedDB"
-
 /******************************************************************************** components */
 import StepThree from "../RegisterSteps/StepThree"
 import UnlockData from "../../Utils/UnlockData"
 import StopPremium from "../StopPremium"
 import CopyText from "../../Utils/CopyText"
 
-/******************************************************************************** api */
+/******************************************************************************** custom hooks */
 import { useApi } from "../../../hooks/useApi"
 import getUserAgent from "../../../hooks/useUserAgent"
+import useUser from "./useUser"
 
 const AccessManagement: FC<Props> = ({ testing }) => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -54,27 +52,12 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 
 	const dispatch = useDispatch()
 	const classes = useStyles()
+	const callApi = useApi
+	const { userRole } = useUser({ lng, dispatch })
+
 	const [locked, setLocked] = useState(true)
 	const [refreshSecret, setRefreshSecret] = useState(false)
 	const [form, setForm] = useState<Form>(placeholder)
-	const [userRole, setUserRole] = useState("")
-	const callApi = useApi
-
-	useEffect(() => {
-		obtainUser()
-	}, [])
-
-	const obtainUser = async () => {
-		let user = await getUser()
-
-		if (user === undefined) {
-			dispatch(showError(translate("error_messages", lng, 0)))
-
-			return
-		}
-
-		setUserRole(user.role)
-	}
 
 	const handleChange = (event: ChangeEvent<{ value: string }>) => {
 		const target = event.target as HTMLInputElement
@@ -333,9 +316,11 @@ const AccessManagement: FC<Props> = ({ testing }) => {
 	)
 }
 
-type Props = { testing?: boolean }
+interface Props {
+	testing?: boolean
+}
 
-type Form = {
+interface Form {
 	name: string
 	phone_number: string
 	email: string
