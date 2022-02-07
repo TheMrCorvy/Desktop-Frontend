@@ -11,6 +11,8 @@ import { showError } from "../../../redux/actions/errorHandlingActions"
 import { translate } from "../../../lang"
 
 const Downloads: FC<Props> = ({ alternative }) => {
+	let deferredPrompt: any
+
 	const classes = useStyles()
 
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -33,7 +35,7 @@ const Downloads: FC<Props> = ({ alternative }) => {
 
 	const handleInstallClick = () => {
 		// this will be disabled for now
-		return
+		// return
 		try {
 			deferredPrompt.prompt()
 
@@ -209,8 +211,6 @@ const Downloads: FC<Props> = ({ alternative }) => {
 }
 
 type Props = { alternative?: boolean; testing?: boolean }
-
-let deferredPrompt: any
 
 /**
  * @alias Section_Downloads
