@@ -1,18 +1,14 @@
 import { FC } from "react"
 
-/******************************************************************************** mui */
 import { Container, Divider, Grid, Hidden, Typography, Link } from "@material-ui/core"
 import useStyles from "./styles"
 
-/******************************************************************************** redux */
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
 import { translate } from "../../lang"
 
-/******************************************************************************** types & components */
 import { recommendedTwoFactorApps, recommendedApps } from "../../misc/staticData"
-
 import { RecommendedAppsT } from "../../misc/types"
 
 import Downloads from "../../components/Sections/Downloads"

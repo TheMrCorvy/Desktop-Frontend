@@ -40,11 +40,9 @@ const Login: FC = () => {
 	const { theme } = useSelector((state: RootState) => state.theme)
 
 	const [error, setError] = useState(false)
-
 	const [isRobot, setIsRobot] = useState(REACT_APP_ENV_LOCAL ? false : true)
 
 	const dispatch = useDispatch()
-
 	const classes = useStyles()
 
 	const cardSubtitle = REACT_APP_ENV_LOCAL
@@ -71,7 +69,6 @@ const Login: FC = () => {
 		}
 
 		dispatch(setLanguage(res.user_data.preferred_lang))
-
 		dispatch(login(res.token))
 	}
 

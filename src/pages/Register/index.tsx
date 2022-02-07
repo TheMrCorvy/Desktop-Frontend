@@ -1,4 +1,5 @@
 import { FC, useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 import {
 	Grid,
@@ -11,10 +12,7 @@ import {
 } from "@material-ui/core"
 
 import { useTheme } from "@material-ui/core/styles"
-
 import useStyles from "./styles"
-
-import { Link } from "react-router-dom"
 
 import ReCAPTCHA from "react-google-recaptcha"
 
@@ -30,12 +28,10 @@ const Register: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const classes = useStyles()
-
 	const theme = useTheme()
+	const { REACT_APP_RECAPTCHA_SITE_KEY, REACT_APP_ENV_LOCAL } = process.env
 
 	const [isRobot, setIsRobot] = useState(true)
-
-	const { REACT_APP_RECAPTCHA_SITE_KEY, REACT_APP_ENV_LOCAL } = process.env
 
 	useEffect(() => {
 		if (REACT_APP_ENV_LOCAL) {

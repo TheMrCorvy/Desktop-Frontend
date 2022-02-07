@@ -39,15 +39,12 @@ import { CredentialT, UserT } from "../../misc/types"
 
 const MyAccount: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
-
 	const { REACT_APP_ENV_LOCAL } = process.env
 
 	const [user, setUser] = useState<UserT | null>(null)
-
 	const [credentials, setCredentials] = useState<CredentialT[]>([])
 
 	const classes = useStyles()
-
 	const dispatch = useDispatch()
 
 	useEffect(() => {

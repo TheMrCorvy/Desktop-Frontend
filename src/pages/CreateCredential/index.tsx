@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import { FC } from "react"
 import { useHistory } from "react-router-dom"
 
 import { Button, Container, Grid, Typography } from "@material-ui/core"
@@ -7,26 +7,21 @@ import useStyles from "./styles"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
-import { clearCredential, editCredential } from "../../redux/actions/credentialActions"
+import { editCredential } from "../../redux/actions/credentialActions"
 import { showError } from "../../redux/actions/errorHandlingActions"
 import { translate } from "../../lang"
 
-import { CompanyT, AccessCredentialPropT, ApiCallI, CredentialT } from "../../misc/types"
+import { AccessCredentialPropT, ApiCallI, CredentialT } from "../../misc/types"
 import calcMaxChar from "../../hooks/useMaxChars"
 import getUserAgent from "../../hooks/useUserAgent"
-import { getCompanies, getUser, putCompanies, putCredential, putUser } from "../../misc/indexedDB"
+import { getUser, putCredential, putUser } from "../../misc/indexedDB"
+
 import { useApi } from "../../hooks/useApi"
+import useCompanies from "./useCopmanies"
 
 import CreateCredentialProp from "../../components/UI-Components/CreateCredentialProp"
 import GoBackBtn from "../../components/Utils/GoBackBtn"
 import { setErrorLoading, toggleLoading } from "../../redux/actions/loadingActions"
-
-type EditingCredential = {
-	mainText: string
-	secondText: string
-	accessCredentialProp: AccessCredentialPropT
-	editingOption: "question" | "answer" | ""
-}
 
 const CreateCredential: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
@@ -34,56 +29,10 @@ const CreateCredential: FC = () => {
 	const { token } = useSelector((state: RootState) => state.token)
 
 	const dispatch = useDispatch()
-
 	const classes = useStyles()
-
 	const history = useHistory()
-
 	const callApi = useApi
-
-	const [companies, setCompanies] = useState<CompanyT[]>([
-		{
-			id: 0,
-			name: "",
-			url_logo: "",
-		},
-	])
-
-	useEffect(() => {
-		obtainCompanies()
-
-		dispatch(clearCredential())
-	}, [])
-
-	const obtainCompanies = async () => {
-		const data = await getCompanies()
-
-		if (data === undefined || data.length === 0) {
-			getFromApi()
-
-			return
-		}
-
-		setCompanies(data)
-	}
-
-	const getFromApi = () => {
-		const request: ApiCallI = {
-			lng,
-			method: "GET",
-			endpoint: "/companies/index",
-		}
-
-		callApi(request).then(async (response) => {
-			if (response.status !== 200) {
-				dispatch(setErrorLoading(response.message))
-			}
-
-			await putCompanies(response.data.companies)
-
-			setCompanies(response.data.companies)
-		})
-	}
+	const { companies } = useCompanies({ lng, dispatch })
 
 	const dispatchEditCredential = (edit: EditingCredential) => {
 		let baggage = {
@@ -108,15 +57,6 @@ const CreateCredential: FC = () => {
 
 		const autocomplete = document.getElementById("autocomplete-input") as HTMLInputElement
 
-		// if (credential && autocomplete) {
-		// 	let baggage: CredentialProp = {
-		// 		oldCredential: credential,
-		// 		prop: "company_name",
-		// 		newValue: autocomplete.value,
-		// 	}
-
-		// 	dispatch(editCredential(baggage))
-		// }
 		dispatch(toggleLoading(true))
 
 		const request: ApiCallI = {
@@ -305,6 +245,13 @@ const CreateCredential: FC = () => {
 			</Container>
 		</>
 	)
+}
+
+type EditingCredential = {
+	mainText: string
+	secondText: string
+	accessCredentialProp: AccessCredentialPropT
+	editingOption: "question" | "answer" | ""
 }
 
 export default CreateCredential

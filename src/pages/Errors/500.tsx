@@ -19,7 +19,6 @@ const Error500: FC = () => {
 	const { err } = useSelector((state: RootState) => state.err)
 
 	const dispatch = useDispatch()
-
 	const classes = useStyles()
 
 	return (
