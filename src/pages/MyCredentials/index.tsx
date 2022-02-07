@@ -17,7 +17,7 @@ import { ApiCallI } from "../../misc/types"
 import { getUser, putCredentials } from "../../misc/indexedDB"
 
 /************************************************************************************ types & components */
-import OrderBar, { By, Direction } from "../../components/UI-Components/OrderBar"
+import OrderBar from "../../components/UI-Components/OrderBar"
 import CredentialCard from "../../components/UI-Components/CredentialCard"
 import Downloads from "../../components/Sections/Downloads"
 import Snackbar from "../../components/Utils/Snackbar"
@@ -32,35 +32,16 @@ const MyCredentials: FC = () => {
 	const { token } = useSelector((state: RootState) => state.token)
 	const { lng } = useSelector((state: RootState) => state.lng)
 
-	const [error, setError] = useState<boolean>(false)
-	const [snackbarMessage, setSnackbarMessage] = useState("")
-
 	const callApi = useApi
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	const { user, credentials, setCredentials } = useUserInfo({
+	const { user, credentials, setCredentials, orderBy } = useUserInfo({
 		lng,
 		dispatch,
 	})
 
-	const orderBy = (sort: Sort) => {
-		// the [...credentials] is very important, since a sorted array its still the same,
-		// and thus react won't update state after re order the array.
-		// so we need to copy it, creating a new array in the proces, then sorting it, and the finally update the state
-		const credentialsSorted = [...credentials].sort((prev, next) => {
-			if (prev[sort.by] > next[sort.by]) {
-				return 1 * sort.direction
-			}
-
-			if (prev[sort.by] < next[sort.by]) {
-				return -1 * sort.direction
-			}
-
-			return 0
-		})
-
-		setCredentials(credentialsSorted)
-	}
+	const [error, setError] = useState<boolean>(false)
+	const [snackbarMessage, setSnackbarMessage] = useState("")
 
 	const getFromApi = async () => {
 		setError(false)
@@ -94,19 +75,8 @@ const MyCredentials: FC = () => {
 			}
 
 			setCredentials(response.data.credentials)
-
 			dispatch(toggleLoading(false))
 		})
-	}
-
-	const isAllowed = () => {
-		if (user !== null) {
-			if (user.role === "premium") {
-				return <FeedbackForm />
-			}
-		}
-
-		return null
 	}
 
 	const canBuySlots = () => {
@@ -166,15 +136,10 @@ const MyCredentials: FC = () => {
 					{user && <UpdateRole userRole={user.role} canBuySlots={canBuySlots()} />}
 				</Grid>
 			</Container>
-			{isAllowed()}
+			{user !== null && user.role === "premium" && <FeedbackForm />}
 			<Downloads />
 		</>
 	)
-}
-
-type Sort = {
-	by: By
-	direction: Direction
 }
 
 export default MyCredentials
