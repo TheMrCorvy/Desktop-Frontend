@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react"
 
-import { clearCredential } from "../../redux/actions/credentialActions"
+import { clearCredential } from "../../../redux/actions/credentialActions"
 import { Dispatch } from "redux"
-import { setErrorLoading } from "../../redux/actions/loadingActions"
+import { setErrorLoading } from "../../../redux/actions/loadingActions"
 
-import { CompanyT, ApiCallI } from "../../misc/types"
+import { CompanyT, ApiCallI } from "../../../misc/types"
 
-import { getCompanies, putCompanies } from "../../misc/indexedDB"
+import { getCompanies, putCompanies } from "../../../misc/indexedDB"
 
-import { useApi } from "../../hooks/useApi"
+import { useApi } from "../../../hooks/useApi"
 
 const useCompanies = ({ lng, dispatch }: Params) => {
 	const [companies, setCompanies] = useState<CompanyT[]>([
