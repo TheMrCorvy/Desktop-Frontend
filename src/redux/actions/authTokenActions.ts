@@ -14,6 +14,8 @@ export const login = (token: string): AuthAction => {
 export const logOut = (): AuthAction => {
 	dropDatabase()
 
+	localStorage.removeItem("token")
+
 	return {
 		type: LOG_OUT,
 		payload: null,
