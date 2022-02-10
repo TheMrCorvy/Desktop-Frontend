@@ -4,9 +4,9 @@ First of all, this is **NOT** a secure password manager, since key to decrypt ev
 
 This is a personal project in which I put all my effort to learn a lot of technologies, some new, and some not so much, like React Hooks, Typescript, Redux and its Hooks, and many more.
 
-I always tried to follow standards, and respect good practices (something that I hadn't yet gotten used to...).
+I always tried to follow standards.
 
-My original intention was to use Next JS for this project, but I ended up diciding to use React JS due to some problems I could'nt solve, and that I didn't know well how to handle the authentication in Next JS.
+This is basically the same project as [Web-Forntend](https://github.com/PasuSewa/Web-Frontend), but with ElectronJS on top of that, and with a few less functionalities (the payment system, and the captcha, for example).
 
 Whithout further ado, lets start with the documentation:
 
@@ -26,20 +26,30 @@ First of all, you will need to properly set up the .env.local file. This project
 2. REACT_APP_USE_LOCAL_API: If empty, the app will call the production api, else, it will use http://localhost:8000/api (see src/misc/ajaxManajer.ts to change the base uri for both options).
    <br/>
    <br/>
-3. REACT_APP_RECAPTCHA_SITE_KEY & REACT_APP_RECAPTCHA_SECRET_KEY: These are required to use the Captcha component, you can get them signing up here: [Google ReCaptcha Admin Site](https://www.google.com/recaptcha/admin)
-   <br/>
-   <br/>
-4. REACT_APP_PAYPAL_CLIENT_ID: This is your client ID for PayPal, you can get it on the [Developers Paypal](https://developer.paypal.com) site. Once signed up, create an application, and the go to the "live" credentials.
-   No secret key is required to use the magic buttons of PayPal
-   <br/>
-   <br/>
-5. REACT_APP_COINBASE_API_KEY: This is required to use the Coinbase API in order to let the user pay with cryptos.
-   You can get your Coinbase credentials on [Coinbase Commerce](https://commerce.coinbase.com)
-   <br/>
-   <br/>
    Once you are done with all of that, the last thing is to run
 
     `npm install`
+
+    or
+
+    `yarn install`
+
+---
+
+## Electron
+
+**Before anything, to run these commands you must have yarn already installed in your PC.**
+
+There are two commands that you wnat to know. First is how to run the project in the local environment:
+
+`npm run electron:serve`
+
+The other useful-to-know command is:
+
+`npm run electron:build`
+
+In order to create the installer file.
+(It will create the installer required for the system you are in at the time of building).
 
 ---
 
@@ -55,6 +65,14 @@ And lastly, there are a few components that aren't used outside of 1 or 2 parent
 
 ---
 
+## Running the Tests
+
+In order to run the tests, you can execute the following:
+
+`npm run test -a`
+
+---
+
 ## Project Dependencies
 
 [Material UI](https://material-ui.com/) - As the UI
@@ -63,11 +81,7 @@ And lastly, there are a few components that aren't used outside of 1 or 2 parent
 
 [Dexie](https://www.npmjs.com/package/dexie) - To handle all the interactions with Indexed DB (I don't recomment using it, its really simple to use, but very limited in my opinion).
 
-[react-google-recaptcha](https://www.npmjs.com/package/react-google-recaptcha) - As the Captcha component
-
 [react-hook-form](https://www.npmjs.com/package/react-hook-form) - To handle all the forms
-
-[react-paypal-button-v2](https://www.npmjs.com/package/react-paypal-button-v2) - To create PayPal's magic buttons
 
 [react-qrcode-logo](https://www.npmjs.com/package/react-qrcode-logo) - For the QR codes
 
