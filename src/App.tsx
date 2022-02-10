@@ -1,9 +1,14 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { BrowserRouter } from "react-router-dom"
 
 /*********************************************************************************** redux related */
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "./redux/store"
+
+/*********************************************************************************** api for token validation */
+import { ApiCallI } from "./misc/types"
+import { useApi } from "./hooks/useApi"
+import { initiateDB } from "./misc/indexedDB"
 
 /*********************************************************************************** mui related */
 import { ThemeProvider } from "@material-ui/core/styles"
@@ -14,10 +19,6 @@ import useCustomTheme from "./hooks/useCustomTheme"
 import routes from "./misc/routes"
 import MapRoutes from "./components/Utils/MapRoutes"
 import Layout from "./components/Utils/Layout"
-
-/*********************************************************************************** prevent reload if user is signed in */
-import { Beforeunload } from "react-beforeunload"
-import { translate } from "./lang"
 
 /*********************************************************************************** font awesome */
 import { library } from "@fortawesome/fontawesome-svg-core"
@@ -40,7 +41,8 @@ import {
 	faFileImport,
 	faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons"
-
+import { login } from "./redux/actions/authTokenActions"
+import { setErrorLoading, toggleLoading } from "./redux/actions/loadingActions"
 library.add(
 	faKey,
 	faCloudDownloadAlt,
@@ -67,16 +69,46 @@ const App: FC = () => {
 	const { lng } = useSelector((state: RootState) => state.lng)
 
 	const globalTheme = useCustomTheme(theme)
+	const dispatch = useDispatch()
+	const callApi = useApi
 
 	const { REACT_APP_ENV_LOCAL } = process.env
+
+	useEffect(() => {
+		localStorage.removeItem("recentlySeen")
+
+		const token = localStorage.getItem("token")
+
+		if (token) {
+			dispatch(toggleLoading(true))
+
+			const request: ApiCallI = {
+				lng,
+				endpoint: "/auth/verify-token",
+				method: "GET",
+				token,
+			}
+
+			callApi(request).then(async (response) => {
+				if (response.status === 200) {
+					await initiateDB(response.data.user_data, response.data.user_credentials)
+
+					dispatch(login(token))
+
+					dispatch(toggleLoading(false))
+				} else {
+					localStorage.removeItem("token")
+
+					dispatch(setErrorLoading(response.message))
+				}
+			})
+		}
+	}, [])
 
 	return (
 		<ThemeProvider theme={globalTheme}>
 			<BrowserRouter>
 				<CssBaseline />
-				{token && !REACT_APP_ENV_LOCAL && (
-					<Beforeunload onBeforeunload={() => translate("before_unload", lng)} />
-				)}
 				<Layout>
 					<MapRoutes routes={routes} />
 				</Layout>
