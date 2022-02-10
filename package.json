@@ -1,9 +1,13 @@
 {
-	"name": "pasusewa",
-	"version": "0.1.0",
+	"name": "pasunashi",
+	"version": "1.0.1",
 	"private": true,
-	"homepage": "https://web-frontend-virid.vercel.app/",
+	"main": "public/main.js",
+	"homepage": "https://desktop.pasunashi.xyz/",
+	"author": "gonzalo corvalan <mr.corvy@gmail.com>",
+	"description": "PasuNashi is a password manager made with create-react-app and ElectronJS",
 	"dependencies": {
+		"@electron/remote": "^2.0.1",
 		"@fortawesome/fontawesome-svg-core": "^1.2.34",
 		"@fortawesome/free-brands-svg-icons": "^5.15.2",
 		"@fortawesome/free-regular-svg-icons": "^5.15.2",
@@ -22,11 +26,11 @@
 		"@types/react-router-dom": "^5.1.7",
 		"clean-jsdoc-theme": "^3.2.7",
 		"dexie": "^3.0.3",
+		"electron-is-dev": "^2.0.0",
 		"gh-pages": "^3.2.0",
 		"react": "^17.0.1",
 		"react-beforeunload": "^2.4.0",
 		"react-dom": "^17.0.1",
-		"react-google-recaptcha": "^2.1.0",
 		"react-hook-form": "^6.15.4",
 		"react-paypal-button-v2": "^2.6.3",
 		"react-qrcode-logo": "^2.2.1",
@@ -55,7 +59,10 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"docs": "jsdoc -c jsdoc.json",
-		"deploy": "gh-pages -d docs"
+		"deploy": "gh-pages -d docs",
+		"electron:serve": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn electron:start\"",
+		"electron:build": "yarn build && electron-builder -c.extraMetadata.main=build/main.js",
+		"electron:start": "wait-on tcp:3000 && electron ."
 	},
 	"eslintConfig": {
 		"extends": [
@@ -81,6 +88,25 @@
 		"@types/react-google-recaptcha": "^2.1.0",
 		"better-docs": "^2.3.2",
 		"jsdoc": "^3.6.7",
-		"jsdoc-baseline": "^0.1.5"
+		"jsdoc-baseline": "^0.1.5",
+		"concurrently": "^5.3.0",
+		"cross-env": "^7.0.3",
+		"electron": "^11.2.1",
+		"electron-builder": "^22.9.1",
+		"prettier": "^2.2.1",
+		"wait-on": "^5.2.1"
+	},
+	"build": {
+		"extends": null,
+		"appId": "com.pasunashi.electron-cra",
+		"files": [
+			"dist/**/*",
+			"build/**/*",
+			"node_modules/**/*",
+			"package.json"
+		],
+		"directories": {
+			"buildResources": "assets"
+		}
 	}
 }
