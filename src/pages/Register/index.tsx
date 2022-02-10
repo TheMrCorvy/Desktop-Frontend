@@ -14,8 +14,6 @@ import {
 import { useTheme } from "@material-ui/core/styles"
 import useStyles from "./styles"
 
-import ReCAPTCHA from "react-google-recaptcha"
-
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 
@@ -68,17 +66,8 @@ const Register: FC = () => {
 								<Grid item xs={12} style={{ textAlign: "center" }}>
 									<RegisterDialog />
 								</Grid>
-								<Grid item xs={12} className={classes.centerCaptcha}>
-									<ReCAPTCHA
-										onChange={handleChangeCaptcha}
-										sitekey={`${REACT_APP_RECAPTCHA_SITE_KEY}`}
-										theme={theme.palette.type}
-										onExpired={handleErrorCaptcha}
-										onErrored={handleErrorCaptcha}
-									/>
-								</Grid>
 								<Grid item xs={12} style={{ marginRight: 15, marginLeft: 15 }}>
-									<RegisterSteps isRobot={isRobot} />
+									<RegisterSteps isRobot={false} />
 								</Grid>
 							</Grid>
 						</CardContent>

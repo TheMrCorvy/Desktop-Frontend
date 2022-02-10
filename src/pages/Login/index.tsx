@@ -1,8 +1,6 @@
 import { FC, useState } from "react"
 import { Link } from "react-router-dom"
 
-import ReCAPTCHA from "react-google-recaptcha"
-
 /************************************************************************************ mui related */
 import {
 	Container,
@@ -88,19 +86,9 @@ const Login: FC = () => {
 							/>
 							<CardContent>
 								<Grid container justify="center" spacing={4}>
-									<Grid item xs={12} className={classes.captcha}>
-										<ReCAPTCHA
-											onChange={handleChangeCaptcha}
-											sitekey={`${REACT_APP_RECAPTCHA_SITE_KEY}`}
-											theme={theme}
-											onExpired={handleErrorCaptcha}
-											onErrored={handleErrorCaptcha}
-										/>
-									</Grid>
-
 									<Grid item xs={12}>
 										<LoginOptions
-											isRobot={isRobot}
+											isRobot={false}
 											onAuthSuccess={onAuthSuccess}
 										/>
 									</Grid>
